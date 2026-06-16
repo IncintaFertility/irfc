@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import FloatingContact from '../components/FloatingContact.astro';
 
 interface Props {
   title: string;
@@ -50,5 +51,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://irfc.com
   </head>
   <body>
     <slot />
+    <FloatingContact />
   </body>
 </html>

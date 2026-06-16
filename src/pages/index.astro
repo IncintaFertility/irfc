@@ -88,6 +88,33 @@ const recognitions = [
   'Fairfax EggBank Premier Partner',
   'Highly Rated on FertilityIQ',
 ];
+
+const testimonials = [
+  {
+    quote: "After three and a half years of trying, I finally found a team that never gave up on us. IRFC made my dream of having a family come true. I can't imagine having gone through this journey anywhere else.",
+    name: 'Mary T.',
+    treatment: 'IVF',
+    color: 'gold',
+  },
+  {
+    quote: "As a same-sex couple, we needed a clinic that truly understood our path. The reciprocal IVF process was explained so clearly, and every step felt supported. We are now holding our daughter thanks to this incredible team.",
+    name: 'Lisa & Elsien',
+    treatment: 'Reciprocal IVF',
+    color: 'purple',
+  },
+  {
+    quote: "I started with IUI and when that didn't work, Dr. Lin's team moved us to IVF with complete compassion — no pressure, just clear guidance. Five months later, I'm almost 9 weeks pregnant. We are overjoyed.",
+    name: 'Anonymous Patient',
+    treatment: 'IUI → IVF',
+    color: 'gold',
+  },
+  {
+    quote: "At 41, I was told my chances were around 10%. Dr. Lin was honest with me, which I appreciated more than false hope. He designed a protocol specifically for me — and it worked. My baby is now 6 months old.",
+    name: 'Patient, Age 41',
+    treatment: 'IVF',
+    color: 'purple',
+  },
+];
 ---
 
 <Layout
@@ -471,6 +498,52 @@ const recognitions = [
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Stories</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800">
+          Journeys We've Shared
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed max-w-lg mx-auto" style="color: var(--color-stone-500);">
+          Every family's path is unique. Here are a few of the stories that remind us why we do what we do.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {testimonials.map(t => (
+          <div class="p-8 lg:p-10 border border-stone-200 bg-stone-50 flex flex-col">
+            <svg class="w-8 h-8 mb-6 opacity-25" fill="currentColor" viewBox="0 0 32 32" style={`color: var(--color-${t.color}-600);`}>
+              <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
+            </svg>
+            <p class="text-stone-600 leading-relaxed flex-1 italic mb-8 text-sm">"{t.quote}"</p>
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-stone-800">— {t.name}</p>
+              </div>
+              <span class="text-xs px-3 py-1 border tracking-wide" style={`color: var(--color-${t.color}-600); border-color: var(--color-${t.color}-300); font-family: var(--font-sans);`}>
+                {t.treatment}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-8 text-center text-xs" style="color: var(--color-stone-400);">
+        Individual patient outcomes vary. These stories reflect personal experiences and are not a guarantee of results.
+      </p>
+
+      <div class="mt-8 text-center">
+        <a href="/testimonials" class="btn-outline">Read More Stories</a>
       </div>
     </div>
   </section>
