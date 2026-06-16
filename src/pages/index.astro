@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 
 const stats = [
   { number: '20+', label: 'Years of Excellence' },
-  { number: '4', label: 'Southern California Clinics' },
+  { number: '5', label: 'Southern California Clinics' },
   { number: '#1', label: 'US IVF Success Rate, 2016' },
   { number: '∞', label: 'Families Built' },
 ];
@@ -364,16 +364,17 @@ const recognitions = [
         <div>
           <div class="section-divider mb-6"></div>
           <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
-            Four Locations<br/>Across Southern<br/>California
+            Five Locations<br/>Across Southern<br/>California
           </h2>
           <p class="text-sm leading-relaxed mb-8" style="color: var(--color-stone-500);">
-            With clinics in Alhambra, Beverly Hills, Corona, and Irvine, expert fertility care is always within reach.
+            With clinics in Torrance, Alhambra, Beverly Hills, Corona, and Irvine, expert fertility care is always within reach.
           </p>
           <a href="/locations" class="btn-outline">Find a Location</a>
         </div>
 
         <div class="lg:col-span-2 grid sm:grid-cols-2 gap-4">
           {[
+            { city: 'Torrance', code: 'CA', phone: '(424) 212-4087', types: 'Clinic' },
             { city: 'Alhambra', code: 'CA', phone: '(626) 588-2885', types: 'Clinic' },
             { city: 'Beverly Hills', code: 'CA', phone: '(213) 600-8088', types: 'Clinic' },
             { city: 'Corona', code: 'CA', phone: '(951) 272-2221', types: 'Clinic · Surgery · Lab' },
