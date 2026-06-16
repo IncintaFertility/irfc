@@ -62,6 +62,7 @@ const team = [
     bio: 'Award-winning reproductive endocrinologist with 20+ years of expertise. Founder of RFC and architect of IRFC\'s patient-first model of care.',
     initial: 'J',
     color: 'gold',
+    photo: '/images/team/dr-james-lin-circle.png',
   },
   {
     name: 'Zitao Liu, MD',
@@ -69,6 +70,7 @@ const team = [
     bio: 'Fertility specialist pioneering mild stimulation protocols and AI-assisted reproductive tools. Now accepting new patients.',
     initial: 'Z',
     color: 'purple',
+    photo: '/images/team/dr-zitao-liu-circle.png',
   },
   {
     name: 'Yufen Xie, PhD',
@@ -76,6 +78,7 @@ const team = [
     bio: 'Led the team ranked #1 in US IVF success rates in 2016. Brings world-class embryology expertise to every case.',
     initial: 'Y',
     color: 'gold',
+    photo: '/images/team/dr-yufen-xie.png',
   },
 ];
 
@@ -306,12 +309,21 @@ const recognitions = [
           {team.map((member) => (
             <div class="bg-white p-8 border-l-2 card-hover" style={`border-left-color: var(--color-${member.color}-200);`}>
               <div class="flex items-start gap-5">
-                <div
-                  class="flex-shrink-0 w-12 h-12 flex items-center justify-center text-lg font-light text-white"
-                  style={`background: linear-gradient(135deg, var(--color-${member.color}-500), var(--color-${member.color}-700));`}
-                >
-                  {member.initial}
-                </div>
+                {member.photo ? (
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    class="flex-shrink-0 w-14 h-14 object-cover"
+                    style="border-radius: 50%;"
+                  />
+                ) : (
+                  <div
+                    class="flex-shrink-0 w-12 h-12 flex items-center justify-center text-lg font-light text-white"
+                    style={`background: linear-gradient(135deg, var(--color-${member.color}-500), var(--color-${member.color}-700));`}
+                  >
+                    {member.initial}
+                  </div>
+                )}
                 <div>
                   <h3 class="text-xl font-light text-stone-800 mb-1" style="font-family: var(--font-serif);">{member.name}</h3>
                   <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>

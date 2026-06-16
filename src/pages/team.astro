@@ -15,6 +15,7 @@ const physicians = [
     ],
     color: 'gold',
     initial: 'J',
+    photo: '/images/team/dr-james-lin-circle.png',
   },
   {
     name: 'Zitao Liu, MD',
@@ -27,6 +28,7 @@ const physicians = [
     color: 'purple',
     initial: 'Z',
     badge: 'Now Accepting New Patients',
+    photo: '/images/team/dr-zitao-liu-circle.png',
   },
 ];
 
@@ -37,6 +39,7 @@ const labTeam = [
     bio: 'Dr. Yufen Xie leads IRFC\'s embryology laboratory with extraordinary distinction. She directed the team that achieved the remarkable milestone of being ranked #1 in US IVF success rates in 2016. Her dedication to world-class embryology technique and continuous improvement defines the standard of care in our lab.',
     initial: 'Y',
     color: 'gold',
+    photo: '/images/team/dr-yufen-xie.png',
   },
   {
     name: 'Hyang Park, M.S.',
@@ -44,6 +47,7 @@ const labTeam = [
     bio: 'Hyang Park ensures the day-to-day excellence of IRFC\'s embryology laboratory. With meticulous attention to protocol, quality control, and team coordination, she maintains the rigorous standards that have defined the lab\'s outstanding reputation.',
     initial: 'H',
     color: 'purple',
+    photo: '/images/team/hyang-park.png',
   },
 ];
 
@@ -54,6 +58,7 @@ const clinicalTeam = [
     bio: 'Lily Hao brings her expertise as a Women\'s Health Nurse Practitioner to her role as IRFC\'s Nurse Manager. A passionate advocate for the patient-first philosophy, she ensures that every patient experiences exceptional, compassionate nursing care throughout their fertility journey.',
     initial: 'L',
     color: 'gold',
+    photo: '/images/team/lily-hao.png',
   },
   {
     name: 'Kelly Zhao',
@@ -61,6 +66,7 @@ const clinicalTeam = [
     bio: 'Kelly Zhao is IRFC\'s bilingual Third Party Coordinator, specializing in egg donation and surrogacy programs. She supports patients navigating the complex world of donor and gestational carrier arrangements with warmth, expertise, and culturally competent care.',
     initial: 'K',
     color: 'purple',
+    photo: '/images/team/kelly-zhao.png',
   },
 ];
 ---
@@ -103,12 +109,21 @@ const clinicalTeam = [
           <div class="bg-white border border-stone-200 p-10 lg:p-14">
             <div class="grid lg:grid-cols-4 gap-8 items-start">
               <div class="flex flex-col items-start">
-                <div
-                  class="w-20 h-20 flex items-center justify-center text-3xl font-light text-white mb-4"
-                  style={`background: linear-gradient(135deg, var(--color-${doc.color}-400), var(--color-${doc.color}-700));`}
-                >
-                  {doc.initial}
-                </div>
+                {doc.photo ? (
+                  <img
+                    src={doc.photo}
+                    alt={doc.name}
+                    class="w-36 h-36 object-cover mb-4"
+                    style="border-radius: 50%;"
+                  />
+                ) : (
+                  <div
+                    class="w-20 h-20 flex items-center justify-center text-3xl font-light text-white mb-4"
+                    style={`background: linear-gradient(135deg, var(--color-${doc.color}-400), var(--color-${doc.color}-700));`}
+                  >
+                    {doc.initial}
+                  </div>
+                )}
                 {doc.badge && (
                   <span class="text-xs tracking-wider px-3 py-1.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">
                     {doc.badge}
@@ -146,12 +161,21 @@ const clinicalTeam = [
         {labTeam.map(member => (
           <div class="p-8 border border-stone-200 card-hover">
             <div class="flex items-start gap-6">
-              <div
-                class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white"
-                style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}
-              >
-                {member.initial}
-              </div>
+              {member.photo ? (
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  class="flex-shrink-0 w-20 h-20 object-cover"
+                  style="border-radius: 50%;"
+                />
+              ) : (
+                <div
+                  class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white"
+                  style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}
+                >
+                  {member.initial}
+                </div>
+              )}
               <div>
                 <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
                 <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
@@ -176,12 +200,21 @@ const clinicalTeam = [
         {clinicalTeam.map(member => (
           <div class="p-8 border border-stone-200 bg-white card-hover">
             <div class="flex items-start gap-6">
-              <div
-                class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white"
-                style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}
-              >
-                {member.initial}
-              </div>
+              {member.photo ? (
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  class="flex-shrink-0 w-20 h-20 object-cover"
+                  style="border-radius: 50%;"
+                />
+              ) : (
+                <div
+                  class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white"
+                  style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}
+                >
+                  {member.initial}
+                </div>
+              )}
               <div>
                 <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
                 <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
