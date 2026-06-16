@@ -1,0 +1,112 @@
+---
+const navLinks = [
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/team', label: 'Our Team' },
+  { href: '/locations', label: 'Locations' },
+  { href: '/patient-resources', label: 'Resources' },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+    <nav class="flex items-center justify-between h-20 lg:h-24">
+      <!-- Logo -->
+      <a href="/" class="flex-shrink-0" aria-label="IRFC Home">
+        <img
+          src="/images/irfc-logo.svg"
+          alt="IRFC"
+          class="h-10 lg:h-12 w-auto transition-opacity duration-300"
+          id="nav-logo"
+        />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-10">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`nav-link ${pathname.startsWith(link.href) ? 'text-gold-600' : ''}`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="hidden lg:flex items-center gap-4">
+        <a href="tel:+19494538600" class="text-sm text-stone-500 tracking-wide hover:text-gold-600 transition-colors">
+          (949) 453-8600
+        </a>
+        <a href="/contact" class="btn-primary text-xs py-3 px-6">
+          Book Consultation
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden p-2 text-stone-700"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden hidden bg-white border-t border-stone-100 shadow-xl"
+  >
+    <div class="max-w-screen-xl mx-auto px-6 py-6 flex flex-col gap-6">
+      {navLinks.map(link => (
+        <a href={link.href} class="text-sm tracking-wider uppercase text-stone-700 hover:text-gold-600 transition-colors">
+          {link.label}
+        </a>
+      ))}
+      <div class="pt-4 border-t border-stone-100 flex flex-col gap-3">
+        <a href="tel:+19494538600" class="text-sm text-stone-500">(949) 453-8600</a>
+        <a href="/contact" class="btn-primary text-center text-xs">Book Consultation</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const logo = document.getElementById('nav-logo') as HTMLImageElement;
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  // Scroll behavior
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const scroll = window.scrollY;
+    if (scroll > 60) {
+      header?.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-stone-100');
+    } else {
+      header?.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-stone-100');
+    }
+    lastScroll = scroll;
+  });
+
+  // Mobile menu toggle
+  mobileBtn?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.contains('hidden');
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden', !isOpen);
+    closeIcon?.classList.toggle('hidden', isOpen);
+    mobileBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+</script>

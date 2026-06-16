@@ -1,0 +1,462 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const stats = [
+  { number: '20+', label: 'Years of Excellence' },
+  { number: '4', label: 'Southern California Clinics' },
+  { number: '#1', label: 'US IVF Success Rate, 2016' },
+  { number: '∞', label: 'Families Built' },
+];
+
+const services = [
+  {
+    icon: '◈',
+    title: 'In Vitro Fertilization',
+    abbr: 'IVF',
+    desc: 'Advanced IVF with EmbryoScope+ monitoring and AI-assisted embryo selection for the highest success rates.',
+    href: '/services#ivf',
+  },
+  {
+    icon: '◇',
+    title: 'Fertility Preservation',
+    abbr: 'Egg & Embryo Freezing',
+    desc: 'Preserve your fertility future with state-of-the-art vitrification technology secured in the TMRW Vault.',
+    href: '/services#preservation',
+  },
+  {
+    icon: '◉',
+    title: 'Genetic Testing',
+    abbr: 'PGT',
+    desc: 'Preimplantation Genetic Testing to identify the healthiest embryos before transfer, maximizing success.',
+    href: '/services#pgt',
+  },
+  {
+    icon: '◎',
+    title: 'Donors & Surrogacy',
+    abbr: 'Third-Party Reproduction',
+    desc: 'Comprehensive support for egg donation and gestational surrogacy, including LGBTQIA+ family building.',
+    href: '/services#donors',
+  },
+  {
+    icon: '○',
+    title: 'Intrauterine Insemination',
+    abbr: 'IUI',
+    desc: 'A minimally invasive first-line fertility treatment for select candidates, guided by expert diagnostics.',
+    href: '/services#iui',
+  },
+  {
+    icon: '◐',
+    title: 'Surgical Services',
+    abbr: 'Minimally Invasive',
+    desc: 'Diagnostic and therapeutic procedures including hysteroscopy and laparoscopy at accredited surgery centers.',
+    href: '/services#surgical',
+  },
+];
+
+const team = [
+  {
+    name: 'James P. Lin, MD',
+    role: 'Founder & Medical Director',
+    bio: 'Award-winning reproductive endocrinologist with 20+ years of expertise. Founder of RFC and architect of IRFC\'s patient-first model of care.',
+    initial: 'J',
+    color: 'gold',
+  },
+  {
+    name: 'Zitao Liu, MD',
+    role: 'Associate Chief Medical Officer',
+    bio: 'Fertility specialist pioneering mild stimulation protocols and AI-assisted reproductive tools. Now accepting new patients.',
+    initial: 'Z',
+    color: 'purple',
+  },
+  {
+    name: 'Yufen Xie, PhD',
+    role: 'IVF Laboratory Director',
+    bio: 'Led the team ranked #1 in US IVF success rates in 2016. Brings world-class embryology expertise to every case.',
+    initial: 'Y',
+    color: 'gold',
+  },
+];
+
+const recognitions = [
+  'Kaiser Permanente Center of Excellence',
+  'Top IVF Center — California, IVF Authority',
+  'Fairfax EggBank Premier Partner',
+  'Highly Rated on FertilityIQ',
+];
+---
+
+<Layout
+  title="Home"
+  description="IRFC — Where science meets compassionate care. World-class IVF and fertility treatments across Southern California. The union of Incinta Fertility and Reproductive Fertility Center."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden" style="background: var(--color-stone-900);">
+    <!-- Background dot pattern -->
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(var(--color-gold-500) 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <!-- Ambient gradients -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/4 right-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl" style="background: var(--color-purple-500);"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-80 h-80 rounded-full opacity-8 blur-3xl" style="background: var(--color-gold-600);"></div>
+    </div>
+
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 pt-32 pb-20 w-full">
+      <div class="max-w-4xl">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400); font-family: var(--font-sans);">
+            Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center
+          </span>
+        </div>
+
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6 leading-none">
+          <span class="block">Where Science</span>
+          <span class="block mt-2 italic" style="color: var(--color-gold-400);">Meets Compassion</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-stone-300 font-light leading-relaxed max-w-2xl mb-10">
+          IRFC unites two of Southern California's most trusted fertility centers — bringing together two decades of clinical excellence and a philosophy that sees every patient as a whole person, not just a diagnosis.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/contact" class="btn-primary">
+            Schedule a Free Consultation
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/about" class="btn-outline" style="border-color: var(--color-stone-700); color: var(--color-stone-300);">
+            Our Story
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style="color: var(--color-stone-700);">
+      <span class="text-xs tracking-widest uppercase" style="font-family: var(--font-sans);">Scroll</span>
+      <div class="w-px h-12" style="background: linear-gradient(to bottom, var(--color-stone-600), transparent);"></div>
+    </div>
+  </section>
+
+  <!-- The Union -->
+  <section class="py-24 lg:py-32" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+            A New Chapter<br/>
+            <em class="not-italic" style="color: var(--color-purple-500);">in Fertility Care</em>
+          </h2>
+          <p class="text-stone-600 leading-relaxed mb-5">
+            IRFC was born from the union of two pioneering fertility centers: <strong class="text-stone-800 font-medium">Incinta Fertility</strong> and <strong class="text-stone-800 font-medium">Reproductive Fertility Center (RFC)</strong>. Together, we bring over two decades of combined clinical excellence, a nationally top-ranked IVF laboratory, and a philosophy that sees every patient as a whole person.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-8">
+            Our founder, Dr. James P. Lin, built RFC on the belief that a fertility clinic should feel like "both a family and a home." That spirit now lives within IRFC — amplified by the multidisciplinary team and thoughtfully designed spaces that Incinta pioneered.
+          </p>
+          <a href="/about" class="btn-outline">Learn Our Story</a>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          {stats.map(stat => (
+            <div class="bg-white p-8 border border-stone-200 card-hover">
+              <p class="text-4xl lg:text-5xl font-light mb-2" style={`font-family: var(--font-serif); color: var(--color-gold-600);`}>{stat.number}</p>
+              <p class="text-sm" style="color: var(--color-stone-500);">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Treatments &amp; Services</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800">
+          Comprehensive Fertility Care
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed max-w-xl mx-auto" style="color: var(--color-stone-500);">
+          Every path to parenthood is unique. Our full spectrum of treatments is tailored to your specific needs and goals.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px" style="background: var(--color-stone-200);">
+        {services.map(service => (
+          <a href={service.href} class="group bg-white p-8 lg:p-10 flex flex-col" style="transition: background 0.2s;">
+            <span class="text-2xl mb-5" style={`color: var(--color-gold-500);`} aria-hidden="true">{service.icon}</span>
+            <p class="text-xs tracking-widest uppercase mb-2" style={`color: var(--color-stone-400); font-family: var(--font-sans);`}>{service.abbr}</p>
+            <h3 class="text-xl font-light mb-3" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{service.title}</h3>
+            <p class="text-sm leading-relaxed flex-1" style={`color: var(--color-stone-500);`}>{service.desc}</p>
+            <div class="mt-6 flex items-center gap-2 text-xs tracking-wider uppercase" style={`color: var(--color-gold-500);`}>
+              <span>Learn more</span>
+              <svg class="w-3.5 h-3.5" style="transition: transform 0.2s;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/services" class="btn-outline">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three Pillars -->
+  <section class="py-24 lg:py-32" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-500); font-family: var(--font-sans);">Our Foundation</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white">
+          Built on Three Pillars
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 border" style="border-color: var(--color-stone-800);">
+        {[
+          {
+            title: 'Safety',
+            desc: 'State-of-the-art technology in professionally accredited surgery centers. Every procedure follows the highest clinical standards.',
+            num: '01',
+          },
+          {
+            title: 'Quality',
+            desc: 'CAP-certified laboratories staffed by world-class embryologists. Excellence isn\'t a goal — it\'s our standard.',
+            num: '02',
+          },
+          {
+            title: 'Integrity',
+            desc: 'Award-winning, internationally-renowned physicians who lead with transparency, authenticity, and unwavering dedication.',
+            num: '03',
+          },
+        ].map((pillar, i) => (
+          <div class="p-10 lg:p-14" style={`border-right: ${i < 2 ? `1px solid var(--color-stone-800)` : 'none'}; border-bottom: 0;`}>
+            <p class="text-xs tracking-widest mb-6" style="color: var(--color-stone-700); font-family: var(--font-sans);">{pillar.num}</p>
+            <h3 class="text-3xl font-light text-white mb-5" style="font-family: var(--font-serif);">{pillar.title}</h3>
+            <div class="w-8 h-px mb-6" style="background: var(--color-gold-500);"></div>
+            <p class="text-sm leading-relaxed" style="color: var(--color-stone-400);">{pillar.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Preview -->
+  <section class="py-24 lg:py-32" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div class="lg:sticky" style="top: 8rem;">
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+            Expert Physicians.<br/>
+            <em class="not-italic" style="color: var(--color-purple-500);">Trusted Partners.</em>
+          </h2>
+          <p class="text-stone-600 leading-relaxed mb-8 text-sm">
+            Our medical team combines decades of clinical experience with genuine compassion. Each physician brings specialized expertise to give you the most advanced, personalized care available.
+          </p>
+          <a href="/team" class="btn-primary">Meet the Full Team</a>
+        </div>
+
+        <div class="space-y-5">
+          {team.map((member) => (
+            <div class="bg-white p-8 border-l-2 card-hover" style={`border-left-color: var(--color-${member.color}-200);`}>
+              <div class="flex items-start gap-5">
+                <div
+                  class="flex-shrink-0 w-12 h-12 flex items-center justify-center text-lg font-light text-white"
+                  style={`background: linear-gradient(135deg, var(--color-${member.color}-500), var(--color-${member.color}-700));`}
+                >
+                  {member.initial}
+                </div>
+                <div>
+                  <h3 class="text-xl font-light text-stone-800 mb-1" style="font-family: var(--font-serif);">{member.name}</h3>
+                  <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
+                  <p class="text-sm text-stone-500 leading-relaxed">{member.bio}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recognition Bar -->
+  <section class="py-10 bg-white border-y border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
+        <p class="text-xs tracking-widest uppercase flex-shrink-0 lg:w-36 text-center lg:text-left" style="color: var(--color-stone-400); font-family: var(--font-sans);">
+          Recognized<br/>Excellence
+        </p>
+        <div class="h-px w-full lg:h-12 lg:w-px" style="background: var(--color-stone-200);"></div>
+        <div class="flex flex-wrap justify-center lg:justify-start gap-x-10 gap-y-3">
+          {recognitions.map(rec => (
+            <div class="flex items-center gap-2">
+              <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: var(--color-gold-500);">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              <span class="text-sm" style="color: var(--color-stone-500);">{rec}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Technology -->
+  <section class="py-24 lg:py-32" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <div class="section-divider mx-auto mb-6" style="width: 3rem; margin-left: auto; margin-right: auto;"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800">
+          Advanced Laboratory Technology
+        </h2>
+        <p class="mt-4 text-sm leading-relaxed max-w-xl mx-auto" style="color: var(--color-stone-500);">
+          Our investment in cutting-edge technology reflects our commitment to giving every embryo the best possible environment to thrive.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          {
+            name: 'EmbryoScope+',
+            desc: 'Time-lapse incubation system that continuously monitors embryo development without disturbing the culture environment.',
+          },
+          {
+            name: 'RI Witness',
+            desc: 'Electronic witnessing system ensuring biological samples are precisely matched to patients throughout every IVF step.',
+          },
+          {
+            name: 'TMRW Vault',
+            desc: 'Military-grade cryogenic storage with real-time monitoring and unprecedented traceability for frozen embryos and eggs.',
+          },
+        ].map(tech => (
+          <div class="bg-white p-8 border border-stone-200 card-hover">
+            <div class="w-10 h-10 mb-6 flex items-center justify-center border" style="border-color: var(--color-gold-400);">
+              <div class="w-3 h-3" style="background: var(--color-gold-500);"></div>
+            </div>
+            <h3 class="text-xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{tech.name}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">{tech.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-12 items-start">
+        <div>
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+            Four Locations<br/>Across Southern<br/>California
+          </h2>
+          <p class="text-sm leading-relaxed mb-8" style="color: var(--color-stone-500);">
+            With clinics in Alhambra, Beverly Hills, Corona, and Irvine, expert fertility care is always within reach.
+          </p>
+          <a href="/locations" class="btn-outline">Find a Location</a>
+        </div>
+
+        <div class="lg:col-span-2 grid sm:grid-cols-2 gap-4">
+          {[
+            { city: 'Alhambra', code: 'CA', phone: '(626) 588-2885', types: 'Clinic' },
+            { city: 'Beverly Hills', code: 'CA', phone: '(213) 600-8088', types: 'Clinic' },
+            { city: 'Corona', code: 'CA', phone: '(951) 272-2221', types: 'Clinic · Surgery · Lab' },
+            { city: 'Irvine', code: 'CA', phone: '(949) 453-8600', types: 'Clinic · Surgery · Lab' },
+          ].map(loc => (
+            <a href="/locations" class="group p-6 border border-stone-200 block" style="transition: border-color 0.2s;">
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <h3 class="text-lg font-light text-stone-800" style="font-family: var(--font-serif);">{loc.city}</h3>
+                  <p class="text-xs" style="color: var(--color-stone-400);">{loc.code}</p>
+                </div>
+                <svg class="w-4 h-4 mt-1" style="color: var(--color-stone-300);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+              <p class="text-xs mb-2" style="color: var(--color-stone-400);">{loc.types}</p>
+              <p class="text-sm" style="color: var(--color-gold-600);">{loc.phone}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inclusive Care -->
+  <section class="py-24 lg:py-32" style="background: var(--color-purple-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-8 lg:p-10 border" style="border-color: var(--color-purple-700);">
+          <h3 class="text-2xl font-light text-white mb-4" style="font-family: var(--font-serif);">LGBTQIA+ Family Building</h3>
+          <p class="text-sm leading-relaxed mb-6" style="color: var(--color-purple-200);">
+            Every family deserves the same exceptional care. We offer inclusive, affirming fertility services for same-sex couples and single individuals — including sperm donation, egg donation, and gestational surrogacy.
+          </p>
+          <a href="/services#lgbtqia" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-400);">
+            Learn More
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+
+        <div class="p-8 lg:p-10 border" style="border-color: var(--color-purple-700);">
+          <h3 class="text-2xl font-light text-white mb-4" style="font-family: var(--font-serif);">International &amp; Out-of-Town Patients</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color: var(--color-purple-200);">
+            We welcome patients from around the world. Our team supports you with telehealth consultations, multilingual care coordination, and a seamless experience whether local or traveling from abroad.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            {['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'].map(lang => (
+              <span class="text-xs px-3 py-1 border tracking-wide" style="border-color: var(--color-purple-700); color: var(--color-purple-300);">{lang}</span>
+            ))}
+          </div>
+          <a href="/contact" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-400);">
+            Contact Us
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400);">Begin Your Journey</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+          Your Family Starts Here
+        </h2>
+        <p class="leading-relaxed mb-10 text-sm" style="color: var(--color-stone-500);">
+          Schedule a free new patient consultation and take the first step toward building the family you've always dreamed of. Our team is here to listen, guide, and support you every step of the way.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="btn-primary">Schedule Free Consultation</a>
+          <a href="tel:+19494538600" class="btn-outline">Call (949) 453-8600</a>
+        </div>
+        <p class="mt-6 text-xs" style="color: var(--color-stone-400);">
+          Free initial consultations available. Telehealth options for out-of-area patients.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

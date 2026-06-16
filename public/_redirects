@@ -1,0 +1,3 @@
+# Legacy redirects for old RFC and Incinta URLs
+/rfcfamily  /about  301
+/incinta    /about  301

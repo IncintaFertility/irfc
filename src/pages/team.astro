@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const physicians = [
+  {
+    name: 'James P. Lin, MD',
+    role: 'Founder & Medical Director',
+    credentials: 'MD, Reproductive Endocrinology & Infertility',
+    bio: [
+      'Dr. James P. Lin is the founder of Reproductive Fertility Center and Medical Director of IRFC. With over 20 years of experience in reproductive endocrinology and infertility, he is widely recognized as one of Southern California\'s most distinguished fertility specialists.',
+      'An award-winning physician, Dr. Lin built RFC on the belief that every patient deserves a clinic that feels like "both a family and a home." His leadership transformed RFC into a Kaiser Permanente Center of Excellence and one of the largest Fairfax EggBank production facilities in the United States.',
+      'Dr. Lin is internationally renowned for his expertise and continues to shape the future of fertility medicine through clinical innovation and his commitment to patient-centered care.',
+    ],
+    color: 'gold',
+    initial: 'J',
+  },
+  {
+    name: 'Zitao Liu, MD',
+    role: 'Associate Chief Medical Officer',
+    credentials: 'MD, Reproductive Endocrinology & Infertility',
+    bio: [
+      'Dr. Zitao Liu serves as Associate Chief Medical Officer at IRFC and is now accepting new patients. A rising leader in the field, Dr. Liu has become a pioneer in the development of mild stimulation protocols that reduce patient burden while maintaining excellent outcomes.',
+      'He brings a forward-thinking approach to fertility care, integrating artificial intelligence and data-driven tools to enhance diagnostic precision and treatment planning. His work represents the next generation of reproductive medicine — thoughtful, innovative, and deeply personalized.',
+    ],
+    color: 'purple',
+    initial: 'Z',
+    badge: 'Now Accepting New Patients',
+  },
+];
+
+const labTeam = [
+  {
+    name: 'Yufen Xie, PhD',
+    role: 'IVF Laboratory Director',
+    bio: 'Dr. Yufen Xie leads IRFC\'s embryology laboratory with extraordinary distinction. She directed the team that achieved the remarkable milestone of being ranked #1 in US IVF success rates in 2016. Her dedication to world-class embryology technique and continuous improvement defines the standard of care in our lab.',
+    initial: 'Y',
+    color: 'gold',
+  },
+  {
+    name: 'Hyang Park, M.S.',
+    role: 'IVF Laboratory Supervisor',
+    bio: 'Hyang Park ensures the day-to-day excellence of IRFC\'s embryology laboratory. With meticulous attention to protocol, quality control, and team coordination, she maintains the rigorous standards that have defined the lab\'s outstanding reputation.',
+    initial: 'H',
+    color: 'purple',
+  },
+];
+
+const clinicalTeam = [
+  {
+    name: 'Lily Hao, MSN, WHNP',
+    role: 'Nurse Manager',
+    bio: 'Lily Hao brings her expertise as a Women\'s Health Nurse Practitioner to her role as IRFC\'s Nurse Manager. A passionate advocate for the patient-first philosophy, she ensures that every patient experiences exceptional, compassionate nursing care throughout their fertility journey.',
+    initial: 'L',
+    color: 'gold',
+  },
+  {
+    name: 'Kelly Zhao',
+    role: 'Third Party Coordinator',
+    bio: 'Kelly Zhao is IRFC\'s bilingual Third Party Coordinator, specializing in egg donation and surrogacy programs. She supports patients navigating the complex world of donor and gestational carrier arrangements with warmth, expertise, and culturally competent care.',
+    initial: 'K',
+    color: 'purple',
+  },
+];
+---
+
+<Layout
+  title="Our Team"
+  description="Meet the IRFC team — award-winning physicians, world-class embryologists, and compassionate clinical staff dedicated to your fertility journey."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Our Team</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          Expert Care,<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Personal Attention.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          Every member of the IRFC team brings specialized expertise and genuine dedication. Together, we form a collaborative practice built around one goal: your success.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Physicians -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Medical Leadership</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">Physicians</h2>
+      </div>
+
+      <div class="space-y-10">
+        {physicians.map(doc => (
+          <div class="bg-white border border-stone-200 p-10 lg:p-14">
+            <div class="grid lg:grid-cols-4 gap-8 items-start">
+              <div class="flex flex-col items-start">
+                <div
+                  class="w-20 h-20 flex items-center justify-center text-3xl font-light text-white mb-4"
+                  style={`background: linear-gradient(135deg, var(--color-${doc.color}-400), var(--color-${doc.color}-700));`}
+                >
+                  {doc.initial}
+                </div>
+                {doc.badge && (
+                  <span class="text-xs tracking-wider px-3 py-1.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">
+                    {doc.badge}
+                  </span>
+                )}
+              </div>
+
+              <div class="lg:col-span-3">
+                <h3 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-1">{doc.name}</h3>
+                <p class="text-xs tracking-widest uppercase mb-1" style={`color: var(--color-${doc.color}-600); font-family: var(--font-sans);`}>{doc.role}</p>
+                <p class="text-xs mb-6" style="color: var(--color-stone-400);">{doc.credentials}</p>
+                {doc.bio.map(para => (
+                  <p class="text-sm text-stone-600 leading-relaxed mb-4 last:mb-0">{para}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab Team -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Laboratory Excellence</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">Embryology Team</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          Our lab ranked #1 in US IVF success rates in 2016. The scientists who achieved that milestone continue to push the boundaries of embryological science at IRFC.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {labTeam.map(member => (
+          <div class="p-8 border border-stone-200 card-hover">
+            <div class="flex items-start gap-6">
+              <div
+                class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white"
+                style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}
+              >
+                {member.initial}
+              </div>
+              <div>
+                <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
+                <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
+                <p class="text-sm text-stone-500 leading-relaxed">{member.bio}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinical Team -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Care</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">Clinical Staff</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {clinicalTeam.map(member => (
+          <div class="p-8 border border-stone-200 bg-white card-hover">
+            <div class="flex items-start gap-6">
+              <div
+                class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white"
+                style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}
+              >
+                {member.initial}
+              </div>
+              <div>
+                <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
+                <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
+                <p class="text-sm text-stone-500 leading-relaxed">{member.bio}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Us / CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        Begin with a Conversation
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Our team is ready to answer your questions and guide you through your options. Schedule a free consultation today.
+      </p>
+      <a href="/contact" class="btn-primary">Book a Free Consultation</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

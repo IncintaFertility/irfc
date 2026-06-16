@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --color-gold-50: #fdf9ee;
+  --color-gold-100: #f7edd0;
+  --color-gold-200: #eed9a0;
+  --color-gold-300: #e3c170;
+  --color-gold-400: #debc68;
+  --color-gold-500: #c6ad5c;
+  --color-gold-600: #a27f31;
+  --color-gold-700: #7d5f22;
+  --color-gold-800: #5a4218;
+  --color-gold-900: #3a2a0e;
+
+  --color-purple-50: #f4f3f9;
+  --color-purple-100: #e5e3f2;
+  --color-purple-200: #ccc9e6;
+  --color-purple-300: #b0acd7;
+  --color-purple-400: #8f88b6;
+  --color-purple-500: #766ea0;
+  --color-purple-600: #5d5582;
+  --color-purple-700: #453e63;
+  --color-purple-800: #2e2843;
+  --color-purple-900: #181424;
+
+  --color-stone-50: #fafaf8;
+  --color-stone-100: #f5f5f0;
+  --color-stone-200: #e8e8e0;
+  --color-stone-300: #d4d4c8;
+  --color-stone-400: #a8a89a;
+  --color-stone-500: #78786c;
+  --color-stone-600: #555548;
+  --color-stone-700: #3a3a30;
+  --color-stone-800: #242420;
+  --color-stone-900: #141410;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-stone-50 text-stone-800;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-gold-500) 25%, transparent);
+  }
+}
+
+@layer components {
+  .gold-gradient {
+    background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+  }
+
+  .gold-text {
+    background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-divider {
+    width: 3rem;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-gold-500), transparent);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 text-sm font-medium tracking-widest uppercase text-white;
+    background: linear-gradient(135deg, var(--color-gold-500), var(--color-gold-700));
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px color-mix(in srgb, var(--color-gold-600) 35%, transparent);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 text-sm font-medium tracking-widest uppercase border;
+    border-color: var(--color-gold-500);
+    color: var(--color-gold-600);
+    transition: all 0.3s ease;
+  }
+  .btn-outline:hover {
+    background: var(--color-gold-500);
+    color: white;
+  }
+
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  }
+
+  .nav-link {
+    @apply relative text-sm tracking-wider uppercase text-stone-600;
+    transition: color 0.2s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-gold-500);
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover {
+    color: var(--color-gold-600);
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+}

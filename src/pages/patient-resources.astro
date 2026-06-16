@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const resources = [
+  {
+    category: 'Getting Started',
+    items: [
+      {
+        title: 'Your First Consultation',
+        desc: 'What to bring, what to expect, and how to prepare for your initial appointment with an IRFC physician.',
+      },
+      {
+        title: 'Fertility Basics',
+        desc: 'An overview of how fertility works, common causes of infertility, and when to seek evaluation.',
+      },
+      {
+        title: 'Diagnostic Workup Guide',
+        desc: 'Understanding the tests and assessments your physician may recommend: hormonal panels, ultrasound, semen analysis, and more.',
+      },
+    ],
+  },
+  {
+    category: 'Treatment Information',
+    items: [
+      {
+        title: 'Understanding IVF',
+        desc: 'A step-by-step walkthrough of the IVF process — from ovarian stimulation to embryo transfer — so you know what to expect at every stage.',
+      },
+      {
+        title: 'IUI vs. IVF: Which is Right for You?',
+        desc: 'How your physician evaluates which treatment offers the best chance of success based on your unique medical profile.',
+      },
+      {
+        title: 'Egg Freezing & Fertility Preservation',
+        desc: 'Everything you need to know about preserving your eggs or embryos for the future, including timing, process, and success rates.',
+      },
+      {
+        title: 'Preimplantation Genetic Testing (PGT)',
+        desc: 'How genetic testing of embryos can help select the healthiest embryo and reduce the risk of certain inherited conditions.',
+      },
+    ],
+  },
+  {
+    category: 'Financial & Practical',
+    items: [
+      {
+        title: 'Insurance & Financing',
+        desc: 'Navigating insurance coverage for fertility treatments and financing options available to IRFC patients.',
+      },
+      {
+        title: 'Out-of-Town & International Patients',
+        desc: 'A practical guide for patients traveling to Southern California for treatment, including telehealth coordination and local accommodations.',
+      },
+      {
+        title: 'Telehealth & Virtual Care',
+        desc: 'How to use IRFC\'s telehealth services for consultations, follow-ups, and remote monitoring — wherever you are in the world.',
+      },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: 'What should I bring to my first consultation?',
+    a: 'Bring any prior fertility testing results, medical records, and a list of current medications. If you have a partner, we encourage them to join — their medical history is part of the picture too.',
+  },
+  {
+    q: 'Is a referral required to see an IRFC physician?',
+    a: 'No referral is necessary. You can schedule a consultation directly through our website, by phone, or by email.',
+  },
+  {
+    q: 'Do you offer telehealth appointments?',
+    a: 'Yes. IRFC offers virtual consultations for initial evaluations, follow-up appointments, and monitoring coordination for patients who cannot visit in person.',
+  },
+  {
+    q: 'Do you see international patients?',
+    a: 'Absolutely. We welcome patients from around the world and have multilingual staff who speak English, Mandarin Chinese, Japanese, Korean, and Spanish. We can coordinate care remotely and help plan in-person visits.',
+  },
+  {
+    q: 'What is the success rate of IVF at IRFC?',
+    a: 'Our laboratory team achieved the remarkable milestone of ranking #1 in US IVF success rates in 2016. Our physicians will provide individualized success rate estimates based on your specific age, diagnosis, and treatment plan during your consultation.',
+  },
+  {
+    q: 'Are consultations really free?',
+    a: 'Yes. All initial consultations with IRFC are offered at no charge. We want every patient to have the opportunity to learn about their options before making any commitment.',
+  },
+  {
+    q: 'Does IRFC support LGBTQIA+ patients?',
+    a: 'Yes, wholeheartedly. IRFC provides inclusive, affirming care to same-sex couples, transgender individuals, and single parents by choice. Our coordinators specialize in the range of third-party options available.',
+  },
+];
+---
+
+<Layout
+  title="Patient Resources"
+  description="Educational resources, FAQs, and practical information to help IRFC patients prepare for their fertility journey."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Patient Resources</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          Your Questions,<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Answered.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          We believe an informed patient is an empowered patient. Here you'll find educational guides, practical information, and answers to the questions we hear most often.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="space-y-16">
+        {resources.map(section => (
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-8 pb-4 border-b border-stone-200">{section.category}</h2>
+            <div class="grid md:grid-cols-3 gap-5">
+              {section.items.map(item => (
+                <div class="bg-white p-7 border border-stone-200 card-hover">
+                  <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{item.title}</h3>
+                  <p class="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-14">
+          <div class="h-px w-12 mx-auto mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="space-y-0 border border-stone-200" id="faq">
+          {faqs.map((faq, i) => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Webinars / Events Note -->
+  <section class="py-14" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row items-center gap-8 p-10 border border-stone-200 bg-white">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-2">Patient Webinars &amp; Events</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+            IRFC regularly hosts free educational webinars covering topics like IVF basics, fertility preservation, and LGBTQIA+ family building. Contact us to learn about upcoming events.
+          </p>
+        </div>
+        <a href="/contact" class="btn-outline flex-shrink-0">Contact Us for Event Info</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        Still Have Questions?
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Our team is here to help. Reach out for a free consultation — no obligation, just an honest conversation about your options.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Schedule Free Consultation</a>
+        <a href="tel:+19494538600" class="btn-outline">Call (949) 453-8600</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

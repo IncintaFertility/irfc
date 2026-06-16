@@ -1,0 +1,226 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Contact"
+  description="Schedule a free consultation with IRFC. Reach our team by phone, email, or online form. Telehealth options available."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Contact &amp; Consultations</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          Let's Begin<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Together.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          Your first consultation with IRFC is free. Reach out by phone, email, or the form below — we'll be in touch promptly to schedule a time that works for you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Grid -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16">
+
+        <!-- Contact Form -->
+        <div id="consultation">
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">Request a Consultation</h2>
+          <form class="space-y-6" name="consultation" method="POST" data-netlify="true" action="/contact/success">
+            <input type="hidden" name="form-name" value="consultation" />
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="first-name">First Name *</label>
+                <input
+                  type="text"
+                  id="first-name"
+                  name="first-name"
+                  required
+                  class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none"
+                  style="focus-border-color: var(--color-gold-500);"
+                />
+              </div>
+              <div>
+                <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="last-name">Last Name *</label>
+                <input
+                  type="text"
+                  id="last-name"
+                  name="last-name"
+                  required
+                  class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="preferred-location">Preferred Location</label>
+              <select
+                id="preferred-location"
+                name="preferred-location"
+                class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-700 text-sm focus:outline-none appearance-none"
+                style="background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a8a89a'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;"
+              >
+                <option value="">Select a location (or telehealth)</option>
+                <option value="alhambra">Alhambra, CA</option>
+                <option value="beverly-hills">Beverly Hills, CA</option>
+                <option value="corona">Corona, CA</option>
+                <option value="irvine">Irvine, CA</option>
+                <option value="telehealth">Telehealth / Virtual</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="service">Area of Interest</label>
+              <select
+                id="service"
+                name="service"
+                class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-700 text-sm focus:outline-none appearance-none"
+                style="background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a8a89a'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;"
+              >
+                <option value="">Select a treatment area</option>
+                <option value="ivf">IVF</option>
+                <option value="iui">IUI</option>
+                <option value="fertility-preservation">Fertility Preservation / Egg Freezing</option>
+                <option value="genetic-testing">Genetic Testing (PGT)</option>
+                <option value="donors-surrogacy">Egg Donation / Surrogacy</option>
+                <option value="lgbtqia">LGBTQIA+ Family Building</option>
+                <option value="surgical">Surgical Services</option>
+                <option value="general">General Fertility Evaluation</option>
+                <option value="other">Other / Not Sure</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="message">Message (Optional)</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none resize-none"
+                placeholder="Tell us a bit about your situation or questions..."
+              ></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="language">Preferred Language</label>
+              <select
+                id="language"
+                name="language"
+                class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-700 text-sm focus:outline-none appearance-none"
+                style="background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a8a89a'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;"
+              >
+                <option value="english">English</option>
+                <option value="chinese">Chinese (Mandarin / 普通话)</option>
+                <option value="japanese">Japanese / 日本語</option>
+                <option value="korean">Korean / 한국어</option>
+                <option value="spanish">Spanish / Español</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary w-full justify-center">
+              Submit Request
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+            <p class="text-xs text-center" style="color: var(--color-stone-400);">
+              All consultations are free of charge. We typically respond within one business day.
+            </p>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">Get in Touch</h2>
+
+          <div class="space-y-8 mb-12">
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">Main Line (English)</p>
+              <a href="tel:+19494538600" class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(949) 453-8600</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">Mandarin Chinese</p>
+              <a href="tel:+16263886022" class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(626) 388-6022</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">WhatsApp</p>
+              <a href="https://wa.me/14244719353" class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">+1 (424) 471-9353</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">Email</p>
+              <a href="mailto:contact@irfc.com" class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">contact@irfc.com</a>
+            </div>
+          </div>
+
+          <div class="border-t border-stone-200 pt-8">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-5">Our Locations</h3>
+            <div class="space-y-5">
+              {[
+                { city: 'Alhambra', address: '723 S Garfield Ave, Suite 203, CA 91801', phone: '(626) 588-2885' },
+                { city: 'Beverly Hills', address: '8635 W 3rd St, Suite 1170W, Los Angeles, CA 90048', phone: '(213) 600-8088' },
+                { city: 'Corona', address: '400 E Rincon St, Suite 108, CA 92879', phone: '(951) 272-2221' },
+                { city: 'Irvine', address: '16300 Sand Canyon Ave, 9th Fl, CA 92618', phone: '(949) 453-8600' },
+              ].map(loc => (
+                <div class="flex items-start gap-4">
+                  <svg class="w-4 h-4 mt-0.5 flex-shrink-0" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <div>
+                    <p class="text-sm font-medium text-stone-800">{loc.city}</p>
+                    <p class="text-xs text-stone-500 leading-relaxed">{loc.address}</p>
+                    <a href={`tel:${loc.phone.replace(/\D/g,'')}`} class="text-xs" style="color: var(--color-gold-600);">{loc.phone}</a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="mt-8 p-6 bg-stone-50 border border-stone-200">
+            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">We Speak Your Language</p>
+            <div class="flex flex-wrap gap-2">
+              {['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'].map(lang => (
+                <span class="text-xs px-3 py-1.5 border" style="color: var(--color-stone-600); border-color: var(--color-stone-300);">{lang}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

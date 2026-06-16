@@ -1,0 +1,313 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const artServices = [
+  {
+    id: 'ivf',
+    title: 'In Vitro Fertilization (IVF)',
+    category: 'Assisted Reproductive Technology',
+    desc: 'IVF is our most comprehensive fertility treatment. Eggs are retrieved from the ovaries, fertilized with sperm in our world-class laboratory, and the resulting embryos are carefully developed before transfer to the uterus.',
+    details: [
+      'Initial consultation and comprehensive diagnostic workup',
+      'Ovarian stimulation with personalized medication protocols',
+      'Egg retrieval under anesthesia',
+      'Fertilization and embryo development in our CAP-certified lab',
+      'Embryo monitoring with EmbryoScope+ time-lapse technology',
+      'Fresh or frozen embryo transfer',
+      'Pregnancy testing and early pregnancy monitoring',
+    ],
+    also: ['Low Stimulation IVF', 'Natural Cycle IVF', 'ICSI', 'Assisted Hatching'],
+  },
+  {
+    id: 'iui',
+    title: 'Intrauterine Insemination (IUI)',
+    category: 'Assisted Reproductive Technology',
+    desc: 'IUI is a minimally invasive first-line treatment that places prepared sperm directly into the uterus at the time of ovulation, increasing the chances of fertilization.',
+    details: [
+      'Monitoring of natural or medically-stimulated cycle',
+      'Sperm preparation and concentration',
+      'Timed insemination procedure',
+      'Appropriate for select candidates based on thorough evaluation',
+    ],
+    also: [],
+  },
+  {
+    id: 'preservation',
+    title: 'Fertility Preservation',
+    category: 'Egg, Embryo & Sperm Freezing',
+    desc: 'Whether you\'re not yet ready to start a family, facing a medical diagnosis, or planning ahead, IRFC offers state-of-the-art cryopreservation to protect your reproductive future.',
+    details: [
+      'Egg (oocyte) freezing for individuals and couples',
+      'Embryo cryopreservation for future frozen embryo transfers',
+      'Sperm freezing and banking',
+      'Vitrification technology for superior freeze-thaw survival rates',
+      'Secure storage in the TMRW Vault with real-time monitoring',
+      'Oncofertility: fertility preservation for cancer patients',
+    ],
+    also: [],
+  },
+  {
+    id: 'pgt',
+    title: 'Preimplantation Genetic Testing (PGT)',
+    category: 'Genetic Testing',
+    desc: 'PGT allows our embryologists to screen embryos for chromosomal abnormalities and specific genetic conditions before transfer, significantly improving the likelihood of a healthy pregnancy.',
+    details: [
+      'PGT-A: Aneuploidy screening for chromosomal balance',
+      'PGT-M: Monogenic disease testing for inherited conditions',
+      'PGT-SR: Structural rearrangement analysis',
+      'Biopsy of trophectoderm cells at the blastocyst stage',
+      'Results guide selection of the most viable embryo for transfer',
+    ],
+    also: [],
+  },
+  {
+    id: 'embryo-transfer',
+    title: 'Embryo Transfer',
+    category: 'Assisted Reproductive Technology',
+    desc: 'The culmination of the IVF process — a carefully timed, minimally invasive procedure in which selected embryos are placed into the uterine cavity to initiate pregnancy.',
+    details: [
+      'Fresh embryo transfer following egg retrieval cycle',
+      'Frozen embryo transfer (FET) with hormone priming',
+      'Ultrasound guidance for precise catheter placement',
+      'Single embryo transfer protocols to minimize multiple pregnancy risk',
+    ],
+    also: [],
+  },
+  {
+    id: 'ovulation',
+    title: 'Ovulation Induction',
+    category: 'Assisted Reproductive Technology',
+    desc: 'For patients who do not ovulate regularly, medication-based protocols stimulate the ovaries to develop and release one or more mature eggs, creating optimal conditions for conception.',
+    details: [
+      'Oral and injectable medication options',
+      'Cycle monitoring with ultrasound and hormone testing',
+      'Timed intercourse or IUI coordination',
+      'Carefully managed to reduce multiple pregnancy risk',
+    ],
+    also: [],
+  },
+];
+
+const donorServices = [
+  {
+    id: 'donors-surrogacy',
+    title: 'Donor Egg Program',
+    desc: 'IRFC offers access to a comprehensive egg donor database, including our partnership with Fairfax EggBank, the largest egg bank in the United States. Our coordinators guide recipients through every step of the selection and matching process.',
+  },
+  {
+    id: 'surrogacy',
+    title: 'Gestational Surrogacy',
+    desc: 'For patients who are unable to carry a pregnancy, gestational surrogacy offers a path to parenthood using their own or donated embryos. IRFC coordinates with reputable surrogacy agencies and provides full medical management.',
+  },
+  {
+    id: 'lgbtqia',
+    title: 'LGBTQIA+ Family Building',
+    desc: 'IRFC is proud to offer inclusive, affirming care to same-sex couples and single individuals. Whether through sperm donation, egg donation, reciprocal IVF, or gestational surrogacy, we help all families grow.',
+  },
+  {
+    id: 'sperm-retrieval',
+    title: 'Sperm Retrieval',
+    desc: 'For male patients with obstructive or non-obstructive azoospermia, IRFC offers surgical sperm retrieval procedures — including TESE and micro-TESE — to obtain sperm for use in IVF/ICSI.',
+  },
+];
+
+const surgicalServices = [
+  {
+    title: 'Diagnostic Hysteroscopy',
+    desc: 'A minimally invasive procedure to examine and treat the inside of the uterus, identifying polyps, fibroids, or structural abnormalities.',
+  },
+  {
+    title: 'Operative Hysteroscopy',
+    desc: 'Treatment of uterine conditions such as polyp or fibroid removal, septum resection, and adhesion lysis — performed at IRFC\'s accredited surgery centers.',
+  },
+  {
+    title: 'Laparoscopic Surgery',
+    desc: 'Minimally invasive abdominal surgery to diagnose and treat endometriosis, ovarian cysts, tubal disease, and other conditions affecting fertility.',
+  },
+];
+
+const collaborative = [
+  'Maternal Fetal Medicine',
+  'Minimally Invasive Gynecological Surgery',
+  'Preconception Weight Loss Management',
+  'Reproductive Urology',
+  'Oncofertility',
+  'Fertility Acupuncture',
+];
+---
+
+<Layout
+  title="Services"
+  description="IRFC offers a full spectrum of fertility treatments including IVF, IUI, egg freezing, genetic testing, donor services, and surgical care at four Southern California locations."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Treatments &amp; Services</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          Your Path,<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Our Expertise.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          No two fertility journeys are alike. IRFC offers a comprehensive range of treatments — from foundational diagnostics to advanced assisted reproduction — all tailored to your individual circumstances and goals.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ART Services -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">ART</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">Assisted Reproductive Technology</h2>
+      </div>
+
+      <div class="space-y-8">
+        {artServices.map(service => (
+          <div id={service.id} class="bg-white p-8 lg:p-12 border border-stone-200">
+            <div class="grid lg:grid-cols-3 gap-8">
+              <div>
+                <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">{service.category}</p>
+                <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">{service.title}</h3>
+                <p class="text-sm text-stone-500 leading-relaxed">{service.desc}</p>
+                {service.also.length > 0 && (
+                  <div class="mt-5">
+                    <p class="text-xs text-stone-400 mb-2 tracking-wide">Also includes:</p>
+                    <div class="flex flex-wrap gap-2">
+                      {service.also.map(a => (
+                        <span class="text-xs px-2.5 py-1 border" style="color: var(--color-stone-500); border-color: var(--color-stone-200);">{a}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div class="lg:col-span-2">
+                <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">What to expect</p>
+                <ul class="space-y-3">
+                  {service.details.map((detail, i) => (
+                    <li class="flex items-start gap-3">
+                      <span class="flex-shrink-0 text-xs mt-1 w-5 h-5 flex items-center justify-center border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{String(i+1).padStart(2,'0')}</span>
+                      <span class="text-sm text-stone-600 leading-relaxed">{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Donor & Third Party -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-purple-600); font-family: var(--font-sans);">Third-Party Reproduction</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">Donors, Surrogacy &amp; Inclusive Care</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          Building a family takes many forms. IRFC supports every path with expertise, compassion, and complete inclusivity.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6" id="donors">
+        {donorServices.map(service => (
+          <div id={service.id} class="p-8 border border-stone-200 card-hover">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{service.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{service.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Surgical -->
+  <section class="py-20" id="surgical" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Minimally Invasive</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">Surgical Services</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          Performed at IRFC's professionally accredited surgery centers in Corona and Irvine by our experienced physicians.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {surgicalServices.map(service => (
+          <div class="bg-white p-8 border border-stone-200 card-hover">
+            <div class="w-8 h-px mb-5" style="background: var(--color-gold-500);"></div>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{service.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{service.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Collaborative Specialties -->
+  <section class="py-20" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-white mb-4">
+            Collaborative Specialties
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-400);">
+            IRFC collaborates with specialists across multiple disciplines to provide comprehensive care that addresses every aspect of your reproductive health and overall wellbeing.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {collaborative.map(spec => (
+            <div class="flex items-center gap-3 p-4 border" style="border-color: var(--color-stone-800);">
+              <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--color-gold-500);"></div>
+              <span class="text-sm" style="color: var(--color-stone-300);">{spec}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Telehealth -->
+  <section class="py-16 bg-white border-b border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row items-center gap-8 p-10 bg-stone-50 border border-stone-200">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-2">Telehealth Consultations</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+            Can't come in person? IRFC offers virtual consultations for out-of-area, international, and busy patients. Start your journey from anywhere.
+          </p>
+        </div>
+        <a href="/contact" class="btn-primary flex-shrink-0">Book a Telehealth Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        Not Sure Where to Start?
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Our physicians will guide you through a comprehensive evaluation and recommend the treatment plan best suited to your situation. Your first consultation is free.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Schedule Free Consultation</a>
+        <a href="/team" class="btn-outline">Meet Our Physicians</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
