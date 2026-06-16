@@ -1,0 +1,225 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const pillars = [
+  {
+    number: '01',
+    title: 'Two Decades of Proven Excellence',
+    color: 'gold',
+    desc: 'IRFC brings together over 20 years of clinical experience from Reproductive Fertility Center and Incinta Fertility — two of Southern California\'s most trusted fertility practices. Our combined history means we\'ve guided thousands of families through every type of fertility challenge, from the straightforward to the highly complex.',
+    highlights: [
+      'Founded by Dr. James P. Lin, a nationally recognized REI specialist',
+      '20+ years treating patients across Southern California',
+      'Thousands of successful pregnancies and births',
+    ],
+  },
+  {
+    number: '02',
+    title: '#1 Ranked IVF Laboratory',
+    color: 'gold',
+    desc: 'The laboratory at the heart of IRFC was ranked #1 in US IVF success rates in 2016 — a distinction earned through world-class embryology science, exacting protocols, and continuous improvement. That same team, led by Dr. Yufen Xie, continues to set the standard at IRFC today.',
+    highlights: [
+      'Ranked #1 in US IVF success rates, 2016',
+      'CAP-certified and CLIA-accredited laboratory',
+      'Led by Dr. Yufen Xie with 20+ years of embryology expertise',
+    ],
+  },
+  {
+    number: '03',
+    title: 'Kaiser Permanente Center of Excellence',
+    color: 'purple',
+    desc: 'IRFC (through RFC) is a designated Kaiser Permanente Center of Excellence across Southern California — one of the most rigorous quality designations available in reproductive medicine. This recognition reflects our clinical outcomes, safety record, and patient care standards.',
+    highlights: [
+      'Designated by Kaiser Permanente across Southern California',
+      'Reflects independently verified clinical quality standards',
+      'One of the largest Fairfax EggBank production facilities in the US',
+    ],
+  },
+  {
+    number: '04',
+    title: 'Technology That Sets the Standard',
+    color: 'purple',
+    desc: 'IRFC invests in the most advanced laboratory technology available — not as a marketing distinction, but because it produces measurably better outcomes. EmbryoScope+ time-lapse monitoring, TMRW Vault smart cryogenic storage, and RI Witness electronic witnessing are used for every patient, every cycle.',
+    highlights: [
+      'EmbryoScope+ time-lapse incubation — continuous embryo monitoring',
+      'TMRW Vault — military-grade cryogenic storage with RFID tracking',
+      'RI Witness — automated sample verification throughout IVF',
+    ],
+    link: { href: '/technology', label: 'Explore Our Technology' },
+  },
+  {
+    number: '05',
+    title: 'Multilingual, Multicultural Care',
+    color: 'gold',
+    desc: 'Fertility care is deeply personal, and language should never be a barrier. Our clinical and support team provides care in English, Mandarin Chinese, Japanese, Korean, and Spanish — so every patient feels fully heard, understood, and supported throughout their journey.',
+    highlights: [
+      'English, Mandarin, Japanese, Korean, and Spanish',
+      'Dedicated Mandarin-language phone line: (626) 388-6022',
+      'Telehealth available for international patients worldwide',
+    ],
+  },
+  {
+    number: '06',
+    title: 'Complete Care Under One Roof',
+    color: 'gold',
+    desc: 'From initial diagnostics to advanced IVF, egg donation, gestational surrogacy, and surgical care — IRFC offers the full spectrum of reproductive medicine at five Southern California locations. Patients never need to be referred elsewhere for the next stage of their care.',
+    highlights: [
+      'ART: IVF, IUI, PGT, egg freezing, embryo transfer',
+      'Third-party: donor eggs, sperm, gestational surrogacy',
+      'Surgical: hysteroscopy, laparoscopy at accredited surgery centers',
+      '5 clinic locations across Southern California',
+    ],
+  },
+];
+
+const synergies = [
+  {
+    from: 'RFC',
+    brought: '20 years of clinical trust, Kaiser COE designation, Fairfax EggBank partnership, and a physician-led model built on Safety, Quality, and Integrity.',
+  },
+  {
+    from: 'Incinta',
+    brought: 'The #1 US IVF lab, open-concept laboratory design, a culture of patient-centered innovation, and the belief that "you are more than your fertility."',
+  },
+];
+---
+
+<Layout
+  title="Why Choose IRFC"
+  description="What makes IRFC different — 20+ years of experience, the #1 ranked US IVF lab, Kaiser Permanente Center of Excellence, cutting-edge technology, and multilingual care across Southern California."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Why Choose IRFC</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          Not All Fertility<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Clinics Are Equal.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Choosing a fertility clinic is one of the most important decisions you will make. Here is why thousands of patients in Southern California — and from around the world — choose IRFC.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Pillars -->
+  <section class="py-4" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="space-y-1">
+        {pillars.map((pillar, i) => (
+          <div class={`grid lg:grid-cols-12 gap-0 border border-stone-200 ${i % 2 === 0 ? 'bg-white' : ''}`} style={i % 2 !== 0 ? 'background: var(--color-stone-50);' : ''}>
+            <!-- Number -->
+            <div class="lg:col-span-1 p-8 flex items-start">
+              <span class="text-xs tracking-widest font-medium" style={`color: var(--color-${pillar.color}-400); font-family: var(--font-sans);`}>{pillar.number}</span>
+            </div>
+            <!-- Content -->
+            <div class="lg:col-span-5 p-8 pt-0 lg:pt-8 border-b lg:border-b-0 lg:border-r border-stone-200">
+              <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">{pillar.title}</h2>
+              <p class="text-sm text-stone-600 leading-relaxed mb-4">{pillar.desc}</p>
+              {pillar.link && (
+                <a href={pillar.link.href} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-4" style={`color: var(--color-${pillar.color}-600);`}>
+                  {pillar.link.label}
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+              )}
+            </div>
+            <!-- Highlights -->
+            <div class="lg:col-span-6 p-8">
+              <ul class="space-y-3">
+                {pillar.highlights.map(h => (
+                  <li class="flex items-start gap-3">
+                    <div class="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-1.5" style={`background: var(--color-${pillar.color}-500);`}></div>
+                    <span class="text-sm text-stone-600 leading-relaxed">{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The Merger Advantage -->
+  <section class="py-24 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-14">
+        <div class="h-px w-12 mx-auto mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">The Strength of Two Legacies</h2>
+        <p class="mt-4 text-sm max-w-xl mx-auto" style="color: var(--color-stone-500);">
+          IRFC isn't just a rebrand — it's the combination of two distinct clinical cultures, each bringing unique strengths that our patients now benefit from together.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-px" style="background: var(--color-stone-200);">
+        {synergies.map(s => (
+          <div class="bg-white p-10 lg:p-14">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">{s.from}</p>
+            <p class="text-stone-600 leading-relaxed text-sm">{s.brought}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 p-10 lg:p-14 border border-stone-200 text-center" style="background: var(--color-stone-50);">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <div class="h-px flex-1" style="background: var(--color-gold-300);"></div>
+          <span class="text-xl" style="font-family: var(--font-serif); color: var(--color-gold-600);">Together</span>
+          <div class="h-px flex-1" style="background: var(--color-gold-300);"></div>
+        </div>
+        <p class="text-stone-600 leading-relaxed text-sm max-w-2xl mx-auto">
+          IRFC combines RFC's 20-year legacy of trust and clinical rigor with Incinta's award-winning laboratory and patient-centered philosophy — creating a practice that is greater than the sum of its parts, and dedicated entirely to the families we help build.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recognition Wall -->
+  <section class="py-20" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-12">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-white">Recognition & Accreditation</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { title: 'Kaiser Permanente Center of Excellence', detail: 'Designated across Southern California for clinical quality and outcomes' },
+          { title: '#1 US IVF Success Rate', detail: 'Ranked first among all US fertility laboratories, 2016' },
+          { title: 'Top IVF Center — California', detail: 'Recognized by IVF Authority, especially for patients aged 38–40' },
+          { title: 'Fairfax EggBank Partner', detail: 'One of the largest production facilities for the largest US egg bank' },
+        ].map(rec => (
+          <div class="p-7 border" style="border-color: var(--color-stone-800);">
+            <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-white mb-2">{rec.title}</h3>
+            <p class="text-xs leading-relaxed" style="color: var(--color-stone-400);">{rec.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        See It for Yourself
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Words only go so far. Schedule a free consultation and meet our physicians, see our facility, and ask us anything — no obligation.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Free Consultation</a>
+        <a href="/team" class="btn-outline">Meet Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

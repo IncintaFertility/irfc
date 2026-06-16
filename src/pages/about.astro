@@ -2,6 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+
+const timeline = [
+  { year: '2003', event: 'RFC Founded', detail: 'Dr. James P. Lin establishes Reproductive Fertility Center in Irvine, CA, with a mission to provide patient-centered fertility care built on Safety, Quality, and Integrity.' },
+  { year: '2010', event: 'Incinta Fertility Opens', detail: 'Incinta Fertility Center opens, pioneering an open-concept laboratory model and a philosophy that treats patients as whole people, not diagnoses.' },
+  { year: '2013', event: 'Kaiser COE Designation', detail: 'RFC earns designation as a Kaiser Permanente Center of Excellence across Southern California — an independent validation of clinical quality and outcomes.' },
+  { year: '2016', event: '#1 US IVF Laboratory', detail: 'The Incinta embryology lab, led by Dr. Yufen Xie, achieves the remarkable milestone of ranking #1 in US IVF success rates.' },
+  { year: '2018', event: 'Technology Leadership', detail: 'IRFC becomes among the first fertility centers in Orange County to deploy EmbryoScope+ time-lapse incubation technology.' },
+  { year: '2024', event: 'IRFC is Born', detail: 'Incinta Fertility and Reproductive Fertility Center unite to form IRFC — combining two decades of clinical excellence into one comprehensive fertility practice.' },
+];
+
+const achievements = [
+  { number: '20+', label: 'Years of Clinical Experience' },
+  { number: '#1', label: 'US IVF Lab Ranking, 2016' },
+  { number: '5', label: 'Southern California Clinics' },
+  { number: '5', label: 'Languages Spoken' },
+];
 ---
 
 <Layout
@@ -70,6 +86,51 @@ import Footer from '../components/Footer.astro';
     </div>
   </section>
 
+  <!-- Achievement Stats Bar -->
+  <section class="py-12 bg-white border-y border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px" style="background: var(--color-stone-200);">
+        {achievements.map(a => (
+          <div class="bg-white py-8 px-10 text-center">
+            <p class="text-4xl lg:text-5xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-600);">{a.number}</p>
+            <p class="text-xs tracking-wide" style="color: var(--color-stone-500); font-family: var(--font-sans);">{a.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinic Photos -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="overflow-hidden">
+          <img
+            src="/images/clinic-scene.jpg"
+            alt="IRFC clinic interior"
+            class="w-full h-72 object-cover"
+          />
+        </div>
+        <div class="grid grid-rows-2 gap-6">
+          <div class="overflow-hidden">
+            <img
+              src="/images/hero-incinta.jpg"
+              alt="Incinta Fertility Center"
+              class="w-full h-32 object-cover object-center"
+            />
+          </div>
+          <div class="overflow-hidden">
+            <img
+              src="/images/consultant.jpg"
+              alt="IRFC consultation"
+              class="w-full h-32 object-cover object-center"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Quote -->
   <section class="py-20 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
@@ -81,6 +142,47 @@ import Footer from '../components/Footer.astro';
           "Here you will find both a family and a home for every step of your fertility journey."
         </blockquote>
         <p class="text-sm tracking-wider uppercase" style="color: var(--color-gold-600);">— Dr. James P. Lin, Founder</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-24 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">Our Journey</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          Two decades of milestones that shaped who we are today.
+        </p>
+      </div>
+
+      <div class="relative">
+        <!-- Vertical line -->
+        <div class="absolute left-6 top-0 bottom-0 w-px hidden md:block" style="background: var(--color-stone-200);"></div>
+
+        <div class="space-y-0">
+          {timeline.map((item, i) => (
+            <div class="grid md:grid-cols-12 gap-4 md:gap-8 pb-10 relative">
+              <!-- Year dot + line -->
+              <div class="md:col-span-2 flex md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white border-2 z-10 relative" style={`border-color: ${i === timeline.length - 1 ? 'var(--color-gold-500)' : 'var(--color-stone-200)'};`}>
+                  <span class="text-xs font-medium" style={`font-family: var(--font-sans); color: ${i === timeline.length - 1 ? 'var(--color-gold-600)' : 'var(--color-stone-500)'};`}>{item.year}</span>
+                </div>
+              </div>
+              <!-- Content -->
+              <div class="md:col-span-10 pb-10 md:pb-0">
+                <div class={`p-7 border ${i === timeline.length - 1 ? 'border-gold-200' : 'border-stone-200'} bg-white`} style={i === timeline.length - 1 ? 'border-color: var(--color-gold-200);' : ''}>
+                  <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{item.event}</h3>
+                  {i === timeline.length - 1 && (
+                    <div class="w-6 h-px mb-3" style="background: var(--color-gold-500);"></div>
+                  )}
+                  <p class="text-sm text-stone-500 leading-relaxed">{item.detail}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>

@@ -1,0 +1,215 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const technologies = [
+  {
+    id: 'embryoscope',
+    name: 'EmbryoScope+',
+    tagline: 'Time-Lapse Embryo Monitoring',
+    color: 'gold',
+    intro: 'The EmbryoScope+ is the world\'s first time-lapse incubator designed to provide a stable, undisturbed environment for embryo development while continuously capturing high-resolution images — without ever removing the embryo from incubation. IRFC was among the first fertility centers in Orange County to offer this technology.',
+    how: [
+      { title: 'Stable Environment', desc: 'Direct-contact heating and HEPA/VOC air filtration maintain optimal, uninterrupted incubation conditions. Integrated gas mixing enables reduced oxygen levels proven to support embryo health.' },
+      { title: 'Continuous Imaging', desc: 'High-resolution optics capture multi-plane images at regular intervals throughout development — validated as safe at the light wavelength and energy levels used.' },
+      { title: 'Intelligent Selection', desc: 'The resulting time-lapse video allows our embryologists to assess each embryo\'s developmental pattern and select the most viable candidates for transfer — a level of insight impossible with traditional spot-checking.' },
+    ],
+    benefits: [
+      'Improved implantation rates through better embryo selection',
+      'Reduced pregnancy loss by identifying the most viable embryos',
+      'No disruption to incubation — embryos are never exposed to environmental stress',
+      'Shortened average time to pregnancy',
+    ],
+  },
+  {
+    id: 'tmrw',
+    name: 'TMRW Vault',
+    tagline: 'Smart Cryogenic Storage',
+    color: 'purple',
+    intro: 'The TMRW Vault replaces traditional handwritten labeling with a fully digital specimen management system. Each patient receives a unique digital ID; every egg and embryo is assigned an RFID beacon that maintains its location and complete history in real time — so your future family is protected with military-grade precision.',
+    how: [
+      { title: 'Digital Identification', desc: 'Every specimen is assigned a unique RFID beacon linked to the patient\'s digital ID. No handwritten labels — no human error in identification.' },
+      { title: '24/7 Active Monitoring', desc: 'Thousands of system checks are performed daily by both automated systems and a dedicated remote expert team. Anomalies are flagged and addressed before they become problems.' },
+      { title: 'Military-Grade Security', desc: 'All patient data and specimen records are protected with HIPAA-compliant, military-grade encryption. Your most private medical information stays private.' },
+    ],
+    benefits: [
+      'Eliminates risk of specimen mix-ups through digital rather than analog tracking',
+      'Continuous oversight by both automated systems and expert personnel',
+      'Real-time location history for every stored egg and embryo',
+      'HIPAA-compliant encryption protects your medical records',
+    ],
+  },
+  {
+    id: 'riwitness',
+    name: 'RI Witness™',
+    tagline: 'Electronic Witnessing System',
+    color: 'gold',
+    intro: 'The RI Witness™ ART Management System uses RFID technology to track every patient sample — eggs, sperm, and embryos — through every step of the IVF process. Readers positioned throughout the lab automatically verify that the right samples are being used for the right patient, every time.',
+    how: [
+      { title: 'RFID Sample Tracking', desc: 'Every dish, tube, and container is tagged with an RFID chip linked to the patient\'s identity. Lab readers automatically confirm correct matching without requiring manual checks.' },
+      { title: 'Automated Lab Workflow', desc: 'The system integrates into standard lab procedures without adding steps for embryologists — reducing administrative burden and freeing them to focus entirely on patient care.' },
+      { title: 'Research-Validated', desc: 'Endorsed by the American Society for Reproductive Medicine (ASRM), RI Witness is recognized for significantly reducing the risk of laboratory errors in ART procedures.' },
+    ],
+    benefits: [
+      'Prevents sample mix-ups — the most serious risk in any IVF laboratory',
+      'Automatic verification at every stage: egg retrieval, fertilization, biopsy, transfer',
+      'Reduces reliance on manual double-checking without sacrificing safety',
+      'Used in leading IVF centers worldwide',
+    ],
+  },
+];
+---
+
+<Layout
+  title="Lab Technology"
+  description="IRFC's embryology laboratory uses EmbryoScope+, TMRW Vault, and RI Witness — the gold standard in IVF laboratory technology for safety, precision, and superior outcomes."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Laboratory Technology</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          The Science Behind<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Every Success.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Our embryology laboratory is equipped with the most advanced technologies in reproductive medicine. These tools don't replace the expertise of our scientists — they amplify it, giving every embryo the best possible conditions to develop and every patient the best possible chance of success.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab Achievement Banner -->
+  <section class="py-10 border-y border-stone-100" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-16 text-center md:text-left">
+        <div>
+          <p class="text-4xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-400);">#1</p>
+          <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400);">US IVF Success Rate, 2016</p>
+        </div>
+        <div class="h-px w-12 md:h-12 md:w-px" style="background: var(--color-stone-700);"></div>
+        <div>
+          <p class="text-sm leading-relaxed max-w-md" style="color: var(--color-stone-300);">
+            Our laboratory team ranked <strong class="text-white">#1 in US IVF success rates in 2016</strong> — a distinction earned through relentless investment in both scientific talent and the technology that supports it.
+          </p>
+        </div>
+        <div class="h-px w-12 md:h-12 md:w-px" style="background: var(--color-stone-700);"></div>
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-1" style="color: var(--color-stone-500);">CAP Certified</p>
+          <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-500);">CLIA Accredited</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Deep Dives -->
+  {technologies.map((tech, i) => (
+    <section
+      id={tech.id}
+      class={`py-24 lg:py-28 ${i % 2 === 0 ? 'bg-white' : ''}`}
+      style={i % 2 !== 0 ? 'background: var(--color-stone-50);' : ''}
+    >
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <!-- Header -->
+        <div class="grid lg:grid-cols-3 gap-10 lg:gap-16 mb-14">
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-3" style={`color: var(--color-${tech.color}-600); font-family: var(--font-sans);`}>{tech.tagline}</p>
+            <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-5">{tech.name}</h2>
+            <div class="w-8 h-px" style={`background: var(--color-${tech.color}-500);`}></div>
+          </div>
+          <div class="lg:col-span-2">
+            <p class="text-stone-600 leading-relaxed">{tech.intro}</p>
+          </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="grid lg:grid-cols-2 gap-8 mb-10">
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">How It Works</p>
+            <div class="space-y-6">
+              {tech.how.map((step, idx) => (
+                <div class="flex gap-5">
+                  <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center border text-xs font-medium" style={`border-color: var(--color-${tech.color}-300); color: var(--color-${tech.color}-600); font-family: var(--font-sans);`}>
+                    {String(idx + 1).padStart(2, '0')}
+                  </div>
+                  <div>
+                    <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-1">{step.title}</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="border border-stone-200 p-8" style={i % 2 !== 0 ? 'background: white;' : 'background: var(--color-stone-50);'}>
+            <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Benefits</p>
+            <ul class="space-y-4">
+              {tech.benefits.map(b => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style={`color: var(--color-${tech.color}-500);`}>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                  </svg>
+                  <span class="text-sm text-stone-600 leading-relaxed">{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Lab Director -->
+  <section class="py-20" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="flex items-start gap-8">
+          <img
+            src="/images/team/dr-yufen-xie.png"
+            alt="Dr. Yufen Xie, IVF Laboratory Director"
+            class="flex-shrink-0 w-24 h-24 object-cover rounded-full"
+          />
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-500); font-family: var(--font-sans);">IVF Laboratory Director</p>
+            <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-white mb-1">Yufen Xie, PhD</h3>
+            <p class="text-sm mb-5" style="color: var(--color-stone-400);">Embryologist · 20+ Years Experience</p>
+            <p class="text-sm leading-relaxed" style="color: var(--color-stone-300);">
+              Dr. Xie led the IRFC laboratory team to achieve the #1 ranking in US IVF success rates in 2016. Her expertise in embryology technique, combined with her command of the most advanced laboratory systems available, sets the standard for every case that passes through our lab.
+            </p>
+          </div>
+        </div>
+        <blockquote class="border-l-2 pl-8" style="border-color: var(--color-gold-600);">
+          <p class="text-xl font-light italic leading-relaxed mb-4" style="font-family: var(--font-serif); color: var(--color-stone-200);">
+            "Technology gives us the information. Science and experience tell us what to do with it. Together, they give our patients their best possible chance."
+          </p>
+          <cite class="text-xs tracking-widest uppercase not-italic" style="color: var(--color-gold-500);">— Yufen Xie, PhD, IVF Laboratory Director</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        Experience the Difference
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Our technology, combined with our team's expertise, means every embryo in our lab has the best possible chance. Schedule a free consultation to learn more.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Free Consultation</a>
+        <a href="/team" class="btn-outline">Meet Our Lab Team</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
