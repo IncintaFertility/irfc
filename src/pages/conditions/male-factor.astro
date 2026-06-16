@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Male Factor Infertility"
+  description="Male factor infertility treatment at IRFC — semen analysis, sperm retrieval, IVF with ICSI. Expert care for all causes of male infertility in Southern California."
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Conditions We Treat</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Male Factor<br/>Infertility
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Male factor infertility contributes to approximately 40–50% of all infertility cases. At IRFC, male factor is evaluated thoroughly, treated where possible, and bypassed with advanced techniques when necessary — without judgment, and with the same compassion we extend to every patient.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">Causes of Male Infertility</h2>
+          <p class="text-stone-600 leading-relaxed mb-5 text-sm">Male infertility can stem from problems with sperm production, function, or delivery. A semen analysis is the essential first test — evaluating sperm count, motility (movement), morphology (shape), and other parameters.</p>
+          <div class="space-y-4">
+            {[
+              { title: 'Low Sperm Count (Oligospermia)', desc: 'Fewer sperm than normal, reducing the likelihood of successful fertilization.' },
+              { title: 'Poor Motility (Asthenospermia)', desc: 'Sperm that cannot swim effectively toward the egg.' },
+              { title: 'Abnormal Morphology (Teratospermia)', desc: 'High proportion of abnormally shaped sperm, which are less able to fertilize.' },
+              { title: 'Azoospermia', desc: 'No sperm in the ejaculate — either due to a blockage (obstructive) or production failure (non-obstructive).' },
+              { title: 'Hormonal Imbalances', desc: 'Low testosterone, elevated FSH, or other hormonal issues that impair sperm production.' },
+              { title: 'Varicocele', desc: 'Enlarged veins in the scrotum that raise testicular temperature and reduce sperm quality.' },
+            ].map(c => (
+              <div class="flex gap-4">
+                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-500);"></div>
+                <div>
+                  <p class="text-sm font-medium text-stone-800">{c.title}</p>
+                  <p class="text-xs text-stone-500 leading-relaxed">{c.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="p-7 bg-white border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-4">Diagnostic Evaluation at IRFC</h3>
+            <ul class="space-y-2">
+              {['Semen analysis (count, motility, morphology, volume)', 'Hormonal panel (testosterone, FSH, LH, prolactin)', 'Genetic testing when indicated (Y-chromosome microdeletion, karyotype)', 'Scrotal ultrasound to evaluate for varicocele or structural abnormalities', 'Referral to reproductive urologist for further evaluation when needed'].map(d => (
+                <li class="flex items-start gap-3 text-sm text-stone-600">
+                  <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-7 bg-white border border-stone-200">
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Collaborative Care</p>
+            <p class="text-sm text-stone-600 leading-relaxed">IRFC works with reproductive urologists to provide comprehensive male factor care — including varicocele repair and surgical sperm retrieval for azoospermic patients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">Treatment Options</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {[
+          { title: 'IUI with Sperm Preparation', desc: 'For mild male factor, washing and concentrating the sperm sample before IUI significantly improves the number of motile sperm reaching the egg.' },
+          { title: 'IVF with ICSI', desc: 'Intracytoplasmic sperm injection (ICSI) injects a single selected sperm directly into each egg — effective even when sperm count or motility is severely reduced.' },
+          { title: 'Surgical Sperm Retrieval', desc: 'For men with azoospermia, IRFC coordinates TESE (testicular sperm extraction) or micro-TESE — procedures that retrieve sperm directly from testicular tissue for use in IVF/ICSI.' },
+          { title: 'Sperm Freezing', desc: 'Sperm can be frozen and banked before cancer treatment, vasectomy reversal, or as a precaution against future decline in sperm quality.' },
+          { title: 'Donor Sperm', desc: 'When no sperm can be retrieved, or when a couple chooses not to pursue sperm retrieval, IRFC helps select high-quality donors through licensed sperm banks.' },
+          { title: 'Lifestyle & Supplement Guidance', desc: 'Dietary changes, antioxidant supplementation, heat avoidance, and lifestyle modification can meaningfully improve sperm parameters for some patients.' },
+        ].map(t => (
+          <div class="p-7 border border-stone-200 card-hover">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{t.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Male Factor Is Treatable</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">Infertility is a medical issue — not a personal failing. Our team evaluates male factor thoroughly and compassionately, and we have solutions for virtually every presentation.</p>
+      <a href="/contact" class="btn-primary">Book Free Consultation</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

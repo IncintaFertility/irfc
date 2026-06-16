@@ -1,0 +1,158 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const types = [
+  {
+    abbr: 'PGT-A',
+    name: 'Aneuploidy Screening',
+    desc: 'Tests embryos for the correct number of chromosomes (46 total). Chromosomal errors (aneuploidy) are the leading cause of IVF failure and miscarriage — especially in women over 35. PGT-A identifies euploid (chromosomally normal) embryos for transfer.',
+    best: 'Advanced maternal age, recurrent pregnancy loss, repeated IVF failure',
+  },
+  {
+    abbr: 'PGT-M',
+    name: 'Monogenic Disease Testing',
+    desc: 'Screens embryos for specific single-gene disorders — such as cystic fibrosis, sickle cell disease, BRCA mutations, Huntington\'s disease, and hundreds of others — when one or both parents are known carriers.',
+    best: 'Known carriers of a specific inherited condition',
+  },
+  {
+    abbr: 'PGT-SR',
+    name: 'Structural Rearrangement',
+    desc: 'Identifies chromosomal structural changes (translocations, inversions) that can cause IVF failure or recurrent miscarriage, even when one parent is a balanced carrier with no apparent health impact.',
+    best: 'Couples with a known chromosomal structural rearrangement',
+  },
+];
+
+const faqs = [
+  { q: 'Does PGT guarantee a healthy baby?', a: 'PGT significantly reduces the risk of specific chromosomal or genetic conditions — but it cannot screen for all possible abnormalities. It is an important risk-reduction tool, not an absolute guarantee. Your physician will discuss realistic expectations.' },
+  { q: 'How is the embryo biopsy performed?', a: 'At the blastocyst stage (day 5–6), an embryologist uses a laser to remove a small number of trophectoderm cells (which become the placenta, not the baby). The embryo is then frozen while biopsy results are awaited. Studies confirm this process does not harm the embryo.' },
+  { q: 'How long does PGT take?', a: 'Biopsy results typically return within 10–14 days. Your physician will review results with you and recommend which embryos are best suited for transfer.' },
+  { q: 'Does PGT improve success rates?', a: 'For appropriate candidates, yes — particularly women over 35, those with recurrent miscarriage, or those with prior IVF failures. By selecting chromosomally normal embryos, PGT-A reduces miscarriage risk and improves implantation rates per transfer.' },
+  { q: 'What happens to embryos that don\'t pass PGT?', a: 'Embryos with detected abnormalities are not transferred. Patients may choose to discard them, donate them to research, or in some cases, discuss options with genetic counselors and their physician.' },
+];
+---
+
+<Layout
+  title="PGT — Preimplantation Genetic Testing"
+  description="PGT at IRFC — screen embryos for chromosomal abnormalities and inherited conditions before transfer. Learn about PGT-A, PGT-M, and PGT-SR."
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href="/services" class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">All Services</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">PGT</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Preimplantation<br/>Genetic Testing
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Embryo Genetic Analysis</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Before an embryo is transferred, genetic testing can identify the healthiest candidates — reducing miscarriage risk, improving implantation rates, and offering peace of mind about inherited conditions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What & Why -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">What Is PGT?</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            Preimplantation Genetic Testing (PGT) is a laboratory procedure performed on embryos created through IVF before transfer to the uterus. A small number of cells are biopsied from the blastocyst and sent to a genetics laboratory for analysis.
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            PGT allows IRFC's physicians to select the embryo most likely to result in a healthy, ongoing pregnancy — and to avoid transferring embryos with chromosomal or genetic abnormalities that would lead to failed implantation, miscarriage, or an affected child.
+          </p>
+        </div>
+        <div class="p-8 bg-white border border-stone-200">
+          <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Why chromosomal errors matter</p>
+          <p class="text-sm text-stone-600 leading-relaxed mb-4">Chromosomal abnormalities are the most common cause of failed IVF implantation and early miscarriage. Their frequency increases significantly with maternal age:</p>
+          <div class="space-y-3">
+            {[
+              { age: 'Under 35', rate: '~20–25% of embryos affected' },
+              { age: 'Age 35–37', rate: '~40% of embryos affected' },
+              { age: 'Age 38–40', rate: '~50–60% of embryos affected' },
+              { age: 'Over 40', rate: '~70–80% of embryos affected' },
+            ].map(row => (
+              <div class="flex justify-between items-center py-2 border-b border-stone-100 last:border-b-0">
+                <span class="text-sm text-stone-700">{row.age}</span>
+                <span class="text-sm" style="color: var(--color-gold-600);">{row.rate}</span>
+              </div>
+            ))}
+          </div>
+          <p class="text-xs mt-4" style="color: var(--color-stone-400);">Estimates based on published ART literature. Individual results vary.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types -->
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">Types of PGT at IRFC</h2>
+      <div class="space-y-6">
+        {types.map(t => (
+          <div class="border border-stone-200 p-8 lg:p-10">
+            <div class="grid lg:grid-cols-3 gap-8">
+              <div>
+                <span class="inline-block text-xs px-3 py-1 mb-4 border tracking-widest" style="color: var(--color-gold-600); border-color: var(--color-gold-300); font-family: var(--font-sans);">{t.abbr}</span>
+                <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">{t.name}</h3>
+              </div>
+              <div class="lg:col-span-2">
+                <p class="text-sm text-stone-600 leading-relaxed mb-4">{t.desc}</p>
+                <p class="text-xs" style="color: var(--color-stone-400);"><strong class="text-stone-600">Best for:</strong> {t.best}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">PGT Questions</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Know Before You Transfer</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        PGT is a powerful tool for the right patients. Our physicians will help you determine whether it makes sense for your situation.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book Free Consultation</a>
+        <a href="/services" class="btn-outline">All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

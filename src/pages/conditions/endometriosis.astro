@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Endometriosis & Fertility"
+  description="Endometriosis and fertility treatment at IRFC. Expert diagnosis, surgical treatment, and IVF for patients with endometriosis across Southern California."
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Conditions We Treat</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Endometriosis
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Endometriosis affects 1 in 10 women and is a leading cause of chronic pelvic pain and infertility. IRFC offers expert evaluation, laparoscopic surgery, and targeted fertility treatment for women at every stage of this condition.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">What Is Endometriosis?</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">Endometriosis occurs when tissue similar to the uterine lining (endometrium) grows outside the uterus — on the ovaries, fallopian tubes, pelvic peritoneum, and in some cases on other organs. This tissue responds to hormonal cycles, causing inflammation, scarring, and adhesions.</p>
+          <p class="text-stone-600 leading-relaxed mb-5 text-sm">Endometriosis can impair fertility by distorting pelvic anatomy, damaging the fallopian tubes, creating an inflammatory environment hostile to eggs and embryos, and reducing ovarian reserve — particularly when ovarian endometriomas (cysts) are present.</p>
+          <div class="p-6 border border-stone-200 bg-white">
+            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">Stages of Endometriosis</p>
+            <div class="space-y-2">
+              {[
+                { stage: 'Stage I–II (Minimal/Mild)', desc: 'Superficial implants, minimal scarring. Fertility impact varies.' },
+                { stage: 'Stage III (Moderate)', desc: 'Deeper implants, possible endometriomas, some adhesions.' },
+                { stage: 'Stage IV (Severe)', desc: 'Extensive disease, large endometriomas, significant adhesions. Higher fertility impact.' },
+              ].map(s => (
+                <div class="py-2 border-b border-stone-100 last:border-0">
+                  <p class="text-sm font-medium text-stone-700">{s.stage}</p>
+                  <p class="text-xs text-stone-500">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-4">Common Symptoms</h3>
+          <ul class="space-y-2 mb-8">
+            {['Pelvic pain — especially during menstruation', 'Pain during intercourse', 'Pain with bowel movements or urination', 'Heavy menstrual bleeding', 'Spotting between periods', 'Difficulty conceiving', 'Fatigue'].map(s => (
+              <li class="flex items-start gap-3 text-sm text-stone-600">
+                <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: var(--color-gold-500);"></div>
+                {s}
+              </li>
+            ))}
+          </ul>
+          <div class="p-6 bg-white border border-stone-200">
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Diagnosis</p>
+            <p class="text-sm text-stone-600 leading-relaxed">Definitive diagnosis requires laparoscopy — a minimally invasive surgical procedure. IRFC performs diagnostic laparoscopy at accredited surgery centers in Corona and Irvine, with the ability to treat findings in the same procedure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">Fertility Treatment for Endometriosis</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {[
+          { title: 'Laparoscopic Surgery', desc: 'For moderate-to-severe endometriosis, surgical removal of implants and adhesions can restore anatomy, relieve pain, and improve natural fertility. IRFC performs minimally invasive laparoscopic excision at our accredited surgery centers.' },
+          { title: 'IUI with Ovulation Induction', desc: 'For mild endometriosis with patent tubes, medicated IUI cycles can improve the chance of natural conception without surgery — often the first-line treatment option.' },
+          { title: 'IVF', desc: 'IVF bypasses the fallopian tubes and provides the highest success rates for women with endometriosis, particularly moderate-to-severe disease. IRFC customizes stimulation protocols to protect ovarian reserve.' },
+          { title: 'Endometrioma Management', desc: 'Ovarian endometriomas (chocolate cysts) require careful evaluation. IRFC weighs the risks of surgical removal against the benefits, always with ovarian reserve preservation as a priority.' },
+          { title: 'Egg Freezing (Oncofertility)', desc: 'Women with endometriosis who are not ready to conceive should consider freezing eggs before surgical treatment or disease progression reduces their ovarian reserve further.' },
+          { title: 'Collaborative Care', desc: 'IRFC coordinates with minimally invasive gynecological surgeons, pain specialists, and pelvic floor therapists to address endometriosis comprehensively — not just its fertility impact.' },
+        ].map(t => (
+          <div class="p-7 border border-stone-200 card-hover">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{t.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-stone-50);">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <svg class="w-8 h-8 mx-auto mb-6 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);"><path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/></svg>
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-700 italic leading-relaxed mb-5">"I had Stage III endometriosis and two failed IUIs elsewhere. IRFC recommended laparoscopy first, then IVF. I'm now 14 weeks pregnant with my baby boy."</p>
+      <p class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600);">— IRFC Patient, Laparoscopy + IVF</p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Expert Endometriosis Care</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">Whether you've just been diagnosed or struggled for years, IRFC can help you find the right path forward. Start with a free consultation.</p>
+      <a href="/contact" class="btn-primary">Book Free Consultation</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

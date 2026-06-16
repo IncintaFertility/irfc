@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const stories = [
+  {
+    name: 'Mary T.',
+    treatment: 'IVF',
+    color: 'gold',
+    pullQuote: 'It took us three and a half years of trying. Once I came to IRFC, they made my dream of having a family come true.',
+    story: 'Mary and her husband had been trying to conceive for years before a friend referred them to IRFC. After a thorough evaluation, Dr. Lin identified a combination of factors and recommended IVF. On their second cycle, Mary became pregnant — and delivered a healthy daughter the following spring.',
+  },
+  {
+    name: 'Lisa & Elsien',
+    treatment: 'Reciprocal IVF',
+    color: 'purple',
+    pullQuote: 'As a same-sex couple, we needed a clinic that truly understood our path. IRFC made us feel completely welcome from our very first appointment.',
+    story: 'Lisa and Elsien wanted to share the experience of their pregnancy as fully as possible. They chose reciprocal IVF — Elsien\'s eggs were fertilized and the resulting embryo was transferred to Lisa\'s uterus. Their daughter was born healthy nine months later. They describe IRFC\'s team as "part of our family."',
+  },
+  {
+    name: 'Anonymous Patient',
+    treatment: 'IUI → IVF',
+    color: 'gold',
+    pullQuote: 'We first started with IUI. When that didn\'t work, Dr. Lin\'s team moved us to IVF with compassion — no pressure, just clear guidance. Five months later, I was almost 9 weeks pregnant.',
+    story: 'This patient came to IRFC after a year of trying naturally. After evaluation, they began with IUI — three cycles over four months — and then transitioned to IVF when results plateaued. The IVF cycle resulted in a positive pregnancy test within weeks of the transfer.',
+  },
+  {
+    name: 'Patient, Age 41',
+    treatment: 'IVF',
+    color: 'purple',
+    pullQuote: 'Dr. Lin was honest with me — he said I had about a 10% chance at my age. I appreciated that. He designed a protocol just for me. My baby is now 6 months old.',
+    story: 'Faced with the reality of diminished ovarian reserve at 41, this patient chose honesty over false hope — and found it at IRFC. Dr. Lin designed a tailored IVF protocol, retrieved several viable embryos, and PGT-A identified the best candidate. The transfer succeeded on the first attempt.',
+  },
+  {
+    name: 'Anonymous Patient',
+    treatment: 'IVF after Recurrent Loss',
+    color: 'gold',
+    pullQuote: 'Our first fresh transfer failed. When we switched to a frozen transfer, everything changed. IRFC never made us feel like giving up was an option.',
+    story: 'After a fresh embryo transfer that did not implant, this couple was devastated. The team at IRFC regrouped with them, reviewed the cycle data, and recommended a frozen embryo transfer in a subsequent cycle with modified uterine preparation. The result: a healthy pregnancy and, eventually, a son.',
+  },
+  {
+    name: 'Anonymous Patient',
+    treatment: 'IUI with Donor Sperm',
+    color: 'purple',
+    pullQuote: 'As a single woman who always knew I wanted to be a mom, IRFC helped me feel empowered — not alone. Their coordinator walked me through every step.',
+    story: 'This patient came to IRFC at 34, single and ready to build her family on her own timeline. With support from Kelly Zhao, IRFC\'s third-party coordinator, she selected a donor and completed two IUI cycles. She is now expecting her first child.',
+  },
+  {
+    name: 'Anonymous Patient',
+    treatment: 'IVF with PGT-A',
+    color: 'gold',
+    pullQuote: 'After two miscarriages, we were told to consider PGT. IRFC explained everything — why it made sense, what we could expect. We now have a healthy daughter.',
+    story: 'Following two early pregnancy losses, this couple was evaluated and found to have a high rate of chromosomal abnormality in their embryos — a finding more common than many realize. PGT-A identified two euploid embryos from their first IVF cycle. The first transfer was successful.',
+  },
+  {
+    name: 'Sarah & Michael',
+    treatment: 'Gestational Surrogacy',
+    color: 'purple',
+    pullQuote: 'We never thought surrogacy would be our path — but IRFC made the process understandable, dignified, and even beautiful.',
+    story: 'After a medical diagnosis made carrying a pregnancy unsafe, Sarah and Michael came to IRFC seeking another way forward. Kelly Zhao coordinated their gestational surrogacy arrangement, while Dr. Lin managed all medical aspects. Their surrogate carried their biological child to term — and Sarah was present for every ultrasound.',
+  },
+];
+---
+
+<Layout
+  title="Patient Stories"
+  description="Real stories from IRFC patients — IVF, IUI, egg freezing, donor egg, surrogacy, and more. Every family's path is different. Here are some of the journeys we've shared."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Patient Stories</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          Journeys We've<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Shared Together.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Behind every statistic is a person, a couple, a family with a dream. These are some of the stories that remind us why we do what we do — and why we never stop trying.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories Grid -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid md:grid-cols-2 gap-6">
+        {stories.map(s => (
+          <article class="bg-white border border-stone-200 p-8 lg:p-10 flex flex-col">
+            <!-- Treatment tag -->
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs px-3 py-1 border tracking-widest" style={`color: var(--color-${s.color}-600); border-color: var(--color-${s.color}-300); font-family: var(--font-sans);`}>
+                {s.treatment}
+              </span>
+            </div>
+            <!-- Pull quote -->
+            <svg class="w-7 h-7 mb-4 opacity-20" fill="currentColor" viewBox="0 0 32 32" style={`color: var(--color-${s.color}-600);`}>
+              <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
+            </svg>
+            <blockquote style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 leading-relaxed italic mb-5 flex-1">
+              "{s.pullQuote}"
+            </blockquote>
+            <!-- Story -->
+            <p class="text-sm text-stone-500 leading-relaxed mb-6">{s.story}</p>
+            <!-- Attribution -->
+            <div class="pt-5 border-t border-stone-100">
+              <p class="text-sm font-medium text-stone-700">— {s.name}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="mt-10 text-center text-xs max-w-lg mx-auto" style="color: var(--color-stone-400);">
+        These stories are based on patient experiences at IRFC and its predecessor practices. Names have been changed or anonymized. Individual outcomes vary — fertility treatment results depend on many personal factors. These stories are not a guarantee of results.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        Your Story Starts Here
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Every journey in these pages began with one decision: to make an appointment. We'd be honored to be part of yours.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Free Consultation</a>
+        <a href="/team" class="btn-outline">Meet Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

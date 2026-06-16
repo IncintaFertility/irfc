@@ -1,0 +1,162 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const steps = [
+  { n: '01', title: 'Consultation & Ovarian Reserve Testing', desc: 'Your physician orders baseline bloodwork (AMH, FSH, estradiol) and an antral follicle count (AFC) ultrasound. These results help predict how your ovaries will respond to stimulation and how many eggs we can reasonably expect to retrieve.' },
+  { n: '02', title: 'Ovarian Stimulation (8–14 Days)', desc: 'Daily injectable hormones encourage your ovaries to develop multiple follicles simultaneously — rather than the single egg produced in a natural cycle. You return for regular monitoring appointments (ultrasound and blood draws) to track follicle development and adjust medications as needed.' },
+  { n: '03', title: 'Trigger Shot', desc: 'When follicles reach the optimal size (typically 17–20mm), a trigger injection is administered to finalize egg maturation. Retrieval is scheduled approximately 36 hours later.' },
+  { n: '04', title: 'Egg Retrieval', desc: 'Under light sedation, mature eggs are retrieved via a thin needle guided by transvaginal ultrasound. The procedure takes about 20 minutes. Most patients rest for a few hours and go home the same day.' },
+  { n: '05', title: 'Vitrification (Flash Freezing)', desc: 'Mature eggs are immediately frozen using vitrification — an ultra-rapid technique that prevents ice crystal formation and preserves egg integrity far more effectively than traditional slow-freeze methods.' },
+  { n: '06', title: 'Secure Storage in TMRW Vault', desc: 'Frozen eggs are stored in the TMRW Vault — IRFC\'s smart cryogenic storage system with RFID tracking, 24/7 monitoring, and military-grade encryption. Your eggs remain there until you are ready to use them.' },
+];
+
+const faqs = [
+  { q: 'How many eggs should I freeze?', a: 'Most physicians recommend banking 15–20 mature eggs to maximize the chance of at least one successful pregnancy. Younger patients typically need fewer cycles, while older patients may need more. We\'ll set realistic expectations based on your ovarian reserve.' },
+  { q: 'What is the ideal age to freeze eggs?', a: 'Egg quality peaks in the mid-to-late 20s and declines after 35. Freezing before 35 generally produces the strongest outcomes. However, egg freezing can still be a meaningful option for women in their late 30s, and we encourage consultation to understand your individual picture.' },
+  { q: 'How long can eggs stay frozen?', a: 'Vitrified eggs can remain in storage for many years. Current evidence suggests no significant decline in egg viability over time when stored correctly. Your eggs in our TMRW Vault system are monitored continuously.' },
+  { q: 'What is the difference between egg freezing and embryo freezing?', a: 'Egg freezing preserves unfertilized eggs, while embryo freezing preserves eggs that have already been fertilized. Single individuals or those without a partner will freeze eggs; couples often have the option to freeze embryos, which have historically higher survival rates — though egg-freezing technology has improved substantially.' },
+  { q: 'Does egg freezing affect future fertility?', a: 'No. The eggs retrieved during a freezing cycle are from the pool of eggs your body would naturally select that month. The process does not deplete future egg supply.' },
+  { q: 'Does IRFC support oncofertility patients?', a: 'Yes. IRFC prioritizes consultations for patients facing cancer diagnoses who need to preserve fertility before beginning chemotherapy or radiation. We can often accommodate urgent timelines.' },
+];
+---
+
+<Layout
+  title="Egg Freezing & Fertility Preservation"
+  description="Egg freezing at IRFC — protect your reproductive future with vitrification and TMRW Vault storage. Learn the process, timeline, and what to expect."
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href="/services" class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">All Services</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Egg Freezing</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Egg Freezing &<br/>Fertility Preservation
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Oocyte Cryopreservation</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Whether you're not ready to start a family yet, facing a medical diagnosis, or simply want to protect your options — egg freezing gives you the gift of time. IRFC's vitrification technology and TMRW Vault storage provide the highest standards of egg preservation available.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who It's For -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">Who Should Consider Egg Freezing?</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            Egg freezing is no longer considered experimental — it is a proven method of fertility preservation recommended in a growing range of circumstances. You don't need a medical reason to freeze your eggs; the desire to preserve future options is reason enough.
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            IRFC also offers sperm freezing and embryo cryopreservation, giving couples and individuals multiple paths to preserving their reproductive future.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {[
+            { title: 'Career or Personal Planning', desc: 'Not ready for parenthood yet but want to protect future options.' },
+            { title: 'Relationship Status', desc: 'Single or not yet partnered, but anticipating a family in the future.' },
+            { title: 'Medical Diagnosis', desc: 'Cancer, autoimmune disease, or other conditions requiring treatments that affect fertility.' },
+            { title: 'Declining Ovarian Reserve', desc: 'Test results suggest ovarian reserve is declining faster than expected.' },
+            { title: 'Genetic Risk', desc: 'Family history of early menopause or genetic conditions affecting fertility.' },
+            { title: 'IVF Surplus', desc: 'Freezing extra eggs from a stimulation cycle to avoid discarding them.' },
+          ].map(card => (
+            <div class="p-6 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-base font-light text-stone-800 mb-2">{card.title}</h3>
+              <p class="text-xs text-stone-500 leading-relaxed">{card.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">The Egg Freezing Process</h2>
+      <div class="space-y-3">
+        {steps.map(step => (
+          <div class="grid lg:grid-cols-12 gap-6 p-8 border border-stone-200 bg-stone-50">
+            <div class="lg:col-span-1">
+              <span class="text-xs font-medium tracking-widest" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</span>
+            </div>
+            <div class="lg:col-span-11">
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{step.title}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TMRW callout -->
+  <section class="py-16" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-500); font-family: var(--font-sans);">Storage Technology</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-white mb-4">Your Eggs, Protected by TMRW Vault</h2>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-400);">Once frozen, your eggs are stored in the TMRW Vault — a liquid nitrogen smart tank with digital RFID tracking, 24/7 active monitoring, and military-grade encryption. Every egg has a digital history. Every check-up is logged. No handwritten labels, no ambiguity.</p>
+        </div>
+        <div class="space-y-4">
+          {['RFID digital identity for every specimen', '24/7 monitoring with thousands of daily system checks', 'Military-grade HIPAA-compliant encryption', 'Remote expert team oversight and anomaly alerts'].map(f => (
+            <div class="flex items-center gap-3 p-4 border" style="border-color: var(--color-stone-800);">
+              <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--color-gold-500);"></div>
+              <span class="text-sm" style="color: var(--color-stone-300);">{f}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">Frequently Asked Questions</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Preserve Your Future, Today</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        A free consultation takes an hour. The peace of mind it provides can last a lifetime. Let's talk about your options.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book Free Consultation</a>
+        <a href="/services" class="btn-outline">All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

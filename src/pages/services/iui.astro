@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const steps = [
+  { n: '01', title: 'Evaluation & Timing', desc: 'Your physician reviews semen analysis results, confirms at least one open fallopian tube, and assesses ovarian reserve. A natural or medicated cycle is selected based on your specific situation.' },
+  { n: '02', title: 'Cycle Monitoring', desc: 'Ultrasound monitoring tracks follicle development. In stimulated cycles, low-dose oral or injectable medications encourage 1–2 follicles to mature. Blood tests and ultrasounds confirm timing.' },
+  { n: '03', title: 'Trigger Shot (if applicable)', desc: 'When a follicle reaches optimal size, a trigger injection (hCG or Lupron) is administered to time ovulation precisely. Insemination is scheduled approximately 36 hours later.' },
+  { n: '04', title: 'Sperm Preparation', desc: 'A sperm sample is processed in the laboratory to concentrate motile sperm and remove non-motile cells and seminal fluid — a process that typically takes 30–60 minutes.' },
+  { n: '05', title: 'Insemination', desc: 'The prepared sperm is loaded into a small catheter and gently placed directly into the uterine cavity. The procedure is brief (5–10 minutes), mildly uncomfortable at most, and requires no anesthesia.' },
+  { n: '06', title: 'Two-Week Wait & Testing', desc: 'A blood pregnancy test is performed approximately 14 days after insemination. Your care team is available throughout this period to answer questions and provide support.' },
+];
+
+const faqs = [
+  { q: 'How many IUI cycles should I try before moving to IVF?', a: 'Most physicians recommend 3–6 IUI cycles for appropriate candidates before considering IVF — though this varies based on age, diagnosis, and response. Dr. Lin and Dr. Liu will advise the right timeline for your situation.' },
+  { q: 'Can I use donor sperm for IUI?', a: 'Yes. IUI with donor sperm is a common option for single individuals, same-sex female couples, or couples with severe male factor infertility. Our coordinators assist with donor selection through licensed cryobanks.' },
+  { q: 'What are the success rates for IUI?', a: 'Per-cycle success rates typically range from 10–20%, varying by age, diagnosis, and whether medication is used. Cumulative success across multiple cycles is higher. Your physician will provide individualized estimates.' },
+  { q: 'Is IUI covered by insurance?', a: 'Coverage varies by plan. IUI is often one of the first fertility treatments covered when infertility benefits exist. Our team can help verify your specific benefits before your first cycle.' },
+];
+---
+
+<Layout
+  title="IUI — Intrauterine Insemination"
+  description="IUI at IRFC — a minimally invasive first-line fertility treatment. Learn how intrauterine insemination works, who it helps, and what to expect."
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href="/services" class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">All Services</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">IUI</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Intrauterine<br/>Insemination
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Assisted Reproductive Technology</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          IUI is a simple, minimally invasive procedure that places concentrated sperm directly into the uterus at the optimal moment of ovulation — giving conception a meaningful boost without the complexity of IVF.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">What Is IUI?</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            Intrauterine insemination (IUI) is a fertility procedure in which washed, concentrated sperm is placed directly inside the uterus to reduce the distance sperm must travel to reach the egg. Timing is carefully coordinated with ovulation — either natural or triggered with medication.
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            IUI is typically the first treatment recommended after a diagnostic workup, particularly for couples with mild male factor, cervical mucus issues, ovulation dysfunction, or unexplained infertility.
+          </p>
+        </div>
+        <div class="space-y-3">
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">IUI is often recommended for:</p>
+          {[
+            'Mild to moderate male factor infertility',
+            'Cervical factor (hostile or insufficient mucus)',
+            'Ovulation dysfunction (with medication-monitored cycles)',
+            'Unexplained infertility',
+            'Single individuals or same-sex female couples using donor sperm',
+            'Couples preferring a lower-intervention first step',
+          ].map(item => (
+            <div class="flex items-start gap-3 p-4 bg-white border border-stone-200">
+              <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+              </svg>
+              <span class="text-sm text-stone-600">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">The IUI Process</h2>
+      <div class="space-y-3">
+        {steps.map(step => (
+          <div class="grid lg:grid-cols-12 gap-6 p-8 border border-stone-200 bg-stone-50">
+            <div class="lg:col-span-1">
+              <span class="text-xs font-medium tracking-widest" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</span>
+            </div>
+            <div class="lg:col-span-11">
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{step.title}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">Common IUI Questions</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Start with a Conversation</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Our physicians will evaluate whether IUI is the right first step for you — or guide you toward the option most likely to succeed.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book Free Consultation</a>
+        <a href="/services" class="btn-outline">All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

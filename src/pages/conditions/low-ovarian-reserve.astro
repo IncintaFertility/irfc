@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Low Ovarian Reserve & DOR"
+  description="Low ovarian reserve treatment at IRFC. Expert care for diminished ovarian reserve (DOR), low AMH, and premature ovarian insufficiency across Southern California."
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Conditions We Treat</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Low Ovarian Reserve
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          A diagnosis of low ovarian reserve — diminished AMH, elevated FSH, or a low antral follicle count — is not the end of the road. At IRFC, we specialize in maximizing outcomes for patients with reduced egg supply, including through egg donation when the time is right.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">Understanding Ovarian Reserve</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">Every woman is born with a finite number of eggs. "Ovarian reserve" refers to the quantity and quality of eggs remaining. It naturally declines with age — but some women experience this decline earlier than expected, a condition known as diminished ovarian reserve (DOR).</p>
+          <p class="text-stone-600 leading-relaxed mb-5 text-sm">DOR does not mean pregnancy is impossible — but it does mean that time is particularly important, and that treatment should be thoughtful and individualized. IRFC physicians bring extensive experience managing DOR at every stage of severity.</p>
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-4">Key Markers We Evaluate</h3>
+          <div class="space-y-3">
+            {[
+              { name: 'AMH (Anti-Müllerian Hormone)', desc: 'The most reliable single marker of ovarian reserve. Produced by small follicles, AMH reflects the size of the remaining egg pool.' },
+              { name: 'AFC (Antral Follicle Count)', desc: 'Ultrasound count of small follicles visible at the start of a cycle — a direct measure of immediately available eggs.' },
+              { name: 'FSH (Follicle-Stimulating Hormone)', desc: 'Elevated early-cycle FSH suggests the brain is working harder to recruit eggs — a sign of diminished reserve.' },
+              { name: 'Estradiol (Day 3)', desc: 'Elevated early-cycle estradiol can mask FSH elevation and is assessed alongside FSH for a complete picture.' },
+            ].map(m => (
+              <div class="p-4 bg-white border border-stone-200">
+                <p class="text-sm font-medium text-stone-800 mb-1">{m.name}</p>
+                <p class="text-xs text-stone-500 leading-relaxed">{m.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="space-y-5">
+          <div class="p-7 bg-white border border-stone-200">
+            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">Who Is Affected?</p>
+            <ul class="space-y-2">
+              {[
+                'Women over 35 (natural age-related decline)',
+                'Women with a family history of early menopause',
+                'Patients who have undergone ovarian surgery (e.g., endometrioma removal)',
+                'Patients after chemotherapy or radiation',
+                'Women with certain autoimmune conditions',
+                'Women with unexplained infertility who test poorly despite younger age',
+              ].map(w => (
+                <li class="flex items-start gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: var(--color-gold-500);"></div>
+                  {w}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-7 bg-white border border-gold-200" style="border-color: var(--color-gold-200);">
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">IRFC's Approach</p>
+            <p class="text-sm text-stone-600 leading-relaxed">We believe in honest, direct communication about prognosis — combined with creative, individualized treatment strategies that maximize every available egg. Dr. Lin and Dr. Liu are experienced managing DOR at all severity levels.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">Treatment Options for Low Ovarian Reserve</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {[
+          { title: 'Optimized IVF Stimulation', desc: 'IRFC customizes stimulation protocols specifically for DOR patients — using higher doses, shorter protocols, or alternative approaches (e.g., flare or antagonist protocols) to maximize the number of eggs retrieved.' },
+          { title: 'Mild / Mini-Stimulation IVF', desc: 'For some DOR patients, a gentle approach retrieving fewer but potentially higher-quality eggs may be preferable. Dr. Liu specializes in mild stimulation protocols tailored to individual response.' },
+          { title: 'Egg Banking Over Multiple Cycles', desc: 'Freezing eggs or embryos from several cycles before attempting transfer can accumulate a larger pool — improving the overall chance of success for patients with very low reserve.' },
+          { title: 'Natural or Modified Natural Cycle IVF', desc: 'For patients who produce very few eggs with stimulation, retrieving the single egg the body selects naturally can be a meaningful option.' },
+          { title: 'PGT-A with Low Reserve', desc: 'Combining PGT-A with IVF allows selection of chromosomally normal embryos — reducing the chance of wasted transfers and miscarriage. Particularly valuable when the embryo pool is small.' },
+          { title: 'Donor Egg IVF', desc: 'When a patient\'s own eggs are no longer viable, donor egg IVF offers excellent success rates. IRFC\'s comprehensive donor program, in partnership with Fairfax EggBank, provides access to a wide range of screened, tested donors.' },
+        ].map(t => (
+          <div class="p-7 border border-stone-200 card-hover">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{t.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-stone-50);">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <svg class="w-8 h-8 mx-auto mb-6 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);"><path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/></svg>
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-700 italic leading-relaxed mb-5">"When I was 41, Dr. Lin was honest with me. He said I had about a 10% chance. He designed a protocol around that reality — and my baby is now 6 months old."</p>
+      <p class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600);">— IRFC Patient, Age 41, IVF with DOR</p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Act Early, Act with Expertise</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">With low ovarian reserve, timing matters. Our physicians will give you an honest picture of your situation — and every available option to move forward with confidence.</p>
+      <a href="/contact" class="btn-primary">Book Free Consultation</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
