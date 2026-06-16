@@ -69,11 +69,38 @@ const clinicalTeam = [
     photo: '/images/team/kelly-zhao.png',
   },
 ];
+const physicianSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Physician',
+    name: 'James P. Lin, MD',
+    honorificPrefix: 'Dr.',
+    jobTitle: 'Founder & Medical Director',
+    description: 'Board-certified reproductive endocrinologist and infertility specialist with over 20 years of experience. Founder of Reproductive Fertility Center, Medical Director of IRFC, Kaiser Permanente Center of Excellence physician.',
+    medicalSpecialty: 'Reproductive Medicine',
+    worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+    image: 'https://irfc.com/images/team/dr-james-lin-circle.png',
+    url: 'https://irfc.com/team',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Physician',
+    name: 'Zitao Liu, MD',
+    honorificPrefix: 'Dr.',
+    jobTitle: 'Associate Chief Medical Officer',
+    description: 'Reproductive endocrinologist specializing in mild stimulation IVF protocols and AI-assisted fertility diagnostics. Associate Chief Medical Officer at IRFC, now accepting new patients.',
+    medicalSpecialty: 'Reproductive Medicine',
+    worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+    image: 'https://irfc.com/images/team/dr-zitao-liu-circle.png',
+    url: 'https://irfc.com/team',
+  },
+];
 ---
 
 <Layout
   title="Our Team"
   description="Meet the IRFC team — award-winning physicians, world-class embryologists, and compassionate clinical staff dedicated to your fertility journey."
+  schema={physicianSchema}
 >
   <Nav />
 

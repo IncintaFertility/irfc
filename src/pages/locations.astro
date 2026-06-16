@@ -50,11 +50,35 @@ const locations = [
     note: 'Our flagship location in Orange County. Full surgery center and laboratory on-site. Parking available.',
   },
 ];
+
+const clinicSchema = locations.map(loc => {
+  const [street, ...rest] = loc.address.split(', ');
+  const [city, stateZip] = loc.cityState.split(', ');
+  const [stateCode, postalCode] = stateZip.split(' ');
+  return {
+    '@context': 'https://schema.org',
+    '@type': ['MedicalClinic', 'LocalBusiness'],
+    name: `IRFC — ${loc.city}`,
+    parentOrganization: { '@type': 'MedicalOrganization', name: 'IRFC' },
+    telephone: `+1${loc.phone.replace(/\D/g, '')}`,
+    medicalSpecialty: 'Reproductive Medicine',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: loc.address,
+      addressLocality: city,
+      addressRegion: stateCode,
+      postalCode,
+      addressCountry: 'US',
+    },
+    url: 'https://irfc.com/locations',
+  };
+});
 ---
 
 <Layout
   title="Locations"
-  description="IRFC has four convenient locations across Southern California — Alhambra, Beverly Hills, Corona, and Irvine. Find expert fertility care near you."
+  description="IRFC has five convenient locations across Southern California — Torrance, Alhambra, Beverly Hills, Corona, and Irvine. Find expert fertility care near you."
+  schema={clinicSchema}
 >
   <Nav />
 

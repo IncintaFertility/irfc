@@ -6,13 +6,43 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  schema?: object | object[];
 }
 
 const {
   title,
   description = 'IRFC — Where Science Meets Compassionate Care. World-class fertility treatments across Southern California, bringing together the expertise of Incinta Fertility and Reproductive Fertility Center.',
   image = '/images/og-default.jpg',
+  schema,
 } = Astro.props;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalOrganization',
+  name: 'IRFC — Innovative Reproductive & Fertility Center',
+  alternateName: 'IRFC',
+  url: 'https://irfc.com',
+  logo: { '@type': 'ImageObject', url: 'https://irfc.com/favicon.svg' },
+  telephone: '+19494538600',
+  description: 'World-class fertility treatments across Southern California — IVF, IUI, egg freezing, PGT, donor egg, and surrogacy. Merger of Incinta Fertility and Reproductive Fertility Center.',
+  medicalSpecialty: 'Reproductive Medicine',
+  hasCredential: 'Kaiser Permanente Center of Excellence',
+  areaServed: { '@type': 'State', name: 'California' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '16300 Sand Canyon Avenue, 9th Floor',
+    addressLocality: 'Irvine',
+    addressRegion: 'CA',
+    postalCode: '92618',
+    addressCountry: 'US',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+19494538600',
+    contactType: 'customer service',
+    availableLanguage: ['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'],
+  },
+};
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://irfc.com');
 ---
@@ -42,6 +72,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://irfc.com
     <meta name="twitter:title" content={`${title} | IRFC`} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)}></script>
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
