@@ -200,10 +200,19 @@ const testimonials = [
   </section>
 
   <!-- The Union -->
-  <section class="py-24 lg:py-32" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
+  <section class="overflow-hidden" style="background: var(--color-stone-50);">
+    <div class="lg:grid lg:grid-cols-2">
+      <!-- Image: full-height left column -->
+      <div class="relative hidden lg:block" style="min-height: 640px;">
+        <img
+          src="/images/lobby-detail.jpg"
+          alt="IRFC clinic interior"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+      <!-- Text + stats right column -->
+      <div class="py-24 lg:py-28 px-6 lg:px-16">
+        <div class="max-w-xl">
           <div class="section-divider mb-6"></div>
           <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
             A New Chapter<br/>
@@ -213,18 +222,17 @@ const testimonials = [
             IRFC was born from the union of two pioneering fertility centers: <strong class="text-stone-800 font-medium">Incinta Fertility</strong> and <strong class="text-stone-800 font-medium">Reproductive Fertility Center (RFC)</strong>. Together, we bring over two decades of combined clinical excellence, a nationally top-ranked IVF laboratory, and a philosophy that sees every patient as a whole person.
           </p>
           <p class="text-stone-600 leading-relaxed mb-8">
-            Our founder, Dr. James P. Lin, built RFC on the belief that a fertility clinic should feel like "both a family and a home." That spirit now lives within IRFC — amplified by the multidisciplinary team and thoughtfully designed spaces that Incinta pioneered.
+            Our founder, Dr. James P. Lin, built RFC on the belief that a fertility clinic should feel like "both a family and a home." That spirit now lives within IRFC.
           </p>
           <a href="/about" class="btn-outline">Learn Our Story</a>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-          {stats.map(stat => (
-            <div class="bg-white p-8 border border-stone-200 card-hover">
-              <p class="text-4xl lg:text-5xl font-light mb-2" style={`font-family: var(--font-serif); color: var(--color-gold-600);`}>{stat.number}</p>
-              <p class="text-sm" style="color: var(--color-stone-500);">{stat.label}</p>
-            </div>
-          ))}
+          <div class="grid grid-cols-2 gap-4 mt-12">
+            {stats.map(stat => (
+              <div class="bg-white p-6 border border-stone-200">
+                <p class="text-3xl lg:text-4xl font-light mb-1" style={`font-family: var(--font-serif); color: var(--color-gold-600);`}>{stat.number}</p>
+                <p class="text-xs" style="color: var(--color-stone-500);">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -247,37 +255,53 @@ const testimonials = [
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px" style="background: var(--color-stone-200);">
-        {services.map(service => (
-          <a href={service.href} class="group bg-white p-8 lg:p-10 flex flex-col" style="transition: background 0.2s;">
-            <span class="text-2xl mb-5" style={`color: var(--color-gold-500);`} aria-hidden="true">{service.icon}</span>
+      <!-- Featured: IVF -->
+      <div class="overflow-hidden border border-stone-200 lg:grid lg:grid-cols-2 mb-3">
+        <div class="relative" style="min-height: 400px;">
+          <img src="/images/transfer-room.jpg" alt="IVF transfer suite" class="absolute inset-0 w-full h-full object-cover" />
+        </div>
+        <div class="p-10 lg:p-14 bg-white flex flex-col justify-center">
+          <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">Assisted Reproductive Technology</p>
+          <h3 class="text-3xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">In Vitro Fertilization</h3>
+          <p class="text-sm text-stone-500 leading-relaxed mb-8">Advanced IVF with EmbryoScope+ monitoring and AI-assisted embryo selection. Our lab ranked #1 in US IVF success rates in 2016.</p>
+          <a href="/services/ivf" class="btn-primary self-start">IVF Details
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Featured: Egg Freezing (reversed) -->
+      <div class="overflow-hidden border border-stone-200 lg:grid lg:grid-cols-2 mb-6">
+        <div class="p-10 lg:p-14 bg-stone-50 flex flex-col justify-center order-2 lg:order-1">
+          <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">Fertility Preservation</p>
+          <h3 class="text-3xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">Egg & Embryo Freezing</h3>
+          <p class="text-sm text-stone-500 leading-relaxed mb-8">Preserve your fertility future with vitrification technology secured in the TMRW Vault with 24/7 RFID monitoring.</p>
+          <a href="/services/egg-freezing" class="btn-outline self-start">Preservation Details
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+        <div class="relative order-1 lg:order-2" style="min-height: 400px;">
+          <img src="/images/patient-portrait.jpg" alt="Fertility preservation patient" class="absolute inset-0 w-full h-full object-cover object-top" />
+        </div>
+      </div>
+
+      <!-- Remaining 4 services -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-px" style="background: var(--color-stone-200);">
+        {services.slice(2).map(service => (
+          <a href={service.href} class="group bg-white p-7 flex flex-col">
             <p class="text-xs tracking-widest uppercase mb-2" style={`color: var(--color-stone-400); font-family: var(--font-sans);`}>{service.abbr}</p>
-            <h3 class="text-xl font-light mb-3" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{service.title}</h3>
-            <p class="text-sm leading-relaxed flex-1" style={`color: var(--color-stone-500);`}>{service.desc}</p>
-            <div class="mt-6 flex items-center gap-2 text-xs tracking-wider uppercase" style={`color: var(--color-gold-500);`}>
+            <h3 class="text-lg font-light mb-3 flex-1" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{service.title}</h3>
+            <div class="flex items-center gap-2 text-xs tracking-wider uppercase mt-4" style={`color: var(--color-gold-500);`}>
               <span>Learn more</span>
-              <svg class="w-3.5 h-3.5" style="transition: transform 0.2s;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
             </div>
           </a>
         ))}
       </div>
 
-      <div class="mt-12 text-center">
+      <div class="mt-10 text-center">
         <a href="/services" class="btn-outline">View All Services</a>
       </div>
-    </div>
-  </section>
-
-  <!-- Services → Pillars photo break -->
-  <section class="relative overflow-hidden" style="height: 440px;">
-    <img src="/images/transfer-room.jpg" alt="IRFC transfer suite" class="w-full h-full object-cover object-center" />
-    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.6) 0%, rgba(20,18,15,0.2) 55%, transparent 100%);"></div>
-    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
-      <p style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-white max-w-md leading-relaxed">
-        Every embryo is given its best chance to thrive.
-      </p>
     </div>
   </section>
 
@@ -340,26 +364,27 @@ const testimonials = [
           <a href="/team" class="btn-primary">Meet the Full Team</a>
         </div>
 
-        <div class="space-y-5">
+        <div class="space-y-4">
           {team.map((member) => (
-            <div class="bg-white p-8 border-l-2 card-hover" style={`border-left-color: var(--color-${member.color}-200);`}>
-              <div class="flex items-start gap-5">
-                {member.photo ? (
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    class="flex-shrink-0 w-14 h-14 object-cover"
-                    style="border-radius: 50%;"
-                  />
-                ) : (
-                  <div
-                    class="flex-shrink-0 w-12 h-12 flex items-center justify-center text-lg font-light text-white"
-                    style={`background: linear-gradient(135deg, var(--color-${member.color}-500), var(--color-${member.color}-700));`}
-                  >
-                    {member.initial}
-                  </div>
-                )}
-                <div>
+            <div class="bg-white border border-stone-200 overflow-hidden card-hover">
+              <div class="grid grid-cols-3">
+                <div class="relative" style="min-height: 180px;">
+                  {member.photo ? (
+                    <img
+                      src={member.photo}
+                      alt={member.name}
+                      class="absolute inset-0 w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    <div
+                      class="absolute inset-0 flex items-center justify-center text-2xl font-light text-white"
+                      style={`background: linear-gradient(135deg, var(--color-${member.color}-500), var(--color-${member.color}-700));`}
+                    >
+                      {member.initial}
+                    </div>
+                  )}
+                </div>
+                <div class="col-span-2 p-6 flex flex-col justify-center">
                   <h3 class="text-xl font-light text-stone-800 mb-1" style="font-family: var(--font-serif);">{member.name}</h3>
                   <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
                   <p class="text-sm text-stone-500 leading-relaxed">{member.bio}</p>
@@ -395,41 +420,48 @@ const testimonials = [
   </section>
 
   <!-- Advanced Technology -->
-  <section class="py-24 lg:py-32" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="text-center mb-16">
-        <div class="section-divider mx-auto mb-6" style="width: 3rem; margin-left: auto; margin-right: auto;"></div>
-        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800">
-          Advanced Laboratory Technology
-        </h2>
-        <p class="mt-4 text-sm leading-relaxed max-w-xl mx-auto" style="color: var(--color-stone-500);">
-          Our investment in cutting-edge technology reflects our commitment to giving every embryo the best possible environment to thrive.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        {[
-          {
-            name: 'EmbryoScope+',
-            desc: 'Time-lapse incubation system that continuously monitors embryo development without disturbing the culture environment.',
-          },
-          {
-            name: 'RI Witness',
-            desc: 'Electronic witnessing system ensuring biological samples are precisely matched to patients throughout every IVF step.',
-          },
-          {
-            name: 'TMRW Vault',
-            desc: 'Military-grade cryogenic storage with real-time monitoring and unprecedented traceability for frozen embryos and eggs.',
-          },
-        ].map(tech => (
-          <div class="bg-white p-8 border border-stone-200 card-hover">
-            <div class="w-10 h-10 mb-6 flex items-center justify-center border" style="border-color: var(--color-gold-400);">
-              <div class="w-3 h-3" style="background: var(--color-gold-500);"></div>
-            </div>
-            <h3 class="text-xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{tech.name}</h3>
-            <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">{tech.desc}</p>
+  <section class="overflow-hidden" style="background: var(--color-stone-50);">
+    <div class="lg:grid lg:grid-cols-2">
+      <!-- Text column -->
+      <div class="py-24 lg:py-28 px-6 lg:px-16">
+        <div class="max-w-xl">
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-4">
+            Advanced Laboratory Technology
+          </h2>
+          <p class="text-sm leading-relaxed mb-14" style="color: var(--color-stone-500);">
+            Our investment in cutting-edge technology reflects our commitment to giving every embryo the best possible environment to thrive.
+          </p>
+          <div class="space-y-8">
+            {[
+              { name: 'EmbryoScope+', desc: 'Time-lapse incubation with continuous embryo monitoring — without disturbing the culture environment.' },
+              { name: 'RI Witness™', desc: 'RFID electronic witnessing that ensures biological samples are precisely matched to patients at every IVF step.' },
+              { name: 'TMRW Vault', desc: 'Military-grade cryogenic storage with 24/7 real-time monitoring and full traceability for frozen eggs and embryos.' },
+            ].map(tech => (
+              <div class="flex gap-6 items-start">
+                <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center border" style="border-color: var(--color-gold-400);">
+                  <div class="w-2.5 h-2.5" style="background: var(--color-gold-500);"></div>
+                </div>
+                <div>
+                  <h3 class="text-lg font-light text-stone-800 mb-1" style="font-family: var(--font-serif);">{tech.name}</h3>
+                  <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">{tech.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+          <a href="/technology" class="btn-outline mt-12 inline-flex items-center gap-2">
+            See Our Technology
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Image column -->
+      <div class="relative hidden lg:block" style="min-height: 580px;">
+        <img
+          src="/images/surgery-center.jpg"
+          alt="IRFC laboratory"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
     </div>
   </section>
@@ -511,82 +543,87 @@ const testimonials = [
   </section>
 
   <!-- Testimonials -->
-  <section class="py-24 lg:py-32 bg-white">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="text-center mb-16">
-        <div class="flex items-center justify-center gap-3 mb-5">
-          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Stories</span>
-          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
-        </div>
-        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800">
-          Journeys We've Shared
-        </h2>
-        <p class="mt-4 text-sm leading-relaxed max-w-lg mx-auto" style="color: var(--color-stone-500);">
-          Every family's path is unique. Here are a few of the stories that remind us why we do what we do.
-        </p>
+  <section class="bg-white">
+    <!-- Header -->
+    <div class="pt-24 pb-12 text-center max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex items-center justify-center gap-3 mb-5">
+        <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+        <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Stories</span>
+        <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
       </div>
+      <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800">
+        Journeys We've Shared
+      </h2>
+    </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        {testimonials.map(t => (
-          <div class="p-8 lg:p-10 border border-stone-200 bg-stone-50 flex flex-col">
-            <svg class="w-8 h-8 mb-6 opacity-25" fill="currentColor" viewBox="0 0 32 32" style={`color: var(--color-${t.color}-600);`}>
+    <!-- Featured testimonial with image -->
+    <div class="overflow-hidden lg:grid lg:grid-cols-2">
+      <div class="relative hidden lg:block" style="min-height: 480px;">
+        <img src="/images/consultation.jpg" alt="IRFC patient consultation" class="absolute inset-0 w-full h-full object-cover" />
+      </div>
+      <div class="p-12 lg:p-16 bg-stone-50 flex items-center">
+        <div>
+          <svg class="w-8 h-8 mb-6 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);">
+            <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
+          </svg>
+          <p class="text-stone-700 leading-relaxed italic mb-8 text-lg" style="font-family: var(--font-serif);">"{testimonials[0].quote}"</p>
+          <div class="flex items-center gap-4">
+            <p class="text-sm font-medium text-stone-800">— {testimonials[0].name}</p>
+            <span class="text-xs px-3 py-1 border tracking-wide" style={`color: var(--color-gold-600); border-color: var(--color-gold-300); font-family: var(--font-sans);`}>
+              {testimonials[0].treatment}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 remaining testimonials -->
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 py-10">
+      <div class="grid md:grid-cols-3 gap-5">
+        {testimonials.slice(1).map(t => (
+          <div class="p-8 border border-stone-200 bg-stone-50 flex flex-col">
+            <svg class="w-6 h-6 mb-4 opacity-20" fill="currentColor" viewBox="0 0 32 32" style={`color: var(--color-${t.color}-600);`}>
               <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
             </svg>
-            <p class="text-stone-600 leading-relaxed flex-1 italic mb-8 text-sm">"{t.quote}"</p>
+            <p class="text-stone-600 leading-relaxed flex-1 italic mb-6 text-sm">"{t.quote}"</p>
             <div class="flex items-center justify-between">
-              <div>
-                <p class="text-sm font-medium text-stone-800">— {t.name}</p>
-              </div>
-              <span class="text-xs px-3 py-1 border tracking-wide" style={`color: var(--color-${t.color}-600); border-color: var(--color-${t.color}-300); font-family: var(--font-sans);`}>
-                {t.treatment}
-              </span>
+              <p class="text-xs font-medium text-stone-700">— {t.name}</p>
+              <span class="text-xs px-2 py-1 border" style={`color: var(--color-${t.color}-600); border-color: var(--color-${t.color}-200); font-family: var(--font-sans);`}>{t.treatment}</span>
             </div>
           </div>
         ))}
       </div>
-
-      <p class="mt-8 text-center text-xs" style="color: var(--color-stone-400);">
+      <p class="mt-6 text-center text-xs" style="color: var(--color-stone-400);">
         Individual patient outcomes vary. These stories reflect personal experiences and are not a guarantee of results.
       </p>
-
-      <div class="mt-8 text-center">
+      <div class="mt-6 text-center">
         <a href="/testimonials" class="btn-outline">Read More Stories</a>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials → CTA photo break -->
-  <section class="relative overflow-hidden" style="height: 400px;">
-    <img src="/images/consultation.jpg" alt="IRFC patient consultation" class="w-full h-full object-cover object-center" />
-    <div class="absolute inset-0" style="background: linear-gradient(to left, rgba(20,18,15,0.55) 0%, rgba(20,18,15,0.1) 55%, transparent 100%);"></div>
-    <div class="absolute inset-0 flex items-center justify-end px-10 lg:px-20">
-      <p style="font-family: var(--font-serif);" class="text-3xl font-light text-white max-w-sm leading-relaxed text-right">
-        Your journey starts with one conversation.
-      </p>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="py-24 lg:py-32 bg-white">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+  <!-- Final CTA — full-bleed image background -->
+  <section class="relative overflow-hidden py-32">
+    <img src="/images/couple-clinic.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+    <div class="absolute inset-0" style="background: rgba(20,18,15,0.68);"></div>
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
       <div class="max-w-2xl mx-auto">
         <div class="flex items-center justify-center gap-3 mb-6">
           <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400);">Begin Your Journey</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400);">Begin Your Journey</span>
           <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
         </div>
-        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white mb-6">
           Your Family Starts Here
         </h2>
-        <p class="leading-relaxed mb-10 text-sm" style="color: var(--color-stone-500);">
-          Schedule a free new patient consultation and take the first step toward building the family you've always dreamed of. Our team is here to listen, guide, and support you every step of the way.
+        <p class="leading-relaxed mb-10 text-sm" style="color: rgba(255,255,255,0.7);">
+          Schedule a free new patient consultation and take the first step toward building the family you've always dreamed of.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="/contact" class="btn-primary">Schedule Free Consultation</a>
-          <a href="tel:+19494538600" class="btn-outline">Call (949) 453-8600</a>
+          <a href="tel:+19494538600" class="btn-outline" style="border-color: rgba(255,255,255,0.4); color: white;">Call (949) 453-8600</a>
         </div>
-        <p class="mt-6 text-xs" style="color: var(--color-stone-400);">
+        <p class="mt-6 text-xs" style="color: rgba(255,255,255,0.4);">
           Free initial consultations available. Telehealth options for out-of-area patients.
         </p>
       </div>
