@@ -12,9 +12,12 @@ interface Props {
 const {
   title,
   description = 'IRFC — Where Science Meets Compassionate Care. World-class fertility treatments across Southern California, bringing together the expertise of Incinta Fertility and Reproductive Fertility Center.',
-  image = '/images/og-default.jpg',
+  image = '/images/lobby-wide.jpg',
   schema,
 } = Astro.props;
+
+const siteBase = 'https://irfc.com';
+const ogImage = image.startsWith('http') ? image : `${siteBase}${image}`;
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -61,17 +64,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://irfc.com
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | IRFC`} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="IRFC" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${title} | IRFC`} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)}></script>
