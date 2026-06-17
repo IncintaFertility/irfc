@@ -70,20 +70,29 @@ const stories = [
   <Nav />
 
   <!-- Hero -->
-  <section class="pt-40 pb-20 bg-white">
+  <section class="pt-40 pb-0 bg-white overflow-hidden">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="max-w-3xl">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Patient Stories</span>
+      <div class="grid lg:grid-cols-2 gap-12 items-end">
+        <div class="pb-20">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Patient Stories</span>
+          </div>
+          <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+            Journeys We've<br/>
+            <em class="not-italic" style="color: var(--color-gold-500);">Shared Together.</em>
+          </h1>
+          <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+            Behind every statistic is a person, a couple, a family with a dream. These are some of the stories that remind us why we do what we do — and why we never stop trying.
+          </p>
         </div>
-        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
-          Journeys We've<br/>
-          <em class="not-italic" style="color: var(--color-gold-500);">Shared Together.</em>
-        </h1>
-        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
-          Behind every statistic is a person, a couple, a family with a dream. These are some of the stories that remind us why we do what we do — and why we never stop trying.
-        </p>
+        <div class="hidden lg:block overflow-hidden" style="max-height: 480px;">
+          <img
+            src="/images/patient-portrait.jpg"
+            alt="IRFC patient"
+            class="w-full h-full object-cover object-top"
+          />
+        </div>
       </div>
     </div>
   </section>

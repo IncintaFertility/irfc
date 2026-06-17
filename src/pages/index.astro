@@ -168,28 +168,24 @@ const testimonials = [
           </div>
         </div>
 
-        <!-- Right: decorative brand mark -->
-        <div class="hidden lg:flex items-center justify-center">
-          <div class="relative">
-            <!-- Outer ring -->
-            <div class="w-80 h-80 rounded-full border flex items-center justify-center" style="border-color: rgba(198,173,92,0.25);">
-              <!-- Middle ring -->
-              <div class="w-64 h-64 rounded-full border flex items-center justify-center" style="border-color: rgba(198,173,92,0.15);">
-                <!-- Logo mark -->
-                <div class="w-44 h-44 flex items-center justify-center">
-                  <img src="/images/irfc-logo.svg" alt="IRFC" class="w-full h-full object-contain" />
-                </div>
-              </div>
-            </div>
-            <!-- Floating stat badges -->
-            <div class="absolute -top-4 -right-6 bg-white shadow-lg px-4 py-3 border-l-2" style="border-color: var(--color-gold-500);">
-              <p class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">20+</p>
-              <p class="text-xs tracking-wide" style="color: var(--color-stone-400);">Years of Excellence</p>
-            </div>
-            <div class="absolute -bottom-4 -left-6 bg-white shadow-lg px-4 py-3 border-l-2" style="border-color: var(--color-purple-400);">
-              <p class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-purple-500);">#1</p>
-              <p class="text-xs tracking-wide" style="color: var(--color-stone-400);">US IVF Lab, 2016</p>
-            </div>
+        <!-- Right: clinic photo -->
+        <div class="hidden lg:block relative">
+          <div class="relative overflow-hidden" style="aspect-ratio: 4/5;">
+            <img
+              src="/images/lobby-wide.jpg"
+              alt="IRFC Clinic — Torrance"
+              class="w-full h-full object-cover object-center"
+            />
+            <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 65%, rgba(253,250,243,0.25));"></div>
+          </div>
+          <!-- Floating stat badges -->
+          <div class="absolute -top-4 -right-6 bg-white shadow-lg px-4 py-3 border-l-2" style="border-color: var(--color-gold-500);">
+            <p class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">20+</p>
+            <p class="text-xs tracking-wide" style="color: var(--color-stone-400);">Years of Excellence</p>
+          </div>
+          <div class="absolute -bottom-4 -left-6 bg-white shadow-lg px-4 py-3 border-l-2" style="border-color: var(--color-purple-400);">
+            <p class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-purple-500);">#1</p>
+            <p class="text-xs tracking-wide" style="color: var(--color-stone-400);">US IVF Lab, 2016</p>
           </div>
         </div>
 
