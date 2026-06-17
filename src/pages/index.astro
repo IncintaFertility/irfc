@@ -7,7 +7,7 @@ const stats = [
   { number: '20+', label: 'Years of Excellence' },
   { number: '5', label: 'Southern California Clinics' },
   { number: '#1', label: 'US IVF Success Rate, 2016' },
-  { number: '∞', label: 'Families Built' },
+  { number: 'Free', label: 'Initial Consultation' },
 ];
 
 const services = [
@@ -16,21 +16,21 @@ const services = [
     title: 'In Vitro Fertilization',
     abbr: 'IVF',
     desc: 'Advanced IVF with EmbryoScope+ monitoring and AI-assisted embryo selection for the highest success rates.',
-    href: '/services#ivf',
+    href: '/services/ivf',
   },
   {
     icon: '◇',
     title: 'Fertility Preservation',
     abbr: 'Egg & Embryo Freezing',
     desc: 'Preserve your fertility future with state-of-the-art vitrification technology secured in the TMRW Vault.',
-    href: '/services#preservation',
+    href: '/services/egg-freezing',
   },
   {
     icon: '◉',
     title: 'Genetic Testing',
     abbr: 'PGT',
     desc: 'Preimplantation Genetic Testing to identify the healthiest embryos before transfer, maximizing success.',
-    href: '/services#pgt',
+    href: '/services/pgt',
   },
   {
     icon: '◎',
@@ -44,7 +44,7 @@ const services = [
     title: 'Intrauterine Insemination',
     abbr: 'IUI',
     desc: 'A minimally invasive first-line fertility treatment for select candidates, guided by expert diagnostics.',
-    href: '/services#iui',
+    href: '/services/iui',
   },
   {
     icon: '◐',
@@ -118,8 +118,8 @@ const testimonials = [
 ---
 
 <Layout
-  title="Home"
-  description="IRFC — Where science meets compassionate care. World-class IVF and fertility treatments across Southern California. The union of Incinta Fertility and Reproductive Fertility Center."
+  title="Southern California IVF & Fertility Specialists"
+  description="IRFC — Award-winning IVF and fertility care across Southern California. The union of Incinta Fertility and Reproductive Fertility Center. Free initial consultations. 5 locations."
 >
   <Nav />
 
@@ -267,6 +267,17 @@ const testimonials = [
       <div class="mt-12 text-center">
         <a href="/services" class="btn-outline">View All Services</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Services → Pillars photo break -->
+  <section class="relative overflow-hidden" style="height: 440px;">
+    <img src="/images/transfer-room.jpg" alt="IRFC transfer suite" class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.6) 0%, rgba(20,18,15,0.2) 55%, transparent 100%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-white max-w-md leading-relaxed">
+        Every embryo is given its best chance to thrive.
+      </p>
     </div>
   </section>
 
@@ -542,6 +553,17 @@ const testimonials = [
       <div class="mt-8 text-center">
         <a href="/testimonials" class="btn-outline">Read More Stories</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Testimonials → CTA photo break -->
+  <section class="relative overflow-hidden" style="height: 400px;">
+    <img src="/images/consultation-joyful.jpg" alt="IRFC patient consultation" class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to left, rgba(20,18,15,0.55) 0%, rgba(20,18,15,0.1) 55%, transparent 100%);"></div>
+    <div class="absolute inset-0 flex items-center justify-end px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-3xl font-light text-white max-w-sm leading-relaxed text-right">
+        Your journey starts with one conversation.
+      </p>
     </div>
   </section>
 
