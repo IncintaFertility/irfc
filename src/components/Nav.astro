@@ -36,7 +36,7 @@ const isActive = (group: typeof navGroups[0]) =>
   group.children.some(c => pathname === c.href || pathname.startsWith(c.href + '/'));
 ---
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-500">
   <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
     <nav class="flex items-center justify-between h-20 lg:h-24">
 
@@ -159,9 +159,9 @@ const isActive = (group: typeof navGroups[0]) =>
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
-      header?.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-stone-100');
+      header?.classList.add('shadow-sm', 'border-b', 'border-stone-100');
     } else {
-      header?.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-stone-100');
+      header?.classList.remove('shadow-sm', 'border-b', 'border-stone-100');
     }
   });
 
