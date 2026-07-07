@@ -10,53 +10,52 @@ import Footer from '../../components/Footer.astro';
 >
   <Nav />
 
-  <!-- ① HERO -->
+  <!-- ① HERO: full-bleed photo, text anchored bottom-left -->
   <section class="hero">
+    <img src="/images/patient-portrait.jpg" alt="IRFC patient care" class="hero-bg" />
+    <div class="hero-overlay"></div>
 
-    <!-- Left: cream, text -->
-    <div class="hero-left">
-      <div class="hero-spacer"></div>
-
-      <div class="hero-content">
+    <div class="hero-body">
+      <div class="hero-text">
         <p class="hero-eyebrow">
-          Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center &nbsp;·&nbsp; Southern California
+          <span class="hero-eyebrow-line"></span>
+          Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center
         </p>
-
         <h1 class="hero-h1">
           <span>Where Science</span>
           <em>Meets</em>
           <span>Compassion.</span>
         </h1>
-
         <div class="hero-ctas">
-          <div class="hero-rule"></div>
-          <a href="/contact" class="btn-primary">Schedule a Free Consultation</a>
-          <a href="/about" class="btn-outline">Our Story</a>
-        </div>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <strong>20+</strong><span>Years of Excellence</span>
-        </div>
-        <div class="hero-stat hero-stat--purple">
-          <strong>#1</strong><span>US IVF Lab · 2016</span>
-        </div>
-        <div class="hero-stat">
-          <strong>5</strong><span>SoCal Locations</span>
-        </div>
-        <div class="hero-stat">
-          <strong>Free</strong><span>Initial Consultation</span>
+          <a href="/contact" class="btn-primary">Schedule a Free Consultation
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="/about" class="hero-ghost-btn">Our Story</a>
         </div>
       </div>
     </div>
 
-    <!-- Right: photo -->
-    <div class="hero-right">
-      <img src="/images/lobby-wide.jpg" alt="IRFC Clinic" />
+    <!-- Scroll cue -->
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
     </div>
-
   </section>
+
+  <!-- Stats strip — cream, sits flush below hero -->
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>20+</strong><span>Years of Excellence</span>
+    </div>
+    <div class="hero-stat hero-stat--purple">
+      <strong>#1</strong><span>US IVF Lab · 2016</span>
+    </div>
+    <div class="hero-stat">
+      <strong>5</strong><span>SoCal Locations</span>
+    </div>
+    <div class="hero-stat">
+      <strong>Free</strong><span>Initial Consultation</span>
+    </div>
+  </div>
 
   <!-- ② QUOTE -->
   <section class="quote-section">
@@ -199,45 +198,75 @@ import Footer from '../../components/Footer.astro';
    HERO
 ═══════════════════════════════════════════ */
 .hero {
-  display: grid;
-  grid-template-columns: 58% 42%;
+  position: relative;
   height: 100vh;
+  min-height: 640px;
   overflow: hidden;
 }
 
-.hero-left {
-  background: #fdfaf3;
+/* Full-bleed photo */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* Gradient: photo clean at top, darkens from 45% down */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.06) 0%,
+    rgba(0,0,0,0)    30%,
+    rgba(8,6,3,0.42) 60%,
+    rgba(8,6,3,0.82) 100%
+  );
+}
+
+/* Content wrapper */
+.hero-body {
+  position: relative;
+  z-index: 1;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  padding-left: 10vw;
-  padding-right: 5vw;
-  overflow: hidden;
+  align-items: flex-end;
+  padding: 0 10vw 6rem;
 }
 
-/* Flexible spacer — pushes content down, stays ≥ nav height */
-.hero-spacer {
-  flex: 1;
-  min-height: 6.5rem; /* nav ~96px */
-}
-
-.hero-content {
-  padding-bottom: 3rem;
+/* Text block */
+.hero-text {
+  max-width: 860px;
 }
 
 .hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
   font-size: 0.58rem;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--color-stone-400);
+  color: rgba(255,255,255,0.65);
   font-family: var(--font-sans);
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero-eyebrow-line {
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-gold-400);
+  flex-shrink: 0;
 }
 
 .hero-h1 {
   font-family: var(--font-serif);
   font-weight: 300;
-  line-height: 0.9;
-  color: var(--color-stone-800);
+  line-height: 0.88;
+  color: white;
   margin-bottom: 3.5rem;
   letter-spacing: -0.01em;
 }
@@ -245,47 +274,82 @@ import Footer from '../../components/Footer.astro';
 .hero-h1 span,
 .hero-h1 em {
   display: block;
-  font-size: clamp(2.6rem, 5.4vw, 7rem);
+  font-size: clamp(3rem, 7.5vw, 9.5rem);
 }
 
 .hero-h1 em {
   font-style: italic;
-  color: var(--color-gold-600);
+  color: var(--color-gold-400);
 }
 
 .hero-ctas {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
-.hero-rule {
-  width: 4rem;
-  height: 1px;
-  background: var(--color-gold-500);
-  flex-shrink: 0;
+.hero-ghost-btn {
+  border: 1px solid rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.85);
+  padding: 0.875rem 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  transition: border-color 0.2s;
+  display: inline-flex;
+  align-items: center;
 }
 
-/* Stats pinned to the bottom of the left column */
+.hero-ghost-btn:hover {
+  border-color: rgba(255,255,255,0.65);
+}
+
+/* Scroll cue */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  right: 10vw;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 4rem;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* Stats strip below hero */
 .hero-stats {
   display: flex;
-  border-top: 1px solid var(--color-stone-200);
-  margin-top: auto;
+  background: #fdfaf3;
+  border-bottom: 1px solid var(--color-stone-200);
 }
 
 .hero-stat {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding: 1.4rem 2rem;
+  padding: 1.75rem 2.5rem;
   border-right: 1px solid var(--color-stone-200);
   flex-shrink: 0;
 }
 
 .hero-stat strong {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-size: 1.75rem;
   font-weight: 300;
   color: var(--color-gold-600);
 }
@@ -300,21 +364,6 @@ import Footer from '../../components/Footer.astro';
   text-transform: uppercase;
   color: var(--color-stone-400);
   font-family: var(--font-sans);
-}
-
-/* Right column: full-bleed photo */
-.hero-right {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-right img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
 }
 
 /* ═══════════════════════════════════════════
@@ -760,29 +809,13 @@ cite {
    RESPONSIVE
 ═══════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .hero {
-    grid-template-columns: 1fr;
-    height: auto;
+  .hero-body {
+    padding: 0 6vw 4.5rem;
   }
 
-  .hero-left {
-    padding: 8rem 6vw 0;
-    min-height: auto;
-  }
-
-  .hero-spacer {
-    min-height: 0;
-    flex: 0;
-  }
-
-  .hero-right {
-    height: 55vw;
-    min-height: 320px;
-    position: relative;
-  }
-
-  .hero-right img {
-    position: absolute;
+  .hero-stats {
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
   .locations-section {
