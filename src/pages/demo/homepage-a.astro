@@ -1123,6 +1123,11 @@ cite {
    RESPONSIVE
 ═══════════════════════════════════════════ */
 
+/* Show hamburger on mobile (must come after .dnav-hamburger { display: none } above) */
+@media (max-width: 900px) {
+  .dnav-hamburger { display: flex; }
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
   .hero-body { padding: 0 6vw 4.5rem; }
