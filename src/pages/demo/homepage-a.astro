@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 ---
 
@@ -8,7 +7,31 @@ import Footer from '../../components/Footer.astro';
   title="IRFC — Southern California IVF & Fertility Specialists"
   description="Award-winning IVF and fertility care across Southern California. Free initial consultations."
 >
-  <Nav />
+  <!-- ─── DEMO NAV ─────────────────────────────────── -->
+  <header id="demo-nav" class="dnav">
+    <!-- Logo -->
+    <a href="/" class="dnav-logo" aria-label="IRFC Home">
+      <div class="dnav-logo-wrap">
+        <img src="/images/irfc-logo.svg"       alt="IRFC" class="dnav-logo-img dnav-logo-color" />
+        <img src="/images/irfc-logo-white.svg" alt="IRFC" class="dnav-logo-img dnav-logo-white" />
+      </div>
+    </a>
+
+    <!-- Links -->
+    <nav class="dnav-links" aria-label="Main navigation">
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/outcomes">Success Rates</a>
+      <a href="/team">Team</a>
+      <a href="/locations">Locations</a>
+    </nav>
+
+    <!-- Right -->
+    <div class="dnav-right">
+      <a href="tel:+19494538600" class="dnav-phone">(949) 453-8600</a>
+      <a href="/contact" class="dnav-cta">Book Consultation</a>
+    </div>
+  </header>
 
   <!-- ① HERO -->
   <section class="hero">
@@ -192,7 +215,158 @@ import Footer from '../../components/Footer.astro';
   <div class="demo-badge">Demo A — Editorial</div>
 </Layout>
 
+<script>
+  const nav = document.getElementById('demo-nav');
+  const onScroll = () => {
+    if (window.scrollY > 40) {
+      nav?.classList.add('dnav--solid');
+    } else {
+      nav?.classList.remove('dnav--solid');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on load
+</script>
+
 <style>
+/* ═══════════════════════════════════════════
+   DEMO NAV
+═══════════════════════════════════════════ */
+.dnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10vw;
+  /* starts transparent */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background  0.4s ease,
+    border-color 0.4s ease,
+    backdrop-filter 0.4s ease;
+}
+
+/* Scrolled state */
+.dnav--solid {
+  background: rgba(253,250,243,0.97);
+  border-bottom-color: var(--color-stone-200);
+  backdrop-filter: blur(12px);
+}
+
+/* Logo */
+.dnav-logo { display: block; flex-shrink: 0; }
+
+.dnav-logo-wrap {
+  position: relative;
+  height: 2.4rem;
+  width: 10rem;   /* enough for the logo SVG */
+}
+
+.dnav-logo-img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: left center;
+  transition: opacity 0.35s ease;
+}
+
+/* Transparent: show white; Solid: show color */
+.dnav-logo-color { opacity: 0; }
+.dnav-logo-white { opacity: 1; }
+
+.dnav--solid .dnav-logo-color { opacity: 1; }
+.dnav--solid .dnav-logo-white { opacity: 0; }
+
+/* Nav links */
+.dnav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.dnav-links a {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.dnav--solid .dnav-links a {
+  color: var(--color-stone-600);
+}
+
+.dnav-links a:hover {
+  color: var(--color-gold-400) !important;
+}
+
+/* Right side */
+.dnav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-shrink: 0;
+}
+
+.dnav-phone {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.dnav--solid .dnav-phone {
+  color: var(--color-stone-500);
+}
+
+.dnav-phone:hover { color: var(--color-gold-400) !important; }
+
+/* CTA button */
+.dnav-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.9);
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+  white-space: nowrap;
+}
+
+.dnav--solid .dnav-cta {
+  border-color: var(--color-gold-500);
+  color: var(--color-gold-700);
+  background: transparent;
+}
+
+.dnav-cta:hover {
+  border-color: var(--color-gold-400) !important;
+  color: var(--color-gold-400) !important;
+}
+
+/* Hide desktop nav on mobile */
+@media (max-width: 900px) {
+  .dnav-links,
+  .dnav-phone { display: none; }
+  .dnav { padding: 0 6vw; }
+}
+
 /* ═══════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════ */
@@ -239,7 +413,7 @@ import Footer from '../../components/Footer.astro';
 /* Eyebrow — top-left, sits in the bright upper area */
 .hero-top {
   position: absolute;
-  top: 8rem;           /* below fixed nav */
+  top: 7rem;           /* below transparent nav (4.5rem) + breathing room */
   left: 10vw;
   z-index: 2;
 }
