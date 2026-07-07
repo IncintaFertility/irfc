@@ -1,0 +1,306 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const categories = [
+  {
+    id: 'getting-started',
+    label: 'Getting Started',
+    faqs: [
+      {
+        q: 'How do I know if I should see a fertility specialist?',
+        a: 'Most guidelines recommend seeing a specialist after 12 months of trying to conceive without success if you are under 35, or after 6 months if you are 35 or older. However, you should seek evaluation sooner if you have irregular or absent periods, a known condition such as PCOS, endometriosis, or prior surgery, a history of recurrent miscarriage, or if your partner has a known semen abnormality. You do not need a referral to schedule a consultation at IRFC.',
+      },
+      {
+        q: 'What happens at the first consultation?',
+        a: 'Your first appointment is a one-on-one conversation with a physician — not a coordinator or nurse. Your doctor will review your medical history, prior fertility history, and any records you bring. Depending on your situation, a baseline ultrasound and bloodwork (AMH, FSH, estradiol) may be ordered at that visit or shortly after. You will leave with a clear picture of your current fertility status and the treatment paths that make sense for your situation.',
+      },
+      {
+        q: 'Do you offer telehealth consultations?',
+        a: 'Yes. IRFC offers telehealth for initial consultations and follow-up appointments. This is particularly useful for out-of-area and international patients, or for anyone with a demanding schedule. Some diagnostic steps — ultrasound, bloodwork — will require an in-person visit, but we design your care plan to minimize unnecessary travel whenever possible.',
+      },
+      {
+        q: 'What languages does IRFC offer care in?',
+        a: 'IRFC\'s team provides care in English, Mandarin Chinese, Japanese, Korean, and Spanish. We understand that navigating fertility treatment in a second language adds stress — our multilingual staff ensures nothing is lost in translation at any stage of your care.',
+      },
+      {
+        q: 'Do I need a referral to be seen at IRFC?',
+        a: 'No. You can contact IRFC directly to schedule your first appointment. Some insurance plans may require a referral for coverage purposes — our team can help you navigate this — but a referral is never required to be seen.',
+      },
+    ],
+  },
+  {
+    id: 'treatments',
+    label: 'Treatments',
+    faqs: [
+      {
+        q: 'What is IVF and how does it work?',
+        a: 'In vitro fertilization (IVF) involves stimulating the ovaries to produce multiple eggs, retrieving those eggs in a brief outpatient procedure, fertilizing them with sperm in our laboratory, and culturing the resulting embryos for 5–6 days. The healthiest embryo is then transferred to the uterus. At IRFC, embryos are monitored continuously using EmbryoScope+ time-lapse technology — allowing our embryologists to assess development without disturbing the culture environment.',
+      },
+      {
+        q: 'What is the difference between IVF and IUI?',
+        a: 'IUI (intrauterine insemination) is a simpler, less invasive procedure in which prepared sperm is placed directly into the uterus near the time of ovulation. It is appropriate for select candidates — typically those with mild male factor infertility, unexplained infertility, or cervical issues — and is often tried before IVF. IVF produces higher success rates per cycle, involves more medications and monitoring, and is typically recommended when IUI has been unsuccessful or is unlikely to succeed based on your diagnosis.',
+      },
+      {
+        q: 'What is mild stimulation IVF?',
+        a: 'Mild stimulation IVF uses lower doses of fertility medications over a shorter period compared to conventional IVF protocols. This approach reduces side effects, lowers the risk of ovarian hyperstimulation syndrome (OHSS), and often costs less per cycle. While fewer eggs are typically retrieved, many patients — particularly those with PCOS, those sensitive to hormonal medications, or those who prefer a more natural approach — find that mild stimulation produces fewer but higher-quality embryos. Dr. Zitao Liu specializes in mild stimulation protocols at IRFC.',
+      },
+      {
+        q: 'What is PGT-A (preimplantation genetic testing)?',
+        a: 'PGT-A tests embryos for chromosomal abnormalities before transfer. A few cells are biopsied from the embryo on day 5 or 6, and the embryo is frozen while results are analyzed. Only chromosomally normal (euploid) embryos are then selected for transfer. PGT-A improves per-transfer live birth rates and reduces miscarriage risk, and is particularly valuable for patients over 35, those with unexplained recurrent implantation failure, or those with prior pregnancy loss. It is not appropriate for every patient — your physician will discuss whether it makes sense for your situation.',
+      },
+      {
+        q: 'What is fertility preservation (egg freezing)?',
+        a: 'Egg freezing (oocyte cryopreservation) uses the same ovarian stimulation and retrieval process as IVF. Mature eggs are then vitrified (flash-frozen) rather than fertilized, and stored in IRFC\'s TMRW cryogenic vault. This allows you to preserve your reproductive potential before age-related decline, before cancer treatment, or before you are ready to conceive. Freezing before age 35 generally produces the strongest outcomes. IRFC also prioritizes expedited consultations for patients facing oncological treatment who have limited time before starting chemotherapy or radiation.',
+      },
+      {
+        q: 'How many embryos are transferred during IVF?',
+        a: 'In the vast majority of cases, IRFC transfers a single embryo per cycle (elective single embryo transfer, or eSET). This approach significantly reduces the risks associated with twin or higher-order pregnancies — which carry substantially greater risk of premature birth, low birth weight, and maternal complications — while maintaining strong cumulative success rates when remaining embryos are frozen for future cycles. Your physician will discuss the appropriate protocol for your specific situation.',
+      },
+    ],
+  },
+  {
+    id: 'success-rates',
+    label: 'Success Rates',
+    faqs: [
+      {
+        q: 'What are IRFC\'s IVF success rates?',
+        a: 'US fertility clinics submit annual outcome data to the CDC, which publishes it through the National ART Surveillance System (NASS) at cdc.gov/art. IRFC\'s laboratory team achieved the highest IVF success rates in the United States as reported to SART in 2016 — a distinction reflecting the extraordinary precision of our embryology team under the direction of Dr. Yufen Xie. We encourage you to review the publicly available CDC data and bring your questions to your consultation, where your physician will provide a frank, personalized assessment.',
+      },
+      {
+        q: 'How should I interpret published success rate data?',
+        a: 'Published rates represent averages across a clinic\'s patient population — they do not tell you what your personal probability looks like. A 50% success rate for a 28-year-old with unexplained infertility is a very different number from a 50% rate for a 41-year-old with diminished ovarian reserve. Clinic comparisons can also be distorted by patient selection: centers that take only straightforward cases will show higher aggregate numbers. At IRFC, we do not turn away complex cases — and we give every patient an honest, individualized probability estimate.',
+      },
+      {
+        q: 'What factors most affect my personal chances of success?',
+        a: 'The most significant factors are age and ovarian reserve (measured by AMH and antral follicle count), uterine anatomy, sperm parameters, any underlying diagnoses (such as PCOS, endometriosis, or recurrent pregnancy loss), and embryo chromosomal health. Your physician will review all of these during your initial evaluation and give you a realistic picture of what to expect.',
+      },
+      {
+        q: 'Do success rates improve with donor eggs?',
+        a: 'Yes — substantially. Donor egg IVF success rates are primarily determined by the donor\'s age rather than the recipient\'s. A patient in her mid-40s using eggs from a donor in her mid-20s can achieve per-transfer success rates comparable to a young patient using her own eggs — typically 50–65% per transfer. For patients with severely diminished ovarian reserve, prior IVF failures, or premature ovarian insufficiency, donor egg IVF is often the most direct path to a successful pregnancy.',
+      },
+    ],
+  },
+  {
+    id: 'costs',
+    label: 'Costs & Financing',
+    faqs: [
+      {
+        q: 'How much does IVF cost at IRFC?',
+        a: 'IVF costs vary based on your treatment protocol, the medications required, and whether add-ons such as PGT-A genetic testing are appropriate for your situation. IRFC provides a transparent, itemized cost estimate before treatment begins — there are no hidden fees. Our financial coordinator will walk you through every component of your recommended plan so you can make an informed decision.',
+      },
+      {
+        q: 'Does insurance cover fertility treatments?',
+        a: 'Coverage varies significantly by plan and employer. California law requires certain employers to offer fertility treatment coverage, but the specifics depend on your plan. Kaiser Permanente patients benefit from IRFC\'s designation as a Kaiser Center of Excellence, which may expand your coverage options. Our team will verify your insurance benefits before treatment and clearly explain what is and is not covered under your plan.',
+      },
+      {
+        q: 'What financing options are available?',
+        a: 'IRFC partners with CapexMD, a specialized medical lender that offers personal loans for fertility treatments. Once approved, funds are deposited directly so you can begin treatment without delay. Loan terms and eligibility are determined by CapexMD directly — IRFC facilitates the connection but is a separate entity. Our financial coordinator can help you initiate the application process.',
+      },
+      {
+        q: 'Can I use HSA or FSA funds for fertility treatment?',
+        a: 'Yes. Fertility treatments — including IVF, IUI, egg freezing, and related medications — are generally considered qualified medical expenses under IRS guidelines, making them eligible for payment with Health Savings Account (HSA) or Flexible Spending Account (FSA) funds. We recommend confirming eligibility with your plan administrator, as specific plan rules can vary.',
+      },
+      {
+        q: 'Are there multi-cycle or package pricing options?',
+        a: 'IRFC offers various package options depending on your treatment plan. These are discussed with our financial coordinator during your consultation, once your physician has recommended a treatment approach. Package options vary by protocol and individual situation.',
+      },
+    ],
+  },
+  {
+    id: 'laboratory',
+    label: 'The Laboratory',
+    faqs: [
+      {
+        q: 'What technology does IRFC use in its IVF laboratory?',
+        a: 'IRFC\'s CAP-certified laboratory is equipped with EmbryoScope+ continuous time-lapse incubation, which monitors embryo development every 10 minutes without removing embryos from their culture environment. RI Witness RFID electronic witnessing verifies that biological samples are precisely matched to each patient at every step of the IVF process — eliminating the risk of sample mix-up. The laboratory operates under the direction of Dr. Yufen Xie, who led IRFC\'s embryology team to the #1 ranking in US IVF success rates in 2016.',
+      },
+      {
+        q: 'How are my frozen eggs and embryos stored?',
+        a: 'IRFC uses the TMRW smart cryogenic vault for all cryopreserved eggs and embryos. TMRW uses RFID barcoding and 24/7 real-time sensor monitoring to track every stored sample with precision — providing automated alerts if temperature or pressure parameters deviate from specifications. This is a meaningful clinical distinction: conventional storage tanks are manually checked intermittently, while TMRW provides continuous monitoring of every individual sample.',
+      },
+      {
+        q: 'What is CAP and CLIA accreditation?',
+        a: 'CAP (College of American Pathologists) accreditation and CLIA (Clinical Laboratory Improvement Amendments) certification are independent quality standards for clinical laboratories. CAP accreditation requires rigorous on-site inspections by peer laboratory professionals and is widely considered the gold standard in laboratory quality assurance. CLIA certification is a federal requirement for laboratories that perform clinical testing on human specimens. IRFC\'s laboratory holds both — reflecting our commitment to operating at the highest standard of laboratory practice.',
+      },
+    ],
+  },
+  {
+    id: 'inclusive-care',
+    label: 'Inclusive Care',
+    faqs: [
+      {
+        q: 'Does IRFC provide care for LGBTQIA+ patients?',
+        a: 'Yes — wholeheartedly. IRFC provides affirming, inclusive fertility care for same-sex couples, transgender individuals, and single parents by choice. Our care coordinators are experienced in the full range of family-building paths available, and our physicians approach every patient with the same clinical rigor and personal respect.',
+      },
+      {
+        q: 'What is reciprocal IVF?',
+        a: 'Reciprocal IVF — also called partner IVF or co-IVF — is a family-building approach in which one partner provides the eggs and the other carries the pregnancy. The egg provider undergoes ovarian stimulation and retrieval; the eggs are fertilized with donor sperm and the resulting embryo is transferred to the carrying partner\'s uterus. This allows both partners to have a biological and gestational connection to the pregnancy. IRFC has extensive experience with reciprocal IVF.',
+      },
+      {
+        q: 'Do you work with egg donors and gestational surrogates?',
+        a: 'Yes. IRFC coordinates with egg banks and donor agencies, and works with established surrogacy agencies for gestational carrier arrangements. Our team will guide you through the medical, logistical, and timeline aspects of third-party reproduction. Legal agreements between all parties are handled through independent reproductive attorneys — IRFC does not provide legal advice but can refer you to experienced counsel.',
+      },
+      {
+        q: 'Do you see single individuals who want to have a child?',
+        a: 'Yes. Many patients at IRFC are single individuals pursuing parenthood through donor sperm IUI or IVF, or through egg freezing to preserve future options. We approach every patient\'s path to family without judgment, and our team is experienced in supporting solo parents from consultation through treatment.',
+      },
+    ],
+  },
+];
+
+// Build FAQPage schema from all Q&As
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: categories.flatMap(cat =>
+    cat.faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    }))
+  ),
+};
+---
+
+<Layout
+  title="FAQ — Frequently Asked Questions"
+  description="Answers to common questions about IVF, fertility treatments, costs, success rates, and patient care at IRFC — Southern California's award-winning fertility center."
+  schema={faqSchema}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Frequently Asked Questions</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          Questions Worth<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">Asking.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Fertility treatment raises many questions — and you deserve clear, honest answers. Browse by topic below, or bring anything unanswered to your consultation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category jump nav -->
+  <div class="sticky top-[4.5rem] z-40 bg-white border-y border-stone-100 overflow-x-auto">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex gap-0 min-w-max">
+        {categories.map(cat => (
+          <a
+            href={`#${cat.id}`}
+            class="faq-nav-item"
+          >
+            {cat.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ categories -->
+  <div class="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 lg:py-20">
+    <div class="lg:grid lg:grid-cols-[260px_1fr] lg:gap-20 items-start">
+
+      <!-- Sticky sidebar (desktop) -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-32 space-y-1">
+          <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Topics</p>
+          {categories.map(cat => (
+            <a href={`#${cat.id}`} class="faq-sidebar-link">{cat.label}</a>
+          ))}
+          <div class="pt-8 mt-8 border-t border-stone-100">
+            <p class="text-xs text-stone-400 leading-relaxed mb-4" style="font-family: var(--font-sans);">Didn't find your answer?</p>
+            <a href="/contact" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">Ask a Physician</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Q&A sections -->
+      <main class="space-y-16 lg:space-y-20">
+        {categories.map(cat => (
+          <section id={cat.id} class="scroll-mt-32">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="h-px w-8 flex-shrink-0" style="background: var(--color-gold-400);"></div>
+              <h2 class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{cat.label}</h2>
+            </div>
+
+            <div class="divide-y divide-stone-100">
+              {cat.faqs.map((faq, i) => (
+                <details class="faq-item group" open={i === 0 && cat.id === 'getting-started'}>
+                  <summary class="flex items-start justify-between gap-6 py-5 cursor-pointer list-none select-none">
+                    <span class="text-base font-light text-stone-800 leading-snug" style="font-family: var(--font-serif);">{faq.q}</span>
+                    <svg class="w-4 h-4 flex-shrink-0 mt-0.5 text-stone-400 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                  </summary>
+                  <p class="pb-5 text-sm leading-relaxed text-stone-500 max-w-2xl">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        <!-- Bottom prompt -->
+        <section class="border-t border-stone-100 pt-12">
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Still have questions?</p>
+          <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">Your physician has answers.</h3>
+          <p class="text-sm text-stone-500 leading-relaxed mb-6 max-w-lg">Every situation is different. Bring your specific questions to a consultation and get answers that actually apply to you.</p>
+          <a href="/contact" class="btn-primary">Book a Consultation</a>
+        </section>
+      </main>
+
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  .faq-nav-item {
+    display: inline-block;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+    color: var(--color-stone-500);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .faq-nav-item:hover {
+    color: var(--color-gold-600);
+    border-bottom-color: var(--color-gold-400);
+  }
+
+  .faq-sidebar-link {
+    display: block;
+    padding: 0.45rem 0;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+    color: var(--color-stone-500);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .faq-sidebar-link:hover { color: var(--color-gold-600); }
+
+  details[open] summary svg {
+    transform: rotate(45deg);
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+</style>
