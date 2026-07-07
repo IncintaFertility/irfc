@@ -3,39 +3,49 @@ const pathname = Astro.url.pathname;
 
 const navGroups = [
   {
+    label: 'Treatments',
+    children: [
+      { href: '/services/ivf',          label: 'IVF' },
+      { href: '/services/egg-freezing',  label: 'Egg Freezing' },
+      { href: '/services/iui',           label: 'IUI' },
+      { href: '/services/pgt',           label: 'Genetic Testing (PGT)' },
+      { href: '/services#donors',        label: 'Donors & Surrogacy' },
+      { href: '/services#lgbtqia',       label: 'LGBTQIA+ Family Building' },
+      { href: '/services',               label: 'All Treatments →' },
+    ],
+  },
+  {
+    label: 'Our Team',
+    children: [
+      { href: '/team/dr-james-lin',  label: 'Dr. James P. Lin, MD' },
+      { href: '/team/dr-zitao-liu',  label: 'Dr. Zitao Liu, MD' },
+      { href: '/team/dr-yufen-xie',  label: 'Dr. Yufen Xie, PhD' },
+      { href: '/team',               label: 'All Physicians →' },
+    ],
+  },
+  {
+    label: 'For Patients',
+    children: [
+      { href: '/patient-journey',    label: 'Patient Journey' },
+      { href: '/outcomes',           label: 'Success Rates' },
+      { href: '/financing',          label: 'Financing & Cost' },
+      { href: '/patient-resources',  label: 'Patient Resources' },
+      { href: '/testimonials',       label: 'Patient Stories' },
+    ],
+  },
+  {
     label: 'About',
     children: [
-      { href: '/about', label: 'About IRFC' },
-      { href: '/why-irfc', label: 'Why Choose Us' },
+      { href: '/about',      label: 'About IRFC' },
+      { href: '/why-irfc',   label: 'Why Choose Us' },
       { href: '/technology', label: 'Lab Technology' },
-      { href: '/team', label: 'Our Team' },
-      { href: '/locations', label: 'Locations' },
-    ],
-  },
-  {
-    label: 'Services',
-    children: [
-      { href: '/services', label: 'All Services' },
-      { href: '/services/ivf', label: 'IVF' },
-      { href: '/services/egg-freezing', label: 'Egg Freezing' },
-      { href: '/services/iui', label: 'IUI' },
-      { href: '/services/pgt', label: 'Genetic Testing (PGT)' },
-    ],
-  },
-  {
-    label: 'Resources',
-    children: [
-      { href: '/outcomes', label: 'Success Rates' },
-      { href: '/patient-journey', label: 'Patient Journey' },
-      { href: '/patient-resources', label: 'Patient Resources' },
-      { href: '/financing', label: 'Financing & Cost' },
-      { href: '/testimonials', label: 'Patient Stories' },
+      { href: '/locations',  label: 'Locations' },
     ],
   },
 ];
 
 const isActive = (group: typeof navGroups[0]) =>
-  group.children.some(c => pathname === c.href || pathname.startsWith(c.href + '/'));
+  group.children.some(c => c.href !== '#' && (pathname === c.href || pathname.startsWith(c.href.split('#')[0] + '/')));
 ---
 
 <header id="site-header" class="site-nav">
@@ -59,7 +69,7 @@ const isActive = (group: typeof navGroups[0]) =>
             {group.children.map(child => (
               <a
                 href={child.href}
-                class={`nav-dropdown-item${pathname === child.href ? ' nav-dropdown-item--active' : ''}`}
+                class={`nav-dropdown-item${child.label.endsWith('→') ? ' nav-dropdown-item--all' : ''}${pathname === child.href ? ' nav-dropdown-item--active' : ''}`}
               >
                 {child.label}
               </a>
@@ -72,8 +82,7 @@ const isActive = (group: typeof navGroups[0]) =>
 
   <!-- Desktop right -->
   <div class="nav-right">
-    <a href="tel:+19494538600" class="nav-phone">(949) 453-8600</a>
-    <a href="/contact" class="nav-cta">Book Consultation</a>
+    <a href="/contact" class="nav-cta">Book a Consultation</a>
   </div>
 
   <!-- Hamburger (mobile) -->
@@ -86,12 +95,13 @@ const isActive = (group: typeof navGroups[0]) =>
 <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
   <div class="nav-mobile-inner">
     <nav class="nav-mobile-links">
-      <a href="/about">About IRFC</a>
-      <a href="/services">Services</a>
-      <a href="/outcomes">Success Rates</a>
-      <a href="/patient-journey">Patient Journey</a>
+      <a href="/services">Treatments</a>
       <a href="/team">Our Team</a>
+      <a href="/patient-journey">Patient Journey</a>
+      <a href="/outcomes">Success Rates</a>
+      <a href="/financing">Financing</a>
       <a href="/locations">Locations</a>
+      <a href="/about">About IRFC</a>
     </nav>
     <div class="nav-mobile-bottom">
       <a href="tel:+19494538600" class="nav-mobile-phone">(949) 453-8600</a>
@@ -218,11 +228,22 @@ const isActive = (group: typeof navGroups[0]) =>
   background: var(--color-stone-50);
 }
 
+.nav-dropdown-item--all {
+  border-top: 1px solid var(--color-stone-200) !important;
+  color: var(--color-gold-600);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  background: var(--color-stone-50);
+}
+
+.nav-dropdown-item--all:hover {
+  background: #f0ede6;
+}
+
 /* Right side */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
   flex-shrink: 0;
 }
 
