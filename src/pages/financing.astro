@@ -17,10 +17,6 @@ const faqs = [
     a: 'CapexMD is a specialized medical lender that offers personal loans for fertility treatments. Once approved, funds are deposited directly so you can begin treatment without delay. IRFC facilitates the connection — all loan terms and repayment questions should be directed to CapexMD. IRFC is a separate entity and does not act as a financing institution.',
   },
   {
-    q: 'Is the initial consultation really free?',
-    a: 'Yes. Your first consultation with an IRFC physician is completely free of charge. We want every patient to have the opportunity to understand their options and meet our team before making any financial commitment.',
-  },
-  {
     q: 'Are there multi-cycle discount programs?',
     a: 'We offer various package options depending on your treatment plan. Please speak with our financial coordinator during your consultation to learn which options may be appropriate for your situation.',
   },
@@ -33,7 +29,7 @@ const faqs = [
 
 <Layout
   title="Financing & Cost"
-  description="Fertility treatment financing options at IRFC — CapexMD lending, insurance guidance, HSA/FSA, and free initial consultations. We help remove financial barriers to care."
+  description="Fertility treatment financing options at IRFC — CapexMD lending, insurance guidance, HSA/FSA, and initial consultations. We help remove financial barriers to care."
 >
   <Nav />
 
@@ -61,7 +57,7 @@ const faqs = [
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid sm:grid-cols-3 gap-6 text-center">
         {[
-          { label: 'Free Initial Consultation', detail: 'No cost, no obligation to begin' },
+          { label: 'Transparent Pricing', detail: 'Itemized estimates before treatment begins' },
           { label: 'Flexible Financing Available', detail: 'Through our lending partner CapexMD' },
           { label: 'HSA / FSA Accepted', detail: 'Use pre-tax dollars for treatment' },
         ].map(item => (
@@ -143,7 +139,7 @@ const faqs = [
           <div class="text-xs space-y-1.5" style="color: var(--color-stone-400);">
             <p>✓ Itemized estimates provided upfront</p>
             <p>✓ HSA and FSA funds accepted</p>
-            <p>✓ Free initial consultation — always</p>
+            <p>✓ Transparent pricing — no surprises</p>
           </div>
         </div>
 
@@ -160,7 +156,7 @@ const faqs = [
         </div>
         <div class="space-y-0">
           {[
-            { n: '01', title: 'Free Consultation', desc: 'Meet your physician. Understand your diagnosis and recommended path. No cost, no obligation.' },
+            { n: '01', title: 'Initial Consultation', desc: 'Meet your physician. Understand your diagnosis and recommended path forward.' },
             { n: '02', title: 'Cost Estimate', desc: 'Our financial coordinator provides a transparent, itemized estimate for your recommended treatment plan.' },
             { n: '03', title: 'Insurance Verification', desc: 'We help verify your insurance benefits and identify what may be covered under your plan.' },
             { n: '04', title: 'Financing Application', desc: 'If needed, apply through CapexMD or explore HSA/FSA options. Most decisions are fast.' },
@@ -227,10 +223,10 @@ const faqs = [
         Let's Talk Through Your Options
       </h2>
       <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
-        Our financial coordinator is here to walk you through costs, insurance benefits, and financing options — free of charge, no pressure.
+        Our financial coordinator is here to walk you through costs, insurance benefits, and financing options, no pressure.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="btn-primary">Schedule Free Consultation</a>
+        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
         <a href="tel:+19494538600" class="btn-outline">Call (949) 453-8600</a>
       </div>
       <p class="mt-5 text-xs" style="color: var(--color-stone-400);">
