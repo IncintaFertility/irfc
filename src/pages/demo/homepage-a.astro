@@ -241,20 +241,19 @@ import Footer from '../../components/Footer.astro';
   align-items: center;
   justify-content: space-between;
   padding: 0 10vw;
-  /* starts transparent */
-  background: transparent;
-  border-bottom: 1px solid transparent;
+  /* Subtle frosted cream — readable on any image brightness */
+  background: rgba(253,250,243,0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(214,209,197,0.5);
   transition:
-    background  0.4s ease,
-    border-color 0.4s ease,
-    backdrop-filter 0.4s ease;
+    background   0.4s ease,
+    border-color 0.4s ease;
 }
 
-/* Scrolled state */
+/* Scrolled state: fully opaque */
 .dnav--solid {
-  background: rgba(253,250,243,0.97);
+  background: rgba(253,250,243,0.98);
   border-bottom-color: var(--color-stone-200);
-  backdrop-filter: blur(12px);
 }
 
 /* Logo */
@@ -276,14 +275,11 @@ import Footer from '../../components/Footer.astro';
   transition: opacity 0.35s ease;
 }
 
-/* Transparent: show white; Solid: show color */
-.dnav-logo-color { opacity: 0; }
-.dnav-logo-white { opacity: 1; }
+/* Always show color logo — image is light so color logo is readable */
+.dnav-logo-color { opacity: 1; }
+.dnav-logo-white { opacity: 0; }
 
-.dnav--solid .dnav-logo-color { opacity: 1; }
-.dnav--solid .dnav-logo-white { opacity: 0; }
-
-/* Nav links */
+/* Nav links — dark text always (bright image) */
 .dnav-links {
   display: flex;
   align-items: center;
@@ -296,17 +292,13 @@ import Footer from '../../components/Footer.astro';
   text-transform: uppercase;
   font-family: var(--font-sans);
   text-decoration: none;
-  color: rgba(255,255,255,0.8);
+  color: var(--color-stone-700);
   transition: color 0.3s;
   white-space: nowrap;
 }
 
-.dnav--solid .dnav-links a {
-  color: var(--color-stone-600);
-}
-
 .dnav-links a:hover {
-  color: var(--color-gold-400) !important;
+  color: var(--color-gold-600) !important;
 }
 
 /* Right side */
@@ -322,18 +314,14 @@ import Footer from '../../components/Footer.astro';
   letter-spacing: 0.08em;
   font-family: var(--font-sans);
   text-decoration: none;
-  color: rgba(255,255,255,0.6);
+  color: var(--color-stone-500);
   transition: color 0.3s;
   white-space: nowrap;
 }
 
-.dnav--solid .dnav-phone {
-  color: var(--color-stone-500);
-}
+.dnav-phone:hover { color: var(--color-gold-600) !important; }
 
-.dnav-phone:hover { color: var(--color-gold-400) !important; }
-
-/* CTA button */
+/* CTA button — gold border, dark text */
 .dnav-cta {
   display: inline-flex;
   align-items: center;
@@ -343,21 +331,15 @@ import Footer from '../../components/Footer.astro';
   font-family: var(--font-sans);
   text-decoration: none;
   padding: 0.6rem 1.4rem;
-  border: 1px solid rgba(255,255,255,0.45);
-  color: rgba(255,255,255,0.9);
+  border: 1px solid var(--color-gold-500);
+  color: var(--color-gold-700);
   transition: border-color 0.3s, color 0.3s, background 0.3s;
   white-space: nowrap;
 }
 
-.dnav--solid .dnav-cta {
-  border-color: var(--color-gold-500);
-  color: var(--color-gold-700);
-  background: transparent;
-}
-
 .dnav-cta:hover {
-  border-color: var(--color-gold-400) !important;
-  color: var(--color-gold-400) !important;
+  background: var(--color-gold-500);
+  color: white;
 }
 
 /* Hide desktop nav on mobile */
@@ -387,9 +369,10 @@ import Footer from '../../components/Footer.astro';
 }
 
 /*
-  Two-layer overlay:
-  1. Bottom vignette: transparent → dark, starts at 45% — for text readability
-  2. Left tint: very subtle darkening on the left so white text pops
+  Three-layer overlay:
+  1. Top vignette: dark at top for nav + eyebrow readability → fades out quickly
+  2. Bottom vignette: transparent → dark from 40% for headline readability
+  3. Left tint: subtle left darkening so left-anchored text has depth
 */
 .hero-overlay {
   position: absolute;
@@ -397,15 +380,17 @@ import Footer from '../../components/Footer.astro';
   background:
     linear-gradient(
       to bottom,
-      transparent          0%,
-      transparent          38%,
-      rgba(10,7,4,0.38)    62%,
-      rgba(10,7,4,0.78)   100%
+      rgba(8,5,2,0.55)   0%,
+      rgba(8,5,2,0.2)   18%,
+      transparent        32%,
+      transparent        40%,
+      rgba(8,5,2,0.42)   62%,
+      rgba(8,5,2,0.82)  100%
     ),
     linear-gradient(
       to right,
-      rgba(10,7,4,0.22)   0%,
-      rgba(10,7,4,0.08)  40%,
+      rgba(8,5,2,0.18)   0%,
+      rgba(8,5,2,0.06)  45%,
       transparent        70%
     );
 }
