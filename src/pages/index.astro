@@ -123,77 +123,51 @@ const testimonials = [
 >
   <Nav />
 
-  <!-- Hero -->
-  <section class="relative min-h-screen overflow-hidden">
-    <!-- Full-bleed background photo -->
-    <img
-      src="/images/lobby-wide.jpg"
-      alt="IRFC Clinic"
-      class="absolute inset-0 w-full h-full object-cover object-center"
-    />
+  <!-- Hero — full-bleed dark vignette, bottom-anchored text -->
+  <section class="idx-hero">
+    <img src="/images/lobby-wide.jpg" alt="IRFC Clinic" class="idx-hero-bg" />
+    <div class="idx-hero-overlay"></div>
 
-    <!-- Gradient overlay: opaque cream left → transparent right -->
-    <div
-      class="absolute inset-0"
-      style="background: linear-gradient(to right, #fdfaf3 0%, #fdfaf3 30%, rgba(253,250,243,0.92) 45%, rgba(253,250,243,0.55) 62%, rgba(253,250,243,0.1) 80%, transparent 100%);"
-    ></div>
-    <!-- Mobile: top-to-bottom overlay for stacked layout -->
-    <div
-      class="absolute inset-0 lg:hidden"
-      style="background: linear-gradient(to bottom, rgba(253,250,243,0.97) 0%, rgba(253,250,243,0.97) 60%, rgba(253,250,243,0.75) 80%, rgba(253,250,243,0.4) 100%);"
-    ></div>
+    <div class="idx-hero-top">
+      <span class="idx-hero-eyebrow">
+        <span class="idx-hero-line"></span>
+        Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center &nbsp;·&nbsp; Southern California
+      </span>
+    </div>
 
-    <!-- Content -->
-    <div class="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 w-full min-h-screen flex items-center pt-28 pb-24">
-      <div class="max-w-xl">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">
-            Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center
-          </span>
-        </div>
-
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-light leading-none mb-10" style="font-family: var(--font-serif); color: var(--color-stone-800);">
-          <span class="block">Where Science</span>
-          <span class="block mt-2 italic" style="color: var(--color-gold-600);">Meets Compassion</span>
-        </h1>
-
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="/contact" class="btn-primary">
-            Schedule a Free Consultation
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-          <a href="/about" class="btn-outline">Our Story</a>
-        </div>
-
-        <!-- Inline stat chips -->
-        <div class="flex flex-wrap gap-5 mt-12">
-          <div class="flex items-center gap-3">
-            <span class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">20+</span>
-            <span class="text-xs tracking-wide" style="color: var(--color-stone-500);">Years of Excellence</span>
-          </div>
-          <div class="w-px h-8 self-center" style="background: var(--color-stone-300);"></div>
-          <div class="flex items-center gap-3">
-            <span class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-purple-400);">#1</span>
-            <span class="text-xs tracking-wide" style="color: var(--color-stone-500);">US IVF Lab, 2016</span>
-          </div>
-          <div class="w-px h-8 self-center hidden sm:block" style="background: var(--color-stone-300);"></div>
-          <div class="flex items-center gap-3">
-            <span class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">5</span>
-            <span class="text-xs tracking-wide" style="color: var(--color-stone-500);">SoCal Locations</span>
-          </div>
-        </div>
+    <div class="idx-hero-body">
+      <h1 class="idx-hero-h1">
+        <span>Where</span>
+        <span>Science <em>Meets</em></span>
+        <span>Compassion.</span>
+      </h1>
+      <div class="idx-hero-ctas">
+        <a href="/contact" class="btn-primary">
+          Schedule a Free Consultation
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <a href="/about" class="idx-ghost-btn">Our Story</a>
       </div>
     </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style="color: var(--color-stone-500);">
-      <span class="text-xs tracking-widest uppercase" style="font-family: var(--font-sans);">Scroll</span>
-      <div class="w-px h-10" style="background: linear-gradient(to bottom, var(--color-gold-400), transparent);"></div>
-    </div>
   </section>
+
+  <!-- Stats strip -->
+  <div class="idx-stats">
+    <div class="idx-stat">
+      <strong>20+</strong><span>Years of Excellence</span>
+    </div>
+    <div class="idx-stat idx-stat--purple">
+      <strong>#1</strong><span>US IVF Lab · 2016</span>
+    </div>
+    <div class="idx-stat">
+      <strong>5</strong><span>SoCal Locations</span>
+    </div>
+    <div class="idx-stat">
+      <strong>Free</strong><span>Initial Consultation</span>
+    </div>
+  </div>
 
   <!-- The Union -->
   <section class="overflow-hidden" style="background: var(--color-stone-50);">
@@ -619,3 +593,158 @@ const testimonials = [
 
   <Footer />
 </Layout>
+
+<style>
+/* ═══ HERO ═══ */
+.idx-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.idx-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.idx-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(8,5,2,0.55) 0%, rgba(8,5,2,0.2) 18%, transparent 32%, transparent 40%, rgba(8,5,2,0.42) 62%, rgba(8,5,2,0.82) 100%),
+    linear-gradient(to right, rgba(8,5,2,0.18) 0%, rgba(8,5,2,0.06) 45%, transparent 70%);
+}
+
+.idx-hero-top {
+  position: absolute;
+  top: 7rem;
+  left: 10vw;
+  z-index: 2;
+}
+
+.idx-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.56rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  font-family: var(--font-sans);
+}
+
+.idx-hero-line {
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-gold-400);
+  flex-shrink: 0;
+}
+
+.idx-hero-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0 10vw 5rem;
+}
+
+.idx-hero-h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 0.88;
+  color: white;
+  margin-bottom: 3rem;
+  letter-spacing: -0.015em;
+}
+
+.idx-hero-h1 span {
+  display: block;
+  font-size: clamp(3.2rem, 7.2vw, 9rem);
+}
+
+.idx-hero-h1 em {
+  font-style: italic;
+  color: var(--color-gold-400);
+  font-size: inherit;
+}
+
+.idx-hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.idx-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.9);
+  padding: 0.875rem 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  transition: border-color 0.25s;
+}
+
+.idx-ghost-btn:hover { border-color: rgba(255,255,255,0.7); }
+
+/* ═══ STATS STRIP ═══ */
+.idx-stats {
+  display: flex;
+  background: #fdfaf3;
+  border-bottom: 1px solid #e7e4df;
+}
+
+.idx-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.75rem 2.75rem;
+  border-right: 1px solid #e7e4df;
+  flex: 1;
+}
+
+.idx-stat strong {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--color-gold-600);
+}
+
+.idx-stat--purple strong { color: var(--color-purple-400); }
+
+.idx-stat span {
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-stone-400);
+  font-family: var(--font-sans);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .idx-hero-body { padding: 0 5vw 3.5rem; }
+  .idx-hero-top { left: 5vw; top: 6rem; }
+  .idx-hero-h1 { margin-bottom: 2rem; }
+
+  .idx-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .idx-stat { padding: 1.25rem 1.5rem; flex: unset; }
+}
+
+@media (max-width: 480px) {
+  .idx-hero-h1 span { font-size: clamp(2.6rem, 11vw, 3.2rem); }
+}
+</style>
