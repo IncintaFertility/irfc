@@ -16,6 +16,7 @@ const physicians = [
     color: 'gold',
     initial: 'J',
     photo: '/images/team/dr-james-lin-circle.png',
+    href: '/team/dr-james-lin',
   },
   {
     name: 'Zitao Liu, MD',
@@ -25,10 +26,11 @@ const physicians = [
       'Dr. Zitao Liu serves as Associate Chief Medical Officer at IRFC and is now accepting new patients. A rising leader in the field, Dr. Liu has become a pioneer in the development of mild stimulation protocols that reduce patient burden while maintaining excellent outcomes.',
       'He brings a forward-thinking approach to fertility care, integrating artificial intelligence and data-driven tools to enhance diagnostic precision and treatment planning. His work represents the next generation of reproductive medicine — thoughtful, innovative, and deeply personalized.',
     ],
-    color: 'purple',
+    color: 'gold',
     initial: 'Z',
     badge: 'Now Accepting New Patients',
     photo: '/images/team/dr-zitao-liu-circle.png',
+    href: '/team/dr-zitao-liu',
   },
 ];
 
@@ -46,7 +48,7 @@ const labTeam = [
     role: 'IVF Laboratory Supervisor',
     bio: 'Hyang Park ensures the day-to-day excellence of IRFC\'s embryology laboratory. With meticulous attention to protocol, quality control, and team coordination, she maintains the rigorous standards that have defined the lab\'s outstanding reputation.',
     initial: 'H',
-    color: 'purple',
+    color: 'gold',
     photo: '/images/team/hyang-park.png',
   },
 ];
@@ -65,7 +67,7 @@ const clinicalTeam = [
     role: 'Third Party Coordinator',
     bio: 'Kelly Zhao is IRFC\'s bilingual Third Party Coordinator, specializing in egg donation and surrogacy programs. She supports patients navigating the complex world of donor and gestational carrier arrangements with warmth, expertise, and culturally competent care.',
     initial: 'K',
-    color: 'purple',
+    color: 'gold',
     photo: '/images/team/kelly-zhao.png',
   },
 ];
@@ -163,8 +165,14 @@ const physicianSchema = [
                 <p class="text-xs tracking-widest uppercase mb-1" style={`color: var(--color-${doc.color}-600); font-family: var(--font-sans);`}>{doc.role}</p>
                 <p class="text-xs mb-6" style="color: var(--color-stone-400);">{doc.credentials}</p>
                 {doc.bio.map(para => (
-                  <p class="text-sm text-stone-600 leading-relaxed mb-4 last:mb-0">{para}</p>
+                  <p class="text-sm text-stone-600 leading-relaxed mb-4">{para}</p>
                 ))}
+                {doc.href && (
+                  <a href={doc.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-2" style="color: var(--color-gold-600);">
+                    Full Profile
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </a>
+                )}
               </div>
             </div>
           </div>

@@ -82,13 +82,12 @@
 
   .btn-primary {
     @apply inline-flex items-center gap-2 px-8 py-3.5 text-sm font-medium tracking-widest uppercase text-white;
-    background: linear-gradient(135deg, var(--color-gold-500), var(--color-gold-700));
-    transition: all 0.3s ease;
+    background: var(--color-gold-600);
+    transition: all 0.25s ease;
   }
   .btn-primary:hover {
-    background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+    background: var(--color-gold-700);
     transform: translateY(-1px);
-    box-shadow: 0 8px 25px color-mix(in srgb, var(--color-gold-600) 35%, transparent);
   }
 
   .btn-outline {

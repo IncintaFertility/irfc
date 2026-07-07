@@ -1,0 +1,225 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const expertise = [
+  'Embryo Culture & Development',
+  'Oocyte Vitrification (Egg Freezing)',
+  'Embryo Cryopreservation',
+  'PGT-A Biopsy & Sample Preparation',
+  'ICSI (Intracytoplasmic Sperm Injection)',
+  'Time-Lapse Embryo Monitoring',
+  'IVF Laboratory Quality Systems',
+  'CAP/CLIA Compliance & Accreditation',
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Yufen Xie, PhD',
+  jobTitle: 'IVF Laboratory Director',
+  description: 'Led the embryology team ranked #1 in US IVF success rates in 2016. IVF Laboratory Director at IRFC with 20+ years of world-class embryology expertise.',
+  worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+  image: 'https://irfc.com/images/team/dr-yufen-xie.png',
+  url: 'https://irfc.com/team/dr-yufen-xie',
+};
+---
+
+<Layout
+  title="Dr. Yufen Xie, PhD — IVF Laboratory Director"
+  description="Dr. Yufen Xie led the embryology team ranked #1 in US IVF success rates in 2016. IRFC's IVF Laboratory Director with 20+ years of world-class embryology expertise."
+  schema={schema}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-0 items-end">
+        <div class="pb-16 lg:pb-24 pt-12">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">IVF Laboratory Director</span>
+          </div>
+          <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-4 leading-none">
+            Yufen Xie,<br/>
+            <em class="not-italic" style="color: var(--color-gold-500);">PhD</em>
+          </h1>
+          <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Embryology & Reproductive Science</p>
+          <span class="inline-block text-xs tracking-wider px-3 py-1.5 border mb-6" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">
+            #1 US IVF Laboratory — 2016
+          </span>
+          <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-10">
+            The scientist who led IRFC's embryology team to the highest IVF success rates in the United States. Dr. Xie defines the laboratory standard that every patient's embryos are held to.
+          </p>
+          <a href="/contact" class="btn-outline inline-flex items-center gap-2">
+            Learn About Our Laboratory
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+        <div class="hidden lg:block relative" style="min-height: 560px;">
+          <img
+            src="/images/team/dr-yufen-xie.png"
+            alt="Dr. Yufen Xie, PhD"
+            class="absolute bottom-0 right-0 h-full w-full object-cover object-top"
+            style="object-position: center top;"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick stats bar -->
+  <section class="border-y border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-stone-100">
+        {[
+          { stat: '#1', label: 'US IVF Lab Ranking\n2016' },
+          { stat: '20+', label: 'Years of Embryology\nExpertise' },
+          { stat: 'CAP', label: 'Certified Laboratory\nDirector' },
+          { stat: '24/7', label: 'TMRW Vault\nCryogenic Monitoring' },
+        ].map(item => (
+          <div class="px-8 py-6">
+            <p class="text-2xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-600);">{item.stat}</p>
+            <p class="text-xs whitespace-pre-line leading-snug" style="color: var(--color-stone-500); font-family: var(--font-sans);">{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Biography -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-16">
+        <div class="lg:col-span-2 space-y-6">
+          <div class="section-divider mb-8"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">About Dr. Xie</h2>
+
+          <p class="text-stone-600 leading-relaxed">
+            Dr. Yufen Xie is the IVF Laboratory Director at IRFC and one of the most accomplished clinical embryologists practicing in the United States. She brings more than two decades of expertise in reproductive science — and a career defined by an uncompromising standard of excellence.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            The milestone that defines her reputation came in 2016, when Dr. Xie led the IRFC embryology team to achieve the highest IVF success rates in the United States as reported to SART. That ranking was not the result of patient selection — it was the result of meticulous science, relentless quality management, and the belief that every embryo deserves the best possible environment to develop.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            Dr. Xie oversees every aspect of IRFC's laboratory operations: from the culture media and incubation systems used to develop embryos, to the cryopreservation protocols that protect frozen eggs and embryos, to the quality assurance systems that ensure consistency across every cycle. Her approach is evidence-driven, methodically documented, and continuously refined.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            Under her direction, IRFC's laboratory operates with EmbryoScope+ time-lapse incubation, RI Witness RFID electronic witnessing, and TMRW smart cryogenic storage — a technology infrastructure that reflects her belief that the laboratory environment is one of the most significant controllable variables in IVF outcomes.
+          </p>
+
+          <!-- Philosophy pull quote -->
+          <blockquote class="py-10 border-y border-stone-100 my-10">
+            <p class="text-2xl font-light leading-relaxed text-stone-700 italic" style="font-family: var(--font-serif);">
+              "Every embryo represents someone's hope. That is not a responsibility I take lightly — it is the reason every protocol, every decision, every piece of equipment in this laboratory is held to the highest possible standard."
+            </p>
+            <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">— Dr. Yufen Xie</cite>
+          </blockquote>
+
+          <!-- Lab technology link -->
+          <div class="p-8 lg:p-10 border border-stone-200" style="background: var(--color-stone-50);">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">The Laboratory Dr. Xie Directs</p>
+            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">World-class technology. Exacting protocols.</h3>
+            <p class="text-sm leading-relaxed text-stone-500 mb-6">
+              IRFC's laboratory is equipped with EmbryoScope+ continuous time-lapse monitoring, RI Witness electronic witnessing, and TMRW smart cryogenic vault with 24/7 real-time monitoring. These are not marketing distinctions — they are clinical variables that directly affect embryo quality and patient outcomes.
+            </p>
+            <a href="/technology" class="btn-outline inline-flex items-center gap-2 text-xs py-2.5 px-5">
+              Laboratory Technology Overview
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-10">
+          <!-- Expertise -->
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Areas of Expertise</p>
+            <ul class="space-y-3">
+              {expertise.map(item => (
+                <li class="flex items-center gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 flex-shrink-0" style="background: var(--color-gold-400);"></div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Recognition -->
+          <div class="border-t border-stone-100 pt-8">
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Recognition</p>
+            <ul class="space-y-4">
+              {[
+                '#1 US IVF Laboratory — SART, 2016',
+                'CAP-Certified Laboratory Director',
+                'CLIA-Accredited Clinical Laboratory',
+                'Fairfax EggBank Production Excellence',
+              ].map(item => (
+                <li class="text-sm text-stone-600 leading-snug">{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Languages -->
+          <div class="border-t border-stone-100 pt-8">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Languages</p>
+            <div class="flex flex-wrap gap-2">
+              {['English', 'Mandarin Chinese'].map(lang => (
+                <span class="text-xs px-3 py-1.5 border border-stone-200 text-stone-600">{lang}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Outcomes link -->
+          <div class="border border-stone-200 p-6" style="background: var(--color-stone-50);">
+            <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
+            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">IVF Success Rates</p>
+            <p class="text-xs text-stone-500 mb-5 leading-relaxed">See how laboratory quality translates directly to patient outcomes.</p>
+            <a href="/outcomes" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
+              View Outcomes Data
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other physicians -->
+  <section class="py-16 border-t border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex items-center justify-between mb-10">
+        <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">Also at IRFC</h3>
+        <a href="/team" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          Full Team
+          <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        {[
+          { name: 'James P. Lin, MD', role: 'Founder & Medical Director', href: '/team/dr-james-lin', badge: 'Founder', photo: '/images/team/dr-james-lin-circle.png' },
+          { name: 'Zitao Liu, MD', role: 'Associate Chief Medical Officer', href: '/team/dr-zitao-liu', badge: 'Now Accepting New Patients', photo: '/images/team/dr-zitao-liu-circle.png' },
+        ].map(doc => (
+          <a href={doc.href} class="group bg-white border border-stone-200 p-6 flex items-center gap-5 card-hover">
+            <img src={doc.photo} alt={doc.name} class="w-16 h-16 object-cover flex-shrink-0" style="border-radius: 50%;" />
+            <div class="flex-1 min-w-0">
+              <p class="text-base font-light text-stone-800" style="font-family: var(--font-serif);">{doc.name}</p>
+              <p class="text-xs tracking-wider uppercase mt-0.5" style="color: var(--color-stone-400);">{doc.role}</p>
+              {doc.badge && <span class="inline-block mt-2 text-xs px-2 py-0.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{doc.badge}</span>}
+            </div>
+            <svg class="w-4 h-4 flex-shrink-0 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

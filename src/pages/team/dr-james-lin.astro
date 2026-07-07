@@ -1,0 +1,211 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const expertise = [
+  'In Vitro Fertilization (IVF)',
+  'Recurrent Pregnancy Loss',
+  'Diminished Ovarian Reserve',
+  'LGBTQIA+ Family Building',
+  'Donor Egg & Third-Party Reproduction',
+  'Gestational Surrogacy',
+  'Minimally Invasive Surgery',
+  'Complex & High-Age IVF Cases',
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  name: 'James P. Lin, MD',
+  honorificPrefix: 'Dr.',
+  jobTitle: 'Founder & Medical Director',
+  description: 'Board-certified reproductive endocrinologist and infertility specialist with over 20 years of experience. Founder of Reproductive Fertility Center, Medical Director of IRFC.',
+  medicalSpecialty: 'Reproductive Medicine',
+  worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+  image: 'https://irfc.com/images/team/dr-james-lin-circle.png',
+  url: 'https://irfc.com/team/dr-james-lin',
+};
+---
+
+<Layout
+  title="Dr. James P. Lin, MD — Founder & Medical Director"
+  description="Dr. James P. Lin is the founder of RFC and Medical Director of IRFC. Award-winning reproductive endocrinologist with 20+ years of experience in Southern California."
+  schema={schema}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-0 items-end">
+        <div class="pb-16 lg:pb-24 pt-12">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Founder & Medical Director</span>
+          </div>
+          <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-4 leading-none">
+            James P. Lin,<br/>
+            <em class="not-italic" style="color: var(--color-gold-500);">MD</em>
+          </h1>
+          <p class="text-sm tracking-widest uppercase mb-8" style="color: var(--color-stone-400); font-family: var(--font-sans);">Reproductive Endocrinology & Infertility</p>
+          <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-10">
+            Founder of Reproductive Fertility Center, architect of IRFC's patient-first model, and one of Southern California's most trusted names in reproductive medicine.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="btn-primary">
+              Request a Consultation with Dr. Lin
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="hidden lg:block relative" style="min-height: 560px;">
+          <img
+            src="/images/team/dr-james-lin-circle.png"
+            alt="Dr. James P. Lin, MD"
+            class="absolute bottom-0 right-0 h-full w-full object-cover object-top"
+            style="object-position: center top;"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick stats bar -->
+  <section class="border-y border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-stone-100">
+        {[
+          { stat: '20+', label: 'Years of Experience' },
+          { stat: 'COE', label: 'Kaiser Permanente\nCenter of Excellence' },
+          { stat: '5', label: 'Languages at IRFC' },
+          { stat: 'Free', label: 'Initial Consultation' },
+        ].map(item => (
+          <div class="px-8 py-6">
+            <p class="text-2xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-600);">{item.stat}</p>
+            <p class="text-xs whitespace-pre-line leading-snug" style="color: var(--color-stone-500); font-family: var(--font-sans);">{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Biography -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-16">
+        <div class="lg:col-span-2 space-y-6">
+          <div class="section-divider mb-8"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">About Dr. Lin</h2>
+
+          <p class="text-stone-600 leading-relaxed">
+            Dr. James P. Lin is the founder of Reproductive Fertility Center (RFC) and serves as Founder and Medical Director of IRFC — the practice born from the union of RFC and Incinta Fertility. With over 20 years of experience in reproductive endocrinology and infertility, he is widely recognized as one of Southern California's most accomplished and trusted fertility specialists.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            Dr. Lin established RFC on a foundational belief that has never wavered: that a fertility clinic should feel like <em>"both a family and a home."</em> Under his leadership, RFC earned designation as a Kaiser Permanente Center of Excellence across Southern California — one of the most rigorous independent quality recognitions in reproductive medicine — and became one of the largest Fairfax EggBank production facilities in the United States.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            Dr. Lin is internationally recognized for his clinical expertise and his philosophy of treating every patient as an individual rather than a diagnosis. He combines deep technical expertise with a communication style that patients consistently describe as honest, clear, and compassionate — never dismissive, never falsely reassuring.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            He continues to practice clinically, seeing patients personally and playing an active role in IRFC's medical leadership as the practice grows across Southern California.
+          </p>
+
+          <!-- Philosophy pull quote -->
+          <blockquote class="py-10 border-y border-stone-100 my-10">
+            <p class="text-2xl font-light leading-relaxed text-stone-700 italic" style="font-family: var(--font-serif);">
+              "A fertility clinic should feel like both a family and a home. That is the environment we build — and the care every patient deserves."
+            </p>
+            <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">— Dr. James P. Lin</cite>
+          </blockquote>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-10">
+          <!-- Expertise -->
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Areas of Expertise</p>
+            <ul class="space-y-3">
+              {expertise.map(item => (
+                <li class="flex items-center gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 flex-shrink-0" style="background: var(--color-gold-400);"></div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Recognition -->
+          <div class="border-t border-stone-100 pt-8">
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Recognition & Credentials</p>
+            <ul class="space-y-4">
+              {[
+                'Kaiser Permanente Center of Excellence',
+                'Board Certified — Reproductive Endocrinology & Infertility',
+                'Fairfax EggBank Premier Partner',
+                'Top IVF Center — California, IVF Authority',
+              ].map(item => (
+                <li class="text-sm text-stone-600 leading-snug">{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Languages -->
+          <div class="border-t border-stone-100 pt-8">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Languages</p>
+            <div class="flex flex-wrap gap-2">
+              {['English', 'Mandarin Chinese'].map(lang => (
+                <span class="text-xs px-3 py-1.5 border border-stone-200 text-stone-600">{lang}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- CTA card -->
+          <div class="border border-stone-200 p-6" style="background: var(--color-stone-50);">
+            <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
+            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">Schedule a Consultation</p>
+            <p class="text-xs text-stone-500 mb-5 leading-relaxed">First appointment is free. Telehealth available.</p>
+            <a href="/contact" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
+              Book Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other physicians -->
+  <section class="py-16 border-t border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex items-center justify-between mb-10">
+        <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">Also at IRFC</h3>
+        <a href="/team" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          Full Team
+          <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        {[
+          { name: 'Zitao Liu, MD', role: 'Associate Chief Medical Officer', href: '/team/dr-zitao-liu', badge: 'Now Accepting New Patients', photo: '/images/team/dr-zitao-liu-circle.png' },
+          { name: 'Yufen Xie, PhD', role: 'IVF Laboratory Director', href: '/team/dr-yufen-xie', badge: '#1 US IVF Lab, 2016', photo: '/images/team/dr-yufen-xie.png' },
+        ].map(doc => (
+          <a href={doc.href} class="group bg-white border border-stone-200 p-6 flex items-center gap-5 card-hover">
+            <img src={doc.photo} alt={doc.name} class="w-16 h-16 object-cover flex-shrink-0" style="border-radius: 50%;" />
+            <div class="flex-1 min-w-0">
+              <p class="text-base font-light text-stone-800" style="font-family: var(--font-serif);">{doc.name}</p>
+              <p class="text-xs tracking-wider uppercase mt-0.5" style="color: var(--color-stone-400);">{doc.role}</p>
+              {doc.badge && <span class="inline-block mt-2 text-xs px-2 py-0.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{doc.badge}</span>}
+            </div>
+            <svg class="w-4 h-4 flex-shrink-0 text-stone-300 group-hover:text-gold-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,275 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const phases = [
+  {
+    phase: 'Phase One',
+    title: 'Getting Started',
+    timeframe: 'Weeks 1 – 3',
+    steps: [
+      {
+        num: '01',
+        title: 'Free Initial Consultation',
+        time: 'Day 1 · 60–90 minutes',
+        body: 'Your first appointment is with a physician — not a coordinator or nurse. You\'ll discuss your complete medical history, any prior fertility testing, and your goals. No decisions are required at this visit. Bring any prior records, bloodwork, or semen analyses you have. If you have a partner, we encourage them to attend.',
+        note: 'Free of charge. Telehealth available for out-of-area patients.',
+      },
+      {
+        num: '02',
+        title: 'Diagnostic Workup',
+        time: 'Week 1–2 · Multiple visits',
+        body: 'Your physician will order a comprehensive evaluation: Day 3 bloodwork (FSH, estradiol, AMH, AFC ultrasound), a transvaginal ultrasound to assess ovarian reserve and uterine anatomy, and a semen analysis for male partners. If needed, additional tests such as an HSG (to confirm tubal patency) or SHG (saline sonogram) may be ordered.',
+        note: 'Male factor contributes to 40–50% of infertility cases. A semen analysis is always part of a complete evaluation.',
+      },
+      {
+        num: '03',
+        title: 'Results Review & Protocol Design',
+        time: 'Week 2–3 · 45–60 minutes',
+        body: 'Your physician reviews all test results with you in detail — not just numbers, but what they mean for your path. Together, you\'ll discuss treatment options, expected response, and realistic success probabilities. If IVF is recommended, your personalized stimulation protocol is designed at this visit. Financial planning and insurance review happen in parallel with your financial coordinator.',
+        note: 'At IRFC, your protocol is designed by your physician — not a template.',
+      },
+    ],
+  },
+  {
+    phase: 'Phase Two',
+    title: 'The IVF Cycle',
+    timeframe: 'Weeks 4 – 8',
+    steps: [
+      {
+        num: '04',
+        title: 'Cycle Preparation',
+        time: 'Week 3–4 · 1–2 visits',
+        body: 'Before stimulation begins, your nurse coordinator teaches you how to self-administer injections, reviews the medication schedule, and answers all practical questions. For patients doing a freeze-all cycle, a mock transfer may be performed to map the uterine cavity and confirm the optimal catheter path before the real thing.',
+        note: 'Injection training is done in-clinic. Most patients feel confident after one session.',
+      },
+      {
+        num: '05',
+        title: 'Ovarian Stimulation',
+        time: '8–14 days · Monitoring every 2–3 days',
+        body: 'You self-administer injectable hormones at home to stimulate the development of multiple follicles. You\'ll visit IRFC every 2–3 days for ultrasound monitoring and bloodwork. Your physician adjusts your medication dosage in real time based on your response. When follicles reach the target size, a trigger injection is given to mature the eggs.',
+        note: 'Most patients find monitoring appointments quick (30–45 min). Morning slots are available.',
+      },
+      {
+        num: '06',
+        title: 'Egg Retrieval',
+        time: 'Day 1 of retrieval phase · 20–30 minutes',
+        body: 'Egg retrieval is performed under light intravenous sedation — you are asleep and comfortable throughout. Using transvaginal ultrasound guidance, your physician aspirates the fluid from each follicle. The procedure typically takes 20–30 minutes. You rest at the clinic for about an hour afterward, then go home. Most patients feel mild cramping for 1–2 days.',
+        note: 'You\'ll need a driver. Plan to rest for the remainder of the day.',
+      },
+      {
+        num: '07',
+        title: 'Fertilization & Embryo Culture',
+        time: 'Days 1–6 in the laboratory',
+        body: 'Retrieved eggs are evaluated, matured, and fertilized — either by conventional insemination or ICSI (intracytoplasmic sperm injection), depending on your protocol. Fertilized embryos develop in our EmbryoScope+ time-lapse incubators for 5–6 days. Your embryologist monitors development continuously. On Day 5 or 6, each blastocyst is graded and either biopsied for genetic testing or vitrified (frozen).',
+        note: 'EmbryoScope+ means your embryos are never removed from their environment for observation.',
+      },
+      {
+        num: '08',
+        title: 'Genetic Testing (Optional)',
+        time: '10–14 days for results',
+        body: 'If PGT-A is part of your plan, a small biopsy of each blastocyst is sent to a genetics laboratory. Results identify which embryos are chromosomally normal (euploid) and ready for transfer. Embryos are safely frozen while you wait for results. Most patients find the wait the most emotionally challenging part of the process — your care team is available throughout.',
+        note: 'PGT-A is not recommended for every patient. Your physician will discuss whether it adds value for your specific situation.',
+      },
+    ],
+  },
+  {
+    phase: 'Phase Three',
+    title: 'Transfer & Beyond',
+    timeframe: 'Weeks 9 – 14+',
+    steps: [
+      {
+        num: '09',
+        title: 'Transfer Preparation',
+        time: '2–4 weeks',
+        body: 'Before a frozen embryo transfer, your body needs preparation. You\'ll take estrogen to develop the uterine lining, followed by progesterone to create a receptive environment. Your physician monitors lining development with ultrasound. Transfer is scheduled when your lining reaches the optimal thickness and pattern.',
+        note: 'For fresh transfers, the lining is prepared during the stimulation cycle itself.',
+      },
+      {
+        num: '10',
+        title: 'Embryo Transfer',
+        time: 'Transfer day · 10–15 minutes',
+        body: 'Embryo transfer is a gentle, awake procedure — no sedation is needed. Using ultrasound guidance, a thin, flexible catheter places the embryo into the uterine cavity. Most patients describe it as feeling similar to a Pap smear. You rest briefly afterward and can resume normal light activity the same day. Strenuous exercise and certain medications are restricted for a short period.',
+        note: 'At IRFC, only one embryo is transferred at a time in most cases — the single embryo transfer (eSET) standard is the safest approach for both mother and baby.',
+      },
+      {
+        num: '11',
+        title: 'Pregnancy Confirmation',
+        time: '10–12 days after transfer',
+        body: 'A blood hCG test confirms whether implantation has occurred. If positive, a second test 2 days later confirms that levels are rising appropriately. A gestational sac ultrasound follows at approximately 6 weeks. This is one of the most emotionally charged moments of the journey — your care team is with you regardless of the result.',
+        note: 'If the first transfer does not result in pregnancy, your physician reviews all data and discusses next steps without delay.',
+      },
+      {
+        num: '12',
+        title: 'Graduate to Your OB',
+        time: '8–10 weeks',
+        body: 'At 8–10 weeks, with a confirmed heartbeat and healthy progression, you graduate from IRFC to your obstetric provider. We prepare a complete clinical summary and transfer your care with full documentation. Many of our patients stay in touch — we love hearing the good news.',
+        note: 'IRFC does not provide obstetric care, but we support the transition to your OB fully.',
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="The IVF Patient Journey"
+  description="A step-by-step guide to the IVF process at IRFC — from your first free consultation through embryo transfer and graduation to OB care. Know what to expect at every stage."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">The IVF Journey</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          From First Call<br/>
+          <em class="not-italic" style="color: var(--color-gold-500);">to First Heartbeat.</em>
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          One of the most common questions patients ask is: <em>"What does the process actually look like?"</em> This page walks you through every step — from your first free consultation to the moment you graduate to your OB — so you can move forward with clarity, not anxiety.
+        </p>
+      </div>
+
+      <!-- Quick overview strip -->
+      <div class="mt-12 grid sm:grid-cols-3 gap-px" style="background: var(--color-stone-200); max-width: 680px;">
+        {[
+          { label: 'Phase 1', detail: 'Consultation & Workup', time: '~3 weeks' },
+          { label: 'Phase 2', detail: 'Stimulation & Retrieval', time: '~4 weeks' },
+          { label: 'Phase 3', detail: 'Transfer & Confirmation', time: '~4–6 weeks' },
+        ].map(p => (
+          <div class="bg-white px-6 py-5">
+            <p class="text-xs tracking-widest uppercase mb-1" style="color: var(--color-stone-400); font-family: var(--font-sans);">{p.label}</p>
+            <p class="text-sm font-light text-stone-800" style="font-family: var(--font-serif);">{p.detail}</p>
+            <p class="text-xs mt-1" style="color: var(--color-gold-600);">{p.time}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline phases -->
+  {phases.map((phase, phaseIdx) => (
+    <section class={`py-20 lg:py-28 ${phaseIdx % 2 === 0 ? 'bg-white' : ''}`} style={phaseIdx % 2 !== 0 ? 'background: var(--color-stone-50);' : ''}>
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+
+        <!-- Phase header -->
+        <div class="flex items-end gap-8 mb-16 pb-8 border-b border-stone-100">
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{phase.phase} · {phase.timeframe}</p>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800">{phase.title}</h2>
+          </div>
+          <div class="hidden lg:block flex-1 h-px mb-3" style="background: var(--color-stone-100);"></div>
+        </div>
+
+        <!-- Steps -->
+        <div class="space-y-0">
+          {phase.steps.map((step, stepIdx) => (
+            <div class={`grid lg:grid-cols-12 gap-8 lg:gap-16 py-12 ${stepIdx < phase.steps.length - 1 ? 'border-b border-stone-100' : ''}`}>
+
+              <!-- Step number + connector -->
+              <div class="lg:col-span-1 flex lg:flex-col items-center lg:items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-stone-200 bg-white">
+                  <span class="text-sm font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">{step.num}</span>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="lg:col-span-5">
+                <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{step.time}</p>
+                <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{step.title}</h3>
+                <p class="text-sm leading-relaxed text-stone-500">{step.body}</p>
+              </div>
+
+              <!-- Note card -->
+              <div class="lg:col-span-5 lg:col-start-8">
+                <div class="border-l-2 pl-5 py-1" style="border-color: var(--color-gold-400);">
+                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">What to Know</p>
+                  <p class="text-sm leading-relaxed text-stone-500 italic">{step.note}</p>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  ))}
+
+  <!-- What if it doesn't work -->
+  <section class="py-20 lg:py-28 bg-white border-y border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-6">
+            What Happens If the<br/>
+            <em class="not-italic" style="color: var(--color-gold-500);">First Cycle Doesn't Work?</em>
+          </h2>
+          <p class="text-sm leading-relaxed text-stone-500 mb-5">
+            IVF is not always successful on the first cycle — and any honest physician will tell you that upfront. If a transfer does not result in pregnancy, your physician conducts a thorough review of every data point: stimulation response, embryo quality, endometrial preparation, and transfer technique.
+          </p>
+          <p class="text-sm leading-relaxed text-stone-500 mb-5">
+            Most patients who do not succeed on the first cycle have frozen embryos available for subsequent transfers — meaning the physical and financial investment of retrieval carries forward. In other situations, a second stimulation cycle may be recommended.
+          </p>
+          <p class="text-sm leading-relaxed text-stone-500">
+            IRFC does not give up easily. And we never let a failed cycle pass without understanding why.
+          </p>
+        </div>
+        <div class="space-y-5">
+          {[
+            { heading: 'Frozen embryos transfer forward', body: 'If you have banked embryos, additional transfers do not require a new retrieval — reducing both time and cost.' },
+            { heading: 'Protocol adjustments are standard', body: 'Every cycle generates data. Your physician uses that data to refine the next approach — stimulation dose, trigger timing, transfer protocol.' },
+            { heading: 'Donor egg IVF remains an option', body: 'For patients with poor ovarian response or repeated failures, donor egg IVF offers substantially higher success rates and a clear path forward.' },
+            { heading: 'Emotional support is built in', body: 'Your nurse coordinator and care team are available between appointments. Fertility journeys have difficult moments — you should never navigate them alone.' },
+          ].map(item => (
+            <div class="flex gap-5 items-start">
+              <div class="flex-shrink-0 w-1 self-stretch" style="background: var(--color-gold-300);"></div>
+              <div>
+                <p class="text-sm font-medium text-stone-800 mb-1" style="font-family: var(--font-serif);">{item.heading}</p>
+                <p class="text-sm leading-relaxed text-stone-500">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Begin Your Journey</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-6">
+          Ready to Take the First Step?
+        </h2>
+        <p class="text-sm text-stone-500 leading-relaxed mb-10 max-w-lg mx-auto">
+          Your first consultation is free. You'll speak directly with a physician who will review your history, answer your questions, and give you an honest picture of your options.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="btn-primary">
+            Schedule Free Consultation
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/outcomes" class="btn-outline">
+            View Success Rates
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

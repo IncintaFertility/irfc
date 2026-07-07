@@ -69,7 +69,7 @@ const team = [
     role: 'Associate Chief Medical Officer',
     bio: 'Fertility specialist pioneering mild stimulation protocols and AI-assisted reproductive tools. Now accepting new patients.',
     initial: 'Z',
-    color: 'purple',
+    color: 'gold',
     photo: '/images/team/dr-zitao-liu-circle.png',
   },
   {
@@ -100,7 +100,7 @@ const testimonials = [
     quote: "As a same-sex couple, we needed a clinic that truly understood our path. The reciprocal IVF process was explained so clearly, and every step felt supported. We are now holding our daughter thanks to this incredible team.",
     name: 'Lisa & Elsien',
     treatment: 'Reciprocal IVF',
-    color: 'purple',
+    color: 'gold',
   },
   {
     quote: "I started with IUI and when that didn't work, Dr. Lin's team moved us to IVF with complete compassion — no pressure, just clear guidance. Five months later, I'm almost 9 weeks pregnant. We are overjoyed.",
@@ -112,7 +112,7 @@ const testimonials = [
     quote: "At 41, I was told my chances were around 10%. Dr. Lin was honest with me, which I appreciated more than false hope. He designed a protocol specifically for me — and it worked. My baby is now 6 months old.",
     name: 'Patient, Age 41',
     treatment: 'IVF',
-    color: 'purple',
+    color: 'gold',
   },
 ];
 ---
@@ -180,7 +180,7 @@ const testimonials = [
           </div>
           <div class="w-px h-8 self-center" style="background: var(--color-stone-300);"></div>
           <div class="flex items-center gap-3">
-            <span class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-purple-500);">#1</span>
+            <span class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-500);">#1</span>
             <span class="text-xs tracking-wide" style="color: var(--color-stone-500);">US IVF Lab, 2016</span>
           </div>
           <div class="w-px h-8 self-center hidden sm:block" style="background: var(--color-stone-300);"></div>
@@ -216,7 +216,7 @@ const testimonials = [
           <div class="section-divider mb-6"></div>
           <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
             A New Chapter<br/>
-            <em class="not-italic" style="color: var(--color-purple-500);">in Fertility Care</em>
+            <em class="not-italic" style="color: var(--color-gold-500);">in Fertility Care</em>
           </h2>
           <p class="text-stone-600 leading-relaxed mb-5">
             IRFC was born from the union of two pioneering fertility centers: <strong class="text-stone-800 font-medium">Incinta Fertility</strong> and <strong class="text-stone-800 font-medium">Reproductive Fertility Center (RFC)</strong>. Together, we bring over two decades of combined clinical excellence, a nationally top-ranked IVF laboratory, and a philosophy that sees every patient as a whole person.
@@ -225,11 +225,11 @@ const testimonials = [
             Our founder, Dr. James P. Lin, built RFC on the belief that a fertility clinic should feel like "both a family and a home." That spirit now lives within IRFC.
           </p>
           <a href="/about" class="btn-outline">Learn Our Story</a>
-          <div class="grid grid-cols-2 gap-4 mt-12">
+          <div class="grid grid-cols-2 gap-8 mt-12 pt-10 border-t border-stone-200">
             {stats.map(stat => (
-              <div class="bg-white p-6 border border-stone-200">
+              <div>
                 <p class="text-3xl lg:text-4xl font-light mb-1" style={`font-family: var(--font-serif); color: var(--color-gold-600);`}>{stat.number}</p>
-                <p class="text-xs" style="color: var(--color-stone-500);">{stat.label}</p>
+                <p class="text-xs" style="color: var(--color-stone-400);">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -286,12 +286,13 @@ const testimonials = [
       </div>
 
       <!-- Remaining 4 services -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-px" style="background: var(--color-stone-200);">
+      <div class="grid md:grid-cols-2 gap-px" style="background: var(--color-stone-100);">
         {services.slice(2).map(service => (
-          <a href={service.href} class="group bg-white p-7 flex flex-col">
-            <p class="text-xs tracking-widest uppercase mb-2" style={`color: var(--color-stone-400); font-family: var(--font-sans);`}>{service.abbr}</p>
-            <h3 class="text-lg font-light mb-3 flex-1" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{service.title}</h3>
-            <div class="flex items-center gap-2 text-xs tracking-wider uppercase mt-4" style={`color: var(--color-gold-500);`}>
+          <a href={service.href} class="group bg-white p-10 lg:p-12 flex flex-col">
+            <p class="text-xs tracking-widest uppercase mb-3" style={`color: var(--color-stone-400); font-family: var(--font-sans);`}>{service.abbr}</p>
+            <h3 class="text-xl font-light mb-3 flex-1" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{service.title}</h3>
+            <p class="text-sm leading-relaxed mb-6" style="color: var(--color-stone-500);">{service.desc}</p>
+            <div class="flex items-center gap-2 text-xs tracking-wider uppercase" style={`color: var(--color-gold-600);`}>
               <span>Learn more</span>
               <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
             </div>
@@ -306,20 +307,20 @@ const testimonials = [
   </section>
 
   <!-- Three Pillars -->
-  <section class="py-24 lg:py-32" style="background: var(--color-stone-900);">
+  <section class="py-24 lg:py-32 bg-white border-y border-stone-100">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="text-center mb-16">
         <div class="flex items-center justify-center gap-3 mb-5">
           <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-500); font-family: var(--font-sans);">Our Foundation</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Our Foundation</span>
           <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
         </div>
-        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white">
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800">
           Built on Three Pillars
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-3 border" style="border-color: var(--color-stone-800);">
+      <div class="grid md:grid-cols-3 gap-px" style="background: var(--color-stone-100);">
         {[
           {
             title: 'Safety',
@@ -336,12 +337,12 @@ const testimonials = [
             desc: 'Award-winning, internationally-renowned physicians who lead with transparency, authenticity, and unwavering dedication.',
             num: '03',
           },
-        ].map((pillar, i) => (
-          <div class="p-10 lg:p-14" style={`border-right: ${i < 2 ? `1px solid var(--color-stone-800)` : 'none'}; border-bottom: 0;`}>
-            <p class="text-xs tracking-widest mb-6" style="color: var(--color-stone-700); font-family: var(--font-sans);">{pillar.num}</p>
-            <h3 class="text-3xl font-light text-white mb-5" style="font-family: var(--font-serif);">{pillar.title}</h3>
+        ].map((pillar) => (
+          <div class="bg-white p-10 lg:p-14">
+            <p class="text-6xl font-light mb-8 leading-none" style="font-family: var(--font-serif); color: var(--color-gold-200);">{pillar.num}</p>
+            <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{pillar.title}</h3>
             <div class="w-8 h-px mb-6" style="background: var(--color-gold-500);"></div>
-            <p class="text-sm leading-relaxed" style="color: var(--color-stone-400);">{pillar.desc}</p>
+            <p class="text-sm leading-relaxed text-stone-500">{pillar.desc}</p>
           </div>
         ))}
       </div>
@@ -356,7 +357,7 @@ const testimonials = [
           <div class="section-divider mb-6"></div>
           <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
             Expert Physicians.<br/>
-            <em class="not-italic" style="color: var(--color-purple-500);">Trusted Partners.</em>
+            <em class="not-italic" style="color: var(--color-gold-500);">Trusted Partners.</em>
           </h2>
           <p class="text-stone-600 leading-relaxed mb-8 text-sm">
             Our medical team combines decades of clinical experience with genuine compassion. Each physician brings specialized expertise to give you the most advanced, personalized care available.
@@ -509,31 +510,33 @@ const testimonials = [
   </section>
 
   <!-- Inclusive Care -->
-  <section class="py-24 lg:py-32" style="background: var(--color-purple-900);">
+  <section class="py-24 lg:py-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="p-8 lg:p-10 border" style="border-color: var(--color-purple-700);">
-          <h3 class="text-2xl font-light text-white mb-4" style="font-family: var(--font-serif);">LGBTQIA+ Family Building</h3>
-          <p class="text-sm leading-relaxed mb-6" style="color: var(--color-purple-200);">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-10 lg:p-12 border border-stone-200 bg-stone-50">
+          <div class="w-8 h-px mb-8" style="background: var(--color-gold-500);"></div>
+          <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">LGBTQIA+ Family Building</h3>
+          <p class="text-sm leading-relaxed mb-8 text-stone-500">
             Every family deserves the same exceptional care. We offer inclusive, affirming fertility services for same-sex couples and single individuals — including sperm donation, egg donation, and gestational surrogacy.
           </p>
-          <a href="/services#lgbtqia" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-400);">
+          <a href="/services#lgbtqia" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
             Learn More
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
         </div>
 
-        <div class="p-8 lg:p-10 border" style="border-color: var(--color-purple-700);">
-          <h3 class="text-2xl font-light text-white mb-4" style="font-family: var(--font-serif);">International &amp; Out-of-Town Patients</h3>
-          <p class="text-sm leading-relaxed mb-5" style="color: var(--color-purple-200);">
+        <div class="p-10 lg:p-12 border border-stone-200 bg-stone-50">
+          <div class="w-8 h-px mb-8" style="background: var(--color-gold-500);"></div>
+          <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">International &amp; Out-of-Town Patients</h3>
+          <p class="text-sm leading-relaxed mb-6 text-stone-500">
             We welcome patients from around the world. Our team supports you with telehealth consultations, multilingual care coordination, and a seamless experience whether local or traveling from abroad.
           </p>
-          <div class="flex flex-wrap gap-2 mb-6">
+          <div class="flex flex-wrap gap-2 mb-8">
             {['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'].map(lang => (
-              <span class="text-xs px-3 py-1 border tracking-wide" style="border-color: var(--color-purple-700); color: var(--color-purple-300);">{lang}</span>
+              <span class="text-xs px-3 py-1 border tracking-wide" style="border-color: var(--color-stone-300); color: var(--color-stone-500);">{lang}</span>
             ))}
           </div>
-          <a href="/contact" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-400);">
+          <a href="/contact" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
             Contact Us
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
