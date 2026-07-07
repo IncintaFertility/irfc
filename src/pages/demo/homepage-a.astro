@@ -26,12 +26,35 @@ import Footer from '../../components/Footer.astro';
       <a href="/locations">Locations</a>
     </nav>
 
-    <!-- Right -->
+    <!-- Right (desktop) -->
     <div class="dnav-right">
       <a href="tel:+19494538600" class="dnav-phone">(949) 453-8600</a>
       <a href="/contact" class="dnav-cta">Book Consultation</a>
     </div>
+
+    <!-- Hamburger (mobile) -->
+    <button class="dnav-hamburger" id="dnav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-menu-links">
+        <a href="/about">About IRFC</a>
+        <a href="/services">Services</a>
+        <a href="/outcomes">Success Rates</a>
+        <a href="/patient-journey">Patient Journey</a>
+        <a href="/team">Our Team</a>
+        <a href="/locations">Locations</a>
+      </nav>
+      <div class="mobile-menu-bottom">
+        <a href="tel:+19494538600" class="mobile-menu-phone">(949) 453-8600</a>
+        <a href="/contact" class="btn-primary mobile-menu-cta">Book Free Consultation</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ① HERO -->
   <section class="hero">
@@ -216,16 +239,40 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <script>
+  // Scroll → solid nav
   const nav = document.getElementById('demo-nav');
   const onScroll = () => {
-    if (window.scrollY > 40) {
-      nav?.classList.add('dnav--solid');
-    } else {
-      nav?.classList.remove('dnav--solid');
-    }
+    if (window.scrollY > 40) nav?.classList.add('dnav--solid');
+    else nav?.classList.remove('dnav--solid');
   };
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // run once on load
+  onScroll();
+
+  // Mobile menu
+  const hamburger = document.getElementById('dnav-hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  const openMenu = () => {
+    hamburger?.classList.add('is-open');
+    mobileMenu?.classList.add('mobile-menu--open');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    hamburger?.classList.remove('is-open');
+    mobileMenu?.classList.remove('mobile-menu--open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 </script>
 
 <style>
@@ -342,11 +389,13 @@ import Footer from '../../components/Footer.astro';
   color: white;
 }
 
-/* Hide desktop nav on mobile */
+/* Hide desktop nav items; show hamburger */
 @media (max-width: 900px) {
   .dnav-links,
-  .dnav-phone { display: none; }
-  .dnav { padding: 0 6vw; }
+  .dnav-phone,
+  .dnav-cta { display: none; }
+  .dnav { padding: 0 5vw; }
+  .dnav-hamburger { display: flex; }
 }
 
 /* ═══════════════════════════════════════════
@@ -952,49 +1001,205 @@ cite {
 }
 
 /* ═══════════════════════════════════════════
+   HAMBURGER BUTTON
+═══════════════════════════════════════════ */
+.dnav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  flex-shrink: 0;
+}
+
+.dnav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--color-stone-700);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.dnav-hamburger.is-open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.dnav-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.dnav-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE MENU
+═══════════════════════════════════════════ */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: #fdfaf3;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+  overflow-y: auto;
+}
+
+.mobile-menu.mobile-menu--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
+}
+
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 5.5rem 6vw 3rem;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.mobile-menu-links a {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 300;
+  color: var(--color-stone-800);
+  text-decoration: none;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--color-stone-100);
+  transition: color 0.2s, padding-left 0.2s;
+}
+
+.mobile-menu-links a:hover,
+.mobile-menu-links a:active {
+  color: var(--color-gold-600);
+  padding-left: 0.5rem;
+}
+
+.mobile-menu-bottom {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.mobile-menu-phone {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--color-stone-400);
+  font-family: var(--font-sans);
+  text-decoration: none;
+  text-align: center;
+  padding: 0.75rem;
+  border: 1px solid var(--color-stone-200);
+  transition: color 0.2s;
+}
+
+.mobile-menu-phone:hover { color: var(--color-gold-600); }
+
+.mobile-menu-cta {
+  display: flex;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
+
+/* Tablet */
 @media (max-width: 1024px) {
-  .hero-body {
-    padding: 0 6vw 4.5rem;
-  }
-
-  .hero-stats {
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .locations-section {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
+  .hero-body { padding: 0 6vw 4.5rem; }
+  .hero-top { left: 6vw; }
+  .locations-section { grid-template-columns: 1fr; gap: 3rem; }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
-  .services-grid,
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* Section side padding */
+  .quote-section,
+  .services-section,
+  .team-section,
+  .recognition-section,
+  .locations-section,
+  .cta-section {
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
 
-  .locations-grid {
-    grid-template-columns: 1fr;
-  }
+  /* Section vertical padding */
+  .quote-section { padding-top: 4rem; padding-bottom: 4rem; }
+  .services-section { padding-bottom: 4rem; }
+  .team-section { padding-top: 4rem; padding-bottom: 4rem; }
+  .locations-section { padding-top: 4rem; padding-bottom: 4rem; }
+  .cta-section { padding-top: 5rem; padding-bottom: 5rem; }
 
-  .recognition-section {
-    flex-wrap: wrap;
-    gap: 1rem;
+  /* Hero */
+  .hero-body { padding: 0 5vw 3.5rem; }
+  .hero-top { left: 5vw; top: 6rem; }
+  .hero-h1 { margin-bottom: 2rem; }
+
+  /* Stats: 2×2 grid */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
+  .hero-stat { padding: 1.25rem 1.5rem; }
+
+  /* Services: 2-col */
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Team: horizontal cards */
+  .team-grid { grid-template-columns: 1fr; gap: 0; }
+  .team-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-stone-100);
+  }
+  .team-photo-wrap {
+    width: 72px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+  .team-photo { aspect-ratio: 1 / 1; }
+
+  /* Locations: single column */
+  .locations-grid { grid-template-columns: 1fr; }
+
+  /* CTA: stacked buttons */
+  .cta-btns { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .cta-btns .btn-primary,
+  .cta-phone-btn { width: 100%; text-align: center; justify-content: center; }
 }
 
-@media (max-width: 500px) {
-  .services-grid,
-  .team-grid {
-    grid-template-columns: 1fr;
+/* Small mobile */
+@media (max-width: 480px) {
+  .services-grid { grid-template-columns: 1fr; }
+
+  .hero-h1 span {
+    font-size: clamp(2.6rem, 11vw, 3.2rem);
   }
 
-  .hero-stats {
-    overflow-x: auto;
-    scrollbar-width: none;
+  blockquote {
+    font-size: clamp(1.3rem, 6vw, 1.8rem);
   }
 }
 </style>
