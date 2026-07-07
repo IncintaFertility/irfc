@@ -10,54 +10,58 @@ import Footer from '../../components/Footer.astro';
 >
   <Nav />
 
-  <!-- ① HERO — full viewport, pure cream, typography only -->
-  <section class="hero-section" style="min-height: 100vh; background: #fdfaf3; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 10vw 5.5rem; position: relative; overflow: hidden;">
+  <!-- ① HERO — split: left cream text / right full-bleed photo -->
+  <section class="hero-section">
 
-    <!-- Watermark -->
-    <div aria-hidden="true" style="position: absolute; top: 50%; right: -2vw; transform: translateY(-50%); font-family: var(--font-serif); font-size: 38vw; font-weight: 300; color: rgba(198,173,92,0.045); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.05em;">✦</div>
+    <!-- Left column: cream, content vertically centered in lower 2/3 -->
+    <div class="hero-left">
 
-    <!-- Eyebrow -->
-    <p style="font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--color-stone-400); font-family: var(--font-sans); margin-bottom: 2.5rem;">
-      Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center &nbsp;·&nbsp; Southern California
-    </p>
+      <!-- Eyebrow -->
+      <p class="hero-eyebrow">
+        Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center &nbsp;·&nbsp; Southern California
+      </p>
 
-    <!-- Headline -->
-    <h1 style="font-family: var(--font-serif); font-weight: 300; line-height: 0.9; color: var(--color-stone-800); margin-bottom: 4.5rem; letter-spacing: -0.01em;">
-      <span style="display: block; font-size: clamp(3.2rem, 9.2vw, 10rem);">Where Science</span>
-      <span style="display: block; font-size: clamp(3.2rem, 9.2vw, 10rem); color: var(--color-gold-600); font-style: italic;">Meets</span>
-      <span style="display: block; font-size: clamp(3.2rem, 9.2vw, 10rem);">Compassion.</span>
-    </h1>
+      <!-- Headline -->
+      <h1 class="hero-h1">
+        <span class="hero-line">Where Science</span>
+        <span class="hero-line hero-italic">Meets</span>
+        <span class="hero-line">Compassion.</span>
+      </h1>
 
-    <!-- Rule + CTAs -->
-    <div style="display: flex; align-items: center; gap: 2.5rem; margin-bottom: 4.5rem; flex-wrap: wrap;">
-      <div style="width: 5rem; height: 1px; background: var(--color-gold-500); flex-shrink: 0;"></div>
-      <a href="/contact" class="btn-primary">Schedule a Free Consultation</a>
-      <a href="/about" class="btn-outline">Our Story</a>
+      <!-- Rule + CTAs -->
+      <div class="hero-cta-row">
+        <div class="hero-rule"></div>
+        <a href="/contact" class="btn-primary">Schedule a Free Consultation</a>
+        <a href="/about" class="btn-outline">Our Story</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero-stats">
+        {[
+          { num: '20+',  label: 'Years of Excellence',  color: 'var(--color-gold-600)' },
+          { num: '#1',   label: 'US IVF Lab · 2016',    color: 'var(--color-purple-400)' },
+          { num: '5',    label: 'SoCal Locations',       color: 'var(--color-gold-600)' },
+          { num: 'Free', label: 'Initial Consultation',  color: 'var(--color-gold-600)' },
+        ].map((s, i) => (
+          <div class={`hero-stat ${i === 0 ? 'hero-stat--first' : ''}`}>
+            <p class="hero-stat-num" style={`color: ${s.color};`}>{s.num}</p>
+            <p class="hero-stat-label">{s.label}</p>
+          </div>
+        ))}
+      </div>
     </div>
 
-    <!-- Stats row -->
-    <div style="display: flex; border-top: 1px solid var(--color-stone-200); overflow-x: auto;">
-      {[
-        { num: '20+',  label: 'Years of Excellence',    color: 'var(--color-gold-600)' },
-        { num: '#1',   label: 'US IVF Lab · 2016',      color: 'var(--color-purple-400)' },
-        { num: '5',    label: 'SoCal Locations',         color: 'var(--color-gold-600)' },
-        { num: 'Free', label: 'Initial Consultation',    color: 'var(--color-gold-600)' },
-      ].map((s, i) => (
-        <div style={`padding: 1.75rem 2.5rem; border-right: 1px solid var(--color-stone-200); flex-shrink: 0; ${i === 0 ? 'padding-left: 0;' : ''}`}>
-          <p style={`font-family: var(--font-serif); font-size: 1.75rem; font-weight: 300; margin-bottom: 0.3rem; color: ${s.color};`}>{s.num}</p>
-          <p style="font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-stone-400); font-family: var(--font-sans);">{s.label}</p>
-        </div>
-      ))}
+    <!-- Right column: full-bleed photo -->
+    <div class="hero-right">
+      <img
+        src="/images/lobby-wide.jpg"
+        alt="IRFC Clinic Interior"
+        class="hero-img"
+      />
+      <!-- Subtle inner shadow on left edge to blend with cream -->
+      <div class="hero-img-shadow" aria-hidden="true"></div>
     </div>
-  </section>
 
-  <!-- ② IMAGE REVEAL -->
-  <section style="line-height: 0; overflow: hidden;">
-    <img
-      src="/images/lobby-wide.jpg"
-      alt="IRFC Clinic Interior"
-      style="width: 100%; height: 78vh; object-fit: cover; object-position: center; display: block;"
-    />
   </section>
 
   <!-- ③ MISSION QUOTE -->
@@ -243,10 +247,140 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <style>
+  /* ─── HERO ─────────────────────────────────────────── */
   .hero-section {
-    padding-top: 7rem;
+    display: grid;
+    grid-template-columns: 58% 42%;
+    min-height: 100vh;
+    overflow: hidden;
   }
 
+  .hero-left {
+    background: #fdfaf3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 9rem 5vw 0 10vw;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-stone-400);
+    font-family: var(--font-sans);
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-h1 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--color-stone-800);
+    margin-bottom: 4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-line {
+    display: block;
+    font-size: clamp(2.8rem, 5.8vw, 7.5rem);
+  }
+
+  .hero-italic {
+    color: var(--color-gold-600);
+    font-style: italic;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-rule {
+    width: 4rem;
+    height: 1px;
+    background: var(--color-gold-500);
+    flex-shrink: 0;
+  }
+
+  .hero-stats {
+    display: flex;
+    border-top: 1px solid var(--color-stone-200);
+  }
+
+  .hero-stat {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid var(--color-stone-200);
+    flex-shrink: 0;
+  }
+
+  .hero-stat--first {
+    padding-left: 0;
+  }
+
+  .hero-stat-num {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-stat-label {
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-stone-400);
+    font-family: var(--font-sans);
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Soft shadow blending the image into the cream left column */
+  .hero-img-shadow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(253,250,243,0.35) 0%, transparent 18%);
+    pointer-events: none;
+  }
+
+  /* Mobile: stack vertically */
+  @media (max-width: 900px) {
+    .hero-section {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 50vw;
+    }
+
+    .hero-left {
+      padding: 8rem 6vw 2.5rem;
+      justify-content: flex-start;
+    }
+
+    .hero-right {
+      min-height: 50vw;
+    }
+
+    .hero-stats {
+      overflow-x: auto;
+    }
+  }
+
+  /* ─── REST OF PAGE ──────────────────────────────────── */
   .team-card:hover .team-photo {
     transform: scale(1.04);
   }
@@ -255,13 +389,11 @@ import Footer from '../../components/Footer.astro';
     background: var(--color-stone-50) !important;
   }
 
-  /* Services 3-col grid */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Team 3-col grid */
   .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
