@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const candidates = [
+  { title: 'Severe Male Factor Infertility', desc: 'Very low sperm count (oligospermia), poor motility (asthenospermia), or abnormal morphology (teratospermia) — even a single motile sperm is sufficient for ICSI.' },
+  { title: 'Surgically Retrieved Sperm', desc: 'When sperm are obtained via TESA, PESA, or micro-TESE due to azoospermia (absence of sperm in the ejaculate), ICSI is the only fertilization method available.' },
+  { title: 'Prior Fertilization Failure', desc: 'Patients who have previously completed an IVF cycle with low or failed fertilization using conventional insemination are typically moved to ICSI in subsequent cycles.' },
+  { title: 'Frozen or Thawed Sperm', desc: 'Sperm that has been cryopreserved (frozen) may have reduced motility after thawing. ICSI ensures each egg has the best chance of fertilization regardless of sperm mobility post-thaw.' },
+  { title: 'Preimplantation Genetic Testing (PGT)', desc: 'When embryos will be biopsied for genetic testing, ICSI is preferred to eliminate the risk of stray sperm contaminating the biopsy sample and affecting results.' },
+  { title: 'Low Egg Count or Mature Egg Concerns', desc: 'When only a small number of mature eggs are retrieved, ICSI maximizes the fertilization rate to make the most of every available egg.' },
+];
+
+const faqs = [
+  { q: 'Does ICSI improve success rates compared to conventional IVF?', a: 'ICSI consistently improves fertilization rates compared to conventional insemination, particularly for male factor cases. However, fertilization rate is not the same as live birth rate — overall IVF success depends on embryo quality, uterine receptivity, and other factors. For patients with normal sperm parameters, ICSI and conventional insemination produce similar blastocyst and live birth rates. Your physician will recommend ICSI when the evidence supports it for your specific situation.' },
+  { q: 'Is ICSI safe? Does it affect the resulting child?', a: 'Decades of data on children born from ICSI show no clinically meaningful difference in health outcomes compared to children conceived naturally or via conventional IVF. ICSI is considered safe and is one of the most widely performed techniques in reproductive medicine worldwide.' },
+  { q: 'Is ICSI painful or does it affect my cycle in any way?', a: 'ICSI is performed entirely in the laboratory on the retrieved eggs — there is nothing additional done to the patient. The egg retrieval process is identical whether or not ICSI is planned. You will not feel or experience anything different.' },
+  { q: 'Do I need ICSI if my sperm analysis is normal?', a: 'Not necessarily. For patients with normal semen parameters and no prior fertilization issues, conventional insemination (placing a concentrated sperm sample near the eggs in culture) is effective and avoids the additional laboratory step. ICSI is not universally recommended — it is used when evidence supports it.' },
+  { q: 'Can ICSI be combined with PGT-A?', a: 'Yes — in fact, PGT-A cycles at IRFC routinely use ICSI to prevent sperm DNA contamination during the embryo biopsy. The two techniques complement each other and are commonly performed together.' },
+];
+---
+
+<Layout
+  title="ICSI — Intracytoplasmic Sperm Injection"
+  description="ICSI at IRFC — intracytoplasmic sperm injection for male factor infertility, fertilization failure, and PGT cycles. Learn how it works and who benefits most."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href="/services" class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">All Services</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">ICSI</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Intracytoplasmic<br/>Sperm Injection
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">ICSI — Advanced Fertilization Technique</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          ICSI is a precision fertilization technique in which a single sperm is injected directly into an egg. It has transformed outcomes for male factor infertility and is now used in the majority of IVF cycles worldwide — including all PGT cycles at IRFC.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is ICSI -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">How ICSI Works</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            In a standard IVF cycle, eggs and a concentrated sperm sample are placed together in a culture dish and fertilization occurs naturally. In ICSI, an embryologist uses a specialized glass needle to select a single morphologically normal, motile sperm and inject it directly into the cytoplasm (interior) of a mature egg.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            The injected egg is then cultured and monitored in the same way as conventionally fertilized eggs. By the next morning, fertilization is confirmed by the appearance of two pronuclei — one from the egg and one from the sperm.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-6 text-sm">
+            ICSI was first performed successfully in 1992. Today it is performed in approximately 65–70% of all IVF cycles globally and has a well-established safety and efficacy record spanning over three decades.
+          </p>
+          <div class="p-6 border border-stone-200 bg-white">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">ICSI vs. Conventional IVF Insemination</h3>
+            <div class="space-y-3 text-sm">
+              {[
+                { label: 'Fertilization method', icsi: 'Single sperm injected into egg', conv: 'Sperm placed near eggs in dish' },
+                { label: 'Sperm needed', icsi: 'As few as one motile sperm', conv: 'Thousands of motile sperm' },
+                { label: 'Best for', icsi: 'Male factor, PGT, frozen sperm', conv: 'Normal sperm parameters' },
+                { label: 'Lab step', icsi: 'Embryologist performs microinjection', conv: 'Natural sperm-egg binding' },
+              ].map(row => (
+                <div class="grid grid-cols-[130px_1fr_1fr] gap-3 text-xs pb-3 border-b border-stone-100 last:border-b-0 last:pb-0">
+                  <span class="text-stone-400 uppercase tracking-wide">{row.label}</span>
+                  <span class="text-stone-600">{row.icsi}</span>
+                  <span class="text-stone-400">{row.conv}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">The IRFC Laboratory</h2>
+          <p class="text-stone-600 leading-relaxed mb-6 text-sm">
+            ICSI is a highly technique-dependent procedure — outcomes vary significantly based on the skill and experience of the embryologist performing the injections. IRFC's embryology team has performed tens of thousands of ICSI procedures and our laboratory ranked #1 in the United States for IVF success rates in 2016.
+          </p>
+          <div class="space-y-4">
+            {[
+              { title: 'Experienced Embryologists', desc: 'Our embryology team includes laboratory director Dr. Yufen Xie, PhD, who oversees all ICSI and advanced fertilization procedures.' },
+              { title: 'EmbryoScope+ Monitoring', desc: 'All embryos — ICSI or conventionally fertilized — are cultured in our EmbryoScope+ time-lapse incubators, capturing continuous development images without disturbing the culture.' },
+              { title: 'Precision Micromanipulation', desc: 'IRFC uses the latest micromanipulation systems and Piezo-ICSI techniques for eggs that benefit from gentler injection methods.' },
+            ].map(item => (
+              <div class="flex gap-4 p-5 bg-white border border-stone-200">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <div>
+                  <div class="text-xs tracking-widest uppercase font-medium mb-1" style="color: var(--color-stone-700); font-family: var(--font-sans);">{item.title}</div>
+                  <p class="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who benefits -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">Who Benefits from ICSI?</h2>
+      <p class="text-sm text-stone-500 leading-relaxed mb-10 max-w-2xl">ICSI is recommended in specific clinical situations where conventional fertilization is unlikely to succeed or is not appropriate.</p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {candidates.map(c => (
+          <div class="p-6 border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{c.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ICSI + IVF process note -->
+  <section class="py-16" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-4xl mx-auto p-10 bg-white border border-stone-200 flex flex-col md:flex-row gap-8 items-start">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">ICSI Is Part of the IVF Process</h3>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            ICSI replaces the conventional fertilization step within an IVF cycle — the stimulation, monitoring, egg retrieval, embryo culture, and transfer are identical. If you are considering IVF and have any of the indications above, your physician will recommend ICSI as part of your cycle plan. The full IVF process guide explains each phase in detail.
+          </p>
+        </div>
+        <a href="/services/ivf" class="btn-outline flex-shrink-0">Full IVF Guide →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Questions About ICSI?</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Your physician will determine whether ICSI is appropriate for your cycle based on semen parameters, prior treatment history, and planned add-ons. Schedule a consultation to discuss your full plan.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Consultation</a>
+        <a href="/services/ivf" class="btn-outline">Learn About IVF</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

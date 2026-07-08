@@ -1,0 +1,221 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const causes = [
+  {
+    category: 'Chromosomal Abnormalities',
+    pct: '50–60%',
+    desc: 'The most common identifiable cause. Random chromosomal errors in the embryo — most often aneuploidy (incorrect chromosome number) — lead to early pregnancy loss. The risk increases significantly with maternal age. PGT-A testing can identify chromosomally normal embryos before transfer.',
+  },
+  {
+    category: 'Uterine Structural Abnormalities',
+    pct: '10–15%',
+    desc: 'Conditions such as a uterine septum, submucosal fibroids, endometrial polyps, or intrauterine adhesions (Asherman\'s syndrome) can interfere with embryo implantation and placental development. Most structural causes are correctable through minimally invasive surgery.',
+  },
+  {
+    category: 'Thrombophilia & Clotting Disorders',
+    pct: '5–15%',
+    desc: 'Inherited or acquired clotting abnormalities — including antiphospholipid antibody syndrome (APS) and factor V Leiden — can impair placental circulation. APS is one of the most important treatable causes of RPL and is identified through blood testing.',
+  },
+  {
+    category: 'Hormonal & Endocrine Factors',
+    pct: '10–15%',
+    desc: 'Uncontrolled thyroid disease, elevated prolactin, poorly managed diabetes, and luteal phase deficiency have all been associated with recurrent loss. These conditions are identified through hormonal blood panels and are highly treatable.',
+  },
+  {
+    category: 'Immunological Factors',
+    pct: 'Variable',
+    desc: 'Beyond antiphospholipid syndrome, other immune factors including natural killer cell activity and alloimmune responses are being studied as potential contributors to unexplained RPL. Management in this area is an evolving field.',
+  },
+  {
+    category: 'Unexplained',
+    pct: '~25–30%',
+    desc: 'In a significant proportion of RPL cases, no specific cause is found despite thorough evaluation. Even in unexplained cases, the prognosis is often better than patients expect — many couples go on to have successful pregnancies with supportive care and optimized embryo selection.',
+  },
+];
+
+const workup = [
+  'Chromosomal karyotyping of both partners',
+  'Uterine cavity evaluation (saline sonogram or hysteroscopy)',
+  'Antiphospholipid antibody panel (lupus anticoagulant, anticardiolipin, anti-β2 glycoprotein I)',
+  'Inherited thrombophilia panel (Factor V Leiden, prothrombin mutation, MTHFR)',
+  'Thyroid function (TSH, free T4) and prolactin',
+  'Hormonal panel (FSH, AMH, estradiol) to assess ovarian reserve',
+  'Sperm DNA fragmentation analysis (in selected cases)',
+  'Products of conception chromosomal analysis (if prior loss tissue available)',
+];
+
+const faqs = [
+  { q: 'How many miscarriages does it take to be diagnosed with RPL?', a: 'The traditional definition of recurrent pregnancy loss is two or more consecutive clinical pregnancy losses before 20 weeks. Many specialists — including the American Society for Reproductive Medicine — now recommend evaluation after two losses, particularly in women over 35 or those with other risk factors. You do not need to wait for a third loss before seeking an evaluation.' },
+  { q: 'Is the cause always identifiable?', a: 'No. Despite a thorough evaluation, approximately 25–30% of RPL cases remain unexplained. This can be deeply frustrating to hear. However, even without a specific diagnosis, the overall prognosis for future successful pregnancy is often better than patients expect — many couples with unexplained RPL go on to have healthy pregnancies, sometimes with the support of IVF and PGT-A.' },
+  { q: 'Does PGT-A prevent miscarriage?', a: 'PGT-A significantly reduces the miscarriage rate per embryo transfer by identifying chromosomally normal (euploid) embryos before transfer. Since chromosomal abnormalities account for the majority of pregnancy losses, avoiding aneuploid transfers can meaningfully reduce the risk of another loss. PGT-A does not eliminate all causes of miscarriage, but it addresses the most common one.' },
+  { q: 'Can sperm quality contribute to recurrent miscarriage?', a: 'Emerging evidence suggests that elevated sperm DNA fragmentation may contribute to embryo quality problems and, in some cases, pregnancy loss. IRFC offers sperm DNA fragmentation testing as part of the RPL evaluation for male partners. When fragmentation is elevated, interventions such as antioxidant treatment, testicular sperm extraction, or donor sperm may be discussed.' },
+  { q: 'What is the prognosis after recurrent pregnancy loss?', a: 'Better than most patients expect. Even after three losses, the probability of a future live birth with appropriate care is 60–70% or higher, depending on age and the cause identified. With PGT-A, live birth rates per euploid transfer approach 60–65% across age groups. Your physician will give you an individualized prognosis based on your specific history and evaluation results.' },
+  { q: 'Should I wait before trying again after a miscarriage?', a: 'Physically, most physicians recommend waiting one to two normal menstrual cycles before attempting conception again. Emotionally, the timeline is personal — there is no obligation to proceed before you feel ready. When you are ready, IRFC can evaluate your situation and help optimize your approach for the next attempt.' },
+];
+---
+
+<Layout
+  title="Recurrent Pregnancy Loss — Evaluation & Treatment"
+  description="IRFC provides a comprehensive evaluation for recurrent pregnancy loss — identifying causes, building a personalized treatment plan, and supporting patients toward a successful pregnancy."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href="/services" class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">All Services</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Recurrent Pregnancy Loss</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Recurrent<br/>Pregnancy Loss
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Experiencing multiple pregnancy losses is one of the most painful journeys in reproductive medicine. At IRFC, we approach recurrent pregnancy loss with thorough investigation, honest communication, and a personalized plan — focused on understanding what has happened and what can be done.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is RPL -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">Understanding Recurrent Pregnancy Loss</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            Recurrent pregnancy loss (RPL) is defined as two or more clinical pregnancy losses before 20 weeks of gestation. It affects approximately 1–2% of couples trying to conceive. Each loss is emotionally devastating — and the uncertainty of not knowing why it keeps happening can be as difficult as the losses themselves.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            RPL is not a single diagnosis but a presentation with multiple possible underlying causes. A systematic evaluation can identify a specific cause in approximately 50–70% of cases — and even when no cause is found, treatment options exist that meaningfully improve the chances of a successful pregnancy.
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            IRFC's approach to RPL begins with a comprehensive workup to identify treatable causes, followed by a personalized plan that may include medical management, surgical correction, IVF with PGT-A, or a combination.
+          </p>
+        </div>
+        <div class="p-7 bg-white border border-stone-200">
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-5">Standard RPL Evaluation at IRFC</h3>
+          <ul class="space-y-3">
+            {workup.map(item => (
+              <li class="flex items-start gap-3 text-sm text-stone-600">
+                <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Causes -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">Known Causes of Recurrent Pregnancy Loss</h2>
+      <p class="text-sm text-stone-500 leading-relaxed mb-10 max-w-2xl">A thorough evaluation identifies the cause in approximately 50–70% of RPL cases. Many of these causes are treatable.</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        {causes.map(c => (
+          <div class="p-7 border border-stone-200">
+            <div class="flex items-start justify-between mb-3">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800">{c.category}</h3>
+              <span class="text-xs tracking-widest uppercase ml-4 flex-shrink-0 pt-1" style="color: var(--color-gold-500); font-family: var(--font-sans);">{c.pct}</span>
+            </div>
+            <p class="text-sm text-stone-500 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatment options -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">Treatment Approaches</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          {
+            title: 'IVF with PGT-A',
+            desc: 'For patients whose losses are likely caused by chromosomal abnormalities in the embryo, IVF with preimplantation genetic testing (PGT-A) allows the selection of only euploid embryos for transfer — directly addressing the most common cause of pregnancy loss. Miscarriage rates per euploid transfer are typically under 10%.',
+            link: { href: '/services/pgt', label: 'Learn About PGT →' },
+          },
+          {
+            title: 'Surgical Correction',
+            desc: 'Uterine abnormalities such as a septum, submucosal fibroid, or polyp can often be corrected through minimally invasive hysteroscopic surgery. Correcting these structural issues before the next pregnancy attempt can significantly reduce the risk of further loss.',
+            link: null,
+          },
+          {
+            title: 'Medical Management',
+            desc: 'When antiphospholipid syndrome or other clotting disorders are identified, treatment with low-dose aspirin and/or heparin during pregnancy has been shown to significantly improve live birth rates. Thyroid and hormonal abnormalities are managed with appropriate medication.',
+            link: null,
+          },
+        ].map(opt => (
+          <div class="p-7 bg-white border border-stone-200 flex flex-col">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{opt.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed flex-1 mb-4">{opt.desc}</p>
+            {opt.link && (
+              <a href={opt.link.href} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-auto" style="color: var(--color-gold-600);">
+                {opt.link.label}
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Emotional support note -->
+  <section class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="h-px w-12 mx-auto mb-8" style="background: var(--color-gold-500);"></div>
+        <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-700 leading-relaxed mb-6">
+          "We understand that behind every consultation for recurrent pregnancy loss is a history of grief. Our role is not only to investigate and treat — it is to provide a space where you feel heard, respected, and supported."
+        </p>
+        <p class="text-sm text-stone-400" style="font-family: var(--font-sans);">IRFC Physician Team</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <div class="border border-stone-200 bg-white">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">You Deserve Answers.</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        A comprehensive RPL evaluation is the first step toward understanding what has happened and what can be done. Schedule a consultation with an IRFC physician.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Consultation</a>
+        <a href="/services/pgt" class="btn-outline">Learn About PGT-A</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
