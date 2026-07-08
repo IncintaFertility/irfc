@@ -1,0 +1,179 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const ageData = [
+  { age: 'Under 35', ivfRate: '~50–55%', note: 'Per transfer, euploid embryo' },
+  { age: '35–37', ivfRate: '~42–48%', note: 'Per transfer, euploid embryo' },
+  { age: '38–40', ivfRate: '~35–42%', note: 'Per transfer, euploid embryo' },
+  { age: '41–42', ivfRate: '~20–30%', note: 'Per transfer, euploid embryo' },
+  { age: 'Over 42', ivfRate: 'Individualized', note: 'Discuss with your physician' },
+];
+---
+
+<Layout
+  title="Fertility After 35 — Age-Related Infertility"
+  description="Fertility naturally declines with age, but many women over 35 and 40 achieve successful pregnancies with the right treatment. IRFC provides honest, expert guidance."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Conditions We Treat</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Fertility After 35
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Age is the most significant factor affecting fertility — but it is not the whole story. Many women in their late 30s and early 40s achieve successful pregnancies with the right evaluation and treatment plan. IRFC provides honest, individualized guidance based on your actual biology.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How age affects fertility -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">How Age Affects Fertility</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            Women are born with all the eggs they will ever have — approximately 1–2 million at birth, declining to around 400,000 at puberty and continuing to decrease throughout reproductive life. By the mid-30s, both the number of remaining eggs (ovarian reserve) and their chromosomal quality decline more rapidly.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            The most important consequence of age-related egg decline is an increase in chromosomal abnormalities (aneuploidy). Aneuploid embryos either fail to implant, result in early miscarriage, or (rarely) develop into pregnancies with chromosomal conditions. This is why miscarriage rates and IVF failure rates increase with maternal age.
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            It is important to note: chronological age is a population-level statistic, not a guarantee of your individual situation. Some women at 40 have ovarian reserve comparable to women at 32; others experience earlier-than-average decline. AMH testing and antral follicle count give a much clearer picture of where you stand.
+          </p>
+        </div>
+        <div class="space-y-5">
+          <div class="p-7 bg-white border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-4">Key Tests for Ovarian Reserve</h3>
+            <ul class="space-y-3 text-sm text-stone-600">
+              {[
+                { test: 'AMH (Anti-Müllerian Hormone)', desc: 'The most reliable single marker of ovarian reserve — can be drawn any day of the cycle.' },
+                { test: 'Day 3 FSH & Estradiol', desc: 'Elevated FSH signals the pituitary working harder to stimulate aging ovaries. Best interpreted alongside estradiol.' },
+                { test: 'Antral Follicle Count (AFC)', desc: 'Ultrasound count of small follicles visible in the ovaries — correlates directly with egg reserve and expected response to stimulation.' },
+              ].map(t => (
+                <li class="border-b border-stone-100 pb-3 last:border-b-0 last:pb-0">
+                  <span class="font-medium text-stone-700">{t.test}</span>
+                  <p class="text-stone-500 mt-1">{t.desc}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-7 bg-white border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">When to Seek Evaluation</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">
+              If you are 35–37: seek evaluation after 6 months of trying. If you are 38 or older: seek evaluation after 3 months, or immediately if you have relevant history (irregular cycles, prior surgery, endometriosis). If you are not yet trying but concerned about your timeline, proactive ovarian reserve testing can be done at any time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success rates by age -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4 text-center">IVF Success Rates by Age</h2>
+        <p class="text-sm text-stone-500 leading-relaxed text-center mb-10">Approximate live birth rates per embryo transfer using euploid (chromosomally normal) embryos. Individual outcomes depend on multiple factors beyond age.</p>
+        <div class="border border-stone-200">
+          <div class="grid grid-cols-3 px-6 py-3 border-b border-stone-200" style="background: var(--color-stone-50);">
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Age</span>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">IVF Rate</span>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Note</span>
+          </div>
+          {ageData.map((row, i) => (
+            <div class={`grid grid-cols-3 px-6 py-4 text-sm ${i < ageData.length - 1 ? 'border-b border-stone-100' : ''}`}>
+              <span class="font-medium text-stone-700">{row.age}</span>
+              <span style="color: var(--color-gold-600);">{row.ivfRate}</span>
+              <span class="text-stone-400">{row.note}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-stone-400 mt-4 leading-relaxed">Note: These figures are approximate population-level estimates. Your physician will provide individualized projections based on your ovarian reserve, embryo quality, and clinical history.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatment options -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">Treatment Options</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {[
+          {
+            title: 'IVF with Own Eggs',
+            desc: 'For many women in their late 30s and early 40s with good ovarian reserve, IVF with their own eggs remains highly effective. Pairing IVF with PGT-A (preimplantation genetic testing) allows identification of euploid embryos — significantly improving implantation rates and reducing miscarriage risk.',
+          },
+          {
+            title: 'Preimplantation Genetic Testing (PGT-A)',
+            desc: 'PGT-A is particularly valuable for patients over 37, where a higher proportion of embryos may carry chromosomal abnormalities. By selecting only euploid embryos for transfer, PGT-A can increase per-transfer success rates and reduce the risk of miscarriage — providing more confidence in each transfer.',
+          },
+          {
+            title: 'IVF with Donor Eggs',
+            desc: 'When ovarian reserve is severely diminished or prior IVF cycles with own eggs have not succeeded, donor eggs offer a path to pregnancy with high success rates regardless of maternal age. The uterus retains its receptivity well into the mid-40s, making donor egg IVF effective for many patients who can no longer use their own eggs.',
+          },
+          {
+            title: 'Fertility Preservation',
+            desc: 'If you are not yet ready to conceive but want to protect your options, egg freezing in your early-to-mid 30s is the most effective strategy. Eggs frozen at younger ages retain the quality they had at the time of freezing — giving you access to healthier eggs in the future.',
+          },
+        ].map(opt => (
+          <div class="p-8 bg-white border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{opt.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{opt.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <div class="border border-stone-200">
+          {[
+            { q: 'I\'m 38 and have never tried to conceive. Should I see a specialist?', a: 'A proactive evaluation at 38 is a very reasonable step. Even if you are not actively trying to conceive, knowing your ovarian reserve gives you important information for planning. If your reserve is strong, you may have more time than you think; if it is lower, early knowledge allows you to act while more options are available.' },
+            { q: 'What is the difference between ovarian reserve and egg quality?', a: 'Ovarian reserve refers to the quantity of eggs remaining — measured by AMH and antral follicle count. Egg quality refers to the chromosomal integrity of individual eggs, which declines with age regardless of reserve. It is possible to have adequate reserve (quantity) but still experience age-related quality decline. PGT-A during IVF addresses quality by screening embryos before transfer.' },
+            { q: 'Is there a cut-off age for IVF with own eggs?', a: 'There is no universal cut-off. IRFC treats each patient as an individual. Women in their early-to-mid 40s with remaining ovarian reserve may still produce euploid embryos, particularly with PGT-A testing. Your physician will give you an honest assessment of your specific situation — including realistic success rate estimates — so you can make an informed decision.' },
+            { q: 'At what age should I consider donor eggs?', a: 'Donor eggs are typically considered when own-egg IVF has repeatedly not produced viable embryos, when AMH is very low, or when a patient wants the highest possible success rate. Age alone is not the only indicator — some patients in their early 40s succeed with own eggs, while others may benefit from donor eggs earlier. Your physician will discuss this openly during your consultation.' },
+          ].map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Know Where You Stand.</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        A thorough evaluation is the first step. Book a consultation and leave with an honest picture of your options — no pressure, no guesswork.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Consultation</a>
+        <a href="/services/egg-freezing" class="btn-outline">Fertility Preservation</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

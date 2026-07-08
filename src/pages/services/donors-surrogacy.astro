@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const services = [
+  {
+    title: 'Egg Donation',
+    body: 'IRFC partners with Fairfax EggBank and other licensed donor egg agencies to provide access to a large database of screened, FDA-compliant egg donors. Donors undergo comprehensive medical, genetic, and psychological screening. Using donor eggs is typically recommended when a patient\'s own eggs cannot produce a successful pregnancy — due to diminished ovarian reserve, premature ovarian insufficiency, genetic carrier status, or advanced age.',
+    candidates: ['Diminished ovarian reserve or premature ovarian insufficiency', 'Repeated IVF failure with own eggs', 'Genetic conditions to avoid passing on', 'Same-sex male couples (with gestational carrier)'],
+  },
+  {
+    title: 'Sperm Donation',
+    body: 'Donor sperm can be used in IUI or IVF cycles. IRFC works with leading cryobanks that provide thoroughly screened sperm from anonymous or identity-release donors. Donors are tested for infectious diseases, chromosomal abnormalities, and genetic carrier status per FDA regulations. Your coordinator will assist you in navigating the selection process.',
+    candidates: ['Single women pursuing parenthood', 'Same-sex female couples', 'Male factor infertility when treatment is not possible', 'Genetic conditions to avoid passing on'],
+  },
+  {
+    title: 'Embryo Donation',
+    body: 'Families who have completed their own IVF treatment and have remaining embryos may choose to donate them to other intended parents. IRFC facilitates embryo donation arrangements, including appropriate legal documentation and FDA compliance requirements. Receiving donated embryos is often a more affordable path to pregnancy than a full IVF cycle with donor eggs.',
+    candidates: ['Patients seeking a more affordable third-party option', 'Same-sex female couples or single women', 'Patients who cannot use their own eggs or sperm', 'Those who prefer a fully carried pregnancy'],
+  },
+  {
+    title: 'Gestational Surrogacy',
+    body: 'In gestational surrogacy, an embryo created from the intended parents\' (or donors\') eggs and sperm is transferred to a gestational carrier who carries the pregnancy. The gestational carrier has no genetic relationship to the child. IRFC works with surrogacy agencies and reproductive attorneys to coordinate the medical, legal, and logistical aspects of your surrogacy journey. California is one of the most surrogacy-friendly states in the US, with clear legal protections for all parties.',
+    candidates: ['Same-sex male couples', 'Women who cannot carry a pregnancy (uterine absence, recurrent implantation failure, medical contraindications)', 'Single men', 'Intended parents who have struggled with repeated pregnancy loss'],
+  },
+];
+
+const faqs = [
+  { q: 'How do I find an egg donor?', a: 'IRFC partners with Fairfax EggBank and other licensed agencies. You will review anonymous donor profiles including physical characteristics, education, health history, and (in some cases) photos. Your coordinator guides you through the selection and matching process, and all donors are FDA-compliant.' },
+  { q: 'How long does the surrogacy process take?', a: 'The full surrogacy process — from matching with a gestational carrier to a confirmed pregnancy — typically takes 12–18 months. This includes medical clearance of the carrier, legal contract execution, embryo transfer, and pregnancy confirmation. Your IRFC coordinator will outline a realistic timeline during your consultation.' },
+  { q: 'Is gestational surrogacy legal in California?', a: 'Yes. California has among the most well-established surrogacy laws in the United States, offering clear legal protections for intended parents and gestational carriers alike. Pre-birth orders are available, meaning intended parents are established as the legal parents before the child is born.' },
+  { q: 'Does IRFC have a third-party coordinator?', a: 'Yes. IRFC has dedicated third-party reproduction coordinators who specialize in donor and surrogacy arrangements. They serve as your primary point of contact for all coordination outside of direct clinical care — agency communication, legal referrals, and logistical planning.' },
+  { q: 'Can both partners in a same-sex male couple contribute sperm?', a: 'Yes. It is possible to create embryos using sperm from both partners and donor eggs, then use PGT to identify each embryo\'s genetic origin. Some couples choose to transfer embryos from each partner sequentially. Your physician will discuss the clinical and logistical considerations involved.' },
+  { q: 'What is the cost of using donor eggs or a gestational carrier?', a: 'Third-party reproduction involves clinical fees (IVF cycle, embryo transfer), agency fees, donor compensation, and legal fees. Total costs vary widely depending on the arrangement. Our financial coordinator provides a detailed cost breakdown before you begin, and financing options are available.' },
+];
+---
+
+<Layout
+  title="Donors & Surrogacy — Third-Party Reproduction"
+  description="IRFC provides comprehensive third-party reproduction services including egg donation, sperm donation, embryo donation, and gestational surrogacy coordination."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href="/services" class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">All Services</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Donors & Surrogacy</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Donors &<br/>Surrogacy
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Third-party reproduction opens doors for individuals and couples who need donor eggs, donor sperm, donor embryos, or a gestational carrier to build their families. IRFC coordinates every aspect of this journey — medical, logistical, and legal — with experienced, compassionate guidance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">Third-Party Services</h2>
+      <div class="space-y-6">
+        {services.map((svc, i) => (
+          <div class="grid lg:grid-cols-[2fr_1fr] gap-0 bg-white border border-stone-200">
+            <div class="p-8 lg:border-r border-stone-200">
+              <div class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-500); font-family: var(--font-sans);">0{i + 1}</div>
+              <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">{svc.title}</h3>
+              <p class="text-sm text-stone-600 leading-relaxed">{svc.body}</p>
+            </div>
+            <div class="p-8" style="background: var(--color-stone-50);">
+              <div class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Who This Serves</div>
+              <ul class="space-y-2">
+                {svc.candidates.map(c => (
+                  <li class="flex items-start gap-3 text-sm text-stone-600">
+                    <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-400);"></div>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Coordinator callout -->
+  <section class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-8 items-center p-10 border border-stone-200">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">Dedicated Third-Party Coordination</h3>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            IRFC's third-party reproduction coordinators are your central point of contact throughout the process — liaising with donor agencies, surrogacy agencies, and reproductive attorneys so you can focus on your journey, not the logistics.
+          </p>
+        </div>
+        <a href="/contact" class="btn-outline flex-shrink-0">Speak with a Coordinator</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <div class="border border-stone-200 bg-white">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Ready to Explore Your Options?</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        A consultation with an IRFC physician and coordinator is the first step — we'll walk through every option available to you with honesty and care.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Consultation</a>
+        <a href="/financing" class="btn-outline">Financing & Cost</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

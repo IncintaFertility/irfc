@@ -1,0 +1,171 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Unexplained Infertility — Diagnosis & Treatment"
+  description="Unexplained infertility affects up to 30% of couples. IRFC provides advanced diagnostic workups and evidence-based treatment to help patients move forward with confidence."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Conditions We Treat</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          Unexplained<br/>Infertility
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Receiving a diagnosis of "unexplained infertility" — meaning all standard tests are normal yet pregnancy has not occurred — can feel profoundly frustrating. It is one of the most common fertility diagnoses, and one of the most treatable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is it -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">What Is Unexplained Infertility?</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            Unexplained infertility is defined as failure to conceive after 12 months of unprotected intercourse (6 months if the woman is over 35) despite a standard fertility workup showing:
+          </p>
+          <ul class="space-y-2 mb-6">
+            {[
+              'Normal ovarian reserve (AMH, FSH, antral follicle count)',
+              'Regular ovulation confirmed',
+              'Open fallopian tubes on HSG',
+              'Normal uterine cavity on sonogram or hysteroscopy',
+              'Adequate semen analysis (count, motility, morphology)',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-stone-600">
+                <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            Unexplained infertility accounts for approximately 20–30% of all infertility diagnoses. Despite the name, researchers believe underlying causes often exist at a microscopic or molecular level not detectable by standard tests — including subtle egg quality issues, sperm-egg interaction problems, or embryo implantation factors.
+          </p>
+        </div>
+        <div class="space-y-5">
+          <div class="p-7 bg-white border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">Going Beyond the Standard Workup</h3>
+            <p class="text-sm text-stone-500 leading-relaxed mb-4">When standard tests are normal, IRFC physicians may recommend additional evaluation to look for subtle factors:</p>
+            <ul class="space-y-2 text-sm text-stone-600">
+              {[
+                'ERA (Endometrial Receptivity Array) — testing implantation timing',
+                'Sperm DNA fragmentation analysis',
+                'Advanced embryo grading via EmbryoScope+ time-lapse',
+                'Immune and uterine natural killer cell evaluation',
+                'Hysteroscopy to visualize the uterine cavity directly',
+              ].map(d => (
+                <li class="flex items-start gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-400);"></div>
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-7 bg-white border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">When to Seek Evaluation</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">
+              Under 35: after 12 months of trying. Over 35: after 6 months. Known risk factors (irregular cycles, prior surgery, endometriosis history): earlier evaluation is appropriate. If you have already completed a basic workup elsewhere, IRFC can review your results and recommend next steps.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatment Options -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">Treatment Approach</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          {
+            n: '01',
+            title: 'Expectant Management',
+            desc: 'For younger patients with a short duration of infertility, a monitored period of timed intercourse may be appropriate. Spontaneous conception rates remain meaningful in this group.',
+          },
+          {
+            n: '02',
+            title: 'IUI with Ovarian Stimulation',
+            desc: 'Combining mild ovarian stimulation (Clomid or letrozole with or without FSH injections) with intrauterine insemination increases the number of eggs available and places sperm directly at the site of fertilization. A common first-line treatment for unexplained infertility.',
+          },
+          {
+            n: '03',
+            title: 'IVF',
+            desc: 'IVF is the most effective treatment for unexplained infertility. It bypasses most potential barriers to conception — fertilization is confirmed in the laboratory, embryo development is observed, and the best embryo is transferred. IVF also provides diagnostic information: if fertilization or development fails, that knowledge guides the next step.',
+          },
+        ].map(step => (
+          <div class="p-7 border border-stone-200">
+            <div class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</div>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{step.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 p-7 border border-stone-200" style="background: var(--color-stone-50);">
+        <div class="grid lg:grid-cols-[auto_1fr] gap-6 items-start">
+          <svg class="w-8 h-8 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+          <div>
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">The IRFC Approach</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">
+              IRFC physicians do not default to a one-size-fits-all protocol. Your physician will evaluate your age, duration of infertility, prior treatment history, and personal preferences to recommend the approach most likely to lead to a successful pregnancy — not the most expensive or most aggressive one. Some patients benefit from starting with IUI; others are better served by proceeding directly to IVF. That recommendation is made honestly, based on your specific situation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <div class="border border-stone-200 bg-white">
+          {[
+            { q: 'Is unexplained infertility really untreatable?', a: 'No — the name is misleading. "Unexplained" means the standard workup did not identify a specific cause, not that the situation is hopeless. The majority of patients with unexplained infertility achieve pregnancy with appropriate treatment. Success rates are generally higher than for many other fertility diagnoses.' },
+            { q: 'Should I do more testing before starting treatment?', a: 'In some cases, yes. If your prior workup was not comprehensive, or if initial treatment attempts have failed, additional testing (ERA, sperm DNA fragmentation, immune workup) may reveal actionable information. Your physician will recommend further testing only when it is likely to change your treatment plan.' },
+            { q: 'How many IUI cycles should I try before moving to IVF?', a: 'Evidence suggests that 3 IUI cycles with ovarian stimulation is a reasonable approach for unexplained infertility, after which IVF offers meaningfully better success rates. However, age matters significantly — patients over 37 may be advised to proceed to IVF sooner. Your physician will give you a personalized recommendation.' },
+            { q: 'Will IVF give me a diagnosis too?', a: 'Often, yes. IVF allows the embryologist to observe fertilization and embryo development directly. If eggs fertilize poorly, embryos arrest early, or blastocyst rates are low, that information provides important diagnostic clues — even if prior testing was normal. IVF is often as much a diagnostic tool as a treatment.' },
+          ].map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Get Answers. Move Forward.</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        A consultation with an IRFC physician begins with a thorough review of everything you've already done — and a clear-eyed plan for what comes next.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Consultation</a>
+        <a href="/services/ivf" class="btn-outline">Learn About IVF</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

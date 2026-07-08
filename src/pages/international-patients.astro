@@ -1,0 +1,193 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const languages = [
+  { lang: 'English', flag: '🇺🇸' },
+  { lang: 'Mandarin Chinese', flag: '🇨🇳' },
+  { lang: 'Japanese', flag: '🇯🇵' },
+  { lang: 'Korean', flag: '🇰🇷' },
+  { lang: 'Spanish', flag: '🇪🇸' },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'Initial Telehealth Consultation',
+    desc: 'Your first appointment with an IRFC physician can be conducted by secure video — no travel required. You will discuss your medical history, prior fertility evaluations, and goals. If you have existing records, send them in advance and your physician will review them before your appointment.',
+  },
+  {
+    n: '02',
+    title: 'Remote Diagnostic Workup',
+    desc: 'Bloodwork and ultrasound monitoring can often be completed at a clinic near you, with results sent to IRFC for interpretation. Our team will coordinate directly with your local clinic and provide detailed instructions on exactly what tests are needed and when.',
+  },
+  {
+    n: '03',
+    title: 'Treatment Planning & Coordination',
+    desc: 'Once your workup is complete, your IRFC physician prepares your individualized treatment plan. Your coordinator contacts you with a detailed timeline, cost estimate, and itinerary for your in-person visit. We plan everything around your travel schedule.',
+  },
+  {
+    n: '04',
+    title: 'In-Person Visit for Procedure',
+    desc: 'Egg retrieval, embryo transfer, and certain monitoring appointments require in-person visits to our Southern California clinic. Most patients schedule a 1–2 week stay for an IVF cycle. Your coordinator helps arrange logistics so your time in California is efficient and focused on your care.',
+  },
+  {
+    n: '05',
+    title: 'Follow-Up & Ongoing Support',
+    desc: 'After your procedure, follow-up monitoring and pregnancy support can resume with your local clinic, coordinated by IRFC. We remain available for consultation and provide detailed instructions to your local care team to ensure seamless continuity of care.',
+  },
+];
+
+const faqs = [
+  { q: 'Can I start the process without traveling to California?', a: 'Yes. Your initial consultation, medical record review, and much of your diagnostic workup can be done remotely via telehealth and coordination with a local clinic near you. In-person visits are required only for specific procedures — primarily egg retrieval and embryo transfer.' },
+  { q: 'How long do I need to stay in California for an IVF cycle?', a: 'Most patients plan for 10–14 days for the egg retrieval phase, and a shorter visit (2–4 days) for embryo transfer if done in a separate cycle. We work with your schedule to minimize time away from home without compromising your care.' },
+  { q: 'Can IRFC coordinate with my local fertility clinic?', a: 'Yes. IRFC has experience working alongside clinics worldwide. We provide detailed instructions for monitoring protocols, and your local clinic sends results directly to our team. We review everything and adjust your protocol in real time.' },
+  { q: 'What languages does IRFC support?', a: 'IRFC\'s clinical and coordination team speaks English, Mandarin Chinese, Japanese, Korean, and Spanish. Consultations and coordination can be conducted in your preferred language.' },
+  { q: 'Can I freeze embryos at IRFC and return for transfer later?', a: 'Absolutely. Many international patients choose to complete egg retrieval and embryo banking during one visit, then return for embryo transfer at a time that suits them. Embryos are stored in our TMRW Vault with RFID tracking and 24/7 monitoring for as long as needed.' },
+  { q: 'Does IRFC assist with visa or travel arrangements?', a: 'IRFC does not arrange visas or travel directly, but we provide supporting documentation for visa applications where relevant (such as medical visit letters). Our coordinator can provide guidance on the type of visit required and assist with planning.' },
+  { q: 'What are the costs for international patients?', a: 'IRFC provides a detailed cost estimate before treatment begins. International patients typically pay out of pocket; our financial coordinator will give you a transparent, itemized breakdown including all clinic fees. Financing options through CapexMD are available to eligible US-based patients.' },
+];
+---
+
+<Layout
+  title="International & Out-of-Town Patients"
+  description="IRFC welcomes patients from across the US and internationally. Telehealth consultations, remote monitoring coordination, and multilingual support in English, Mandarin, Japanese, Korean, and Spanish."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">For Patients</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          International &<br/>Out-of-Town Patients
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          IRFC welcomes patients from across the United States and around the world. Our team has extensive experience coordinating care for patients who cannot be present in Southern California for every appointment — combining telehealth, remote monitoring, and carefully timed in-person visits.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why IRFC -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">Why Patients Travel to IRFC</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            For many patients, choosing where to receive fertility care is not just a matter of geography — it is a matter of confidence. When patients travel to IRFC from other states or other countries, it is typically because they want access to a specific physician, a laboratory with a demonstrated track record, or a treatment protocol not available locally.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            IRFC's laboratory team achieved the #1 ranking for IVF success rates in the United States in 2016. Our physicians include Dr. James Lin, a pioneer in low-stimulation and natural cycle IVF, and Dr. Zitao Liu, whose research and clinical expertise attract patients seeking highly individualized protocols.
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            We understand that traveling for fertility care adds emotional and financial complexity to an already demanding process. Our international patient coordination team exists specifically to make that journey as smooth and efficient as possible.
+          </p>
+        </div>
+        <div class="space-y-4">
+          {[
+            { title: '#1 US IVF Success Rates', desc: 'IRFC laboratory ranked first in the United States in 2016.' },
+            { title: 'Telehealth-First Approach', desc: 'Most consultations and follow-ups can be done remotely.' },
+            { title: 'Remote Monitoring Coordination', desc: 'We work with clinics worldwide to manage your cycle from anywhere.' },
+            { title: 'Multilingual Team', desc: 'Clinical support in English, Mandarin, Japanese, Korean, and Spanish.' },
+            { title: 'TMRW Vault Storage', desc: 'RFID-tracked, 24/7 monitored embryo and egg storage for long-term peace of mind.' },
+          ].map(item => (
+            <div class="flex gap-4 p-5 bg-white border border-stone-200">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <div>
+                <div class="text-xs tracking-widest uppercase font-medium mb-1" style="color: var(--color-stone-700); font-family: var(--font-sans);">{item.title}</div>
+                <p class="text-sm text-stone-500">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Language support -->
+  <section class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-8 text-center">Languages We Serve</h2>
+      <div class="flex flex-wrap gap-4 justify-center">
+        {languages.map(l => (
+          <div class="flex items-center gap-3 px-6 py-4 border border-stone-200 bg-white">
+            <span class="text-xl">{l.flag}</span>
+            <span class="text-sm font-medium text-stone-700" style="font-family: var(--font-sans);">{l.lang}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12 text-center">How It Works</h2>
+      <div class="space-y-4 max-w-3xl mx-auto">
+        {steps.map(step => (
+          <div class="flex gap-6 p-7 bg-white border border-stone-200">
+            <div class="text-xs tracking-widest uppercase flex-shrink-0 pt-1" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</div>
+            <div>
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{step.title}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo section -->
+  <section class="relative overflow-hidden" style="height: 300px;">
+    <img src="/images/consultation.jpg" alt="IRFC consultation" class="w-full h-full object-cover object-top" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.55) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        Distance should not determine the quality of your care.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Start with a Telehealth Consultation</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        No travel required for your first appointment. Meet with an IRFC physician by secure video and leave with a clear plan.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Telehealth Consultation</a>
+        <a href="tel:+19494538600" class="btn-outline">Call (949) 453-8600</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

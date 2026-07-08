@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const pathways = [
+  {
+    title: 'Same-Sex Female Couples',
+    desc: 'Most same-sex female couples achieve pregnancy through IUI with donor sperm or IVF with donor sperm. For couples who want a genetic connection for both partners, reciprocal IVF (one partner provides eggs, the other carries the pregnancy) is a meaningful option IRFC is experienced in coordinating.',
+    options: ['IUI with donor sperm', 'IVF with donor sperm', 'Reciprocal IVF (shared motherhood)'],
+  },
+  {
+    title: 'Same-Sex Male Couples',
+    desc: 'Same-sex male couples build families through gestational surrogacy with one or both partners\' sperm and a donor egg. IRFC coordinates with trusted egg donor agencies and surrogacy attorneys to guide you through every step — medical, legal, and logistical.',
+    options: ['Gestational surrogacy with donor egg', 'Sperm selection from one or both partners', 'PGT-A testing for embryo health'],
+  },
+  {
+    title: 'Transgender & Non-Binary Individuals',
+    desc: 'Fertility preservation before hormone therapy or gender-affirming surgery is an important option for many transgender individuals. IRFC provides confidential, affirming care and works with your gender-affirming care team to plan the timing of egg or sperm freezing that fits your transition journey.',
+    options: ['Egg freezing before hormone therapy', 'Sperm freezing before hormone therapy or surgery', 'Family building after transition with stored gametes'],
+  },
+  {
+    title: 'Single Parents by Choice',
+    desc: 'Whether you are a single woman or single man, IRFC supports your path to parenthood. Single women can pursue IUI or IVF with donor sperm; single men pursue gestational surrogacy with donor eggs. Your physician will outline the approach most suited to your reproductive health and goals.',
+    options: ['IUI or IVF with donor sperm (single women)', 'Gestational surrogacy with donor egg (single men)', 'Fertility preservation to keep future options open'],
+  },
+];
+
+const faqs = [
+  { q: 'Does IRFC have experience with LGBTQIA+ patients?', a: 'Yes. IRFC has served LGBTQIA+ individuals and couples for many years. Our physicians and coordinators understand the specific medical, legal, and emotional dimensions of LGBTQIA+ family building, and our clinical team provides inclusive, affirming care throughout.' },
+  { q: 'What is reciprocal IVF?', a: 'Reciprocal IVF (also called partner IVF or shared motherhood) is a process in which one partner in a same-sex female couple provides the eggs and the other partner carries the pregnancy. Both partners are biologically connected to the pregnancy — one genetically, one as the gestational carrier. IRFC coordinates all aspects of this process.' },
+  { q: 'Do I need a referral to begin care at IRFC?', a: 'No referral is required. You can schedule a consultation directly through our website, by phone, or by email.' },
+  { q: 'How do I find a sperm or egg donor?', a: 'IRFC partners with licensed sperm banks and egg donor agencies. Your coordinator will walk you through the selection process, including medical screening requirements and legal considerations. We make the process straightforward and supportive.' },
+  { q: 'What legal steps are involved in surrogacy?', a: 'Surrogacy requires a legal contract between the intended parents and the gestational carrier, established before the embryo transfer. IRFC works closely with reproductive attorneys who specialize in California surrogacy law. We will connect you with appropriate legal counsel as part of our coordination process.' },
+  { q: 'Is fertility preservation covered by insurance for transgender patients?', a: 'Coverage varies widely. Some California insurers cover fertility preservation for transgender patients under specific circumstances. Our financial coordinator will review your insurance benefits and discuss financing options so you have a clear picture before starting care.' },
+];
+---
+
+<Layout
+  title="LGBTQIA+ Family Building"
+  description="IRFC provides inclusive, affirming fertility care for LGBTQIA+ individuals and couples — same-sex couples, transgender patients, and single parents by choice."
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href="/services" class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">All Services</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">LGBTQIA+ Family Building</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          LGBTQIA+<br/>Family Building
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          Every family deserves to be built with care, respect, and expertise. IRFC provides inclusive, affirming fertility care for same-sex couples, transgender and non-binary individuals, and single parents by choice — with the same clinical excellence we bring to every patient.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commitment -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">Our Commitment to Inclusive Care</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            At IRFC, we believe that the desire to become a parent transcends all boundaries. Our physicians, nurses, and coordinators are trained in the full spectrum of LGBTQIA+ family-building pathways and are committed to providing a safe, affirming environment where you can focus on what matters most.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            We understand that the path to parenthood looks different for every person and couple — and we approach each situation with individualized attention, honest information, and deep respect for your goals and values.
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            IRFC's multilingual team speaks English, Mandarin, Japanese, Korean, and Spanish, and we welcome patients from across Southern California and internationally.
+          </p>
+        </div>
+        <div class="space-y-4">
+          {[
+            { label: 'Inclusive Care', desc: 'Affirming, respectful care for all family structures and identities.' },
+            { label: 'Third-Party Coordination', desc: 'Experienced coordinators for donor and surrogacy arrangements.' },
+            { label: 'Legal Guidance', desc: 'Connections to reproductive attorneys specializing in California law.' },
+            { label: 'Multilingual Team', desc: 'Support in English, Mandarin, Japanese, Korean, and Spanish.' },
+          ].map(item => (
+            <div class="p-6 bg-white border border-stone-200 flex gap-5">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <div>
+                <div class="text-xs tracking-widest uppercase font-medium mb-1" style="color: var(--color-stone-700); font-family: var(--font-sans);">{item.label}</div>
+                <p class="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pathways -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12 text-center">Pathways to Parenthood</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {pathways.map(p => (
+          <div class="p-8 border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{p.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed mb-5">{p.desc}</p>
+            <ul class="space-y-2">
+              {p.options.map(opt => (
+                <li class="flex items-start gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-400);"></div>
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl mx-auto text-center mb-12">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">Getting Started</h2>
+        <p class="text-sm text-stone-500 leading-relaxed">Your journey begins with a consultation — a conversation about your goals, your health, and your options. No referral is required.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {[
+          { n: '01', title: 'Initial Consultation', desc: 'Meet with a physician to discuss your goals, review relevant medical history, and understand the treatment pathways available to you.' },
+          { n: '02', title: 'Fertility Evaluation', desc: 'Appropriate testing is ordered based on your pathway — ovarian reserve, semen analysis, or uterine evaluation, depending on your situation.' },
+          { n: '03', title: 'Treatment & Coordination', desc: 'Your clinical team and third-party coordinator work together to manage every aspect of your treatment, donor selection, or surrogacy arrangement.' },
+        ].map(step => (
+          <div class="p-7 bg-white border border-stone-200">
+            <div class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-500); font-family: var(--font-sans);">Step {step.n}</div>
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{step.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Begin Your Journey</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        Schedule a consultation with an IRFC physician to discuss your goals and explore the pathway that is right for you.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">Book a Consultation</a>
+        <a href="/services" class="btn-outline">All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
