@@ -1,0 +1,611 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+const stats = [
+  { num: '20+', label: 'Years of Combined Excellence' },
+  { num: '#1', label: 'US IVF Lab Success Rate · 2016' },
+  { num: '5', label: 'Southern California Locations' },
+  { num: '5', label: 'Languages Spoken On-Site' },
+];
+
+const services = [
+  { n: '01', abbr: 'IVF',      title: 'In Vitro Fertilization',    desc: 'EmbryoScope+ monitoring and AI-assisted embryo selection for the highest success rates.', href: '/services/ivf' },
+  { n: '02', abbr: 'Cryo',     title: 'Egg & Embryo Freezing',     desc: 'Vitrification technology secured in the TMRW Vault with 24/7 monitoring.', href: '/services/egg-freezing' },
+  { n: '03', abbr: 'PGT',      title: 'Genetic Testing',           desc: 'Preimplantation genetic testing identifies the healthiest embryos before transfer.', href: '/services/pgt' },
+  { n: '04', abbr: 'IUI',      title: 'Intrauterine Insemination', desc: 'A minimally invasive first-line treatment guided by expert diagnostics.', href: '/services/iui' },
+  { n: '05', abbr: 'Donor',    title: 'Donors & Surrogacy',        desc: 'Full support for egg donation and gestational surrogacy, including LGBTQIA+ family building.', href: '/services#donors' },
+  { n: '06', abbr: 'Surgical', title: 'Minimally Invasive Surgery', desc: 'Diagnostic and therapeutic procedures at accredited surgery centers.', href: '/services#surgical' },
+];
+
+const whyPoints = [
+  { n: '01', title: 'Board-Certified Physicians', desc: 'Every case led by reproductive endocrinologists with national and international recognition.' },
+  { n: '02', title: '#1-Ranked Laboratory', desc: 'CAP/CLIA-accredited embryology lab, ranked #1 in US IVF success rates in 2016.' },
+  { n: '03', title: 'Personalized Protocols', desc: 'No one-size-fits-all care — every stimulation and transfer plan is built around your history.' },
+  { n: '04', title: 'Transparent Pricing', desc: 'Clear cost breakdowns and financing options discussed before treatment begins.' },
+  { n: '05', title: 'Multilingual & Telehealth', desc: 'Care in five languages, with telehealth consultations for out-of-area and international patients.' },
+];
+
+const team = [
+  { name: 'James P. Lin, MD',  role: 'Founder & Medical Director',      credential: 'Kaiser Permanente Center of Excellence · 20+ Years', photo: '/images/team/dr-james-lin-circle.png', href: '/team/dr-james-lin' },
+  { name: 'Zitao Liu, MD',     role: 'Associate Chief Medical Officer', credential: 'Mild Stimulation & AI-Assisted Protocols · Now Accepting Patients', photo: '/images/team/dr-zitao-liu-circle.png', href: '/team/dr-zitao-liu' },
+  { name: 'Yufen Xie, PhD',    role: 'IVF Laboratory Director',         credential: '#1 US IVF Lab Success Rate · SART 2016', photo: '/images/team/dr-yufen-xie.png', href: '/team/dr-yufen-xie' },
+];
+
+const locations = [
+  { city: 'Torrance',      phone: '(424) 212-4087', types: 'Clinic' },
+  { city: 'Alhambra',      phone: '(626) 588-2885', types: 'Clinic' },
+  { city: 'Beverly Hills', phone: '(213) 600-8088', types: 'Clinic' },
+  { city: 'Corona',        phone: '(951) 272-2221', types: 'Clinic · Surgery · Lab' },
+  { city: 'Irvine',        phone: '(949) 453-8600', types: 'Clinic · Surgery · Lab' },
+];
+---
+
+<Layout
+  title="IRFC — Southern California IVF & Fertility Specialists"
+  description="Award-winning IVF and fertility care across Southern California. Board-certified physicians, a #1-ranked lab, and 5 locations. Schedule a consultation."
+>
+  <!-- ─── DEMO NAV (shared with Demo A) ─────────────────────── -->
+  <header id="demo-nav" class="dnav">
+    <a href="/" class="dnav-logo" aria-label="IRFC Home">
+      <div class="dnav-logo-wrap">
+        <img src="/images/irfc-logo.svg" alt="IRFC" class="dnav-logo-img" />
+      </div>
+    </a>
+
+    <nav class="dnav-links" aria-label="Main navigation">
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/outcomes">Success Rates</a>
+      <a href="/team">Team</a>
+      <a href="/locations">Locations</a>
+    </nav>
+
+    <div class="dnav-right">
+      <a href="tel:+19494538600" class="dnav-phone">(949) 453-8600</a>
+      <a href="/contact" class="dnav-cta">Book Consultation</a>
+    </div>
+
+    <button class="dnav-hamburger" id="dnav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-menu-links">
+        <a href="/about">About IRFC</a>
+        <a href="/services">Services</a>
+        <a href="/outcomes">Success Rates</a>
+        <a href="/patient-journey">Patient Journey</a>
+        <a href="/team">Our Team</a>
+        <a href="/locations">Locations</a>
+      </nav>
+      <div class="mobile-menu-bottom">
+        <a href="tel:+19494538600" class="mobile-menu-phone">(949) 453-8600</a>
+        <a href="/contact" class="btn-primary mobile-menu-cta">Book a Consultation</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ① HERO -->
+  <section class="hero">
+    <img src="/images/lobby-wide.jpg" alt="IRFC Clinic" class="hero-bg" />
+    <div class="hero-overlay"></div>
+
+    <div class="hero-top">
+      <span class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center &nbsp;·&nbsp; Southern California
+      </span>
+    </div>
+
+    <div class="hero-body">
+      <h1 class="hero-h1">
+        <span>Where</span>
+        <span>Science <em>Meets</em></span>
+        <span>Compassion.</span>
+      </h1>
+      <p class="hero-sub">
+        A #1-ranked IVF laboratory. Board-certified physicians. Five Southern California locations.
+        Care built around your story, not a protocol.
+      </p>
+      <div class="hero-ctas">
+        <a href="/contact" class="btn-primary">
+          Book a Consultation
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="/services" class="hero-ghost-btn">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② TRUST / STATS BAND — bold, IRMC-style credibility strip -->
+  <section class="stats-band">
+    <div class="stats-band-inner">
+      {stats.map((s, i) => (
+        <div class={`stats-cell ${i === 1 ? 'stats-cell--purple' : ''}`}>
+          <p class="stats-num">{s.num}</p>
+          <p class="stats-label">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ③ THE UNION -->
+  <section class="union-section">
+    <div class="union-grid">
+      <div class="union-image">
+        <img src="/images/lobby-detail.jpg" alt="IRFC clinic interior" />
+      </div>
+      <div class="union-text">
+        <div class="section-rule"></div>
+        <h2>A New Chapter<br/><em>in Fertility Care</em></h2>
+        <p>
+          IRFC was born from the union of two pioneering fertility centers: <strong>Incinta Fertility</strong> and
+          <strong>Reproductive Fertility Center (RFC)</strong>. Together, we bring over two decades of combined
+          clinical excellence, a nationally top-ranked IVF laboratory, and a philosophy that treats every patient
+          as a whole person — not a case number.
+        </p>
+        <p>
+          Our founder, Dr. James P. Lin, built RFC on the belief that a fertility clinic should feel like
+          "both a family and a home." That spirit now lives within IRFC.
+        </p>
+        <a href="/about" class="btn-outline">Learn Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ SERVICES — numbered cards -->
+  <section class="services-section">
+    <div class="section-header">
+      <p class="label">Treatments &amp; Services</p>
+      <h2>Comprehensive Fertility Care</h2>
+    </div>
+    <div class="services-grid">
+      {services.map(s => (
+        <a href={s.href} class="service-card">
+          <div class="service-card-top">
+            <span class="service-num">{s.n}</span>
+            <span class="service-abbr">{s.abbr}</span>
+          </div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+          <span class="service-arrow">
+            Learn more
+            <svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </span>
+        </a>
+      ))}
+    </div>
+    <div class="section-cta">
+      <a href="/services" class="btn-outline">View All Services</a>
+    </div>
+  </section>
+
+  <!-- ⑤ WHY CHOOSE IRFC — 5-point comparative advantage -->
+  <section class="why-section">
+    <div class="section-header section-header--light">
+      <p class="label label--light">Why Choose IRFC</p>
+      <h2 class="light-h2">Built for Confidence, at Every Step</h2>
+    </div>
+    <div class="why-grid">
+      {whyPoints.map(w => (
+        <div class="why-card">
+          <p class="why-num">{w.n}</p>
+          <h3>{w.title}</h3>
+          <p class="why-desc">{w.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ⑥ TEAM -->
+  <section class="team-section">
+    <div class="section-header">
+      <p class="label">Medical Leadership</p>
+      <h2>Expert Physicians. Trusted Partners.</h2>
+    </div>
+    <div class="team-grid">
+      {team.map(doc => (
+        <a href={doc.href} class="team-card">
+          <div class="team-photo-wrap">
+            <img src={doc.photo} alt={doc.name} class="team-photo" />
+          </div>
+          <p class="team-name">{doc.name}</p>
+          <p class="team-role">{doc.role}</p>
+          <p class="team-credential">{doc.credential}</p>
+        </a>
+      ))}
+    </div>
+    <div class="section-cta">
+      <a href="/team" class="btn-outline">Meet the Full Team</a>
+    </div>
+  </section>
+
+  <!-- ⑦ LOCATIONS -->
+  <section class="locations-section">
+    <div class="locations-intro">
+      <div class="section-rule"></div>
+      <h2>Five Locations<br/>Across Southern<br/>California</h2>
+      <p>With clinics in Torrance, Alhambra, Beverly Hills, Corona, and Irvine, expert fertility care is always within reach.</p>
+      <a href="/locations" class="btn-outline">View All Locations</a>
+    </div>
+    <div class="locations-grid">
+      {locations.map(loc => (
+        <a href="/locations" class="location-cell">
+          <p class="location-city">{loc.city}</p>
+          <p class="location-types">{loc.types}</p>
+          <p class="location-phone">{loc.phone}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ⑧ TESTIMONIAL -->
+  <section class="quote-section">
+    <div class="quote-inner">
+      <div class="section-rule"></div>
+      <blockquote>
+        "After three and a half years of trying, I finally found a team that never gave up on us.
+        I can't imagine having gone through this journey anywhere else."
+      </blockquote>
+      <cite>— Mary T. &nbsp;·&nbsp; IVF Patient</cite>
+    </div>
+  </section>
+
+  <!-- ⑨ CTA -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-eyebrow">
+        <div class="cta-rule-left"></div>
+        <span>Begin Your Journey</span>
+        <div class="cta-rule-right"></div>
+      </div>
+      <h2>Your Family<br/>Starts Here</h2>
+      <p class="cta-sub">Initial consultation · Board-certified physicians · 5 Southern California locations</p>
+      <div class="cta-btns">
+        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
+        <a href="tel:+19494538600" class="cta-phone-btn">Call (949) 453-8600</a>
+      </div>
+      <p class="cta-foot">Telehealth available for out-of-area and international patients</p>
+    </div>
+  </section>
+
+  <Footer />
+
+  <div class="demo-badge">Demo B — Trust &amp; Numbers</div>
+</Layout>
+
+<script>
+  const nav = document.getElementById('demo-nav');
+  const onScroll = () => {
+    if (window.scrollY > 40) nav?.classList.add('dnav--solid');
+    else nav?.classList.remove('dnav--solid');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const hamburger = document.getElementById('dnav-hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  const openMenu = () => {
+    hamburger?.classList.add('is-open');
+    mobileMenu?.classList.add('mobile-menu--open');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    hamburger?.classList.remove('is-open');
+    mobileMenu?.classList.remove('mobile-menu--open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+</script>
+
+<style>
+/* ═══════════════════════════════════════════
+   NAV (identical to Demo A)
+═══════════════════════════════════════════ */
+.dnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10vw;
+  background: rgba(253,250,243,0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(214,209,197,0.5);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.dnav--solid {
+  background: rgba(253,250,243,0.98);
+  border-bottom-color: var(--color-stone-200);
+}
+
+.dnav-logo { display: block; flex-shrink: 0; }
+.dnav-logo-wrap { position: relative; height: 2.4rem; width: 10rem; }
+.dnav-logo-img { position: absolute; inset: 0; height: 100%; width: auto; object-fit: contain; object-position: left center; }
+
+.dnav-links { display: flex; align-items: center; gap: 2.5rem; }
+.dnav-links a {
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: var(--font-sans); text-decoration: none; color: var(--color-stone-700);
+  transition: color 0.3s; white-space: nowrap;
+}
+.dnav-links a:hover { color: var(--color-gold-600) !important; }
+
+.dnav-right { display: flex; align-items: center; gap: 1.75rem; flex-shrink: 0; }
+.dnav-phone {
+  font-size: 0.62rem; letter-spacing: 0.08em; font-family: var(--font-sans);
+  text-decoration: none; color: var(--color-stone-500); transition: color 0.3s; white-space: nowrap;
+}
+.dnav-phone:hover { color: var(--color-gold-600) !important; }
+
+.dnav-cta {
+  display: inline-flex; align-items: center; font-size: 0.6rem; letter-spacing: 0.16em;
+  text-transform: uppercase; font-family: var(--font-sans); text-decoration: none;
+  padding: 0.6rem 1.4rem; border: 1px solid var(--color-gold-500); color: var(--color-gold-700);
+  transition: border-color 0.3s, color 0.3s, background 0.3s; white-space: nowrap;
+}
+.dnav-cta:hover { background: var(--color-gold-500); color: white; }
+
+.dnav-hamburger {
+  display: none; flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; width: 2.25rem; height: 2.25rem; background: none; border: none; cursor: pointer;
+  padding: 0.25rem; flex-shrink: 0;
+}
+.dnav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--color-stone-700); transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+.dnav-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.dnav-hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.dnav-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .dnav-links, .dnav-phone, .dnav-cta { display: none; }
+  .dnav { padding: 0 5vw; }
+  .dnav-hamburger { display: flex; }
+}
+
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 99; background: #fdfaf3;
+  display: flex; flex-direction: column; opacity: 0; visibility: hidden;
+  transform: translateY(-8px); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+  overflow-y: auto;
+}
+.mobile-menu.mobile-menu--open { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s; }
+.mobile-menu-inner { display: flex; flex-direction: column; min-height: 100%; padding: 5.5rem 6vw 3rem; }
+.mobile-menu-links { display: flex; flex-direction: column; flex: 1; }
+.mobile-menu-links a {
+  font-family: var(--font-serif); font-size: 1.9rem; font-weight: 300; color: var(--color-stone-800);
+  text-decoration: none; padding: 0.9rem 0; border-bottom: 1px solid var(--color-stone-100);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.mobile-menu-links a:hover, .mobile-menu-links a:active { color: var(--color-gold-600); padding-left: 0.5rem; }
+.mobile-menu-bottom { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; align-items: stretch; }
+.mobile-menu-phone {
+  font-size: 0.72rem; letter-spacing: 0.1em; color: var(--color-stone-400); font-family: var(--font-sans);
+  text-decoration: none; text-align: center; padding: 0.75rem; border: 1px solid var(--color-stone-200); transition: color 0.2s;
+}
+.mobile-menu-phone:hover { color: var(--color-gold-600); }
+.mobile-menu-cta { display: flex; justify-content: center; }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(8,5,2,0.55) 0%, rgba(8,5,2,0.2) 18%, transparent 32%, transparent 40%, rgba(8,5,2,0.5) 62%, rgba(8,5,2,0.86) 100%),
+    linear-gradient(to right, rgba(8,5,2,0.18) 0%, rgba(8,5,2,0.06) 45%, transparent 70%);
+}
+.hero-top { position: absolute; top: 7rem; left: 10vw; z-index: 2; }
+.hero-eyebrow { display: flex; align-items: center; gap: 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-family: var(--font-sans); }
+.hero-eyebrow-line { display: inline-block; width: 2.5rem; height: 1px; background: var(--color-gold-400); flex-shrink: 0; }
+.hero-body { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 0 10vw 5rem; max-width: 46rem; }
+.hero-h1 { font-family: var(--font-serif); font-weight: 300; line-height: 0.88; color: white; margin-bottom: 1.5rem; letter-spacing: -0.015em; }
+.hero-h1 span { display: block; font-size: clamp(3.2rem, 7.2vw, 8rem); }
+.hero-h1 em { font-style: italic; color: var(--color-gold-400); font-size: inherit; }
+.hero-sub { font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.8); font-family: var(--font-sans); margin-bottom: 2.25rem; max-width: 34rem; }
+.hero-ctas { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.hero-ghost-btn {
+  display: inline-flex; align-items: center; border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.9);
+  padding: 0.875rem 2rem; font-size: 0.75rem; letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase;
+  font-family: var(--font-sans); transition: border-color 0.25s;
+}
+.hero-ghost-btn:hover { border-color: rgba(255,255,255,0.7); }
+
+/* ═══════════════════════════════════════════
+   STATS BAND — bold, credibility-first
+═══════════════════════════════════════════ */
+.stats-band { background: var(--color-stone-900); }
+.stats-band-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1400px; margin: 0 auto; }
+.stats-cell {
+  padding: 3rem 2rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.08);
+}
+.stats-cell:last-child { border-right: none; }
+.stats-num { font-family: var(--font-serif); font-size: clamp(2rem, 3.2vw, 3rem); font-weight: 300; color: var(--color-gold-400); margin-bottom: 0.5rem; }
+.stats-cell--purple .stats-num { color: var(--color-purple-300); }
+.stats-label { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-family: var(--font-sans); }
+
+/* ═══════════════════════════════════════════
+   SHARED
+═══════════════════════════════════════════ */
+.label { font-size: 0.57rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-stone-400); font-family: var(--font-sans); }
+.label--light { color: rgba(255,255,255,0.5); }
+.section-rule { width: 2.5rem; height: 1px; background: var(--color-gold-500); margin-bottom: 1.5rem; }
+
+.section-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; padding-top: 8rem; }
+.section-header h2 { font-family: var(--font-serif); font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 300; color: var(--color-stone-800); margin-top: 0.75rem; }
+.section-header--light { padding-top: 7rem; margin-bottom: 3.5rem; }
+.section-header--light h2 { color: white; }
+
+.section-cta { text-align: center; margin-top: 3rem; padding-bottom: 8rem; }
+
+/* ═══════════════════════════════════════════
+   UNION
+═══════════════════════════════════════════ */
+.union-section { background: white; }
+.union-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.union-image { min-height: 560px; }
+.union-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.union-text { padding: 7rem 6vw; display: flex; flex-direction: column; justify-content: center; }
+.union-text h2 { font-family: var(--font-serif); font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 300; color: var(--color-stone-800); line-height: 1.15; margin-bottom: 1.5rem; }
+.union-text h2 em { font-style: italic; color: var(--color-purple-400); }
+.union-text p { color: var(--color-stone-600); line-height: 1.7; margin-bottom: 1.25rem; max-width: 34rem; }
+.union-text strong { color: var(--color-stone-800); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   SERVICES — numbered cards
+═══════════════════════════════════════════ */
+.services-section { background: white; padding: 0 10vw; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-stone-200); border: 1px solid var(--color-stone-200); }
+.service-card { background: white; padding: 2.5rem 2rem; display: flex; flex-direction: column; text-decoration: none; transition: background 0.2s; }
+.service-card:hover { background: var(--color-stone-50); }
+.service-card-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+.service-num { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 300; color: var(--color-gold-200); line-height: 1; }
+.service-abbr { font-size: 0.55rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-stone-400); font-family: var(--font-sans); }
+.service-card h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 300; color: var(--color-stone-800); margin-bottom: 0.75rem; }
+.service-card p { font-size: 0.85rem; line-height: 1.6; color: var(--color-stone-500); flex: 1; margin-bottom: 1.25rem; }
+.service-arrow { font-size: 0.54rem; letter-spacing: 0.2em; color: var(--color-gold-600); font-family: var(--font-sans); text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; }
+
+/* ═══════════════════════════════════════════
+   WHY CHOOSE — dark trust band
+═══════════════════════════════════════════ */
+.why-section { background: var(--color-stone-900); padding: 0 6vw 6rem; }
+.why-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255,255,255,0.08); max-width: 1400px; margin: 0 auto; }
+.why-card { background: var(--color-stone-900); padding: 2.5rem 1.75rem; }
+.why-num { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 300; color: var(--color-gold-500); margin-bottom: 1.25rem; }
+.why-card h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: white; margin-bottom: 0.75rem; line-height: 1.25; }
+.why-desc { font-size: 0.78rem; line-height: 1.6; color: rgba(255,255,255,0.5); }
+
+/* ═══════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════ */
+.team-section { background: #fdfaf3; padding: 0 10vw; }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.team-card { display: block; text-decoration: none; }
+.team-photo-wrap { overflow: hidden; margin-bottom: 1.25rem; }
+.team-photo { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center top; display: block; transition: transform 0.6s ease; }
+.team-card:hover .team-photo { transform: scale(1.04); }
+.team-name { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: var(--color-stone-800); margin-bottom: 0.25rem; }
+.team-role { font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-stone-400); font-family: var(--font-sans); margin-bottom: 0.5rem; }
+.team-credential { font-size: 0.68rem; line-height: 1.4; font-family: var(--font-sans); color: var(--color-purple-500); }
+
+/* ═══════════════════════════════════════════
+   LOCATIONS
+═══════════════════════════════════════════ */
+.locations-section { padding: 8rem 10vw; background: white; display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; }
+.locations-intro h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 300; color: var(--color-stone-800); line-height: 1.1; margin-bottom: 1.25rem; }
+.locations-intro p { font-size: 0.85rem; line-height: 1.6; color: var(--color-stone-500); margin-bottom: 2rem; max-width: 22rem; }
+.locations-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--color-stone-200); }
+.location-cell { padding: 1.75rem; border-right: 1px solid var(--color-stone-200); border-bottom: 1px solid var(--color-stone-200); display: block; text-decoration: none; background: white; transition: background 0.2s; }
+.location-cell:hover { background: var(--color-stone-50); }
+.location-city { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; color: var(--color-stone-800); margin-bottom: 0.3rem; }
+.location-types { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-stone-400); font-family: var(--font-sans); margin-bottom: 0.5rem; }
+.location-phone { font-size: 0.8rem; color: var(--color-gold-600); }
+
+/* ═══════════════════════════════════════════
+   QUOTE
+═══════════════════════════════════════════ */
+.quote-section { padding: 7rem 10vw; background: var(--color-stone-50); text-align: center; }
+.quote-inner { max-width: 800px; margin: 0 auto; }
+.quote-inner .section-rule { margin: 0 auto 3rem; }
+blockquote { font-family: var(--font-serif); font-size: clamp(1.4rem, 2.6vw, 2.2rem); font-weight: 300; line-height: 1.35; color: var(--color-stone-800); font-style: italic; margin: 0 0 2rem; }
+cite { font-size: 0.57rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-stone-400); font-family: var(--font-sans); font-style: normal; }
+
+/* ═══════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════ */
+.cta-section { padding: 9rem 10vw; background: #1c1917; text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 55%, rgba(198,173,92,0.07) 0%, transparent 60%); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; max-width: 580px; margin: 0 auto; }
+.cta-eyebrow { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+.cta-eyebrow span { font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-gold-400); font-family: var(--font-sans); white-space: nowrap; }
+.cta-rule-left { height: 1px; width: 3rem; background: linear-gradient(90deg, transparent, var(--color-gold-500)); }
+.cta-rule-right { height: 1px; width: 3rem; background: linear-gradient(90deg, var(--color-gold-500), transparent); }
+.cta-inner h2 { font-family: var(--font-serif); font-size: clamp(2.2rem, 4.5vw, 3.75rem); font-weight: 300; color: white; line-height: 1.1; margin-bottom: 1.25rem; }
+.cta-sub { font-size: 0.72rem; color: rgba(255,255,255,0.4); font-family: var(--font-sans); letter-spacing: 0.06em; margin-bottom: 3rem; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.cta-phone-btn { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 0.875rem 1.75rem; font-size: 0.72rem; letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; font-family: var(--font-sans); transition: border-color 0.2s; }
+.cta-phone-btn:hover { border-color: rgba(255,255,255,0.45); }
+.cta-foot { margin-top: 2rem; font-size: 0.57rem; color: rgba(255,255,255,0.25); font-family: var(--font-sans); letter-spacing: 0.1em; }
+
+/* ═══════════════════════════════════════════
+   DEMO BADGE
+═══════════════════════════════════════════ */
+.demo-badge {
+  position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 9999;
+  background: var(--color-stone-900); color: rgba(255,255,255,0.65);
+  font-size: 0.54rem; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.45rem 0.9rem; font-family: var(--font-sans); border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-body { padding: 0 6vw 4.5rem; }
+  .hero-top { left: 6vw; }
+  .union-grid { grid-template-columns: 1fr; }
+  .union-image { min-height: 360px; order: -1; }
+  .union-text { padding: 5rem 6vw; }
+  .why-grid { grid-template-columns: repeat(3, 1fr); }
+  .locations-section { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+@media (max-width: 900px) {
+  .services-section, .locations-section { padding-left: 5vw; padding-right: 5vw; }
+}
+
+@media (max-width: 768px) {
+  .quote-section, .cta-section { padding-left: 5vw; padding-right: 5vw; }
+  .quote-section { padding-top: 4rem; padding-bottom: 4rem; }
+  .cta-section { padding-top: 5rem; padding-bottom: 5rem; }
+
+  .hero-body { padding: 0 5vw 3.5rem; max-width: 100%; }
+  .hero-top { left: 5vw; top: 6rem; }
+  .hero-h1 { margin-bottom: 1.25rem; }
+  .hero-sub { display: none; }
+
+  .stats-band-inner { grid-template-columns: 1fr 1fr; }
+  .stats-cell { padding: 1.75rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+  .section-header { padding-top: 4.5rem; margin-bottom: 2.5rem; }
+  .section-header--light { padding-top: 4rem; }
+  .section-cta { padding-bottom: 4.5rem; }
+
+  .services-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr; gap: 0; }
+  .team-card { display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--color-stone-100); }
+  .team-photo-wrap { width: 72px; flex-shrink: 0; margin-bottom: 0; }
+  .team-photo { aspect-ratio: 1 / 1; }
+
+  .locations-grid { grid-template-columns: 1fr; }
+
+  .cta-btns { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .cta-btns .btn-primary, .cta-phone-btn { width: 100%; text-align: center; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .hero-h1 span { font-size: clamp(2.6rem, 11vw, 3.2rem); }
+  blockquote { font-size: clamp(1.3rem, 6vw, 1.8rem); }
+}
+</style>
