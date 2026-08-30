@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Expose the LLM indexing file
+Allow: /llms.txt
+
 Sitemap: https://irfc.com/sitemap-index.xml
