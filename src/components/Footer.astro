@@ -1,4 +1,6 @@
 ---
+import { BRAND_ABBREV, LEGAL_ENTITY, BRAND_LANGUAGE } from '../config/brand';
+
 const locations = [
   { city: 'Torrance', address: '21545 Hawthorne Blvd, Pavilion B', state: 'CA 90503', phone: '(424) 212-4087' },
   { city: 'Alhambra', address: '723 S Garfield Ave, Suite 203', state: 'CA 91801', phone: '(626) 588-2885' },
@@ -10,8 +12,8 @@ const locations = [
 const services = [
   { label: 'In Vitro Fertilization (IVF)', href: '/services/ivf' },
   { label: 'Intrauterine Insemination (IUI)', href: '/services/iui' },
-  { label: 'Fertility Preservation', href: '/services/preservation' },
-  { label: 'Genetic Testing (PGT)', href: '/services/genetic-testing' },
+  { label: 'Fertility Preservation', href: '/services/egg-freezing' },
+  { label: 'Genetic Testing (PGT)', href: '/services/pgt' },
   { label: 'Donors & Surrogacy', href: '/services/donors-surrogacy' },
   { label: 'LGBTQIA+ Family Building', href: '/services/lgbtqia' },
 ];
@@ -30,7 +32,7 @@ const services = [
           <img src="/images/irfc-logo-white.svg" alt="IRFC" class="h-10 w-auto" onerror="this.src='/images/irfc-logo.svg'; this.style.filter='brightness(0) invert(1)'" />
         </a>
         <p class="text-sm text-stone-400 leading-relaxed mb-6">
-          Where science meets compassionate care. Helping families grow across Southern California.
+          {BRAND_LANGUAGE.belief.en} Helping families grow across Southern California.
         </p>
         <div class="flex items-center gap-1 text-xs text-stone-500 mb-1">
           <svg class="w-3.5 h-3.5 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
@@ -68,7 +70,7 @@ const services = [
             { label: 'Locations', href: '/locations' },
             { label: 'Patient Resources', href: '/patient-resources' },
             { label: 'Contact Us', href: '/contact' },
-            { label: 'Book a Consultation', href: '/contact' },
+            { label: 'Schedule a Consultation', href: '/contact' },
           ].map(link => (
             <li>
               <a href={link.href} class="text-sm text-stone-400 hover:text-stone-200 transition-colors">{link.label}</a>
@@ -96,7 +98,7 @@ const services = [
     <!-- Bottom -->
     <div class="border-t border-stone-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
       <p class="text-xs text-stone-600">
-        © {new Date().getFullYear()} IRFC — Incinta Reproductive Fertility Center. All rights reserved.
+        © {new Date().getFullYear()} {BRAND_ABBREV} — {LEGAL_ENTITY}. All rights reserved.
       </p>
       <div class="flex items-center gap-6">
         <a href="/privacy" class="text-xs text-stone-600 hover:text-stone-400 transition-colors">Privacy Policy</a>

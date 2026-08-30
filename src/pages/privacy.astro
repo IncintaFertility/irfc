@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { LEGAL_ENTITY, BRAND_ABBREV, SITE_PHONE, SITE_PHONE_DISPLAY } from '../config/brand';
+
+const sections = [
+  {
+    id: 'collect',
+    title: 'Information We Collect',
+    body: [
+      'When you submit a consultation request through this website, we collect the information you provide: your name, email address, phone number, preferred location, area of clinical interest, preferred language, and any details you choose to share in the message field.',
+      'Like most websites, we may also collect technical information such as browser type, device type, and pages visited. This information is used only to understand how the site is used and to improve it.',
+    ],
+  },
+  {
+    id: 'use',
+    title: 'How We Use Your Information',
+    body: [
+      'Information you submit is used to respond to your consultation request, schedule appointments, and provide the clinical care and communication you have asked for.',
+      'We do not sell your personal information. We do not share it with third parties for their own marketing purposes.',
+    ],
+  },
+  {
+    id: 'hipaa',
+    title: 'Your Rights Under HIPAA',
+    body: [
+      'Once you become a patient, the health information we create and maintain about you is protected health information under the Health Insurance Portability and Accountability Act (HIPAA). You have the right to:',
+    ],
+    list: [
+      'Receive a copy of this Notice of Privacy Practices',
+      'Inspect and obtain a copy of your medical record',
+      'Request corrections to your health information',
+      'Request restrictions on certain uses and disclosures',
+      'Receive an accounting of disclosures we have made',
+      'Request confidential communications by alternative means or locations',
+      'File a complaint if you believe your privacy rights have been violated',
+    ],
+  },
+  {
+    id: 'security',
+    title: 'How We Protect Your Information',
+    body: [
+      'We maintain administrative, physical, and technical safeguards designed to protect the confidentiality, integrity, and availability of your information, including access controls, encrypted transmission, and workforce training on privacy obligations.',
+      'Please note that no method of transmission over the internet is entirely secure. For this reason, we ask that you do not send sensitive medical details through the general contact form on this site — those are best discussed directly with your care team.',
+    ],
+  },
+  {
+    id: 'ccpa',
+    title: 'California Privacy Rights',
+    body: [
+      'If you are a California resident, you have the right to know what personal information we collect, to request deletion of that information, to opt out of any sale or sharing, and to receive equal service regardless of whether you exercise these rights. To make a request, contact us using the information below.',
+    ],
+  },
+  {
+    id: 'contact',
+    title: 'Questions or Requests',
+    body: [
+      `If you have questions about this notice, or wish to exercise any of the rights described above, please contact our Privacy Officer at ${LEGAL_ENTITY} using the phone number or address listed below.`,
+    ],
+  },
+];
+---
+
+<Layout
+  title="Privacy Practices"
+  description={`How ${LEGAL_ENTITY} (${BRAND_ABBREV}) collects, uses, and protects your personal and health information, including your rights under HIPAA and California privacy law.`}
+>
+  <Nav />
+
+  <section class="pt-40 pb-16" style="background: var(--color-pearl-100);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
+        Legal
+      </p>
+      <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
+        Notice of Privacy Practices
+      </h1>
+      <p class="text-lg text-stone-500 font-light leading-relaxed">
+        We take the trust you place in us seriously. This notice explains what information we collect,
+        how it is used, and the rights you have over it.
+      </p>
+      <p class="text-sm text-stone-400 font-light mt-4">Effective date: August 2026</p>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-pearl-50);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+
+      {sections.map((section) => (
+        <div class="mb-12" id={section.id}>
+          <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+            {section.title}
+          </h2>
+          {section.body.map((para) => (
+            <p class="text-stone-500 font-light leading-relaxed mb-4">{para}</p>
+          ))}
+          {section.list && (
+            <ul class="space-y-2 mt-4 ml-1">
+              {section.list.map((item) => (
+                <li class="flex gap-3 text-stone-500 font-light leading-relaxed">
+                  <span style="color: var(--color-champagne-500);">—</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+
+      <div class="pt-10" style="border-top: 1px solid var(--color-pearl-300);">
+        <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+          Contact
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed mb-2">{LEGAL_ENTITY} ({BRAND_ABBREV})</p>
+        <p class="text-stone-500 font-light leading-relaxed mb-2">
+          16300 Sand Canyon Avenue, 9th Floor, Irvine, CA 92618
+        </p>
+        <p class="text-stone-500 font-light leading-relaxed">
+          <a href={`tel:${SITE_PHONE}`} style="color: var(--color-champagne-700);">{SITE_PHONE_DISPLAY}</a>
+        </p>
+      </div>
+
+      <p class="text-xs text-stone-400 font-light mt-12 leading-relaxed">
+        This notice is provided for general information. It does not create a contractual or legal
+        guarantee, and it is not a substitute for advice from qualified counsel on your specific situation.
+      </p>
+
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

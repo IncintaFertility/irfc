@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { LEGAL_ENTITY, BRAND_ABBREV, SITE_PHONE, SITE_PHONE_DISPLAY } from '../config/brand';
+
+const commitments = [
+  {
+    title: 'Visual design',
+    body: 'We aim to maintain sufficient colour contrast between text and background, and to keep body text legible at standard zoom levels across the site.',
+  },
+  {
+    title: 'Keyboard navigation',
+    body: 'Primary navigation, menus, and forms are intended to be operable using a keyboard alone, with visible focus states on interactive elements.',
+  },
+  {
+    title: 'Images and media',
+    body: 'Meaningful images carry descriptive alternative text so that screen readers can convey their content. Decorative imagery is marked as such.',
+  },
+  {
+    title: 'Structure and headings',
+    body: 'Pages use semantic headings and landmarks so that assistive technologies can navigate content by structure rather than by visual position alone.',
+  },
+  {
+    title: 'Language support',
+    body: 'Care is available in English, Mandarin Chinese, Japanese, Korean, and Spanish. Interpretation can be arranged for clinical consultations.',
+  },
+];
+---
+
+<Layout
+  title="Accessibility"
+  description={`Our commitment to making the ${LEGAL_ENTITY} (${BRAND_ABBREV}) website usable by everyone, including people using assistive technologies.`}
+>
+  <Nav />
+
+  <section class="pt-40 pb-16" style="background: var(--color-pearl-100);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
+        Commitment
+      </p>
+      <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
+        Accessibility
+      </h1>
+      <p class="text-lg text-stone-500 font-light leading-relaxed">
+        Everyone deserves to be able to find the care they need. We work to keep this site usable
+        for people of all abilities, including those using screen readers, keyboard navigation,
+        or other assistive technologies.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-pearl-50);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+
+      <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-8">
+        What we work toward
+      </h2>
+
+      <div class="space-y-8 mb-14">
+        {commitments.map((item) => (
+          <div class="flex gap-4">
+            <span class="mt-2 shrink-0" style="color: var(--color-champagne-500);">—</span>
+            <div>
+              <p class="text-stone-800 font-light mb-1">{item.title}</p>
+              <p class="text-stone-500 font-light leading-relaxed">{item.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="pt-10" style="border-top: 1px solid var(--color-pearl-300);">
+        <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+          Need help or found a barrier?
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed mb-6">
+          If any part of this site is difficult to use, or if you need information in another format,
+          please tell us. We will do our best to provide what you need directly and to fix the issue.
+        </p>
+        <a href={`tel:${SITE_PHONE}`} class="btn-primary">
+          Call {SITE_PHONE_DISPLAY}
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

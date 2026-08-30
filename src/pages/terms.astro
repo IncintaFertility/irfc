@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { LEGAL_ENTITY, BRAND_ABBREV } from '../config/brand';
+
+const sections = [
+  {
+    title: 'Acceptance of Terms',
+    paragraphs: [
+      `By accessing this website, you agree to these terms of use. If you do not agree, please discontinue use of the site. These terms apply to ${LEGAL_ENTITY} (${BRAND_ABBREV}) and the services described on this site.`,
+    ],
+  },
+  {
+    title: 'No Medical Advice',
+    paragraphs: [
+      'The content on this site is provided for general information only. It does not constitute medical advice, diagnosis, or treatment, and it is not a substitute for consultation with a qualified physician.',
+      'Treatment outcomes vary by individual. Any success rates, rankings, or statistics presented on this site are historical or comparative in nature and do not guarantee any particular result for you.',
+      'Never disregard professional medical advice, or delay seeking it, because of something you have read on this website.',
+    ],
+  },
+  {
+    title: 'Use of This Site',
+    paragraphs: [
+      'You agree not to use this site for any unlawful purpose, to attempt to gain unauthorized access to any system, or to reproduce, distribute, or commercially exploit site content without prior written permission.',
+    ],
+  },
+  {
+    title: 'Intellectual Property',
+    paragraphs: [
+      'All text, imagery, marks, and design elements on this site are the property of the organization or its licensors, and are protected by applicable intellectual property laws.',
+    ],
+  },
+  {
+    title: 'Third-Party Links',
+    paragraphs: [
+      'This site may link to external resources for your convenience. We do not control those sites and are not responsible for their content, accuracy, or privacy practices.',
+    ],
+  },
+  {
+    title: 'Limitation of Liability',
+    paragraphs: [
+      'To the fullest extent permitted by law, we disclaim liability for any indirect, incidental, or consequential damages arising from your use of this site or reliance on its content.',
+    ],
+  },
+  {
+    title: 'Changes to These Terms',
+    paragraphs: [
+      'We may update these terms from time to time. Continued use of the site after changes are posted constitutes acceptance of the revised terms.',
+    ],
+  },
+];
+---
+
+<Layout
+  title="Terms of Use"
+  description={`Terms and conditions governing your use of the ${LEGAL_ENTITY} (${BRAND_ABBREV}) website, including important notices about medical information.`}
+>
+  <Nav />
+
+  <section class="pt-40 pb-16" style="background: var(--color-pearl-100);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
+        Legal
+      </p>
+      <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
+        Terms of Use
+      </h1>
+      <p class="text-lg text-stone-500 font-light leading-relaxed">
+        Please read these terms before using this website.
+      </p>
+      <p class="text-sm text-stone-400 font-light mt-4">Effective date: August 2026</p>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-pearl-50);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      {sections.map((section) => (
+        <div class="mb-10">
+          <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+            {section.title}
+          </h2>
+          {section.paragraphs.map((para) => (
+            <p class="text-stone-500 font-light leading-relaxed mb-4">{para}</p>
+          ))}
+        </div>
+      ))}
+
+      <p class="text-xs text-stone-400 font-light mt-12 leading-relaxed">
+        This document is provided for general information and does not constitute legal advice.
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

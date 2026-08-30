@@ -2,77 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { FIVE_STANDARDS } from '../config/brand';
 
-const pillars = [
-  {
-    number: '01',
-    title: 'Two Decades of Proven Excellence',
-    color: 'gold',
-    desc: 'IRFC brings together over 20 years of clinical experience from Reproductive Fertility Center and Incinta Fertility — two of Southern California\'s most trusted fertility practices. Our combined history means we\'ve guided thousands of families through every type of fertility challenge, from the straightforward to the highly complex.',
-    highlights: [
-      'Founded by Dr. James P. Lin, a nationally recognized REI specialist',
-      '20+ years treating patients across Southern California',
-      'Thousands of successful pregnancies and births',
-    ],
-  },
-  {
-    number: '02',
-    title: '#1 Ranked IVF Laboratory',
-    color: 'gold',
-    desc: 'The laboratory at the heart of IRFC was ranked #1 in US IVF success rates in 2016 — a distinction earned through world-class embryology science, exacting protocols, and continuous improvement. That same team, led by Dr. Yufen Xie, continues to set the standard at IRFC today.',
-    highlights: [
-      'Ranked #1 in US IVF success rates, 2016',
-      'CAP-certified and CLIA-accredited laboratory',
-      'Led by Dr. Yufen Xie with 20+ years of embryology expertise',
-    ],
-  },
-  {
-    number: '03',
-    title: 'Kaiser Permanente Center of Excellence',
-    color: 'gold',
-    desc: 'IRFC (through RFC) is a designated Kaiser Permanente Center of Excellence across Southern California — one of the most rigorous quality designations available in reproductive medicine. This recognition reflects our clinical outcomes, safety record, and patient care standards.',
-    highlights: [
-      'Designated by Kaiser Permanente across Southern California',
-      'Reflects independently verified clinical quality standards',
-      'One of the largest Fairfax EggBank production facilities in the US',
-    ],
-  },
-  {
-    number: '04',
-    title: 'Technology That Sets the Standard',
-    color: 'gold',
-    desc: 'IRFC invests in the most advanced laboratory technology available — not as a marketing distinction, but because it produces measurably better outcomes. EmbryoScope+ time-lapse monitoring, TMRW Vault smart cryogenic storage, and RI Witness electronic witnessing are used for every patient, every cycle.',
-    highlights: [
-      'EmbryoScope+ time-lapse incubation — continuous embryo monitoring',
-      'TMRW Vault — military-grade cryogenic storage with RFID tracking',
-      'RI Witness — automated sample verification throughout IVF',
-    ],
-    link: { href: '/technology', label: 'Explore Our Technology' },
-  },
-  {
-    number: '05',
-    title: 'Multilingual, Multicultural Care',
-    color: 'gold',
-    desc: 'Fertility care is deeply personal, and language should never be a barrier. Our clinical and support team provides care in English, Mandarin Chinese, Japanese, Korean, and Spanish — so every patient feels fully heard, understood, and supported throughout their journey.',
-    highlights: [
-      'English, Mandarin, Japanese, Korean, and Spanish',
-      'Dedicated Mandarin-language phone line: (626) 388-6022',
-      'Telehealth available for international patients worldwide',
-    ],
-  },
-  {
-    number: '06',
-    title: 'Complete Care Under One Roof',
-    color: 'gold',
-    desc: 'From initial diagnostics to advanced IVF, egg donation, gestational surrogacy, and surgical care — IRFC offers the full spectrum of reproductive medicine at five Southern California locations. Patients never need to be referred elsewhere for the next stage of their care.',
-    highlights: [
-      'ART: IVF, IUI, PGT, egg freezing, embryo transfer',
-      'Third-party: donor eggs, sperm, gestational surrogacy',
-      'Surgical: hysteroscopy, laparoscopy at accredited surgery centers',
-      '5 clinic locations across Southern California',
-    ],
-  },
-];
+const pillars = FIVE_STANDARDS.map((s) => ({
+  number: s.index,
+  title: s.en,
+  claim: s.claim,
+  color: 'champagne',
+  desc: s.body,
+  highlights: s.evidence,
+}));
 
 const synergies = [
   {
@@ -112,7 +51,7 @@ const synergies = [
   </section>
 
   <!-- 6 Pillars -->
-  <section class="py-4" style="background: var(--color-stone-50);">
+  <section id="standards" class="py-4 scroll-mt-24" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="space-y-1">
         {pillars.map((pillar, i) => (
@@ -123,7 +62,8 @@ const synergies = [
             </div>
             <!-- Content -->
             <div class="lg:col-span-5 p-8 pt-0 lg:pt-8 border-b lg:border-b-0 lg:border-r border-stone-200">
-              <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">{pillar.title}</h2>
+              <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-2">{pillar.title}</h2>
+              <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-champagne-600); font-family: var(--font-sans);">{pillar.claim}</p>
               <p class="text-sm text-stone-600 leading-relaxed mb-4">{pillar.desc}</p>
               {pillar.link && (
                 <a href={pillar.link.href} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-4" style={`color: var(--color-${pillar.color}-600);`}>
@@ -233,7 +173,7 @@ const synergies = [
         Words only go so far. Schedule a consultation and meet our physicians, see our facility, and ask us anything — no obligation.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="btn-primary">Book a Consultation</a>
+        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
         <a href="/team" class="btn-outline">Meet Our Team</a>
       </div>
     </div>

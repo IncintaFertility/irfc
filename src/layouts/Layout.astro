@@ -1,33 +1,45 @@
 ---
 import '../styles/global.css';
 import FloatingContact from '../components/FloatingContact.astro';
+import {
+  BRAND_NAME,
+  BRAND_ABBREV,
+  LEGAL_ENTITY,
+  SITE_URL,
+  SITE_PHONE,
+  DEFAULT_DESCRIPTION,
+  ORG_DESCRIPTION,
+} from '../config/brand';
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
   schema?: object | object[];
+  /** 内部 / 未定稿页面（如设计稿 demo）：禁止索引 */
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = 'IRFC — Where Science Meets Compassionate Care. World-class fertility treatments across Southern California, bringing together the expertise of Incinta Fertility and Reproductive Fertility Center.',
+  description = DEFAULT_DESCRIPTION,
   image = '/images/lobby-wide.jpg',
   schema,
+  noindex = false,
 } = Astro.props;
 
-const siteBase = 'https://irfc.com';
+const siteBase = SITE_URL;
 const ogImage = image.startsWith('http') ? image : `${siteBase}${image}`;
 
 const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'MedicalOrganization',
-  name: 'IRFC — Innovative Reproductive & Fertility Center',
-  alternateName: 'IRFC',
-  url: 'https://irfc.com',
-  logo: { '@type': 'ImageObject', url: 'https://irfc.com/favicon.svg' },
-  telephone: '+19494538600',
-  description: 'World-class fertility treatments across Southern California — IVF, IUI, egg freezing, PGT, donor egg, and surrogacy. Merger of Incinta Fertility and Reproductive Fertility Center.',
+  name: `${BRAND_ABBREV} — ${LEGAL_ENTITY}`,
+  alternateName: BRAND_NAME,
+  url: SITE_URL,
+  logo: { '@type': 'ImageObject', url: `${SITE_URL}/favicon.svg` },
+  telephone: SITE_PHONE,
+  description: ORG_DESCRIPTION,
   medicalSpecialty: 'Reproductive Medicine',
   hasCredential: 'Kaiser Permanente Center of Excellence',
   areaServed: { '@type': 'State', name: 'California' },
@@ -41,13 +53,13 @@ const orgSchema = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+19494538600',
+    telephone: SITE_PHONE,
     contactType: 'customer service',
     availableLanguage: ['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'],
   },
 };
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://irfc.com');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || SITE_URL);
 ---
 
 <!doctype html>
@@ -58,24 +70,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://irfc.com
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title} | IRFC</title>
+    <title>{title} | {BRAND_NAME}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} | IRFC`} />
+    <meta property="og:title" content={`${title} | ${BRAND_NAME}`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="IRFC" />
+    <meta property="og:site_name" content={BRAND_NAME} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} | IRFC`} />
+    <meta name="twitter:title" content={`${title} | ${BRAND_NAME}`} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 

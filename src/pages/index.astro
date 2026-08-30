@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { FIVE_STANDARDS } from '../config/brand';
 
 const stats = [
   { number: '20+', label: 'Years of Excellence' },
@@ -119,27 +120,27 @@ const testimonials = [
 
 <Layout
   title="Southern California IVF & Fertility Specialists"
-  description="IRFC — Award-winning IVF and fertility care across Southern California. The union of Incinta Fertility and Reproductive Fertility Center. Telehealth available. 5 locations."
+  description="INCINTA — Life Is the Ultimate Art. Award-winning IVF and fertility care across Southern California at Incinta Reproductive Fertility Center (IRFC). 5 locations."
 >
   <Nav />
 
-  <!-- Hero — full-bleed dark vignette, bottom-anchored text -->
+  <!-- 01 / HERO — 第一眼先让患者感受到品牌，而不是一排治疗按钮 -->
   <section class="idx-hero">
-    <img src="/images/lobby-wide.jpg" alt="IRFC Clinic" class="idx-hero-bg" />
+    <img src="/images/lobby-wide.jpg" alt="INCINTA fertility clinic interior" class="idx-hero-bg" />
     <div class="idx-hero-overlay"></div>
 
     <div class="idx-hero-top">
       <span class="idx-hero-eyebrow">
         <span class="idx-hero-line"></span>
-        Incinta Fertility &nbsp;·&nbsp; Reproductive Fertility Center &nbsp;·&nbsp; Southern California
+        INCINTA &nbsp;·&nbsp; Incinta Reproductive Fertility Center &nbsp;·&nbsp; Southern California
       </span>
     </div>
 
     <div class="idx-hero-body">
       <h1 class="idx-hero-h1">
-        <span>Where</span>
-        <span>Science <em>Meets</em></span>
-        <span>Compassion.</span>
+        <span>Life Is</span>
+        <span>the <em>Ultimate</em></span>
+        <span>Art.</span>
       </h1>
       <div class="idx-hero-ctas">
         <a href="/contact" class="btn-primary">
@@ -168,6 +169,63 @@ const testimonials = [
       <strong>5</strong><span>Languages Spoken</span>
     </div>
   </div>
+
+  <!-- 02 / WHY — 生命的开始，不应只是一场医疗过程 -->
+  <section id="why" class="py-24 lg:py-32 lotus-watermark" style="background: var(--color-pearl-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <p class="brand-eyebrow mb-7">Why INCINTA</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-7 leading-tight">
+          The beginning of life deserves<br />
+          <em class="not-italic" style="color: var(--color-champagne-600);">more than a medical process.</em>
+        </h2>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          The beginning of life deserves the care of a work of art. True art is never accidental —
+          it is shaped by scientific rigor, purposeful environments, meticulous detail,
+          and reverence for every possibility of life.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 / STANDARD — A New Standard in Fertility Care -->
+  <section id="standard" class="py-20" style="background: var(--color-pearl-100);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
+        The INCINTA Standard
+      </p>
+      <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-4">
+        A New Standard in Fertility Care
+      </h2>
+      <p class="text-stone-500 font-light leading-relaxed max-w-2xl mx-auto">
+        Five standards for where life begins. Not five claims — one connected philosophy of fertility care.
+      </p>
+    </div>
+  </section>
+
+  <!-- 04 / FIVE PROOFS — 五大标准 + 真实证据 -->
+  <section id="proofs" class="py-24 lg:py-32" style="background: var(--color-pearl-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px" style="background: var(--color-pearl-300);">
+        {FIVE_STANDARDS.map((s) => (
+          <div class="p-8 lg:p-10" style="background: var(--color-pearl-50);">
+            <span class="text-xs tracking-widest" style="color: var(--color-champagne-600); font-family: var(--font-sans);">{s.index}</span>
+            <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mt-3 mb-2">{s.en}</h3>
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-amethyst-600); font-family: var(--font-sans);">{s.claim}</p>
+            <p class="text-sm text-stone-500 font-light leading-relaxed mb-6">{s.body}</p>
+            <ul class="space-y-2">
+              {s.evidence.map((e) => (
+                <li class="flex gap-2 text-xs text-stone-500 font-light leading-relaxed">
+                  <span class="flex-shrink-0" style="color: var(--color-champagne-500);">—</span>
+                  <span>{e}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- The Union -->
   <section class="overflow-hidden" style="background: var(--color-stone-50);">
@@ -316,7 +374,7 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Team Preview -->
+  <!-- 05 / EXPERTS — 医生 + 胚胎学团队 -->
   <section class="py-24 lg:py-32" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-2 gap-16 items-start">
@@ -428,7 +486,7 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Locations -->
+  <!-- 06 / NETWORK — One INCINTA Network -->
   <section class="py-24 lg:py-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-3 gap-12 items-start">
@@ -566,7 +624,7 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Final CTA — full-bleed image background -->
+  <!-- 07 / ACTION — Your Beginning Starts Here. -->
   <section class="relative overflow-hidden py-32">
     <img src="/images/couple-clinic.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
     <div class="absolute inset-0" style="background: rgba(20,18,15,0.68);"></div>
@@ -574,12 +632,15 @@ const testimonials = [
       <div class="max-w-2xl mx-auto">
         <div class="flex items-center justify-center gap-3 mb-6">
           <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400);">Begin Your Journey</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400);">07 / Action</span>
           <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
         </div>
-        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white mb-6">
-          Your Family Starts Here
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white mb-5">
+          Your Beginning Starts Here.
         </h2>
+        <p class="text-white/70 font-light leading-relaxed mb-9 max-w-xl mx-auto">
+          Every Extraordinary Life Deserves an Extraordinary Beginning.
+        </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="/contact" class="btn-primary">Schedule a Consultation</a>
           <a href="tel:+19494538600" class="btn-outline" style="border-color: rgba(255,255,255,0.4); color: white;">Call (949) 453-8600</a>

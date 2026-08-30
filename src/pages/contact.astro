@@ -47,8 +47,18 @@ import Footer from '../components/Footer.astro';
         <!-- Contact Form -->
         <div id="consultation">
           <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">Request a Consultation</h2>
-          <form class="space-y-6" name="consultation" method="POST" data-netlify="true" action="/contact/success">
-            <input type="hidden" name="form-name" value="consultation" />
+          <!--
+            Cloudflare Pages 静态表单。
+            站点部署在 Cloudflare Pages，原 data-netlify 语法不生效，导致提交 404、线索丢失。
+            data-static-form-name 由平台捕获提交并归档，无需第三方表单服务。
+          -->
+          <form
+            class="space-y-6"
+            name="consultation"
+            method="POST"
+            action="/contact/success"
+            data-static-form-name="consultation"
+          >
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="first-name">First Name *</label>

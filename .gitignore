@@ -28,3 +28,8 @@ pnpm-debug.log*
 
 # wrangler local state
 .wrangler/
+
+# project-internal working files (agent scratch, audits, plans — not site content)
+.workbuddy/
+ANALYSIS.md
+BRAND-ALIGNMENT-PROPOSAL.md
