@@ -66,6 +66,14 @@ const team = [
     photo: '/images/team/dr-james-lin-circle.png',
   },
   {
+    name: 'Tiffanny Jones, MD, FACOG',
+    role: 'Reproductive Endocrinology Specialist',
+    bio: 'Supports patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.',
+    initial: 'T',
+    color: 'purple',
+    photo: '/images/doctor-tiffanny-jones.jpg',
+  },
+  {
     name: 'Zitao Liu, MD',
     role: 'Associate Chief Medical Officer',
     bio: 'Fertility specialist pioneering mild stimulation protocols and AI-assisted reproductive tools. Now accepting new patients.',
@@ -115,6 +123,46 @@ const testimonials = [
     treatment: 'IVF',
     color: 'gold',
   },
+];
+
+const careTeam = [
+  {
+    kicker: 'Physician',
+    title: 'Understand the Whole Picture.',
+    desc: 'Your physician brings together your medical history, test results, family-building goals, and current concerns to explain which paths may fit.',
+    img: '/images/care-team-physician.jpg',
+    alt: 'Dr. James Lin speaking with a patient during a consultation',
+  },
+  {
+    kicker: 'Nursing & Coordination',
+    title: 'Keep Every Step Clear and Organized.',
+    desc: 'Nursing and coordination teams help organize appointments, explain how to prepare, gather records, and carry questions through treatment.',
+    img: '/images/care-team-coordinator.jpg',
+    alt: 'A fertility care coordinator speaking with a patient during a consultation',
+  },
+  {
+    kicker: 'Embryology Lab',
+    title: 'Support the Plan with Precise Laboratory Care.',
+    desc: 'The embryology laboratory supports fertilization, embryo culture, observation, and preservation steps according to your treatment plan.',
+    img: '/images/care-team-embryologist.jpg',
+    alt: 'An embryology professional working in the IRFC laboratory',
+  },
+  {
+    kicker: 'Follow-Up',
+    title: 'Turn Information into the Next Decision.',
+    desc: 'Physicians and care teams explain results together, answer questions, and help you understand the options for what comes next.',
+    img: '/images/care-team-followup.jpg',
+    alt: 'A physician speaking with a patient during a follow-up consultation',
+  },
+];
+
+const reviews = [
+  { quote: 'The entire team made us feel welcomed, supported, and cared for every step of the way.', name: 'Nisha', when: '1 month ago' },
+  { quote: 'Special thanks to our coordinator, Michelle, who has been incredibly passionate and supportive throughout the whole process.', name: 'Jinmiao L.', when: '1 year ago' },
+  { quote: 'They listened to our concerns here and treated us like family.', name: 'Sandra P.', when: '10 months ago' },
+  { quote: 'I have never felt more seen or heard.', name: 'Shyanne B.', when: '3 months ago' },
+  { quote: 'Dr. Lin was incredibly patient in explaining every step and answering all of our complex questions.', name: 'Archer X.', when: '5 months ago' },
+  { quote: 'Every question was answered, every concern was taken seriously, and I always felt genuinely cared for.', name: 'Gabriela L.', when: '7 months ago' },
 ];
 ---
 
@@ -374,6 +422,46 @@ const testimonials = [
     </div>
   </section>
 
+  <!-- 04b / CONNECTED CARE TEAM — 一个连贯的照护团队 -->
+  <section class="py-24 lg:py-32" style="background: var(--color-pearl-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">One Connected Care Team</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-4">
+          Your Care Moves Forward as One Connected Plan.
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed max-w-2xl mx-auto">
+          See how physicians, nursing and coordination, embryology, and follow-up stay connected around the decisions ahead.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {careTeam.map((role) => (
+          <div class="bg-white border border-stone-200 overflow-hidden card-hover">
+            <div class="relative" style="aspect-ratio: 4 / 5;">
+              <img src={role.img} alt={role.alt} width="1024" height="1024" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-champagne-600); font-family: var(--font-sans);">{role.kicker}</p>
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{role.title}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{role.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center mt-8 text-sm" style="color: var(--color-stone-500);">Different specialists. One coordinated path.</p>
+      <div class="flex flex-wrap justify-center gap-4 mt-6">
+        <a href="/team" class="btn-outline">Meet the Team</a>
+        <a href="/technology" class="btn-outline">Explore Our Facilities</a>
+      </div>
+    </div>
+  </section>
+
   <!-- 05 / EXPERTS — 医生 + 胚胎学团队 -->
   <section class="py-24 lg:py-32" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
@@ -560,6 +648,40 @@ const testimonials = [
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patient Voices — Google reviews -->
+  <section class="py-24 lg:py-32 bg-white border-y border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-14">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Voices</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-4">What Patients Remember Most</h2>
+        <p class="text-stone-500 font-light leading-relaxed max-w-2xl mx-auto mb-4">Selected excerpts from public Google reviews. Excerpts are shortened for length and reflect individual experiences.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Reproductive%20Fertility%20Center%20RFC%20Family%20Irvine" target="_blank" rel="noopener" class="text-xs tracking-widest uppercase flex items-center justify-center gap-2" style="color: var(--color-gold-600);">
+          View all reviews
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        {reviews.map((r) => (
+          <figure class="p-8 border border-stone-200 bg-stone-50 flex flex-col">
+            <svg class="w-6 h-6 mb-4 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);">
+              <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
+            </svg>
+            <blockquote class="text-stone-600 leading-relaxed flex-1 text-sm mb-6">"{r.quote}"</blockquote>
+            <figcaption class="flex items-center justify-between">
+              <span class="text-xs font-medium text-stone-700">— {r.name}</span>
+              <span class="text-xs" style="color: var(--color-stone-400);">{r.when} · Google Review</span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </div>
   </section>

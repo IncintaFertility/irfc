@@ -107,6 +107,31 @@ const synergies = [
     </div>
   </section>
 
+  <!-- Connected Care Team -->
+  <section class="py-20" style="background: var(--color-pearl-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {[
+          { img: '/images/care-team-physician.jpg', alt: 'Physician consulting with a patient', kicker: 'Physician', title: 'Understand the Whole Picture.' },
+          { img: '/images/care-team-coordinator.jpg', alt: 'Care coordinator with a patient', kicker: 'Nursing & Coordination', title: 'Every Step Clear and Organized.' },
+          { img: '/images/care-team-embryologist.jpg', alt: 'Embryologist in the IRFC laboratory', kicker: 'Embryology Lab', title: 'Precise Laboratory Care.' },
+          { img: '/images/care-team-followup.jpg', alt: 'Physician in follow-up consultation', kicker: 'Follow-Up', title: 'Into the Next Decision.' },
+        ].map(role => (
+          <div class="bg-white border border-stone-200 overflow-hidden">
+            <div class="relative" style="aspect-ratio: 4 / 5;">
+              <img src={role.img} alt={role.alt} width="1024" height="1024" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div class="p-5">
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-champagne-600); font-family: var(--font-sans);">{role.kicker}</p>
+              <h3 style="font-family: var(--font-sans);" class="text-sm font-light text-stone-800 leading-snug">{role.title}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="text-center mt-6 text-sm" style="color: var(--color-stone-500);">Different specialists. One coordinated path.</p>
+    </div>
+  </section>
+
   <!-- The Merger Advantage -->
   <section class="py-24 lg:py-28 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
