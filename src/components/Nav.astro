@@ -55,8 +55,8 @@ const isActive = (group: typeof navGroups[0]) =>
 
 <header id="site-header" class="site-nav">
   <!-- Logo -->
-  <a href="/" class="nav-logo" aria-label="IRFC Home">
-    <img src="/images/irfc-logo.svg" alt="IRFC" class="nav-logo-img" />
+  <a href="/" class="nav-logo" aria-label="INCINTA Home">
+    <img src="/images/incinta-logo.png" alt="INCINTA" class="nav-logo-img" />
   </a>
 
   <!-- Desktop navigation with dropdowns -->
@@ -151,10 +151,14 @@ const isActive = (group: typeof navGroups[0]) =>
 .nav-logo { display: block; flex-shrink: 0; }
 .nav-logo-img {
   height: 2.4rem;
+  max-width: 220px;
   width: auto;
   object-fit: contain;
   object-position: left center;
   display: block;
+}
+@media (max-width: 1024px) {
+  .nav-logo-img { max-width: 170px; height: 2rem; }
 }
 
 /* Desktop links */

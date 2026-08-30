@@ -19,53 +19,61 @@
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
-  /* ── PEARL WHITE · 珍珠白（65–75% 主视觉基底，温润 · 通透 · 珍贵）── */
-  --color-pearl-50: #fdfcf9;
-  --color-pearl-100: #faf8f2;
-  --color-pearl-200: #f4f1e8;
-  --color-pearl-300: #eae5d8;
-  --color-pearl-400: #d8d2c0;
-  --color-pearl-500: #c2bba5;
-  --color-pearl-600: #a39b84;
-  --color-pearl-700: #7e7763;
-  --color-pearl-800: #575244;
-  --color-pearl-900: #332f27;
+  /* ── PEARL WHITE · 珍珠白（65–75% 主视觉基底，温润 · 通透 · 珍贵）──
+   * VI 基准：#FBF9F6
+   */
+  --color-pearl-50: #FBF9F6;
+  --color-pearl-100: #F5F2EB;
+  --color-pearl-200: #EBE6DC;
+  --color-pearl-300: #DDD6C8;
+  --color-pearl-400: #C8BFAE;
+  --color-pearl-500: #ADA590;
+  --color-pearl-600: #8F8773;
+  --color-pearl-700: #6E6758;
+  --color-pearl-800: #4A453B;
+  --color-pearl-900: #2B2823;
 
-  /* ── CHAMPAGNE GOLD · 香槟金（10–15% 价值与光，克制 · 精致 · 艺术）── */
-  --color-champagne-50: #fdf9ee;
-  --color-champagne-100: #f7edd0;
-  --color-champagne-200: #eed9a0;
-  --color-champagne-300: #e3c170;
-  --color-champagne-400: #debc68;
-  --color-champagne-500: #c6ad5c;
-  --color-champagne-600: #a27f31;
-  --color-champagne-700: #7d5f22;
-  --color-champagne-800: #5a4218;
-  --color-champagne-900: #3a2a0e;
+  /* ── CHAMPAGNE GOLD · 香槟金（10–15% 价值与光，克制 · 精致 · 艺术）──
+   * VI 基准：#BE9758
+   */
+  --color-champagne-50: #FBF7EE;
+  --color-champagne-100: #F5EAD2;
+  --color-champagne-200: #EBD6A8;
+  --color-champagne-300: #D9BC7D;
+  --color-champagne-400: #CBA865;
+  --color-champagne-500: #BE9758;
+  --color-champagne-600: #A68047;
+  --color-champagne-700: #856335;
+  --color-champagne-800: #634826;
+  --color-champagne-900: #3D2C16;
 
-  /* ── DEEP AMETHYST · 深紫（5–10% 只做点睛，身份 · 权威 · 识别）── */
-  --color-amethyst-50: #f5f3fa;
-  --color-amethyst-100: #ebe7f4;
-  --color-amethyst-200: #d7cfe9;
-  --color-amethyst-300: #b9acda;
-  --color-amethyst-400: #9a89c6;
-  --color-amethyst-500: #7e6bad;
-  --color-amethyst-600: #645391;
-  --color-amethyst-700: #4c3e72;
-  --color-amethyst-800: #332950;
-  --color-amethyst-900: #1e1832;
+  /* ── DEEP AMETHYST · 深紫（5–10% 只做点睛，身份 · 权威 · 识别）──
+   * VI 基准：#462A52；最新 Logo 文字：#35074F
+   */
+  --color-amethyst-50: #F5F2F7;
+  --color-amethyst-100: #EBE5EE;
+  --color-amethyst-200: #D7CEE0;
+  --color-amethyst-300: #BFB0CE;
+  --color-amethyst-400: #9F89B3;
+  --color-amethyst-500: #856897;
+  --color-amethyst-600: #6B4E7D;
+  --color-amethyst-700: #533B62;
+  --color-amethyst-800: #462A52;
+  --color-amethyst-900: #35074F;
 
-  /* ── SOFT LAVENDER · 浅紫（<5% 柔和过渡 / 数字辅助）── */
-  --color-lavender-50: #faf9fd;
-  --color-lavender-100: #f3f1fa;
-  --color-lavender-200: #e6e2f5;
-  --color-lavender-300: #d2cbe9;
-  --color-lavender-400: #b7acd8;
-  --color-lavender-500: #9a8cc3;
-  --color-lavender-600: #7e6fab;
-  --color-lavender-700: #635688;
-  --color-lavender-800: #453b60;
-  --color-lavender-900: #28213a;
+  /* ── SOFT LAVENDER · 浅紫（<5% 柔和过渡 / 数字辅助）──
+   * VI 基准：#DAD1E0
+   */
+  --color-lavender-50: #F7F5F9;
+  --color-lavender-100: #EFECF4;
+  --color-lavender-200: #E2DDEB;
+  --color-lavender-300: #DAD1E0;
+  --color-lavender-400: #B8ADBF;
+  --color-lavender-500: #9A8EA3;
+  --color-lavender-600: #7D7285;
+  --color-lavender-700: #63586A;
+  --color-lavender-800: #453C4B;
+  --color-lavender-900: #282230;
 
   /* ── 兼容别名 ──
    * 站点现存大量 gold-* / purple-* 引用，此处指向品牌新命名，
