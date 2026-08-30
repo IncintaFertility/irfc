@@ -784,8 +784,10 @@ const reviews = [
 .idx-hero {
   position: relative;
   height: 100vh;
+  height: 100dvh;
   min-height: 600px;
   overflow: hidden;
+  background: #0b0710;
 }
 
 .idx-hero-bg {
@@ -793,8 +795,9 @@ const reviews = [
   inset: 0;
   width: 100%;
   height: 100%;
+  -webkit-object-fit: cover;
   object-fit: cover;
-  object-position: right center;
+  object-position: center;
 }
 
 .idx-hero-overlay {
@@ -918,7 +921,6 @@ const reviews = [
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 768px) {
-  .idx-hero-bg { object-position: 85% center; }
   .idx-hero-body { padding: 0 5vw 3.5rem; }
   .idx-hero-top { left: 5vw; top: 6rem; }
   .idx-hero-h1 { margin-bottom: 2rem; }
