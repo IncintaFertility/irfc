@@ -152,6 +152,32 @@ const phases = [
     </div>
   </section>
 
+  <!-- Care Team spotlight -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="overflow-hidden rounded-sm order-2 lg:order-1">
+          <img
+            src="/images/care-team-physician.jpg"
+            alt="IRFC physician meeting with a patient during an initial fertility consultation"
+            width="1800" height="1200"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">You'll Meet a Physician First</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">
+            At IRFC, your first appointment is a one-on-one conversation with a physician — not a coordinator or nurse. You'll review your history, understand your diagnosis, and leave with an honest picture of your options.
+          </p>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            No decisions are required at that visit. Bring any prior records, and if you have a partner, we encourage them to attend.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Timeline phases -->
   {phases.map((phase, phaseIdx) => (
     <section class={`py-20 lg:py-28 ${phaseIdx % 2 === 0 ? 'bg-white' : ''}`} style={phaseIdx % 2 !== 0 ? 'background: var(--color-stone-50);' : ''}>
