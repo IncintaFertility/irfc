@@ -30,7 +30,7 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <section class="relative overflow-hidden" style="height: 340px;">
-    <img src="/images/surgery-center.jpg" alt="IRFC clinic interior" class="w-full h-full object-cover object-center" />
+    <img src="/images/surgery-center.webp" srcset="/images/surgery-center-800.webp 800w, /images/surgery-center-1280.webp 1280w, /images/surgery-center.webp 2560w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC clinic interior" class="w-full h-full object-cover object-center" />
     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 60%);"></div>
     <div class="absolute inset-0 flex items-center px-10 lg:px-20">
       <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
@@ -185,7 +185,7 @@ import Footer from '../components/Footer.astro';
         <div>
           <div class="mb-8 overflow-hidden rounded-sm">
             <img
-              src="/images/care-team-followup.jpg"
+              src="/images/care-team-followup.webp" srcset="/images/care-team-followup-800.webp 800w, /images/care-team-followup-1280.webp 1280w, /images/care-team-followup.webp 1498w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               alt="IRFC physician checking in with a patient during a follow-up visit"
               width="1498" height="1000"
               class="w-full h-auto object-cover"
