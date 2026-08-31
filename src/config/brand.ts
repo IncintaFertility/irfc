@@ -163,7 +163,6 @@ export const LOCATIONS = [
   { id: 'torrance', name: 'Torrance' },
   { id: 'irvine', name: 'Irvine' },
   { id: 'corona', name: 'Corona' },
-  { id: 'alhambra', name: 'Alhambra' },
 ] as const;
 
 /**

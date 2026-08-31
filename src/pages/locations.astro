@@ -14,15 +14,6 @@ const locations = [
     note: 'Serving the South Bay area of Los Angeles. Originally home to the Incinta Fertility clinic.',
   },
   {
-    city: 'Alhambra',
-    state: 'California',
-    address: '723 South Garfield Avenue, Suite 203',
-    cityState: 'Alhambra, CA 91801',
-    phone: '(626) 588-2885',
-    facilities: ['Clinic'],
-    note: 'Convenient to the San Gabriel Valley and greater Los Angeles area.',
-  },
-  {
     city: 'Beverly Hills',
     state: 'California',
     address: '8635 West 3rd Street, Suite 1170W',
@@ -77,7 +68,7 @@ const clinicSchema = locations.map(loc => {
 
 <Layout
   title="Locations"
-  description="IRFC has five convenient locations across Southern California — Torrance, Alhambra, Beverly Hills, Corona, and Irvine. Find expert fertility care near you."
+  description="IRFC has four convenient locations across Southern California — Torrance, Beverly Hills, Corona, and Irvine. Find expert fertility care near you."
   schema={clinicSchema}
 >
   <Nav />
@@ -94,7 +85,7 @@ const clinicSchema = locations.map(loc => {
           Care Close to Home
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed">
-          With five locations across Southern California, IRFC brings world-class fertility expertise to your neighborhood. Each clinic is staffed by our expert team and supported by the same commitment to excellence.
+          With four locations across Southern California, IRFC brings world-class fertility expertise to your neighborhood. Each clinic is staffed by our expert team and supported by the same commitment to excellence.
         </p>
       </div>
     </div>
