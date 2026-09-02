@@ -211,14 +211,14 @@ const reviews = [
       <div class="idx-standards-left">
         <p class="idx-standards-eyebrow">The INCINTA Standard</p>
         <h2 class="idx-standards-title">
-          Where life begins,
-          <em>carefully.</em>
+          Fertility Care<br/>
+          Built on <em>Proof.</em>
         </h2>
         <p class="idx-standards-lead">
-          Five standards. One connected philosophy of fertility care.
+          Five standards. One clear philosophy of care.
         </p>
-        <a href="#proofs" class="idx-standards-link">
-          Explore the standards
+        <a href="/about" class="idx-standards-link">
+          Our approach
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -227,13 +227,15 @@ const reviews = [
 
       <!-- Right: slideshow -->
       <div class="idx-standards-stage" data-std-slideshow>
+        <div class="idx-std-decor idx-std-decor--1" aria-hidden="true"></div>
+        <div class="idx-std-decor idx-std-decor--2" aria-hidden="true"></div>
+
         <div class="idx-std-slides">
           {FIVE_STANDARDS.map((s, i) => (
             <div class={`idx-std-slide${i === 0 ? ' is-active' : ''}`} data-slide={i}>
               <span class="idx-std-slide-index">{s.index}</span>
               <h3 class="idx-std-slide-title">{s.en}</h3>
               <p class="idx-std-slide-claim">{s.claim}</p>
-              <p class="idx-std-slide-hint">{s.evidence[0]}</p>
             </div>
           ))}
         </div>
@@ -325,45 +327,6 @@ const reviews = [
           it is shaped by scientific rigor, purposeful environments, meticulous detail,
           and reverence for every possibility of life.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 / STANDARD — A New Standard in Fertility Care -->
-  <section id="standard" class="py-20" style="background: var(--color-pearl-100);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
-      <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
-        The INCINTA Standard
-      </p>
-      <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-4">
-        A New Standard in Fertility Care
-      </h2>
-      <p class="text-stone-500 font-light leading-relaxed max-w-2xl mx-auto">
-        Five standards for where life begins. Not five claims — one connected philosophy of fertility care.
-      </p>
-    </div>
-  </section>
-
-  <!-- 04 / FIVE PROOFS — 五大标准 + 真实证据 -->
-  <section id="proofs" class="py-24 lg:py-32" style="background: var(--color-pearl-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px" style="background: var(--color-pearl-300);">
-        {FIVE_STANDARDS.map((s) => (
-          <div class="p-8 lg:p-10" style="background: var(--color-pearl-50);">
-            <span class="text-xs tracking-widest" style="color: var(--color-champagne-600); font-family: var(--font-sans);">{s.index}</span>
-            <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mt-3 mb-2">{s.en}</h3>
-            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-amethyst-600); font-family: var(--font-sans);">{s.claim}</p>
-            <p class="text-sm text-stone-500 font-light leading-relaxed mb-6">{s.body}</p>
-            <ul class="space-y-2">
-              {s.evidence.map((e) => (
-                <li class="flex gap-2 text-xs text-stone-500 font-light leading-relaxed">
-                  <span class="flex-shrink-0" style="color: var(--color-champagne-500);">—</span>
-                  <span>{e}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
       </div>
     </div>
   </section>
@@ -978,75 +941,100 @@ const reviews = [
 
 /* ═══ STANDARDS SLIDESHOW ═══ */
 .idx-standards {
-  background: linear-gradient(180deg, #fdfaf3 0%, #f7f3ea 100%);
-  border-bottom: 1px solid #e7e4df;
-  padding: 4.5rem 0 5rem;
+  background: #f7f5f0;
+  border-bottom: 1px solid #edeae4;
+  padding: 5rem 0 6rem;
+  overflow: hidden;
 }
 
 .idx-standards-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   align-items: center;
-  gap: 4rem;
+  gap: 5rem;
 }
 
 .idx-standards-left {
-  max-width: 420px;
+  max-width: 440px;
 }
 
 .idx-standards-eyebrow {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--color-champagne-700);
+  color: #8a8478;
   font-family: var(--font-sans);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .idx-standards-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.75rem, 5.5vw, 4.5rem);
   font-weight: 300;
-  line-height: 1.05;
-  color: var(--color-stone-800);
-  margin-bottom: 1.25rem;
+  line-height: 1.02;
+  color: #2e2640;
+  margin-bottom: 1.5rem;
 }
 
 .idx-standards-title em {
   font-style: italic;
-  color: var(--color-purple-500);
+  color: #5d4e75;
 }
 
 .idx-standards-lead {
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.6;
-  color: var(--color-stone-500);
+  color: #6d665c;
   font-weight: 300;
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
+  max-width: 340px;
 }
 
 .idx-standards-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-purple-600);
+  color: #5d4e75;
   font-family: var(--font-sans);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease;
 }
 
-.idx-standards-link:hover { border-color: var(--color-purple-300); }
+.idx-standards-link:hover { border-color: #c4b8d4; }
 
 .idx-standards-stage {
   position: relative;
-  min-height: 420px;
+  min-height: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.idx-std-decor {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+.idx-std-decor--1 {
+  width: 42px;
+  height: 42px;
+  background: rgba(93, 78, 117, 0.08);
+  top: 8%;
+  left: 6%;
+}
+
+.idx-std-decor--2 {
+  width: 18px;
+  height: 18px;
+  background: rgba(197, 177, 134, 0.22);
+  bottom: 18%;
+  right: 10%;
 }
 
 .idx-std-slides {
@@ -1064,15 +1052,15 @@ const reviews = [
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 3rem;
-  background: #fffef9;
+  padding: 2.5rem;
+  background: #faf8f4;
   border-radius: 50%;
-  box-shadow: 0 24px 70px rgba(68, 52, 70, 0.08), 0 8px 24px rgba(68, 52, 70, 0.04);
-  border: 1px solid rgba(231, 228, 223, 0.8);
+  box-shadow: 0 32px 90px rgba(46, 38, 64, 0.07), 0 12px 30px rgba(46, 38, 64, 0.03);
+  border: 1px solid rgba(237, 234, 228, 0.9);
   opacity: 0;
   transform: scale(0.96) translateY(12px);
   pointer-events: none;
-  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .idx-std-slide.is-active {
@@ -1083,37 +1071,29 @@ const reviews = [
 }
 
 .idx-std-slide-index {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: var(--color-champagne-700);
-  font-family: var(--font-sans);
-  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 10vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1;
+  color: #2e2640;
+  margin-bottom: 0.75rem;
 }
 
 .idx-std-slide-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
   font-weight: 300;
-  line-height: 1.1;
-  color: var(--color-stone-800);
+  line-height: 1.15;
+  color: #2e2640;
   margin-bottom: 0.75rem;
 }
 
 .idx-std-slide-claim {
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-amethyst-600);
+  color: #7a6b93;
   font-family: var(--font-sans);
-  margin-bottom: 1.5rem;
-}
-
-.idx-std-slide-hint {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  color: var(--color-stone-500);
-  font-weight: 300;
-  max-width: 280px;
 }
 
 .idx-std-arrow {
@@ -1121,12 +1101,12 @@ const reviews = [
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 1px solid #e7e4df;
-  background: #fffef9;
-  color: var(--color-stone-600);
+  border: 1px solid #e3e0da;
+  background: rgba(250, 248, 244, 0.9);
+  color: #7a756c;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1135,8 +1115,8 @@ const reviews = [
 }
 
 .idx-std-arrow:hover {
-  border-color: var(--color-purple-300);
-  color: var(--color-purple-600);
+  border-color: #c4b8d4;
+  color: #5d4e75;
   background: #fff;
 }
 
@@ -1145,12 +1125,12 @@ const reviews = [
 
 .idx-std-dots {
   position: absolute;
-  bottom: -2.5rem;
+  bottom: -3rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
-  gap: 0.6rem;
+  gap: 0.65rem;
 }
 
 .idx-std-dot {
@@ -1159,13 +1139,13 @@ const reviews = [
   border-radius: 50%;
   border: none;
   padding: 0;
-  background: #d8d4cc;
+  background: #d4d0c8;
   cursor: pointer;
   transition: background 0.25s ease, transform 0.25s ease;
 }
 
 .idx-std-dot.is-active {
-  background: var(--color-purple-500);
+  background: #5d4e75;
   transform: scale(1.25);
 }
 
@@ -1173,24 +1153,28 @@ const reviews = [
 @media (max-width: 1024px) {
   .idx-standards-inner {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem;
     text-align: center;
   }
   .idx-standards-left {
     max-width: 560px;
     margin: 0 auto;
   }
+  .idx-standards-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .idx-standards-link {
     justify-content: center;
   }
   .idx-standards-stage {
-    min-height: 380px;
+    min-height: 420px;
   }
   .idx-std-slides {
     max-width: 420px;
   }
-  .idx-std-arrow--prev { left: -0.5rem; }
-  .idx-std-arrow--next { right: -0.5rem; }
+  .idx-std-decor--1 { top: 4%; left: 10%; }
+  .idx-std-decor--2 { bottom: 14%; right: 12%; }
 }
 
 @media (max-width: 768px) {
@@ -1207,29 +1191,29 @@ const reviews = [
   .idx-hero-top { left: 5vw; top: 6rem; }
   .idx-hero-h1 { margin-bottom: 2rem; }
 
-  .idx-standards { padding: 3rem 0 4rem; }
+  .idx-standards { padding: 3.5rem 0 5rem; }
   .idx-standards-stage {
-    min-height: 340px;
+    min-height: 360px;
   }
   .idx-std-slides {
     max-width: 340px;
   }
   .idx-std-slide {
-    padding: 2rem;
+    padding: 1.75rem;
   }
   .idx-std-arrow {
     width: 38px;
     height: 38px;
   }
-  .idx-std-arrow--prev { left: 0; }
-  .idx-std-arrow--next { right: 0; }
+  .idx-std-arrow--prev { left: -0.25rem; }
+  .idx-std-arrow--next { right: -0.25rem; }
 }
 
 @media (max-width: 480px) {
   .idx-hero-h1 span { font-size: clamp(2.6rem, 11vw, 3.2rem); }
-  .idx-standards-title { font-size: clamp(2rem, 9vw, 2.75rem); }
-  .idx-std-slide-title { font-size: 1.5rem; }
-  .idx-std-slide-claim { font-size: 0.65rem; }
-  .idx-std-slide-hint { font-size: 0.75rem; }
+  .idx-standards-title { font-size: clamp(2.1rem, 10vw, 3rem); }
+  .idx-std-slide-index { font-size: clamp(3.5rem, 18vw, 5rem); }
+  .idx-std-slide-title { font-size: 1.35rem; }
+  .idx-std-slide-claim { font-size: 0.6rem; }
 }
 </style>
