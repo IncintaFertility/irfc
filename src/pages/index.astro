@@ -225,19 +225,18 @@ const reviews = [
         </a>
       </div>
 
-      <!-- Right: slideshow -->
+      <!-- Right: horizontal card carousel -->
       <div class="idx-standards-stage" data-std-slideshow>
-        <div class="idx-std-decor idx-std-decor--1" aria-hidden="true"></div>
-        <div class="idx-std-decor idx-std-decor--2" aria-hidden="true"></div>
-
-        <div class="idx-std-slides">
-          {FIVE_STANDARDS.map((s, i) => (
-            <div class={`idx-std-slide${i === 0 ? ' is-active' : ''}`} data-slide={i}>
-              <span class="idx-std-slide-index">{s.index}</span>
-              <h3 class="idx-std-slide-title">{s.en}</h3>
-              <p class="idx-std-slide-claim">{s.claim}</p>
-            </div>
-          ))}
+        <div class="idx-std-viewport">
+          <div class="idx-std-track">
+            {FIVE_STANDARDS.map((s, i) => (
+              <div class="idx-std-card" data-slide={i}>
+                <span class="idx-std-card-index">{s.index}</span>
+                <h3 class="idx-std-card-title">{s.en}</h3>
+                <p class="idx-std-card-claim">{s.claim}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <button type="button" class="idx-std-arrow idx-std-arrow--prev" aria-label="Previous standard">
@@ -270,20 +269,20 @@ const reviews = [
       (function () {
         const root = document.querySelector('[data-std-slideshow]');
         if (!root) return;
-        const slides = Array.from(root.querySelectorAll('[data-slide]'));
+        const track = root.querySelector('.idx-std-track');
         const dots = Array.from(root.querySelectorAll('.idx-std-dot'));
         const prevBtn = root.querySelector('.idx-std-arrow--prev');
         const nextBtn = root.querySelector('.idx-std-arrow--next');
+        const len = dots.length;
         let current = 0;
         let timer = null;
         const interval = 5000;
 
         function go(n) {
-          const next = ((n % slides.length) + slides.length) % slides.length;
-          slides[current].classList.remove('is-active');
+          const next = ((n % len) + len) % len;
+          track.style.transform = `translateX(-${next * (100 / len)}%)`;
           dots[current].classList.remove('is-active');
           dots[current].setAttribute('aria-selected', 'false');
-          slides[next].classList.add('is-active');
           dots[next].classList.add('is-active');
           dots[next].setAttribute('aria-selected', 'true');
           current = next;
@@ -1008,88 +1007,60 @@ const reviews = [
 
 .idx-standards-stage {
   position: relative;
-  min-height: 520px;
+  min-height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 3.25rem;
 }
 
-.idx-std-decor {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(1px);
-}
-
-.idx-std-decor--1 {
-  width: 42px;
-  height: 42px;
-  background: rgba(93, 78, 117, 0.08);
-  top: 8%;
-  left: 6%;
-}
-
-.idx-std-decor--2 {
-  width: 18px;
-  height: 18px;
-  background: rgba(197, 177, 134, 0.22);
-  bottom: 18%;
-  right: 10%;
-}
-
-.idx-std-slides {
-  position: relative;
+.idx-std-viewport {
   width: 100%;
-  max-width: 520px;
-  aspect-ratio: 1 / 1;
+  max-width: 560px;
+  overflow: hidden;
 }
 
-.idx-std-slide {
-  position: absolute;
-  inset: 0;
+.idx-std-track {
+  display: flex;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.idx-std-card {
+  flex: 0 0 100%;
+  min-height: 260px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
-  padding: 2.5rem;
+  text-align: left;
+  padding: 2.75rem 2.5rem;
   background: #faf8f4;
-  border-radius: 50%;
-  box-shadow: 0 32px 90px rgba(46, 38, 64, 0.07), 0 12px 30px rgba(46, 38, 64, 0.03);
+  border-radius: 28px;
+  box-shadow: 0 28px 80px rgba(46, 38, 64, 0.07), 0 10px 26px rgba(46, 38, 64, 0.03);
   border: 1px solid rgba(237, 234, 228, 0.9);
-  opacity: 0;
-  transform: scale(0.96) translateY(12px);
-  pointer-events: none;
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.idx-std-slide.is-active {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-  pointer-events: auto;
-  z-index: 2;
-}
-
-.idx-std-slide-index {
+.idx-std-card-index {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 10vw, 7.5rem);
+  font-size: 3.25rem;
   font-weight: 300;
   line-height: 1;
-  color: #2e2640;
-  margin-bottom: 0.75rem;
+  color: #5d4e75;
+  margin-bottom: 1.25rem;
 }
 
-.idx-std-slide-title {
+.idx-std-card-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 300;
-  line-height: 1.15;
+  line-height: 1.12;
   color: #2e2640;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
-.idx-std-slide-claim {
-  font-size: 0.7rem;
+.idx-std-card-claim {
+  font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #7a6b93;
@@ -1125,7 +1096,7 @@ const reviews = [
 
 .idx-std-dots {
   position: absolute;
-  bottom: -3rem;
+  bottom: -2.75rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -1168,13 +1139,11 @@ const reviews = [
     justify-content: center;
   }
   .idx-standards-stage {
-    min-height: 420px;
+    min-height: 360px;
   }
-  .idx-std-slides {
-    max-width: 420px;
+  .idx-std-viewport {
+    max-width: 460px;
   }
-  .idx-std-decor--1 { top: 4%; left: 10%; }
-  .idx-std-decor--2 { bottom: 14%; right: 12%; }
 }
 
 @media (max-width: 768px) {
@@ -1193,13 +1162,15 @@ const reviews = [
 
   .idx-standards { padding: 3.5rem 0 5rem; }
   .idx-standards-stage {
-    min-height: 360px;
+    min-height: 320px;
+    padding: 0 2.75rem;
   }
-  .idx-std-slides {
-    max-width: 340px;
+  .idx-std-viewport {
+    max-width: 360px;
   }
-  .idx-std-slide {
-    padding: 1.75rem;
+  .idx-std-card {
+    padding: 2.25rem 1.75rem;
+    min-height: 220px;
   }
   .idx-std-arrow {
     width: 38px;
@@ -1212,8 +1183,8 @@ const reviews = [
 @media (max-width: 480px) {
   .idx-hero-h1 span { font-size: clamp(2.6rem, 11vw, 3.2rem); }
   .idx-standards-title { font-size: clamp(2.1rem, 10vw, 3rem); }
-  .idx-std-slide-index { font-size: clamp(3.5rem, 18vw, 5rem); }
-  .idx-std-slide-title { font-size: 1.35rem; }
-  .idx-std-slide-claim { font-size: 0.6rem; }
+  .idx-std-card-index { font-size: 2.5rem; }
+  .idx-std-card-title { font-size: 1.35rem; }
+  .idx-std-card-claim { font-size: 0.6rem; }
 }
 </style>
