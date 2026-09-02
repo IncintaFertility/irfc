@@ -112,7 +112,7 @@ export const FIVE_STANDARDS: Standard[] = [
       'VOC-controlled materials throughout laboratory spaces',
     ],
     visual: '空间 / 建筑线条 / 空气感 / 材质细节',
-    image: '/images/lobby-wide-800.webp',
+    image: '/images/lobby-detail-800.webp',
   },
   {
     id: 'life-treasured',
@@ -127,8 +127,8 @@ export const FIVE_STANDARDS: Standard[] = [
       'Continuous monitoring with redundant alarm systems',
       'Backup power and fail-safe protocols at every site',
     ],
-    visual: '储存 / 监测 / 安全细节',
-    image: '/images/consultation-joyful-800.webp',
+    visual: '患者关系 / 伴侣 / 温暖 / 珍视',
+    image: '/images/couple-clinic-800.webp',
   },
   {
     id: 'systems-of-excellence',
@@ -143,8 +143,8 @@ export const FIVE_STANDARDS: Standard[] = [
       'Kaiser Permanente Center of Excellence designation',
       'One clinical standard across the entire center network',
     ],
-    visual: '手术中心 / 网络 / 系统',
-    image: '/images/surgery-center-800.webp',
+    visual: '团队 / 网络 / 协作 / 系统',
+    image: '/images/team-rfc-wide-800.webp',
   },
   {
     id: 'private-by-nature',
