@@ -12,6 +12,7 @@ const locations = [
     phone: '(424) 212-4087',
     facilities: ['Clinic'],
     note: 'Serving the South Bay area of Los Angeles. Originally home to the Incinta Fertility clinic.',
+    image: '/images/clinic-scene-1280.webp',
   },
   {
     city: 'Beverly Hills',
@@ -21,6 +22,7 @@ const locations = [
     phone: '(213) 600-8088',
     facilities: ['Clinic'],
     note: 'Located in the heart of Los Angeles, steps from Cedars-Sinai Medical Center.',
+    image: '/images/reception-desk-1280.webp',
   },
   {
     city: 'Corona',
@@ -30,6 +32,7 @@ const locations = [
     phone: '(951) 272-2221',
     facilities: ['Clinic', 'Surgery Center', 'IVF Laboratory'],
     note: 'Full-service location serving the Inland Empire with on-site surgical and laboratory facilities.',
+    image: '/images/surgery-center-1280.webp',
   },
   {
     city: 'Irvine',
@@ -39,7 +42,25 @@ const locations = [
     phone: '(949) 453-8600',
     facilities: ['Clinic', 'Surgery Center', 'IVF Laboratory'],
     note: 'Our flagship location in Orange County. Full surgery center and laboratory on-site. Parking available.',
+    image: '/images/consultation-joyful-1280.webp',
   },
+];
+
+const networkFeatures = [
+  'Welcoming spaces',
+  'Southern California access',
+  'Laboratory technology',
+  'Comfort and privacy',
+  'Clinical environments',
+  'Thoughtful details',
+  'Space for conversation',
+  'Connected care',
+];
+
+const arrivalSteps = [
+  { n: '01', t: 'Confirm your location', d: 'Check the current address and appointment time.' },
+  { n: '02', t: 'Review your instructions', d: 'Prepare requested records and arrival details.' },
+  { n: '03', t: 'Ask what happens where', d: 'Confirm the setting for monitoring, procedures, or laboratory care.' },
 ];
 
 const clinicSchema = locations.map(loc => {
@@ -91,57 +112,139 @@ const clinicSchema = locations.map(loc => {
     </div>
   </section>
 
-  <!-- Location Cards -->
+  <!-- One Connected Standard of Care -->
   <section class="py-20" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="space-y-8">
+      <div class="max-w-2xl mb-12">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">The IRFC Network</span>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-4">
+          One Connected Standard of Care.
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed">
+          Welcoming spaces, clinical environments, and laboratory technology come together across the IRFC network. This collective view reflects the places and teams supporting your care throughout Southern California.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {networkFeatures.map(f => (
+          <div class="p-6 bg-white border border-stone-200">
+            <span class="block h-px w-8 mb-3" style="background: var(--color-gold-500);"></span>
+            <p class="text-sm text-stone-700 font-light leading-snug" style="font-family: var(--font-sans);">{f}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Cards -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="space-y-10">
         {locations.map((loc, i) => (
-          <div class="bg-white border border-stone-200 p-10 lg:p-14">
-            <div class="grid lg:grid-cols-3 gap-10 items-start">
-              <!-- Location Name & Number -->
-              <div>
-                <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">0{i + 1} — {loc.state}</p>
-                <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{loc.city}</h2>
-                <div class="flex flex-wrap gap-2">
-                  {loc.facilities.map(f => (
-                    <span class="text-xs px-3 py-1 border" style="color: var(--color-gold-700); border-color: var(--color-gold-300);">{f}</span>
-                  ))}
+          <div id={loc.city.toLowerCase().replace(/\s+/g, '-')} class="bg-white border border-stone-200 overflow-hidden scroll-mt-32">
+            <div class="h-56 sm:h-64 overflow-hidden">
+              <img
+                src={loc.image}
+                alt={`${loc.city} IRFC clinic`}
+                class="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="p-10 lg:p-14">
+              <div class="grid lg:grid-cols-3 gap-10 items-start">
+                <!-- Location Name & Number -->
+                <div>
+                  <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">0{i + 1} — {loc.state}</p>
+                  <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{loc.city}</h2>
+                  <div class="flex flex-wrap gap-2">
+                    {loc.facilities.map(f => (
+                      <span class="text-xs px-3 py-1 border" style="color: var(--color-gold-700); border-color: var(--color-gold-300);">{f}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <!-- Address & Contact -->
-              <div>
-                <div class="mb-5">
-                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Address</p>
-                  <p class="text-stone-700 text-sm leading-relaxed">{loc.address}</p>
-                  <p class="text-stone-700 text-sm">{loc.cityState}</p>
+                <!-- Address & Contact -->
+                <div>
+                  <div class="mb-5">
+                    <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Address</p>
+                    <p class="text-stone-700 text-sm leading-relaxed">{loc.address}</p>
+                    <p class="text-stone-700 text-sm">{loc.cityState}</p>
+                  </div>
+                  <div class="mb-5">
+                    <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Phone</p>
+                    <a href={`tel:${loc.phone.replace(/\D/g,'')}`} class="text-sm font-medium" style="color: var(--color-gold-600);">{loc.phone}</a>
+                  </div>
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(loc.address + ', ' + loc.cityState)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-xs tracking-wider uppercase"
+                    style="color: var(--color-stone-500);"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    Get Directions
+                  </a>
                 </div>
-                <div class="mb-5">
-                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">Phone</p>
-                  <a href={`tel:${loc.phone.replace(/\D/g,'')}`} class="text-sm font-medium" style="color: var(--color-gold-600);">{loc.phone}</a>
-                </div>
-                <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(loc.address + ', ' + loc.cityState)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 text-xs tracking-wider uppercase"
-                  style="color: var(--color-stone-500);"
-                >
-                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                  Get Directions
-                </a>
-              </div>
 
-              <!-- Note & CTA -->
-              <div>
-                <p class="text-sm text-stone-500 leading-relaxed mb-6">{loc.note}</p>
-                <a href="/contact" class="btn-outline text-xs py-2.5 px-5">Book at This Location</a>
+                <!-- Note & CTA -->
+                <div>
+                  <p class="text-sm text-stone-500 leading-relaxed mb-6">{loc.note}</p>
+                  <a href="/contact" class="btn-outline text-xs py-2.5 px-5">Book at This Location</a>
+                </div>
               </div>
             </div>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Southern California Network (map) -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Southern California Network</span>
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-4">
+          Four Locations. One Connected Network.
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed">
+          From the San Gabriel Valley to Orange County, our clinics are placed where Southern California lives and works.
+        </p>
+      </div>
+
+      <div class="bg-white border border-stone-200 p-4 lg:p-8">
+        <picture>
+          <source srcset="/images/socal-network-map-1280.webp" type="image/webp" />
+          <img
+            src="/images/socal-network-map.png"
+            alt="Map of IRFC Southern California locations: Beverly Hills, Torrance, Irvine, and Corona"
+            class="w-full h-auto mx-auto"
+            style="max-width: 1000px;"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        {['Beverly Hills', 'Torrance', 'Irvine', 'Corona'].map(c => (
+          <a
+            href={`#${c.toLowerCase().replace(/\s+/g, '-')}`}
+            class="text-xs tracking-wider uppercase px-4 py-2 border border-stone-300 text-stone-600 rounded-full transition-colors hover:border-[var(--color-gold-400)] hover:text-[var(--color-gold-700)]"
+          >
+            {c}
+          </a>
         ))}
       </div>
     </div>
@@ -154,6 +257,34 @@ const clinicSchema = locations.map(loc => {
     </div>
     <div class="overflow-hidden">
       <img src="/images/lobby-detail.webp" srcset="/images/lobby-detail-800.webp 800w, /images/lobby-detail-1280.webp 1280w, /images/lobby-detail.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC clinic interior" class="w-full h-full object-cover object-center" />
+    </div>
+  </section>
+
+  <!-- Before You Arrive -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl mb-12">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Before You Arrive</span>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-4">
+          A More Confident First Visit.
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed">
+          A few simple steps help your first appointment go smoothly.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {arrivalSteps.map(step => (
+          <div class="bg-white border border-stone-200 p-8">
+            <span class="block text-3xl font-light mb-4" style="font-family: var(--font-serif); color: var(--color-gold-600);">{step.n}</span>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{step.t}</h3>
+            <p class="text-sm text-stone-500 font-light leading-relaxed">{step.d}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
