@@ -77,6 +77,8 @@ export interface Standard {
   evidence: string[];
   /** 视觉关键词，用于配图选择 */
   visual: string;
+  /** 首屏轮播配图（站点实景 webp） */
+  image: string;
 }
 
 export const FIVE_STANDARDS: Standard[] = [
@@ -94,6 +96,7 @@ export const FIVE_STANDARDS: Standard[] = [
       'RI Witness electronic witnessing for every sample',
     ],
     visual: '实验室 / 胚胎学家 / 显微操作',
+    image: '/images/care-team-embryologist-800.webp',
   },
   {
     id: 'architected-for-life',
@@ -109,6 +112,7 @@ export const FIVE_STANDARDS: Standard[] = [
       'VOC-controlled materials throughout laboratory spaces',
     ],
     visual: '空间 / 建筑线条 / 空气感 / 材质细节',
+    image: '/images/lobby-wide-800.webp',
   },
   {
     id: 'life-treasured',
@@ -124,6 +128,7 @@ export const FIVE_STANDARDS: Standard[] = [
       'Backup power and fail-safe protocols at every site',
     ],
     visual: '储存 / 监测 / 安全细节',
+    image: '/images/consultation-joyful-800.webp',
   },
   {
     id: 'systems-of-excellence',
@@ -139,6 +144,7 @@ export const FIVE_STANDARDS: Standard[] = [
       'One clinical standard across the entire center network',
     ],
     visual: '手术中心 / 网络 / 系统',
+    image: '/images/surgery-center-800.webp',
   },
   {
     id: 'private-by-nature',
@@ -154,6 +160,7 @@ export const FIVE_STANDARDS: Standard[] = [
       'Care in English, Mandarin, Japanese, Korean and Spanish',
     ],
     visual: '私密诊室 / 医患关系 / 细节',
+    image: '/images/consultation-800.webp',
   },
 ];
 
