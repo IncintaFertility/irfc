@@ -196,6 +196,35 @@ const reviews = [
     </div>
   </section>
 
+  <!-- Screen 2 — The Meaning of Life: deep interpretation & value -->
+  <section class="idx-meaning" aria-label="The Meaning of Life">
+    <div class="idx-meaning-inner">
+      <p class="idx-meaning-eyebrow">02 / Meaning</p>
+      <h2 class="idx-meaning-title">
+        <span class="idx-meaning-en">Every life deserves an extraordinary beginning</span>
+        <span class="idx-meaning-zh">生命不凡，始于不凡</span>
+      </h2>
+      <div class="idx-meaning-body">
+        <p class="idx-meaning-lead">
+          <span class="en">A thought blooms. The future is already within.</span>
+          <span class="zh">一念花开，未来已在其中。</span>
+        </p>
+        <p>
+          <span class="en">Every life begins with a thought of the future.</span>
+          <span class="zh">每一个生命，都始于一个关于未来的念头。</span>
+        </p>
+        <p>
+          <span class="en">The moment you imagine a child, that story has already begun.</span>
+          <span class="zh">当你第一次期待一个孩子，生命的故事，其实已经开始。</span>
+        </p>
+        <p class="idx-meaning-lotus">
+          <span class="en">Like the lotus&mdash;when the flower blooms, the fruit is already within.</span>
+          <span class="zh">如莲花一般——花开之时，果已在其中。</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Standards slideshow — 五大标准首屏幻灯呈现 -->
   <section class="idx-standards" aria-label="The INCINTA Standard">
     <div class="idx-standards-inner max-w-screen-xl mx-auto px-6 lg:px-10">
@@ -912,6 +941,92 @@ const reviews = [
 
 .idx-ghost-btn:hover { border-color: rgba(255,255,255,0.7); }
 
+/* ═══ SCREEN 2 — THE MEANING OF LIFE ═══ */
+.idx-meaning {
+  position: relative;
+  padding: 7rem 10vw 8.5rem;
+  background:
+    radial-gradient(120% 70% at 50% -8%, rgba(99,66,150,0.07), transparent 58%),
+    var(--color-pearl-50);
+  border-bottom: 1px solid var(--color-pearl-200);
+}
+.idx-meaning-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+.idx-meaning-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 2.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-purple-400);
+}
+.idx-meaning-eyebrow::before {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-gold-500);
+  flex-shrink: 0;
+}
+.idx-meaning-title {
+  margin: 0 0 3.75rem;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.06;
+  color: var(--color-purple-700);
+}
+.idx-meaning-en {
+  display: block;
+  font-size: clamp(2.3rem, 5.2vw, 4.4rem);
+  letter-spacing: -0.015em;
+}
+.idx-meaning-zh {
+  display: block;
+  margin-top: 0.85rem;
+  font-size: clamp(1.35rem, 3vw, 2.4rem);
+  letter-spacing: 0.05em;
+  color: var(--color-purple-500);
+}
+.idx-meaning-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.9rem;
+  max-width: 46rem;
+}
+.idx-meaning-body p {
+  margin: 0;
+  line-height: 1.85;
+}
+.idx-meaning-body .en {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  color: var(--color-champagne-600);
+}
+.idx-meaning-body .zh {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--color-stone-500);
+}
+.idx-meaning-lead .en {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  color: var(--color-champagne-700);
+}
+.idx-meaning-lead .zh {
+  font-size: 1.05rem;
+  color: var(--color-stone-600);
+}
+.idx-meaning-lotus .en {
+  color: var(--color-purple-500);
+}
+
 /* ═══ STANDARDS SLIDESHOW ═══ */
 .idx-standards {
   background: #f7f5f0;
@@ -1151,6 +1266,11 @@ const reviews = [
     object-fit: cover;
     object-position: center;
   }
+  /* Screen 2 — tighten on phones */
+  .idx-meaning { padding: 4.5rem 6vw 5.5rem; }
+  .idx-meaning-eyebrow { margin-bottom: 2rem; }
+  .idx-meaning-title { margin-bottom: 2.75rem; }
+  .idx-meaning-body { gap: 1.5rem; max-width: none; }
   /* Reserve a bigger bottom band so the CTA clears the video subtitles */
   .idx-hero-body { padding: 0 5vw clamp(4.5rem, 14vh, 7rem); }
   .idx-hero-h1 { margin-bottom: 1.5rem; }
@@ -1207,6 +1327,8 @@ const reviews = [
     padding: 0.6rem 1.25rem;
     font-size: 0.65rem;
   }
+  .idx-meaning { padding: 3.75rem 5vw 4.5rem; }
+  .idx-meaning-body .zh { font-size: 0.9rem; }
   .idx-standards-title { font-size: clamp(1.9rem, 9vw, 2.7rem); }
   .idx-std-card-index { font-size: 2.25rem; }
   .idx-std-card-title { font-size: 1.25rem; }
