@@ -946,8 +946,8 @@ const reviews = [
   position: relative;
   padding: 7rem 10vw 8.5rem;
   background:
-    radial-gradient(120% 70% at 50% -8%, rgba(99,66,150,0.07), transparent 58%),
-    var(--color-pearl-50);
+    radial-gradient(135% 80% at 50% -12%, rgba(91,60,140,0.11), transparent 62%),
+    linear-gradient(180deg, var(--color-pearl-50) 0%, var(--color-pearl-100) 100%);
   border-bottom: 1px solid var(--color-pearl-200);
 }
 .idx-meaning-inner {
@@ -973,11 +973,22 @@ const reviews = [
   flex-shrink: 0;
 }
 .idx-meaning-title {
+  position: relative;
   margin: 0 0 3.75rem;
+  padding-bottom: 2.25rem;
   font-family: var(--font-serif);
   font-weight: 400;
   line-height: 1.06;
-  color: var(--color-purple-700);
+  color: var(--color-purple-800);
+}
+.idx-meaning-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-champagne-500), transparent);
 }
 .idx-meaning-en {
   display: block;
@@ -986,20 +997,21 @@ const reviews = [
 }
 .idx-meaning-zh {
   display: block;
-  margin-top: 0.85rem;
+  margin-top: 0.9rem;
   font-size: clamp(1.35rem, 3vw, 2.4rem);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  font-weight: 500;
   color: var(--color-purple-500);
 }
 .idx-meaning-body {
   display: flex;
   flex-direction: column;
-  gap: 1.9rem;
+  gap: 2.1rem;
   max-width: 46rem;
 }
 .idx-meaning-body p {
   margin: 0;
-  line-height: 1.85;
+  line-height: 2;
 }
 .idx-meaning-body .en {
   display: block;
@@ -1010,9 +1022,9 @@ const reviews = [
 }
 .idx-meaning-body .zh {
   display: block;
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
   font-size: 0.95rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   color: var(--color-stone-500);
 }
 .idx-meaning-lead .en {
