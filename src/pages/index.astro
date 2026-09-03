@@ -230,7 +230,7 @@ const reviews = [
     <div class="idx-standards-inner max-w-screen-xl mx-auto px-6 lg:px-10">
       <!-- Left: headline -->
       <div class="idx-standards-left">
-        <p class="idx-standards-eyebrow">The INCINTA Standard</p>
+        <p class="idx-standards-eyebrow">03 / The INCINTA Standard</p>
         <h2 class="idx-standards-title">
           Fertility Care<br/>
           Built on <em>Proof.</em>
@@ -1039,7 +1039,7 @@ const reviews = [
   color: var(--color-purple-500);
 }
 
-/* ═══ STANDARDS SLIDESHOW ═══ */
+/* ═══ STANDARDS SLIDESHOW (Screen 3) ═══ */
 .idx-standards {
   background: #f7f5f0;
   border-bottom: 1px solid #edeae4;
@@ -1059,12 +1059,22 @@ const reviews = [
 }
 
 .idx-standards-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   font-size: 0.6rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #8a8478;
+  color: var(--color-purple-400);
   font-family: var(--font-sans);
   margin-bottom: 1.25rem;
+}
+.idx-standards-eyebrow::before {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-gold-500);
+  flex-shrink: 0;
 }
 
 .idx-standards-title {
@@ -1072,19 +1082,19 @@ const reviews = [
   font-size: clamp(2.75rem, 5.5vw, 4.5rem);
   font-weight: 300;
   line-height: 1.02;
-  color: #2e2640;
+  color: var(--color-purple-800);
   margin-bottom: 1.5rem;
 }
 
 .idx-standards-title em {
   font-style: italic;
-  color: #5d4e75;
+  color: var(--color-purple-500);
 }
 
 .idx-standards-lead {
   font-size: 1rem;
   line-height: 1.6;
-  color: #6d665c;
+  color: var(--color-stone-600);
   font-weight: 300;
   margin-bottom: 2rem;
   max-width: 340px;
@@ -1097,14 +1107,14 @@ const reviews = [
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #5d4e75;
+  color: var(--color-purple-500);
   font-family: var(--font-sans);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease;
 }
 
-.idx-standards-link:hover { border-color: #c4b8d4; }
+.idx-standards-link:hover { border-color: var(--color-purple-300); }
 
 .idx-standards-stage {
   position: relative;
