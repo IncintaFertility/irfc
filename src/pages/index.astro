@@ -1148,13 +1148,13 @@ const reviews = [
     min-height: 460px;
   }
   .idx-hero-bg {
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
-    background: #000;
   }
-  .idx-hero-body { padding: 0 5vw 3rem; }
+  /* Reserve a bottom band for video subtitles so the CTA never covers them */
+  .idx-hero-body { padding: 0 5vw clamp(3.5rem, 12vh, 6rem); }
   .idx-hero-h1 { margin-bottom: 1.5rem; }
-  .idx-hero-h1 span { font-size: clamp(2.3rem, 9.5vw, 2.85rem); white-space: normal; }
+  .idx-hero-h1 span { font-size: clamp(2.3rem, 9.5vw, 2.85rem); white-space: nowrap; }
   .idx-ghost-btn {
     padding: 0.75rem 1.75rem;
   }
