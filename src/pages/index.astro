@@ -863,8 +863,8 @@ const reviews = [
   left: 0;
   right: 0;
   z-index: 2;
-  /* Reserve a bottom band for video subtitles so the CTA never covers them */
-  padding: 0 10vw clamp(5rem, 13vh, 9rem);
+  /* Reserve a bigger bottom band so the CTA clears the video subtitles */
+  padding: 0 10vw clamp(6.5rem, 16vh, 11rem);
 }
 
 .idx-hero-h1 {
@@ -1151,12 +1151,19 @@ const reviews = [
     object-fit: cover;
     object-position: center;
   }
-  /* Reserve a bottom band for video subtitles so the CTA never covers them */
-  .idx-hero-body { padding: 0 5vw clamp(3.5rem, 12vh, 6rem); }
+  /* Reserve a bigger bottom band so the CTA clears the video subtitles */
+  .idx-hero-body { padding: 0 5vw clamp(4.5rem, 14vh, 7rem); }
   .idx-hero-h1 { margin-bottom: 1.5rem; }
   .idx-hero-h1 span { font-size: clamp(2.3rem, 9.5vw, 2.85rem); white-space: nowrap; }
+  /* Smaller booking button on phones — don't let it dominate the screen */
+  .idx-hero-ctas .btn-primary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
   .idx-ghost-btn {
     padding: 0.75rem 1.75rem;
+    font-size: 0.7rem;
   }
 
   .idx-standards { padding: 3rem 0 4.5rem; }
@@ -1190,6 +1197,16 @@ const reviews = [
 
 @media (max-width: 480px) {
   .idx-hero-h1 span { font-size: clamp(2.1rem, 9vw, 2.6rem); }
+  /* Keep the booking button compact on the smallest screens */
+  .idx-hero-ctas { gap: 0.5rem; }
+  .idx-hero-ctas .btn-primary {
+    padding: 0.55rem 1rem;
+    font-size: 0.65rem;
+  }
+  .idx-ghost-btn {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.65rem;
+  }
   .idx-standards-title { font-size: clamp(1.9rem, 9vw, 2.7rem); }
   .idx-std-card-index { font-size: 2.25rem; }
   .idx-std-card-title { font-size: 1.25rem; }
