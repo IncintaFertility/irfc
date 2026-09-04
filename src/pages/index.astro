@@ -12,15 +12,6 @@ const stats = [
 
 
 
-const recognitions = [
-  'Kaiser Permanente Center of Excellence',
-  'Top IVF Center — California, IVF Authority',
-  'Fairfax EggBank Premier Partner',
-  'Highly Rated on FertilityIQ',
-];
-
-
-
 ---
 
 <Layout
@@ -53,10 +44,9 @@ const recognitions = [
     </div>
   </section>
 
-  <!-- 02 / Meaning — The Meaning of Life: deep interpretation & value -->
+  <!-- Meaning — The Meaning of Life: deep interpretation & value -->
   <section class="idx-meaning" aria-label="The Meaning of Life">
     <div class="idx-meaning-inner">
-      <p class="idx-meaning-eyebrow">02 / Meaning</p>
       <h2 class="idx-meaning-title">
         <span class="idx-meaning-en">Every life deserves an extraordinary beginning</span>
       </h2>
@@ -68,10 +58,9 @@ const recognitions = [
     </div>
   </section>
 
-  <!-- 03 / The INCINTA Standard — six standards as alternating editorial rows -->
+  <!-- The INCINTA Standard — six standards as alternating editorial rows -->
   <section class="idx-standards" aria-label="The INCINTA Standard">
     <div class="idx-standards-head max-w-screen-xl mx-auto px-6 lg:px-10">
-      <p class="idx-standards-eyebrow">03 / The INCINTA Standard</p>
       <h2 class="idx-standards-title">Six standards help patients establish their own criteria.</h2>
       <p class="idx-standards-lead">A fertility center worth trusting should pass six tests. These are the standards we help every patient hold their care to.</p>
     </div>
@@ -151,14 +140,9 @@ const recognitions = [
     </div>
   </section>
 
-  <!-- 04 / Brand DNA — Science, Art, Life: the philosophy behind every standard -->
+  <!-- Brand DNA — Science, Art, Life: the philosophy behind every standard -->
   <section class="idx-dna" aria-label="Brand DNA">
     <div class="idx-dna-inner max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="idx-dna-head">
-        <div class="idx-dna-rule"></div>
-        <p class="idx-dna-eyebrow">04 / Brand DNA</p>
-        <div class="idx-dna-rule"></div>
-      </div>
       <h2 class="idx-dna-title">Science<span class="idx-dna-dot">&middot;</span><span class="idx-dna-art">Art</span><span class="idx-dna-dot">&middot;</span>Life</h2>
       <p class="idx-dna-body">Science makes life possible. Art refines every detail. Life gives every technology its meaning.</p>
       <div class="idx-dna-grid">
@@ -189,28 +173,6 @@ const recognitions = [
             <span class="idx-dna-panel-cap">The meaning behind every technology.</span>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Recognition Bar -->
-  <section class="py-10 bg-white border-y border-stone-100">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
-        <p class="text-xs tracking-widest uppercase flex-shrink-0 lg:w-36 text-center lg:text-left" style="color: var(--color-stone-400); font-family: var(--font-sans);">
-          Recognized<br/>Excellence
-        </p>
-        <div class="h-px w-full lg:h-12 lg:w-px" style="background: var(--color-stone-200);"></div>
-        <div class="flex flex-wrap justify-center lg:justify-start gap-x-10 gap-y-3">
-          {recognitions.map(rec => (
-            <div class="flex items-center gap-2">
-              <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: var(--color-gold-500);">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-              <span class="text-sm" style="color: var(--color-stone-500);">{rec}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   </section>
@@ -344,24 +306,6 @@ const recognitions = [
   max-width: 62rem;
   margin: 0 auto;
 }
-.idx-meaning-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 0 0 2.75rem;
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--color-purple-400);
-}
-.idx-meaning-eyebrow::before {
-  content: "";
-  width: 2.5rem;
-  height: 1px;
-  background: var(--color-gold-500);
-  flex-shrink: 0;
-}
 .idx-meaning-title {
   position: relative;
   margin: 0 0 3.75rem;
@@ -417,25 +361,6 @@ const recognitions = [
   border-bottom: 1px solid var(--color-pearl-200);
   padding: 6rem 0 7rem;
   overflow: hidden;
-}
-
-.idx-standards-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--color-purple-400);
-  font-family: var(--font-sans);
-  margin-bottom: 1.25rem;
-}
-.idx-standards-eyebrow::before {
-  content: "";
-  width: 2.5rem;
-  height: 1px;
-  background: var(--color-gold-500);
-  flex-shrink: 0;
 }
 
 .idx-standards-title {
@@ -556,7 +481,6 @@ const recognitions = [
   }
   /* Screen 2 — tighten on phones */
   .idx-meaning { padding: 4.5rem 6vw 5.5rem; }
-  .idx-meaning-eyebrow { margin-bottom: 2rem; }
   .idx-meaning-title { margin-bottom: 2.75rem; }
   .idx-meaning-body { gap: 1.5rem; max-width: none; }
   .idx-hero-body { padding: 0 6vw clamp(6rem, 20vh, 10rem); }
@@ -593,30 +517,6 @@ const recognitions = [
     overflow: hidden;
   }
   .idx-dna-inner { text-align: center; }
-  .idx-dna-head {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-  .idx-dna-rule {
-    height: 1px;
-    width: 3rem;
-    background: linear-gradient(90deg, transparent, var(--color-gold-500));
-  }
-  .idx-dna-rule:last-child {
-    background: linear-gradient(90deg, var(--color-gold-500), transparent);
-  }
-  .idx-dna-eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--color-purple-400);
-    margin: 0;
-    white-space: nowrap;
-  }
   .idx-dna-title {
     font-family: var(--font-serif);
     font-weight: 300;
