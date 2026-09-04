@@ -22,7 +22,7 @@ const stats = [
 
   <!-- 01 / HERO — First impression should convey the brand, not a row of treatment buttons -->
   <section class="idx-hero">
-    <video class="idx-hero-bg" autoplay muted loop playsinline preload="auto" poster="/images/lobby-wide.webp">
+    <video id="idx-hero-video" class="idx-hero-bg" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="auto" poster="/images/lobby-wide.webp">
       <source src="/videos/brand-promo.mp4" type="video/mp4" />
     </video>
     <div class="idx-hero-overlay"></div>
@@ -206,6 +206,30 @@ const stats = [
   </section>
 
   <Footer />
+
+  <script is:inline>
+    (function () {
+      var v = document.getElementById('idx-hero-video');
+      if (!v) return;
+      // WeChat/iOS autoplay policy requires the element to be muted before play()
+      v.muted = true;
+      v.setAttribute('muted', '');
+      function tryPlay() {
+        try {
+          var p = v.play();
+          if (p && typeof p.catch === 'function') p.catch(function () {});
+        } catch (e) {}
+      }
+      // Normal browsers: try immediately + on load
+      tryPlay();
+      window.addEventListener('load', tryPlay, false);
+      // WeChat (X5/WKWebView) only allows play after the JS bridge is ready
+      document.addEventListener('WeixinJSBridgeReady', tryPlay, false);
+      if (typeof window.WeixinJSBridge !== 'undefined') tryPlay();
+      // Last-resort: first touch anywhere starts the video
+      document.addEventListener('touchstart', tryPlay, { once: true });
+    })();
+  </script>
 </Layout>
 
 <style>
