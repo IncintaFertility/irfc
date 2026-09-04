@@ -552,31 +552,28 @@ const recognitions = [
 
 @media (max-width: 768px) {
   .idx-hero {
-    height: 70dvh;
-    min-height: 460px;
+    height: 100svh;
+    min-height: auto;
   }
   .idx-hero-bg {
     object-fit: cover;
     object-position: center;
+  }
+  /* Simpler, stronger overlay on phones to keep the video clean behind text/subtitles */
+  .idx-hero-overlay {
+    background: linear-gradient(to top, rgba(8,5,2,0.9) 0%, rgba(8,5,2,0.55) 45%, rgba(8,5,2,0.22) 100%);
   }
   /* Screen 2 — tighten on phones */
   .idx-meaning { padding: 4.5rem 6vw 5.5rem; }
   .idx-meaning-eyebrow { margin-bottom: 2rem; }
   .idx-meaning-title { margin-bottom: 2.75rem; }
   .idx-meaning-body { gap: 1.5rem; max-width: none; }
-  /* Reserve a bigger bottom band so the CTA clears the video subtitles */
-  .idx-hero-body { padding: 0 5vw clamp(4.5rem, 14vh, 7rem); }
+  .idx-hero-body { padding: 0 6vw clamp(6rem, 20vh, 10rem); }
   .idx-hero-h1 { margin-bottom: 1.5rem; }
   .idx-hero-h1 span { font-size: clamp(2.3rem, 9.5vw, 2.85rem); white-space: nowrap; }
-  /* Smaller booking button on phones — don't let it dominate the screen */
-  .idx-hero-ctas .btn-primary {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-  }
-  .idx-ghost-btn {
-    padding: 0.75rem 1.75rem;
-    font-size: 0.7rem;
+  /* Hide the hero CTAs on phones — the first screen stays a clean full-screen video */
+  .idx-hero-ctas {
+    display: none;
   }
 
   .idx-standards { padding: 3.5rem 0 4.5rem; }
@@ -593,16 +590,6 @@ const recognitions = [
 
 @media (max-width: 480px) {
   .idx-hero-h1 span { font-size: clamp(2.1rem, 9vw, 2.6rem); }
-  /* Keep the booking button compact on the smallest screens */
-  .idx-hero-ctas { gap: 0.5rem; }
-  .idx-hero-ctas .btn-primary {
-    padding: 0.55rem 1rem;
-    font-size: 0.65rem;
-  }
-  .idx-ghost-btn {
-    padding: 0.6rem 1.25rem;
-    font-size: 0.65rem;
-  }
   .idx-meaning { padding: 3.75rem 5vw 4.5rem; }
   .idx-standards-title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
 }
