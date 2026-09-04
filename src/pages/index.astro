@@ -62,10 +62,7 @@ const recognitions = [
       </h2>
       <div class="idx-meaning-body">
         <p>
-          <span class="en">The moment you begin to imagine a child, the story of that life has already begun.</span>
-        </p>
-        <p class="idx-meaning-lotus">
-          <span class="en">Like the lotus &mdash; when the flower blooms, the fruit is already within.</span>
+          <span class="en">The moment you begin to imagine a child, the story of that life has already begun. </span><span class="idx-meaning-lotus"><span class="en">Like the lotus &mdash; when the flower blooms, the fruit is already within.</span></span>
         </p>
       </div>
     </div>
@@ -164,7 +161,6 @@ const recognitions = [
       </div>
       <h2 class="idx-dna-title">Science<span class="idx-dna-dot">&middot;</span><span class="idx-dna-art">Art</span><span class="idx-dna-dot">&middot;</span>Life</h2>
       <p class="idx-dna-body">Science makes life possible. Art refines every detail. Life gives every technology its meaning.</p>
-      <p class="idx-dna-note">In fertility medicine, ART is both Assisted Reproductive Technology and an art of precision.</p>
       <div class="idx-dna-grid">
         <article class="idx-dna-panel">
           <img src="/images/dna/dna-science.jpg" alt="INCINTA embryology and laboratory precision" loading="lazy" decoding="async" />
@@ -400,7 +396,7 @@ const recognitions = [
   line-height: 1.95;
 }
 .idx-meaning-body .en {
-  display: block;
+  display: inline;
   font-family: var(--font-serif);
   font-style: italic;
   font-size: clamp(1.1rem, 2.1vw, 1.5rem);
@@ -411,6 +407,7 @@ const recognitions = [
   color: var(--color-champagne-700);
 }
 .idx-meaning-lotus .en {
+  display: inline;
   color: var(--color-purple-500);
 }
 
@@ -645,25 +642,6 @@ const recognitions = [
     color: var(--color-stone-600);
     max-width: 44rem;
     margin: 0 auto 2.5rem;
-  }
-  .idx-dna-note {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--color-stone-400);
-    max-width: 38rem;
-    margin: 0 auto;
-    position: relative;
-    padding-top: 1.75rem;
-  }
-  .idx-dna-note::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2.5rem;
-    height: 1px;
-    background: var(--color-gold-400);
   }
   .idx-dna-grid {
     display: flex;
