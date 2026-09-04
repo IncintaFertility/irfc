@@ -281,6 +281,50 @@ const achievements = [
     </div>
   </section>
 
+  <!-- Inclusive Care -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">Inclusive Care</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          Fertility care should welcome every path to a family. We build affirming, accessible care for all.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-10 lg:p-12 border border-stone-200 bg-white">
+          <div class="w-8 h-px mb-8" style="background: var(--color-purple-400);"></div>
+          <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">LGBTQIA+ Family Building</h3>
+          <p class="text-sm leading-relaxed mb-8 text-stone-500">
+            Inclusive, affirming care for same-sex couples and single individuals — sperm donation, egg donation, and gestational surrogacy.
+          </p>
+          <a href="/services#lgbtqia" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+            Learn More
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+
+        <div class="p-10 lg:p-12 border border-stone-200 bg-white">
+          <div class="w-8 h-px mb-8" style="background: var(--color-gold-500);"></div>
+          <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">International &amp; Out-of-Town Patients</h3>
+          <p class="text-sm leading-relaxed mb-6 text-stone-500">
+            Telehealth consultations and multilingual care for patients near and far.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            {['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'].map(lang => (
+              <span class="text-xs px-3 py-1 border tracking-wide" style="border-color: var(--color-stone-300); color: var(--color-stone-500);">{lang}</span>
+            ))}
+          </div>
+          <a href="/contact" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+            Contact Us
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="py-20 lg:py-24" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
