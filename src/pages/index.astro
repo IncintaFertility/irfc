@@ -171,6 +171,35 @@ const recognitions = [
       <h2 class="idx-dna-title">Science<span class="idx-dna-dot">&middot;</span><span class="idx-dna-art">Art</span><span class="idx-dna-dot">&middot;</span>Life</h2>
       <p class="idx-dna-body">Science makes life possible. Art refines every detail. Life gives every technology its meaning.</p>
       <p class="idx-dna-note">In fertility medicine, ART is both Assisted Reproductive Technology and an art of precision.</p>
+      <div class="idx-dna-grid">
+        <article class="idx-dna-panel">
+          <img src="/images/dna/dna-science.jpg" alt="INCINTA embryology and laboratory precision" loading="lazy" decoding="async" />
+          <span class="idx-dna-panel-ov"></span>
+          <div class="idx-dna-panel-lab">
+            <span class="idx-dna-panel-num">01</span>
+            <span class="idx-dna-panel-title">Science</span>
+            <span class="idx-dna-panel-cap">Precision that makes life possible.</span>
+          </div>
+        </article>
+        <article class="idx-dna-panel">
+          <img src="/images/dna/dna-art.jpg" alt="The artistry of personalised fertility care" loading="lazy" decoding="async" />
+          <span class="idx-dna-panel-ov"></span>
+          <div class="idx-dna-panel-lab">
+            <span class="idx-dna-panel-num">02</span>
+            <span class="idx-dna-panel-title">Art</span>
+            <span class="idx-dna-panel-cap">Craft in every single detail.</span>
+          </div>
+        </article>
+        <article class="idx-dna-panel">
+          <img src="/images/dna/dna-life.jpg" alt="New life beginning at INCINTA" loading="lazy" decoding="async" />
+          <span class="idx-dna-panel-ov"></span>
+          <div class="idx-dna-panel-lab">
+            <span class="idx-dna-panel-num">03</span>
+            <span class="idx-dna-panel-title">Life</span>
+            <span class="idx-dna-panel-cap">The meaning behind every technology.</span>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -655,8 +684,79 @@ const recognitions = [
     height: 1px;
     background: var(--color-gold-400);
   }
+  .idx-dna-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    height: clamp(420px, 56vh, 560px);
+  }
+  .idx-dna-panel {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex .55s cubic-bezier(.22, 1, .36, 1);
+  }
+  .idx-dna-panel:hover { flex: 3.4 1 0; }
+  .idx-dna-panel img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .7s cubic-bezier(.22, 1, .36, 1);
+  }
+  .idx-dna-panel:hover img { transform: scale(1.06); }
+  .idx-dna-panel-ov {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 15, 12, 0.34);
+    transition: background .55s ease;
+  }
+  .idx-dna-panel:hover .idx-dna-panel-ov { background: rgba(18, 15, 12, 0.20); }
+  .idx-dna-panel-lab {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.25rem 1.4rem;
+    color: #fff;
+    text-align: left;
+  }
+  .idx-dna-panel-num {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: .72rem;
+    letter-spacing: .18em;
+    opacity: .8;
+  }
+  .idx-dna-panel-title {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: .15rem;
+  }
+  .idx-dna-panel-cap {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: .82rem;
+    line-height: 1.5;
+    margin-top: .5rem;
+    max-width: 22rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .idx-dna-panel:hover .idx-dna-panel-cap { opacity: 1; transform: translateY(0); }
   @media (max-width: 768px) {
     .idx-dna { padding: 4.5rem 0 5rem; }
     .idx-dna-title { font-size: clamp(2.2rem, 11vw, 3.4rem); }
+    .idx-dna-grid { flex-direction: column; height: auto; gap: .85rem; }
+    .idx-dna-panel { flex: none; height: clamp(200px, 34vh, 280px); }
+    .idx-dna-panel-cap { opacity: 1; transform: none; }
   }
 </style>
