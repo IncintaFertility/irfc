@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { standards } from '../data/standards';
 
 const stats = [
   { number: '20+', label: 'Years of Excellence' },
@@ -66,77 +67,24 @@ const stats = [
     </div>
 
     <div class="idx-standards-rows max-w-screen-xl mx-auto px-6 lg:px-10">
-      <article class="std-row">
-        <div class="std-row-media">
-          <img src="/images/standards/01-collective-expertise.jpg" alt="INCINTA reception and care team welcoming patients" loading="lazy" decoding="async" />
-        </div>
-        <div class="std-row-body">
-          <span class="std-row-index">01</span>
-          <h3 class="std-row-title">Collective expertise</h3>
-          <p class="std-row-lead">One patient. The expertise of an entire team.</p>
-          <p class="std-row-text">When a patient chooses INCINTA, the strength of our entire team carries that trust&mdash;together, we strive for the best possible outcome.</p>
-        </div>
-      </article>
-
-      <article class="std-row">
-        <div class="std-row-media">
-          <img src="/images/standards/02-precision-personalization.jpg" alt="Hands poised in careful movement, representing personalized care" loading="lazy" decoding="async" />
-        </div>
-        <div class="std-row-body">
-          <span class="std-row-index">02</span>
-          <h3 class="std-row-title">Precision &amp; personalization</h3>
-          <p class="std-row-lead">No two patients are the same. Their care shouldn't be either.</p>
-          <p class="std-row-text">Care is never one-size-fits-all. It is a plan crafted for your life.</p>
-        </div>
-      </article>
-
-      <article class="std-row">
-        <div class="std-row-media">
-          <img src="/images/standards/03-lab-excellence.jpg" alt="INCINTA embryology laboratory with advanced equipment" loading="lazy" decoding="async" />
-        </div>
-        <div class="std-row-body">
-          <span class="std-row-index">03</span>
-          <h3 class="std-row-title">Laboratory excellence</h3>
-          <p class="std-row-lead">Where life begins, standards matter most.</p>
-          <p class="std-row-text">With exacting rigor in every laboratory detail, we safeguard every extraordinary beginning.</p>
-        </div>
-      </article>
-
-      <article class="std-row">
-        <div class="std-row-media">
-          <img src="/images/standards/04-privacy-transparency.jpg" alt="Glass staircase in the INCINTA clinic" loading="lazy" decoding="async" />
-        </div>
-        <div class="std-row-body">
-          <span class="std-row-index">04</span>
-          <h3 class="std-row-title">Privacy &amp; transparency</h3>
-          <p class="std-row-lead">Private, yet completely open.</p>
-          <p class="std-row-text">Your body and choices remain absolutely private; our standards and processes are completely open. True trust is built through clear boundaries.</p>
-        </div>
-      </article>
-
-      <article class="std-row">
-        <div class="std-row-media">
-          <img src="/images/standards/05-art-of-care.jpg" alt="A warm, supportive conversation between patient and care team" loading="lazy" decoding="async" />
-        </div>
-        <div class="std-row-body">
-          <span class="std-row-index">05</span>
-          <h3 class="std-row-title">The art of care</h3>
-          <p class="std-row-lead">More than clinical rigor, it holds the beauty of art and the warmth of nature.</p>
-          <p class="std-row-text">From the texture of pearl to the imagery of the lotus, from light to material&mdash;a space carefully created for life.</p>
-        </div>
-      </article>
-
-      <article class="std-row">
-        <div class="std-row-media">
-          <img src="/images/standards/06-care-within-reach.jpg" alt="A couple welcomed in the INCINTA clinic" loading="lazy" decoding="async" />
-        </div>
-        <div class="std-row-body">
-          <span class="std-row-index">06</span>
-          <h3 class="std-row-title">Exceptional care, within reach</h3>
-          <p class="std-row-lead">Beyond distance and resources.</p>
-          <p class="std-row-text">Exceptional care truly reaches every family in need.</p>
-        </div>
-      </article>
+      {standards.map((s) => (
+        <a class="std-row" href={`/standards/${s.slug}`} aria-label={s.title}>
+          <div class="std-row-media">
+            <img src={s.image} alt={s.title} loading="lazy" decoding="async" />
+          </div>
+          <div class="std-row-body">
+            <span class="std-row-index">{s.number}</span>
+            <h3 class="std-row-title">{s.title}</h3>
+            <p class="std-row-lead">{s.lead}</p>
+            <p class="std-row-text">{s.text}</p>
+            <span class="std-row-cue">Explore this standard
+              <svg class="std-row-cue-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -420,6 +368,9 @@ const stats = [
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
   gap: 4rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .std-row-media {
@@ -477,6 +428,26 @@ const stats = [
   color: var(--color-stone-600);
   margin: 0;
 }
+
+.std-row-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.std-row:hover .std-row-cue {
+  opacity: 1;
+  transform: translateY(0);
+}
+.std-row-cue-arrow { width: 0.95rem; height: 0.95rem; }
 
 .std-row:nth-child(even) .std-row-media { order: 2; }
 .std-row:nth-child(even) .std-row-body { order: 1; }

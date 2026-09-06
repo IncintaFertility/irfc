@@ -1,53 +1,18 @@
 ---
+import { standards } from '../data/standards';
+
 const pathname = Astro.url.pathname;
 
-const navGroups = [
-  {
-    label: 'Treatments',
-    children: [
-      { href: '/services/ivf',          label: 'In Vitro Fertilization (IVF)' },
-      { href: '/services/iui',           label: 'Intrauterine Insemination (IUI)' },
-      { href: '/services/egg-freezing',  label: 'Fertility Preservation' },
-      { href: '/services/pgt',           label: 'Genetic Testing (PGT)' },
-      { href: '/services/icsi',                    label: 'Intracytoplasmic Sperm Injection (ICSI)' },
-      { href: '/services/recurrent-pregnancy-loss', label: 'Recurrent Pregnancy Loss' },
-      { href: '/services/donors-surrogacy',         label: 'Donors & Surrogacy' },
-      { href: '/services/lgbtqia',                  label: 'LGBTQIA+ Family Building' },
-      { href: '/services',                          label: 'All Treatments →' },
-    ],
-  },
-  {
-    label: 'Our Team',
-    children: [
-      { href: '/team/dr-james-lin',  label: 'Dr. James P. Lin, MD' },
-      { href: '/team/dr-zitao-liu',  label: 'Dr. Zitao Liu, MD' },
-      { href: '/team/dr-yufen-xie',  label: 'Dr. Yufen Xie, PhD' },
-      { href: '/team',               label: 'All Physicians →' },
-    ],
-  },
-  {
-    label: 'For Patients',
-    children: [
-      { href: '/patient-journey',    label: 'Patient Journey' },
-      { href: '/outcomes',           label: 'Success Rates' },
-      { href: '/financing',          label: 'Financing & Cost' },
-      { href: '/patient-resources',  label: 'Patient Resources' },
-      { href: '/testimonials',          label: 'Patient Stories' },
-      { href: '/faq',                   label: 'FAQ' },
-      { href: '/international-patients', label: 'International Patients' },
-    ],
-  },
-  {
-    label: 'About',
-    children: [
-      { href: '/about',      label: 'About IRFC' },
-      { href: '/why-irfc',   label: 'Why Choose Us' },
-      { href: '/why-irfc#standards', label: 'Our Standard' },
-      { href: '/technology', label: 'Lab Technology' },
-      { href: '/locations',  label: 'Locations' },
-    ],
-  },
-];
+// Main navigation = the six INCINTA standards. Each standard's dropdown lists
+// its hub page first, then every content page filed under it.
+const navGroups = standards.map((s) => ({
+  label: s.shortTitle,
+  fullTitle: s.title,
+  children: [
+    { href: `/standards/${s.slug}`, label: `${s.title} →`, isAll: true },
+    ...s.related.flatMap((g) => g.items.map((i) => ({ href: i.href, label: i.label, isAll: false }))),
+  ],
+}));
 
 const isActive = (group: typeof navGroups[0]) =>
   group.children.some(c => c.href !== '#' && (pathname === c.href || pathname.startsWith(c.href.split('#')[0] + '/')));
@@ -74,7 +39,7 @@ const isActive = (group: typeof navGroups[0]) =>
             {group.children.map(child => (
               <a
                 href={child.href}
-                class={`nav-dropdown-item${child.label.endsWith('→') ? ' nav-dropdown-item--all' : ''}${pathname === child.href ? ' nav-dropdown-item--active' : ''}`}
+                class={`nav-dropdown-item${child.isAll ? ' nav-dropdown-item--all' : ''}${pathname === child.href ? ' nav-dropdown-item--active' : ''}`}
               >
                 {child.label}
               </a>
@@ -87,7 +52,10 @@ const isActive = (group: typeof navGroups[0]) =>
 
   <!-- Desktop right -->
   <div class="nav-right">
-    <a href="/contact" class="nav-cta">Schedule a Consultation</a>
+    <a href="/contact" class="nav-cta">
+      <span class="nav-cta-full">Schedule a Consultation</span>
+      <span class="nav-cta-short">Schedule</span>
+    </a>
   </div>
 
   <!-- Hamburger (mobile) -->
@@ -110,7 +78,7 @@ const isActive = (group: typeof navGroups[0]) =>
           </summary>
           <div class="nav-mobile-children">
             {group.children.map(child => (
-              <a href={child.href} class={`nav-mobile-child${child.label.endsWith('→') ? ' nav-mobile-child--all' : ''}`}>
+              <a href={child.href} class={`nav-mobile-child${child.isAll ? ' nav-mobile-child--all' : ''}`}>
                 {child.label}
               </a>
             ))}
@@ -135,7 +103,7 @@ const isActive = (group: typeof navGroups[0]) =>
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10vw;
+  padding: 0 4vw;
   background: rgba(253,250,243,0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(214,209,197,0.5);
@@ -165,7 +133,7 @@ const isActive = (group: typeof navGroups[0]) =>
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1rem;
 }
 
 .nav-group { position: relative; }
@@ -173,16 +141,16 @@ const isActive = (group: typeof navGroups[0]) =>
 .nav-group-btn {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-family: var(--font-sans);
   color: var(--color-stone-700);
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.5rem 0;
+  padding: 0.55rem 0.4rem;
   transition: color 0.2s;
   white-space: nowrap;
 }
@@ -221,7 +189,7 @@ const isActive = (group: typeof navGroups[0]) =>
   background: white;
   border: 1px solid var(--color-stone-200);
   box-shadow: 0 8px 24px -4px rgba(0,0,0,0.08);
-  min-width: 210px;
+  min-width: 230px;
 }
 
 .nav-dropdown-item {
@@ -281,16 +249,31 @@ const isActive = (group: typeof navGroups[0]) =>
 .nav-cta {
   display: inline-flex;
   align-items: center;
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-family: var(--font-sans);
   text-decoration: none;
-  padding: 0.6rem 1.4rem;
+  padding: 0.6rem 1.1rem;
   border: 1px solid var(--color-gold-500);
   color: var(--color-gold-700);
   transition: border-color 0.25s, color 0.25s, background 0.25s;
   white-space: nowrap;
+}
+
+.nav-cta-short { display: inline; }
+.nav-cta-full { display: none; }
+
+@media (min-width: 1200px) {
+  .nav-cta-short { display: none; }
+  .nav-cta-full { display: inline; }
+}
+
+/* Wider screens: let the nav breathe with larger type */
+@media (min-width: 1280px) {
+  .nav-links { gap: 1.5rem; }
+  .nav-group-btn { font-size: 0.9rem; padding: 0.6rem 0.5rem; }
+  .nav-cta { font-size: 0.78rem; padding: 0.65rem 1.25rem; }
 }
 
 .nav-cta:hover {
