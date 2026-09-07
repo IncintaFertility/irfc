@@ -53,12 +53,25 @@ export const standards: Standard[] = [
       'Expertise at IRFC is never held by a single person. Physicians, embryologists, nurses, and care coordinators work as one unit around your case—so every decision benefits from the full weight of the practice, not just one opinion.',
     related: [
       {
-        heading: 'Our Physicians',
+        heading: 'Physician Team',
         items: [
-          { href: '/team', label: 'Meet the Team', desc: 'The specialists who lead your care' },
-          { href: '/team/dr-james-lin', label: 'Dr. James P. Lin, MD', desc: 'Founder & Reproductive Endocrinologist' },
-          { href: '/team/dr-zitao-liu', label: 'Dr. Zitao Liu, MD', desc: 'Reproductive Endocrinologist' },
-          { href: '/team/dr-yufen-xie', label: 'Dr. Yufen Xie, PhD', desc: 'Laboratory & Embryology Director' },
+          { href: '/team/dr-james-lin', label: 'James P. Lin, MD', desc: 'Founder & Medical Director' },
+          { href: '/team/dr-tiffanny-jones', label: 'Tiffanny LaTrice Jones, MD', desc: 'Reproductive Endocrinology Specialist' },
+          { href: '/team/dr-zitao-liu', label: 'Zitao Liu, MD', desc: 'Associate Chief Medical Officer' },
+        ],
+      },
+      {
+        heading: 'Embryologists',
+        items: [
+          { href: '/team/dr-yufen-xie', label: 'Yufen Xie, PhD', desc: 'IVF Laboratory Director' },
+          { href: '/team', label: 'Hyang Park, M.S.', desc: 'IVF Laboratory Supervisor' },
+        ],
+      },
+      {
+        heading: 'Nursing Team',
+        items: [
+          { href: '/team', label: 'Lily Hao, MSN, WHNP', desc: 'Nurse Manager' },
+          { href: '/team', label: 'Kelly Zhao', desc: 'Third Party Coordinator' },
         ],
       },
     ],
