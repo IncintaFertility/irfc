@@ -47,6 +47,7 @@ const isActive = (group: typeof navGroups[0]) =>
                     <a
                       href={i.href}
                       class={`nav-dropdown-item${pathname === i.href ? ' nav-dropdown-item--active' : ''}`}
+                      {...(i.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     >
                       {i.label}
                     </a>
@@ -62,7 +63,7 @@ const isActive = (group: typeof navGroups[0]) =>
 
   <!-- Desktop right -->
   <div class="nav-right">
-    <a href="/contact" class="nav-cta">
+    <a href="/appointment" class="nav-cta">
       <span class="nav-cta-full">Schedule a Consultation</span>
       <span class="nav-cta-short">Schedule</span>
     </a>
@@ -94,7 +95,7 @@ const isActive = (group: typeof navGroups[0]) =>
               <div class="nav-mobile-subgroup">
                 <p class="nav-mobile-subgroup-heading">{g.heading}</p>
                 {g.items.map(i => (
-                  <a href={i.href} class="nav-mobile-child">
+                  <a href={i.href} class="nav-mobile-child" {...(i.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
                     {i.label}
                   </a>
                 ))}
@@ -105,8 +106,8 @@ const isActive = (group: typeof navGroups[0]) =>
       ))}
     </nav>
     <div class="nav-mobile-bottom">
-      <a href="tel:+19494538600" class="nav-mobile-phone">(949) 453-8600</a>
-      <a href="/contact" class="btn-primary nav-mobile-cta">Schedule a Consultation</a>
+      <a href="tel:+19494538600" class="nav-mobile-phone">Irvine · (949) 453-8600</a>
+      <a href="/appointment" class="btn-primary nav-mobile-cta">Schedule a Consultation</a>
     </div>
   </div>
 </div>

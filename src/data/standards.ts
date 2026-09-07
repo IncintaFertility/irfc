@@ -9,6 +9,8 @@ export interface RelatedItem {
   href: string;
   label: string;
   desc?: string;
+  /** When true the link points to an external site and opens in a new tab */
+  external?: boolean;
 }
 
 export interface RelatedGroup {
@@ -64,14 +66,14 @@ export const standards: Standard[] = [
         heading: 'Embryologists',
         items: [
           { href: '/team/dr-yufen-xie', label: 'Yufen Xie, PhD', desc: 'IVF Laboratory Director' },
-          { href: '/team', label: 'Hyang Park, M.S.', desc: 'IVF Laboratory Supervisor' },
+          { href: '/team/hyang-park', label: 'Hyang Park, M.S.', desc: 'IVF Laboratory Supervisor' },
         ],
       },
       {
         heading: 'Nursing Team',
         items: [
-          { href: '/team', label: 'Lily Hao, MSN, WHNP', desc: 'Nurse Manager' },
-          { href: '/team', label: 'Kelly Zhao', desc: 'Third Party Coordinator' },
+          { href: '/team/lily-hao', label: 'Lily Hao, MSN, WHNP', desc: 'Nurse Manager' },
+          { href: '/team/kelly-zhao', label: 'Kelly Zhao', desc: 'Third Party Coordinator' },
         ],
       },
     ],
@@ -102,7 +104,6 @@ export const standards: Standard[] = [
       {
         heading: 'Your Personalized Journey',
         items: [
-          { href: '/patient-journey', label: 'Patient Journey', desc: 'How care unfolds, step by step' },
           { href: '/services/ivf', label: 'In Vitro Fertilization (IVF)', desc: 'In Vitro Fertilization' },
           { href: '/services/iui', label: 'Intrauterine Insemination (IUI)', desc: 'Intrauterine Insemination' },
           { href: '/services/egg-freezing', label: 'Egg Freezing & Fertility Preservation' },
@@ -180,15 +181,9 @@ export const standards: Standard[] = [
         heading: 'The Experience',
         items: [
           { href: '/patient-resources', label: 'Patient Resources', desc: 'Guides & support' },
+          { href: '/patient-portal', label: 'Patient Portal', desc: 'Access your records & messages' },
           { href: '/testimonials', label: 'Patient Stories', desc: 'Voices from our community' },
-        ],
-      },
-      {
-        heading: 'Care for Every Family',
-        items: [
-          { href: '/services/lgbtqia', label: 'LGBTQIA+ Family Building', desc: 'Affirming, inclusive care' },
-          { href: '/international-patients', label: 'International Patients', desc: 'Telehealth & multilingual care' },
-          { href: '/about', label: 'Inclusive Care', desc: 'Our commitment to welcome all' },
+          { href: '/about', label: 'About', desc: 'Our commitment to welcome all' },
         ],
       },
     ],
@@ -208,16 +203,17 @@ export const standards: Standard[] = [
       {
         heading: 'Find & Reach Us',
         items: [
+          { href: '/appointment', label: 'Schedule a Consultation', desc: 'Book your first appointment' },
+          { href: '/contact', label: 'Contact Us', desc: 'Questions? Reach our team' },
           { href: '/locations', label: 'Locations', desc: '5 Southern California clinics' },
-          { href: '/contact', label: 'Schedule a Consultation' },
-          { href: '/international-patients', label: 'Telehealth & Travel', desc: 'Care from anywhere' },
         ],
       },
       {
-        heading: 'Make It Possible',
+        heading: 'Your Guide',
         items: [
-          { href: '/financing', label: 'Affordable Care', desc: 'Financing options' },
-          { href: '/accessibility', label: 'Accessibility' },
+          { href: '/patient-journey', label: 'Patient Journey', desc: 'How care unfolds, step by step' },
+          { href: '/international-patients', label: 'International Patients', desc: 'Telehealth & multilingual care' },
+          { href: '/services/lgbtqia', label: 'LGBTQIA+ Family Building', desc: 'Affirming, inclusive care' },
         ],
       },
     ],

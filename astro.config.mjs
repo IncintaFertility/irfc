@@ -7,10 +7,7 @@ export default defineConfig({
   output: 'static',
   site: 'https://irfc.com',
   integrations: [
-    sitemap({
-      // 设计稿 demo 页不进 sitemap（内部评审用，非对外内容）
-      filter: (page) => !page.includes('/demo/'),
-    }),
+    sitemap(),
   ],
   vite: {
     plugins: [tailwindcss()],

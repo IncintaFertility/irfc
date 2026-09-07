@@ -63,6 +63,7 @@ const labTeam = [
     initial: 'H',
     color: 'gold',
     photo: '/images/team/hyang-park.png',
+    href: '/team/hyang-park',
   },
 ];
 
@@ -74,6 +75,7 @@ const clinicalTeam = [
     initial: 'L',
     color: 'gold',
     photo: '/images/team/lily-hao.png',
+    href: '/team/lily-hao',
   },
   {
     name: 'Kelly Zhao',
@@ -82,6 +84,7 @@ const clinicalTeam = [
     initial: 'K',
     color: 'gold',
     photo: '/images/team/kelly-zhao.png',
+    href: '/team/kelly-zhao',
   },
 ];
 const physicianSchema = [
@@ -240,6 +243,12 @@ const physicianSchema = [
                 <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
                 <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
                 <p class="text-sm text-stone-500 leading-relaxed">{member.bio}</p>
+                {member.href && (
+                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-600);">
+                    Full Profile
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -279,6 +288,12 @@ const physicianSchema = [
                 <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
                 <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{member.role}</p>
                 <p class="text-sm text-stone-500 leading-relaxed">{member.bio}</p>
+                {member.href && (
+                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-600);">
+                    Full Profile
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -305,7 +320,7 @@ const physicianSchema = [
       <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
         Our team is ready to answer your questions and guide you through your options. Schedule a consultation today.
       </p>
-      <a href="/contact" class="btn-primary">Schedule a Consultation</a>
+      <a href="/appointment" class="btn-primary">Schedule a Consultation</a>
     </div>
   </section>
 

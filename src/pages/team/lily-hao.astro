@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const focus = [
+  'Patient-Centered Nursing Care',
+  'Care Coordination & Education',
+  'Fertility Treatment Support',
+  'Clinical Workflow & Patient Experience',
+  'Compassionate, Inclusive Communication',
+  'Nursing Team Leadership',
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Lily Hao, MSN, WHNP',
+  jobTitle: 'Nurse Manager',
+  description: 'Women’s Health Nurse Practitioner and Nurse Manager at IRFC, ensuring every patient experiences exceptional, compassionate nursing care throughout their fertility journey.',
+  worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+  image: 'https://irfc.com/images/team/lily-hao.png',
+  url: 'https://irfc.com/team/lily-hao',
+};
+---
+
+<Layout
+  title="Lily Hao, MSN, WHNP — Nurse Manager"
+  description="Lily Hao is IRFC's Nurse Manager and a Women's Health Nurse Practitioner, championing compassionate, patient-first nursing care across every fertility visit."
+  schema={schema}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-0 items-end">
+        <div class="pb-16 lg:pb-24 pt-12">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Nurse Manager</span>
+          </div>
+          <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-4 leading-none">
+            Lily Hao,<br/>
+            <em class="not-italic" style="color: var(--color-gold-500);">MSN, WHNP</em>
+          </h1>
+          <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Care & Nursing</p>
+          <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-10">
+            The advocate who makes sure every patient feels seen, heard, and cared for. Lily Hao brings clinical expertise and genuine warmth to her role leading IRFC's nursing team.
+          </p>
+          <a href="/contact" class="btn-outline inline-flex items-center gap-2">
+            Talk With Our Care Team
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+        <div class="hidden lg:block relative" style="min-height: 560px;">
+          <img
+            src="/images/team/lily-hao.png"
+            alt="Lily Hao, MSN, WHNP"
+            class="absolute bottom-0 right-0 h-full w-full object-cover object-top"
+            style="object-position: center top;"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Biography -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-16">
+        <div class="lg:col-span-2 space-y-6">
+          <div class="section-divider mb-8"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">About Lily Hao</h2>
+
+          <p class="text-stone-600 leading-relaxed">
+            Lily Hao brings her expertise as a Women's Health Nurse Practitioner to her role as IRFC's Nurse Manager. A passionate advocate for the patient-first philosophy, she ensures that every patient experiences exceptional, compassionate nursing care throughout their fertility journey.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            Fertility treatment can be emotionally demanding. Lily's focus is on the human experience of care — clear communication, steady reassurance, and coordination that removes friction so patients can focus on what matters. She works closely with physicians and coordinators to make sure no patient falls through the cracks.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            As Nurse Manager, she sets the tone for the entire clinical team: rigorous where it counts, gentle where it matters. Under her leadership, IRFC's nursing care reflects the belief that science and humanity are not separate — they are the same act of care.
+          </p>
+
+          <blockquote class="py-10 border-y border-stone-100 my-10">
+            <p class="text-2xl font-light leading-relaxed text-stone-700 italic" style="font-family: var(--font-serif);">
+              "Behind every protocol is a person hoping for a family. Our job is to make sure they never feel like a chart — only like a priority."
+            </p>
+            <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">— Lily Hao</cite>
+          </blockquote>
+
+          <div class="p-8 lg:p-10 border border-stone-200" style="background: var(--color-stone-50);">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">The Experience Lily Leads</p>
+            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">Science held with humanity.</h3>
+            <p class="text-sm leading-relaxed text-stone-500 mb-6">
+              From the texture of pearl to the imagery of the lotus, IRFC designs spaces and moments that make the hardest parts of the journey feel held — for every kind of family that comes to us.
+            </p>
+            <a href="/patient-resources" class="btn-outline inline-flex items-center gap-2 text-xs py-2.5 px-5">
+              Patient Resources
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-10">
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Areas of Focus</p>
+            <ul class="space-y-3">
+              {focus.map(item => (
+                <li class="flex items-center gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 flex-shrink-0" style="background: var(--color-gold-400);"></div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="border-t border-stone-100 pt-8">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Languages</p>
+            <div class="flex flex-wrap gap-2">
+              {['English', 'Mandarin Chinese'].map(lang => (
+                <span class="text-xs px-3 py-1.5 border border-stone-200 text-stone-600">{lang}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="border border-stone-200 p-6" style="background: var(--color-stone-50);">
+            <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
+            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">Plan Your Visit</p>
+            <p class="text-xs text-stone-500 mb-5 leading-relaxed">Ready to begin? Schedule a consultation with our care team.</p>
+            <a href="/appointment" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
+              Schedule a Consultation
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other team -->
+  <section class="py-16 border-t border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex items-center justify-between mb-10">
+        <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">Also at IRFC</h3>
+        <a href="/team" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          Full Team
+          <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        {[
+          { name: 'Hyang Park, M.S.', role: 'IVF Laboratory Supervisor', href: '/team/hyang-park', badge: 'Embryology', photo: '/images/team/hyang-park.png' },
+          { name: 'Kelly Zhao', role: 'Third Party Coordinator', href: '/team/kelly-zhao', badge: 'Coordination', photo: '/images/team/kelly-zhao.png' },
+        ].map(doc => (
+          <a href={doc.href} class="group bg-white border border-stone-200 p-6 flex items-center gap-5 card-hover">
+            <img src={doc.photo} alt={doc.name} class="w-16 h-16 object-cover flex-shrink-0" style="border-radius: 50%;" />
+            <div class="flex-1 min-w-0">
+              <p class="text-base font-light text-stone-800" style="font-family: var(--font-serif);">{doc.name}</p>
+              <p class="text-xs tracking-wider uppercase mt-0.5" style="color: var(--color-stone-400);">{doc.role}</p>
+              {doc.badge && <span class="inline-block mt-2 text-xs px-2 py-0.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{doc.badge}</span>}
+            </div>
+            <svg class="w-4 h-4 flex-shrink-0 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

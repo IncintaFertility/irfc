@@ -23,7 +23,7 @@ export const BRAND_ABBREV = 'IRFC';
 
 export const SITE_URL = 'https://irfc.com';
 export const SITE_PHONE = '+19494538600';
-export const SITE_PHONE_DISPLAY = '(949) 453-8600';
+export const SITE_PHONE_DISPLAY = 'Irvine · (949) 453-8600';
 
 /**
  * 四层品牌语言（Brand Message Architecture）
