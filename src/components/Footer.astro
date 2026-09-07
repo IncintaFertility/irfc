@@ -1,6 +1,5 @@
 ---
 import { BRAND_ABBREV, LEGAL_ENTITY, BRAND_LANGUAGE } from '../config/brand';
-import { standards } from '../data/standards';
 
 const locations = [
   { city: 'Torrance', address: '21545 Hawthorne Blvd, Pavilion B', state: 'CA 90503', phone: '(424) 212-4087' },
@@ -22,19 +21,6 @@ const services = [
 <footer class="bg-pearl-50 text-stone-700">
   <!-- Top border accent -->
   <div class="h-px" style="background: linear-gradient(90deg, transparent, var(--color-gold-500), transparent);"></div>
-
-  <!-- Our 6 Standards — global cross-link to every hub page -->
-  <nav class="std-strip" aria-label="Our 6 Standards">
-    <span class="std-strip-label">Our 6 Standards</span>
-    <div class="std-strip-links">
-      {standards.map((s) => (
-        <a href={`/standards/${s.slug}`} class="std-strip-link">
-          <span class="std-strip-num">{s.number}</span>
-          <span class="std-strip-title">{s.title}</span>
-        </a>
-      ))}
-    </div>
-  </nav>
 
   <div class="max-w-screen-xl mx-auto px-6 lg:px-10 pt-16 pb-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -125,55 +111,4 @@ const services = [
       The information on this website is for general informational purposes only and does not constitute medical advice. Please consult with a qualified healthcare provider regarding your individual circumstances.
     </p>
   </div>
-
-  <style>
-    .std-strip {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem 2rem;
-      max-width: 80rem;
-      margin: 0 auto;
-      padding: 1.5rem 6vw;
-      border-bottom: 1px solid var(--color-pearl-200);
-    }
-    .std-strip-label {
-      font-family: var(--font-sans);
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-gold-600);
-      white-space: nowrap;
-    }
-    .std-strip-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.75rem;
-    }
-    .std-strip-link {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      text-decoration: none;
-      color: var(--color-stone-600);
-      transition: color 0.2s;
-    }
-    .std-strip-link:hover { color: var(--color-gold-600); }
-    .std-strip-num {
-      font-family: var(--font-serif);
-      font-size: 0.85rem;
-      font-weight: 300;
-      color: var(--color-purple-400);
-    }
-    .std-strip-title {
-      font-family: var(--font-sans);
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-    @media (max-width: 640px) {
-      .std-strip { padding: 1.25rem 6vw; }
-      .std-strip-links { gap: 0.6rem 1.1rem; }
-    }
-  </style>
 </footer>
