@@ -61,13 +61,6 @@ export const standards: Standard[] = [
           { href: '/team/dr-yufen-xie', label: 'Dr. Yufen Xie, PhD', desc: 'Laboratory & Embryology Director' },
         ],
       },
-      {
-        heading: 'Why it matters',
-        items: [
-          { href: '/why-irfc', label: 'Why Choose IRFC', desc: 'What sets our practice apart' },
-          { href: '/testimonials', label: 'Patient Stories', desc: 'Outcomes from the people we have helped' },
-        ],
-      },
     ],
   },
   {
