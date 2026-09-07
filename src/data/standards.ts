@@ -25,6 +25,8 @@ export interface Standard {
   title: string;
   /** Compact nav label (keep it short: one word or 2-3 words max) */
   shortTitle: string;
+  /** Concrete, scannable nav label shown as the primary line in the top nav */
+  navLabel: string;
   /** Short italic lead line (from homepage copy) */
   lead: string;
   /** Supporting paragraph (from homepage copy) */
@@ -43,6 +45,7 @@ export const standards: Standard[] = [
     slug: 'collective-expertise',
     title: 'Collective expertise',
     shortTitle: 'Collective',
+    navLabel: 'Our Team',
     lead: 'One patient. The expertise of an entire team.',
     text: 'When a patient chooses INCINTA, the strength of our entire team carries that trust—together, we strive for the best possible outcome.',
     image: '/images/standards/01-collective-expertise.jpg',
@@ -72,6 +75,7 @@ export const standards: Standard[] = [
     slug: 'precision-personalization',
     title: 'Precision & personalization',
     shortTitle: 'Precision',
+    navLabel: 'Treatments',
     lead: 'No two patients are the same. Their care shouldn’t be either.',
     text: 'Care is never one-size-fits-all. It is a plan crafted for your life.',
     image: '/images/standards/02-precision-personalization.jpg',
@@ -108,6 +112,7 @@ export const standards: Standard[] = [
     slug: 'laboratory-excellence',
     title: 'Laboratory excellence',
     shortTitle: 'Lab',
+    navLabel: 'Our Lab',
     lead: 'Where life begins, standards matter most.',
     text: 'With exacting rigor in every laboratory detail, we safeguard every extraordinary beginning.',
     image: '/images/standards/03-lab-excellence.jpg',
@@ -129,6 +134,7 @@ export const standards: Standard[] = [
     slug: 'privacy-transparency',
     title: 'Privacy & transparency',
     shortTitle: 'Privacy',
+    navLabel: 'Financing',
     lead: 'Private, yet completely open.',
     text: 'Your body and choices remain absolutely private; our standards and processes are completely open. True trust is built through clear boundaries.',
     image: '/images/standards/04-privacy-transparency.jpg',
@@ -157,6 +163,7 @@ export const standards: Standard[] = [
     slug: 'art-of-care',
     title: 'The art of care',
     shortTitle: 'Art of Care',
+    navLabel: 'Resources',
     lead: 'More than clinical rigor, it holds the beauty of art and the warmth of nature.',
     text: 'From the texture of pearl to the imagery of the lotus, from light to material—a space carefully created for life.',
     image: '/images/standards/05-art-of-care.jpg',
@@ -185,6 +192,7 @@ export const standards: Standard[] = [
     slug: 'care-within-reach',
     title: 'Exceptional care, within reach',
     shortTitle: 'Within Reach',
+    navLabel: 'Visit Us',
     lead: 'Beyond distance and resources.',
     text: 'Exceptional care truly reaches every family in need.',
     image: '/images/standards/06-care-within-reach.jpg',

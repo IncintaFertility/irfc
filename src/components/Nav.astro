@@ -3,15 +3,11 @@ import { standards } from '../data/standards';
 
 const pathname = Astro.url.pathname;
 
-// Main navigation = the six INCINTA standards. Each standard's dropdown lists
-// its hub page first, then every content page filed under it.
+// Top navigation = six functional categories (one per standard). Each
+// category's dropdown lists the content pages filed under that standard.
 const navGroups = standards.map((s) => ({
-  label: s.shortTitle,
-  fullTitle: s.title,
-  children: [
-    { href: `/standards/${s.slug}`, label: `${s.title} →`, isAll: true },
-    ...s.related.flatMap((g) => g.items.map((i) => ({ href: i.href, label: i.label, isAll: false }))),
-  ],
+  label: s.navLabel,
+  children: s.related.flatMap((g) => g.items.map((i) => ({ href: i.href, label: i.label }))),
 }));
 
 const isActive = (group: typeof navGroups[0]) =>
@@ -39,7 +35,7 @@ const isActive = (group: typeof navGroups[0]) =>
             {group.children.map(child => (
               <a
                 href={child.href}
-                class={`nav-dropdown-item${child.isAll ? ' nav-dropdown-item--all' : ''}${pathname === child.href ? ' nav-dropdown-item--active' : ''}`}
+                class={`nav-dropdown-item${pathname === child.href ? ' nav-dropdown-item--active' : ''}`}
               >
                 {child.label}
               </a>
@@ -78,7 +74,7 @@ const isActive = (group: typeof navGroups[0]) =>
           </summary>
           <div class="nav-mobile-children">
             {group.children.map(child => (
-              <a href={child.href} class={`nav-mobile-child${child.isAll ? ' nav-mobile-child--all' : ''}`}>
+              <a href={child.href} class="nav-mobile-child">
                 {child.label}
               </a>
             ))}
@@ -141,16 +137,16 @@ const isActive = (group: typeof navGroups[0]) =>
 .nav-group-btn {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  gap: 0.3rem;
   font-family: var(--font-sans);
-  color: var(--color-stone-700);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.55rem 0.4rem;
+  color: var(--color-stone-700);
   transition: color 0.2s;
   white-space: nowrap;
 }
@@ -223,10 +219,6 @@ const isActive = (group: typeof navGroups[0]) =>
   background: var(--color-stone-50);
 }
 
-.nav-dropdown-item--all:hover {
-  background: #f0ede6;
-}
-
 /* Right side */
 .nav-right {
   display: flex;
@@ -269,10 +261,16 @@ const isActive = (group: typeof navGroups[0]) =>
   .nav-cta-full { display: inline; }
 }
 
-/* Wider screens: let the nav breathe with larger type */
+/* Medium laptops: tighten so the six items still fit comfortably */
+@media (max-width: 1279px) {
+  .nav-links { gap: 0.6rem; }
+  .nav-group-btn { padding: 0.5rem 0.3rem; font-size: 0.76rem; }
+}
+
+/* Wider screens: let the nav breathe */
 @media (min-width: 1280px) {
-  .nav-links { gap: 1.5rem; }
-  .nav-group-btn { font-size: 0.9rem; padding: 0.6rem 0.5rem; }
+  .nav-links { gap: 1.1rem; }
+  .nav-group-btn { padding: 0.6rem 0.5rem; font-size: 0.9rem; }
   .nav-cta { font-size: 0.78rem; padding: 0.65rem 1.25rem; }
 }
 
@@ -404,12 +402,6 @@ const isActive = (group: typeof navGroups[0]) =>
   color: var(--color-gold-600);
   border-left-color: var(--color-gold-400);
   padding-left: 1.3rem;
-}
-
-.nav-mobile-child--all {
-  color: var(--color-gold-600);
-  border-left-color: var(--color-stone-200);
-  margin-top: 0.25rem;
 }
 
 .nav-mobile-bottom {
