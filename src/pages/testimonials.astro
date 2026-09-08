@@ -2,79 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { reviews, reviewSources } from '../data/testimonials';
 
-const stories = [
-  {
-    name: 'Mary T.',
-    treatment: 'IVF',
-    color: 'gold',
-    pullQuote: 'It took us three and a half years of trying. Once I came to IRFC, they made my dream of having a family come true.',
-    story: 'Mary and her husband had been trying to conceive for years before a friend referred them to IRFC. After a thorough evaluation, Dr. Lin identified a combination of factors and recommended IVF. On their second cycle, Mary became pregnant — and delivered a healthy daughter the following spring.',
-  },
-  {
-    name: 'Lisa & Elsien',
-    treatment: 'Reciprocal IVF',
-    color: 'gold',
-    pullQuote: 'As a same-sex couple, we needed a clinic that truly understood our path. IRFC made us feel completely welcome from our very first appointment.',
-    story: 'Lisa and Elsien wanted to share the experience of their pregnancy as fully as possible. They chose reciprocal IVF — Elsien\'s eggs were fertilized and the resulting embryo was transferred to Lisa\'s uterus. Their daughter was born healthy nine months later. They describe IRFC\'s team as "part of our family."',
-  },
-  {
-    name: 'Anonymous Patient',
-    treatment: 'IUI → IVF',
-    color: 'gold',
-    pullQuote: 'We first started with IUI. When that didn\'t work, Dr. Lin\'s team moved us to IVF with compassion — no pressure, just clear guidance. Five months later, I was almost 9 weeks pregnant.',
-    story: 'This patient came to IRFC after a year of trying naturally. After evaluation, they began with IUI — three cycles over four months — and then transitioned to IVF when results plateaued. The IVF cycle resulted in a positive pregnancy test within weeks of the transfer.',
-  },
-  {
-    name: 'Patient, Age 41',
-    treatment: 'IVF',
-    color: 'gold',
-    pullQuote: 'Dr. Lin was honest with me — he said I had about a 10% chance at my age. I appreciated that. He designed a protocol just for me. My baby is now 6 months old.',
-    story: 'Faced with the reality of diminished ovarian reserve at 41, this patient chose honesty over false hope — and found it at IRFC. Dr. Lin designed a tailored IVF protocol, retrieved several viable embryos, and PGT-A identified the best candidate. The transfer succeeded on the first attempt.',
-  },
-  {
-    name: 'Anonymous Patient',
-    treatment: 'IVF after Recurrent Loss',
-    color: 'gold',
-    pullQuote: 'Our first fresh transfer failed. When we switched to a frozen transfer, everything changed. IRFC never made us feel like giving up was an option.',
-    story: 'After a fresh embryo transfer that did not implant, this couple was devastated. The team at IRFC regrouped with them, reviewed the cycle data, and recommended a frozen embryo transfer in a subsequent cycle with modified uterine preparation. The result: a healthy pregnancy and, eventually, a son.',
-  },
-  {
-    name: 'Anonymous Patient',
-    treatment: 'IUI with Donor Sperm',
-    color: 'gold',
-    pullQuote: 'As a single woman who always knew I wanted to be a mom, IRFC helped me feel empowered — not alone. Their coordinator walked me through every step.',
-    story: 'This patient came to IRFC at 34, single and ready to build her family on her own timeline. With support from Kelly Zhao, IRFC\'s third-party coordinator, she selected a donor and completed two IUI cycles. She is now expecting her first child.',
-  },
-  {
-    name: 'Anonymous Patient',
-    treatment: 'IVF with PGT-A',
-    color: 'gold',
-    pullQuote: 'After two miscarriages, we were told to consider PGT. IRFC explained everything — why it made sense, what we could expect. We now have a healthy daughter.',
-    story: 'Following two early pregnancy losses, this couple was evaluated and found to have a high rate of chromosomal abnormality in their embryos — a finding more common than many realize. PGT-A identified two euploid embryos from their first IVF cycle. The first transfer was successful.',
-  },
-  {
-    name: 'Sarah & Michael',
-    treatment: 'Gestational Surrogacy',
-    color: 'gold',
-    pullQuote: 'We never thought surrogacy would be our path — but IRFC made the process understandable, dignified, and even beautiful.',
-    story: 'After a medical diagnosis made carrying a pregnancy unsafe, Sarah and Michael came to IRFC seeking another way forward. Kelly Zhao coordinated their gestational surrogacy arrangement, while Dr. Lin managed all medical aspects. Their surrogate carried their biological child to term — and Sarah was present for every ultrasound.',
-  },
-];
-
-const reviews = [
-  { quote: 'The entire team made us feel welcomed, supported, and cared for every step of the way.', name: 'Nisha', when: '1 month ago' },
-  { quote: 'Special thanks to our coordinator, Michelle, who has been incredibly passionate and supportive throughout the whole process.', name: 'Jinmiao L.', when: '1 year ago' },
-  { quote: 'They listened to our concerns here and treated us like family.', name: 'Sandra P.', when: '10 months ago' },
-  { quote: 'I have never felt more seen or heard.', name: 'Shyanne B.', when: '3 months ago' },
-  { quote: 'Dr. Lin was incredibly patient in explaining every step and answering all of our complex questions.', name: 'Archer X.', when: '5 months ago' },
-  { quote: 'Every question was answered, every concern was taken seriously, and I always felt genuinely cared for.', name: 'Gabriela L.', when: '7 months ago' },
-];
+const googleReviews = reviews.filter((r) => r.source === 'google');
+const yelpReviews = reviews.filter((r) => r.source === 'yelp');
 ---
 
 <Layout
-  title="Patient Stories"
-  description="Real stories from IRFC patients — IVF, IUI, egg freezing, donor egg, surrogacy, and more. Every family's path is different. Here are some of the journeys we've shared."
+  title="Real Patient Reviews — IRFC on Google & Yelp"
+  description="Real patient reviews of Incinta Fertility Center from public Google and Yelp profiles — verbatim excerpts with star ratings, names, and dates, linked back to the source."
 >
   <Nav />
 
@@ -85,14 +21,14 @@ const reviews = [
         <div class="pb-20">
           <div class="flex items-center gap-3 mb-6">
             <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Patient Stories</span>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Real Patient Reviews</span>
           </div>
           <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
-            Journeys We've<br/>
-            <em class="not-italic" style="color: var(--color-gold-500);">Shared Together.</em>
+            In Their<br/>
+            <em class="not-italic" style="color: var(--color-gold-500);">Own Words.</em>
           </h1>
           <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
-            Behind every statistic is a person, a couple, a family with a dream. These are some of the stories that remind us why we do what we do — and why we never stop trying.
+            We let our patients speak for us. Every review below is a verbatim excerpt from our public Google and Yelp profiles — with the star rating, name, and date exactly as posted, and a link back to the original.
           </p>
         </div>
         <div class="hidden lg:block overflow-hidden" style="max-height: 480px;">
@@ -106,67 +42,63 @@ const reviews = [
     </div>
   </section>
 
-  <!-- Stories Grid -->
-  <section class="py-20" style="background: var(--color-stone-50);">
+  <!-- Aggregate -->
+  <section class="py-16" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid md:grid-cols-2 gap-6">
-        {stories.map(s => (
-          <article class="bg-white border border-stone-200 p-8 lg:p-10 flex flex-col">
-            <!-- Treatment tag -->
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs px-3 py-1 border tracking-widest" style={`color: var(--color-${s.color}-600); border-color: var(--color-${s.color}-300); font-family: var(--font-sans);`}>
-                {s.treatment}
-              </span>
+      <div class="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        {Object.values(reviewSources).map((s) => (
+          <a href={s.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 p-6 border border-stone-200 bg-white hover:border-stone-300 transition">
+            <span class="text-2xl font-semibold tracking-tight" style={`color: ${s.color}; font-family: var(--font-sans);`}>{s.name}</span>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <span class="text-3xl font-light" style="font-family: var(--font-serif); color: var(--color-stone-800);">{s.rating.toFixed(1)}</span>
+                <div class="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg class="w-4 h-4" viewBox="0 0 20 20" fill={i < Math.round(s.rating) ? 'currentColor' : 'none'} stroke="currentColor" style={i < Math.round(s.rating) ? 'color: var(--color-gold-500);' : 'color: var(--color-stone-300);'}>
+                      <path stroke-linejoin="round" d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+              <p class="text-xs" style="color: var(--color-stone-400);">{s.count} reviews · Read on {s.name}</p>
             </div>
-            <!-- Pull quote -->
-            <svg class="w-7 h-7 mb-4 opacity-20" fill="currentColor" viewBox="0 0 32 32" style={`color: var(--color-${s.color}-600);`}>
-              <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
-            </svg>
-            <blockquote style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 leading-relaxed italic mb-5 flex-1">
-              "{s.pullQuote}"
-            </blockquote>
-            <!-- Story -->
-            <p class="text-sm text-stone-500 leading-relaxed mb-6">{s.story}</p>
-            <!-- Attribution -->
-            <div class="pt-5 border-t border-stone-100">
-              <p class="text-sm font-medium text-stone-700">— {s.name}</p>
-            </div>
-          </article>
+            <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-stone-400);"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
         ))}
       </div>
-
-      <p class="mt-10 text-center text-xs max-w-lg mx-auto" style="color: var(--color-stone-400);">
-        These stories are based on patient experiences at IRFC and its predecessor practices. Names have been changed or anonymized. Individual outcomes vary — fertility treatment results depend on many personal factors. These stories are not a guarantee of results.
-      </p>
     </div>
   </section>
 
-  <!-- Patient Voices — Google reviews -->
-  <section class="py-20" style="background: var(--color-stone-50);">
+  <!-- Google reviews -->
+  <section class="py-20 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="text-center mb-12">
-        <div class="flex items-center justify-center gap-3 mb-5">
-          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">Patient Voices</span>
-          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+      <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">From Google</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800">What patients say on Google</h2>
         </div>
-        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-4">What Patients Remember Most</h2>
-        <p class="text-sm text-stone-500 font-light leading-relaxed max-w-2xl mx-auto mb-4">Selected excerpts from public Google reviews. Excerpts are shortened for length and reflect individual experiences.</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Reproductive%20Fertility%20Center%20RFC%20Family%20Irvine" target="_blank" rel="noopener" class="text-xs tracking-widest uppercase flex items-center justify-center gap-2" style="color: var(--color-gold-600);">
-          View all reviews
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        <a href={reviewSources.google.url} target="_blank" rel="noopener noreferrer" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          All {reviewSources.google.count} Google reviews
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
         </a>
       </div>
-      <div class="grid md:grid-cols-3 gap-5">
-        {reviews.map((r) => (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {googleReviews.map((r) => (
           <figure class="p-7 border border-stone-200 bg-white flex flex-col">
-            <svg class="w-5 h-5 mb-3 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);">
-              <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
-            </svg>
+            <div class="flex items-center justify-between mb-4">
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" style="color: var(--color-gold-500);"><path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9z"/></svg>
+              <div class="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill={i < r.rating ? 'currentColor' : 'none'} stroke="currentColor" style={i < r.rating ? 'color: var(--color-gold-500);' : 'color: var(--color-stone-300);'}>
+                    <path stroke-linejoin="round" d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9z" />
+                  </svg>
+                ))}
+              </div>
+            </div>
             <blockquote class="text-stone-600 leading-relaxed flex-1 text-sm mb-5">"{r.quote}"</blockquote>
-            <figcaption class="flex items-center justify-between">
-              <span class="text-xs font-medium text-stone-700">— {r.name}</span>
-              <span class="text-xs" style="color: var(--color-stone-400);">{r.when} · Google Review</span>
+            <figcaption class="flex items-center justify-between pt-4 border-t border-stone-100">
+              <span class="text-xs font-medium text-stone-700">{r.author}</span>
+              <span class="text-xs" style="color: var(--color-stone-400);">{r.date}</span>
             </figcaption>
           </figure>
         ))}
@@ -174,18 +106,65 @@ const reviews = [
     </div>
   </section>
 
+  <!-- Yelp reviews -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">From Yelp</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800">What patients say on Yelp</h2>
+        </div>
+        <a href={reviewSources.yelp.url} target="_blank" rel="noopener noreferrer" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          All {reviewSources.yelp.count} Yelp reviews
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {yelpReviews.map((r) => (
+          <figure class="p-7 border border-stone-200 bg-white flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-sm font-semibold tracking-tight" style="color: #D32323; font-family: var(--font-sans);">Yelp</span>
+              <div class="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill={i < r.rating ? 'currentColor' : 'none'} stroke="currentColor" style={i < r.rating ? 'color: var(--color-gold-500);' : 'color: var(--color-stone-300);'}>
+                    <path stroke-linejoin="round" d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9z" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+            <blockquote class="text-stone-600 leading-relaxed flex-1 text-sm mb-5">"{r.quote}"</blockquote>
+            <figcaption class="flex items-center justify-between pt-4 border-t border-stone-100">
+              <span class="text-xs font-medium text-stone-700">{r.author}</span>
+              <span class="text-xs" style="color: var(--color-stone-400);">{r.date}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-sm" style="color: var(--color-stone-500);">
+        Want to see more? <a href={reviewSources.yelp.url} target="_blank" rel="noopener noreferrer" class="underline" style="color: var(--color-gold-600);">Read all {reviewSources.yelp.count} reviews on Yelp</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="py-10 bg-white">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="text-xs leading-relaxed" style="color: var(--color-stone-400);">
+        These are real excerpts from public Google and Yelp reviews of Incinta Fertility Center, used with attribution. Quotes are reproduced as posted; some are shortened with an ellipsis. Individual results vary — reviews reflect personal experiences and are not a guarantee of outcomes.
+      </p>
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section class="py-20 bg-white">
+  <section class="py-20" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
-      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
-        Your Story Starts Here
-      </h2>
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">Your Story Starts Here</h2>
       <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
-        Every journey in these pages began with one decision: to make an appointment. We'd be honored to be part of yours.
+        Every journey on this page began with one decision: to make an appointment. We'd be honored to be part of yours.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="btn-primary">Schedule a Consultation</a>
-        <a href="/team" class="btn-outline">Meet Our Team</a>
+        <a href="/appointment" class="btn-primary">Schedule an In-Person Visit</a>
+        <a href="/consultation" class="btn-outline">Phone &amp; Online Consultation</a>
       </div>
     </div>
   </section>
