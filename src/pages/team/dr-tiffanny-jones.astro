@@ -3,13 +3,13 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 
-const expertise = [
-  'Fertility Evaluation & Diagnosis',
+const focus = [
+  'Fertility Evaluation',
   'In Vitro Fertilization (IVF)',
   'Preimplantation Genetic Testing (PGT)',
-  'Egg Freezing & Fertility Preservation',
-  'Personalized Treatment Planning',
-  'Patient-Centered Care',
+  'Fertility Preservation',
+  'Patient-Centered Counseling',
+  'Individualized Treatment Planning',
 ];
 
 const schema = {
@@ -18,7 +18,7 @@ const schema = {
   name: 'Tiffanny LaTrice Jones, MD, FACOG',
   honorificPrefix: 'Dr.',
   jobTitle: 'Reproductive Endocrinology Specialist',
-  description: 'Reproductive endocrinologist at IRFC specializing in fertility evaluation, IVF, preimplantation genetic testing, and fertility-preservation planning.',
+  description: 'Reproductive endocrinology specialist at IRFC supporting patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.',
   medicalSpecialty: 'Reproductive Medicine',
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
   image: 'https://irfc.com/images/doctor-tiffanny-jones.webp',
@@ -27,13 +27,12 @@ const schema = {
 ---
 
 <Layout
-  title="Dr. Tiffanny LaTrice Jones, MD — Reproductive Endocrinology Specialist"
-  description="Dr. Tiffanny LaTrice Jones is a reproductive endocrinology specialist at IRFC, supporting patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning."
+  title="Tiffanny LaTrice Jones, MD — Reproductive Endocrinology Specialist"
+  description="Dr. Tiffanny LaTrice Jones is a reproductive endocrinology specialist at IRFC, supporting patients through fertility evaluation, IVF, and fertility preservation."
   schema={schema}
 >
   <Nav />
 
-  <!-- Hero -->
   <section class="pt-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-2 gap-0 items-end">
@@ -44,25 +43,23 @@ const schema = {
           </div>
           <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-4 leading-none">
             Tiffanny LaTrice<br/>
-            Jones, <em class="not-italic" style="color: var(--color-gold-500);">MD</em>
+            <em class="not-italic" style="color: var(--color-gold-500);">Jones, MD</em>
           </h1>
-          <p class="text-sm tracking-widest uppercase mb-8" style="color: var(--color-stone-400); font-family: var(--font-sans);">Reproductive Endocrinology & Infertility</p>
+          <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Reproductive Endocrinology & Infertility</p>
           <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-10">
-            A dedicated reproductive endocrinologist who guides patients through fertility evaluation, IVF, genetic-testing decisions, and preservation planning — with a calm, clear, and deeply personal approach.
+            A reproductive endocrinology specialist at IRFC, supporting patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/contact" class="btn-primary">
-              Request a Consultation with Dr. Jones
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
+          <a href="/contact" class="btn-outline inline-flex items-center gap-2">
+            Meet Our Physicians
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
         </div>
         <div class="hidden lg:block relative" style="min-height: 560px;">
           <img
             src="/images/doctor-tiffanny-jones.webp"
-            alt="Dr. Tiffanny LaTrice Jones, MD"
+            alt="Tiffanny LaTrice Jones, MD"
             class="absolute bottom-0 right-0 h-full w-full object-cover object-top"
             style="object-position: center top;"
           />
@@ -71,56 +68,47 @@ const schema = {
     </div>
   </section>
 
-  <!-- Quick stats bar -->
-  <section class="border-y border-stone-100" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-stone-100">
-        {[
-          { stat: 'REI', label: 'Board-Certified\nReproductive Endocrinology' },
-          { stat: 'IVF', label: 'Fertility & Genetic\nTesting Specialist' },
-          { stat: 'Bilingual', label: 'Patient-Centered\nCare Approach' },
-          { stat: 'Telehealth', label: 'Consultations\nAvailable' },
-        ].map(item => (
-          <div class="px-8 py-6">
-            <p class="text-2xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-600);">{item.stat}</p>
-            <p class="text-xs whitespace-pre-line leading-snug" style="color: var(--color-stone-500); font-family: var(--font-sans);">{item.label}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Biography -->
   <section class="py-24 lg:py-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-3 gap-16">
         <div class="lg:col-span-2 space-y-6">
           <div class="section-divider mb-8"></div>
-          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">About Dr. Jones</h2>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">About Tiffanny LaTrice Jones, MD</h2>
 
           <p class="text-stone-600 leading-relaxed">
-            Dr. Tiffanny LaTrice Jones is a reproductive endocrinology specialist at IRFC. She supports patients through every stage of their fertility journey — from initial evaluation and diagnosis to IVF cycles, preimplantation genetic-testing discussions, and fertility-preservation planning.
+            Dr. Tiffanny LaTrice Jones is a reproductive endocrinology specialist at IRFC. She supports patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.
           </p>
           <p class="text-stone-600 leading-relaxed">
-            Known for her patient-centered approach, Dr. Jones takes the time to explain each step clearly and to tailor treatment to every patient's unique goals and circumstances. She believes that informed, unhurried conversations are the foundation of care that patients can trust — and that the best outcomes begin with a plan built around the person, not a protocol.
+            Known for her patient-centered approach, Dr. Jones takes time to explain each step clearly and to tailor treatment to every patient's unique goals and circumstances.
           </p>
 
-          <!-- Philosophy pull quote -->
           <blockquote class="py-10 border-y border-stone-100 my-10">
             <p class="text-2xl font-light leading-relaxed text-stone-700 italic" style="font-family: var(--font-serif);">
-              "Every patient deserves a plan built around their life — explained clearly, and shaped by their own goals."
+              "Fertility care works best when the patient understands every step."
             </p>
-            <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">— Dr. Tiffanny LaTrice Jones</cite>
+            <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">— Tiffanny LaTrice Jones, MD</cite>
           </blockquote>
+
+          <div class="p-8 lg:p-10 border border-stone-200" style="background: var(--color-stone-50);">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">Your Evaluation, Explained</p>
+            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">Clarity at every turn.</h3>
+            <p class="text-sm leading-relaxed text-stone-500 mb-6">
+              From the first consult to a personalized plan, Dr. Jones makes sure you always know what comes next — and why.
+            </p>
+            <a href="/patient-journey" class="btn-outline inline-flex items-center gap-2 text-xs py-2.5 px-5">
+              The Patient Journey
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="space-y-10">
-          <!-- Expertise -->
           <div>
-            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Areas of Expertise</p>
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Areas of Focus</p>
             <ul class="space-y-3">
-              {expertise.map(item => (
+              {focus.map(item => (
                 <li class="flex items-center gap-3 text-sm text-stone-600">
                   <div class="w-1.5 h-1.5 flex-shrink-0" style="background: var(--color-gold-400);"></div>
                   {item}
@@ -129,21 +117,6 @@ const schema = {
             </ul>
           </div>
 
-          <!-- Recognition -->
-          <div class="border-t border-stone-100 pt-8">
-            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Recognition & Credentials</p>
-            <ul class="space-y-4">
-              {[
-                'FACOG — Fellow, American College of Obstetricians & Gynecologists',
-                'Board Certified — Reproductive Endocrinology & Infertility',
-                'Member — American Society for Reproductive Medicine',
-              ].map(item => (
-                <li class="text-sm text-stone-600 leading-snug">{item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <!-- Languages -->
           <div class="border-t border-stone-100 pt-8">
             <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Languages</p>
             <div class="flex flex-wrap gap-2">
@@ -153,13 +126,12 @@ const schema = {
             </div>
           </div>
 
-          <!-- CTA card -->
           <div class="border border-stone-200 p-6" style="background: var(--color-stone-50);">
             <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
-            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">Schedule a Consultation</p>
-            <p class="text-xs text-stone-500 mb-5 leading-relaxed">First appointment is free. Telehealth available.</p>
-            <a href="/contact" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
-              Book Now
+            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">Plan Your Visit</p>
+            <p class="text-xs text-stone-500 mb-5 leading-relaxed">Ready to begin? Schedule a consultation with our care team.</p>
+            <a href="/appointment" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
+              Schedule a Consultation
             </a>
           </div>
         </div>
@@ -167,7 +139,6 @@ const schema = {
     </div>
   </section>
 
-  <!-- Other physicians -->
   <section class="py-16 border-t border-stone-100" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="flex items-center justify-between mb-10">
@@ -179,8 +150,8 @@ const schema = {
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         {[
-          { name: 'James P. Lin, MD', role: 'Founder & Medical Director', href: '/team/dr-james-lin', badge: 'Founder', photo: '/images/team/dr-james-lin-circle.png' },
-          { name: 'Zitao Liu, MD', role: 'Associate Chief Medical Officer', href: '/team/dr-zitao-liu', badge: 'Now Accepting New Patients', photo: '/images/team/dr-zitao-liu-circle.png' },
+          { name: 'James P. Lin, MD', role: 'Founder & Medical Director', href: '/team/dr-james-lin', badge: 'Physician', photo: '/images/team/dr-james-lin-circle.png' },
+          { name: 'Zitao Liu, MD', role: 'Associate Chief Medical Officer', href: '/team/dr-zitao-liu', badge: 'Physician', photo: '/images/team/dr-zitao-liu-circle.png' },
         ].map(doc => (
           <a href={doc.href} class="group bg-white border border-stone-200 p-6 flex items-center gap-5 card-hover">
             <img src={doc.photo} alt={doc.name} class="w-16 h-16 object-cover flex-shrink-0" style="border-radius: 50%;" />
@@ -189,7 +160,7 @@ const schema = {
               <p class="text-xs tracking-wider uppercase mt-0.5" style="color: var(--color-stone-400);">{doc.role}</p>
               {doc.badge && <span class="inline-block mt-2 text-xs px-2 py-0.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{doc.badge}</span>}
             </div>
-            <svg class="w-4 h-4 flex-shrink-0 text-stone-300 group-hover:text-gold-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg class="w-4 h-4 flex-shrink-0 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
             </svg>
           </a>

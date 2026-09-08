@@ -9,6 +9,10 @@ export interface RelatedItem {
   href: string;
   label: string;
   desc?: string;
+  /** Optional portrait image — when present the related card renders as a team member card */
+  photo?: string;
+  /** Short bio line shown on the team member card */
+  bio?: string;
   /** When true the link points to an external site and opens in a new tab */
   external?: boolean;
 }
@@ -18,6 +22,12 @@ export interface RelatedGroup {
   items: RelatedItem[];
 }
 
+export interface StandardPillar {
+  num: string;
+  title: string;
+  text: string;
+}
+
 export interface Standard {
   /** Two-digit display number, e.g. "01" */
   number: string;
@@ -25,7 +35,7 @@ export interface Standard {
   slug: string;
   /** Display title (English site) */
   title: string;
-  /** Compact nav label (keep it short: one word or 2-3 words max) */
+  /** Compact nav title (keep it short: one word or 2-3 words max) */
   shortTitle: string;
   /** Concrete, scannable nav label shown as the primary line in the top nav */
   navLabel: string;
@@ -39,6 +49,8 @@ export interface Standard {
   intro: string;
   /** Related content pages, clustered by group */
   related: RelatedGroup[];
+  /** Optional concrete points that show how the standard shows up in care */
+  pillars?: StandardPillar[];
 }
 
 export const standards: Standard[] = [
@@ -57,25 +69,30 @@ export const standards: Standard[] = [
       {
         heading: 'Physician Team',
         items: [
-          { href: '/team/dr-james-lin', label: 'James P. Lin, MD', desc: 'Founder & Medical Director' },
-          { href: '/team/dr-tiffanny-jones', label: 'Tiffanny LaTrice Jones, MD', desc: 'Reproductive Endocrinology Specialist' },
-          { href: '/team/dr-zitao-liu', label: 'Zitao Liu, MD', desc: 'Associate Chief Medical Officer' },
+          { href: '/team/dr-james-lin', label: 'James P. Lin, MD', desc: 'Founder & Medical Director', photo: '/images/team/dr-james-lin-circle.png', bio: 'Founder of RFC; 20+ years building it into a Kaiser Center of Excellence.' },
+          { href: '/team/dr-tiffanny-jones', label: 'Tiffanny LaTrice Jones, MD', desc: 'Reproductive Endocrinology Specialist', photo: '/images/doctor-tiffanny-jones.webp', bio: 'Patient-centered REI specialist for IVF, genetic testing and preservation.' },
+          { href: '/team/dr-zitao-liu', label: 'Zitao Liu, MD', desc: 'Associate Chief Medical Officer', photo: '/images/team/dr-zitao-liu-circle.png', bio: 'Pioneer of mild-stimulation IVF; integrates AI for precise planning.' },
         ],
       },
       {
         heading: 'Embryologists',
         items: [
-          { href: '/team/dr-yufen-xie', label: 'Yufen Xie, PhD', desc: 'IVF Laboratory Director' },
-          { href: '/team/hyang-park', label: 'Hyang Park, M.S.', desc: 'IVF Laboratory Supervisor' },
+          { href: '/team/dr-yufen-xie', label: 'Yufen Xie, PhD', desc: 'IVF Laboratory Director', photo: '/images/team/dr-yufen-xie.png', bio: 'Directed the lab ranked #1 in US IVF success rates in 2016.' },
+          { href: '/team/hyang-park', label: 'Hyang Park, M.S.', desc: 'IVF Laboratory Supervisor', photo: '/images/team/hyang-park.png', bio: 'Ensures day-to-day excellence of the embryology laboratory.' },
         ],
       },
       {
         heading: 'Nursing Team',
         items: [
-          { href: '/team/lily-hao', label: 'Lily Hao, MSN, WHNP', desc: 'Nurse Manager' },
-          { href: '/team/kelly-zhao', label: 'Kelly Zhao', desc: 'Third Party Coordinator' },
+          { href: '/team/lily-hao', label: 'Lily Hao, MSN, WHNP', desc: 'Nurse Manager', photo: '/images/team/lily-hao.png', bio: 'Women’s Health NP leading compassionate, patient-first nursing.' },
+          { href: '/team/kelly-zhao', label: 'Kelly Zhao', desc: 'Third Party Coordinator', photo: '/images/team/kelly-zhao.png', bio: 'Bilingual third-party coordinator for donor and surrogacy programs.' },
         ],
       },
+    ],
+    pillars: [
+      { num: '01', title: 'Physician-led care', text: 'Every case is shaped by specialist physicians, not protocols alone.' },
+      { num: '02', title: 'Embryology precision', text: 'A lab ranked #1 in US IVF success rates safeguards each embryo.' },
+      { num: '03', title: 'Coordinated nursing', text: 'Nurse coordinators carry your plan end-to-end, so nothing falls through.' },
     ],
   },
   {
@@ -152,6 +169,7 @@ export const standards: Standard[] = [
         heading: 'Cost & Clarity',
         items: [
           { href: '/financing', label: 'Financing & Cost', desc: 'Clear, upfront pricing' },
+          { href: '/insurance', label: 'Insurance & Coverage', desc: 'What your plan may cover' },
           { href: '/faq', label: 'FAQ', desc: 'Straight answers to common questions' },
         ],
       },
@@ -203,6 +221,7 @@ export const standards: Standard[] = [
       {
         heading: 'Find & Reach Us',
         items: [
+          { href: '/consultation', label: 'Phone & Online Consultation', desc: 'Call or meet us virtually' },
           { href: '/appointment', label: 'Schedule a Consultation', desc: 'Book your first appointment' },
           { href: '/contact', label: 'Contact Us', desc: 'Questions? Reach our team' },
           { href: '/locations', label: 'Locations', desc: '5 Southern California clinics' },

@@ -45,6 +45,25 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
     </div>
   </section>
 
+  <!-- ═══ PILLARS ═══ -->
+  {standard.pillars && standard.pillars.length > 0 && (
+    <section class="std-pillars">
+      <div class="std-pillars-inner">
+        <div class="h-px mb-8" style="background: var(--color-gold-500); width: 3rem;"></div>
+        <h2 class="std-pillars-h2">How this standard shows up in care</h2>
+        <div class="std-pillar-grid">
+          {standard.pillars.map((p) => (
+            <div class="std-pillar">
+              <span class="std-pillar-num">{p.num}</span>
+              <h3 class="std-pillar-title">{p.title}</h3>
+              <p class="std-pillar-text">{p.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- ═══ RELATED CONTENT ═══ -->
   <section class="std-related">
     <div class="std-related-inner">
@@ -53,17 +72,31 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
       {standard.related.map((group) => (
         <div class="std-group">
           <h3 class="std-group-h">{group.heading}</h3>
-          <div class="std-cards">
+          <div class={`std-cards ${group.items.some((i) => i.photo) ? 'std-cards-team' : ''}`}>
             {group.items.map((item) => (
-              <a href={item.href} class="std-card">
-                <span class="std-card-label">{item.label}</span>
-                {item.desc && <span class="std-card-desc">{item.desc}</span>}
-                <span class="std-card-arrow" aria-hidden="true">
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-              </a>
+              item.photo ? (
+                <a href={item.href} class="std-team-card">
+                  <img src={item.photo} alt={item.label} class="std-team-ava" loading="lazy" decoding="async" />
+                  <span class="std-team-name">{item.label}</span>
+                  {item.desc && <span class="std-team-role">{item.desc}</span>}
+                  {item.bio && <span class="std-team-bio">{item.bio}</span>}
+                  <span class="std-team-link">Full profile
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </a>
+              ) : (
+                <a href={item.href} class="std-card">
+                  <span class="std-card-label">{item.label}</span>
+                  {item.desc && <span class="std-card-desc">{item.desc}</span>}
+                  <span class="std-card-arrow" aria-hidden="true">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </a>
+              )
             ))}
           </div>
         </div>
@@ -185,6 +218,52 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
   margin: 0;
 }
 
+/* ═══ PILLARS ═══ */
+.std-pillars {
+  background: #fff;
+  padding: 4.5rem 4vw 5rem;
+  border-top: 1px solid var(--color-pearl-200);
+}
+.std-pillars-inner { max-width: 70rem; margin: 0 auto; }
+.std-pillars-h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  color: var(--color-purple-800);
+  margin: 0 0 3rem;
+}
+.std-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}
+.std-pillar {
+  padding: 1.75rem 1.6rem;
+  background: var(--color-pearl-50);
+  border: 1px solid var(--color-pearl-200);
+}
+.std-pillar-num {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-gold-500);
+  margin-bottom: 0.75rem;
+}
+.std-pillar-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-purple-800);
+  margin: 0 0 0.6rem;
+}
+.std-pillar-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-stone-600);
+  margin: 0;
+}
+
 /* ═══ RELATED ═══ */
 .std-related {
   background: #fff;
@@ -215,6 +294,9 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1rem;
+}
+.std-cards-team {
+  grid-template-columns: repeat(3, 1fr);
 }
 .std-card {
   position: relative;
@@ -256,6 +338,63 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
 .std-card:hover .std-card-arrow {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* ═══ TEAM CARDS (photo) ═══ */
+.std-team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  padding: 1.75rem 1.4rem;
+  background: var(--color-pearl-50);
+  border: 1px solid var(--color-pearl-200);
+  text-decoration: none;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+.std-team-card:hover {
+  border-color: var(--color-gold-400);
+  background: #fff;
+  transform: translateY(-2px);
+}
+.std-team-ava {
+  width: 5.25rem;
+  height: 5.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.65rem;
+}
+.std-team-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-purple-800);
+}
+.std-team-role {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+  margin-bottom: 0.4rem;
+}
+.std-team-bio {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--color-stone-500);
+  margin-bottom: 0.7rem;
+}
+.std-team-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
 }
 
 /* ═══ EXPLORE OTHER ═══ */
@@ -347,5 +486,9 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
   }
   .std-related,
   .std-more { padding-left: 6vw; padding-right: 6vw; }
+  .std-cards-team { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .std-cards-team { grid-template-columns: 1fr; }
 }
 </style>

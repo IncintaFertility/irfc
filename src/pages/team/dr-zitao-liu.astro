@@ -3,15 +3,13 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 
-const expertise = [
-  'Mild & Minimal Stimulation IVF',
-  'AI-Assisted Embryo Selection',
-  'Polycystic Ovary Syndrome (PCOS)',
-  'Diminished Ovarian Reserve',
-  'Recurrent Implantation Failure',
-  'Egg Freezing & Fertility Preservation',
-  'Male Factor Infertility',
-  'Unexplained Infertility',
+const focus = [
+  'Mild Stimulation IVF',
+  'AI-Assisted Diagnostics',
+  'Data-Driven Treatment Planning',
+  'Reproductive Endocrinology & Infertility',
+  'Personalized Protocol Design',
+  'Clinical Innovation',
 ];
 
 const schema = {
@@ -20,7 +18,7 @@ const schema = {
   name: 'Zitao Liu, MD',
   honorificPrefix: 'Dr.',
   jobTitle: 'Associate Chief Medical Officer',
-  description: 'Reproductive endocrinologist specializing in mild stimulation IVF protocols and AI-assisted fertility diagnostics. Associate Chief Medical Officer at IRFC, now accepting new patients.',
+  description: 'Associate Chief Medical Officer at IRFC and a pioneer of mild-stimulation IVF protocols that reduce patient burden while maintaining excellent outcomes.',
   medicalSpecialty: 'Reproductive Medicine',
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
   image: 'https://irfc.com/images/team/dr-zitao-liu-circle.png',
@@ -29,13 +27,12 @@ const schema = {
 ---
 
 <Layout
-  title="Dr. Zitao Liu, MD — Associate Chief Medical Officer"
-  description="Dr. Zitao Liu is IRFC's Associate Chief Medical Officer, pioneering mild stimulation IVF protocols and AI-assisted reproductive tools. Now accepting new patients."
+  title="Zitao Liu, MD — Associate Chief Medical Officer"
+  description="Dr. Zitao Liu is Associate Chief Medical Officer at IRFC and a pioneer of mild-stimulation IVF protocols that reduce patient burden while maintaining excellent outcomes."
   schema={schema}
 >
   <Nav />
 
-  <!-- Hero -->
   <section class="pt-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-2 gap-0 items-end">
@@ -45,19 +42,17 @@ const schema = {
             <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">Associate Chief Medical Officer</span>
           </div>
           <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-4 leading-none">
-            Zitao Liu,<br/>
-            <em class="not-italic" style="color: var(--color-gold-500);">MD</em>
+            Zitao<br/>
+            <em class="not-italic" style="color: var(--color-gold-500);">Liu, MD</em>
           </h1>
-          <p class="text-sm tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Reproductive Endocrinology & Infertility</p>
-          <span class="inline-block text-xs tracking-wider px-3 py-1.5 border mb-6" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">
-            Now Accepting New Patients
-          </span>
-          <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-10">
-            A pioneer in mild stimulation IVF and AI-assisted reproductive diagnostics — bringing next-generation approaches to fertility care with precision and compassion.
+          <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">Reproductive Endocrinology & Infertility</p>
+          <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-6">
+            A rising leader in the field, Dr. Liu pioneers mild-stimulation protocols that reduce patient burden while maintaining excellent outcomes — and now accepts new patients.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/contact" class="btn-primary">
-              Request a Consultation with Dr. Liu
+          <span class="inline-block mb-8 text-xs px-3 py-1.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">Now Accepting New Patients</span>
+          <div>
+            <a href="/contact" class="btn-outline inline-flex items-center gap-2">
+              Meet Our Physicians
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -67,7 +62,7 @@ const schema = {
         <div class="hidden lg:block relative" style="min-height: 560px;">
           <img
             src="/images/team/dr-zitao-liu-circle.png"
-            alt="Dr. Zitao Liu, MD"
+            alt="Zitao Liu, MD"
             class="absolute bottom-0 right-0 h-full w-full object-cover object-top"
             style="object-position: center top;"
           />
@@ -76,74 +71,47 @@ const schema = {
     </div>
   </section>
 
-  <!-- Quick stats bar -->
-  <section class="border-y border-stone-100" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-stone-100">
-        {[
-          { stat: 'REI', label: 'Board Certified\nReproductive Endocrinologist' },
-          { stat: 'AI', label: 'Assisted Embryo\nSelection Pioneer' },
-          { stat: 'Mild', label: 'Stimulation Protocol\nSpecialist' },
-          { stat: 'Telehealth', label: 'Consultations\nAvailable' },
-        ].map(item => (
-          <div class="px-8 py-6">
-            <p class="text-2xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-600);">{item.stat}</p>
-            <p class="text-xs whitespace-pre-line leading-snug" style="color: var(--color-stone-500); font-family: var(--font-sans);">{item.label}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Biography -->
   <section class="py-24 lg:py-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-3 gap-16">
         <div class="lg:col-span-2 space-y-6">
           <div class="section-divider mb-8"></div>
-          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">About Dr. Liu</h2>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">About Zitao Liu, MD</h2>
 
           <p class="text-stone-600 leading-relaxed">
-            Dr. Zitao Liu serves as Associate Chief Medical Officer at IRFC and is currently accepting new patients. A rising leader in reproductive medicine, Dr. Liu has established himself as a pioneer in the development and refinement of mild stimulation IVF protocols — an approach that thoughtfully reduces the hormonal burden on patients while preserving — and often optimizing — clinical outcomes.
+            Dr. Zitao Liu serves as Associate Chief Medical Officer at IRFC and is now accepting new patients. A rising leader in the field, Dr. Liu has become a pioneer in the development of mild stimulation protocols that reduce patient burden while maintaining excellent outcomes.
           </p>
           <p class="text-stone-600 leading-relaxed">
-            Dr. Liu brings a forward-thinking perspective to fertility care, integrating artificial intelligence and data analytics into diagnostic and treatment planning processes. His work reflects a broader belief: that precision medicine — the ability to tailor every decision to the individual patient's biology — represents the future of reproductive medicine.
-          </p>
-          <p class="text-stone-600 leading-relaxed">
-            Beyond his technical expertise, Dr. Liu is known among patients for his patience, clarity, and willingness to take time explaining complex concepts in accessible terms. He treats each case as a unique clinical puzzle, approaching even the most challenging situations with methodical care.
-          </p>
-          <p class="text-stone-600 leading-relaxed">
-            Dr. Liu practices across IRFC's Southern California locations and is now actively welcoming new patients seeking a physician who combines clinical innovation with a deeply personal approach to care.
+            He brings a forward-thinking approach to fertility care, integrating artificial intelligence and data-driven tools to enhance diagnostic precision and treatment planning. His work represents the next generation of reproductive medicine — thoughtful, innovative, and deeply personalized.
           </p>
 
-          <!-- Philosophy pull quote -->
           <blockquote class="py-10 border-y border-stone-100 my-10">
             <p class="text-2xl font-light leading-relaxed text-stone-700 italic" style="font-family: var(--font-serif);">
-              "Fertility medicine is at an inflection point. The tools we have today — from AI-assisted embryo assessment to precision mild stimulation — allow us to do more for patients with less, and more precisely than ever before."
+              "The future of reproductive medicine is thoughtful, innovative, and deeply personalized."
             </p>
-            <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">— Dr. Zitao Liu</cite>
+            <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">— Zitao Liu, MD</cite>
           </blockquote>
 
-          <!-- Mild stim explainer -->
           <div class="p-8 lg:p-10 border border-stone-200" style="background: var(--color-stone-50);">
-            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">What Is Mild Stimulation IVF?</p>
-            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">A gentler path — with excellent results</h3>
-            <p class="text-sm leading-relaxed text-stone-500 mb-4">
-              Traditional IVF protocols use high doses of hormones to maximize the number of eggs retrieved. Mild stimulation IVF uses lower doses over a shorter period — reducing side effects, cost, and the risk of ovarian hyperstimulation syndrome (OHSS), while producing fewer but often higher-quality embryos.
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">Precision, Reimagined</p>
+            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">Less burden, same excellence.</h3>
+            <p class="text-sm leading-relaxed text-stone-500 mb-6">
+              Dr. Liu's mild-stimulation protocols pair clinical evidence with AI-assisted planning — so your care is gentler without compromising results.
             </p>
-            <p class="text-sm leading-relaxed text-stone-500">
-              For many patients — particularly those with PCOS, diminished ovarian reserve, or sensitivity to hormonal medications — mild stimulation offers a better physiological fit. Dr. Liu will discuss whether this approach is appropriate for your situation during your consultation.
-            </p>
+            <a href="/services/ivf" class="btn-outline inline-flex items-center gap-2 text-xs py-2.5 px-5">
+              About IVF at IRFC
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
           </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="space-y-10">
-          <!-- Expertise -->
           <div>
-            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Areas of Expertise</p>
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">Areas of Focus</p>
             <ul class="space-y-3">
-              {expertise.map(item => (
+              {focus.map(item => (
                 <li class="flex items-center gap-3 text-sm text-stone-600">
                   <div class="w-1.5 h-1.5 flex-shrink-0" style="background: var(--color-gold-400);"></div>
                   {item}
@@ -152,24 +120,21 @@ const schema = {
             </ul>
           </div>
 
-          <!-- Languages -->
           <div class="border-t border-stone-100 pt-8">
             <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">Languages</p>
             <div class="flex flex-wrap gap-2">
-              {['English', 'Mandarin Chinese'].map(lang => (
+              {['English', 'Mandarin'].map(lang => (
                 <span class="text-xs px-3 py-1.5 border border-stone-200 text-stone-600">{lang}</span>
               ))}
             </div>
           </div>
 
-          <!-- Accepting patients callout -->
           <div class="border border-stone-200 p-6" style="background: var(--color-stone-50);">
             <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
-            <span class="inline-block text-xs tracking-wider px-2 py-1 border mb-3" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">Now Accepting New Patients</span>
-            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">Consultations with Dr. Liu</p>
-            <p class="text-xs text-stone-500 mb-5 leading-relaxed">First appointment is free. Telehealth available.</p>
-            <a href="/contact" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
-              Book Now
+            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">Plan Your Visit</p>
+            <p class="text-xs text-stone-500 mb-5 leading-relaxed">Ready to begin? Schedule a consultation with our care team.</p>
+            <a href="/appointment" class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
+              Schedule a Consultation
             </a>
           </div>
         </div>
@@ -177,7 +142,6 @@ const schema = {
     </div>
   </section>
 
-  <!-- Other physicians -->
   <section class="py-16 border-t border-stone-100" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="flex items-center justify-between mb-10">
@@ -189,8 +153,8 @@ const schema = {
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         {[
-          { name: 'James P. Lin, MD', role: 'Founder & Medical Director', href: '/team/dr-james-lin', badge: 'Founder', photo: '/images/team/dr-james-lin-circle.png' },
-          { name: 'Tiffanny LaTrice Jones, MD', role: 'Reproductive Endocrinology Specialist', href: '/team/dr-tiffanny-jones', badge: 'Reproductive Endocrinologist', photo: '/images/doctor-tiffanny-jones.webp' },
+          { name: 'James P. Lin, MD', role: 'Founder & Medical Director', href: '/team/dr-james-lin', badge: 'Physician', photo: '/images/team/dr-james-lin-circle.png' },
+          { name: 'Tiffanny LaTrice Jones, MD', role: 'Reproductive Endocrinology Specialist', href: '/team/dr-tiffanny-jones', badge: 'Physician', photo: '/images/doctor-tiffanny-jones.webp' },
         ].map(doc => (
           <a href={doc.href} class="group bg-white border border-stone-200 p-6 flex items-center gap-5 card-hover">
             <img src={doc.photo} alt={doc.name} class="w-16 h-16 object-cover flex-shrink-0" style="border-radius: 50%;" />
