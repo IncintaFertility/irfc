@@ -16,8 +16,8 @@ const stats = [
 ---
 
 <Layout
-  title="Southern California IVF & Fertility Specialists"
-  description="INCINTA — Life Is the Ultimate Art. Award-winning IVF and fertility care across Southern California at Incinta Reproductive Fertility Center (IRFC). Four locations."
+  title="Incinta Reproductive Fertility Center — IVF & Fertility Care in Southern California"
+  description="Award-winning IVF and fertility care across Southern California at Incinta Reproductive Fertility Center (IRFC). Four locations, one standard of care."
 >
   <Nav />
 
@@ -37,6 +37,7 @@ const stats = [
     <div class="idx-hero-overlay"></div>
 
     <div class="idx-hero-body">
+      <p class="idx-hero-eyebrow">Incinta Reproductive Fertility Center</p>
       <h1 class="idx-hero-h1">
         <span>Life Is</span>
         <span>the <em>Ultimate</em> Art.</span>
@@ -231,6 +232,16 @@ const stats = [
   z-index: 2;
   /* Reserve a bigger bottom band so the CTA clears the video subtitles */
   padding: 0 10vw clamp(6.5rem, 16vh, 11rem);
+}
+
+.idx-hero-eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-gold-400);
+  margin-bottom: 1.25rem;
 }
 
 .idx-hero-h1 {

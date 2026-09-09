@@ -195,9 +195,9 @@ export const HOMEPAGE_FLOW = [
   { id: 'action', en: 'ACTION', zh: 'Your Beginning Starts Here.' },
 ] as const;
 
-/** 默认 meta description（品牌语言版，替代旧语） */
+/** 默认 meta description（实体名主导，替代旧语） */
 export const DEFAULT_DESCRIPTION =
-  'INCINTA — Life Is the Ultimate Art. World-class fertility care across Southern California at Incinta Reproductive Fertility Center (IRFC).';
+  'Incinta Reproductive Fertility Center (IRFC) — world-class IVF and fertility care across Southern California, where science, art, and life meet.';
 
 /** 结构化数据用的机构描述 */
 export const ORG_DESCRIPTION =
