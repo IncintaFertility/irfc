@@ -199,6 +199,7 @@ export const standards: Standard[] = [
         heading: 'The Experience',
         items: [
           { href: '/patient-resources', label: 'Patient Resources', desc: 'Guides & support' },
+          { href: '/blog', label: 'Fertility Insights', desc: 'Articles & patient guides' },
           { href: '/patient-portal', label: 'Patient Portal', desc: 'Access your records & messages' },
           { href: '/testimonials', label: 'Patient Stories', desc: 'Voices from our community' },
           { href: '/about', label: 'About', desc: 'Our commitment to welcome all' },

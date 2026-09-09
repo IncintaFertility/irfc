@@ -1,0 +1,162 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { blogPosts } from '../../data/blog';
+import { BRAND_ABBREV } from '../../config/brand';
+
+const posts = [...blogPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+
+const fmtDate = (iso: string) =>
+  new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Layout
+  title="Fertility Insights & Patient Guides"
+  description="Evidence-based guides on IVF, genetic testing, and fertility preservation from the physicians at Incinta Reproductive Fertility Center (IRFC) — written to help you make informed decisions."
+>
+  <main class="blog-hub">
+    <header class="blog-hub-hero">
+      <p class="blog-hub-eyebrow">Fertility Insights</p>
+      <h1 class="blog-hub-title">Guides &amp; answers for your fertility journey</h1>
+      <p class="blog-hub-lead">
+        Clear, physician-reviewed explainers on IVF, genetic testing, and preservation — so the
+        decisions ahead of you are easier to make. New guides are added regularly.
+      </p>
+    </header>
+
+    <section class="blog-hub-grid" aria-label="Articles">
+      {posts.map((post) => (
+        <a class="blog-card" href={`/blog/${post.slug}`}>
+          <span class="blog-card-cat">{post.category}</span>
+          <h2 class="blog-card-title">{post.title}</h2>
+          <p class="blog-card-excerpt">{post.excerpt}</p>
+          <p class="blog-card-meta">{fmtDate(post.date)} · {post.readingTime}</p>
+        </a>
+      ))}
+    </section>
+
+    <section class="blog-hub-cta">
+      <h2 class="blog-hub-cta-title">Have a question about your own path?</h2>
+      <p class="blog-hub-cta-text">
+        These guides are general education, not medical advice. The next step is a conversation with a
+        physician — in person at one of our four Southern California clinics, or by secure video visit.
+      </p>
+      <a class="blog-hub-cta-btn" href="/consultation">Talk with a Physician →</a>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .blog-hub {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 7rem 6vw 5rem;
+  }
+  .blog-hub-hero { max-width: 720px; margin-bottom: 3.5rem; }
+  .blog-hub-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold-600);
+    margin: 0 0 1rem;
+  }
+  .blog-hub-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    color: var(--color-stone-800);
+    margin: 0 0 1.25rem;
+  }
+  .blog-hub-lead {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-stone-600);
+    margin: 0;
+  }
+  .blog-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--color-stone-200);
+    border-radius: 14px;
+    padding: 1.75rem;
+    text-decoration: none;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  }
+  .blog-card:hover {
+    border-color: var(--color-gold-400);
+    box-shadow: 0 10px 30px -12px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+  .blog-card-cat {
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold-600);
+    margin-bottom: 0.9rem;
+  }
+  .blog-card-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.25;
+    color: var(--color-stone-800);
+    margin: 0 0 0.75rem;
+  }
+  .blog-card-excerpt {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-stone-600);
+    margin: 0 0 1.25rem;
+    flex: 1;
+  }
+  .blog-card-meta {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+    color: var(--color-stone-400);
+    margin: 0;
+  }
+  .blog-hub-cta {
+    margin-top: 4rem;
+    padding: 2.75rem;
+    background: #FAEEDA;
+    border-radius: 16px;
+    text-align: center;
+  }
+  .blog-hub-cta-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.75rem;
+    color: var(--color-stone-800);
+    margin: 0 0 0.85rem;
+  }
+  .blog-hub-cta-text {
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-stone-600);
+  }
+  .blog-hub-cta-btn {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.8rem 1.6rem;
+    background: var(--color-gold-500);
+    color: #fff;
+    border-radius: 999px;
+    transition: background 0.25s;
+  }
+  .blog-hub-cta-btn:hover { background: var(--color-gold-600); }
+</style>
