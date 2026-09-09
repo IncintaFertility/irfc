@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { SITE_URL } from '../../config/brand';
 
 const focus = [
   'Fertility Evaluation',
@@ -21,8 +22,8 @@ const schema = {
   description: 'Reproductive endocrinology specialist at IRFC supporting patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.',
   medicalSpecialty: 'Reproductive Medicine',
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-  image: 'https://irfc.com/images/doctor-tiffanny-jones.webp',
-  url: 'https://irfc.com/team/dr-tiffanny-jones',
+  image: SITE_URL + '/images/doctor-tiffanny-jones.webp',
+  url: SITE_URL + '/team/dr-tiffanny-jones',
 };
 ---
 

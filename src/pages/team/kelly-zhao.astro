@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { SITE_URL } from '../../config/brand';
 
 const focus = [
   'Egg Donation Programs',
@@ -19,8 +20,8 @@ const schema = {
   jobTitle: 'Third Party Coordinator',
   description: 'Bilingual Third Party Coordinator at IRFC, specializing in egg donation and surrogacy programs with warmth, expertise, and culturally competent care.',
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-  image: 'https://irfc.com/images/team/kelly-zhao.png',
-  url: 'https://irfc.com/team/kelly-zhao',
+  image: SITE_URL + '/images/team/kelly-zhao.png',
+  url: SITE_URL + '/team/kelly-zhao',
 };
 ---
 

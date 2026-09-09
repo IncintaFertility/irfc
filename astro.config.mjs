@@ -7,7 +7,7 @@ export default defineConfig({
   output: 'static',
   site: 'https://irfc.com',
   integrations: [
-    sitemap(),
+    sitemap({ filter: (page) => !page.includes('/contact/success/') }),
   ],
   vite: {
     plugins: [tailwindcss()],

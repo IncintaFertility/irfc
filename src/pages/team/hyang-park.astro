@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { SITE_URL } from '../../config/brand';
 
 const focus = [
   'Embryology Laboratory Operations',
@@ -19,8 +20,8 @@ const schema = {
   jobTitle: 'IVF Laboratory Supervisor',
   description: 'IVF Laboratory Supervisor at IRFC, ensuring day-to-day excellence of the embryology laboratory through meticulous quality control and team coordination.',
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-  image: 'https://irfc.com/images/team/hyang-park.png',
-  url: 'https://irfc.com/team/hyang-park',
+  image: SITE_URL + '/images/team/hyang-park.png',
+  url: SITE_URL + '/team/hyang-park',
 };
 ---
 

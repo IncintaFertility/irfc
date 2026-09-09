@@ -60,6 +60,40 @@ const orgSchema = {
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || SITE_URL);
+
+// BreadcrumbList — derived from the current path so every interior page earns
+// navigational rich results without hand-maintaining markup per page.
+const crumbLabels = {
+  services: 'Treatments & Services', ivf: 'In Vitro Fertilization (IVF)', iui: 'Intrauterine Insemination (IUI)',
+  'egg-freezing': 'Egg Freezing & Fertility Preservation', pgt: 'Preimplantation Genetic Testing (PGT)',
+  icsi: 'Intracytoplasmic Sperm Injection (ICSI)', 'recurrent-pregnancy-loss': 'Recurrent Pregnancy Loss',
+  'donors-surrogacy': 'Donors & Surrogacy', lgbtqia: 'LGBTQIA+ Family Building',
+  standards: 'The INCINTA Standard', team: 'Our Team', locations: 'Locations',
+  financing: 'Financing', insurance: 'Insurance & Coverage', consultation: 'Phone & Online Consultation',
+  resources: 'Resources', 'patient-resources': 'Patient Resources', testimonials: 'Patient Reviews',
+  about: 'About', contact: 'Contact', appointment: 'Appointment', faq: 'FAQ',
+  'patient-journey': 'Patient Journey', conditions: 'Conditions', technology: 'Lab Technology',
+  outcomes: 'Outcomes', privacy: 'Privacy Policy', terms: 'Terms of Use', accessibility: 'Accessibility',
+  'patient-portal': 'Patient Portal', 'international-patients': 'International Patients', 'why-irfc': 'Why IRFC',
+};
+const segs = Astro.url.pathname.split('/').filter(Boolean);
+const crumbItems = [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL }];
+if (segs.length) {
+  let acc = '';
+  segs.forEach((seg, i) => {
+    acc += '/' + seg;
+    const label = crumbLabels[seg] || seg.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+    crumbItems.push({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: label,
+      item: new URL(acc + '/', SITE_URL).href,
+    });
+  });
+}
+const breadcrumbSchema = segs.length
+  ? { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: crumbItems }
+  : null;
 ---
 
 <!doctype html>
@@ -94,6 +128,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || SITE_URL);
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)}></script>
+    {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>}
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>}
 
     <!-- Fonts: non-render-blocking so the page paints immediately even when

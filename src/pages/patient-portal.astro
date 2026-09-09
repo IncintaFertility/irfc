@@ -4,6 +4,8 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
 const portalLogin = 'https://portal.rfcfamily.com/PatientPortal';
+// TODO: eIVF 开通自助注册后，替换为专用注册链接
+const registrationUrl = portalLogin;
 const appStore = 'https://apps.apple.com/us/app/eivf-caresync/id6477145996';
 const googlePlay = 'https://play.google.com/store/apps/details?id=com.practicehwy.eivf.revamp';
 
@@ -136,6 +138,40 @@ const videos = [
         </a>
       </div>
       <p class="mt-6 text-xs" style="color: var(--color-stone-400);">The portal opens in a new tab on the secure eIVF system.</p>
+    </div>
+  </section>
+
+  <!--
+    New patient self-registration banner.
+    TODO: eIVF self-registration / online booking module 未开通前，"Register Online"
+    暂指向门户登录页；eIVF 开通自助注册后，把 REGISTRATION_URL 换成
+    eIVF 提供的专用注册链接即可（注册、病史、同意书均在 eIVF 内完成，
+    网站不收集任何临床信息）。
+  -->
+  <section class="py-16 lg:py-20 bg-white border-b border-stone-200">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">New to IRFC?</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-stone-800 mb-4">
+            Register online, then <em class="not-italic" style="color: var(--color-gold-500);">request your visit.</em>
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+            New patients can start their registration through the secure eIVF
+            portal — your identity, medical history, and consents stay inside
+            our HIPAA-compliant system, never on the public website.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row lg:justify-end gap-4">
+          <a href={registrationUrl} target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Register Online
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="/appointment#request" class="btn-outline" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
+            Request an Appointment
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 

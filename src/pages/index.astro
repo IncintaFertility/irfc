@@ -6,7 +6,7 @@ import { standards } from '../data/standards';
 
 const stats = [
   { number: '20+', label: 'Years of Excellence' },
-  { number: '5', label: 'Southern California Clinics' },
+  { number: '4', label: 'Southern California Clinics' },
   { number: '#1', label: 'US IVF Success Rate, 2016' },
   { number: '5', label: 'Languages Spoken' },
 ];
@@ -17,13 +17,21 @@ const stats = [
 
 <Layout
   title="Southern California IVF & Fertility Specialists"
-  description="INCINTA — Life Is the Ultimate Art. Award-winning IVF and fertility care across Southern California at Incinta Reproductive Fertility Center (IRFC). 5 locations."
+  description="INCINTA — Life Is the Ultimate Art. Award-winning IVF and fertility care across Southern California at Incinta Reproductive Fertility Center (IRFC). Four locations."
 >
   <Nav />
 
   <!-- 01 / HERO — First impression should convey the brand, not a row of treatment buttons -->
   <section class="idx-hero">
-    <video id="idx-hero-video" class="idx-hero-bg" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="auto" poster="/images/lobby-wide.webp">
+    <!--
+      Hero video: poster (lobby-wide.webp) paints instantly as the LCP element.
+      `preload="none"` + deferred play() means the (large) .mp4 only starts downloading
+      AFTER first paint, so it never blocks LCP / Core Web Vitals.
+      When you upload a larger HD master, also export a 720p variant and add a
+      <source media="(max-width: 768px)" src="/videos/brand-promo-720p.mp4" type="video/mp4" />
+      before the line below to save mobile bandwidth.
+    -->
+    <video id="idx-hero-video" class="idx-hero-bg" muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="none" width="1920" height="1080" poster="/images/lobby-wide.webp">
       <source src="/videos/brand-promo.mp4" type="video/mp4" />
     </video>
     <div class="idx-hero-overlay"></div>
@@ -55,6 +63,9 @@ const stats = [
         <p>
           <span class="en">The moment you begin to imagine a child, the story of that life has already begun. </span><span class="idx-meaning-lotus"><span class="en">Like the lotus &mdash; when the flower blooms, the fruit is already within.</span></span>
         </p>
+        <p class="idx-meaning-seo">
+          <span class="en">That same belief shapes how we practise reproductive medicine &mdash; from IVF and IUI to egg freezing and preimplantation genetic testing &mdash; across our four fertility clinics in Southern California.</span>
+        </p>
       </div>
     </div>
   </section>
@@ -63,14 +74,14 @@ const stats = [
   <section class="idx-standards" aria-label="The INCINTA Standard">
     <div class="idx-standards-head max-w-screen-xl mx-auto px-6 lg:px-10">
       <h2 class="idx-standards-title">Six standards help patients establish their own criteria.</h2>
-      <p class="idx-standards-lead">A fertility center worth trusting should pass six tests. These are the standards we help every patient hold their care to.</p>
+      <p class="idx-standards-lead">A fertility center worth trusting should pass six tests. At IRFC's four Southern California fertility clinics, we help every patient hold their IVF, IUI, and personalised care to these standards &mdash; so you can choose with confidence.</p>
     </div>
 
     <div class="idx-standards-rows max-w-screen-xl mx-auto px-6 lg:px-10">
       {standards.map((s) => (
         <a class="std-row" href={`/standards/${s.slug}`} aria-label={s.title}>
           <div class="std-row-media">
-            <img src={s.image} alt={s.title} loading="lazy" decoding="async" />
+            <img src={s.image} alt={s.title} width="800" height="600" loading="lazy" decoding="async" />
           </div>
           <div class="std-row-body">
             <span class="std-row-index">{s.number}</span>
@@ -104,7 +115,7 @@ const stats = [
           </div>
         </article>
         <article class="idx-dna-panel">
-          <img src="/images/dna/dna-art.jpg" alt="The artistry of personalised fertility care" loading="lazy" decoding="async" />
+          <img src="/images/dna/dna-art.webp" alt="The artistry of personalised fertility care" loading="lazy" decoding="async" width="1137" height="1383" />
           <span class="idx-dna-panel-ov"></span>
           <div class="idx-dna-panel-lab">
             <span class="idx-dna-panel-num">02</span>
@@ -156,20 +167,29 @@ const stats = [
       // WeChat/iOS autoplay policy requires the element to be muted before play()
       v.muted = true;
       v.setAttribute('muted', '');
-      function tryPlay() {
+      var started = false;
+      function start() {
+        if (started) return;
+        started = true;
+        // Calling play() triggers the network fetch of the (large) source only now,
+        // after first paint — keeping the poster as the LCP element.
         try {
           var p = v.play();
           if (p && typeof p.catch === 'function') p.catch(function () {});
         } catch (e) {}
       }
-      // Normal browsers: try immediately + on load
-      tryPlay();
-      window.addEventListener('load', tryPlay, false);
+      // Defer the heavy video download until the page is idle / fully loaded.
+      var ric = window.requestIdleCallback || function (fn) { return setTimeout(fn, 600); };
+      if (document.readyState === 'complete') {
+        ric(start);
+      } else {
+        window.addEventListener('load', function () { ric(start); }, false);
+      }
       // WeChat (X5/WKWebView) only allows play after the JS bridge is ready
-      document.addEventListener('WeixinJSBridgeReady', tryPlay, false);
-      if (typeof window.WeixinJSBridge !== 'undefined') tryPlay();
+      document.addEventListener('WeixinJSBridgeReady', start, false);
+      if (typeof window.WeixinJSBridge !== 'undefined') start();
       // Last-resort: first touch anywhere starts the video
-      document.addEventListener('touchstart', tryPlay, { once: true });
+      document.addEventListener('touchstart', start, { once: true });
     })();
   </script>
 </Layout>

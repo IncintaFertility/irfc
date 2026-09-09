@@ -2,15 +2,45 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { SITE_URL } from '../config/brand';
 import { reviews, reviewSources } from '../data/testimonials';
 
 const googleReviews = reviews.filter((r) => r.source === 'google');
 const yelpReviews = reviews.filter((r) => r.source === 'yelp');
+
+// Aggregate rating across both public profiles + a sample of individual reviews,
+// emitted as Review/AggregateRating JSON-LD to enable star rich results.
+const totalCount = reviewSources.google.count + reviewSources.yelp.count;
+const weighted =
+  reviewSources.google.rating * reviewSources.google.count +
+  reviewSources.yelp.rating * reviewSources.yelp.count;
+const aggregateRating = Number((weighted / totalCount).toFixed(2));
+
+const reviewSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Incinta Reproductive Fertility Center',
+  url: SITE_URL,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: aggregateRating,
+    reviewCount: totalCount,
+    bestRating: 5,
+  },
+  review: reviews.slice(0, 8).map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Person', name: r.author },
+    datePublished: r.date,
+    reviewBody: r.quote,
+    reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },
+  })),
+};
 ---
 
 <Layout
   title="Real Patient Reviews — IRFC on Google & Yelp"
   description="Real patient reviews of Incinta Fertility Center from public Google and Yelp profiles — verbatim excerpts with star ratings, names, and dates, linked back to the source."
+  schema={reviewSchema}
 >
   <Nav />
 

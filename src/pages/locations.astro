@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { BRAND_ABBREV } from '../config/brand';
+import { BRAND_ABBREV, SITE_URL } from '../config/brand';
 
 /* 地点数据：mapX/mapY 为标记在地图上的百分比坐标（基于南加州地理比例估算，可微调） */
 const locations = [
@@ -87,7 +87,7 @@ const clinicSchema = locations.map(loc => {
       postalCode,
       addressCountry: 'US',
     },
-    url: 'https://irfc.com/locations',
+    url: SITE_URL + '/locations',
   };
 });
 ---
@@ -124,7 +124,7 @@ const clinicSchema = locations.map(loc => {
         <!-- Map -->
         <div class="relative rounded-[2rem] overflow-hidden shadow-xl min-h-[420px] lg:min-h-[560px] bg-stone-100">
           <img
-            src="/images/locations/southern-california-irfc-map-label-free.png"
+            src="/images/locations/southern-california-irfc-map-label-free.webp"
             alt="Map of IRFC Southern California clinic locations"
             class="absolute inset-0 w-full h-full object-cover object-center"
             loading="lazy"

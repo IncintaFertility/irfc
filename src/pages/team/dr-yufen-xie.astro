@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { SITE_URL } from '../../config/brand';
 
 const focus = [
   'Embryology Laboratory Direction',
@@ -19,8 +20,8 @@ const schema = {
   jobTitle: 'IVF Laboratory Director',
   description: 'IVF Laboratory Director at IRFC, who led the team ranked #1 in US IVF success rates in 2016.',
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-  image: 'https://irfc.com/images/team/dr-yufen-xie.png',
-  url: 'https://irfc.com/team/dr-yufen-xie',
+  image: SITE_URL + '/images/team/dr-yufen-xie.png',
+  url: SITE_URL + '/team/dr-yufen-xie',
 };
 ---
 

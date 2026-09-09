@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { SITE_URL } from '../../config/brand';
 
 const focus = [
   'Mild Stimulation IVF',
@@ -21,8 +22,8 @@ const schema = {
   description: 'Associate Chief Medical Officer at IRFC and a pioneer of mild-stimulation IVF protocols that reduce patient burden while maintaining excellent outcomes.',
   medicalSpecialty: 'Reproductive Medicine',
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-  image: 'https://irfc.com/images/team/dr-zitao-liu-circle.png',
-  url: 'https://irfc.com/team/dr-zitao-liu',
+  image: SITE_URL + '/images/team/dr-zitao-liu-circle.png',
+  url: SITE_URL + '/team/dr-zitao-liu',
 };
 ---
 

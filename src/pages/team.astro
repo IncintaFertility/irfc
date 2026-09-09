@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { SITE_URL } from '../config/brand';
 
 const physicians = [
   {
@@ -97,8 +98,8 @@ const physicianSchema = [
     description: 'Board-certified reproductive endocrinologist and infertility specialist with over 20 years of experience. Founder of Reproductive Fertility Center, Medical Director of IRFC, Kaiser Permanente Center of Excellence physician.',
     medicalSpecialty: 'Reproductive Medicine',
     worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-    image: 'https://irfc.com/images/team/dr-james-lin-circle.png',
-    url: 'https://irfc.com/team',
+    image: SITE_URL + '/images/team/dr-james-lin-circle.png',
+    url: SITE_URL + '/team',
   },
   {
     '@context': 'https://schema.org',
@@ -109,8 +110,8 @@ const physicianSchema = [
     description: 'Reproductive endocrinologist at IRFC specializing in fertility evaluation, IVF, preimplantation genetic testing, and fertility-preservation planning.',
     medicalSpecialty: 'Reproductive Medicine',
     worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-    image: 'https://irfc.com/images/doctor-tiffanny-jones.jpg',
-    url: 'https://irfc.com/team',
+    image: SITE_URL + '/images/doctor-tiffanny-jones.webp',
+    url: SITE_URL + '/team',
   },
   {
     '@context': 'https://schema.org',
@@ -121,8 +122,8 @@ const physicianSchema = [
     description: 'Reproductive endocrinologist specializing in mild stimulation IVF protocols and AI-assisted fertility diagnostics. Associate Chief Medical Officer at IRFC, now accepting new patients.',
     medicalSpecialty: 'Reproductive Medicine',
     worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
-    image: 'https://irfc.com/images/team/dr-zitao-liu-circle.png',
-    url: 'https://irfc.com/team',
+    image: SITE_URL + '/images/team/dr-zitao-liu-circle.png',
+    url: SITE_URL + '/team',
   },
 ];
 ---

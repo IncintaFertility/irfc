@@ -1,0 +1,179 @@
+---
+/**
+ * RequestForm — 预约请求表单（HIPAA 最小字段版）
+ *
+ * 设计原则：
+ *  - 只收集联系方式类最小字段，不设病情描述输入框
+ *  - 提交到 /api/appointment-request（Pages Function，验证后转发到 BAA 邮箱）
+ *  - 失败时回退到电话，绝不让线索静默丢失
+ *
+ * 复用：appointment.astro 与 contact.astro
+ */
+const locations = [
+  { value: 'Beverly Hills', label: 'Beverly Hills, CA' },
+  { value: 'Corona', label: 'Corona, CA' },
+  { value: 'Irvine', label: 'Irvine, CA' },
+  { value: 'Torrance', label: 'Torrance, CA' },
+];
+const visitTypes = [
+  { value: 'In-Person Consultation', label: 'In-Person Consultation' },
+  { value: 'Zoom Video Consultation', label: 'Zoom Video Consultation' },
+];
+const languages = [
+  { value: 'English', label: 'English' },
+  { value: 'Chinese (Mandarin)', label: 'Chinese (Mandarin / 普通话)' },
+  { value: 'Japanese', label: 'Japanese / 日本語' },
+  { value: 'Korean', label: 'Korean / 한국어' },
+  { value: 'Spanish', label: 'Spanish / Español' },
+];
+const selectStyle = `background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a8a89a'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;`;
+---
+
+<form id="request-form" class="space-y-6" novalidate>
+  <div class="grid sm:grid-cols-2 gap-5">
+    <div>
+      <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="rf-first-name">First Name *</label>
+      <input type="text" id="rf-first-name" name="firstName" required autocomplete="given-name" maxlength="80"
+        class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none" />
+    </div>
+    <div>
+      <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="rf-last-name">Last Name *</label>
+      <input type="text" id="rf-last-name" name="lastName" required autocomplete="family-name" maxlength="80"
+        class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none" />
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-5">
+    <div>
+      <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="rf-email">Email Address *</label>
+      <input type="email" id="rf-email" name="email" required autocomplete="email" maxlength="160"
+        class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none" />
+      <p class="text-xs mt-2" style="color: var(--color-stone-400);">Or provide a phone number below.</p>
+    </div>
+    <div>
+      <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="rf-phone">Phone Number</label>
+      <input type="tel" id="rf-phone" name="phone" autocomplete="tel" maxlength="40"
+        class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none" />
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-5">
+    <div>
+      <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="rf-location">Preferred Location *</label>
+      <select id="rf-location" name="location" required
+        class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-700 text-sm focus:outline-none appearance-none" style={selectStyle}>
+        <option value="">Select a location</option>
+        {locations.map((l) => <option value={l.value}>{l.label}</option>)}
+      </select>
+    </div>
+    <div>
+      <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="rf-visit-type">Visit Type *</label>
+      <select id="rf-visit-type" name="visitType" required
+        class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-700 text-sm focus:outline-none appearance-none" style={selectStyle}>
+        <option value="">Select a visit type</option>
+        {visitTypes.map((v) => <option value={v.value}>{v.label}</option>)}
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400);" for="rf-language">Preferred Language</label>
+    <select id="rf-language" name="language"
+      class="w-full px-4 py-3 border border-stone-200 bg-white text-stone-700 text-sm focus:outline-none appearance-none" style={selectStyle}>
+      {languages.map((l) => <option value={l.value}>{l.label}</option>)}
+    </select>
+  </div>
+
+  <!-- honeypot：对用户不可见，机器人填写即被丢弃 -->
+  <div class="hidden" aria-hidden="true">
+    <label for="rf-company">Company</label>
+    <input type="text" id="rf-company" name="company" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <button type="submit" class="btn-primary w-full justify-center">
+    Submit Request
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </button>
+
+  <p class="text-xs text-center" style="color: var(--color-stone-400);">
+    We typically respond within one business day. This form collects your contact
+    details only — your medical history is gathered securely through the patient
+    portal after registration.
+  </p>
+
+  <div id="rf-success" class="hidden border p-8 text-center" style="border-color: var(--color-champagne-300); background: var(--color-champagne-50);">
+    <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">Request received.</p>
+    <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+      A member of our care team will contact you within one business day to
+      confirm a time. We look forward to meeting you.
+    </p>
+  </div>
+
+  <div id="rf-error" class="hidden border border-red-200 bg-red-50 p-6 text-center">
+    <p class="text-sm leading-relaxed text-stone-700 mb-3">
+      Something went wrong sending your request. Please call us instead —
+      we'll schedule you right away.
+    </p>
+    <a href="tel:+14244324732" class="btn-outline inline-flex items-center gap-2" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
+      Call (424) 432-4732
+    </a>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('request-form') as HTMLFormElement | null;
+  if (form) {
+    const success = document.getElementById('rf-success')!;
+    const errorBox = document.getElementById('rf-error')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBox.classList.add('hidden');
+
+      const get = (id: string) =>
+        (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null)?.value?.trim() ?? '';
+
+      const payload = {
+        firstName: get('rf-first-name'),
+        lastName: get('rf-last-name'),
+        email: get('rf-email'),
+        phone: get('rf-phone'),
+        location: get('rf-location'),
+        visitType: get('rf-visit-type'),
+        language: get('rf-language'),
+        company: get('rf-company'),
+      };
+
+      // 前端轻校验
+      if (!payload.firstName || !payload.lastName) { errorBox.classList.remove('hidden'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload.email) && !payload.phone) {
+        errorBox.classList.remove('hidden');
+        return;
+      }
+      if (!payload.location || !payload.visitType) { errorBox.classList.remove('hidden'); return; }
+
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const res = await fetch('/api/appointment-request', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && (data as { ok?: boolean }).ok) {
+          form.querySelectorAll('div:not(#rf-success):not(#rf-error), button, p').forEach((el) => el.classList.add('hidden'));
+          success.classList.remove('hidden');
+        } else {
+          errorBox.classList.remove('hidden');
+        }
+      } catch {
+        errorBox.classList.remove('hidden');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+</script>

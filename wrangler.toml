@@ -1,3 +1,16 @@
 name = "irfc"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "./dist"
+
+# ── 预约请求接口（functions/api/appointment-request.ts）所需绑定 ──
+# 上线前在 Dashboard → Pages → irfc → Settings → Functions 配置：
+#
+# 1. send_email 绑定：
+# [[send_email]]
+# name = "SEND_EMAIL"
+#
+# 2. 环境变量（Production + Preview 各配一份）：
+#    MAIL_FROM = "no-reply@irfc.com"        # 发件地址（需为站点域）
+#    MAIL_TO   = "newpatients@irfc.com"     # 协调员收件地址（必须位于已签 BAA 的邮件服务，如 Google Workspace / Microsoft 365）
+#
+# 3. 建议同时为 /api/appointment-request 开启 Cloudflare Turnstile 校验。

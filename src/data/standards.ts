@@ -216,7 +216,7 @@ export const standards: Standard[] = [
     text: 'Exceptional care truly reaches every family in need.',
     image: '/images/standards/06-care-within-reach.jpg',
     intro:
-      'World-class fertility care should not depend on your zip code or your budget. With five clinics, telehealth, and transparent financing, we bring exceptional care within reach of every family who needs it.',
+      'World-class fertility care should not depend on your zip code or your budget. With four clinics, telehealth, and transparent financing, we bring exceptional care within reach of every family who needs it.',
     related: [
       {
         heading: 'Find & Reach Us',
@@ -224,7 +224,7 @@ export const standards: Standard[] = [
           { href: '/consultation', label: 'Phone & Online Consultation', desc: 'Call or meet us virtually' },
           { href: '/appointment', label: 'Schedule a Consultation', desc: 'Book your first appointment' },
           { href: '/contact', label: 'Contact Us', desc: 'Questions? Reach our team' },
-          { href: '/locations', label: 'Locations', desc: '5 Southern California clinics' },
+          { href: '/locations', label: 'Locations', desc: '4 Southern California clinics' },
         ],
       },
       {
