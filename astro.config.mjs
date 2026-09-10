@@ -13,7 +13,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   i18n: {
-    locales: ['en', 'zh', 'ja', 'ko', 'es'],
+    // en 为默认语言，无前缀；繁體中文挂在 /zh-hant/ 下。
+    // 简体（zh / zh-CN）当前不做，故不在 locales 内。
+    locales: ['en', 'zh-hant'],
     defaultLocale: 'en',
     routing: {
       prefixDefaultLocale: false,

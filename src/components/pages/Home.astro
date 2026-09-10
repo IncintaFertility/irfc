@@ -1,0 +1,635 @@
+---
+// 首頁（英文 / 繁體中文共用元件）
+// 兩個路由 src/pages/index.astro 與 src/pages/zh-hant/index.astro 皆渲染此元件；
+// locale 由路徑前綴判斷（/zh-hant/* → zh-hant，其餘 → en）。
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { standards } from '../../data/standards';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const stats = [
+  { number: '20+', label: ZH ? '年卓越傳承' : 'Years of Excellence' },
+  { number: '4', label: ZH ? '南加州 4 間診所' : 'Southern California Clinics' },
+  { number: '#1', label: ZH ? '2016 年全美 IVF 成功率第一' : 'US IVF Success Rate, 2016' },
+  { number: '5', label: ZH ? '5 種語言服務' : 'Languages Spoken' },
+];
+
+// 首頁六標準「支援段落」的繁體譯文（text 欄為首頁專用，集中於此）。
+const stdTextZh: Record<string, string> = {
+  'collective-expertise': '當您選擇 INCINTA，我們整個團隊的專業便承接這份信任——我們共同努力，追求最好的可能結果。',
+  'precision-personalization': '療程從非一體適用，而是為您的人生量身打造的計畫。',
+  'laboratory-excellence': '在每個實驗室細節上秉持嚴謹，守護每一個非凡的開始。',
+  'privacy-transparency': '您的身體與選擇絕對隱私；我們的標準與流程完全公開。真正的信任，源自清晰的界線。',
+  'art-of-care': '從珍珠的質感到蓮花的意象，從光線到材質——為生命精心構築的空間。',
+  'care-within-reach': '卓越的照護，真正觸及每一位需要的家庭。',
+};
+
+const title = ZH
+  ? 'Incinta Reproductive Fertility Center — 南加州 IVF 與生育照護'
+  : 'Incinta Reproductive Fertility Center — IVF & Fertility Care in Southern California';
+const description = ZH
+  ? 'Incinta Reproductive Fertility Center (IRFC) 於南加州提供屢獲肯定的 IVF 與生育照護。四間診所，同一套照護標準。'
+  : 'Award-winning IVF and fertility care across Southern California at Incinta Reproductive Fertility Center (IRFC). Four locations, one standard of care.';
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- 01 / HERO — First impression should convey the brand, not a row of treatment buttons -->
+  <section class="idx-hero">
+    <video id="idx-hero-video" class="idx-hero-bg" muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="none" width="1920" height="1080" poster="/images/lobby-wide.webp">
+      <source src="/videos/brand-promo.mp4" type="video/mp4" />
+    </video>
+    <div class="idx-hero-overlay"></div>
+
+    <div class="idx-hero-body">
+      <p class="idx-hero-eyebrow">Incinta Reproductive Fertility Center</p>
+      <h1 class="idx-hero-h1">
+        {ZH ? <span>生命，</span> : <span>Life Is</span>}
+        {ZH ? <span>是<em>最珍貴</em>的藝術。</span> : <span>the <em>Ultimate</em> Art.</span>}
+      </h1>
+      <div class="idx-hero-ctas">
+        <a href={localeHref('/contact', locale)} class="btn-primary">
+          {t(locale, 'nav.cta')}
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <a href={localeHref('/about', locale)} class="idx-ghost-btn">{ZH ? '我們的故事' : 'Our Story'}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meaning — The Meaning of Life: deep interpretation & value -->
+  <section class="idx-meaning" aria-label={ZH ? '生命的意義' : 'The Meaning of Life'}>
+    <div class="idx-meaning-inner">
+      <h2 class="idx-meaning-title">
+        <span class="idx-meaning-en">{ZH ? '每個生命都值得非凡的開始' : 'Every life deserves an extraordinary beginning'}</span>
+      </h2>
+      <div class="idx-meaning-body">
+        <p>
+          <span class="en">{ZH ? '當您開始想像一個孩子，那個生命的故事便已開始。' : 'The moment you begin to imagine a child, the story of that life has already begun.'}</span> <span class="idx-meaning-lotus"><span class="en">{ZH ? '如蓮花——花開之時，果實已在其中。' : 'Like the lotus &mdash; when the flower blooms, the fruit is already within.'}</span></span>
+        </p>
+        <p class="idx-meaning-seo">
+          <span class="en">{ZH ? '同樣的信念也形塑我們的生育醫學實踐——從 IVF、IUI 到凍卵與胚胎著床前基因檢測——遍佈南加州四間生育診所。' : 'That same belief shapes how we practise reproductive medicine &mdash; from IVF and IUI to egg freezing and preimplantation genetic testing &mdash; across our four fertility clinics in Southern California.'}</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The INCINTA Standard — six standards as alternating editorial rows -->
+  <section class="idx-standards" aria-label={ZH ? 'INCINTA 的標準' : 'The INCINTA Standard'}>
+    <div class="idx-standards-head max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 class="idx-standards-title">{ZH ? '六項標準，幫助病人建立自己的判斷準則。' : 'Six standards help patients establish their own criteria.'}</h2>
+      <p class="idx-standards-lead">{ZH ? '一所值得信賴的生育中心，應通過六項考驗。在 IRFC 南加州四間生育診所，我們協助每位病人以這六項標準檢視自己的 IVF、IUI 與個人化照護——讓您能自信地做選擇。' : 'A fertility center worth trusting should pass six tests. At IRFC\'s four Southern California fertility clinics, we help every patient hold their IVF, IUI, and personalised care to these standards &mdash; so you can choose with confidence.'}</p>
+    </div>
+
+    <div class="idx-standards-rows max-w-screen-xl mx-auto px-6 lg:px-10">
+      {standards.map((s) => (
+        <a class="std-row" href={localeHref(`/standards/${s.slug}`, locale)} aria-label={ZH ? (s.titleZh ?? s.title) : s.title}>
+          <div class="std-row-media">
+            <img src={s.image} alt={ZH ? (s.titleZh ?? s.title) : s.title} width="800" height="600" loading="lazy" decoding="async" />
+          </div>
+          <div class="std-row-body">
+            <span class="std-row-index">{s.number}</span>
+            <h3 class="std-row-title">{ZH ? (s.titleZh ?? s.title) : s.title}</h3>
+            <p class="std-row-lead">{ZH ? (s.leadZh ?? s.lead) : s.lead}</p>
+            <p class="std-row-text">{ZH ? (stdTextZh[s.slug] ?? s.text) : s.text}</p>
+            <span class="std-row-cue">{t(locale, 'std.explore')}
+              <svg class="std-row-cue-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Brand DNA — Science, Art, Life: the philosophy behind every standard -->
+  <section class="idx-dna" aria-label={ZH ? '品牌 DNA' : 'Brand DNA'}>
+    <div class="idx-dna-inner max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 class="idx-dna-title">{ZH ? <>科學<span class="idx-dna-dot">&middot;</span><span class="idx-dna-art">藝術</span><span class="idx-dna-dot">&middot;</span>生命</> : <>Science<span class="idx-dna-dot">&middot;</span><span class="idx-dna-art">Art</span><span class="idx-dna-dot">&middot;</span>Life</>}</h2>
+      <p class="idx-dna-body">{ZH ? '科學使生命成為可能。藝術雕琢每個細節。生命賦予每項技術意義。' : 'Science makes life possible. Art refines every detail. Life gives every technology its meaning.'}</p>
+      <div class="idx-dna-grid">
+        <article class="idx-dna-panel">
+          <img src="/images/dna/dna-science.jpg" alt={ZH ? 'INCINTA 胚胎學與實驗室精準' : 'INCINTA embryology and laboratory precision'} loading="lazy" decoding="async" />
+          <span class="idx-dna-panel-ov"></span>
+          <div class="idx-dna-panel-lab">
+            <span class="idx-dna-panel-num">01</span>
+            <span class="idx-dna-panel-title">{ZH ? '科學' : 'Science'}</span>
+            <span class="idx-dna-panel-cap">{ZH ? '使生命成為可能的精準。' : 'Precision that makes life possible.'}</span>
+          </div>
+        </article>
+        <article class="idx-dna-panel">
+          <img src="/images/dna/dna-art.webp" alt={ZH ? '個人化生育照護的匠心' : 'The artistry of personalised fertility care'} loading="lazy" decoding="async" width="1137" height="1383" />
+          <span class="idx-dna-panel-ov"></span>
+          <div class="idx-dna-panel-lab">
+            <span class="idx-dna-panel-num">02</span>
+            <span class="idx-dna-panel-title">{ZH ? '藝術' : 'Art'}</span>
+            <span class="idx-dna-panel-cap">{ZH ? '於每個細節中的匠心。' : 'Craft in every single detail.'}</span>
+          </div>
+        </article>
+        <article class="idx-dna-panel">
+          <img src="/images/dna/dna-life.jpg" alt={ZH ? '在 INCINTA 展開的新生命' : 'New life beginning at INCINTA'} loading="lazy" decoding="async" />
+          <span class="idx-dna-panel-ov"></span>
+          <div class="idx-dna-panel-lab">
+            <span class="idx-dna-panel-num">03</span>
+            <span class="idx-dna-panel-title">{ZH ? '生命' : 'Life'}</span>
+            <span class="idx-dna-panel-cap">{ZH ? '每項技術背後的意義。' : 'The meaning behind every technology.'}</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden py-32">
+    <img src="/images/couple-clinic.webp" srcset="/images/couple-clinic-800.webp 800w, /images/couple-clinic-1280.webp 1280w, /images/couple-clinic.webp 2292w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+    <div class="absolute inset-0" style="background: rgba(20,18,15,0.68);"></div>
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <div class="max-w-2xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white mb-5">
+          {ZH ? '您的開始，由此展開。' : 'Your Beginning Starts Here.'}
+        </h2>
+        <p class="text-white/70 font-light leading-relaxed mb-9 max-w-xl mx-auto">
+          {ZH ? '每個非凡的生命，都值得非凡的開始。' : 'Every Extraordinary Life Deserves an Extraordinary Beginning.'}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+          <a href="tel:+14244324732" class="btn-outline" style="border-color: rgba(255,255,255,0.4); color: white;">{ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}</a>
+        </div>
+        <p class="mt-6 text-xs" style="color: rgba(255,255,255,0.4);">
+          {ZH ? '提供遠距醫療。異地病人亦可選擇遠距醫療。' : 'Telehealth available. Telehealth options for out-of-area patients.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script is:inline>
+    (function () {
+      var v = document.getElementById('idx-hero-video');
+      if (!v) return;
+      v.muted = true;
+      v.setAttribute('muted', '');
+      var started = false;
+      function start() {
+        if (started) return;
+        started = true;
+        try {
+          var p = v.play();
+          if (p && typeof p.catch === 'function') p.catch(function () {});
+        } catch (e) {}
+      }
+      var ric = window.requestIdleCallback || function (fn) { return setTimeout(fn, 600); };
+      if (document.readyState === 'complete') {
+        ric(start);
+      } else {
+        window.addEventListener('load', function () { ric(start); }, false);
+      }
+      document.addEventListener('WeixinJSBridgeReady', start, false);
+      if (typeof window.WeixinJSBridge !== 'undefined') start();
+      document.addEventListener('touchstart', start, { once: true });
+    })();
+  </script>
+</Layout>
+
+<style>
+/* ═══ HERO ═══ */
+.idx-hero {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #0b0710;
+}
+
+.idx-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-object-fit: cover;
+  object-fit: cover;
+  object-position: center;
+}
+
+.idx-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(8,5,2,0.55) 0%, rgba(8,5,2,0.2) 18%, transparent 32%, transparent 40%, rgba(8,5,2,0.42) 62%, rgba(8,5,2,0.82) 100%),
+    linear-gradient(to right, rgba(8,5,2,0.18) 0%, rgba(8,5,2,0.06) 45%, transparent 70%);
+}
+
+.idx-hero-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0 10vw clamp(6.5rem, 16vh, 11rem);
+}
+
+.idx-hero-eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-gold-400);
+  margin-bottom: 1.25rem;
+}
+
+.idx-hero-h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 0.88;
+  color: white;
+  margin-bottom: 3rem;
+  letter-spacing: -0.015em;
+}
+
+.idx-hero-h1 span {
+  display: block;
+  font-size: clamp(3.2rem, 7.2vw, 9rem);
+  white-space: nowrap;
+}
+
+.idx-hero-h1 em {
+  font-style: italic;
+  color: var(--color-gold-400);
+  font-size: inherit;
+}
+
+.idx-hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.idx-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.9);
+  padding: 0.875rem 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  transition: border-color 0.25s;
+}
+
+.idx-ghost-btn:hover { border-color: rgba(255,255,255,0.7); }
+
+/* ═══ SCREEN 2 — THE MEANING OF LIFE ═══ */
+.idx-meaning {
+  position: relative;
+  padding: 7rem 10vw 8.5rem;
+  background:
+    linear-gradient(90deg, rgba(251,249,246,0.96) 0%, rgba(251,249,246,0.82) 38%, rgba(251,249,246,0.18) 100%),
+    url('/images/meaning-bg.jpg') center right / cover no-repeat;
+  background-color: var(--color-pearl-50);
+  border-bottom: 1px solid var(--color-pearl-200);
+}
+.idx-meaning-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+.idx-meaning-title {
+  position: relative;
+  margin: 0 0 3.75rem;
+  padding-bottom: 2.25rem;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.06;
+  color: var(--color-purple-800);
+}
+.idx-meaning-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-champagne-500), transparent);
+}
+.idx-meaning-en {
+  display: block;
+  font-size: clamp(2.5rem, 5.8vw, 4.9rem);
+  letter-spacing: -0.018em;
+}
+.idx-meaning-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 48rem;
+}
+.idx-meaning-body p {
+  margin: 0;
+  line-height: 1.95;
+}
+.idx-meaning-body .en {
+  display: inline;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.1vw, 1.5rem);
+  color: var(--color-champagne-600);
+}
+.idx-meaning-lead .en {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  color: var(--color-champagne-700);
+}
+
+/* ═══ STANDARDS — alternating editorial rows (Screen 3) ═══ */
+.idx-standards {
+  background: var(--color-pearl-50);
+  border-bottom: 1px solid var(--color-pearl-200);
+  padding: 6rem 0 7rem;
+  overflow: hidden;
+}
+
+.idx-standards-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--color-purple-800);
+  margin: 1.5rem 0 1.25rem;
+}
+
+.idx-standards-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-stone-600);
+  max-width: 44rem;
+  margin: 0;
+}
+
+#why .brand-eyebrow { color: var(--color-purple-400); }
+
+.idx-standards-head {
+  max-width: 62rem;
+  margin: 0 auto 4.5rem;
+}
+
+.idx-standards-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 5.5rem;
+}
+
+.std-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 4rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.std-row-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  aspect-ratio: 4 / 3;
+  background: var(--color-pearl-100);
+}
+
+.std-row-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.9) contrast(1.03) brightness(1.02);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.std-row:hover .std-row-media img { transform: scale(1.045); }
+
+.std-row-body { max-width: 30rem; }
+
+.std-row-index {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-purple-400);
+  margin-bottom: 0.9rem;
+}
+
+.std-row-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.55rem, 2.6vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-purple-800);
+  margin: 0 0 1rem;
+}
+
+.std-row-lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.12rem;
+  line-height: 1.5;
+  color: var(--color-champagne-600);
+  margin: 0 0 0.9rem;
+}
+
+.std-row-text {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--color-stone-600);
+  margin: 0;
+}
+
+.std-row-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.std-row:hover .std-row-cue {
+  opacity: 1;
+  transform: translateY(0);
+}
+.std-row-cue-arrow { width: 0.95rem; height: 0.95rem; }
+
+.std-row:nth-child(even) .std-row-media { order: 2; }
+.std-row:nth-child(even) .std-row-body { order: 1; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .idx-standards-rows { gap: 4.5rem; }
+}
+
+@media (max-width: 768px) {
+  .idx-hero {
+    height: 100svh;
+    min-height: auto;
+  }
+  .idx-hero-bg {
+    object-fit: cover;
+    object-position: center;
+  }
+  .idx-hero-overlay {
+    background: linear-gradient(to top, rgba(8,5,2,0.9) 0%, rgba(8,5,2,0.55) 45%, rgba(8,5,2,0.22) 100%);
+  }
+  .idx-meaning { padding: 4.5rem 6vw 5.5rem; }
+  .idx-meaning-title { margin-bottom: 2.75rem; }
+  .idx-meaning-body { gap: 1.5rem; max-width: none; }
+  .idx-hero-body { padding: 0 6vw clamp(6rem, 20vh, 10rem); }
+  .idx-hero-h1 { margin-bottom: 1.5rem; }
+  .idx-hero-h1 span { font-size: clamp(2.3rem, 9.5vw, 2.85rem); white-space: nowrap; }
+  .idx-hero-ctas {
+    display: none;
+  }
+
+  .idx-standards { padding: 3.5rem 0 4.5rem; }
+  .idx-standards-rows { gap: 3.5rem; }
+  .std-row {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  .std-row:nth-child(even) .std-row-media,
+  .std-row:nth-child(even) .std-row-body { order: 0; }
+  .std-row-media { aspect-ratio: 16 / 10; }
+  .std-row-body { max-width: none; }
+}
+
+@media (max-width: 480px) {
+  .idx-hero-h1 span { font-size: clamp(2.1rem, 9vw, 2.6rem); }
+  .idx-meaning { padding: 3.75rem 5vw 4.5rem; }
+  .idx-standards-title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+}
+
+  /* ═══ BRAND DNA — Science · Art · Life (Screen 4) ═══ */
+  .idx-dna {
+    background: var(--color-pearl-50);
+    border-bottom: 1px solid var(--color-pearl-200);
+    padding: 6.5rem 0 7rem;
+    overflow: hidden;
+  }
+  .idx-dna-inner { text-align: center; }
+  .idx-dna-title {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--color-purple-800);
+    margin: 0 0 2rem;
+  }
+  .idx-dna-art {
+    font-style: italic;
+    color: var(--color-champagne-600);
+    padding: 0 0.15em;
+  }
+  .idx-dna-dot {
+    color: var(--color-gold-400);
+    font-style: normal;
+    padding: 0 0.35em;
+  }
+  .idx-dna-body {
+    font-family: var(--font-serif);
+    font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+    line-height: 1.8;
+    color: var(--color-stone-600);
+    max-width: 44rem;
+    margin: 0 auto 2.5rem;
+  }
+  .idx-dna-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    height: clamp(420px, 56vh, 560px);
+  }
+  .idx-dna-panel {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex .55s cubic-bezier(.22, 1, .36, 1);
+  }
+  .idx-dna-panel:hover { flex: 3.4 1 0; }
+  .idx-dna-panel img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .7s cubic-bezier(.22, 1, .36, 1);
+  }
+  .idx-dna-panel:hover img { transform: scale(1.06); }
+  .idx-dna-panel-ov {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 15, 12, 0.34);
+    transition: background .55s ease;
+  }
+  .idx-dna-panel:hover .idx-dna-panel-ov { background: rgba(18, 15, 12, 0.20); }
+  .idx-dna-panel-lab {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.25rem 1.4rem;
+    color: #fff;
+    text-align: left;
+  }
+  .idx-dna-panel-num {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: .72rem;
+    letter-spacing: .18em;
+    opacity: .8;
+  }
+  .idx-dna-panel-title {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: .15rem;
+  }
+  .idx-dna-panel-cap {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: .82rem;
+    line-height: 1.5;
+    margin-top: .5rem;
+    max-width: 22rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .idx-dna-panel:hover .idx-dna-panel-cap { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) {
+    .idx-dna { padding: 4.5rem 0 5rem; }
+    .idx-dna-title { font-size: clamp(2.2rem, 11vw, 3.4rem); }
+    .idx-dna-grid { flex-direction: column; height: auto; gap: .85rem; }
+    .idx-dna-panel { flex: none; height: clamp(200px, 34vh, 280px); }
+    .idx-dna-panel-cap { opacity: 1; transform: none; }
+  }
+</style>

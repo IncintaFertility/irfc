@@ -1,0 +1,409 @@
+---
+// 診所地點（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, type Locale } from '../../i18n';
+import { BRAND_ABBREV, SITE_URL } from '../../config/brand';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const regionZh: Record<string, string> = {
+  'Greater Los Angeles': '大洛杉磯地區',
+  'Inland Empire': '內陸帝國',
+  'Orange County': '橙縣',
+};
+const hoursZh = '週一至週五 7:00 AM – 5:00 PM · 週六 8:00 AM – 12:00 PM · 週日 休診';
+const descriptionsZh: Record<string, string> = {
+  'Torrance': '諮詢、監測與協調的生育照護。請聯絡 IRFC 確認目前醫師排程與可約時間。',
+  'Beverly Hills': '諮詢、監測與協調的生育照護。請聯絡 IRFC 確認目前醫師排程與可約時間。',
+  'Corona': '提供全方位生育照護，現場設有手術與實驗室設施，服務內陸帝國地區。',
+  'Irvine': '我們位於橙縣的旗艦據點，現場設有完整手術中心與 IVF 實驗室，備有停車位。',
+};
+
+const locations = [
+  { city: 'Torrance', region: 'Greater Los Angeles', address: '21545 Hawthorne Blvd, Pavilion B', cityState: 'Torrance, CA 90503', phone: '(424) 212-4087', hours: 'Mon–Fri 7:00 AM – 5:00 PM · Sat 8:00 AM – 12:00 PM · Sun Closed', mapX: 19.9, mapY: 50.1 },
+  { city: 'Beverly Hills', region: 'Greater Los Angeles', address: '8635 West 3rd Street, Suite 1170W', cityState: 'Los Angeles, CA 90048', phone: '(213) 600-8088', hours: 'Mon–Fri 7:00 AM – 5:00 PM · Sat 8:00 AM – 12:00 PM · Sun Closed', mapX: 18.5, mapY: 11.8 },
+  { city: 'Corona', region: 'Inland Empire', address: '400 East Rincon Street, Suite 108', cityState: 'Corona, CA 92879', phone: '(951) 272-2221', hours: 'Mon–Fri 7:00 AM – 5:00 PM · Sat 8:00 AM – 12:00 PM · Sun Closed', mapX: 86.6, mapY: 43.6 },
+  { city: 'Irvine', region: 'Orange County', address: '16300 Sand Canyon Avenue, 9th Floor', cityState: 'Irvine, CA 92618', phone: '(949) 453-8600', hours: 'Mon–Fri 7:00 AM – 5:00 PM · Sat 8:00 AM – 12:00 PM · Sun Closed', mapX: 67.7, mapY: 70.9 },
+];
+
+const bentoLabelsZh: Record<string, string> = {
+  'Welcoming Spaces': '溫馨空間',
+  'Southern California Access': '南加州據點',
+  'Laboratory Technology': '實驗室技術',
+  'Comfort and Privacy': '舒適與隱私',
+  'Clinical Environments': '臨床環境',
+  'Thoughtful Details': '細膩設計',
+  'Space for Conversation': '對話空間',
+  'Connected Care': '連結的照護',
+  'Warm Reception': '溫暖接待',
+};
+
+const bento = [
+  { src: '/images/locations/network-welcome-beverly-hills.jpg', alt: 'Welcoming IRFC patient lounge', altZh: '溫馨的 IRFC 病人休息室', label: 'Welcoming Spaces' },
+  { src: '/images/locations/network-access-corona.jpg', alt: 'IRFC Southern California clinic access', altZh: 'IRFC 南加州診所據點', label: 'Southern California Access' },
+  { src: '/images/locations/network-lab-corona.jpg', alt: 'IRFC embryology laboratory', altZh: 'IRFC 胚胎學實驗室', label: 'Laboratory Technology' },
+  { src: '/images/locations/network-comfort-irvine.jpg', alt: 'Comfortable private consultation room', altZh: '舒適的私人諮詢室', label: 'Comfort and Privacy' },
+  { src: '/images/locations/network-clinical-corona.jpg', alt: 'IRFC clinical environment', altZh: 'IRFC 臨床環境', label: 'Clinical Environments' },
+  { src: '/images/locations/network-welcome-irvine.jpg', alt: 'Thoughtful clinic detail', altZh: '細膩的診所設計', label: 'Thoughtful Details' },
+  { src: '/images/locations/network-consultation-beverly-hills.jpg', alt: 'Space for conversation', altZh: '對話空間', label: 'Space for Conversation' },
+  { src: '/images/locations/network-welcome-torrance.jpg', alt: 'Connected care network', altZh: '連結的照護網絡', label: 'Connected Care' },
+  { src: '/images/locations/incinta-reception-desk.jpg', alt: 'Warm IRFC reception desk', altZh: '溫暖的 IRFC 接待櫃檯', label: 'Warm Reception' },
+  { src: '/images/couple-clinic.webp', alt: 'Care for couples at IRFC', altZh: 'IRFC 為伴侶提供的照護', label: 'Care for Couples' },
+];
+
+const descriptions: Record<string, string> = {
+  'Torrance': 'Consultation, monitoring, and coordinated fertility care. Contact IRFC to confirm current physician schedules and visit availability.',
+  'Beverly Hills': 'Consultation, monitoring, and coordinated fertility care. Contact IRFC to confirm current physician schedules and visit availability.',
+  'Corona': 'Full-service fertility care with on-site surgical and laboratory facilities serving the Inland Empire.',
+  'Irvine': 'Our flagship Orange County location with a full surgery center and IVF laboratory on-site. Parking available.',
+};
+
+const clinicSchema = locations.map(loc => {
+  const [city, stateZip] = loc.cityState.split(', ');
+  const [stateCode, postalCode] = stateZip.split(' ');
+  return {
+    '@context': 'https://schema.org',
+    '@type': ['MedicalClinic', 'LocalBusiness'],
+    name: `IRFC — ${loc.city}`,
+    parentOrganization: { '@type': 'MedicalOrganization', name: 'IRFC' },
+    telephone: `+1${loc.phone.replace(/\D/g, '')}`,
+    medicalSpecialty: 'Reproductive Medicine',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: loc.address,
+      addressLocality: city,
+      addressRegion: stateCode,
+      postalCode,
+      addressCountry: 'US',
+    },
+    url: SITE_URL + '/locations',
+  };
+});
+
+const title = ZH ? '診所地點' : 'Locations';
+const description = ZH
+  ? 'IRFC 於南加州設有四間便利的診所——Torrance、Beverly Hills、Corona 與 Irvine。在您就近之處找到專業的生育照護。'
+  : 'IRFC has four convenient locations across Southern California — Torrance, Beverly Hills, Corona, and Irvine. Find expert fertility care near you.';
+---
+
+<Layout title={title} description={description} schema={clinicSchema}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="bg-stone-50">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 md:py-20 lg:py-24">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{title}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-stone-900 text-4xl md:text-5xl lg:text-6xl font-light leading-none mb-5">
+          {ZH ? '南加州診所地點' : 'Southern California Locations'}
+        </h1>
+        <p class="text-stone-600 text-base md:text-lg font-light leading-relaxed max-w-2xl">
+          {ZH ? '四間診所，同一套連結的照護標準。點按地圖上的地點查看詳情。' : 'Four clinics, one connected standard of care. Tap a location on the map to see details.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map with clickable location markers + detail panel -->
+  <section class="py-14 md:py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-5 lg:gap-6 items-stretch">
+        <div class="relative rounded-[2rem] overflow-hidden shadow-xl min-h-[420px] lg:min-h-[560px] bg-stone-100">
+          <img
+            src="/images/locations/southern-california-irfc-map-label-free.webp"
+            alt={ZH ? 'IRFC 南加州診所位置地圖' : 'Map of IRFC Southern California clinic locations'}
+            class="absolute inset-0 w-full h-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+          />
+          {locations.map((loc) => (
+            <button
+              type="button"
+              data-marker={loc.city}
+              class="map-marker"
+              style={`left:${loc.mapX}%; top:${loc.mapY}%;`}
+              aria-label={ZH ? `查看 ${loc.city} 診所` : `Show ${loc.city} location`}
+            >
+              <span class="map-dot"></span>
+              <span class="map-label">{loc.city}</span>
+            </button>
+          ))}
+          <div class="absolute bottom-5 left-5 z-[2]">
+            <span class="text-[10px] tracking-[0.25em] uppercase text-white/85 font-medium" style="font-family: var(--font-sans); text-shadow: 0 1px 3px rgba(0,0,0,0.4);">{ZH ? '南加州診所地點' : 'Southern California Locations'}</span>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] p-7 md:p-10 lg:p-12 shadow-xl flex flex-col bg-white">
+          <div class="grid grid-cols-2 gap-3 mb-8">
+            {locations.map((loc) => (
+              <button
+                type="button"
+                data-loc={loc.city}
+                class="loc-city-btn text-center px-4 py-3 rounded-full text-sm font-medium transition-all"
+                style="font-family: var(--font-sans);"
+              >
+                {loc.city}
+              </button>
+            ))}
+          </div>
+
+          <div class="relative flex-1">
+            {locations.map((loc) => (
+              <article data-detail={loc.city} class="loc-detail">
+                <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? (regionZh[loc.region] ?? loc.region) : loc.region}</p>
+                <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-900 mb-6 leading-none">{loc.city}</h2>
+
+                <div class="space-y-5 mb-8" style="font-family: var(--font-sans);">
+                  <div>
+                    <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '地址' : 'Address'}</p>
+                    <p class="text-stone-700 leading-relaxed">{loc.address}<br />{loc.cityState}</p>
+                  </div>
+                  <div>
+                    <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '電話' : 'Phone'}</p>
+                    <a href={`tel:+1${loc.phone.replace(/\D/g, '')}`} class="text-stone-700 hover:underline" style="color: var(--color-gold-700);">{loc.phone}</a>
+                  </div>
+                  <div>
+                    <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '門診時間' : 'Hours'}</p>
+                    <p class="text-stone-600 leading-relaxed text-sm">{ZH ? hoursZh : loc.hours}</p>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(loc.address + ', ' + loc.cityState)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-medium transition-colors"
+                    style="background: var(--color-gold-500); color: #fff; font-family: var(--font-sans);"
+                  >
+                    {ZH ? '取得路線' : 'Get Directions'}
+                  </a>
+                  <a
+                    href="/appointment"
+                    class="inline-flex items-center gap-1.5 text-sm font-medium underline underline-offset-4 transition-colors"
+                    style="color: var(--color-stone-600); font-family: var(--font-sans);"
+                  >
+                    {ZH ? '預約門診' : 'Schedule Appointment'}
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-sm text-stone-400 mt-6">{ZH ? '點按地圖上的標記或上方城市可切換地點。' : 'Tap a marker on the map or a city above to switch locations.'}</p>
+    </div>
+  </section>
+
+  <!-- Inside Our Clinics (real photos) -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="bento-grid">
+        {bento.map((item, i) => (
+          <div class={`bento-pic-${i} relative overflow-hidden rounded-2xl group`}>
+            <img
+              src={item.src}
+              alt={ZH ? item.altZh : item.alt}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(20,18,28,0.62) 0%, rgba(20,18,28,0.08) 52%, transparent 100%);"></div>
+            <span class="absolute bottom-4 left-4 text-[10px] md:text-[11px] tracking-[0.16em] uppercase font-medium text-white/95" style="font-family: var(--font-sans); text-shadow: 0 1px 3px rgba(0,0,0,0.35);">
+              {ZH ? (bentoLabelsZh[item.label] ?? item.label) : item.label}
+            </span>
+          </div>
+        ))}
+
+        <div class="bento-logo rounded-2xl flex items-center justify-center">
+          <img
+            src="/images/incinta-logo.png"
+            alt="IRFC"
+            class="w-[86%] max-w-[300px] h-auto"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-16 lg:py-20 bg-stone-50">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '從這裡開始' : 'Begin Here'}</span>
+          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900 mb-5">{ZH ? '準備好找到您的照護團隊了嗎？' : 'Ready to find your care team?'}</h2>
+        <p class="text-stone-500 mb-8 leading-relaxed">{ZH ? '請撥打我們的總機、以 WhatsApp 聯絡，或線上提出諮詢。' : 'Call our main line, message us on WhatsApp, or request a consultation online.'}</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="tel:+14244324732" class="btn-primary inline-flex items-center gap-2">
+            {ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}
+          </a>
+          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
+            {ZH ? 'WhatsApp (424) 432-4732' : 'WhatsApp (424) 432-4732'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const detailEls = Array.from(document.querySelectorAll<HTMLElement>('[data-detail]'));
+    const btns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-loc]'));
+    const markers = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-marker]'));
+
+    function setActive(city: string) {
+      btns.forEach(btn => {
+        const active = btn.dataset.loc === city;
+        btn.classList.toggle('loc-city-btn--active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+      markers.forEach(m => {
+        m.classList.toggle('map-marker--active', m.dataset.marker === city);
+      });
+      detailEls.forEach(el => {
+        el.classList.toggle('loc-detail--active', el.dataset.detail === city);
+      });
+    }
+
+    btns.forEach(btn => btn.addEventListener('click', () => setActive(btn.dataset.loc!)));
+    markers.forEach(m => m.addEventListener('click', () => setActive(m.dataset.marker!)));
+
+    setActive('Irvine');
+  </script>
+
+  <style>
+    .loc-city-btn {
+      background: var(--color-stone-100);
+      color: var(--color-stone-700);
+      border: 1px solid transparent;
+    }
+    .loc-city-btn:hover {
+      border-color: var(--color-gold-300);
+      color: var(--color-gold-700);
+    }
+    .loc-city-btn--active {
+      background: var(--color-gold-500);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(194,161,77,0.22);
+    }
+    .loc-city-btn--active:hover {
+      background: var(--color-gold-600);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .loc-detail {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      inset: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+    .loc-detail--active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+      transform: translateY(0);
+    }
+
+    .map-marker {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .map-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: var(--color-gold-500);
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .map-marker:hover .map-dot,
+    .map-marker--active .map-dot {
+      transform: scale(1.4);
+      background: var(--color-gold-600);
+    }
+    .map-label {
+      font-size: 11px;
+      font-family: var(--font-sans);
+      color: #fff;
+      background: rgba(28,25,23,0.80);
+      padding: 2px 9px;
+      border-radius: 9999px;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    .map-marker:hover .map-label,
+    .map-marker--active .map-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bento-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: minmax(180px, 1fr);
+    }
+    .bento-logo {
+      display: none;
+      min-height: 180px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(194,161,77,0.22);
+    }
+    @media (min-width: 1024px) {
+      .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, minmax(200px, 1fr));
+        grid-template-areas:
+          "pic0 pic1 pic2 pic3"
+          "pic4 logo logo pic5"
+          "pic6 pic7 pic8 pic9";
+        gap: 1rem;
+      }
+      .bento-logo { grid-area: logo; display: flex; }
+      .bento-pic-0 { grid-area: pic0; }
+      .bento-pic-1 { grid-area: pic1; }
+      .bento-pic-2 { grid-area: pic2; }
+      .bento-pic-3 { grid-area: pic3; }
+      .bento-pic-4 { grid-area: pic4; }
+      .bento-pic-5 { grid-area: pic5; }
+      .bento-pic-6 { grid-area: pic6; }
+      .bento-pic-7 { grid-area: pic7; }
+      .bento-pic-8 { grid-area: pic8; }
+      .bento-pic-9 { grid-area: pic9; }
+    }
+  </style>
+
+  <Footer />
+</Layout>

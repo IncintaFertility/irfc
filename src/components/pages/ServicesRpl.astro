@@ -1,0 +1,255 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const causes = [
+  {
+    category: ZH ? '染色體異常' : 'Chromosomal Abnormalities',
+    pct: '50–60%',
+    desc: ZH ? '最常見的可辨識原因。胚胎中的隨機染色體錯誤——最常見為非整倍體（染色體數目不正確）——會導致早期懷孕流失。風險隨母親年齡顯著上升。PGT-A 檢測能在植入前辨識染色體正常的胚胎。' : 'The most common identifiable cause. Random chromosomal errors in the embryo — most often aneuploidy (incorrect chromosome number) — lead to early pregnancy loss. The risk increases significantly with maternal age. PGT-A testing can identify chromosomally normal embryos before transfer.',
+  },
+  {
+    category: ZH ? '子宮結構異常' : 'Uterine Structural Abnormalities',
+    pct: '10–15%',
+    desc: ZH ? '例如子宮中隔、黏膜下肌瘤、子宮內膜息肉或子宮腔粘連（阿舍曼症候群）等狀況，可能干擾胚胎著床與胎盤發育。多數結構性成因可經微創手術矯正。' : 'Conditions such as a uterine septum, submucosal fibroids, endometrial polyps, or intrauterine adhesions (Asherman\'s syndrome) can interfere with embryo implantation and placental development. Most structural causes are correctable through minimally invasive surgery.',
+  },
+  {
+    category: ZH ? '血栓體質與凝血障礙' : 'Thrombophilia & Clotting Disorders',
+    pct: '5–15%',
+    desc: ZH ? '先天或後天的凝血異常——包括抗磷脂抗體症候群（APS）與第五因子 Leiden——可能損害胎盤循環。APS 是 RPL 最重要、可治療的成因之一，可經抽血檢查確認。' : 'Inherited or acquired clotting abnormalities — including antiphospholipid antibody syndrome (APS) and factor V Leiden — can impair placental circulation. APS is one of the most important treatable causes of RPL and is identified through blood testing.',
+  },
+  {
+    category: ZH ? '荷爾蒙與內分泌因素' : 'Hormonal & Endocrine Factors',
+    pct: '10–15%',
+    desc: ZH ? '未控制的甲狀腺疾病、泌乳激素過高、控制不佳的糖尿病與黃體期缺陷，都與反覆流失有關。這些狀況可經荷爾蒙血液套組確認，且高度可治療。' : 'Uncontrolled thyroid disease, elevated prolactin, poorly managed diabetes, and luteal phase deficiency have all been associated with recurrent loss. These conditions are identified through hormonal blood panels and are highly treatable.',
+  },
+  {
+    category: ZH ? '免疫因素' : 'Immunological Factors',
+    pct: ZH ? '不定' : 'Variable',
+    desc: ZH ? '除了抗磷脂抗體症候群，自然殺手細胞活性與異體免疫反應等其他免疫因素，正被研究為不明原因 RPL 的潛在促成因子。此領域的處置仍在不斷演進。' : 'Beyond antiphospholipid syndrome, other immune factors including natural killer cell activity and alloimmune responses are being studied as potential contributors to unexplained RPL. Management in this area is an evolving field.',
+  },
+  {
+    category: ZH ? '不明原因' : 'Unexplained',
+    pct: '~25–30%',
+    desc: ZH ? '相當比例的 RPL 案例，即便經徹底評估仍未發現特定原因。即便在不明原因的情況下，預後往往優於病患預期——許多伴侶在支持性照護與優化胚胎挑選下，仍能成功懷孕。' : 'In a significant proportion of RPL cases, no specific cause is found despite thorough evaluation. Even in unexplained cases, the prognosis is often better than patients expect — many couples go on to have successful pregnancies with supportive care and optimized embryo selection.',
+  },
+];
+
+const workup = [
+  ZH ? '雙方染色體核型分析' : 'Chromosomal karyotyping of both partners',
+  ZH ? '子宮腔評估（生理食鹽水超音波或子宮鏡）' : 'Uterine cavity evaluation (saline sonogram or hysteroscopy)',
+  ZH ? '抗磷脂抗體套組（狼瘡抗凝因子、抗心肌脂質抗體、抗 β2 醣蛋白 I）' : 'Antiphospholipid antibody panel (lupus anticoagulant, anticardiolipin, anti-β2 glycoprotein I)',
+  ZH ? '遺傳性血栓體質套組（第五因子 Leiden、凝血酶原突變、MTHFR）' : 'Inherited thrombophilia panel (Factor V Leiden, prothrombin mutation, MTHFR)',
+  ZH ? '甲狀腺功能（TSH、free T4）與泌乳激素' : 'Thyroid function (TSH, free T4) and prolactin',
+  ZH ? '荷爾蒙套組（FSH、AMH、雌二醇）評估卵巢庫存' : 'Hormonal panel (FSH, AMH, estradiol) to assess ovarian reserve',
+  ZH ? '精子 DNA 斷裂分析（視個案）' : 'Sperm DNA fragmentation analysis (in selected cases)',
+  ZH ? '妊娠產物染色體分析（若有先前流失組織）' : 'Products of conception chromosomal analysis (if prior loss tissue available)',
+];
+
+const treatments = [
+  {
+    title: ZH ? '搭配 PGT-A 的 IVF' : 'IVF with PGT-A',
+    desc: ZH ? '對流產很可能由胚胎染色體異常引起的病患，搭配胚胎著床前基因檢測（PGT-A）的 IVF 能只挑選整倍體胚胎植入——直接處理懷孕流失最常見的原因。每次整倍體植入的流產率通常低於 10%。' : 'For patients whose losses are likely caused by chromosomal abnormalities in the embryo, IVF with preimplantation genetic testing (PGT-A) allows the selection of only euploid embryos for transfer — directly addressing the most common cause of pregnancy loss. Miscarriage rates per euploid transfer are typically under 10%.',
+    link: { href: '/services/pgt', label: ZH ? '認識 PGT →' : 'Learn About PGT →' },
+  },
+  {
+    title: ZH ? '手術矯正' : 'Surgical Correction',
+    desc: ZH ? '子宮中隔、黏膜下肌瘤或息肉等子宮異常，常可經微創子宮鏡手術矯正。在下次嘗試懷孕前修正這些結構問題，能顯著降低再次流失的風險。' : 'Uterine abnormalities such as a septum, submucosal fibroid, or polyp can often be corrected through minimally invasive hysteroscopic surgery. Correcting these structural issues before the next pregnancy attempt can significantly reduce the risk of further loss.',
+    link: null,
+  },
+  {
+    title: ZH ? '藥物治療' : 'Medical Management',
+    desc: ZH ? '當確認抗磷脂抗體症候群或其他凝血障礙，孕期使用低劑量阿斯匹靈及/或肝素已被證實能顯著提升活產率。甲狀腺與荷爾蒙異常則以適當藥物控制。' : 'When antiphospholipid syndrome or other clotting disorders are identified, treatment with low-dose aspirin and/or heparin during pregnancy has been shown to significantly improve live birth rates. Thyroid and hormonal abnormalities are managed with appropriate medication.',
+    link: null,
+  },
+];
+
+const faqs = [
+  { q: ZH ? '需要流產幾次才會被診斷為 RPL？' : 'How many miscarriages does it take to be diagnosed with RPL?', a: ZH ? '反覆懷孕流失的傳統定義是懷孕 20 週前的兩次或以上連續臨床懷孕流失。包括美國生殖醫學會在內的許多專家，現在建議在兩次流失後即進行評估，尤其針對 35 歲以上或有其他風險因子的女性。你不需等到第三次流失才尋求評估。' : 'The traditional definition of recurrent pregnancy loss is two or more consecutive clinical pregnancy losses before 20 weeks. Many specialists — including the American Society for Reproductive Medicine — now recommend evaluation after two losses, particularly in women over 35 or those with other risk factors. You do not need to wait for a third loss before seeking an evaluation.' },
+  { q: ZH ? '原因總是能找出來嗎？' : 'Is the cause always identifiable?', a: ZH ? '不盡然。儘管經徹底評估，約 25–30% 的 RPL 案例仍屬不明原因。聽到這點可能令人深感挫折。然而，即便沒有特定診斷，未來成功懷孕的整體預後往往優於病患預期——許多不明原因 RPL 伴侶仍能擁有健康懷孕，有時是在 IVF 與 PGT-A 的協助下。' : 'No. Despite a thorough evaluation, approximately 25–30% of RPL cases remain unexplained. This can be deeply frustrating to hear. However, even without a specific diagnosis, the overall prognosis for future successful pregnancy is often better than patients expect — many couples with unexplained RPL go on to have healthy pregnancies, sometimes with the support of IVF and PGT-A.' },
+  { q: ZH ? 'PGT-A 能預防流產嗎？' : 'Does PGT-A prevent miscarriage?', a: ZH ? 'PGT-A 能透過在植入前辨識染色體正常（整倍體）的胚胎，顯著降低每次胚胎植入的流產率。由於染色體異常佔了大多數懷孕流失，避免非整倍體植入能實質降低再次流失的風險。PGT-A 無法消除所有流產原因，但它處理了最常見的那一個。' : 'PGT-A significantly reduces the miscarriage rate per embryo transfer by identifying chromosomally normal (euploid) embryos before transfer. Since chromosomal abnormalities account for the majority of pregnancy losses, avoiding aneuploid transfers can meaningfully reduce the risk of another loss. PGT-A does not eliminate all causes of miscarriage, but it addresses the most common one.' },
+  { q: ZH ? '精子品質會導致反覆流產嗎？' : 'Can sperm quality contribute to recurrent miscarriage?', a: ZH ? '新興證據顯示，精子 DNA 斷裂程度偏高，可能導致胚胎品質問題，並在某些情況下造成懷孕流失。IRFC 將精子 DNA 斷裂檢測納入男性伴侶的 RPL 評估。當斷裂程度偏高時，可討論抗氧化治療、睪丸精子取出或捐精等介入方式。' : 'Emerging evidence suggests that elevated sperm DNA fragmentation may contribute to embryo quality problems and, in some cases, pregnancy loss. IRFC offers sperm DNA fragmentation testing as part of the RPL evaluation for male partners. When fragmentation is elevated, interventions such as antioxidant treatment, testicular sperm extraction, or donor sperm may be discussed.' },
+  { q: ZH ? '反覆懷孕流失後的預後如何？' : 'What is the prognosis after recurrent pregnancy loss?', a: ZH ? '優於多數病患預期。即便經歷三次流失，在適當照護下未來活產的機率仍有 60–70% 或更高，取決於年齡與找出的原因。搭配 PGT-A，各年齡層每次整倍體植入的活產率接近 60–65%。醫師會依你的特定病史與評估結果，給出個別化預後。' : 'Better than most patients expect. Even after three losses, the probability of a future live birth with appropriate care is 60–70% or higher, depending on age and the cause identified. With PGT-A, live birth rates per euploid transfer approach 60–65% across age groups. Your physician will give you an individualized prognosis based on your specific history and evaluation results.' },
+  { q: ZH ? '流產後，我該等多久再嘗試？' : 'Should I wait before trying again after a miscarriage?', a: ZH ? '生理上，多數醫師建議等待 1–2 個正常月經週期再嘗試受孕。情感上，時程是個人的——你不必在準備好之前就勉強進行。當你準備就緒，IRFC 能評估你的狀況，協助優化下一次嘗試的方向。' : 'Physically, most physicians recommend waiting one to two normal menstrual cycles before attempting conception again. Emotionally, the timeline is personal — there is no obligation to proceed before you feel ready. When you are ready, IRFC can evaluate your situation and help optimize your approach for the next attempt.' },
+];
+---
+
+<Layout
+  title={ZH ? '反覆流產' : 'Recurrent Pregnancy Loss'}
+  description={ZH ? 'IRFC 提供反覆流產的全面評估——找出原因、擬定個人化治療計畫，並在邁向成功懷孕的路上提供支持。' : 'IRFC provides a comprehensive evaluation for recurrent pregnancy loss — identifying causes, building a personalized treatment plan, and supporting patients toward a successful pregnancy.'}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href={localeHref('/services', locale)} class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '全部療程' : 'All Services'}</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '反覆流產' : 'Recurrent Pregnancy Loss'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          {ZH ? '反覆' : 'Recurrent'}<br/>{ZH ? '流產' : 'Pregnancy Loss'}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? '經歷多次懷孕流失，是生殖醫學中最痛楚的旅程之一。在 IRFC，我們以徹底調查、誠實溝通與個人化計畫來面對反覆流產——聚焦於了解發生了什麼，以及能採取什麼行動。' : 'Experiencing multiple pregnancy losses is one of the most painful journeys in reproductive medicine. At IRFC, we approach recurrent pregnancy loss with thorough investigation, honest communication, and a personalized plan — focused on understanding what has happened and what can be done.'}
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility physician consulting with a patient" width="1800" height="1200" class="w-full h-auto object-cover" />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '每一步，都是同一個團隊' : 'One team, every step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '從初次諮詢、每次回診監測，到胚胎植入，都由同一批醫師、護理師與胚胎師陪伴你。緊密銜接的照護，讓你的治療過程不會有一絲落差。' : 'From your first consultation through every monitoring visit and embryo transfer, the same physicians, nurses, and embryologists stay with you. Connected care means nothing about your treatment gets lost in translation.'}</p>
+          <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">{ZH ? '認識我們的團隊' : 'Meet our team'} <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is RPL -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '了解反覆懷孕流失' : 'Understanding Recurrent Pregnancy Loss'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '反覆懷孕流失（RPL）定義為懷孕 20 週前的兩次或以上臨床懷孕流失。它影響約 1–2% 嘗試受孕的伴侶。每一次流失在情感上都令人崩潰——而不知道為何一再發生的不確定性，可能與流失本身同樣難熬。' : 'Recurrent pregnancy loss (RPL) is defined as two or more clinical pregnancy losses before 20 weeks of gestation. It affects approximately 1–2% of couples trying to conceive. Each loss is emotionally devastating — and the uncertainty of not knowing why it keeps happening can be as difficult as the losses themselves.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? 'RPL 並非單一診斷，而是一種可能有多種潛在成因的表現。系統性評估能在約 50–70% 的案例中找出特定原因——即使未找到原因，仍存在能實質提升成功懷孕機會的治療選項。' : 'RPL is not a single diagnosis but a presentation with multiple possible underlying causes. A systematic evaluation can identify a specific cause in approximately 50–70% of cases — and even when no cause is found, treatment options exist that meaningfully improve the chances of a successful pregnancy.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH ? 'IRFC 處理 RPL 的方式，始於全面的檢查以找出可治療的原因，接著擬定個人化計畫，可能包含藥物治療、手術矯正、搭配 PGT-A 的 IVF，或合併方式。' : 'IRFC\'s approach to RPL begins with a comprehensive workup to identify treatable causes, followed by a personalized plan that may include medical management, surgical correction, IVF with PGT-A, or a combination.'}
+          </p>
+        </div>
+        <div class="p-7 bg-white border border-stone-200">
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-5">{ZH ? 'IRFC 的標準 RPL 評估' : 'Standard RPL Evaluation at IRFC'}</h3>
+          <ul class="space-y-3">
+            {workup.map(item => (
+              <li class="flex items-start gap-3 text-sm text-stone-600">
+                <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Causes -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '反覆懷孕流失的已知成因' : 'Known Causes of Recurrent Pregnancy Loss'}</h2>
+      <p class="text-sm text-stone-500 leading-relaxed mb-10 max-w-2xl">{ZH ? '徹底的評估能在約 50–70% 的 RPL 案例中找出原因。其中多數成因是可以治療的。' : 'A thorough evaluation identifies the cause in approximately 50–70% of RPL cases. Many of these causes are treatable.'}</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        {causes.map(c => (
+          <div class="p-7 border border-stone-200">
+            <div class="flex items-start justify-between mb-3">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800">{c.category}</h3>
+              <span class="text-xs tracking-widest uppercase ml-4 flex-shrink-0 pt-1" style="color: var(--color-gold-500); font-family: var(--font-sans);">{c.pct}</span>
+            </div>
+            <p class="text-sm text-stone-500 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatment options -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">{ZH ? '治療方向' : 'Treatment Approaches'}</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {treatments.map(opt => (
+          <div class="p-7 bg-white border border-stone-200 flex flex-col">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{opt.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed flex-1 mb-4">{opt.desc}</p>
+            {opt.link && (
+              <a href={localeHref(opt.link.href, locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-auto" style="color: var(--color-gold-600);">
+                {opt.link.label}
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo break -->
+  <section class="relative overflow-hidden" style="height: 340px;">
+    <img src="/images/patient-laughing.webp" srcset="/images/patient-laughing-800.webp 800w, /images/patient-laughing-1280.webp 1280w, /images/patient-laughing.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC patient" class="w-full h-full object-cover object-top" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 55%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-xs leading-relaxed">
+        {ZH ? '希望並非天真。它是我們一同建構的事物。' : 'Hope is not naive. It is something we build together.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Emotional support note -->
+  <section class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="h-px w-12 mx-auto mb-8" style="background: var(--color-gold-500);"></div>
+        <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-700 leading-relaxed mb-6">
+          {ZH ? '我們明白，每一次反覆流產的諮詢背後，都有一段悲傷的過往。我們的角色不只是調查與治療——更是提供一個讓你感到被傾聽、被尊重、被支持的空間。' : 'We understand that behind every consultation for recurrent pregnancy loss is a history of grief. Our role is not only to investigate and treat — it is to provide a space where you feel heard, respected, and supported.'}
+        </p>
+        <p class="text-sm text-stone-400" style="font-family: var(--font-sans);">{ZH ? 'IRFC 醫療團隊' : 'IRFC Physician Team'}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+        <div class="border border-stone-200 bg-white">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '你值得得到答案。' : 'You Deserve Answers.'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '全面的 RPL 評估，是了解發生了什麼、以及能採取什麼行動的第一步。與 IRFC 醫師預約諮詢。' : 'A comprehensive RPL evaluation is the first step toward understanding what has happened and what can be done. Schedule a consultation with an IRFC physician.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/services/pgt', locale)} class="btn-outline">{ZH ? '認識 PGT-A' : 'Learn About PGT-A'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

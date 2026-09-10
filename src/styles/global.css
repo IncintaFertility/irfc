@@ -16,8 +16,10 @@
  * DON'T：大面积紫色 · 金色铺满 · 传统莲花图案 · 婴儿脚印/卵子图标 · 促销海报感
  */
 @theme {
-  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  /* 拉丁字形走 Cormorant/Inter，繁體中文走 Noto TC（Google Fonts 按
+     unicode-range 子集化，英文頁不會下載 CJK 字體，故可直接併入字體棧） */
+  --font-serif: "Cormorant Garamond", "Noto Serif TC", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", "Noto Sans TC", system-ui, -apple-system, sans-serif;
 
   /* ── PEARL WHITE · 珍珠白（65–75% 主视觉基底，温润 · 通透 · 珍贵）──
    * VI 基准：#FBF9F6

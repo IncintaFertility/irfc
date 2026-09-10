@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const services = [
+  {
+    title: ZH ? '捐卵' : 'Egg Donation',
+    body: ZH ? 'IRFC 與 Fairfax EggBank 及其他合法捐卵機構合作，提供大型、經篩檢且符合 FDA 規範的捐卵者資料庫。捐卵者需接受完整的醫療、基因與心理篩檢。通常當病患自身卵子無法成功懷孕時——例如卵巢庫存下降、卵巢早衰、遺傳帶因，或高齡——會建議使用捐卵。' : 'IRFC partners with Fairfax EggBank and other licensed donor egg agencies to provide access to a large database of screened, FDA-compliant egg donors. Donors undergo comprehensive medical, genetic, and psychological screening. Using donor eggs is typically recommended when a patient\'s own eggs cannot produce a successful pregnancy — due to diminished ovarian reserve, premature ovarian insufficiency, genetic carrier status, or advanced age.',
+    candidates: ZH ? ['卵巢庫存下降或卵巢早衰', '使用自身卵子的 IVF 屢次失敗', '欲避免遺傳的疾病', '男同志伴侶（搭配代理孕母）'] : ['Diminished ovarian reserve or premature ovarian insufficiency', 'Repeated IVF failure with own eggs', 'Genetic conditions to avoid passing on', 'Same-sex male couples (with gestational carrier)'],
+  },
+  {
+    title: ZH ? '捐精' : 'Sperm Donation',
+    body: ZH ? '捐精可用於 IUI 或 IVF 療程。IRFC 與領先的冷凍精子銀行合作，提供經徹底篩檢、來自匿名或開放身分捐精者的精子。依 FDA 規範，捐精者需接受傳染病、染色體異常與遺傳帶因檢測。你的協調師會協助你進行挑選流程。' : 'Donor sperm can be used in IUI or IVF cycles. IRFC works with leading cryobanks that provide thoroughly screened sperm from anonymous or identity-release donors. Donors are tested for infectious diseases, chromosomal abnormalities, and genetic carrier status per FDA regulations. Your coordinator will assist you in navigating the selection process.',
+    candidates: ZH ? ['計畫為人母的單身女性', '女同志伴侶', '無法治療的男性因素不孕', '欲避免遺傳的疾病'] : ['Single women pursuing parenthood', 'Same-sex female couples', 'Male factor infertility when treatment is not possible', 'Genetic conditions to avoid passing on'],
+  },
+  {
+    title: ZH ? '捐贈胚胎' : 'Embryo Donation',
+    body: ZH ? '已完成自身 IVF 療程、尚有剩餘胚胎的家庭，可選擇將胚胎捐贈給其他預定父母。IRFC 協助安排胚胎捐贈，包含適當的法律文件與 FDA 合規要求。接受捐贈胚胎，通常比使用捐卵的完整 IVF 週期更為經濟。' : 'Families who have completed their own IVF treatment and have remaining embryos may choose to donate them to other intended parents. IRFC facilitates embryo donation arrangements, including appropriate legal documentation and FDA compliance requirements. Receiving donated embryos is often a more affordable path to pregnancy than a full IVF cycle with donor eggs.',
+    candidates: ZH ? ['尋求較經濟第三方選項的病患', '女同志伴侶或單身女性', '無法使用自身卵子或精子的病患', '偏好由自身懷孕者'] : ['Patients seeking a more affordable third-party option', 'Same-sex female couples or single women', 'Patients who cannot use their own eggs or sperm', 'Those who prefer a fully carried pregnancy'],
+  },
+  {
+    title: ZH ? '代理孕母（妊娠代孕）' : 'Gestational Surrogacy',
+    body: ZH ? '在妊娠代孕中，由預定父母（或捐贈者）的卵子與精子形成的胚胎，會植入代孕母體內由她懷孕。代孕母與孩子無基因關係。IRFC 與代孕機構及生殖法律師合作，協調你代孕旅程的醫療、法律與後勤層面。加州是美國對代孕最友善的州之一，對各方都有清晰的法律保障。' : 'In gestational surrogacy, an embryo created from the intended parents\' (or donors\') eggs and sperm is transferred to a gestational carrier who carries the pregnancy. The gestational carrier has no genetic relationship to the child. IRFC works with surrogacy agencies and reproductive attorneys to coordinate the medical, legal, and logistical aspects of your surrogacy journey. California is one of the most surrogacy-friendly states in the US, with clear legal protections for all parties.',
+    candidates: ZH ? ['男同志伴侶', '無法懷孕的女性（無子宮、反覆著床失敗、醫療禁忌）', '單身男性', '飽受反覆懷孕流失之苦的預定父母'] : ['Same-sex male couples', 'Women who cannot carry a pregnancy (uterine absence, recurrent implantation failure, medical contraindications)', 'Single men', 'Intended parents who have struggled with repeated pregnancy loss'],
+  },
+];
+
+const faqs = [
+  { q: ZH ? '我該如何找到捐卵者？' : 'How do I find an egg donor?', a: ZH ? 'IRFC 與 Fairfax EggBank 及其他合法機構合作。你會瀏覽匿名捐贈者檔案，包含外型特徵、教育、健康史，以及（部分情況）照片。你的協調師會引導你完成挑選與配對流程，且所有捐贈者均符合 FDA 規範。' : 'IRFC partners with Fairfax EggBank and other licensed agencies. You will review anonymous donor profiles including physical characteristics, education, health history, and (in some cases) photos. Your coordinator guides you through the selection and matching process, and all donors are FDA-compliant.' },
+  { q: ZH ? '代孕過程需要多久？' : 'How long does the surrogacy process take?', a: ZH ? '完整的代孕過程——從與代孕母配對到確認懷孕——通常需要 12–18 個月。這包含代孕母的醫療核可、法律合約簽署、胚胎植入與懷孕確認。你的 IRFC 協調師會在諮詢時列出務實的時程。' : 'The full surrogacy process — from matching with a gestational carrier to a confirmed pregnancy — typically takes 12–18 months. This includes medical clearance of the carrier, legal contract execution, embryo transfer, and pregnancy confirmation. Your IRFC coordinator will outline a realistic timeline during your consultation.' },
+  { q: ZH ? '在加州，妊娠代孕合法嗎？' : 'Is gestational surrogacy legal in California?', a: ZH ? '是的。加州擁有美國最完備的代孕法律之一，為預定父母與代孕母雙方提供清晰的法律保障。可取得出生前命令，意味著預定父母在孩子出生前即被確立為法定父母。' : 'Yes. California has among the most well-established surrogacy laws in the United States, offering clear legal protections for intended parents and gestational carriers alike. Pre-birth orders are available, meaning intended parents are established as the legal parents before the child is born.' },
+  { q: ZH ? 'IRFC 有第三方協調師嗎？' : 'Does IRFC have a third-party coordinator?', a: ZH ? '有的。IRFC 設有專門的第三方生育協調師，專精於捐贈與代孕安排。他們是你所有直接臨床照護之外協調工作的首要聯絡窗口——機構溝通、法律轉介與後勤規劃。' : 'Yes. IRFC has dedicated third-party reproduction coordinators who specialize in donor and surrogacy arrangements. They serve as your primary point of contact for all coordination outside of direct clinical care — agency communication, legal referrals, and logistical planning.' },
+  { q: ZH ? '男同志伴侶的雙方都能提供精子嗎？' : 'Can both partners in a same-sex male couple contribute sperm?', a: ZH ? '可以。可使用雙方精子與捐卵製作胚胎，再以 PGT 辨識每顆胚胎的基因來源。部分伴侶會依序分別植入來自雙方的胚胎。醫師會與你討論相關的臨床與後勤考量。' : 'Yes. It is possible to create embryos using sperm from both partners and donor eggs, then use PGT to identify each embryo\'s genetic origin. Some couples choose to transfer embryos from each partner sequentially. Your physician will discuss the clinical and logistical considerations involved.' },
+  { q: ZH ? '使用捐卵或代孕母的費用是多少？' : 'What is the cost of using donor eggs or a gestational carrier?', a: ZH ? '第三方生育包含臨床費用（IVF 週期、胚胎植入）、機構費用、捐贈者補償與法律費用。總費用依安排而有很大差異。我們的財務協調師會在你開始前提供詳細的費用明細，並有融資方案可供選擇。' : 'Third-party reproduction involves clinical fees (IVF cycle, embryo transfer), agency fees, donor compensation, and legal fees. Total costs vary widely depending on the arrangement. Our financial coordinator provides a detailed cost breakdown before you begin, and financing options are available.' },
+];
+---
+
+<Layout
+  title={ZH ? '捐卵與代理孕母 — 第三方生育' : 'Donors & Surrogacy — Third-Party Reproduction'}
+  description={ZH ? 'IRFC 提供完整的第三方生育服務，包含捐卵、捐精、捐贈胚胎，以及妊娠代孕的協調。' : 'IRFC provides comprehensive third-party reproduction services including egg donation, sperm donation, embryo donation, and gestational surrogacy coordination.'}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href={localeHref('/services', locale)} class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '全部療程' : 'All Services'}</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '捐卵與代理孕母' : 'Donors & Surrogacy'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          {ZH ? '捐卵與' : 'Donors &'}<br/>{ZH ? '代理孕母' : 'Surrogacy'}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? '第三方生育為需要捐卵、捐精、捐贈胚胎或代理孕母才能組建家庭的個人與伴侶敞開大門。IRFC 以經驗豐富、充滿同理心的引導，協調這段旅程的每一個層面——醫療、後勤與法律。' : 'Third-party reproduction opens doors for individuals and couples who need donor eggs, donor sperm, donor embryos, or a gestational carrier to build their families. IRFC coordinates every aspect of this journey — medical, logistical, and legal — with experienced, compassionate guidance.'}
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility physician consulting with a patient" width="1800" height="1200" class="w-full h-auto object-cover" />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '每一步，都是同一個團隊' : 'One team, every step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '從初次諮詢、每次回診監測，到胚胎植入，都由同一批醫師、護理師與胚胎師陪伴你。緊密銜接的照護，讓你的治療過程不會有一絲落差。' : 'From your first consultation through every monitoring visit and embryo transfer, the same physicians, nurses, and embryologists stay with you. Connected care means nothing about your treatment gets lost in translation.'}</p>
+          <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">{ZH ? '認識我們的團隊' : 'Meet our team'} <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">{ZH ? '第三方生育服務' : 'Third-Party Services'}</h2>
+      <div class="space-y-6">
+        {services.map((svc, i) => (
+          <div class="grid lg:grid-cols-[2fr_1fr] gap-0 bg-white border border-stone-200">
+            <div class="p-8 lg:border-r border-stone-200">
+              <div class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-500); font-family: var(--font-sans);">0{i + 1}</div>
+              <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">{svc.title}</h3>
+              <p class="text-sm text-stone-600 leading-relaxed">{svc.body}</p>
+            </div>
+            <div class="p-8" style="background: var(--color-stone-50);">
+              <div class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '適用對象' : 'Who This Serves'}</div>
+              <ul class="space-y-2">
+                {svc.candidates.map(c => (
+                  <li class="flex items-start gap-3 text-sm text-stone-600">
+                    <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-400);"></div>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo break -->
+  <section class="relative overflow-hidden" style="height: 340px;">
+    <img src="/images/couple-clinic.webp" srcset="/images/couple-clinic-800.webp 800w, /images/couple-clinic-1280.webp 1280w, /images/couple-clinic.webp 2292w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="Couple at IRFC clinic" class="w-full h-full object-cover object-top" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 58%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '你成為父母的道路，每一步都有人引導。' : 'Your path to parenthood, guided every step of the way.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Coordinator callout -->
+  <section class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-8 items-center p-10 border border-stone-200">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{ZH ? '專屬第三方生育協調' : 'Dedicated Third-Party Coordination'}</h3>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            {ZH ? 'IRFC 的第三方生育協調師是你整段過程的中央聯絡窗口——與捐贈機構、代孕機構及生殖法律師聯繫，讓你專注於自己的旅程，而非後勤瑣事。' : 'IRFC\'s third-party reproduction coordinators are your central point of contact throughout the process — liaising with donor agencies, surrogacy agencies, and reproductive attorneys so you can focus on your journey, not the logistics.'}
+          </p>
+        </div>
+        <a href={localeHref('/contact', locale)} class="btn-outline flex-shrink-0">{ZH ? '與協調師洽談' : 'Speak with a Coordinator'}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+        <div class="border border-stone-200 bg-white">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '準備探索你的選擇？' : 'Ready to Explore Your Options?'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '與 IRFC 醫師及協調師的諮詢是第一步——我們會以誠實與關懷，陪你走過每一個可行的選項。' : 'A consultation with an IRFC physician and coordinator is the first step — we\'ll walk through every option available to you with honesty and care.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/financing', locale)} class="btn-outline">{ZH ? '費用與補助' : 'Financing & Cost'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

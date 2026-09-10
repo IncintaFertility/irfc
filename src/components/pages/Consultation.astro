@@ -1,0 +1,145 @@
+---
+// 諮詢：到院或 Zoom（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, type Locale } from '../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const locations = [
+  { city: 'Torrance', phone: '(424) 212-4087', tel: 'tel:+14242124087' },
+  { city: 'Beverly Hills', phone: '(213) 600-8088', tel: 'tel:+12136008088' },
+  { city: 'Corona', phone: '(951) 272-2221', tel: 'tel:+19512722221' },
+  { city: 'Irvine', phone: '(949) 453-8600', tel: 'tel:+19494538600' },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: ZH ? '申請 Zoom 看診' : 'Request a Zoom visit',
+    body: ZH ? '請以電話或 WhatsApp 告訴我們的團隊，您希望進行視訊諮詢。我們將為您媒合合適的醫師。' : 'Tell our team by phone or WhatsApp that you would like a video consultation. We will match you with the right physician.',
+  },
+  {
+    n: '02',
+    title: ZH ? '接收您的連結' : 'Receive your link',
+    body: ZH ? '我們會寄送安全的 Zoom 連結，並與您確認合適的時間——加入無須下載應用程式。' : 'We send a secure Zoom link and confirm a time that works for you — no app download needed to join.',
+  },
+  {
+    n: '03',
+    title: ZH ? '與醫師會面' : 'Meet your physician',
+    body: ZH ? '在家中、辦公室或任何地方加入。檢視您的病史、討論選項，並共同規劃下一步。' : 'Join from home, the office, or anywhere. Review your history, discuss options, and plan your next steps together.',
+  },
+];
+
+const title = ZH ? '諮詢 — 到院或 Zoom' : 'Consultation — In Person or by Zoom';
+const description = ZH
+  ? '展開您的生育旅程。我們推薦您於南加州任一診所親自到院諮詢，亦提供安全的 Zoom 視訊選項，費用與到院諮詢相同。'
+  : 'Begin your fertility journey with IRFC. We recommend an in-person consultation at one of our Southern California clinics, with a secure Zoom video option available at the same consultation fee.';
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '電話與線上諮詢' : 'Phone &amp; Online Consultation'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>親自或透過 Zoom<br/><em class="not-italic" style="color: var(--color-gold-500);">與您的醫師會面。</em></> : <>Meet your physician<br/><em class="not-italic" style="color: var(--color-gold-500);">in person or by Zoom.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl mb-10">
+          {ZH ? '我們建議您於南加州任一診所，以親自到院的方式展開旅程。若行程或時間不便，您也可以透過安全的 Zoom 視訊與醫師會面——諮詢費用與到院相同。' : 'We recommend beginning your journey with an in-person consultation at one of our Southern California clinics. If travel or time is hard, you can meet your physician by secure Zoom video &mdash; at the same consultation fee.'}
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/appointment" class="btn-primary inline-flex items-center gap-2">
+            {ZH ? '預約到院看診' : 'Schedule an In-Person Visit'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
+            {ZH ? '申請 Zoom 看診' : 'Request a Zoom Visit'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two ways -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '兩種與醫師會面的方式' : 'Two ways to meet your physician'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '選擇適合您的方式' : 'Choose what fits'}</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-8 border border-stone-200 bg-white relative">
+          <span class="absolute top-6 right-6 text-xs tracking-widest uppercase px-3 py-1" style="background: var(--color-gold-500); color: #fff; font-family: var(--font-sans);">{ZH ? '推薦' : 'Recommended'}</span>
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3 pr-28">{ZH ? '到院諮詢' : 'In-person consultation'}</h3>
+          <p class="text-sm text-stone-600 leading-relaxed mb-6">
+            {ZH ? '於我們南加州四間診所任一間與您的醫師會面。我們推薦您首次看診選擇到院——檢查、超音波與實驗室檢驗都在現場同一處完成。' : 'Meet your physician at any of our four Southern California clinics. Recommended for your first visit &mdash; exams, ultrasound, and lab work are all on site, in one place.'}
+          </p>
+          <a href="/appointment" class="btn-primary inline-flex items-center gap-2">
+            {ZH ? '預約看診' : 'Schedule a Visit'}
+          </a>
+        </div>
+        <div class="p-8 border border-stone-200 bg-white relative">
+          <span class="absolute top-6 right-6 text-xs tracking-widest uppercase px-3 py-1" style="background: var(--color-stone-100); color: var(--color-gold-600); font-family: var(--font-sans); border: 1px solid var(--color-gold-300);">{ZH ? '同價' : 'Same fee'}</span>
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3 pr-28">{ZH ? 'Zoom 諮詢' : 'Zoom consultation'}</h3>
+          <p class="text-sm text-stone-600 leading-relaxed mb-6">
+            {ZH ? '在家中與醫師進行安全的視訊看診。適合追蹤、第二意見，或行程不便時——價格與到院諮詢完全相同。' : 'A secure video visit with your physician from home. Ideal for follow-ups, second opinions, or when travel is hard &mdash; priced exactly the same as an in-person consultation.'}
+          </p>
+          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
+            {ZH ? '申請 Zoom 看診' : 'Request a Zoom Visit'}
+          </a>
+        </div>
+      </div>
+      <p class="mt-8 text-center text-sm" style="color: var(--color-stone-500);">
+        {ZH ? '無論您親自或透過安全 Zoom 會面，諮詢費用完全相同。' : 'Your consultation fee is identical whether you meet in person or by secure Zoom.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- How a Zoom visit works -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? 'Zoom 看診如何進行' : 'How a Zoom visit works'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '三個簡單步驟' : 'Three simple steps'}</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-10">
+        {steps.map(step => (
+          <div>
+            <p class="text-5xl font-light mb-4" style="font-family: var(--font-serif); color: var(--color-gold-400);">{step.n}</p>
+            <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{step.title}</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinic lines -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '偏好特定診所？' : 'Prefer a specific clinic?'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '直接致電任一據點' : 'Call any location directly'}</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {locations.map(loc => (
+          <a href={loc.tel} class="p-6 border border-stone-200 bg-white card-hover flex items-center justify-between gap-3">
+            <span style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800">{loc.city}</span>
+            <span class="text-sm font-medium" style="color: var(--color-gold-600);">{loc.phone}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

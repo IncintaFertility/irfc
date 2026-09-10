@@ -1,0 +1,202 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const steps = [
+  { n: '01', title: ZH ? '諮詢與卵巢庫存檢測' : 'Consultation & Ovarian Reserve Testing', desc: ZH ? '醫師會安排基礎抽血（AMH、FSH、雌二醇）與竇卵泡數（AFC）超音波。這些結果有助預測卵巢對刺激的反應，以及我們可合理預期取出的卵子數量。' : 'Your physician orders baseline bloodwork (AMH, FSH, estradiol) and an antral follicle count (AFC) ultrasound. These results help predict how your ovaries will respond to stimulation and how many eggs we can reasonably expect to retrieve.' },
+  { n: '02', title: ZH ? '卵巢刺激（8–14 天）' : 'Ovarian Stimulation (8–14 Days)', desc: ZH ? '每日注射荷爾蒙促使卵巢同時發育多個卵泡——而非自然週期中僅產出的一顆卵子。你需回診定期監測（超音波與抽血），追蹤卵泡發育並視需要調整藥物。' : 'Daily injectable hormones encourage your ovaries to develop multiple follicles simultaneously — rather than the single egg produced in a natural cycle. You return for regular monitoring appointments (ultrasound and blood draws) to track follicle development and adjust medications as needed.' },
+  { n: '03', title: ZH ? '破卵針' : 'Trigger Shot', desc: ZH ? '當卵泡達到理想大小（通常 17–20mm），會施打破卵針以完成卵子成熟。取卵預計在約 36 小時後進行。' : 'When follicles reach the optimal size (typically 17–20mm), a trigger injection is administered to finalize egg maturation. Retrieval is scheduled approximately 36 hours later.' },
+  { n: '04', title: ZH ? '取卵' : 'Egg Retrieval', desc: ZH ? '在輕度鎮靜下，以經陰道超音波導引的細針取出成熟卵子。手術約 20 分鐘。多數病患休息數小時後當天即可返家。' : 'Under light sedation, mature eggs are retrieved via a thin needle guided by transvaginal ultrasound. The procedure takes about 20 minutes. Most patients rest for a few hours and go home the same day.' },
+  { n: '05', title: ZH ? '玻璃化冷凍（瞬凍）' : 'Vitrification (Flash Freezing)', desc: ZH ? '成熟卵子會立即以玻璃化冷凍——一種超高速技術，能防止冰晶形成，比傳統緩慢冷凍法更有效地保存卵子完整性。' : 'Mature eggs are immediately frozen using vitrification — an ultra-rapid technique that prevents ice crystal formation and preserves egg integrity far more effectively than traditional slow-freeze methods.' },
+  { n: '06', title: ZH ? 'TMRW Vault 安全保存' : 'Secure Storage in TMRW Vault', desc: ZH ? '冷凍卵子存放於 TMRW Vault——IRFC 的智慧型冷凍保存系統，具備 RFID 追蹤、24/7 監控與軍規等級加密。你的卵子將保存在此，直到你準備使用為止。' : 'Frozen eggs are stored in the TMRW Vault — IRFC\'s smart cryogenic storage system with RFID tracking, 24/7 monitoring, and military-grade encryption. Your eggs remain there until you are ready to use them.' },
+];
+
+const faqs = [
+  { q: ZH ? '我應該冷凍幾顆卵子？' : 'How many eggs should I freeze?', a: ZH ? '多數醫師建議保存 15–20 顆成熟卵子，以最大化至少一次成功懷孕的機會。年輕病患通常需要較少週期，年長者可能需更多。我們會依你的卵巢庫存量設定務實的期待。' : 'Most physicians recommend banking 15–20 mature eggs to maximize the chance of at least one successful pregnancy. Younger patients typically need fewer cycles, while older patients may need more. We\'ll set realistic expectations based on your ovarian reserve.' },
+  { q: ZH ? '凍卵的理想年齡是？' : 'What is the ideal age to freeze eggs?', a: ZH ? '卵子品質在 20 歲後期至 30 歲前期達高峰，35 歲後下降。35 歲前冷凍通常成效最佳。不過，對 30 歲後期的女性，凍卵仍可能是有意義的選擇，我們建議諮詢以了解你的個別狀況。' : 'Egg quality peaks in the mid-to-late 20s and declines after 35. Freezing before 35 generally produces the strongest outcomes. However, egg freezing can still be a meaningful option for women in their late 30s, and we encourage consultation to understand your individual picture.' },
+  { q: ZH ? '卵子可以冷凍保存多久？' : 'How long can eggs stay frozen?', a: ZH ? '玻璃化冷凍的卵子可保存多年。現有證據顯示，在妥善保存下，卵子存活率隨時間並無顯著下降。存放在我們 TMRW Vault 系統中的卵子會持續受到監控。' : 'Vitrified eggs can remain in storage for many years. Current evidence suggests no significant decline in egg viability over time when stored correctly. Your eggs in our TMRW Vault system are monitored continuously.' },
+  { q: ZH ? '凍卵與凍胚胎有何不同？' : 'What is the difference between egg freezing and embryo freezing?', a: ZH ? '凍卵保存未受精的卵子，凍胚胎則保存已受精的卵子。單身者或無伴侶者會冷凍卵子；伴侶通常可選擇冷凍胚胎，其存活率歷來較高——儘管凍卵技術已有大幅進步。' : 'Egg freezing preserves unfertilized eggs, while embryo freezing preserves eggs that have already been fertilized. Single individuals or those without a partner will freeze eggs; couples often have the option to freeze embryos, which have historically higher survival rates — though egg-freezing technology has improved substantially.' },
+  { q: ZH ? '凍卵會影響未來的生育力嗎？' : 'Does egg freezing affect future fertility?', a: ZH ? '不會。凍卵週期中取出的卵子，來自你身體當月自然會篩選的卵子池。這個過程不會耗損未來的卵子存量。' : 'No. The eggs retrieved during a freezing cycle are from the pool of eggs your body would naturally select that month. The process does not deplete future egg supply.' },
+  { q: ZH ? 'IRFC 是否協助腫瘤生育保存（oncofertility）病患？' : 'Does IRFC support oncofertility patients?', a: ZH ? '是的。IRFC 優先安排面臨癌症診斷、需在化療或放射治療前保存生育力的病患諮詢。我們通常能配合緊急時程。' : 'Yes. IRFC prioritizes consultations for patients facing cancer diagnoses who need to preserve fertility before beginning chemotherapy or radiation. We can often accommodate urgent timelines.' },
+];
+
+const whoCards = [
+  { title: ZH ? '職涯或個人生涯規劃' : 'Career or Personal Planning', desc: ZH ? '尚未準備好為人父母，但想為未來保留選擇。' : 'Not ready for parenthood yet but want to protect future options.' },
+  { title: ZH ? '感情狀態' : 'Relationship Status', desc: ZH ? '單身或尚未有伴侶，但預計未來組織家庭。' : 'Single or not yet partnered, but anticipating a family in the future.' },
+  { title: ZH ? '醫療診斷' : 'Medical Diagnosis', desc: ZH ? '癌症、自體免疫疾病，或其他需要可能影響生育的治療之狀況。' : 'Cancer, autoimmune disease, or other conditions requiring treatments that affect fertility.' },
+  { title: ZH ? '卵巢庫存下降' : 'Declining Ovarian Reserve', desc: ZH ? '檢查結果顯示卵巢庫存下降速度快於預期。' : 'Test results suggest ovarian reserve is declining faster than expected.' },
+  { title: ZH ? '遺傳風險' : 'Genetic Risk', desc: ZH ? '有早發性更年期或影響生育的遺傳疾病家族史。' : 'Family history of early menopause or genetic conditions affecting fertility.' },
+  { title: ZH ? 'IVF 剩餘卵子' : 'IVF Surplus', desc: ZH ? '將刺激週期中多餘的卵子冷凍保存，避免捨棄。' : 'Freezing extra eggs from a stimulation cycle to avoid discarding them.' },
+];
+
+const vaultFeatures = [
+  ZH ? '每個檢體都有 RFID 數位身分' : 'RFID digital identity for every specimen',
+  ZH ? '24/7 監控，每日數千次系統檢查' : '24/7 monitoring with thousands of daily system checks',
+  ZH ? '軍規等級、符合 HIPAA 的加密' : 'Military-grade HIPAA-compliant encryption',
+  ZH ? '遠端專家團隊監督與異常警示' : 'Remote expert team oversight and anomaly alerts',
+];
+---
+
+<Layout
+  title={ZH ? '凍卵與生育保存' : 'Egg Freezing & Fertility Preservation'}
+  description={ZH ? 'IRFC 的凍卵療程——以玻璃化冷凍與 TMRW Vault 保存，守護你的生育未來。了解流程、時程，以及過程中會發生什麼。' : 'Egg freezing at IRFC — protect your reproductive future with vitrification and TMRW Vault storage. Learn the process, timeline, and what to expect.'}
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href={localeHref('/services', locale)} class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '全部療程' : 'All Services'}</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '凍卵' : 'Egg Freezing'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          {ZH ? '凍卵與' : 'Egg Freezing &'}<br/>{ZH ? '生育保存' : 'Fertility Preservation'}
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '卵母細胞冷凍保存' : 'Oocyte Cryopreservation'}</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? '無論你尚未準備好組建家庭、正面臨醫療診斷，或只是想為自己保留選擇——凍卵都為你送上「時間」這份禮物。IRFC 的玻璃化冷凍技術與 TMRW Vault 保存系統，提供現有最高標準的卵子保存。' : 'Whether you\'re not ready to start a family yet, facing a medical diagnosis, or simply want to protect your options — egg freezing gives you the gift of time. IRFC\'s vitrification technology and TMRW Vault storage provide the highest standards of egg preservation available.'}
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility physician consulting with a patient" width="1800" height="1200" class="w-full h-auto object-cover" />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '每一步，都是同一個團隊' : 'One team, every step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '從初次諮詢、每次回診監測，到胚胎植入，都由同一批醫師、護理師與胚胎師陪伴你。緊密銜接的照護，讓你的治療過程不會有一絲落差。' : 'From your first consultation through every monitoring visit and embryo transfer, the same physicians, nurses, and embryologists stay with you. Connected care means nothing about your treatment gets lost in translation.'}</p>
+          <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">{ZH ? '認識我們的團隊' : 'Meet our team'} <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who It's For -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '誰該考慮凍卵？' : 'Who Should Consider Egg Freezing?'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '凍卵已不再被視為實驗性質——它是一項經證實的生育保存方式，適用情境日益廣泛。你不需要醫療理由才能凍卵；想為未來保留選擇，本身就是充分理由。' : 'Egg freezing is no longer considered experimental — it is a proven method of fertility preservation recommended in a growing range of circumstances. You don\'t need a medical reason to freeze your eggs; the desire to preserve future options is reason enough.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH ? 'IRFC 也提供精子冷凍與胚胎冷凍保存，讓伴侶與個人擁有多種保存生育未來的途徑。' : 'IRFC also offers sperm freezing and embryo cryopreservation, giving couples and individuals multiple paths to preserving their reproductive future.'}
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {whoCards.map(card => (
+            <div class="p-6 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-base font-light text-stone-800 mb-2">{card.title}</h3>
+              <p class="text-xs text-stone-500 leading-relaxed">{card.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? '凍卵流程' : 'The Egg Freezing Process'}</h2>
+      <div class="space-y-3">
+        {steps.map(step => (
+          <div class="grid lg:grid-cols-12 gap-6 p-8 border border-stone-200 bg-stone-50">
+            <div class="lg:col-span-1">
+              <span class="text-xs font-medium tracking-widest" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</span>
+            </div>
+            <div class="lg:col-span-11">
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{step.title}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TMRW callout -->
+  <section class="py-16" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-500); font-family: var(--font-sans);">{ZH ? '保存技術' : 'Storage Technology'}</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-white mb-4">{ZH ? '你的卵子，由 TMRW Vault 守護' : 'Your Eggs, Protected by TMRW Vault'}</h2>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-400);">{ZH ? '卵子冷凍後，存放於 TMRW Vault——這是一座液態氮智慧型儲存槽，具備數位 RFID 追蹤、24/7 主動監控與軍規等級加密。每顆卵子都有數位身分。每次檢查都有紀錄。沒有手寫標籤，也沒有模糊空間。' : 'Once frozen, your eggs are stored in the TMRW Vault — a liquid nitrogen smart tank with digital RFID tracking, 24/7 active monitoring, and military-grade encryption. Every egg has a digital history. Every check-up is logged. No handwritten labels, no ambiguity.'}</p>
+        </div>
+        <div class="space-y-4">
+          {vaultFeatures.map(f => (
+            <div class="flex items-center gap-3 p-4 border" style="border-color: var(--color-stone-800);">
+              <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--color-gold-500);"></div>
+              <span class="text-sm" style="color: var(--color-stone-300);">{f}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden" style="height: 380px;">
+    <img src="/images/patient-laughing.webp" srcset="/images/patient-laughing-800.webp 800w, /images/patient-laughing-1280.webp 1280w, /images/patient-laughing.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility patient" class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to left, rgba(20,18,15,0.5) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center justify-end px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed text-right">
+        {ZH ? '你未來的家庭，今天起受到守護。' : 'Your future family, protected today.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '為未來保存，就從今天' : 'Preserve Your Future, Today'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '讓我們聊聊你的選擇，找到適合的前進方向。' : 'Let\'s talk about your options and find the right path forward.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/services', locale)} class="btn-outline">{ZH ? '全部療程' : 'All Services'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

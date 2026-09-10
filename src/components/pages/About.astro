@@ -1,0 +1,322 @@
+---
+// 關於 IRFC（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const timeline = [
+  { year: '2003', event: 'RFC Founded', eventZh: 'RFC 創立', detail: 'Dr. James P. Lin establishes Reproductive Fertility Center in Irvine, CA, with a mission to provide patient-centered fertility care built on Safety, Quality, and Integrity.', detailZh: 'James P. Lin 醫師於加州爾灣（Irvine）創立 Reproductive Fertility Center，以在安全、品質與誠信之上提供以病人為中心的生育照護為使命。' },
+  { year: '2010', event: 'Incinta Fertility Opens', eventZh: 'Incinta Fertility 成立', detail: 'Incinta Fertility Center opens, pioneering an open-concept laboratory model and a philosophy that treats patients as whole people, not diagnoses.', detailZh: 'Incinta Fertility Center 成立，開創開放式實驗室模式，並以「將病人視為完整的人，而非只是診斷」為哲學。' },
+  { year: '2013', event: 'Kaiser COE Designation', eventZh: '凱薩卓越中心認證', detail: 'RFC earns designation as a Kaiser Permanente Center of Excellence across Southern California — an independent validation of clinical quality and outcomes.', detailZh: 'RFC 獲凱薩醫療（Kaiser Permanente）指定為南加州卓越中心——這是對其臨床品質與成果的獨立肯定。' },
+  { year: '2016', event: '#1 US IVF Laboratory', eventZh: '全美 IVF 實驗室第一', detail: 'The Incinta embryology lab, led by Dr. Yufen Xie, achieves the remarkable milestone of ranking #1 in US IVF success rates.', detailZh: '由 Yufen Xie 醫師領軍的 Incinta 胚胎學實驗室，締造全美 IVF 成功率排名第一的重要里程碑。' },
+  { year: '2018', event: 'Technology Leadership', eventZh: '技術領導地位', detail: 'IRFC becomes among the first fertility centers in Orange County to deploy EmbryoScope+ time-lapse incubation technology.', detailZh: 'IRFC 成為橙縣首批引進 EmbryoScope+ 連續拍攝培養技術的生育中心之一。' },
+  { year: '2024', event: 'IRFC is Born', eventZh: 'IRFC 誕生', detail: 'Incinta Fertility and Reproductive Fertility Center unite to form IRFC — Incinta Reproductive Fertility Center — combining two decades of clinical excellence into one practice, under one standard.', detailZh: 'Incinta Fertility 與 Reproductive Fertility Center 合併為 IRFC — Incinta Reproductive Fertility Center — 將兩個十年的臨床卓越，匯聚為同一套標準下的一個機構。' },
+];
+
+const achievements = [
+  { number: '20+', label: ZH ? '年臨床經驗' : 'Years of Clinical Experience' },
+  { number: '#1', label: ZH ? '2016 年全美 IVF 實驗室排名第一' : 'US IVF Lab Ranking, 2016' },
+  { number: '4', label: ZH ? '南加州 4 間診所' : 'Southern California Clinics' },
+  { number: '5', label: ZH ? '5 種語言服務' : 'Languages Spoken' },
+];
+
+const values = [
+  { title: ZH ? '安全至上' : 'Safety First', desc: ZH ? 'IRFC 的每項療程都遵循最高臨床標準，於先進、具專業認證的手術中心與 CAP 認證實驗室中進行。' : 'Every procedure performed at IRFC follows the highest clinical standards, in state-of-the-art, professionally accredited surgery centers and CAP-certified laboratories.' },
+  { title: ZH ? '品質不妥協' : 'Quality Without Compromise', desc: ZH ? '從我們的胚胎學實驗室到臨床團隊，我們不斷投入技術、系統與人才，以換取病人更好的成果。' : 'From our embryology lab to our clinical team, we invest relentlessly in the skills, systems, and technology that translate to better outcomes for our patients.' },
+  { title: ZH ? '誠信貫穿一切' : 'Integrity in Everything', desc: ZH ? '透明、真誠與誠實溝通，是我們工作的核心。我們對病人說實話——並為我們共同做出的每個決定負責。' : 'Transparency, authenticity, and honest communication are at the core of how we work. We tell patients the truth — and stand behind every decision we make together.' },
+];
+
+const recognitions = [
+  { label: ZH ? '卓越中心' : 'Center of Excellence', detail: ZH ? '由凱薩醫療（Kaiser Permanente）指定於南加州' : 'Designated by Kaiser Permanente across Southern California' },
+  { label: ZH ? '頂尖 IVF 中心' : 'Top IVF Center', detail: ZH ? '獲 IVF Authority 評為加州最佳之一，尤其在 38–40 歲病人群中' : "Ranked among California's best by IVF Authority, especially for patients 38–40" },
+  { label: ZH ? '全美 IVF 實驗室第一' : '#1 US IVF Lab', detail: ZH ? 'IRFC 實驗室於 2016 年全美 IVF 成功率排名第一' : "IRFC's laboratory ranked number one in US IVF success rates in 2016" },
+  { label: ZH ? 'Fairfax EggBank 合作夥伴' : 'Fairfax EggBank Partner', detail: ZH ? '全美最大卵子銀行規模最大的生產機構之一' : 'One of the largest production facilities for the largest US egg bank' },
+];
+
+const languages = ['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'];
+
+const title = ZH ? '關於 IRFC' : 'About IRFC';
+const description = ZH
+  ? 'Incinta Reproductive Fertility Center (IRFC) — 逾二十年於南加州深耕生殖醫學的卓越成就。認識我們的故事、標準與照護團隊。'
+  : 'Incinta Reproductive Fertility Center (IRFC) — over 20 years of reproductive medicine excellence across Southern California. Learn our story, our standards, and our care team.';
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{title}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>兩個傳承。<br/><em class="not-italic" style="color: var(--color-gold-500);">同一使命。</em></> : <>Two Legacies.<br/><em class="not-italic" style="color: var(--color-gold-500);">One Mission.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? 'INCINTA 始於一個信念：每個非凡的生命，都值得非凡的開始。IRFC — Incinta Reproductive Fertility Center — 由兩家秉持相同信念的機構合而為一。' : 'INCINTA began with a conviction: every extraordinary life deserves an extraordinary beginning. IRFC — Incinta Reproductive Fertility Center — was formed when two practices built on that same belief came together as one.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">Reproductive Fertility Center</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '二十年的信任' : '20 Years of Trust'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '由 James P. Lin 醫師創辦的 Reproductive Fertility Center，立基於一個承諾：正在經歷不孕挑戰的病人，能在這裡找到「如同家人，也如同歸處」的所在。二十年來，RFC 從單一診所成長為南加州最受敬重的生育機構之一。' : 'Founded by Dr. James P. Lin, Reproductive Fertility Center was built on a promise: that patients navigating the challenges of infertility would find "both a family and a home" within these walls. Over two decades, RFC grew from a single clinic into one of Southern California\'s most respected fertility practices.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? 'RFC 成為凱薩醫療（Kaiser Permanente）在南加州指定的卓越中心，並被評為美國最大卵子銀行 Fairfax EggBank 規模最大的生產機構之一。該機構獲 IVF Authority 評為加州頂尖 IVF 中心，尤其在 38–40 歲病人群中表現出色。' : 'RFC became a Kaiser Permanente Center of Excellence across Southern California and was designated one of the largest production facilities for Fairfax EggBank, the largest egg bank in the United States. The practice earned recognition from IVF Authority as a top-ranked California IVF center, particularly for patients aged 38–40.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH ? '一路走來，安全（Safety）、品質（Quality）、誠信（Integrity）三大支柱，始終是 RFC 一切作為的根基。' : 'Through it all, the three pillars of <strong class="text-stone-800">Safety</strong>, <strong class="text-stone-800">Quality</strong>, and <strong class="text-stone-800">Integrity</strong> remained the foundation of everything RFC does.'}
+          </p>
+        </div>
+
+        <div class="border-l-2 pl-10 lg:pl-14" style="border-color: var(--color-gold-500);">
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-500); font-family: var(--font-sans);">Incinta Fertility</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '生命的科學與藝術' : 'Science &amp; Art of Life'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? 'Incinta Fertility 建立起於另一種信念：生育診所不該只是臨床場所。「你不只是你的生育能力；我們也不只是間生育診所。」精心設計的空間、開放式實驗室，以及團隊照護模式，從一開始就是 Incinta 哲學的核心。' : 'Incinta Fertility was built around a different kind of belief: that a fertility clinic should be more than clinical. "You\'re more than your fertility. We\'re more than a fertility clinic." Artfully designed spaces, open-concept laboratories, and a team-based care model were central to the Incinta philosophy from day one.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? 'Incinta 實驗室締造了業界罕見的成就：2016 年全美 IVF 成功率排名第一。在 Yufen Xie 醫師領導下，實驗室始終堅持世界級的胚胎學與創新技術。' : 'The Incinta laboratory achieved what few in the field have: a national ranking of <strong class="text-stone-800">#1 in US IVF success rates in 2016</strong>. Under the direction of Dr. Yufen Xie, the lab has maintained a commitment to world-class embryology and innovative technique.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH ? 'Incinta 的核心理念始終簡單：「你所尋覓的，也會遇見你。」' : 'The guiding principle at Incinta remains simple: "What you are seeking will also find you."'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievement Stats Bar -->
+  <section class="py-12 bg-white border-y border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px" style="background: var(--color-stone-200);">
+        {achievements.map(a => (
+          <div class="bg-white py-8 px-10 text-center">
+            <p class="text-4xl lg:text-5xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-600);">{a.number}</p>
+            <p class="text-xs tracking-wide" style="color: var(--color-stone-500); font-family: var(--font-sans);">{a.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinic Photos -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="overflow-hidden">
+          <img
+            src="/images/clinic-scene.webp" srcset="/images/clinic-scene-800.webp 800w, /images/clinic-scene-1280.webp 1280w, /images/clinic-scene.webp 1300w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            alt={ZH ? 'IRFC 診所內部' : 'IRFC clinic interior'}
+            class="w-full h-72 object-cover"
+          />
+        </div>
+        <div class="grid grid-rows-2 gap-6">
+          <div class="overflow-hidden">
+            <img
+              src="/images/hero-incinta.webp" srcset="/images/hero-incinta-800.webp 800w, /images/hero-incinta.webp 1254w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              alt={ZH ? 'Incinta Fertility Center' : 'Incinta Fertility Center'}
+              class="w-full h-32 object-cover object-center"
+            />
+          </div>
+          <div class="overflow-hidden">
+            <img
+              src="/images/consultant.webp" srcset="/images/consultant-800.webp 800w, /images/consultant-1280.webp 1280w, /images/consultant.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              alt={ZH ? 'IRFC 諮詢' : 'IRFC consultation'}
+              class="w-full h-32 object-cover object-center"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Care in action -->
+  <section class="relative overflow-hidden" style="height: 340px;">
+    <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt={ZH ? 'James Lin 醫師與病人交談' : 'Dr. James Lin speaking with a patient'} class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 55%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <div class="max-w-md">
+        <p style="font-family: var(--font-serif);" class="text-3xl font-light text-white leading-snug">
+          {ZH ? '「你不只是你的生育能力。<br/>我們也不只是間生育診所。」' : '"You\'re more than your fertility.<br/>We\'re more than a fertility clinic."'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <svg class="w-8 h-8 mx-auto mb-8 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);">
+          <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
+        </svg>
+        <blockquote style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 leading-relaxed italic mb-6">
+          {ZH ? '「在這裡，你將於生育旅程的每一步，都找到如同家人、也如同歸處的所在。」' : '"Here you will find both a family and a home for every step of your fertility journey."'}
+        </blockquote>
+        <p class="text-sm tracking-wider uppercase" style="color: var(--color-gold-600);">{ZH ? '— 創辦人 James P. Lin 醫師' : '— Dr. James P. Lin, Founder'}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-24 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '我們的旅程' : 'Our Journey'}</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          {ZH ? '形塑今日我們的二十年重要里程碑。' : 'Two decades of milestones that shaped who we are today.'}
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="absolute left-6 top-0 bottom-0 w-px hidden md:block" style="background: var(--color-stone-200);"></div>
+        <div class="space-y-0">
+          {timeline.map((item, i) => (
+            <div class="grid md:grid-cols-12 gap-4 md:gap-8 pb-10 relative">
+              <div class="md:col-span-2 flex md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white border-2 z-10 relative" style={`border-color: ${i === timeline.length - 1 ? 'var(--color-gold-500)' : 'var(--color-stone-200)'};`}>
+                  <span class="text-xs font-medium" style={`font-family: var(--font-sans); color: ${i === timeline.length - 1 ? 'var(--color-gold-600)' : 'var(--color-stone-500)'};`}>{item.year}</span>
+                </div>
+              </div>
+              <div class="md:col-span-10 pb-10 md:pb-0">
+                <div class={`p-7 border ${i === timeline.length - 1 ? 'border-gold-200' : 'border-stone-200'} bg-white`} style={i === timeline.length - 1 ? 'border-color: var(--color-gold-200);' : ''}>
+                  <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{ZH ? item.eventZh : item.event}</h3>
+                  {i === timeline.length - 1 && (
+                    <div class="w-6 h-px mb-3" style="background: var(--color-gold-500);"></div>
+                  )}
+                  <p class="text-sm text-stone-500 leading-relaxed">{ZH ? item.detailZh : item.detail}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Values -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-white mb-6">{ZH ? '我們的使命' : 'Our Mission'}</h2>
+          <p class="leading-relaxed mb-5 text-sm" style="color: var(--color-stone-300);">
+            {ZH ? 'IRFC 的存在，是為了讓每位個人與伴侶都能以最佳機會組建家庭——憑藉世界級的科學、充滿同理的照護，以及對每位病人獨特旅程的不懈承諾。' : 'IRFC exists to give every individual and couple the best possible chance at building their family — through world-class science, compassionate care, and an unwavering commitment to each patient\'s unique journey.'}
+          </p>
+          <p class="leading-relaxed text-sm" style="color: var(--color-stone-400);">
+            {ZH ? '我們相信生育照護應同時具備技術的卓越與深切的人性。我們的整合模式，將全美排名前列的實驗室，與讓病人真正被看見、被支持的個人化關懷結合在一起。' : 'We believe fertility care should be both technically excellent and deeply human. Our integrated model combines a nationally top-ranked laboratory with the kind of personal attention that makes patients feel genuinely seen and supported.'}
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          {values.map(value => (
+            <div class="border-l-2 pl-8" style="border-color: var(--color-gold-700);">
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-white mb-2">{value.title}</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--color-stone-400);">{value.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recognitions -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-14">
+        <div class="h-px w-12 mx-auto mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '肯定與成就' : 'Recognition &amp; Achievements'}</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {recognitions.map(rec => (
+          <div class="p-8 bg-stone-50 border border-stone-200 card-hover">
+            <div class="w-8 h-px mb-5" style="background: var(--color-gold-500);"></div>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{rec.label}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">{rec.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Inclusive Care -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '包容性照護' : 'Inclusive Care'}</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          {ZH ? '生育照護應歡迎每一條通往家庭的道路。我們為所有人打造肯定、可及的照護。' : 'Fertility care should welcome every path to a family. We build affirming, accessible care for all.'}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-10 lg:p-12 border border-stone-200 bg-white">
+          <div class="w-8 h-px mb-8" style="background: var(--color-purple-400);"></div>
+          <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{ZH ? 'LGBTQIA+ 成家' : 'LGBTQIA+ Family Building'}</h3>
+          <p class="text-sm leading-relaxed mb-8 text-stone-500">
+            {ZH ? '為同性伴侶與單身者提供包容、肯定的照護——精子捐贈、卵子捐贈與代理孕母。' : 'Inclusive, affirming care for same-sex couples and single individuals — sperm donation, egg donation, and gestational surrogacy.'}
+          </p>
+          <a href={ZH ? '/services/lgbtqia' : '/services#lgbtqia'} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+            {ZH ? '了解更多' : 'Learn More'}
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+
+        <div class="p-10 lg:p-12 border border-stone-200 bg-white">
+          <div class="w-8 h-px mb-8" style="background: var(--color-gold-500);"></div>
+          <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{ZH ? '國際與外地病人' : 'International &amp; Out-of-Town Patients'}</h3>
+          <p class="text-sm leading-relaxed mb-6 text-stone-500">
+            {ZH ? '為遠近病人提供遠距醫療諮詢與多語照護。' : 'Telehealth consultations and multilingual care for patients near and far.'}
+          </p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            {languages.map(lang => (
+              <span class="text-xs px-3 py-1 border tracking-wide" style="border-color: var(--color-stone-300); color: var(--color-stone-500);">{lang}</span>
+            ))}
+          </div>
+          <a href="/contact" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+            {ZH ? '聯絡我們' : 'Contact Us'}
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 lg:py-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        {ZH ? '準備好認識我們的團隊了嗎？' : 'Ready to Meet Our Team?'}
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '每段旅程都始於一場對話。今天就預約諮詢，讓我們認識你。' : 'Every journey starts with a conversation. Schedule your consultation today and let us learn about you.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/team" class="btn-outline">{ZH ? '認識我們的醫師' : 'Meet Our Physicians'}</a>
+        <a href="/contact" class="btn-primary">{t(locale, 'nav.cta')}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

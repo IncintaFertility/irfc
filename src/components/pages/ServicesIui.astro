@@ -1,0 +1,172 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const steps = [
+  { n: '01', title: ZH ? '評估與時機' : 'Evaluation & Timing', desc: ZH ? '醫師會檢視精液分析結果、確認至少一側輸卵管通暢，並評估卵巢庫存量。依你的具體狀況選擇自然或藥物誘發週期。' : 'Your physician reviews semen analysis results, confirms at least one open fallopian tube, and assesses ovarian reserve. A natural or medicated cycle is selected based on your specific situation.' },
+  { n: '02', title: ZH ? '週期監測' : 'Cycle Monitoring', desc: ZH ? '超音波監測追蹤卵泡發育。在誘發週期中，低劑量口服或注射藥物會促使 1–2 個卵泡成熟。抽血與超音波確認時機。' : 'Ultrasound monitoring tracks follicle development. In stimulated cycles, low-dose oral or injectable medications encourage 1–2 follicles to mature. Blood tests and ultrasounds confirm timing.' },
+  { n: '03', title: ZH ? '破卵針（視情況）' : 'Trigger Shot (if applicable)', desc: ZH ? '當卵泡達到理想大小，會施打破卵針（hCG 或 Lupron）以精準安排排卵時機。授精預計在約 36 小時後進行。' : 'When a follicle reaches optimal size, a trigger injection (hCG or Lupron) is administered to time ovulation precisely. Insemination is scheduled approximately 36 hours later.' },
+  { n: '04', title: ZH ? '精子處理' : 'Sperm Preparation', desc: ZH ? '精液檢體會在實驗室中處理，濃縮活動力強的精子並去除不活動細胞與精漿——此過程通常需 30–60 分鐘。' : 'A sperm sample is processed in the laboratory to concentrate motile sperm and remove non-motile cells and seminal fluid — a process that typically takes 30–60 minutes.' },
+  { n: '05', title: ZH ? '授精' : 'Insemination', desc: ZH ? '處理後的精子裝入細軟導管，輕柔地直接置入子宮腔。程序簡短（5–10 分鐘），頂多略有不適，且不需麻醉。' : 'The prepared sperm is loaded into a small catheter and gently placed directly into the uterine cavity. The procedure is brief (5–10 minutes), mildly uncomfortable at most, and requires no anesthesia.' },
+  { n: '06', title: ZH ? '兩週等待與驗孕' : 'Two-Week Wait & Testing', desc: ZH ? '授精後約 14 天進行抽血驗孕。你的照護團隊在這段期間隨時可回答問題並提供支援。' : 'A blood pregnancy test is performed approximately 14 days after insemination. Your care team is available throughout this period to answer questions and provide support.' },
+];
+
+const faqs = [
+  { q: ZH ? '在考慮 IVF 前，應嘗試幾次 IUI？' : 'How many IUI cycles should I try before moving to IVF?', a: ZH ? '對合適的病患，多數醫師會建議先嘗試 3–6 次 IUI 再考慮 IVF——但這會因年齡、診斷與反應而異。林醫師與劉醫師會針對你的狀況給出合適的時程建議。' : 'Most physicians recommend 3–6 IUI cycles for appropriate candidates before considering IVF — though this varies based on age, diagnosis, and response. Dr. Lin and Dr. Liu will advise the right timeline for your situation.' },
+  { q: ZH ? 'IUI 可以使用捐精嗎？' : 'Can I use donor sperm for IUI?', a: ZH ? '可以。使用捐精的 IUI 是單身者、女同志伴侶，或有重度男性因素不孕伴侶的常見選擇。我們的協調師會協助透過合法冷凍精子銀行挑選捐精者。' : 'Yes. IUI with donor sperm is a common option for single individuals, same-sex female couples, or couples with severe male factor infertility. Our coordinators assist with donor selection through licensed cryobanks.' },
+  { q: ZH ? 'IUI 的成功率如何？' : 'What are the success rates for IUI?', a: ZH ? '單次療程成功率通常介於 10–20%，會因年齡、診斷與是否使用藥物而異。多次療程的累積成功率更高。醫師會提供個別化評估。' : 'Per-cycle success rates typically range from 10–20%, varying by age, diagnosis, and whether medication is used. Cumulative success across multiple cycles is higher. Your physician will provide individualized estimates.' },
+  { q: ZH ? 'IUI 是否在保險給付範圍內？' : 'Is IUI covered by insurance?', a: ZH ? '給付依保單而異。當含有不孕療程福利時，IUI 通常是較早納入給付的治療之一。我們的團隊能在你首次療程前協助確認你的具體福利。' : 'Coverage varies by plan. IUI is often one of the first fertility treatments covered when infertility benefits exist. Our team can help verify your specific benefits before your first cycle.' },
+];
+
+const indications = [
+  ZH ? '輕度至中度男性因素不孕' : 'Mild to moderate male factor infertility',
+  ZH ? '子宮頸因素（黏液排斥或不足）' : 'Cervical factor (hostile or insufficient mucus)',
+  ZH ? '排卵功能障礙（配合藥物監測週期）' : 'Ovulation dysfunction (with medication-monitored cycles)',
+  ZH ? '不明原因不孕' : 'Unexplained infertility',
+  ZH ? '使用捐精的單身者或女同志伴侶' : 'Single individuals or same-sex female couples using donor sperm',
+  ZH ? '偏好較低侵入性第一步的伴侶' : 'Couples preferring a lower-intervention first step',
+];
+---
+
+<Layout
+  title={ZH ? '宮腔內人工授精 (IUI)' : 'Intrauterine Insemination (IUI)'}
+  description={ZH ? 'IRFC 的 IUI 療程——一項微創的第一線生育治療。了解宮腔內人工授精如何運作、適用對象，以及過程中會發生什麼。' : 'IUI at IRFC — a minimally invasive first-line fertility treatment. Learn how intrauterine insemination works, who it helps, and what to expect.'}
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href={localeHref('/services', locale)} class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '全部療程' : 'All Services'}</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">IUI</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          {ZH ? '宮腔內' : 'Intrauterine'}<br/>{ZH ? '人工授精' : 'Insemination'}
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '輔助生殖技術' : 'Assisted Reproductive Technology'}</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? 'IUI 是一項簡單且微創的程序，在排卵的最佳時機將濃縮後的精子直接置入子宮——免於 IVF 的複雜流程，同時為受孕帶來實質助益。' : 'IUI is a simple, minimally invasive procedure that places concentrated sperm directly into the uterus at the optimal moment of ovulation — giving conception a meaningful boost without the complexity of IVF.'}
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility physician consulting with a patient" width="1800" height="1200" class="w-full h-auto object-cover" />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '每一步，都是同一個團隊' : 'One team, every step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '從初次諮詢、每次回診監測，到胚胎植入，都由同一批醫師、護理師與胚胎師陪伴你。緊密銜接的照護，讓你的治療過程不會有一絲落差。' : 'From your first consultation through every monitoring visit and embryo transfer, the same physicians, nurses, and embryologists stay with you. Connected care means nothing about your treatment gets lost in translation.'}</p>
+          <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">{ZH ? '認識我們的團隊' : 'Meet our team'} <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '什麼是宮腔內人工授精（IUI）？' : 'What Is IUI?'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '宮腔內人工授精（IUI）是一項生育程序，將洗滌、濃縮後的精子直接置入子宮內，縮短精子抵達卵子所需的距離。時機會與排卵精密配合——無論是自然排卵或藥物誘發。' : 'Intrauterine insemination (IUI) is a fertility procedure in which washed, concentrated sperm is placed directly inside the uterus to reduce the distance sperm must travel to reach the egg. Timing is carefully coordinated with ovulation — either natural or triggered with medication.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH ? 'IUI 通常是在診斷檢查後優先建議的治療，特別適用於輕度男性因素、子宮頸黏液問題、排卵功能障礙或不明原因不孕的伴侶。' : 'IUI is typically the first treatment recommended after a diagnostic workup, particularly for couples with mild male factor, cervical mucus issues, ovulation dysfunction, or unexplained infertility.'}
+          </p>
+        </div>
+        <div class="space-y-3">
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? 'IUI 通常適用於：' : 'IUI is often recommended for:'}</p>
+          {indications.map(item => (
+            <div class="flex items-start gap-3 p-4 bg-white border border-stone-200">
+              <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+              </svg>
+              <span class="text-sm text-stone-600">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? 'IUI 療程流程' : 'The IUI Process'}</h2>
+      <div class="space-y-3">
+        {steps.map(step => (
+          <div class="grid lg:grid-cols-12 gap-6 p-8 border border-stone-200 bg-stone-50">
+            <div class="lg:col-span-1">
+              <span class="text-xs font-medium tracking-widest" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</span>
+            </div>
+            <div class="lg:col-span-11">
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{step.title}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden" style="height: 380px;">
+    <img src="/images/consultation.webp" srcset="/images/consultation-800.webp 800w, /images/consultation-1280.webp 1280w, /images/consultation.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC patient consultation" class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '簡單、溫和，且時機精準。' : 'Simple, gentle, and precisely timed.'}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? 'IUI 常見問題' : 'Common IUI Questions'}</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '從一場對話開始' : 'Start with a Conversation'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '我們的醫師會評估 IUI 是否適合做為你的第一步——或引導你走向最可能成功的選項。' : 'Our physicians will evaluate whether IUI is the right first step for you — or guide you toward the option most likely to succeed.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/services', locale)} class="btn-outline">{ZH ? '全部療程' : 'All Services'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

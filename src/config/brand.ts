@@ -32,24 +32,24 @@ export const SITE_PHONE_DISPLAY = '(424) 432-4732';
 export const BRAND_LANGUAGE = {
   belief: {
     en: 'Life Is the Ultimate Art.',
-    zh: '生命，是最珍贵的艺术。',
+    zhHant: '生命，是最珍貴的藝術。',
   },
   core: {
     en: 'Science · Art · Life',
-    zh: '科学 · 艺术 · 生命',
+    zhHant: '科学 · 艺术 · 生命',
   },
   promise: {
     en: 'Every Extraordinary Life Deserves an Extraordinary Beginning.',
-    zh: '生而不凡，始于不凡。',
+    zhHant: '生而不凡，始於不凡。',
   },
   expression: {
     en: 'Where Art Nurtures Possibility, and Science Listens for a Heartbeat.',
-    zh: '以艺术孕育美好，让科技听见心跳。',
+    zhHant: '以藝術孕育美好，讓科技聽見心跳。',
   },
   /** 莲花意象（辅助艺术元素，非 Logo） */
   lotus: {
     en: 'Where a thought blooms, the future is already within.',
-    zh: '一念花开，未来已在其中。',
+    zhHant: '一念花開，未來已在其中。',
   },
 } as const;
 

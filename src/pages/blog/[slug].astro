@@ -30,6 +30,7 @@ const articleSchema = {
     name: `${BRAND_ABBREV} — ${LEGAL_ENTITY}`,
     logo: { '@type': 'ImageObject', url: `${SITE_URL}/favicon.svg` },
   },
+  image: `${SITE_URL}${post.cover}`,
   mainEntityOfPage: { '@type': 'WebPage', '@id': url },
 };
 
@@ -44,6 +45,10 @@ const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
         <h1 class="article-title">{post.title}</h1>
         <p class="article-meta">{fmtDate(post.date)} · {post.readingTime}</p>
       </header>
+
+      <figure class="article-cover">
+        <img src={post.cover} alt={post.coverAlt} width="1200" height="675" decoding="async" />
+      </figure>
 
       <div class="blog-prose" set:html={post.body}></div>
 
@@ -68,9 +73,14 @@ const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
         <div class="article-related-grid">
           {related.map((r) => (
             <a class="article-related-card" href={`/blog/${r.slug}`}>
-              <span class="article-related-cat">{r.category}</span>
-              <h3 class="article-related-cardtitle">{r.title}</h3>
-              <p class="article-related-meta">{fmtDate(r.date)} · {r.readingTime}</p>
+              <div class="article-related-media">
+                <img src={r.cover} alt={r.coverAlt} loading="lazy" decoding="async" width="600" height="400" />
+              </div>
+              <div class="article-related-body">
+                <span class="article-related-cat">{r.category}</span>
+                <h3 class="article-related-cardtitle">{r.title}</h3>
+                <p class="article-related-meta">{fmtDate(r.date)} · {r.readingTime}</p>
+              </div>
             </a>
           ))}
         </div>
@@ -97,6 +107,19 @@ const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
     line-height: 1.18;
     color: var(--color-stone-800);
     margin: 0 0 1rem;
+  }
+  .article-cover {
+    margin: 0 0 2.75rem;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--color-stone-100);
+  }
+  .article-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .article-meta {
     font-family: var(--font-sans);
@@ -211,7 +234,8 @@ const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
     background: #fff;
     border: 1px solid var(--color-stone-200);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 0;
+    overflow: hidden;
     text-decoration: none;
     transition: border-color 0.25s, transform 0.25s;
   }
@@ -219,6 +243,19 @@ const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
     border-color: var(--color-gold-400);
     transform: translateY(-2px);
   }
+  .article-related-media {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: var(--color-stone-100);
+  }
+  .article-related-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+  .article-related-card:hover .article-related-media img { transform: scale(1.05); }
   .article-related-cat {
     font-family: var(--font-sans);
     font-size: 0.62rem;
@@ -227,6 +264,7 @@ const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
     color: var(--color-gold-600);
     margin-bottom: 0.7rem;
   }
+  .article-related-body { padding: 1.5rem; }
   .article-related-cardtitle {
     font-family: var(--font-serif);
     font-weight: 400;

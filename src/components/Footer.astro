@@ -1,6 +1,11 @@
 ---
 import { BRAND_ABBREV, LEGAL_ENTITY, BRAND_LANGUAGE } from '../config/brand';
 import { standards } from '../data/standards';
+import { getLocaleFromPath, t, linkLabel, type Locale } from '../i18n/index';
+import { localeHref } from '../i18n/routes';
+import LocaleSwitch from './LocaleSwitch.astro';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
 
 const locations = [
   { city: 'Torrance', address: '21545 Hawthorne Blvd, Pavilion B', state: 'CA 90503', phone: '(424) 432-4732' },
@@ -47,7 +52,9 @@ const company = [
           <img src="/images/incinta-logo.png" alt="INCINTA" class="h-10 w-auto max-w-[200px] object-contain" />
         </a>
         <p class="text-sm text-stone-600 leading-relaxed mb-6">
-          {BRAND_LANGUAGE.belief.en} Helping families grow across Southern California.
+          {locale === 'zh-hant'
+            ? `${BRAND_LANGUAGE.belief.zhHant} ${t(locale, 'footer.tagline')}`
+            : `${BRAND_LANGUAGE.belief.en} Helping families grow across Southern California.`}
         </p>
         <div class="flex items-center gap-1 text-xs text-stone-500 mb-1">
           <svg class="w-3.5 h-3.5 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
@@ -65,11 +72,11 @@ const company = [
 
       <!-- Services -->
       <div>
-        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">Services</h4>
+        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">{t(locale, 'footer.services')}</h4>
         <ul class="space-y-3">
           {services.map(s => (
             <li>
-              <a href={s.href} class="text-sm text-stone-600 hover:text-stone-900 transition-colors">{s.label}</a>
+              <a href={localeHref(s.href, locale)} class="text-sm text-stone-600 hover:text-stone-900 transition-colors">{linkLabel(locale, s.href)}</a>
             </li>
           ))}
         </ul>
@@ -77,11 +84,11 @@ const company = [
 
       <!-- Company -->
       <div>
-        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">Company</h4>
+        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">{t(locale, 'footer.company')}</h4>
         <ul class="space-y-3">
           {company.map(link => (
             <li>
-              <a href={link.href} class="text-sm text-stone-600 hover:text-stone-900 transition-colors">{link.label}</a>
+              <a href={localeHref(link.href, locale)} class="text-sm text-stone-600 hover:text-stone-900 transition-colors">{linkLabel(locale, link.href)}</a>
             </li>
           ))}
         </ul>
@@ -89,11 +96,11 @@ const company = [
 
       <!-- Our Standards -->
       <div>
-        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">Our Standards</h4>
+        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">{t(locale, 'footer.standards')}</h4>
         <ul class="space-y-3">
           {standards.map(s => (
             <li>
-              <a href={`/standards/${s.slug}`} class="text-sm text-stone-600 hover:text-stone-900 transition-colors">{s.title}</a>
+              <a href={localeHref(`/standards/${s.slug}`, locale)} class="text-sm text-stone-600 hover:text-stone-900 transition-colors">{locale === 'zh-hant' ? (s.titleZh ?? s.title) : s.title}</a>
             </li>
           ))}
         </ul>
@@ -101,7 +108,7 @@ const company = [
 
       <!-- Locations -->
       <div>
-        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">Locations</h4>
+        <h4 class="text-xs tracking-widest uppercase text-stone-600 mb-5" style="font-family: var(--font-sans);">{t(locale, 'footer.locations')}</h4>
         <ul class="space-y-4">
           {locations.map(loc => (
             <li>
@@ -118,18 +125,19 @@ const company = [
     <!-- Bottom -->
     <div class="border-t border-stone-200 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
       <p class="text-xs text-stone-500">
-        © {new Date().getFullYear()} {BRAND_ABBREV} — {LEGAL_ENTITY}. All rights reserved.
+        © {new Date().getFullYear()} {BRAND_ABBREV} — {LEGAL_ENTITY}. {t(locale, 'footer.rights')}
       </p>
       <div class="flex items-center gap-6">
-        <a href="/privacy" class="text-xs text-stone-500 hover:text-stone-700 transition-colors">Privacy Policy</a>
-        <a href="/terms" class="text-xs text-stone-500 hover:text-stone-700 transition-colors">Terms of Use</a>
-        <a href="/accessibility" class="text-xs text-stone-500 hover:text-stone-700 transition-colors">Accessibility</a>
+        <a href={localeHref('/privacy', locale)} class="text-xs text-stone-500 hover:text-stone-700 transition-colors">{linkLabel(locale, '/privacy')}</a>
+        <a href={localeHref('/terms', locale)} class="text-xs text-stone-500 hover:text-stone-700 transition-colors">{linkLabel(locale, '/terms')}</a>
+        <a href={localeHref('/accessibility', locale)} class="text-xs text-stone-500 hover:text-stone-700 transition-colors">{linkLabel(locale, '/accessibility')}</a>
+        <LocaleSwitch pathname={Astro.url.pathname} current={locale} variant="footer" />
       </div>
     </div>
 
     <!-- Medical Disclaimer -->
     <p class="mt-6 text-xs text-stone-500 leading-relaxed max-w-3xl">
-      The information on this website is for general informational purposes only and does not constitute medical advice. Please consult with a qualified healthcare provider regarding your individual circumstances.
+      {t(locale, 'footer.disclaimer')}
     </p>
   </div>
 </footer>

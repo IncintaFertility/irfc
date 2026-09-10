@@ -1,5 +1,6 @@
 ---
-// Floating WhatsApp + phone contact buttons — fixed bottom-right
+import { getLocaleFromPath, t } from '../i18n/index';
+const locale = getLocaleFromPath(Astro.url.pathname);
 ---
 
 <div id="floating-contact" class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 hidden md:flex">
@@ -9,11 +10,11 @@
     href="https://wa.me/14244324732"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat on WhatsApp"
+    aria-label={t(locale, 'floating.whatsapp')}
     class="floating-btn group flex items-center gap-3"
   >
     <span class="floating-label hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs tracking-wide bg-white text-stone-700 px-3 py-1.5 shadow border border-stone-100 whitespace-nowrap">
-      WhatsApp Us
+      {t(locale, 'floating.whatsapp')}
     </span>
     <div class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:-translate-y-0.5" style="background: #25D366;">
       <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -25,7 +26,7 @@
   <!-- Phone -->
   <a
     href="tel:+14244324732"
-    aria-label="Call IRFC"
+    aria-label={t(locale, 'floating.call') + ' IRFC'}
     class="floating-btn group flex items-center gap-3"
   >
     <span class="floating-label hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs tracking-wide bg-white text-stone-700 px-3 py-1.5 shadow border border-stone-100 whitespace-nowrap">

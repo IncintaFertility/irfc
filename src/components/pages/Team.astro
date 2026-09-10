@@ -1,0 +1,328 @@
+---
+// 醫療團隊（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL } from '../../config/brand';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const physicians = [
+  {
+    name: 'James P. Lin, MD',
+    role: 'Founder & Medical Director',
+    roleZh: '創辦人暨醫療總監',
+    credentials: 'MD, Reproductive Endocrinology & Infertility',
+    bio: [
+      'Dr. James P. Lin is the founder of Reproductive Fertility Center and Medical Director of IRFC. With over 20 years of experience in reproductive endocrinology and infertility, he is widely recognized as one of Southern California\'s most distinguished fertility specialists.',
+      'An award-winning physician, Dr. Lin built RFC on the belief that every patient deserves a clinic that feels like "both a family and a home." His leadership transformed RFC into a Kaiser Permanente Center of Excellence and one of the largest Fairfax EggBank production facilities in the United States.',
+      'Dr. Lin is internationally renowned for his expertise and continues to shape the future of fertility medicine through clinical innovation and his commitment to patient-centered care.',
+    ],
+    bioZh: [
+      'James P. Lin 醫師是 Reproductive Fertility Center 的創辦人，也是 IRFC 的醫療總監。擁有超過 20 年生殖內分泌與不孕症的臨床經驗，他被廣泛譽為南加州最傑出的生育專家之一。',
+      '身為獲獎無數的醫師，Dr. Lin 以「每位病人都值得一間如同家人、也如同歸處的診所」為信念創立 RFC。他的領導將 RFC 打造成凱薩醫療（Kaiser Permanente）卓越中心，以及美國最大卵子銀行 Fairfax EggBank 規模最大的生產機構之一。',
+      'Dr. Lin 以其專業享譽國際，並持續透過臨床創新與對以病人為中心照護的承諾，形塑生育醫學的未來。',
+    ],
+    color: 'gold',
+    initial: 'J',
+    photo: '/images/team/dr-james-lin-circle.png',
+    href: '/team/dr-james-lin',
+  },
+  {
+    name: 'Tiffanny LaTrice Jones, MD, FACOG',
+    role: 'Reproductive Endocrinology Specialist',
+    roleZh: '生殖內分泌專科醫師',
+    credentials: 'MD, FACOG, Reproductive Endocrinology & Infertility',
+    bio: [
+      'Dr. Tiffanny LaTrice Jones is a reproductive endocrinology specialist at IRFC. She supports patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.',
+      'Known for her patient-centered approach, Dr. Jones takes time to explain each step clearly and to tailor treatment to every patient\'s unique goals and circumstances.',
+    ],
+    bioZh: [
+      'Tiffanny LaTrice Jones 醫師是 IRFC 的生殖內分泌專科醫師，協助病人進行生育評估、IVF、基因檢測諮詢與生育保存規劃。',
+      '以病人為中心的態度聞名，Dr. Jones 會花時間清楚說明每個步驟，並根據每位病人的獨特目標與狀況量身調整治療。',
+    ],
+    color: 'purple',
+    initial: 'T',
+    photo: '/images/doctor-tiffanny-jones.webp',
+    href: '/team/dr-tiffanny-jones',
+  },
+  {
+    name: 'Zitao Liu, MD',
+    role: 'Associate Chief Medical Officer',
+    roleZh: '醫療副總監',
+    credentials: 'MD, Reproductive Endocrinology & Infertility',
+    bio: [
+      'Dr. Zitao Liu serves as Associate Chief Medical Officer at IRFC and is now accepting new patients. A rising leader in the field, Dr. Liu has become a pioneer in the development of mild stimulation protocols that reduce patient burden while maintaining excellent outcomes.',
+      'He brings a forward-thinking approach to fertility care, integrating artificial intelligence and data-driven tools to enhance diagnostic precision and treatment planning. His work represents the next generation of reproductive medicine — thoughtful, innovative, and deeply personalized.',
+    ],
+    bioZh: [
+      'Zitao Liu 醫師現任 IRFC 醫療副總監，現正收治新病人。作為領域中新崛起的領袖，Dr. Liu 已成為輕刺激療程的先驅，在減輕病人負擔的同時維持優異的成果。',
+      '他以前瞻的思維投入生育照護，結合人工智慧與數據驅動工具來提升診斷精準度與治療規劃。他的工作代表下一代的生殖醫學——深思、創新且深切個人化。',
+    ],
+    color: 'gold',
+    initial: 'Z',
+    badge: 'Now Accepting New Patients',
+    badgeZh: '現正收治新病人',
+    photo: '/images/team/dr-zitao-liu-circle.png',
+    href: '/team/dr-zitao-liu',
+  },
+];
+
+const labTeam = [
+  {
+    name: 'Yufen Xie, PhD',
+    role: 'IVF Laboratory Director',
+    roleZh: 'IVF 實驗室主任',
+    bio: 'Dr. Yufen Xie leads IRFC\'s embryology laboratory with extraordinary distinction. She directed the team that achieved the remarkable milestone of being ranked #1 in US IVF success rates in 2016. Her dedication to world-class embryology technique and continuous improvement defines the standard of care in our lab.',
+    bioZh: 'Yufen Xie 博士以非凡的成就領導 IRFC 的胚胎學實驗室。她帶領團隊締造 2016 年全美 IVF 成功率排名第一的重要里程碑。她對世界級胚胎學技術與持續精進的投入，奠定了實驗室的照護標準。',
+    initial: 'Y',
+    color: 'gold',
+    photo: '/images/team/dr-yufen-xie.png',
+  },
+  {
+    name: 'Hyang Park, M.S.',
+    role: 'IVF Laboratory Supervisor',
+    roleZh: 'IVF 實驗室督導',
+    bio: 'Hyang Park ensures the day-to-day excellence of IRFC\'s embryology laboratory. With meticulous attention to protocol, quality control, and team coordination, she maintains the rigorous standards that have defined the lab\'s outstanding reputation.',
+    bioZh: 'Hyang Park 確保 IRFC 胚胎學實驗室的日常卓越。憑藉對流程、品質管控與團隊協調的細心把關，她維持了實驗室卓越聲譽所需的嚴謹標準。',
+    initial: 'H',
+    color: 'gold',
+    photo: '/images/team/hyang-park.png',
+    href: '/team/hyang-park',
+  },
+];
+
+const clinicalTeam = [
+  {
+    name: 'Lily Hao, MSN, WHNP',
+    role: 'Nurse Manager',
+    roleZh: '護理長',
+    bio: 'Lily Hao brings her expertise as a Women\'s Health Nurse Practitioner to her role as IRFC\'s Nurse Manager. A passionate advocate for the patient-first philosophy, she ensures that every patient experiences exceptional, compassionate nursing care throughout their fertility journey.',
+    bioZh: 'Lily Hao 以女性健康護理師（WHNP）的專業擔任 IRFC 護理長。作為病人優先理念的熱情倡議者，她確保每位病人在生育旅程中都能體驗卓越、充滿同理的護理照護。',
+    initial: 'L',
+    color: 'gold',
+    photo: '/images/team/lily-hao.png',
+    href: '/team/lily-hao',
+  },
+  {
+    name: 'Kelly Zhao',
+    role: 'Third Party Coordinator',
+    roleZh: '第三方協調員',
+    bio: 'Kelly Zhao is IRFC\'s bilingual Third Party Coordinator, specializing in egg donation and surrogacy programs. She supports patients navigating the complex world of donor and gestational carrier arrangements with warmth, expertise, and culturally competent care.',
+    bioZh: 'Kelly Zhao 是 IRFC 雙語的第三方協調員，專精卵子捐贈與代理孕母方案。她以溫暖、專業與具文化敏感度的方式，協助走過捐贈者與代理孕母複雜世界的病人。',
+    initial: 'K',
+    color: 'gold',
+    photo: '/images/team/kelly-zhao.png',
+    href: '/team/kelly-zhao',
+  },
+];
+
+const physicianSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Physician',
+    name: 'James P. Lin, MD',
+    honorificPrefix: 'Dr.',
+    jobTitle: 'Founder & Medical Director',
+    description: 'Board-certified reproductive endocrinologist and infertility specialist with over 20 years of experience. Founder of Reproductive Fertility Center, Medical Director of IRFC, Kaiser Permanente Center of Excellence physician.',
+    medicalSpecialty: 'Reproductive Medicine',
+    worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+    image: SITE_URL + '/images/team/dr-james-lin-circle.png',
+    url: SITE_URL + '/team',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Physician',
+    name: 'Tiffanny LaTrice Jones, MD, FACOG',
+    honorificPrefix: 'Dr.',
+    jobTitle: 'Reproductive Endocrinology Specialist',
+    description: 'Reproductive endocrinologist at IRFC specializing in fertility evaluation, IVF, preimplantation genetic testing, and fertility-preservation planning.',
+    medicalSpecialty: 'Reproductive Medicine',
+    worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+    image: SITE_URL + '/images/doctor-tiffanny-jones.webp',
+    url: SITE_URL + '/team',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Physician',
+    name: 'Zitao Liu, MD',
+    honorificPrefix: 'Dr.',
+    jobTitle: 'Associate Chief Medical Officer',
+    description: 'Reproductive endocrinologist specializing in mild stimulation IVF protocols and AI-assisted fertility diagnostics. Associate Chief Medical Officer at IRFC, now accepting new patients.',
+    medicalSpecialty: 'Reproductive Medicine',
+    worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+    image: SITE_URL + '/images/team/dr-zitao-liu-circle.png',
+    url: SITE_URL + '/team',
+  },
+];
+
+const title = ZH ? '醫療團隊' : 'Our Team';
+const description = ZH
+  ? '認識 IRFC 團隊——獲獎無數的醫師、世界級的胚胎學家，以及充滿同理的臨床人員，全心投入您的生育旅程。'
+  : 'Meet the IRFC team — award-winning physicians, world-class embryologists, and compassionate clinical staff dedicated to your fertility journey.';
+---
+
+<Layout title={title} description={description} schema={physicianSchema}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{title}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>專業照護，<br/><em class="not-italic" style="color: var(--color-gold-500);">個人化關懷。</em></> : <>Expert Care,<br/><em class="not-italic" style="color: var(--color-gold-500);">Personal Attention.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          {ZH ? 'IRFC 團隊的每位成員，都帶來專業的技術與真誠的投入。我們齊心協力，組成一個以同一目標為核心的協作團隊：您的成功。' : 'Every member of the IRFC team brings specialized expertise and genuine dedication. Together, we form a collaborative practice built around one goal: your success.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Physicians -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '醫療領導' : 'Medical Leadership'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '醫師' : 'Physicians'}</h2>
+      </div>
+
+      <div class="space-y-10">
+        {physicians.map(doc => (
+          <div class="bg-white border border-stone-200 p-10 lg:p-14">
+            <div class="grid lg:grid-cols-4 gap-8 items-start">
+              <div class="flex flex-col items-start">
+                {doc.photo ? (
+                  <img src={doc.photo} alt={doc.name} class="w-36 h-36 object-cover mb-4" style="border-radius: 50%;" />
+                ) : (
+                  <div class="w-20 h-20 flex items-center justify-center text-3xl font-light text-white mb-4" style={`background: linear-gradient(135deg, var(--color-${doc.color}-400), var(--color-${doc.color}-700));`}>{doc.initial}</div>
+                )}
+                {doc.badge && (
+                  <span class="text-xs tracking-wider px-3 py-1.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? doc.badgeZh : doc.badge}</span>
+                )}
+              </div>
+
+              <div class="lg:col-span-3">
+                <h3 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-1">{doc.name}</h3>
+                <p class="text-xs tracking-widest uppercase mb-1" style={`color: var(--color-${doc.color}-600); font-family: var(--font-sans);`}>{ZH ? doc.roleZh : doc.role}</p>
+                <p class="text-xs mb-6" style="color: var(--color-stone-400);">{doc.credentials}</p>
+                {(ZH ? doc.bioZh : doc.bio).map(para => (
+                  <p class="text-sm text-stone-600 leading-relaxed mb-4">{para}</p>
+                ))}
+                {doc.href && (
+                  <a href={doc.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-2" style="color: var(--color-gold-600);">
+                    {ZH ? '完整簡介' : 'Full Profile'}
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab Team -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '卓越實驗室' : 'Laboratory Excellence'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '胚胎學團隊' : 'Embryology Team'}</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          {ZH ? '我們的實驗室於 2016 年全美 IVF 成功率排名第一。締造該里程碑的科學家們，持續在 IRFC 推動胚胎科學的邊界。' : 'Our lab ranked #1 in US IVF success rates in 2016. The scientists who achieved that milestone continue to push the boundaries of embryological science at IRFC.'}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {labTeam.map(member => (
+          <div class="p-8 border border-stone-200 card-hover">
+            <div class="flex items-start gap-6">
+              {member.photo ? (
+                <img src={member.photo} alt={member.name} class="flex-shrink-0 w-20 h-20 object-cover" style="border-radius: 50%;" />
+              ) : (
+                <div class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white" style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}>{member.initial}</div>
+              )}
+              <div>
+                <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
+                <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{ZH ? member.roleZh : member.role}</p>
+                <p class="text-sm text-stone-500 leading-relaxed">{ZH ? member.bioZh : member.bio}</p>
+                {member.href && (
+                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-600);">
+                    {ZH ? '完整簡介' : 'Full Profile'}
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinical Team -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '病人照護' : 'Patient Care'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '臨床人員' : 'Clinical Staff'}</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {clinicalTeam.map(member => (
+          <div class="p-8 border border-stone-200 bg-white card-hover">
+            <div class="flex items-start gap-6">
+              {member.photo ? (
+                <img src={member.photo} alt={member.name} class="flex-shrink-0 w-20 h-20 object-cover" style="border-radius: 50%;" />
+              ) : (
+                <div class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-xl font-light text-white" style={`background: linear-gradient(135deg, var(--color-${member.color}-400), var(--color-${member.color}-700));`}>{member.initial}</div>
+              )}
+              <div>
+                <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-1">{member.name}</h3>
+                <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{ZH ? member.roleZh : member.role}</p>
+                <p class="text-sm text-stone-500 leading-relaxed">{ZH ? member.bioZh : member.bio}</p>
+                {member.href && (
+                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-600);">
+                    {ZH ? '完整簡介' : 'Full Profile'}
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Photo -->
+  <section class="overflow-hidden">
+    <img
+      src="/images/team-rfc-wide.webp" srcset="/images/team-rfc-wide-800.webp 800w, /images/team-rfc-wide-1280.webp 1280w, /images/team-rfc-wide.webp 2400w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+      alt={ZH ? 'IRFC 照護團隊' : 'The IRFC care team'}
+      class="w-full h-auto block"
+    />
+  </section>
+
+  <!-- Join Us / CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        {ZH ? '從一場對話開始' : 'Begin with a Conversation'}
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '我們的團隊隨時準備回答您的疑問，並引導您了解各種選擇。今天就預約諮詢。' : 'Our team is ready to answer your questions and guide you through your options. Schedule a consultation today.'}
+      </p>
+      <a href="/appointment" class="btn-primary">{t(locale, 'nav.cta')}</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

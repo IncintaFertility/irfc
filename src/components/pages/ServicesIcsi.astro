@@ -1,0 +1,211 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const candidates = [
+  { title: ZH ? '重度男性因素不孕' : 'Severe Male Factor Infertility', desc: ZH ? '極低精子數（寡精症）、活動力差（弱精症）或形態異常（畸形精子症）——即使只有一隻活動精子，也足以進行 ICSI。' : 'Very low sperm count (oligospermia), poor motility (asthenospermia), or abnormal morphology (teratospermia) — even a single motile sperm is sufficient for ICSI.' },
+  { title: ZH ? '手術取出的精子' : 'Surgically Retrieved Sperm', desc: ZH ? '當因無精症（射精中無精子）而經由 TESA、PESA 或 micro-TESE 取得精子時，ICSI 是唯一可行的受精方式。' : 'When sperm are obtained via TESA, PESA, or micro-TESE due to azoospermia (absence of sperm in the ejaculate), ICSI is the only fertilization method available.' },
+  { title: ZH ? '曾有受精失敗' : 'Prior Fertilization Failure', desc: ZH ? '曾以傳統授精完成 IVF 療程但受精率低或失敗的病患，後續療程通常會改採 ICSI。' : 'Patients who have previously completed an IVF cycle with low or failed fertilization using conventional insemination are typically moved to ICSI in subsequent cycles.' },
+  { title: ZH ? '冷凍或解凍後的精子' : 'Frozen or Thawed Sperm', desc: ZH ? '經冷凍保存的精子解凍後活動力可能下降。ICSI 能確保每顆卵子不論解凍後精子活動力如何，都擁有最佳的受精機會。' : 'Sperm that has been cryopreserved (frozen) may have reduced motility after thawing. ICSI ensures each egg has the best chance of fertilization regardless of sperm mobility post-thaw.' },
+  { title: ZH ? '胚胎著床前基因檢測（PGT）' : 'Preimplantation Genetic Testing (PGT)', desc: ZH ? '當胚胎需切片進行基因檢測時，建議採 ICSI，以消除游離精子污染切片檢體、影響結果的風險。' : 'When embryos will be biopsied for genetic testing, ICSI is preferred to eliminate the risk of stray sperm contaminating the biopsy sample and affecting results.' },
+  { title: ZH ? '取卵數少或成熟卵子有限' : 'Low Egg Count or Mature Egg Concerns', desc: ZH ? '當僅取出少量成熟卵子時，ICSI 能最大化受精率，充分善用每一顆可用的卵子。' : 'When only a small number of mature eggs are retrieved, ICSI maximizes the fertilization rate to make the most of every available egg.' },
+];
+
+const faqs = [
+  { q: ZH ? 'ICSI 相較於傳統 IVF 能提升成功率嗎？' : 'Does ICSI improve success rates compared to conventional IVF?', a: ZH ? '與傳統授精相比，ICSI 能持續提升受精率，尤其對男性因素病例。然而，受精率不等於活產率——整體 IVF 成功率取決於胚胎品質、子宮著床環境與其他因素。對精子參數正常的病患，ICSI 與傳統授精的囊胚率與活產率相近。醫師會在證據支持你的特定狀況時，建議採用 ICSI。' : 'ICSI consistently improves fertilization rates compared to conventional insemination, particularly for male factor cases. However, fertilization rate is not the same as live birth rate — overall IVF success depends on embryo quality, uterine receptivity, and other factors. For patients with normal sperm parameters, ICSI and conventional insemination produce similar blastocyst and live birth rates. Your physician will recommend ICSI when the evidence supports it for your specific situation.' },
+  { q: ZH ? 'ICSI 安全嗎？會影響出生的孩子嗎？' : 'Is ICSI safe? Does it affect the resulting child?', a: ZH ? '數十年來針對 ICSI 出生兒童的資料顯示，其健康結果與自然受孕或傳統 IVF 出生的兒童相比，無臨床顯著差異。ICSI 被視為安全，也是全球生殖醫學中最廣泛執行的技術之一。' : 'Decades of data on children born from ICSI show no clinically meaningful difference in health outcomes compared to children conceived naturally or via conventional IVF. ICSI is considered safe and is one of the most widely performed techniques in reproductive medicine worldwide.' },
+  { q: ZH ? 'ICSI 會痛嗎？會對我的療程造成任何影響嗎？' : 'Is ICSI painful or does it affect my cycle in any way?', a: ZH ? 'ICSI 完全在實驗室中對取出的卵子進行——不會對病患施加額外步驟。無論是否規劃 ICSI，取卵過程皆相同。你不會感到或有任何不同體驗。' : 'ICSI is performed entirely in the laboratory on the retrieved eggs — there is nothing additional done to the patient. The egg retrieval process is identical whether or not ICSI is planned. You will not feel or experience anything different.' },
+  { q: ZH ? '如果我的精子分析正常，還需要 ICSI 嗎？' : 'Do I need ICSI if my sperm analysis is normal?', a: ZH ? '未必。對精子參數正常、且無先前受精問題的病患，傳統授精（將濃縮精子檢體置於培養中的卵子附近）即有效，且可免去額外的實驗室步驟。ICSI 並非一致建議——僅在證據支持時使用。' : 'Not necessarily. For patients with normal semen parameters and no prior fertilization issues, conventional insemination (placing a concentrated sperm sample near the eggs in culture) is effective and avoids the additional laboratory step. ICSI is not universally recommended — it is used when evidence supports it.' },
+  { q: ZH ? 'ICSI 可以與 PGT-A 合併進行嗎？' : 'Can ICSI be combined with PGT-A?', a: ZH ? '可以——事實上，IRFC 的 PGT-A 週期例行使用 ICSI，以防止胚胎切片時精子 DNA 污染。兩項技術相輔相成，常合併執行。' : 'Yes — in fact, PGT-A cycles at IRFC routinely use ICSI to prevent sperm DNA contamination during the embryo biopsy. The two techniques complement each other and are commonly performed together.' },
+];
+
+const compareRows = [
+  { label: ZH ? '受精方式' : 'Fertilization method', icsi: ZH ? '單一精子注入卵子' : 'Single sperm injected into egg', conv: ZH ? '精子置於培養皿中卵子附近' : 'Sperm placed near eggs in dish' },
+  { label: ZH ? '所需精子' : 'Sperm needed', icsi: ZH ? '少至一隻活動精子' : 'As few as one motile sperm', conv: ZH ? '數千隻活動精子' : 'Thousands of motile sperm' },
+  { label: ZH ? '適用對象' : 'Best for', icsi: ZH ? '男性因素、PGT、冷凍精子' : 'Male factor, PGT, frozen sperm', conv: ZH ? '精子參數正常' : 'Normal sperm parameters' },
+  { label: ZH ? '實驗室步驟' : 'Lab step', icsi: ZH ? '胚胎師執行顯微注射' : 'Embryologist performs microinjection', conv: ZH ? '精子與卵子自然結合' : 'Natural sperm-egg binding' },
+];
+
+const labItems = [
+  { title: ZH ? '經驗豐富的胚胎師' : 'Experienced Embryologists', desc: ZH ? '我們的胚胎學團隊包括實驗室主任謝玉芬博士（Dr. Yufen Xie, PhD），她督導所有 ICSI 與進階受精程序。' : 'Our embryology team includes laboratory director Dr. Yufen Xie, PhD, who oversees all ICSI and advanced fertilization procedures.' },
+  { title: ZH ? 'EmbryoScope+ 監控' : 'EmbryoScope+ Monitoring', desc: ZH ? '所有胚胎——無論 ICSI 或傳統受精——都在我們的 EmbryoScope+ 縮時培養箱中培養，能在不干擾培養的情況下持續記錄發育影像。' : 'All embryos — ICSI or conventionally fertilized — are cultured in our EmbryoScope+ time-lapse incubators, capturing continuous development images without disturbing the culture.' },
+  { title: ZH ? '精準顯微操作' : 'Precision Micromanipulation', desc: ZH ? 'IRFC 採用最新的顯微操作系統與 Piezo-ICSI 技術，為適合的卵子提供更溫和注射方式。' : 'IRFC uses the latest micromanipulation systems and Piezo-ICSI techniques for eggs that benefit from gentler injection methods.' },
+];
+---
+
+<Layout
+  title={ZH ? '卵胞質內單精子注入 (ICSI)' : 'Intracytoplasmic Sperm Injection (ICSI)'}
+  description={ZH ? 'IRFC 的 ICSI——針對男性因素不孕、受精失敗與 PGT 週期的卵胞質內單精子注入。了解其運作方式與最適用對象。' : 'ICSI at IRFC — intracytoplasmic sperm injection for male factor infertility, fertilization failure, and PGT cycles. Learn how it works and who benefits most.'}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href={localeHref('/services', locale)} class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '全部療程' : 'All Services'}</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">ICSI</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          {ZH ? '卵胞質內' : 'Intracytoplasmic'}<br/>{ZH ? '單精子注入' : 'Sperm Injection'}
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? 'ICSI——先進受精技術' : 'ICSI — Advanced Fertilization Technique'}</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? 'ICSI 是一項精準的受精技術，將單一精子直接注入卵子內。它徹底改變了男性因素不孕的治療結果，如今已應用於全球大多數 IVF 療程——包括 IRFC 所有 PGT 週期。' : 'ICSI is a precision fertilization technique in which a single sperm is injected directly into an egg. It has transformed outcomes for male factor infertility and is now used in the majority of IVF cycles worldwide — including all PGT cycles at IRFC.'}
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility physician consulting with a patient" width="1800" height="1200" class="w-full h-auto object-cover" />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '每一步，都是同一個團隊' : 'One team, every step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '從初次諮詢、每次回診監測，到胚胎植入，都由同一批醫師、護理師與胚胎師陪伴你。緊密銜接的照護，讓你的治療過程不會有一絲落差。' : 'From your first consultation through every monitoring visit and embryo transfer, the same physicians, nurses, and embryologists stay with you. Connected care means nothing about your treatment gets lost in translation.'}</p>
+          <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">{ZH ? '認識我們的團隊' : 'Meet our team'} <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is ICSI -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? 'ICSI 如何運作' : 'How ICSI Works'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '在標準 IVF 療程中，卵子與濃縮精子檢體一同放入培養皿，受精自然發生。在 ICSI 中，胚胎師使用專用玻璃針挑選一隻形態正常、具活動力的精子，將其直接注入成熟卵子的細胞質（內部）中。' : 'In a standard IVF cycle, eggs and a concentrated sperm sample are placed together in a culture dish and fertilization occurs naturally. In ICSI, an embryologist uses a specialized glass needle to select a single morphologically normal, motile sperm and inject it directly into the cytoplasm (interior) of a mature egg.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '注入後的卵子以與傳統受精卵子相同的方式培養與監測。到了次日早晨，會由出現兩個原核（一個來自卵子、一個來自精子）來確認受精。' : 'The injected egg is then cultured and monitored in the same way as conventionally fertilized eggs. By the next morning, fertilization is confirmed by the appearance of two pronuclei — one from the egg and one from the sperm.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-6 text-sm">
+            {ZH ? 'ICSI 於 1992 年首次成功施行。如今全球約 65–70% 的 IVF 療程採用此技術，其安全性與有效性已有超過三十年的扎實紀錄。' : 'ICSI was first performed successfully in 1992. Today it is performed in approximately 65–70% of all IVF cycles globally and has a well-established safety and efficacy record spanning over three decades.'}
+          </p>
+          <div class="p-6 border border-stone-200 bg-white">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{ZH ? 'ICSI 與傳統 IVF 授精之比較' : 'ICSI vs. Conventional IVF Insemination'}</h3>
+            <div class="space-y-3 text-sm">
+              {compareRows.map(row => (
+                <div class="grid grid-cols-[130px_1fr_1fr] gap-3 text-xs pb-3 border-b border-stone-100 last:border-b-0 last:pb-0">
+                  <span class="text-stone-400 uppercase tracking-wide">{row.label}</span>
+                  <span class="text-stone-600">{row.icsi}</span>
+                  <span class="text-stone-400">{row.conv}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? 'IRFC 的實驗室' : 'The IRFC Laboratory'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-6 text-sm">
+            {ZH ? 'ICSI 是一項高度依賴技術的程序——其結果很大程度取決於執行注射的胚胎師的技巧與經驗。IRFC 的胚胎學團隊已完成數萬次 ICSI 程序，我們的實驗室更在 2016 年榮登全美 IVF 成功率第一名。' : 'ICSI is a highly technique-dependent procedure — outcomes vary significantly based on the skill and experience of the embryologist performing the injections. IRFC\'s embryology team has performed tens of thousands of ICSI procedures and our laboratory ranked #1 in the United States for IVF success rates in 2016.'}
+          </p>
+          <div class="space-y-4">
+            {labItems.map(item => (
+              <div class="flex gap-4 p-5 bg-white border border-stone-200">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                <div>
+                  <div class="text-xs tracking-widest uppercase font-medium mb-1" style="color: var(--color-stone-700); font-family: var(--font-sans);">{item.title}</div>
+                  <p class="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who benefits -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '誰適合接受 ICSI？' : 'Who Benefits from ICSI?'}</h2>
+      <p class="text-sm text-stone-500 leading-relaxed mb-10 max-w-2xl">{ZH ? 'ICSI 建議用於傳統受精不太可能成功或不適當的特定臨床情況。' : 'ICSI is recommended in specific clinical situations where conventional fertilization is unlikely to succeed or is not appropriate.'}</p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {candidates.map(c => (
+          <div class="p-6 border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{c.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo break -->
+  <section class="relative overflow-hidden" style="height: 340px;">
+    <img src="/images/transfer-room.webp" srcset="/images/transfer-room-800.webp 800w, /images/transfer-room-1280.webp 1280w, /images/transfer-room.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC procedure room" class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(8,5,2,0.55) 0%, rgba(8,5,2,0.2) 50%, transparent 80%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '精準，精細到單一細胞。' : 'Precision, down to a single cell.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- ICSI + IVF process note -->
+  <section class="py-16" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-4xl mx-auto p-10 bg-white border border-stone-200 flex flex-col md:flex-row gap-8 items-start">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{ZH ? 'ICSI 是 IVF 療程的一部分' : 'ICSI Is Part of the IVF Process'}</h3>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            {ZH ? 'ICSI 取代了 IVF 療程中的傳統受精步驟——刺激、監測、取卵、胚胎培養與植入皆相同。若你正考慮 IVF 且有上述任一適應症，醫師會將 ICSI 納入你的療程計畫。完整的 IVF 流程指南詳細說明每個階段。' : 'ICSI replaces the conventional fertilization step within an IVF cycle — the stimulation, monitoring, egg retrieval, embryo culture, and transfer are identical. If you are considering IVF and have any of the indications above, your physician will recommend ICSI as part of your cycle plan. The full IVF process guide explains each phase in detail.'}
+          </p>
+        </div>
+        <a href={localeHref('/services/ivf', locale)} class="btn-outline flex-shrink-0">{ZH ? '完整 IVF 指南 →' : 'Full IVF Guide →'}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '對 ICSI 有疑問？' : 'Questions About ICSI?'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '醫師會依據精液參數、過往治療史與規劃的加值項目，判斷 ICSI 是否適合你的療程。預約諮詢以討論你的完整計畫。' : 'Your physician will determine whether ICSI is appropriate for your cycle based on semen parameters, prior treatment history, and planned add-ons. Schedule a consultation to discuss your full plan.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/services/ivf', locale)} class="btn-outline">{ZH ? '認識 IVF' : 'Learn About IVF'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

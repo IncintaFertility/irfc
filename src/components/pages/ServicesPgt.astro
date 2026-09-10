@@ -1,0 +1,191 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const types = [
+  {
+    abbr: 'PGT-A',
+    name: ZH ? '染色體數目篩檢' : 'Aneuploidy Screening',
+    desc: ZH ? '檢測胚胎染色體數目是否正確（共 46 條）。染色體錯誤（非整倍體）是 IVF 失敗與流產的主因——尤其見於 35 歲以上女性。PGT-A 可辨識出整倍體（染色體正常）的胚胎供植入。' : 'Tests embryos for the correct number of chromosomes (46 total). Chromosomal errors (aneuploidy) are the leading cause of IVF failure and miscarriage — especially in women over 35. PGT-A identifies euploid (chromosomally normal) embryos for transfer.',
+    best: ZH ? '高齡、反覆流產、屢次 IVF 失敗' : 'Advanced maternal age, recurrent pregnancy loss, repeated IVF failure',
+  },
+  {
+    abbr: 'PGT-M',
+    name: ZH ? '單基因疾病檢測' : 'Monogenic Disease Testing',
+    desc: ZH ? '當父母一方或雙方為已知帶因者時，篩檢胚胎是否帶有特定單基因疾病——例如囊腫性纖維化、鐮刀型貧血、BRCA 突變、亨丁頓舞蹈症等數百種疾病。' : 'Screens embryos for specific single-gene disorders — such as cystic fibrosis, sickle cell disease, BRCA mutations, Huntington\'s disease, and hundreds of others — when one or both parents are known carriers.',
+    best: ZH ? '已知帶有特定遺傳疾病者' : 'Known carriers of a specific inherited condition',
+  },
+  {
+    abbr: 'PGT-SR',
+    name: ZH ? '結構重排檢測' : 'Structural Rearrangement',
+    desc: ZH ? '辨識可能造成 IVF 失敗或反覆流產的染色體結構變化（轉位、倒位）——即使父母一方為無明顯健康影響的平衡型帶因者亦然。' : 'Identifies chromosomal structural changes (translocations, inversions) that can cause IVF failure or recurrent miscarriage, even when one parent is a balanced carrier with no apparent health impact.',
+    best: ZH ? '已知有染色體結構重排的伴侶' : 'Couples with a known chromosomal structural rearrangement',
+  },
+];
+
+const faqs = [
+  { q: ZH ? 'PGT 能保證生下健康寶寶嗎？' : 'Does PGT guarantee a healthy baby?', a: ZH ? 'PGT 能顯著降低特定染色體或基因疾病的風險——但無法篩檢所有可能異常。它是一項重要的風險降低工具，而非絕對保證。醫師會與你討論務實的期待。' : 'PGT significantly reduces the risk of specific chromosomal or genetic conditions — but it cannot screen for all possible abnormalities. It is an important risk-reduction tool, not an absolute guarantee. Your physician will discuss realistic expectations.' },
+  { q: ZH ? '胚胎切片是如何進行的？' : 'How is the embryo biopsy performed?', a: ZH ? '在囊胚階段（第 5–6 天），胚胎師以雷射取出少量滋養外胚層細胞（日後形成胎盤，而非胎兒）。胚胎隨後冷凍，等待切片結果。研究證實此過程不會傷害胚胎。' : 'At the blastocyst stage (day 5–6), an embryologist uses a laser to remove a small number of trophectoderm cells (which become the placenta, not the baby). The embryo is then frozen while biopsy results are awaited. Studies confirm this process does not harm the embryo.' },
+  { q: ZH ? 'PGT 需要多久？' : 'How long does PGT take?', a: ZH ? '切片結果通常於 10–14 天內回報。醫師會與你一同檢視結果，並建議最適合植入的胚胎。' : 'Biopsy results typically return within 10–14 days. Your physician will review results with you and recommend which embryos are best suited for transfer.' },
+  { q: ZH ? 'PGT 能提升成功率嗎？' : 'Does PGT improve success rates?', a: ZH ? '對合適的病患，是的——尤其 35 歲以上女性、有反覆流產史，或曾有 IVF 失敗者。透過挑選染色體正常的胚胎，PGT-A 能降低流產風險並提升每次植入的著床率。' : 'For appropriate candidates, yes — particularly women over 35, those with recurrent miscarriage, or those with prior IVF failures. By selecting chromosomally normal embryos, PGT-A reduces miscarriage risk and improves implantation rates per transfer.' },
+  { q: ZH ? '未通過 PGT 的胚胎會如何處理？' : 'What happens to embryos that don\'t pass PGT?', a: ZH ? '檢出異常的胚胎不會被植入。病患可選擇捨棄、捐贈供研究，或在部分情況下與遺傳諮詢師及醫師討論其他選項。' : 'Embryos with detected abnormalities are not transferred. Patients may choose to discard them, donate them to research, or in some cases, discuss options with genetic counselors and their physician.' },
+];
+
+const ageRows = [
+  { age: ZH ? '35 歲以下' : 'Under 35', rate: ZH ? '約 20–25% 胚胎受影響' : '~20–25% of embryos affected' },
+  { age: ZH ? '35–37 歲' : 'Age 35–37', rate: ZH ? '約 40% 胚胎受影響' : '~40% of embryos affected' },
+  { age: ZH ? '38–40 歲' : 'Age 38–40', rate: ZH ? '約 50–60% 胚胎受影響' : '~50–60% of embryos affected' },
+  { age: ZH ? '40 歲以上' : 'Over 40', rate: ZH ? '約 70–80% 胚胎受影響' : '~70–80% of embryos affected' },
+];
+---
+
+<Layout
+  title={ZH ? '胚胎著床前基因檢測 (PGT)' : 'Preimplantation Genetic Testing (PGT)'}
+  description={ZH ? 'IRFC 的 PGT——在植入前篩檢胚胎的染色體異常與遺傳疾病。了解 PGT-A、PGT-M 與 PGT-SR。' : 'PGT at IRFC — screen embryos for chromosomal abnormalities and inherited conditions before transfer. Learn about PGT-A, PGT-M, and PGT-SR.'}
+>
+  <Nav />
+
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href={localeHref('/services', locale)} class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '全部療程' : 'All Services'}</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">PGT</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          {ZH ? '胚胎著床前' : 'Preimplantation'}<br/>{ZH ? '基因檢測' : 'Genetic Testing'}
+        </h1>
+        <p class="text-xs tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '胚胎基因分析' : 'Embryo Genetic Analysis'}</p>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? '在胚胎植入前，基因檢測能辨識最健康的胚胎——降低流產風險、提升著床率，並讓你對遺傳疾病多一份安心。' : 'Before an embryo is transferred, genetic testing can identify the healthiest candidates — reducing miscarriage risk, improving implantation rates, and offering peace of mind about inherited conditions.'}
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility physician consulting with a patient" width="1800" height="1200" class="w-full h-auto object-cover" />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '每一步，都是同一個團隊' : 'One team, every step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '從初次諮詢、每次回診監測，到胚胎植入，都由同一批醫師、護理師與胚胎師陪伴你。緊密銜接的照護，讓你的治療過程不會有一絲落差。' : 'From your first consultation through every monitoring visit and embryo transfer, the same physicians, nurses, and embryologists stay with you. Connected care means nothing about your treatment gets lost in translation.'}</p>
+          <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">{ZH ? '認識我們的團隊' : 'Meet our team'} <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What & Why -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '什麼是 PGT？' : 'What Is PGT?'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '胚胎著床前基因檢測（PGT）是一項在 IVF 形成的胚胎植入子宮前，於實驗室中進行的程序。會從囊胚取出少量細胞，送往基因實驗室分析。' : 'Preimplantation Genetic Testing (PGT) is a laboratory procedure performed on embryos created through IVF before transfer to the uterus. A small number of cells are biopsied from the blastocyst and sent to a genetics laboratory for analysis.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH ? 'PGT 讓 IRFC 的醫師能挑選最有可能發展為健康、持續妊娠的胚胎——並避免植入帶有染色體或基因異常、可能導致著床失敗、流產或受影響胎兒的胚胎。' : 'PGT allows IRFC\'s physicians to select the embryo most likely to result in a healthy, ongoing pregnancy — and to avoid transferring embryos with chromosomal or genetic abnormalities that would lead to failed implantation, miscarriage, or an affected child.'}
+          </p>
+        </div>
+        <div class="p-8 bg-white border border-stone-200">
+          <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '為什麼染色體錯誤如此關鍵' : 'Why chromosomal errors matter'}</p>
+          <p class="text-sm text-stone-600 leading-relaxed mb-4">{ZH ? '染色體異常是 IVF 著床失敗與早期流產最常見的原因。其發生率隨母親年齡顯著上升：' : 'Chromosomal abnormalities are the most common cause of failed IVF implantation and early miscarriage. Their frequency increases significantly with maternal age:'}</p>
+          <div class="space-y-3">
+            {ageRows.map(row => (
+              <div class="flex justify-between items-center py-2 border-b border-stone-100 last:border-b-0">
+                <span class="text-sm text-stone-700">{row.age}</span>
+                <span class="text-sm" style="color: var(--color-gold-600);">{row.rate}</span>
+              </div>
+            ))}
+          </div>
+          <p class="text-xs mt-4" style="color: var(--color-stone-400);">{ZH ? '依據已發表的 ART 文獻推估。個別結果因人而異。' : 'Estimates based on published ART literature. Individual results vary.'}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types -->
+  <section class="py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">{ZH ? 'IRFC 提供的 PGT 類型' : 'Types of PGT at IRFC'}</h2>
+      <div class="space-y-6">
+        {types.map(t => (
+          <div class="border border-stone-200 p-8 lg:p-10">
+            <div class="grid lg:grid-cols-3 gap-8">
+              <div>
+                <span class="inline-block text-xs px-3 py-1 mb-4 border tracking-widest" style="color: var(--color-gold-600); border-color: var(--color-gold-300); font-family: var(--font-sans);">{t.abbr}</span>
+                <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">{t.name}</h3>
+              </div>
+              <div class="lg:col-span-2">
+                <p class="text-sm text-stone-600 leading-relaxed mb-4">{t.desc}</p>
+                <p class="text-xs" style="color: var(--color-stone-400);"><strong class="text-stone-600">{ZH ? '適用對象：' : 'Best for:'}</strong> {t.best}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden" style="height: 380px;">
+    <img src="/images/reception-desk.webp" srcset="/images/reception-desk-800.webp 800w, /images/reception-desk-1280.webp 1280w, /images/reception-desk.webp 2560w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC clinic reception" class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '在植入前，給你科學的安心。' : 'Science that gives you confidence before transfer.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? 'PGT 常見問題' : 'PGT Questions'}</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '植入前，先了解清楚' : 'Know Before You Transfer'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '對合適的病患，PGT 是一項強大的工具。我們的醫師會協助你判斷它是否適合你的狀況。' : 'PGT is a powerful tool for the right patients. Our physicians will help you determine whether it makes sense for your situation.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/services', locale)} class="btn-outline">{ZH ? '全部療程' : 'All Services'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

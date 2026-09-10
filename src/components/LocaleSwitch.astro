@@ -1,0 +1,65 @@
+---
+/**
+ * LocaleSwitch — 語言切換器（EN | 繁體中文）
+ * 切到另一語言時對應到該語言的相同路徑；未翻譯的頁面會停留在英文版。
+ */
+import { locales, localeMeta, type Locale } from '../i18n/index';
+import { switchLocale } from '../i18n/routes';
+
+interface Props {
+  pathname: string;
+  current: Locale;
+  variant?: 'nav' | 'footer' | 'mobile';
+}
+const { pathname, current, variant = 'nav' } = Astro.props;
+---
+
+<div class:list={['locale-switch', `locale-switch--${variant}`]}>
+  {locales.map((loc) => (
+    <a
+      href={switchLocale(pathname, loc)}
+      hreflang={localeMeta[loc].htmlLang}
+      lang={localeMeta[loc].htmlLang}
+      title={localeMeta[loc].label}
+      aria-label={localeMeta[loc].label}
+      aria-current={loc === current ? 'true' : undefined}
+      class:list={['locale-switch-link', loc === current ? 'is-active' : '']}
+    >
+      {localeMeta[loc].short}
+    </a>
+  ))}
+</div>
+
+<style>
+  .locale-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .locale-switch-link {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-stone-500);
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .locale-switch-link:hover { color: var(--color-gold-600); }
+  .locale-switch-link.is-active {
+    color: var(--color-gold-600);
+    font-weight: 500;
+  }
+
+  /* 導航列：緊湊、與 CTA 同高 */
+  .locale-switch--nav {
+    padding-left: 0.4rem;
+    border-left: 1px solid var(--color-stone-200);
+  }
+  /* 頁腳：略大、可換行 */
+  .locale-switch--footer .locale-switch-link { font-size: 0.78rem; }
+  /* 手機選單 */
+  .locale-switch--mobile { gap: 0.8rem; }
+  .locale-switch--mobile .locale-switch-link { font-size: 0.95rem; }
+</style>

@@ -1,0 +1,218 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const pathways = [
+  {
+    title: ZH ? '女同志伴侶' : 'Same-Sex Female Couples',
+    desc: ZH ? '多數女同志伴侶透過使用捐精的 IUI 或 IVF 懷孕。對希望雙方都與孩子有基因連結的伴侶，互惠 IVF（一方提供卵子、另一方懷孕）是 IRFC 富有協調經驗的重要選項。' : 'Most same-sex female couples achieve pregnancy through IUI with donor sperm or IVF with donor sperm. For couples who want a genetic connection for both partners, reciprocal IVF (one partner provides eggs, the other carries the pregnancy) is a meaningful option IRFC is experienced in coordinating.',
+    options: ZH ? ['使用捐精的 IUI', '使用捐精的 IVF', '互惠 IVF（共享母職）'] : ['IUI with donor sperm', 'IVF with donor sperm', 'Reciprocal IVF (shared motherhood)'],
+  },
+  {
+    title: ZH ? '男同志伴侶' : 'Same-Sex Male Couples',
+    desc: ZH ? '男同志伴侶透過使用一方或雙方精子、搭配捐卵的妊娠代孕來組建家庭。IRFC 與可信賴的捐卵機構及代孕法律師協調，引導你走過每一步——醫療、法律與後勤。' : 'Same-sex male couples build families through gestational surrogacy with one or both partners\' sperm and a donor egg. IRFC coordinates with trusted egg donor agencies and surrogacy attorneys to guide you through every step — medical, legal, and logistical.',
+    options: ZH ? ['搭配捐卵的妊娠代孕', '選用一方或雙方精子', '為胚胎健康進行 PGT-A 檢測'] : ['Gestational surrogacy with donor egg', 'Sperm selection from one or both partners', 'PGT-A testing for embryo health'],
+  },
+  {
+    title: ZH ? '跨性別與非二元性別者' : 'Transgender & Non-Binary Individuals',
+    desc: ZH ? '對許多跨性別者而言，在荷爾蒙治療或性別肯定手術前保存生育力是重要的選項。IRFC 提供保密、肯定式的照護，並與你的性別肯定照護團隊合作，規劃適合你過渡旅程的卵子或精子冷凍時機。' : 'Fertility preservation before hormone therapy or gender-affirming surgery is an important option for many transgender individuals. IRFC provides confidential, affirming care and works with your gender-affirming care team to plan the timing of egg or sperm freezing that fits your transition journey.',
+    options: ZH ? ['荷爾蒙治療前的凍卵', '荷爾蒙治療或手術前的凍精', '過渡後使用保存配子成家'] : ['Egg freezing before hormone therapy', 'Sperm freezing before hormone therapy or surgery', 'Family building after transition with stored gametes'],
+  },
+  {
+    title: ZH ? '自主選擇的單身父母' : 'Single Parents by Choice',
+    desc: ZH ? '無論你是單身女性或單身男性，IRFC 都支持你成家的道路。單身女性可透過使用捐精的 IUI 或 IVF 懷孕；單身男性則透過搭配捐卵的妊娠代孕。醫師會為你擬定最適合生殖健康與目標的方向。' : 'Whether you are a single woman or single man, IRFC supports your path to parenthood. Single women can pursue IUI or IVF with donor sperm; single men pursue gestational surrogacy with donor eggs. Your physician will outline the approach most suited to your reproductive health and goals.',
+    options: ZH ? ['使用捐精的 IUI 或 IVF（單身女性）', '搭配捐卵的妊娠代孕（單身男性）', '凍卵／凍精以保留未來選擇'] : ['IUI or IVF with donor sperm (single women)', 'Gestational surrogacy with donor egg (single men)', 'Fertility preservation to keep future options open'],
+  },
+];
+
+const faqs = [
+  { q: ZH ? 'IRFC 是否有服務 LGBTQIA+ 病患的經驗？' : 'Does IRFC have experience with LGBTQIA+ patients?', a: ZH ? '有的。IRFC 服務 LGBTQIA+ 個人與伴侶已多年。我們的醫師與協調師了解 LGBTQIA+ 成家在醫療、法律與情感上的特定面向，臨床團隊全程提供包容、肯定式的照護。' : 'Yes. IRFC has served LGBTQIA+ individuals and couples for many years. Our physicians and coordinators understand the specific medical, legal, and emotional dimensions of LGBTQIA+ family building, and our clinical team provides inclusive, affirming care throughout.' },
+  { q: ZH ? '什麼是互惠 IVF？' : 'What is reciprocal IVF?', a: ZH ? '互惠 IVF（又稱伴侶 IVF 或共享母職）是一項程序，由女同志伴侶中的一方提供卵子，另一方懷孕。雙方都與懷孕有生物連結——一方在基因上、一方作為妊娠載體。IRFC 協調此過程的所有層面。' : 'Reciprocal IVF (also called partner IVF or shared motherhood) is a process in which one partner in a same-sex female couple provides the eggs and the other partner carries the pregnancy. Both partners are biologically connected to the pregnancy — one genetically, one as the gestational carrier. IRFC coordinates all aspects of this process.' },
+  { q: ZH ? '在 IRFC 開始療程需要轉診嗎？' : 'Do I need a referral to begin care at IRFC?', a: ZH ? '不需轉診。你可以直接透過我們的網站、電話或電子郵件預約諮詢。' : 'No referral is required. You can schedule a consultation directly through our website, by phone, or by email.' },
+  { q: ZH ? '我該如何找到捐精者或捐卵者？' : 'How do I find a sperm or egg donor?', a: ZH ? 'IRFC 與合法的精子銀行及捐卵機構合作。你的協調師會陪你走完挑選流程，包含醫療篩檢要求與法律考量。我們讓過程直接且充滿支持。' : 'IRFC partners with licensed sperm banks and egg donor agencies. Your coordinator will walk you through the selection process, including medical screening requirements and legal considerations. We make the process straightforward and supportive.' },
+  { q: ZH ? '代孕涉及哪些法律步驟？' : 'What legal steps are involved in surrogacy?', a: ZH ? '代孕需要在胚胎植入前，由預定父母與代孕母簽訂法律合約。IRFC 與專精加州代孕法律的生殖法律師密切合作。作為協調流程的一環，我們會為你對接合適的法律諮詢。' : 'Surrogacy requires a legal contract between the intended parents and the gestational carrier, established before the embryo transfer. IRFC works closely with reproductive attorneys who specialize in California surrogacy law. We will connect you with appropriate legal counsel as part of our coordination process.' },
+  { q: ZH ? '跨性別病患的生育保存是否有保險給付？' : 'Is fertility preservation covered by insurance for transgender patients?', a: ZH ? '給付差異很大。部分加州保險公司在特定情況下給付跨性別病患的生育保存。我們的財務協調師會檢視你的保險福利並討論融資選項，讓你在開始療程前就有清楚的全貌。' : 'Coverage varies widely. Some California insurers cover fertility preservation for transgender patients under specific circumstances. Our financial coordinator will review your insurance benefits and discuss financing options so you have a clear picture before starting care.' },
+];
+
+const commitments = [
+  { label: ZH ? '包容照護' : 'Inclusive Care', desc: ZH ? '對所有家庭結構與身分認同，皆提供肯定、尊重的照護。' : 'Affirming, respectful care for all family structures and identities.' },
+  { label: ZH ? '第三方協調' : 'Third-Party Coordination', desc: ZH ? '具經驗的協調師，處理捐贈與代孕安排。' : 'Experienced coordinators for donor and surrogacy arrangements.' },
+  { label: ZH ? '法律引導' : 'Legal Guidance', desc: ZH ? '對接專精加州法律的生殖法律師。' : 'Connections to reproductive attorneys specializing in California law.' },
+  { label: ZH ? '多元語言團隊' : 'Multilingual Team', desc: ZH ? '提供英語、國語、日語、韓語與西班牙語支援。' : 'Support in English, Mandarin, Japanese, Korean, and Spanish.' },
+];
+
+const startSteps = [
+  { n: '01', title: ZH ? '初次諮詢' : 'Initial Consultation', desc: ZH ? '與醫師會面，討論你的目標、檢視相關病史，並了解可供你選擇的治療路徑。' : 'Meet with a physician to discuss your goals, review relevant medical history, and understand the treatment pathways available to you.' },
+  { n: '02', title: ZH ? '生育評估' : 'Fertility Evaluation', desc: ZH ? '依你的路徑安排適當檢查——卵巢庫存、精液分析或子宮評估，視你的狀況而定。' : 'Appropriate testing is ordered based on your pathway — ovarian reserve, semen analysis, or uterine evaluation, depending on your situation.' },
+  { n: '03', title: ZH ? '治療與協調' : 'Treatment & Coordination', desc: ZH ? '你的臨床團隊與第三方協調師共同管理治療、捐贈者挑選或代孕安排的每一個層面。' : 'Your clinical team and third-party coordinator work together to manage every aspect of your treatment, donor selection, or surrogacy arrangement.' },
+];
+---
+
+<Layout
+  title={ZH ? 'LGBTQIA+ 成家' : 'LGBTQIA+ Family Building'}
+  description={ZH ? 'IRFC 為 LGBTQIA+ 個人與伴侶提供包容、肯定式的生育照護——同志伴侶、跨性別病患，以及自主選擇的單身父母。' : 'IRFC provides inclusive, affirming fertility care for LGBTQIA+ individuals and couples — same-sex couples, transgender patients, and single parents by choice.'}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <a href={localeHref('/services', locale)} class="text-xs tracking-widest uppercase hover:underline" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '全部療程' : 'All Services'}</a>
+          <span style="color: var(--color-stone-300);">/</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? 'LGBTQIA+ 成家' : 'LGBTQIA+ Family Building'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          LGBTQIA+<br/>{ZH ? '成家' : 'Family Building'}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH ? '每個家庭都值得以關懷、尊重與專業來建構。IRFC 為同志伴侶、跨性別與非二元性別者，以及自主選擇的單身父母，提供包容、肯定式的生育照護——秉持我們對每位病患一致的臨床卓越。' : 'Every family deserves to be built with care, respect, and expertise. IRFC provides inclusive, affirming fertility care for same-sex couples, transgender and non-binary individuals, and single parents by choice — with the same clinical excellence we bring to every patient.'}
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC fertility physician consulting with a patient" width="1800" height="1200" class="w-full h-auto object-cover" />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '每一步，都是同一個團隊' : 'One team, every step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '從初次諮詢、每次回診監測，到胚胎植入，都由同一批醫師、護理師與胚胎師陪伴你。緊密銜接的照護，讓你的治療過程不會有一絲落差。' : 'From your first consultation through every monitoring visit and embryo transfer, the same physicians, nurses, and embryologists stay with you. Connected care means nothing about your treatment gets lost in translation.'}</p>
+          <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">{ZH ? '認識我們的團隊' : 'Meet our team'} <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commitment -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '我們對包容照護的承諾' : 'Our Commitment to Inclusive Care'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '在 IRFC，我們相信成為父母的渴望超越一切界線。我們的醫師、護理師與協調師皆受過 LGBTQIA+ 成家路徑的完整訓練，並致力於提供一個安全、肯定式的環境，讓你能專注於最重要的事。' : 'At IRFC, we believe that the desire to become a parent transcends all boundaries. Our physicians, nurses, and coordinators are trained in the full spectrum of LGBTQIA+ family-building pathways and are committed to providing a safe, affirming environment where you can focus on what matters most.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH ? '我們明白，成為父母的道路對每個人與伴侶都不盡相同——我們以個別化的關注、誠實的資訊，以及對你的目標與價值觀的深切尊重，來面對每一種情況。' : 'We understand that the path to parenthood looks different for every person and couple — and we approach each situation with individualized attention, honest information, and deep respect for your goals and values.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH ? 'IRFC 的多元語言團隊能說英語、國語、日語、韓語與西班牙語，我們歡迎來自南加州各地及國際的病患。' : 'IRFC\'s multilingual team speaks English, Mandarin, Japanese, Korean, and Spanish, and we welcome patients from across Southern California and internationally.'}
+          </p>
+        </div>
+        <div class="space-y-4">
+          {commitments.map(item => (
+            <div class="p-6 bg-white border border-stone-200 flex gap-5">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <div>
+                <div class="text-xs tracking-widest uppercase font-medium mb-1" style="color: var(--color-stone-700); font-family: var(--font-sans);">{item.label}</div>
+                <p class="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pathways -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12 text-center">{ZH ? '成家之路' : 'Pathways to Parenthood'}</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {pathways.map(p => (
+          <div class="p-8 border border-stone-200">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{p.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed mb-5">{p.desc}</p>
+            <ul class="space-y-2">
+              {p.options.map(opt => (
+                <li class="flex items-start gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-400);"></div>
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo break -->
+  <section class="relative overflow-hidden" style="height: 340px;">
+    <img src="/images/consultation-joyful.webp" srcset="/images/consultation-joyful-800.webp 800w, /images/consultation-joyful-1280.webp 1280w, /images/consultation-joyful.webp 2560w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC welcoming patients" class="w-full h-full object-cover" style="object-position: center 35%;" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 58%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '每個家庭都值得以關懷與專業來建構。' : 'Every family deserves to be built with care and expertise.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl mx-auto text-center mb-12">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '如何開始' : 'Getting Started'}</h2>
+        <p class="text-sm text-stone-500 leading-relaxed">{ZH ? '你的旅程始於一場諮詢——一場關於你的目標、健康與選項的對話。不需轉診轉介。' : 'Your journey begins with a consultation — a conversation about your goals, your health, and your options. No referral is required.'}</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {startSteps.map(step => (
+          <div class="p-7 bg-white border border-stone-200">
+            <div class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-500); font-family: var(--font-sans);">{ZH ? '步驟 ' : 'Step '}{step.n}</div>
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{step.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '展開你的旅程' : 'Begin Your Journey'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '與 IRFC 醫師預約諮詢，討論你的目標，探索適合你的路徑。' : 'Schedule a consultation with an IRFC physician to discuss your goals and explore the pathway that is right for you.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/services', locale)} class="btn-outline">{ZH ? '全部療程' : 'All Services'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
