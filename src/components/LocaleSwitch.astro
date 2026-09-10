@@ -1,7 +1,8 @@
 ---
 /**
- * LocaleSwitch — 語言切換器（EN | 繁體中文）
- * 切到另一語言時對應到該語言的相同路徑；未翻譯的頁面會停留在英文版。
+ * LocaleSwitch — 語言切換器（單一徽章，點擊展開選單切換）
+ * 當前語言顯示為字母徽章（EN / ZH），點擊展開可選語言清單；未翻譯的頁面會停留在英文版。
+ * 全名保留在每個選項的 title / aria-label（tooltip + 無障礙）。
  */
 import { locales, localeMeta, type Locale } from '../i18n/index';
 import { switchLocale } from '../i18n/routes';
@@ -14,52 +15,132 @@ interface Props {
 const { pathname, current, variant = 'nav' } = Astro.props;
 ---
 
-<div class:list={['locale-switch', `locale-switch--${variant}`]}>
-  {locales.map((loc) => (
-    <a
-      href={switchLocale(pathname, loc)}
-      hreflang={localeMeta[loc].htmlLang}
-      lang={localeMeta[loc].htmlLang}
-      title={localeMeta[loc].label}
-      aria-label={localeMeta[loc].label}
-      aria-current={loc === current ? 'true' : undefined}
-      class:list={['locale-switch-link', loc === current ? 'is-active' : '']}
-    >
-      {localeMeta[loc].short}
-    </a>
-  ))}
-</div>
+<details class:list={['locale-switch', `locale-switch--${variant}`]}>
+  <summary class="locale-switch-trigger" aria-label={`Switch language, current: ${localeMeta[current].label}`}>
+    <span class="locale-switch-code">{localeMeta[current].short}</span>
+    <svg class="locale-switch-caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" fill="none">
+      <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </summary>
+  <ul class="locale-switch-menu">
+    {locales.map((loc) => (
+      <li>
+        <a
+          href={switchLocale(pathname, loc)}
+          hreflang={localeMeta[loc].htmlLang}
+          lang={localeMeta[loc].htmlLang}
+          title={localeMeta[loc].label}
+          aria-label={localeMeta[loc].label}
+          aria-current={loc === current ? 'true' : undefined}
+          class:list={['locale-switch-link', loc === current ? 'is-active' : '']}
+        >
+          <span class="locale-switch-link-code">{localeMeta[loc].short}</span>
+          <span class="locale-switch-link-name">{localeMeta[loc].label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
 
 <style>
   .locale-switch {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-  }
-  .locale-switch-link {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--color-stone-500);
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-  .locale-switch-link:hover { color: var(--color-gold-600); }
-  .locale-switch-link.is-active {
-    color: var(--color-gold-600);
-    font-weight: 500;
+    position: relative;
+    display: inline-block;
   }
 
-  /* 導航列：緊湊、與 CTA 同高 */
+  /* 觸發徽章：當前語言代碼 + 下拉箭頭 */
+  .locale-switch-trigger {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-stone-500);
+    padding: 0.35rem 0.1rem;
+    user-select: none;
+    transition: color 0.2s;
+  }
+  .locale-switch-trigger::-webkit-details-marker { display: none; }
+  .locale-switch-trigger:hover { color: var(--color-gold-600); }
+  .locale-switch-code { font-weight: 600; }
+  .locale-switch-caret { transition: transform 0.2s ease; }
+  .locale-switch[open] .locale-switch-caret { transform: rotate(180deg); }
+
+  /* 下拉選單 */
+  .locale-switch-menu {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    right: 0;
+    margin: 0;
+    padding: 0.35rem;
+    list-style: none;
+    min-width: 10rem;
+    background: #fff;
+    border: 1px solid var(--color-stone-200);
+    border-radius: 0.65rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    z-index: 60;
+  }
+  .locale-switch-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    color: var(--color-stone-700);
+    font-family: var(--font-sans);
+    transition: background 0.15s, color 0.15s;
+  }
+  .locale-switch-link:hover { background: var(--color-stone-100); color: var(--color-gold-600); }
+  .locale-switch-link.is-active { color: var(--color-gold-600); }
+  .locale-switch-link-code {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .locale-switch-link-name { font-size: 0.82rem; letter-spacing: 0.02em; }
+
+  /* 導航列：緊湊、與 CTA 同高，左側分隔線 */
   .locale-switch--nav {
-    padding-left: 0.4rem;
+    padding-left: 0.5rem;
     border-left: 1px solid var(--color-stone-200);
   }
-  /* 頁腳：略大、可換行 */
-  .locale-switch--footer .locale-switch-link { font-size: 0.78rem; }
-  /* 手機選單 */
-  .locale-switch--mobile { gap: 0.8rem; }
-  .locale-switch--mobile .locale-switch-link { font-size: 0.95rem; }
+  /* 頁腳：略大 */
+  .locale-switch--footer .locale-switch-trigger { font-size: 0.78rem; }
+  /* 手機選單：向左展開 */
+  .locale-switch--mobile .locale-switch-trigger { font-size: 0.95rem; }
+  .locale-switch--mobile .locale-switch-menu { right: auto; left: 0; }
 </style>
+
+<script>
+  // 無障礙增強：開啟一個語言選單時關閉其他；點擊外部或 Esc 關閉。
+  // 核心開合由 <details> 原生處理，即使腳本失效也能用。
+  document.addEventListener('toggle', (e) => {
+    const det = e.target;
+    if (det instanceof HTMLDetailsElement && det.classList.contains('locale-switch') && det.open) {
+      document.querySelectorAll('details.locale-switch[open]').forEach((el) => {
+        if (el !== det) el.open = false;
+      });
+    }
+  }, true);
+
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    if (!(t instanceof Element) || !t.closest('details.locale-switch')) {
+      document.querySelectorAll('details.locale-switch[open]').forEach((el) => (el.open = false));
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('details.locale-switch[open]').forEach((el) => (el.open = false));
+    }
+  });
+</script>
