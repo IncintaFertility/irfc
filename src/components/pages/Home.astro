@@ -42,7 +42,7 @@ const description = ZH
 
   <!-- 01 / HERO — First impression should convey the brand, not a row of treatment buttons -->
   <section class="idx-hero">
-    <video id="idx-hero-video" class="idx-hero-bg" muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="none" width="1920" height="1080" poster="/images/lobby-wide.webp">
+    <video id="idx-hero-video" class="idx-hero-bg" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="auto" width="1920" height="1080" poster="/images/lobby-wide.webp">
       <source src="/videos/brand-promo.mp4" type="video/mp4" />
     </video>
     <div class="idx-hero-overlay"></div>
@@ -187,15 +187,19 @@ const description = ZH
           if (p && typeof p.catch === 'function') p.catch(function () {});
         } catch (e) {}
       }
-      var ric = window.requestIdleCallback || function (fn) { return setTimeout(fn, 600); };
-      if (document.readyState === 'complete') {
-        ric(start);
-      } else {
-        window.addEventListener('load', function () { ric(start); }, false);
-      }
+      // Native autoplay (muted + playsinline + autoplay attr) covers iOS Safari and
+      // modern WebViews. WeChat's Android X5 kernel still rejects programmatic play()
+      // unless it runs inside the WeixinJSBridgeReady context or on first user gesture,
+      // so we force it there. Resume if WeChat backgrounds/pauses the video.
+      if (v.readyState >= 2) start();
+      else v.addEventListener('loadeddata', start, { once: true });
       document.addEventListener('WeixinJSBridgeReady', start, false);
       if (typeof window.WeixinJSBridge !== 'undefined') start();
       document.addEventListener('touchstart', start, { once: true });
+      document.addEventListener('click', start, { once: true });
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden && v.paused) { try { v.play(); } catch (e) {} }
+      });
     })();
   </script>
 </Layout>
