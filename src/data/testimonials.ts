@@ -12,6 +12,7 @@ export interface Review {
   avatarUrl?: string;
   authorProfileUrl?: string;
   reviewUrl?: string;
+  featured?: boolean;
   /** Location the excerpt came from. Omitted = the primary Incinta listing. */
   clinic?: ClinicKey;
 }
@@ -154,6 +155,9 @@ export const aggregateCount = totalCount;
 // Sourced from the clinic's real review profiles; ellipsis indicates the original was truncated.
 export const reviews: Review[] = [
   // ---- Google ----
+  { source: 'google', quote: "We are deeply grateful to this fertility center for their professional assistance and heartfelt support.", author: 'Wei Li', rating: 5, date: '1 year ago', clinic: 'torrance', featured: true, avatarUrl: 'https://lh3.googleusercontent.com/a-/ALV-UjV4Bcy3SlwByY4XADfsOezcF8tT8ce3yNBTpEzw-XnCbk9gLrA=w160-h160-p-rp-mo-br100', authorProfileUrl: 'https://www.google.com/maps/contrib/107139685321099761023/reviews?hl=en-US', reviewUrl: 'https://www.google.com/maps/search/?api=1&query=Incinta+Fertility+Center+Torrance+CA' },
+  { source: 'google', quote: "His professionalism and expertise gave me confidence and peace of mind during what can be a very stressful journey.", author: 'T.L.', rating: 5, date: '3 months ago', clinic: 'corona', featured: true, avatarUrl: 'https://lh3.googleusercontent.com/a-/ALV-UjWCcd0EphvugCZi7XnV_4yQZX_sTSqaNlEMFBLNruE2uc1EA58=w160-h160-p-rp-mo-br100', authorProfileUrl: 'https://www.google.com/maps/contrib/117140529024619602031/reviews?hl=en-US', reviewUrl: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+400+E+Rincon+St+Corona+CA+92879' },
+  { source: 'google', quote: "We are incredibly grateful to everyone at Reproductive Fertility Center for making our dream of becoming parents come true.", author: 'Nisha', rating: 5, date: '1 month ago', clinic: 'irvine', featured: true, avatarUrl: 'https://lh3.googleusercontent.com/a-/ALV-UjUZ7EGbZ_Cr5Mg_v9jFxdbck5vgyUSkmektJag43CM_FfJUQQuUmA=w160-h160-p-rp-mo-br100', authorProfileUrl: 'https://www.google.com/maps/contrib/107586062463952330288/reviews?hl=en-US', reviewUrl: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+16300+Sand+Canyon+Ave+Irvine+CA+92618' },
   { source: 'google', quote: "I have worked with this clinic twice, I am a surrogate. Dr.Lin is amazing both times my embryo transfer was successful on the first time, my ivf coordinator was always very informative the Entire journey until I was able to go to my OB", author: 'Taylor Zhang', rating: 5, date: '4 years ago' },
   { source: 'google', quote: "Me and my husband tried several years but didn't get a baby so we decided to try IVF. I accidentally went through Incinta from Google and decided to give it a try. And it's worthy. I'm 1 month pregnant now and so glad I have Dr Lin and…", author: 'Shen Xianqi', rating: 5, date: '3 months ago' },
   { source: 'google', quote: "We had a wonderful experience throughout our IVF journey. The entire team was professional, caring, and supportive every step of the way. A special thank you to Lily, who was always patient, kind, and incredibly helpful. She answered all of…", author: 'Keon Hua', rating: 5, date: '2 months ago' },
