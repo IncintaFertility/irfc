@@ -7,16 +7,20 @@ import {
   clinics,
   sourcesOf,
   type ClinicKey,
+  type Review,
 } from '../data/testimonials';
 
 const clinicKeyOf = (clinic?: ClinicKey) => clinic ?? 'torrance';
+const hasPublicAttribution = (review: Review) => Boolean(
+  review.verified && review.avatarUrl && review.authorProfileUrl && review.reviewUrl
+);
 const googleStories = reviews
-  .filter((review) => review.source === 'google' && review.featured)
+  .filter((review) => review.source === 'google' && review.featured && hasPublicAttribution(review))
   .map((review) => ({
     review,
     clinic: clinics.find((clinic) => clinic.key === clinicKeyOf(review.clinic)) ?? clinics[0],
   }));
-const yelpReviews = reviews.filter((r) => r.source === 'yelp');
+const yelpReviews = reviews.filter((review) => review.source === 'yelp' && hasPublicAttribution(review));
 const initialsOf = (name: string) => name
   .split(/\s+/)
   .filter(Boolean)
@@ -135,7 +139,7 @@ const yelpClinicGroups = clinics
       <div class="max-w-2xl mb-12">
         <p class="text-xs tracking-[0.24em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">Featured patient stories · Google</p>
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-5xl font-light text-stone-800">Care that patients remember</h2>
-        <p class="mt-4 text-sm leading-relaxed text-stone-500">Recent perspectives from patients at our Torrance, Corona, and Irvine locations.</p>
+        <p class="mt-4 text-sm leading-relaxed text-stone-500">Every story below is linked to the reviewer’s original public profile and source listing.</p>
       </div>
       <div class="grid lg:grid-cols-3 gap-6">
         {googleStories.map(({ review: r, clinic }, index) => (
@@ -154,7 +158,7 @@ const yelpClinicGroups = clinics
                     ) : (
                       <span class="block truncate text-base font-medium text-stone-800">{r.author}</span>
                     )}
-                    <span class="mt-1 block text-[10px] tracking-[0.2em] uppercase text-stone-400">Google reviewer</span>
+                    <span class="mt-1 block text-[10px] tracking-[0.2em] uppercase text-stone-400">Public Google profile</span>
                   </figcaption>
                 </div>
                 <span class="shrink-0 rounded-full px-3 py-1.5 text-[10px] font-semibold tracking-wider" style="background: #f3f7fe; color: #4285f4;">Google</span>
@@ -196,6 +200,7 @@ const yelpClinicGroups = clinics
       <div class="mb-12">
         <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">From Yelp · By Location</p>
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800">What patients say on Yelp</h2>
+        <p class="mt-4 text-sm leading-relaxed text-stone-500">Only reviews with a public Yelp profile, profile photo, and source listing are featured.</p>
       </div>
       <div class="space-y-16">
         {yelpClinicGroups.map(({ clinic, reviews: clinicReviews }) => {
