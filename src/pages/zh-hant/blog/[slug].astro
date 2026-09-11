@@ -1,6 +1,6 @@
 ---
-import BlogPost from '../../components/pages/BlogPost.astro';
-import { blogPosts } from '../../data/blog';
+import BlogPost from '../../../components/pages/BlogPost.astro';
+import { blogPosts } from '../../../data/blog';
 
 export function getStaticPaths() {
   return blogPosts.map((post) => ({

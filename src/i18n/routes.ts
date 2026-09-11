@@ -23,6 +23,7 @@ const translatedRoutes = new Set<string>([
   '/services/recurrent-pregnancy-loss',
   '/services/donors-surrogacy',
   '/services/lgbtqia',
+  '/blog',
 ]);
 
 const translatedPrefixes = new Set<string>(['/standards/', '/blog/']);

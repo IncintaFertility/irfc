@@ -1,29 +1,128 @@
 export type ReviewSource = 'google' | 'yelp';
 
+/** The four Southern California clinic locations. */
+export type ClinicKey = 'torrance' | 'beverly-hills' | 'corona' | 'irvine';
+
 export interface Review {
   quote: string;
   author: string;
   source: ReviewSource;
   rating: number;
   date: string;
+  /** Location the excerpt came from. Omitted = the primary Incinta listing. */
+  clinic?: ClinicKey;
 }
 
-export const reviewSources: Record<ReviewSource, { name: string; rating: number; count: number; url: string; color: string }> = {
-  google: {
-    name: 'Google',
-    rating: 4.4,
-    count: 72,
-    url: 'https://www.google.com/maps/search/?api=1&query=Incinta+Fertility+Center+Torrance+CA',
-    color: '#4285F4',
+/** One public review profile (e.g. the Google listing of a single location). */
+export interface ClinicSourceProfile {
+  name: string;        // 'Google' | 'Yelp'
+  listingName: string; // how that location is named on the platform
+  rating: number;
+  count: number;
+  url: string;
+  color: string;
+}
+
+export interface ClinicProfile {
+  key: ClinicKey;
+  city: string;
+  clinicName: string;
+  address: string;
+  sources: Partial<Record<ReviewSource, ClinicSourceProfile>>;
+}
+
+const GOOGLE_COLOR = '#4285F4';
+const YELP_COLOR = '#D32323';
+
+// Public review profiles by location. Ratings/counts reflect what each platform
+// displays today, and every card links back to the live listing so patients can
+// read the reviews at the source. Note that our Irvine / Corona / Beverly Hills
+// locations appear on Google under the affiliated "Reproductive Fertility
+// Center" (RFC Family) name; Torrance carries the INCINTA listing.
+export const clinics: ClinicProfile[] = [
+  {
+    key: 'torrance',
+    city: 'Torrance',
+    clinicName: 'INCINTA Fertility Center — Torrance',
+    address: '21545 Hawthorne Blvd, Pavilion B, Torrance, CA 90503',
+    sources: {
+      google: {
+        name: 'Google',
+        listingName: 'INCINTA Fertility Center',
+        rating: 4.4,
+        count: 72,
+        url: 'https://www.google.com/maps/search/?api=1&query=Incinta+Fertility+Center+Torrance+CA',
+        color: GOOGLE_COLOR,
+      },
+      yelp: {
+        name: 'Yelp',
+        listingName: 'INCINTA Fertility Center',
+        rating: 4.2,
+        count: 47,
+        url: 'https://www.yelp.com/biz/incinta-fertility-center-torrance',
+        color: YELP_COLOR,
+      },
+    },
   },
-  yelp: {
-    name: 'Yelp',
-    rating: 4.2,
-    count: 47,
-    url: 'https://www.yelp.com/biz/incinta-fertility-center-torrance',
-    color: '#D32323',
+  {
+    key: 'beverly-hills',
+    city: 'Beverly Hills',
+    clinicName: 'Reproductive Fertility Center — Beverly Hills',
+    address: '8635 W 3rd St, Suite 1170W, Los Angeles, CA 90048',
+    // Awaiting the location's public Google/Yelp profile data.
+    sources: {},
   },
-};
+  {
+    key: 'corona',
+    city: 'Corona',
+    clinicName: 'Reproductive Fertility Center — Corona',
+    address: '400 E Rincon St, 1st Floor, Corona, CA 92879',
+    sources: {
+      google: {
+        name: 'Google',
+        listingName: 'Reproductive Fertility Center (RFC)',
+        rating: 3.8,
+        count: 46,
+        url: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+400+E+Rincon+St+Corona+CA+92879',
+        color: GOOGLE_COLOR,
+      },
+    },
+  },
+  {
+    key: 'irvine',
+    city: 'Irvine',
+    clinicName: 'Reproductive Fertility Center — Irvine',
+    address: '16300 Sand Canyon Ave, 9th Floor, Irvine, CA 92618',
+    sources: {
+      google: {
+        name: 'Google',
+        listingName: 'Reproductive Fertility Center (RFC Family)',
+        rating: 3.7,
+        count: 39,
+        url: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+16300+Sand+Canyon+Ave+Irvine+CA+92618',
+        color: GOOGLE_COLOR,
+      },
+    },
+  },
+];
+
+/** Platform profiles of one clinic, in a stable order (Google first, then Yelp). */
+export const sourcesOf = (c: ClinicProfile): ClinicSourceProfile[] =>
+  (Object.values(c.sources) as (ClinicSourceProfile | undefined)[]).filter(
+    (s): s is ClinicSourceProfile => Boolean(s),
+  );
+
+/** Locations that currently have at least one public review profile. */
+export const clinicsWithReviews = clinics.filter((c) => sourcesOf(c).length > 0);
+
+/** Every public review profile across all locations — powers the aggregate + JSON-LD. */
+export const allSources: ClinicSourceProfile[] = clinics.flatMap(sourcesOf);
+
+const totalCount = allSources.reduce((n, s) => n + s.count, 0);
+const totalStars = allSources.reduce((n, s) => n + s.rating * s.count, 0);
+/** Brand-level weighted average across every public profile we publish. */
+export const aggregateRating = Number((totalStars / totalCount).toFixed(2));
+export const aggregateCount = totalCount;
 
 // Verbatim excerpts from public Google / Yelp reviews of Incinta Fertility Center.
 // Sourced from the clinic's real review profiles; ellipsis indicates the original was truncated.

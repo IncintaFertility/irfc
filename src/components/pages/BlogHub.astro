@@ -1,0 +1,210 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { blogPosts } from '../../data/blog';
+import { getLocaleFromPath, type Locale } from '../../i18n/index';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const posts = [...blogPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+
+const fmtDate = (iso: string) =>
+  new Date(iso + 'T00:00:00').toLocaleDateString(ZH ? 'zh-Hant' : 'en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+const catMap: Record<string, string> = {
+  'IVF & Treatment': 'IVF 與療程',
+  'IVF & Genetics': 'IVF 與基因',
+  Preservation: '生育保存',
+};
+const cat = (c: string) => (ZH ? catMap[c] ?? c : c);
+const reading = (r: string) => (ZH ? r.replace(/(\d+)\s*min read/i, '約 $1 分鐘') : r);
+---
+
+<Layout
+  title={ZH ? '生育洞察與病人指南' : 'Fertility Insights & Patient Guides'}
+  description={ZH
+    ? '由 Incinta Reproductive Fertility Center (IRFC) 醫師撰寫、以實證為基礎的 IVF、基因檢測與生育保存指南——協助你做出明智的決定。'
+    : 'Evidence-based guides on IVF, genetic testing, and fertility preservation from the physicians at Incinta Reproductive Fertility Center (IRFC) — written to help you make informed decisions.'}
+>
+  <Nav />
+  <main class="blog-hub">
+    <header class="blog-hub-hero">
+      <p class="blog-hub-eyebrow">{ZH ? '生育洞察' : 'Fertility Insights'}</p>
+      <h1 class="blog-hub-title">
+        {ZH ? '為你的生育旅程而寫的指南與解答' : 'Guides & answers for your fertility journey'}
+      </h1>
+      <p class="blog-hub-lead">
+        {ZH
+          ? '由醫師審閱、清晰易懂的 IVF、基因檢測與生育保存說明——讓你面前的決定更容易做。我們會定期新增指南。'
+          : 'Clear, physician-reviewed explainers on IVF, genetic testing, and preservation — so the decisions ahead of you are easier to make. New guides are added regularly.'}
+      </p>
+    </header>
+
+    <section class="blog-hub-grid" aria-label="Articles">
+      {posts.map((post) => (
+        <a class="blog-card" href={localeHref(`/blog/${post.slug}`, locale)}>
+          <div class="blog-card-media">
+            <img src={post.cover} alt={ZH ? post.coverAltZh ?? post.coverAlt : post.coverAlt} loading="lazy" decoding="async" width="600" height="400" />
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat">{cat(post.category)}</span>
+            <h2 class="blog-card-title">{ZH ? post.titleZh ?? post.title : post.title}</h2>
+            <p class="blog-card-excerpt">{ZH ? post.excerptZh ?? post.excerpt : post.excerpt}</p>
+            <p class="blog-card-meta">{fmtDate(post.date)} · {reading(post.readingTime)}</p>
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <section class="blog-hub-cta">
+      <h2 class="blog-hub-cta-title">{ZH ? '對你自己的路有疑問？' : 'Have a question about your own path?'}</h2>
+      <p class="blog-hub-cta-text">
+        {ZH
+          ? '這些指南是一般衛教，並非醫療建議。下一步是與醫師對談——親自前往我們南加州四間診所任一處，或透過安全視訊。'
+          : 'These guides are general education, not medical advice. The next step is a conversation with a physician — in person at one of our four Southern California clinics, or by secure video visit.'}
+      </p>
+      <a class="blog-hub-cta-btn" href={localeHref('/consultation', locale)}>
+        {ZH ? '與醫師交談 →' : 'Talk with a Physician →'}
+      </a>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .blog-hub {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 7rem 6vw 5rem;
+  }
+  .blog-hub-hero { max-width: 720px; margin-bottom: 3.5rem; }
+  .blog-hub-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold-600);
+    margin: 0 0 1rem;
+  }
+  .blog-hub-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    color: var(--color-stone-800);
+    margin: 0 0 1.25rem;
+  }
+  .blog-hub-lead {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-stone-600);
+    margin: 0;
+  }
+  .blog-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--color-stone-200);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  }
+  .blog-card:hover {
+    border-color: var(--color-gold-400);
+    box-shadow: 0 10px 30px -12px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+  .blog-card-media {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: var(--color-stone-100);
+  }
+  .blog-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+  .blog-card:hover .blog-card-media img { transform: scale(1.05); }
+  .blog-card-cat {
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold-600);
+    margin-bottom: 0.9rem;
+  }
+  .blog-card-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.25;
+    color: var(--color-stone-800);
+    margin: 0 0 0.75rem;
+  }
+  .blog-card-excerpt {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-stone-600);
+    margin: 0 0 1.25rem;
+    flex: 1;
+  }
+  .blog-card-body { padding: 1.75rem; }
+  .blog-card-meta {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+    color: var(--color-stone-400);
+    margin: 0;
+  }
+  .blog-hub-cta {
+    margin-top: 4rem;
+    padding: 2.75rem;
+    background: #FAEEDA;
+    border-radius: 16px;
+    text-align: center;
+  }
+  .blog-hub-cta-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.75rem;
+    color: var(--color-stone-800);
+    margin: 0 0 0.85rem;
+  }
+  .blog-hub-cta-text {
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-stone-600);
+  }
+  .blog-hub-cta-btn {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.8rem 1.6rem;
+    background: var(--color-gold-500);
+    color: #fff;
+    border-radius: 999px;
+    transition: background 0.25s;
+  }
+  .blog-hub-cta-btn:hover { background: var(--color-gold-600); }
+</style>
