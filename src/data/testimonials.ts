@@ -9,6 +9,9 @@ export interface Review {
   source: ReviewSource;
   rating: number;
   date: string;
+  avatarUrl?: string;
+  authorProfileUrl?: string;
+  reviewUrl?: string;
   /** Location the excerpt came from. Omitted = the primary Incinta listing. */
   clinic?: ClinicKey;
 }
@@ -21,6 +24,7 @@ export interface ClinicSourceProfile {
   count: number;
   url: string;
   color: string;
+  capturedAt: string;
 }
 
 export interface ClinicProfile {
@@ -53,14 +57,16 @@ export const clinics: ClinicProfile[] = [
         count: 72,
         url: 'https://www.google.com/maps/search/?api=1&query=Incinta+Fertility+Center+Torrance+CA',
         color: GOOGLE_COLOR,
+        capturedAt: '2026-09-11',
       },
       yelp: {
         name: 'Yelp',
         listingName: 'INCINTA Fertility Center',
         rating: 4.2,
-        count: 47,
+        count: 48,
         url: 'https://www.yelp.com/biz/incinta-fertility-center-torrance',
         color: YELP_COLOR,
+        capturedAt: '2026-09-11',
       },
     },
   },
@@ -85,6 +91,16 @@ export const clinics: ClinicProfile[] = [
         count: 46,
         url: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+400+E+Rincon+St+Corona+CA+92879',
         color: GOOGLE_COLOR,
+        capturedAt: '2026-09-11',
+      },
+      yelp: {
+        name: 'Yelp',
+        listingName: 'Reproductive Fertility Center',
+        rating: 4.4,
+        count: 120,
+        url: 'https://www.yelp.com/biz/reproductive-fertility-center-corona',
+        color: YELP_COLOR,
+        capturedAt: '2026-09-11',
       },
     },
   },
@@ -101,6 +117,16 @@ export const clinics: ClinicProfile[] = [
         count: 39,
         url: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+16300+Sand+Canyon+Ave+Irvine+CA+92618',
         color: GOOGLE_COLOR,
+        capturedAt: '2026-09-11',
+      },
+      yelp: {
+        name: 'Yelp',
+        listingName: 'Reproductive Fertility Center',
+        rating: 4.2,
+        count: 126,
+        url: 'https://www.yelp.com/biz/reproductive-fertility-center-irvine',
+        color: YELP_COLOR,
+        capturedAt: '2026-09-11',
       },
     },
   },
@@ -166,7 +192,9 @@ export const reviews: Review[] = [
   { source: 'google', quote: "I am incredibly grateful for Incinta and everyone that has guided me through this process.After years of undiagnosed PCOS and unable to get pregnant I am currently a little under 11 weeks pregnant and I couldn't be happier. This is your sign to take that first step and reach out.", author: 'guadalupe gonzalez', rating: 5, date: '7 months ago' },
 
   // ---- Yelp (sourced from the clinic's public Yelp profile) ----
-  { source: 'yelp', quote: "This was our second time going through IVF with them. Dr Lin, Lily, and Laurene were all very supportive through the entire process! Thank you!", author: 'K Y.', rating: 5, date: 'Mar 4, 2026' },
-  { source: 'yelp', quote: "The consultant was very supportive and attentive, checking in throughout the process. Since this was my first IVF experience, I was quite anxious, so I really appreciated how quickly they responded to my questions by email. The doctor was also very professional, which made me feel comfortable and confident in their care.", author: 'Momo O.', rating: 5, date: 'Mar 2, 2026' },
-  { source: 'yelp', quote: "After years of PCOS and wondering if I can get pregnant after loss walking into Incinta was the best decision yet. Staff has been amazing and helpful in everyway and continue to do so. 1st IUI was a success. Thank you for giving me hope again.", author: 'ashley m.', rating: 5, date: 'Dec 26, 2025' },
+  { source: 'yelp', quote: "This was our second time going through IVF with them. Dr Lin, Lily, and Laurene were all very supportive through the entire process! Thank you!", author: 'K Y.', rating: 5, date: 'Mar 4, 2026', clinic: 'torrance', reviewUrl: 'https://www.yelp.com/biz/incinta-fertility-center-torrance' },
+  { source: 'yelp', quote: "The consultant was very supportive and attentive, checking in throughout the process. Since this was my first IVF experience, I was quite anxious, so I really appreciated how quickly they responded to my questions by email. The doctor was also very professional, which made me feel comfortable and confident in their care.", author: 'Momo O.', rating: 5, date: 'Mar 2, 2026', clinic: 'torrance', avatarUrl: 'https://s3-media0.fl.yelpcdn.com/photo/-iOH3ukHoUKvtQPiI2vqiw/60s.jpg', reviewUrl: 'https://www.yelp.com/biz/incinta-fertility-center-torrance' },
+  { source: 'yelp', quote: "After years of PCOS and wondering if I can get pregnant after loss walking into Incinta was the best decision yet. Staff has been amazing and helpful in everyway and continue to do so. 1st IUI was a success. Thank you for giving me hope again.", author: 'ashley m.', rating: 5, date: 'Dec 26, 2025', clinic: 'torrance', reviewUrl: 'https://www.yelp.com/biz/incinta-fertility-center-torrance' },
+  { source: 'yelp', quote: "Amazing support throughout the process. We have Leslie Ortiz as our assigned coordinator and she has been so patient and quick to respond.", author: 'Arielle C.', rating: 5, date: 'Apr 6, 2026', clinic: 'corona', avatarUrl: 'https://s3-media0.fl.yelpcdn.com/photo/DBbVW5e7fTFDvIorSoGZmw/60s.jpg', authorProfileUrl: 'https://www.yelp.com/user_details?userid=9IVjLyad56jZGdFKdTXFzg', reviewUrl: 'https://www.yelp.com/biz/reproductive-fertility-center-corona' },
+  { source: 'yelp', quote: "IVF is a very difficult journey but with the right team you will feel supported throughout the process.", author: 'Famela P.', rating: 5, date: 'Jan 19, 2026', clinic: 'irvine', avatarUrl: 'https://s3-media0.fl.yelpcdn.com/photo/q7U_yIwIuwsoqCYiQtkEiA/60s.jpg', authorProfileUrl: 'https://www.yelp.com/user_details?userid=e4wvSgLAQASO1PlHAA1nWg', reviewUrl: 'https://www.yelp.com/biz/reproductive-fertility-center-irvine' },
 ];
