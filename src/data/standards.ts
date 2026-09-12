@@ -11,6 +11,8 @@ export interface RelatedItem {
   /** 繁體中文標籤（人名以外的連結才需要；人名維持原文） */
   labelZh?: string;
   desc?: string;
+  /** 繁體中文描述（與 labelZh 配套；未提供則繁體模式不顯示 desc） */
+  descZh?: string;
   /** Optional portrait image — when present the related card renders as a team member card */
   photo?: string;
   /** Short bio line shown on the team member card */
@@ -29,7 +31,11 @@ export interface RelatedGroup {
 export interface StandardPillar {
   num: string;
   title: string;
+  /** 繁體中文標題 */
+  titleZh?: string;
   text: string;
+  /** 繁體中文說明 */
+  textZh?: string;
 }
 
 export interface Standard {
@@ -51,6 +57,8 @@ export interface Standard {
   leadZh?: string;
   /** Supporting paragraph (from homepage copy) */
   text: string;
+  /** 繁體中文 supporting paragraph */
+  textZh?: string;
   /** Hero / row image */
   image: string;
   /** Longer intro paragraph explaining the standard at IRFC */
@@ -74,6 +82,7 @@ export const standards: Standard[] = [
     lead: 'One patient. The expertise of an entire team.',
     leadZh: '一位病人，整個團隊的專業為其守護。',
     text: 'When a patient chooses INCINTA, the strength of our entire team carries that trust—together, we strive for the best possible outcome.',
+    textZh: '當您選擇 INCINTA，整個團隊的實力便承接這份信任——我們共同為最佳的療程結果而努力。',
     image: '/images/standards/01-collective-expertise.jpg',
     intro:
       'Expertise at IRFC is never held by a single person. Physicians, embryologists, nurses, and care coordinators work as one unit around your case—so every decision benefits from the full weight of the practice, not just one opinion.',
@@ -107,9 +116,9 @@ export const standards: Standard[] = [
       },
     ],
     pillars: [
-      { num: '01', title: 'Physician-led care', text: 'Every case is shaped by specialist physicians, not protocols alone.' },
-      { num: '02', title: 'Embryology precision', text: 'A lab ranked #1 in US IVF success rates safeguards each embryo.' },
-      { num: '03', title: 'Coordinated nursing', text: 'Nurse coordinators carry your plan end-to-end, so nothing falls through.' },
+      { num: '01', title: 'Physician-led care', titleZh: '醫師主導的照護', text: 'Every case is shaped by specialist physicians, not protocols alone.', textZh: '每個個案都由專科醫師親自把關，而非僅依制式流程。' },
+      { num: '02', title: 'Embryology precision', titleZh: '胚胎學的精準', text: 'A lab ranked #1 in US IVF success rates safeguards each embryo.', textZh: '全美 IVF 成功率第一的實驗室，守護每一顆胚胎。' },
+      { num: '03', title: 'Coordinated nursing', titleZh: '協調式護理', text: 'Nurse coordinators carry your plan end-to-end, so nothing falls through.', textZh: '護理協調師全程守護您的計畫，不讓任何環節脫節。' },
     ],
   },
   {
@@ -122,6 +131,7 @@ export const standards: Standard[] = [
     lead: 'No two patients are the same. Their care shouldn’t be either.',
     leadZh: '沒有兩位病人相同，療程也不該相同。',
     text: 'Care is never one-size-fits-all. It is a plan crafted for your life.',
+    textZh: '療程從非一體適用，而是一份為您的人生量身打造的計畫。',
     image: '/images/standards/02-precision-personalization.jpg',
     intro:
       'Fertility medicine rewards precision. We map your unique picture—diagnosis, history, and goals—and build a protocol around it, from the first consult to the lab bench. Your plan is built for your life, not a template.',
@@ -164,6 +174,7 @@ export const standards: Standard[] = [
     lead: 'Where life begins, standards matter most.',
     leadZh: '生命起始之處，標準最為關鍵。',
     text: 'With exacting rigor in every laboratory detail, we safeguard every extraordinary beginning.',
+    textZh: '以每一處實驗室細節的嚴謹把關，我們守護每一個非凡的開始。',
     image: '/images/standards/03-lab-excellence.jpg',
     intro:
       'Our embryology lab has ranked #1 in US IVF success rates. Behind that number is a culture of precision—time-lapse incubation, rigorous quality control, and an uncompromising standard for every embryo we nurture.',
@@ -174,9 +185,9 @@ export const standards: Standard[] = [
         heading: 'The Laboratory',
         headingZh: '實驗室',
         items: [
-          { href: '/technology', label: 'Lab Technology', labelZh: '實驗室技術', desc: 'The systems behind better outcomes' },
-          { href: '/outcomes', label: 'Success Rates', labelZh: '成功率', desc: 'Transparent, published results' },
-          { href: '/why-irfc', label: 'Why Choose IRFC', labelZh: '為何選擇 IRFC', desc: 'Recognition & lab leadership' },
+          { href: '/technology', label: 'Lab Technology', labelZh: '實驗室技術', desc: 'The systems behind better outcomes', descZh: '成就更好結果的系統' },
+          { href: '/outcomes', label: 'Success Rates', labelZh: '成功率', desc: 'Transparent, published results', descZh: '透明公開的數據' },
+          { href: '/why-irfc', label: 'Why Choose IRFC', labelZh: '為何選擇 IRFC', desc: 'Recognition & lab leadership', descZh: '榮譽與實驗室領導地位' },
         ],
       },
     ],
@@ -191,6 +202,7 @@ export const standards: Standard[] = [
     lead: 'Private, yet completely open.',
     leadZh: '私密，卻完全公開。',
     text: 'Your body and choices remain absolutely private; our standards and processes are completely open. True trust is built through clear boundaries.',
+    textZh: '您的身體與選擇絕對私密；我們的標準與流程則完全公開。真正的信任，建立在清晰的界線之上。',
     image: '/images/standards/04-privacy-transparency.jpg',
     intro:
       'We keep your information strictly confidential—and we keep our own practices fully transparent. From clear pricing to plain-language policies, you should always know exactly where you stand.',
@@ -227,6 +239,7 @@ export const standards: Standard[] = [
     lead: 'More than clinical rigor, it holds the beauty of art and the warmth of nature.',
     leadZh: '不止於臨床的嚴謹，更蘊含藝術之美與自然之暖。',
     text: 'From the texture of pearl to the imagery of the lotus, from light to material—a space carefully created for life.',
+    textZh: '從珍珠的質感到蓮花的意象，從光線到材質——這是一個為生命精心打造的空間。',
     image: '/images/standards/05-art-of-care.jpg',
     intro:
       'Science gets you here; humanity carries you through. We design spaces, moments, and conversations that make the hardest parts of the journey feel held—for every kind of family that comes to us.',
@@ -237,11 +250,11 @@ export const standards: Standard[] = [
         heading: 'The Experience',
         headingZh: '體驗',
         items: [
-          { href: '/patient-resources', label: 'Patient Resources', labelZh: '病人資源', desc: 'Guides & support' },
-          { href: '/blog', label: 'Fertility Insights', labelZh: '生育洞察', desc: 'Articles & patient guides' },
-          { href: '/patient-portal', label: 'Patient Portal', labelZh: '病人專區', desc: 'Access your records & messages' },
-          { href: '/testimonials', label: 'Patient Stories', labelZh: '病人故事', desc: 'Voices from our community' },
-          { href: '/about', label: 'About', labelZh: '關於機構', desc: 'Our commitment to welcome all' },
+          { href: '/patient-resources', label: 'Patient Resources', labelZh: '病人資源', desc: 'Guides & support', descZh: '指南與支持' },
+          { href: '/blog', label: 'Fertility Insights', labelZh: '生育洞察', desc: 'Articles & patient guides', descZh: '文章與病人指南' },
+          { href: '/patient-portal', label: 'Patient Portal', labelZh: '病人專區', desc: 'Access your records & messages', descZh: '查看病歷與訊息' },
+          { href: '/testimonials', label: 'Patient Stories', labelZh: '病人故事', desc: 'Voices from our community', descZh: '來自社群的真實聲音' },
+          { href: '/about', label: 'About', labelZh: '關於機構', desc: 'Our commitment to welcome all', descZh: '我們歡迎每一個家庭的承諾' },
         ],
       },
     ],
@@ -256,6 +269,7 @@ export const standards: Standard[] = [
     lead: 'Beyond distance and resources.',
     leadZh: '超越距離與資源的限制。',
     text: 'Exceptional care truly reaches every family in need.',
+    textZh: '卓越的照護，真正觸及每一位需要的家庭。',
     image: '/images/standards/06-care-within-reach.jpg',
     intro:
       'World-class fertility care should not depend on your zip code or your budget. With four clinics, telehealth, and transparent financing, we bring exceptional care within reach of every family who needs it.',
@@ -276,9 +290,9 @@ export const standards: Standard[] = [
         heading: 'Your Guide',
         headingZh: '您的指南',
         items: [
-          { href: '/patient-journey', label: 'Patient Journey', labelZh: '療程旅程', desc: 'How care unfolds, step by step' },
-          { href: '/international-patients', label: 'International Patients', labelZh: '國際病人', desc: 'Telehealth & multilingual care' },
-          { href: '/services/lgbtqia', label: 'LGBTQIA+ Family Building', labelZh: 'LGBTQIA+ 成家', desc: 'Affirming, inclusive care' },
+          { href: '/patient-journey', label: 'Patient Journey', labelZh: '療程旅程', desc: 'How care unfolds, step by step', descZh: '療程如何一步步展開' },
+          { href: '/international-patients', label: 'International Patients', labelZh: '國際病人', desc: 'Telehealth & multilingual care', descZh: '遠距醫療與多語照護' },
+          { href: '/services/lgbtqia', label: 'LGBTQIA+ Family Building', labelZh: 'LGBTQIA+ 成家', desc: 'Affirming, inclusive care', descZh: '肯定且包容的照護' },
         ],
       },
     ],

@@ -1,0 +1,346 @@
+---
+// 病人資源（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath } from '../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const resources = [
+  {
+    category: 'Getting Started',
+    categoryZh: '開始前',
+    items: [
+      {
+        title: 'Your First Consultation',
+        titleZh: '初次諮詢',
+        desc: 'What to bring, what to expect, and how to prepare for your initial appointment with an IRFC physician.',
+        descZh: '該帶什麼、會發生什麼，以及如何為您與 IRFC 醫師的首次預約做準備。',
+        body: 'Your first consultation is complimentary and lasts approximately 60–90 minutes. Bring any prior fertility testing, medical records, and a list of current medications. If you have a partner, we encourage them to attend — male factor accounts for 40–50% of infertility cases, so their history matters too. You will meet with a physician (not a nurse or coordinator), discuss your complete history, and receive an honest overview of your options. No decisions are required at this visit.',
+        bodyZh: '您的初次諮詢免費，約 60–90 分鐘。請攜帶任何先前的生育檢測結果、病歷，以及目前用藥清單。若有伴侶，我們鼓勵一同出席——男性因素占不孕案例的 40–50%，其病史同樣重要。您將與醫師（而非護理師或協調員）會面，討論完整的病史，並獲得誠實的選項概覽。本次看診無須做任何決定。',
+        link: null,
+        linkZh: null,
+      },
+      {
+        title: 'Fertility Basics',
+        titleZh: '生育基礎',
+        desc: 'An overview of how fertility works, common causes of infertility, and when to seek evaluation.',
+        descZh: '生育如何運作的概覽、不孕的常見原因，以及何時應尋求評估。',
+        body: 'Natural conception requires several things to go right: ovulation, open fallopian tubes, sufficient sperm quality, and a receptive uterus. The most common causes of infertility include ovulatory dysfunction (including PCOS), tubal disease, male factor, endometriosis, diminished ovarian reserve, and unexplained infertility. The American Society for Reproductive Medicine recommends seeking evaluation after 12 months of trying (under age 35) or 6 months (over age 35). If you have irregular periods, known conditions, or prior pregnancy loss, earlier evaluation is appropriate.',
+        bodyZh: '自然受孕需要多件事順利：排卵、輸卵管通暢、足夠的精子品質，以及可著床的子宮。不孕最常見的原因包括排卵功能異常（含 PCOS）、輸卵管疾病、男性因素、子宮內膜異位症、卵巢儲備下降，以及不明原因不孕。美國生殖醫學會建議：未滿 35 歲嘗試 12 個月、或 35 歲以上嘗試 6 個月未果即應評估。若您月經不規則、有已知疾病或曾有妊娠流失，則應提早評估。',
+        link: null,
+        linkZh: null,
+      },
+      {
+        title: 'Diagnostic Workup Guide',
+        titleZh: '診斷檢查指南',
+        desc: 'Understanding the tests and assessments your physician may recommend: hormonal panels, ultrasound, semen analysis, and more.',
+        descZh: '了解醫師可能建議的檢測與評估：荷爾蒙血檢、超音波、精液分析等。',
+        body: 'A standard fertility workup includes: Day 3 bloodwork (FSH, estradiol, AMH, CBC), a transvaginal ultrasound (antral follicle count, uterine cavity evaluation), and a semen analysis for male partners. Depending on findings, your physician may also order a saline sonogram (SHG) to assess the uterine cavity, an HSG to confirm tubal patency, or additional hormonal tests (thyroid, prolactin, androgens). Results are typically reviewed at a follow-up appointment within 1–2 weeks.',
+        bodyZh: '標準的生育檢查包含：第 3 天血液檢查（FSH、雌二醇、AMH、CBC）、陰道超音波（竇卵泡數、子宮腔評估），以及男性伴侶的精液分析。視結果而定，醫師也可能安排生理鹽水超音波（SHG）評估子宮腔、子宮輸卵管攝影（HSG）確認輸卵管通暢，或其他荷爾蒙檢測（甲狀腺、泌乳素、雄性激素）。結果通常於 1–2 週內的回診中檢視。',
+        link: null,
+        linkZh: null,
+      },
+    ],
+  },
+  {
+    category: 'Treatment Information',
+    categoryZh: '療程資訊',
+    items: [
+      {
+        title: 'Understanding IVF',
+        titleZh: '認識 IVF',
+        desc: 'A step-by-step walkthrough of the IVF process — from ovarian stimulation to embryo transfer.',
+        descZh: '逐步走過 IVF 流程——從卵巢刺激到胚胎植入。',
+        body: 'IVF involves five main phases: (1) Ovarian stimulation — 8–14 days of injectable hormones to grow multiple follicles. (2) Egg retrieval — a 20-minute procedure under light sedation. (3) Fertilization — eggs and sperm are combined; ICSI may be used. (4) Embryo culture — embryos develop in our EmbryoScope+ incubators for 5–6 days. (5) Transfer — one high-quality blastocyst is placed into the uterus under ultrasound guidance. A pregnancy blood test follows 10–12 days later.',
+        bodyZh: 'IVF 包含五個主要階段：（1）卵巢刺激——8–14 天注射荷爾蒙以培育多顆卵泡。（2）取卵——在輕度鎮靜下、約 20 分鐘的門診手術。（3）受精——卵子與精子結合；可能使用 ICSI。（4）胚胎培養——胚胎在我們的 EmbryoScope+ 培養箱中發育 5–6 天。（5）植入——在超音波導引下，將一顆高品質囊胚置入子宮。約 10–12 天後進行懷孕血液檢測。',
+        link: { href: '/services/ivf', label: 'Full IVF Guide →' },
+        linkZh: { href: '/zh-hant/services/ivf', label: '完整 IVF 指南 →' },
+      },
+      {
+        title: 'IUI vs. IVF: Which is Right for You?',
+        titleZh: 'IUI 與 IVF：哪個適合您？',
+        desc: 'How your physician evaluates which treatment offers the best chance of success based on your unique medical profile.',
+        descZh: '醫師如何根據您獨特的醫療狀況，評估哪種治療成功率最高。',
+        body: 'IUI is simpler, less expensive, and appropriate when tubes are open, sperm quality is adequate, and the cause of infertility is mild or unexplained. IVF is recommended when tubes are blocked, sperm quality is significantly impaired, IUI has failed (typically 3+ cycles), or age/diagnosis suggests a more proactive approach is needed. Your physician will recommend the option most likely to succeed for your specific profile — not the cheapest or most convenient option.',
+        bodyZh: 'IUI 較簡單、費用較低，適用於輸卵管通暢、精子品質充足，且不孕原因輕微或不明者。IVF 則建議用於輸卵管阻塞、精子品質明顯受損、IUI 失敗（通常 3 個週期以上），或年齡／診斷顯示需要更積極處理者。您的醫師會推薦對您個人狀況最可能成功的選項——而非最便宜或最方便者。',
+        link: null,
+        linkZh: null,
+      },
+      {
+        title: 'Egg Freezing & Fertility Preservation',
+        titleZh: '凍卵與生育力保存',
+        desc: 'Everything you need to know about preserving your eggs or embryos for the future.',
+        descZh: '關於為未來保存卵子或胚胎，您需要知道的一切。',
+        body: 'Egg freezing (oocyte cryopreservation) uses the same stimulation and retrieval process as IVF — but instead of fertilizing the eggs, they are vitrified (flash-frozen) and stored. IRFC stores frozen eggs in the TMRW Vault with RFID tracking and 24/7 monitoring. Most patients freeze 15–20 mature eggs for a realistic chance of a future pregnancy. Freezing before age 35 generally produces the strongest outcomes. IRFC also prioritizes oncofertility consultations for patients facing cancer treatment.',
+        bodyZh: '凍卵（卵母細胞冷凍保存）採用與 IVF 相同的刺激與取卵流程——但卵子不經受精，而是以玻璃化（快速冷凍）方式儲存。IRFC 將冷凍卵子存放於 TMRW 冷凍庫，具 RFID 追蹤與 24/7 監控。多數病人冷凍 15–20 顆成熟卵子，以獲得未來懷孕的實際機會。35 歲前凍卵通常成效最佳。IRFC 也優先為面臨癌症治療的病人安排腫瘤生育（oncofertility）諮詢。',
+        link: { href: '/services/egg-freezing', label: 'Full Egg Freezing Guide →' },
+        linkZh: { href: '/zh-hant/services/egg-freezing', label: '完整凍卵指南 →' },
+      },
+      {
+        title: 'Preimplantation Genetic Testing (PGT)',
+        titleZh: '胚胎著床前基因檢測（PGT）',
+        desc: 'How genetic testing of embryos can help select the healthiest embryo and reduce the risk of certain inherited conditions.',
+        descZh: '胚胎基因檢測如何協助挑選最健康的胚胎，並降低特定遺傳疾病的風險。',
+        body: 'PGT is an optional add-on to IVF in which a small biopsy is taken from each blastocyst-stage embryo and sent for chromosomal or genetic analysis before transfer. PGT-A screens for aneuploidy (incorrect chromosome number) — the leading cause of IVF failure and miscarriage. PGT-M tests for specific inherited conditions (e.g., cystic fibrosis, BRCA). PGT-SR detects chromosomal structural rearrangements. Results typically take 10–14 days and guide which embryo is transferred.',
+        bodyZh: 'PGT 是 IVF 的選用附加項目：從每顆囊胚期胚胎取少量切片，於植入前送交染色體或基因分析。PGT-A 篩檢非整倍體（染色體數目異常）——這是 IVF 失敗與流產的主因。PGT-M 檢測特定遺傳疾病（如囊腫性纖維化、BRCA）。PGT-SR 偵測染色體結構重排。結果通常需 10–14 天，並據此決定植入哪顆胚胎。',
+        link: { href: '/services/pgt', label: 'Full PGT Guide →' },
+        linkZh: { href: '/zh-hant/services/pgt', label: '完整 PGT 指南 →' },
+      },
+    ],
+  },
+  {
+    category: 'Financial & Practical',
+    categoryZh: '財務與實務',
+    items: [
+      {
+        title: 'Insurance & Financing',
+        titleZh: '保險與財務',
+        desc: 'Navigating insurance coverage for fertility treatments and financing options available to IRFC patients.',
+        descZh: '為 IRFC 病人了解生育治療的保險給付範圍，以及可用的財務方案。',
+        body: 'Insurance coverage for fertility treatments varies widely. Kaiser Permanente patients benefit from IRFC\'s Center of Excellence designation, which may expand coverage options. For self-pay patients, IRFC partners with CapexMD for medical financing, and HSA/FSA funds are accepted. Our financial coordinator provides itemized estimates before treatment begins — no surprises.',
+        bodyZh: '生育治療的保險給付差異極大。凱薩醫療（Kaiser Permanente）的病人因 IRFC 的卓越中心身份而受惠，可能擴大給付選項。自費病人部分，IRFC 與 CapexMD 合作提供醫療貸款，並接受 HSA/FSA 資金。我們的財務協調員在治療開始前提供逐項估算——絕無驚喜。',
+        link: { href: '/financing', label: 'Financing Details →' },
+        linkZh: { href: '/zh-hant/financing', label: '財務詳情 →' },
+      },
+      {
+        title: 'Out-of-Town & International Patients',
+        titleZh: '外地與國際病人',
+        desc: 'A practical guide for patients traveling to Southern California for treatment.',
+        descZh: '為前來南加州接受治療的病人提供的實用指南。',
+        body: 'IRFC welcomes patients from across the US and internationally. Initial consultations and follow-up appointments can be conducted via telehealth; monitoring can often be coordinated with a local clinic near you. In-person visits are required for egg retrieval and embryo transfer. Our team provides detailed guidance on timing, local accommodations, and itinerary coordination. We support patients in English, Mandarin, Japanese, Korean, and Spanish.',
+        bodyZh: 'IRFC 歡迎來自美國各地與國際的病人。初次諮詢與後續回診可透過遠距醫療進行；監測常可與您附近的當地診所協調。取卵與胚胎植入則需親自到院。我們的團隊提供關於時程、當地住宿與行程協調的詳細指引。我們以英文、國語、日文、韓文與西班牙文支援病人。',
+        link: null,
+        linkZh: null,
+      },
+      {
+        title: 'Telehealth & Virtual Care',
+        titleZh: '遠距醫療與線上照護',
+        desc: 'How to use IRFC\'s telehealth services for consultations, follow-ups, and remote monitoring.',
+        descZh: '如何使用 IRFC 的遠距醫療服務進行諮詢、回診與遠端監測。',
+        body: 'IRFC offers virtual consultations for new patients, follow-up appointments, and medication counseling. Telehealth is available via secure video platform and can be scheduled alongside in-person visits. Remote monitoring (blood draws and ultrasounds at a local clinic near you, results reviewed by IRFC) is available for select treatment phases. Contact us to discuss which appointments can be done remotely for your specific situation.',
+        bodyZh: 'IRFC 為新病人、後續回診與用藥諮詢提供虛擬諮詢。遠距醫療經由安全的視訊平台提供，可與親自到院看診搭配安排。遠端監測（在您附近的當地診所抽血與超音波，由 IRFC 檢視結果）適用於部分治療階段。請聯絡我們，討論哪些預約可針對您的情況遠端進行。',
+        link: null,
+        linkZh: null,
+      },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: 'What should I bring to my first consultation?',
+    qZh: '初次諮詢該帶什麼？',
+    a: 'Bring any prior fertility testing results, medical records, and a list of current medications. If you have a partner, we encourage them to join — their medical history is part of the picture too.',
+    aZh: '請攜帶任何先前的生育檢測結果、病歷，以及目前用藥清單。若有伴侶，我們鼓勵一同出席——其病史也是整體圖像的一部分。',
+  },
+  {
+    q: 'Is a referral required to see an IRFC physician?',
+    qZh: '看 IRFC 醫師需要轉診嗎？',
+    a: 'No referral is necessary. You can schedule a consultation directly through our website, by phone, or by email.',
+    aZh: '不需要轉診。您可直接透過我們的網站、電話或電子郵件安排諮詢。',
+  },
+  {
+    q: 'Do you offer telehealth appointments?',
+    qZh: '你們提供遠距醫療預約嗎？',
+    a: 'Yes. IRFC offers virtual consultations for initial evaluations, follow-up appointments, and monitoring coordination for patients who cannot visit in person.',
+    aZh: '是的。IRFC 為無法親自到院的病人，提供初次評估、後續回診與監測協調的虛擬諮詢。',
+  },
+  {
+    q: 'Do you see international patients?',
+    qZh: '你們看診國際病人嗎？',
+    a: 'Absolutely. We welcome patients from around the world and have multilingual staff who speak English, Mandarin Chinese, Japanese, Korean, and Spanish. We can coordinate care remotely and help plan in-person visits.',
+    aZh: '當然。我們歡迎來自世界各地的病人，並擁有能說英文、國語、日文、韓文與西班牙文的多語言同仁。我們能遠端協調照護，並協助規劃親自到院看診。',
+  },
+  {
+    q: 'What is the success rate of IVF at IRFC?',
+    qZh: 'IRFC 的 IVF 成功率如何？',
+    a: 'Our laboratory team achieved the remarkable milestone of ranking #1 in US IVF success rates in 2016. Our physicians will provide individualized success rate estimates based on your specific age, diagnosis, and treatment plan during your consultation.',
+    aZh: '我們的實驗室團隊於 2016 年締造全美 IVF 成功率排名第一的重要里程碑。醫師會在諮詢中，依您的具體年齡、診斷與治療計畫，提供個人化的成功率估計。',
+  },
+  {
+    q: 'Does IRFC support LGBTQIA+ patients?',
+    qZh: 'IRFC 是否支援 LGBTQIA+ 病人？',
+    a: 'Yes, wholeheartedly. IRFC provides inclusive, affirming care to same-sex couples, transgender individuals, and single parents by choice. Our coordinators specialize in the range of third-party options available.',
+    aZh: '是的，衷心支援。IRFC 為同性伴侶、跨性別者，以及自主選擇的單親家長，提供包容、肯定的照護。我們的協調員專精各種可行的第三方選項。',
+  },
+];
+---
+
+<Layout
+  title={ZH ? '生育病人資源與指南' : 'Fertility Patient Resources & Guides'}
+  description={ZH
+    ? '協助 IRFC 病人為生育旅程做準備的教育資源、常見問題與實用資訊。'
+    : 'Educational resources, FAQs, and practical information to help IRFC patients prepare for their fertility journey.'}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '病人資源' : 'Patient Resources'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>您的問題，<br/><em class="not-italic" style="color: var(--color-gold-500);">有答案。</em></> : <>Your Questions,<br/><em class="not-italic" style="color: var(--color-gold-500);">Answered.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          {ZH
+            ? '我們相信知情即是賦權。在此您能找到教育指南、實用資訊，以及我們最常聽到的問題解答。'
+            : 'We believe an informed patient is an empowered patient. Here you’ll find educational guides, practical information, and answers to the questions we hear most often.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Team spotlight -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="overflow-hidden rounded-sm order-2 lg:order-1">
+          <img
+            src="/images/care-team-coordinator.webp" srcset="/images/care-team-coordinator-800.webp 800w, /images/care-team-coordinator.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            alt={ZH ? 'IRFC 照護協調員協助病人了解治療資源' : 'IRFC care coordinator helping a patient navigate treatment resources'}
+            width="1024" height="1024"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '每一步都有指引' : 'Guidance at Every Step'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">
+            {ZH
+              ? '生育資訊可能令人不知所措。我們的照護協調員協助您釐清——指引您到正確的指南、說明每項檢測的意義，並從第一個問題到畢業時刻，讓您的計畫有條不紊。'
+              : 'Fertility information can feel overwhelming. Our care coordinators help you make sense of it — pointing you to the right guides, explaining what each test means, and keeping your plan organized from first question to graduation.'}
+          </p>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            {ZH ? '無論您正開始探索選項，或比較不同治療路徑，您都不必獨自面對。' : 'Whether you’re just starting to explore options or comparing treatment paths, you never have to navigate it alone.'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="space-y-16">
+        {resources.map(section => (
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-8 pb-4 border-b border-stone-200">{ZH ? section.categoryZh : section.category}</h2>
+            <div class="grid md:grid-cols-3 gap-5">
+              {section.items.map(item => (
+                <details class="group bg-white border border-stone-200 open:border-gold-300" style="open:border-color: var(--color-gold-300);">
+                  <summary class="p-7 cursor-pointer list-none flex items-start justify-between gap-4">
+                    <div>
+                      <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{ZH ? item.titleZh : item.title}</h3>
+                      <p class="text-sm text-stone-500 leading-relaxed">{ZH ? item.descZh : item.desc}</p>
+                    </div>
+                    <svg class="w-4 h-4 flex-shrink-0 mt-1 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                  </summary>
+                  <div class="px-7 pb-7 border-t border-stone-100 pt-5">
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">{ZH ? item.bodyZh : item.body}</p>
+                    {(ZH ? item.linkZh : item.link) && (
+                      <a href={(ZH ? item.linkZh : item.link).href} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+                        {(ZH ? item.linkZh : item.link).label}
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                      </a>
+                    )}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultation Photo -->
+  <section class="relative overflow-hidden" style="height: 340px;">
+    <img
+      src="/images/consultation.webp" srcset="/images/consultation-800.webp 800w, /images/consultation-1280.webp 1280w, /images/consultation.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+      alt={ZH ? 'IRFC 病人諮詢' : 'IRFC patient consultation'}
+      class="w-full h-full object-cover object-top"
+    />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 55%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '每個問題都值得誠實的答案。' : 'Every question deserves an honest answer.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-14">
+          <div class="h-px w-12 mx-auto mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">
+            {ZH ? '常見問題' : 'Frequently Asked Questions'}
+          </h2>
+        </div>
+
+        <div class="space-y-0 border border-stone-200" id="faq">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{ZH ? faq.qZh : faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{ZH ? faq.aZh : faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Webinars / Events Note -->
+  <section class="py-14" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row items-center gap-8 p-10 border border-stone-200 bg-white">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-2">{ZH ? '病人線上講座與活動' : 'Patient Webinars & Events'}</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+            {ZH
+              ? 'IRFC 定期舉辦免費教育線上講座，主題涵蓋 IVF 基礎、生育力保存，以及 LGBTQIA+ 成家。請聯絡我們了解近期活動。'
+              : 'IRFC regularly hosts free educational webinars covering topics like IVF basics, fertility preservation, and LGBTQIA+ family building. Contact us to learn about upcoming events.'}
+          </p>
+        </div>
+        <a href={ZH ? '/zh-hant/contact' : '/contact'} class="btn-outline flex-shrink-0">{ZH ? '聯絡我們了解活動' : 'Contact Us for Event Info'}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        {ZH ? '仍有疑問？' : 'Still Have Questions?'}
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH
+          ? '我們的團隊隨時為您提供協助。歡迎聯絡安排諮詢——沒有義務，只是一次關於您選項的誠實對話。'
+          : 'Our team is here to help. Reach out for a consultation — no obligation, just an honest conversation about your options.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={ZH ? '/zh-hant/contact' : '/contact'} class="btn-primary">{ZH ? '預約諮詢' : 'Schedule a Consultation'}</a>
+        <a href="tel:+14244324732" class="btn-outline">{ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

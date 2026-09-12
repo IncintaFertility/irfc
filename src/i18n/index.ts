@@ -191,7 +191,7 @@ export function getLocaleFromPath(pathname: string): Locale {
   return defaultLocale;
 }
 
-/** 去掉路徑中的 locale 前綴，回到 en 基準路徑 */
+/** 去掉路徑中的 locale 前綴，回到 en 基準路徑（保留尾端斜線，與實際網址一致） */
 export function stripLocale(pathname: string): string {
   const parts = pathname.split('/').filter(Boolean);
   if (parts.length && isLocale(parts[0])) return '/' + parts.slice(1).join('/');

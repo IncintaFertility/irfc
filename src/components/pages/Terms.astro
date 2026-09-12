@@ -1,0 +1,133 @@
+---
+// 使用條款（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath } from '../../i18n';
+import { LEGAL_ENTITY, BRAND_ABBREV } from '../../config/brand';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const sections = [
+  {
+    title: 'Acceptance of Terms',
+    titleZh: '條款之接受',
+    paragraphs: [
+      `By accessing this website, you agree to these terms of use. If you do not agree, please discontinue use of the site. These terms apply to ${LEGAL_ENTITY} (${BRAND_ABBREV}) and the services described on this site.`,
+    ],
+    paragraphsZh: [
+      `當您存取本網站，即表示您同意本使用條款。若您不同意，請停止使用本網站。本條款適用於 ${LEGAL_ENTITY}（${BRAND_ABBREV}）及本網站所述之服務。`,
+    ],
+  },
+  {
+    title: 'No Medical Advice',
+    titleZh: '非醫療建議',
+    paragraphs: [
+      'The content on this site is provided for general information only. It does not constitute medical advice, diagnosis, or treatment, and it is not a substitute for consultation with a qualified physician.',
+      'Treatment outcomes vary by individual. Any success rates, rankings, or statistics presented on this site are historical or comparative in nature and do not guarantee any particular result for you.',
+      'Never disregard professional medical advice, or delay seeking it, because of something you have read on this website.',
+    ],
+    paragraphsZh: [
+      '本網站內容僅供一般資訊之用，不構成醫療建議、診斷或治療，亦不得取代與合格醫師的諮詢。',
+      '治療結果因人而異。本網站所呈現的任何成功率、排名或統計數據，皆屬歷史性或比較性質，不保證您會獲得任何特定結果。',
+      '切勿因為在本網站讀到的內容，而忽略或延遲尋求專業醫療建議。',
+    ],
+  },
+  {
+    title: 'Use of This Site',
+    titleZh: '本網站之使用',
+    paragraphs: [
+      'You agree not to use this site for any unlawful purpose, to attempt to gain unauthorized access to any system, or to reproduce, distribute, or commercially exploit site content without prior written permission.',
+    ],
+    paragraphsZh: [
+      '您同意不將本網站用於任何非法目的、不嘗試未經授權存取任何系統，亦未經事先書面許可不得複製、散布或商業利用網站內容。',
+    ],
+  },
+  {
+    title: 'Intellectual Property',
+    titleZh: '智慧財產權',
+    paragraphs: [
+      'All text, imagery, marks, and design elements on this site are the property of the organization or its licensors, and are protected by applicable intellectual property laws.',
+    ],
+    paragraphsZh: [
+      '本網站所有文字、圖像、標章與設計元素，均為本機構或其授權人之財產，並受適用智慧財產權相關法律保護。',
+    ],
+  },
+  {
+    title: 'Third-Party Links',
+    titleZh: '第三方連結',
+    paragraphs: [
+      'This site may link to external resources for your convenience. We do not control those sites and are not responsible for their content, accuracy, or privacy practices.',
+    ],
+    paragraphsZh: [
+      '為了您的便利，本網站可能連結至外部資源。我們不控制這些網站，亦不對其內容、正確性或隱私權實務負責。',
+    ],
+  },
+  {
+    title: 'Limitation of Liability',
+    titleZh: '責任限制',
+    paragraphs: [
+      'To the fullest extent permitted by law, we disclaim liability for any indirect, incidental, or consequential damages arising from your use of this site or reliance on its content.',
+    ],
+    paragraphsZh: [
+      '在法律允許的最大範圍內，我們不對您因使用本網站或信賴其內容所產生之任何間接、偶發或衍生性損害負責。',
+    ],
+  },
+  {
+    title: 'Changes to These Terms',
+    titleZh: '條款之變更',
+    paragraphs: [
+      'We may update these terms from time to time. Continued use of the site after changes are posted constitutes acceptance of the revised terms.',
+    ],
+    paragraphsZh: [
+      '我們可能不定時更新本條款。於變更公告後繼續使用本網站，即表示接受修訂後的條款。',
+    ],
+  },
+];
+
+const title = ZH ? '使用條款' : 'Terms of Use';
+const description = ZH
+  ? `規範您使用 ${LEGAL_ENTITY}（${BRAND_ABBREV}）網站之條款與條件，包含關於醫療資訊的重要聲明。`
+  : `Terms and conditions governing your use of the ${LEGAL_ENTITY} (${BRAND_ABBREV}) website, including important notices about medical information.`;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <section class="pt-40 pb-16" style="background: var(--color-pearl-100);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
+        {ZH ? '法律' : 'Legal'}
+      </p>
+      <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
+        {title}
+      </h1>
+      <p class="text-lg text-stone-500 font-light leading-relaxed">
+        {ZH ? '使用本網站前，請先閱讀以下條款。' : 'Please read these terms before using this website.'}
+      </p>
+      <p class="text-sm text-stone-400 font-light mt-4">{ZH ? '生效日期：2026 年 8 月' : 'Effective date: August 2026'}</p>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-pearl-50);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      {sections.map((section) => (
+        <div class="mb-10">
+          <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+            {ZH ? section.titleZh : section.title}
+          </h2>
+          {(ZH ? section.paragraphsZh : section.paragraphs).map((para) => (
+            <p class="text-stone-500 font-light leading-relaxed mb-4">{para}</p>
+          ))}
+        </div>
+      ))}
+
+      <p class="text-xs text-stone-400 font-light mt-12 leading-relaxed">
+        {ZH ? '本文件僅供一般資訊之用，不構成法律建議。' : 'This document is provided for general information and does not constitute legal advice.'}
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

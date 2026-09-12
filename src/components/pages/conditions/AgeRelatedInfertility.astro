@@ -1,0 +1,195 @@
+---
+import ConditionLayout from '../ConditionLayout.astro';
+import { getLocaleFromPath } from '../../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const reserveTests = [
+  { test: 'AMH (Anti-Müllerian Hormone)', descEn: 'The most reliable single marker of ovarian reserve — can be drawn any day of the cycle.', descZh: '卵巢庫存量最可靠的單一指標——可在週期中任一天抽血。' },
+  { test: 'Day 3 FSH & Estradiol', descEn: 'Elevated FSH signals the pituitary working harder to stimulate aging ovaries. Best interpreted alongside estradiol.', descZh: 'FSH 升高代表腦下垂體需更費力刺激老化的卵巢。最好與雌二醇一併解讀。' },
+  { test: 'Antral Follicle Count (AFC)', descEn: 'Ultrasound count of small follicles visible in the ovaries — correlates directly with egg reserve and expected response to stimulation.', descZh: '超音波計算卵巢內可見的小卵泡——直接反映卵子庫存與對刺激療程的預期反應。' },
+];
+
+const ageData = [
+  { age: 'Under 35', ageZh: '35 歲以下', ivfRate: '~50–55%', noteEn: 'Per transfer, euploid embryo', noteZh: '每次植入，染色體正常胚胎' },
+  { age: '35–37', ageZh: '35–37 歲', ivfRate: '~42–48%', noteEn: 'Per transfer, euploid embryo', noteZh: '每次植入，染色體正常胚胎' },
+  { age: '38–40', ageZh: '38–40 歲', ivfRate: '~35–42%', noteEn: 'Per transfer, euploid embryo', noteZh: '每次植入，染色體正常胚胎' },
+  { age: '41–42', ageZh: '41–42 歲', ivfRate: '~20–30%', noteEn: 'Per transfer, euploid embryo', noteZh: '每次植入，染色體正常胚胎' },
+  { age: 'Over 42', ageZh: '42 歲以上', ivfRate: 'Individualized', noteEn: 'Discuss with your physician', noteZh: '請與您的醫師討論' },
+];
+
+const treatments = [
+  {
+    titleEn: 'IVF with Own Eggs',
+    titleZh: '使用自身卵子的 IVF',
+    descEn: `For many women in their late 30s and early 40s with good ovarian reserve, IVF with their own eggs remains highly effective. Pairing IVF with PGT-A (preimplantation genetic testing) allows identification of euploid embryos — significantly improving implantation rates and reducing miscarriage risk.`,
+    descZh: `對許多三十七、八歲至四十出頭、卵巢庫存良好的女性而言，使用自身卵子的 IVF 依然非常有效。將 IVF 搭配 PGT-A（胚胎著床前基因檢測）可篩選出染色體正常的胚胎——顯著提升著床率並降低流產風險。`,
+  },
+  {
+    titleEn: 'Preimplantation Genetic Testing (PGT-A)',
+    titleZh: '胚胎著床前基因檢測（PGT-A）',
+    descEn: `PGT-A is particularly valuable for patients over 37, where a higher proportion of embryos may carry chromosomal abnormalities. By selecting only euploid embryos for transfer, PGT-A can increase per-transfer success rates and reduce the risk of miscarriage — providing more confidence in each transfer.`,
+    descZh: `PGT-A 對 37 歲以上的病人特別有價值，因為此族群胚胎帶有染色體異常的比例較高。只挑選染色體正常的胚胎進行植入，PGT-A 能提高每次植入的成功率並降低流產風險——讓每次植入更有把握。`,
+  },
+  {
+    titleEn: 'IVF with Donor Eggs',
+    titleZh: '使用捐卵的 IVF',
+    descEn: `When ovarian reserve is severely diminished or prior IVF cycles with own eggs have not succeeded, donor eggs offer a path to pregnancy with high success rates regardless of maternal age. The uterus retains its receptivity well into the mid-40s, making donor egg IVF effective for many patients who can no longer use their own eggs.`,
+    descZh: `當卵巢庫存嚴重衰退，或先前使用自身卵子的 IVF 週期未成功時，捐卵提供了一條高成功率的受孕途徑，且不受母體年齡影響。子宮的接受度可維持到四十多歲中期，因此捐卵 IVF 對許多已無法使用自身卵子的病人十分有效。`,
+  },
+  {
+    titleEn: 'Egg Freezing & Fertility Preservation',
+    titleZh: '冷凍卵子與生育力保存',
+    descEn: `If you are not yet ready to conceive but want to protect your options, egg freezing in your early-to-mid 30s is the most effective strategy. Eggs frozen at younger ages retain the quality they had at the time of freezing — giving you access to healthier eggs in the future.`,
+    descZh: `若您尚未準備懷孕、但想保留選擇，在三十出頭至中段冷凍卵子是最有效的策略。年輕時冷凍的卵子會保留凍結當時的品質——讓您未來能使用更健康的卵子。`,
+  },
+];
+
+const faqs = [
+  {
+    qEn: `I'm 38 and have never tried to conceive. Should I see a specialist?`,
+    qZh: `我 38 歲，從未嘗試懷孕。我該看專科嗎？`,
+    aEn: `A proactive evaluation at 38 is a very reasonable step. Even if you are not actively trying to conceive, knowing your ovarian reserve gives you important information for planning. If your reserve is strong, you may have more time than you think; if it is lower, early knowledge allows you to act while more options are available.`,
+    aZh: `在 38 歲主動做評估是非常合理的步驟。即使您尚未積極嘗試懷孕，了解自己的卵巢庫存也能為規劃提供重要資訊。若庫存充足，您可能比想像中還有時間；若偏低，及早知道能讓您在選擇尚多時採取行動。`,
+  },
+  {
+    qEn: `What is the difference between ovarian reserve and egg quality?`,
+    qZh: `卵巢庫存與卵子品質有何不同？`,
+    aEn: `Ovarian reserve refers to the quantity of eggs remaining — measured by AMH and antral follicle count. Egg quality refers to the chromosomal integrity of individual eggs, which declines with age regardless of reserve. It is possible to have adequate reserve (quantity) but still experience age-related quality decline. PGT-A during IVF addresses quality by screening embryos before transfer.`,
+    aZh: `卵巢庫存指的是剩餘卵子的「數量」——以 AMH 與竇卵泡數衡量。卵子品質則指個別卵子的染色體完整度，會隨年齡下降，與庫存無關。有可能庫存（數量）充足，卻仍出現年齡相關的品質衰退。IVF 中的 PGT-A 能在植入前篩檢胚胎，以此處理品質問題。`,
+  },
+  {
+    qEn: `Is there a cut-off age for IVF with own eggs?`,
+    qZh: `使用自身卵子做 IVF 有年齡上限嗎？`,
+    aEn: `There is no universal cut-off. IRFC treats each patient as an individual. Women in their early-to-mid 40s with remaining ovarian reserve may still produce euploid embryos, particularly with PGT-A testing. Your physician will give you an honest assessment of your specific situation — including realistic success rate estimates — so you can make an informed decision.`,
+    aZh: `並沒有通用的年齡上限。IRFC 將每位病人視為獨立的個體。四十出頭至中段、仍有卵巢庫存的女性，仍可能產出染色體正常的胚胎，特別是搭配 PGT-A 檢測時。您的醫師會針對您的具體狀況給出誠實評估——包含務實的成功率預估——讓您做出明智決定。`,
+  },
+  {
+    qEn: `At what age should I consider donor eggs?`,
+    qZh: `我應該在什麼年齡考慮捐卵？`,
+    aEn: `Donor eggs are typically considered when own-egg IVF has repeatedly not produced viable embryos, when AMH is very low, or when a patient wants the highest possible success rate. Age alone is not the only indicator — some patients in their early 40s succeed with own eggs, while others may benefit from donor eggs earlier. Your physician will discuss this openly during your consultation.`,
+    aZh: `通常在以下情況會考慮捐卵：使用自身卵子的 IVF 屢次未能產出可存活胚胎、AMH 非常低，或病人希望獲得最高成功率。年齡並非唯一指標——有些四十出頭的病人用自身卵子就能成功，也有人更早就能從捐卵受益。您的醫師會在諮詢時坦誠討論這點。`,
+  },
+];
+---
+
+<ConditionLayout
+  titleEn="Age-Related Infertility"
+  titleZh="年齡相關不孕症"
+  descriptionEn="Fertility naturally declines with age, but many women over 35 and 40 achieve successful pregnancies with the right treatment. IRFC provides honest, expert guidance."
+  descriptionZh="生育力會隨年齡自然下降，但許多 35 歲、40 歲以上的女性，仍能透過適切治療成功懷孕。IRFC 提供誠實、專業的指引。"
+  ledeEn="Age is the most significant factor affecting fertility — but it is not the whole story. Many women in their late 30s and early 40s achieve successful pregnancies with the right evaluation and treatment plan. IRFC provides honest, individualized guidance based on your actual biology."
+  ledeZh="年齡是影響生育力最顯著的因素——但並不是全貌。許多三十七、八歲到四十出頭的女性，都能在適切的評估與治療計畫下成功懷孕。IRFC 依據您真實的生理狀況，提供誠實、個人化的指引。"
+  bandImage="/images/patient-laughing.webp"
+  bandAltEn="IRFC patient"
+  bandAltZh="IRFC 病人"
+  bandQuoteEn="Age is a factor. It is never the whole picture."
+  bandQuoteZh="年齡是個因素，但從不是全貌。"
+  bandHeight={340}
+  ctaTitleEn="Know Where You Stand."
+  ctaTitleZh="弄清楚自己的處境。"
+  ctaTextEn="A thorough evaluation is the first step. Book a consultation and leave with an honest picture of your options — no pressure, no guesswork."
+  ctaTextZh="徹底的評估是第一步。預約諮詢，帶著對自身選項的誠實瞭解離開——沒有壓力，也不靠猜測。"
+  ctaPrimaryHref="/contact"
+  ctaPrimaryLabelEn="Schedule a Consultation"
+  ctaPrimaryLabelZh="預約諮詢"
+  ctaSecondaryHref="/services/egg-freezing"
+  ctaSecondaryLabelEn="Egg Freezing & Fertility Preservation"
+  ctaSecondaryLabelZh="冷凍卵子與生育力保存"
+>
+  <div slot="intro">
+    <!-- How age affects fertility -->
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-14">
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '年齡如何影響生育力' : 'How Age Affects Fertility'}</h2>
+            <p class="text-stone-600 leading-relaxed mb-4 text-sm">{ZH ? '女性出生時就帶有終身所有的卵子——出生時約 100–200 萬顆，到青春期降至約 40 萬顆，並在整個生育期持續減少。到了三十多歲中期，剩餘卵子的「數量」（卵巢庫存）與「染色體品質」都會更快下降。' : 'Women are born with all the eggs they will ever have — approximately 1–2 million at birth, declining to around 400,000 at puberty and continuing to decrease throughout reproductive life. By the mid-30s, both the number of remaining eggs (ovarian reserve) and their chromosomal quality decline more rapidly.'}</p>
+            <p class="text-stone-600 leading-relaxed mb-4 text-sm">{ZH ? '年齡相關卵子衰退最重要的後果，是染色體異常（非整倍體）的比例上升。非整倍體胚胎要不無法著床、導致早期流產，要不（罕見地）發展為帶有染色體疾病的懷孕。這正是為什麼流產率與 IVF 失敗率會隨母體年齡上升。' : 'The most important consequence of age-related egg decline is an increase in chromosomal abnormalities (aneuploidy). Aneuploid embryos either fail to implant, result in early miscarriage, or (rarely) develop into pregnancies with chromosomal conditions. This is why miscarriage rates and IVF failure rates increase with maternal age.'}</p>
+            <p class="text-stone-600 leading-relaxed text-sm">{ZH ? '重要的是：生理年齡是一個族群層級的統計數字，並不代表您個人的確切狀況。有些 40 歲女性的卵巢庫存可媲美 32 歲；也有些人衰退早於平均。AMH 檢測與竇卵泡計數，能更清楚呈現您所處的位置。' : 'It is important to note: chronological age is a population-level statistic, not a guarantee of your individual situation. Some women at 40 have ovarian reserve comparable to women at 32; others experience earlier-than-average decline. AMH testing and antral follicle count give a much clearer picture of where you stand.'}</p>
+          </div>
+          <div class="space-y-5">
+            <div class="p-7 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-4">{ZH ? '卵巢庫存的關鍵檢測' : 'Key Tests for Ovarian Reserve'}</h3>
+              <ul class="space-y-3 text-sm text-stone-600">
+                {reserveTests.map((t) => (
+                  <li class="border-b border-stone-100 pb-3 last:border-b-0 last:pb-0">
+                    <span class="font-medium text-stone-700">{t.test}</span>
+                    <p class="text-stone-500 mt-1">{ZH ? t.descZh : t.descEn}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="p-7 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{ZH ? '何時該做評估' : 'When to Seek Evaluation'}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? '若您 35–37 歲：嘗試 6 個月後就應評估。若您 38 歲以上：3 個月後就應評估；若有相關病史（月經不規則、曾動手術、子宮內膜異位症）則應立即評估。若您尚未嘗試、但擔心自己的時程，任何時候都可以主動做卵巢庫存檢測。' : 'If you are 35–37: seek evaluation after 6 months of trying. If you are 38 or older: seek evaluation after 3 months, or immediately if you have relevant history (irregular cycles, prior surgery, endometriosis). If you are not yet trying but concerned about your timeline, proactive ovarian reserve testing can be done at any time.'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success rates by age -->
+    <section class="py-20 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="max-w-3xl mx-auto">
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4 text-center">{ZH ? '各年齡層的 IVF 成功率' : 'IVF Success Rates by Age'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed text-center mb-10">{ZH ? '使用染色體正常（euploid）胚胎時，每次胚胎植入的活產率約略估計。個別結果取決於年齡以外的多項因素。' : 'Approximate live birth rates per embryo transfer using euploid (chromosomally normal) embryos. Individual outcomes depend on multiple factors beyond age.'}</p>
+          <div class="border border-stone-200">
+            <div class="grid grid-cols-3 px-6 py-3 border-b border-stone-200" style="background: var(--color-stone-50);">
+              <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '年齡' : 'Age'}</span>
+              <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? 'IVF 率' : 'IVF Rate'}</span>
+              <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '備註' : 'Note'}</span>
+            </div>
+            {ageData.map((row, i) => (
+              <div class={`grid grid-cols-3 px-6 py-4 text-sm ${i < ageData.length - 1 ? 'border-b border-stone-100' : ''}`}>
+                <span class="font-medium text-stone-700">{ZH ? row.ageZh : row.age}</span>
+                <span style="color: var(--color-gold-600);">{row.ivfRate}</span>
+                <span class="text-stone-400">{ZH ? row.noteZh : row.noteEn}</span>
+              </div>
+            ))}
+          </div>
+          <p class="text-xs text-stone-400 mt-4 leading-relaxed">{ZH ? '備註：以上數字為族群層級的約略估計。您的醫師會依據您的卵巢庫存、胚胎品質與臨床病史，提供個人化的成功率預估。' : 'Note: These figures are approximate population-level estimates. Your physician will provide individualized projections based on your ovarian reserve, embryo quality, and clinical history.'}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treatment options -->
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">{ZH ? '治療選項' : 'Treatment Options'}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {treatments.map((opt) => (
+            <div class="p-8 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? opt.titleZh : opt.titleEn}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? opt.descZh : opt.descEn}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div slot="between">
+    <!-- FAQ -->
+    <section class="py-20 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="max-w-3xl mx-auto">
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+          <div class="border border-stone-200">
+            {faqs.map((faq) => (
+              <details class="group border-b border-stone-200 last:border-b-0">
+                <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                  <h3 class="text-sm font-medium text-stone-800 pr-4">{ZH ? faq.qZh : faq.qEn}</h3>
+                  <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </summary>
+                <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{ZH ? faq.aZh : faq.aEn}</p></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ConditionLayout>

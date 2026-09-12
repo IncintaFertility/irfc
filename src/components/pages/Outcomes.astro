@@ -1,0 +1,511 @@
+---
+// 成功率與治療結果（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const ageGroups = [
+  {
+    range: 'Under 35',
+    national: '47%',
+    color: 'gold',
+    note: 'Egg quality and quantity are at their peak. Most patients in this group respond well to stimulation.',
+    noteZh: '卵子品質與數量都處於巔峰。此年齡層多數病人對刺激療程反應良好。',
+  },
+  {
+    range: '35 – 37',
+    national: '38%',
+    color: 'gold',
+    note: 'Strong outcomes remain achievable. Personalized protocols and lab quality make a measurable difference.',
+    noteZh: '仍能達成穩健的治療結果。個人化療程與實驗室品質，會帶來可衡量的差異。',
+  },
+  {
+    range: '38 – 40',
+    national: '25%',
+    color: 'stone',
+    note: 'PGT-A genetic testing is often recommended to identify the strongest embryos and reduce miscarriage risk.',
+    noteZh: '通常建議進行 PGT-A 基因檢測，以挑選最強健的胚胎並降低流產風險。',
+  },
+  {
+    range: '41 – 42',
+    national: '13%',
+    color: 'stone',
+    note: 'Multiple cycles or donor egg IVF significantly improve the probability of success for patients in this range.',
+    noteZh: '多次週期或捐卵 IVF，能顯著提升此年齡區間病人的成功機率。',
+  },
+  {
+    range: 'Over 42',
+    national: '5%',
+    color: 'stone',
+    note: "Donor egg IVF offers success rates equivalent to the donor's age — typically 50%+. Many patients find this path profoundly meaningful.",
+    noteZh: '捐卵 IVF 提供的成功率相當於捐卵者年齡層——通常超過 50%。許多病人發現這條路徑意義深遠。',
+  },
+];
+
+const factors = [
+  {
+    num: '01',
+    title: 'Age at Time of Retrieval',
+    titleZh: '取卵時的年齡',
+    desc: 'The single most influential variable in IVF outcomes. Egg chromosome integrity declines with age — which is why your physician designs a stimulation protocol specifically calibrated to your ovarian reserve and history, not a generic one.',
+    descZh: 'IVF 結果中影響力最大的單一變數。卵子染色體完整性隨年齡下降——這正是醫師為你設計刺激療程時，會依據卵巢儲備與病史精確校準，而非套用通用方案的緣故。',
+  },
+  {
+    num: '02',
+    title: 'Laboratory Quality & Environment',
+    titleZh: '實驗室品質與環境',
+    desc: "Embryos are extraordinarily sensitive to their culture environment. Temperature, oxygen levels, culture media composition, and handling practices all affect development. IRFC's CAP-certified laboratory and EmbryoScope+ continuous monitoring eliminate the environmental disruptions that compromise embryo quality in less rigorous settings.",
+    descZh: '胚胎對其培養環境極度敏感。溫度、含氧量、培養液組成與操作方式，都會影響發育。IRFC 通過 CAP 認證的實驗室與 EmbryoScope+ 持續監測，排除了在較不嚴謹環境中會損害胚胎品質的環境干擾。',
+  },
+  {
+    num: '03',
+    title: 'Embryo Chromosomal Integrity',
+    titleZh: '胚胎染色體完整性',
+    desc: 'The majority of IVF failures — and most miscarriages — are caused by chromosomally abnormal embryos. Preimplantation Genetic Testing (PGT-A) identifies euploid (chromosomally normal) embryos before transfer, significantly improving per-transfer success rates and reducing miscarriage risk.',
+    descZh: '大多數 IVF 失敗——以及多數流產——皆由染色體異常的胚胎造成。胚胎著床前基因檢測（PGT-A）能在植入前辨識出染色體正常（整倍體）的胚胎，顯著提升每次植入的成功率並降低流產風險。',
+  },
+  {
+    num: '04',
+    title: 'Accurate Diagnosis & Protocol Design',
+    titleZh: '準確診斷與療程設計',
+    desc: 'Conditions such as diminished ovarian reserve, endometriosis, or severe male factor each require distinct clinical approaches. A physician who accurately diagnoses and adjusts protocol for your specific diagnosis achieves materially better outcomes than a one-size-fits-all approach.',
+    descZh: '卵巢儲備下降、子宮內膜異位症或嚴重男性因素等狀況，各自需要不同的臨床方式。能準確診斷並針對你的特定診斷調整療程的醫師，比起一體適用的做法，能取得實質更好的結果。',
+  },
+  {
+    num: '05',
+    title: 'Uterine Receptivity at Transfer',
+    titleZh: '植入時的子宮接受度',
+    desc: 'Even a chromosomally perfect embryo requires the right uterine environment to implant. Your physician evaluates endometrial thickness, anatomy, and may recommend ERA (Endometrial Receptivity Analysis) or a mock cycle to optimize transfer timing for your body.',
+    descZh: '即便是染色體完美的胚胎，也需要合適的子宮環境才能著床。醫師會評估內膜厚度、解剖構造，並可能建議 ERA（子宮內膜容受性分析）或模擬週期，為你的身體優化植入時機。',
+  },
+];
+
+const credentials = [
+  {
+    stat: '#1',
+    label: 'US IVF Laboratory',
+    year: 'SART — 2016',
+    labelZh: '全美 IVF 實驗室',
+    yearZh: 'SART — 2016',
+    detail: 'The IRFC embryology team, led by Dr. Yufen Xie, achieved the highest IVF success rates in the United States in 2016. This ranking is based on verified CDC-reported outcomes submitted to SART.',
+    detailZh: '由 Yufen Xie 醫師領軍的 IRFC 胚胎學團隊，於 2016 年達成全美最高的 IVF 成功率。此排名依據提交至 SART、經 CDC 驗證的治療結果。',
+  },
+  {
+    stat: 'COE',
+    label: 'Kaiser Permanente\nCenter of Excellence',
+    year: 'Southern California Designation',
+    labelZh: 'Kaiser Permanente\n傑出中心',
+    yearZh: '南加州認證',
+    detail: 'One of the most rigorous independent quality designations in reproductive medicine. Requires consistently exceeding benchmarks for clinical outcomes, safety record, and patient experience standards.',
+    detailZh: '生殖醫學領域最嚴謹的獨立品質認證之一。要求持續超越臨床結果、安全紀錄與病人體驗標準的基準。',
+  },
+  {
+    stat: 'CAP',
+    label: 'Certified Laboratory',
+    year: 'CAP / CLIA Accreditation',
+    labelZh: '認證實驗室',
+    yearZh: 'CAP / CLIA 認證',
+    detail: "Our IVF laboratory meets the College of American Pathologists' highest standards for quality management, personnel qualifications, and procedural accuracy — the same standard applied to the best hospital labs in the country.",
+    detailZh: '我們的 IVF 實驗室符合美國病理學會（CAP）在品質管理、人員資格與流程準確性上的最高標準——與全美頂尖醫院實驗室採用的標準相同。',
+  },
+  {
+    stat: '#1',
+    label: 'Fairfax EggBank\nProduction Facility',
+    year: 'Donor Egg Program',
+    labelZh: 'Fairfax EggBank\n生產據點',
+    yearZh: '捐卵計畫',
+    detail: 'IRFC is one of the largest Fairfax EggBank production facilities in the United States — a distinction reflecting consistent technical excellence in egg banking outcomes and laboratory precision.',
+    detailZh: 'IRFC 是美國規模最大的 Fairfax EggBank 生產據點之一——此榮譽反映我們在卵子銀行結果與實驗室精準度上，一貫的技術卓越。',
+  },
+];
+
+const faqs = [
+  { q: 'Why don\'t you list a specific success rate percentage on this page?', a: 'Because a single percentage without context is, at best, incomplete — and at worst, misleading. A 50% rate for a 28-year-old with unexplained infertility is very different from a 50% rate for a 41-year-old with diminished ovarian reserve. The number that matters is yours. We discuss your personalized probability honestly at your first consultation.', qZh: '為什麼這一頁不列出具體的成功率百分比？', aZh: '因為脫離脈絡的單一百分比，往好處說是不完整，往壞處說則會誤導。一位 28 歲、不明原因不孕者的 50% 成功率，與一位 41 歲、卵巢儲備下降者的 50% 成功率，意義截然不同。真正重要的數字，是「你的」。我們會在初次諮詢時，誠實地與你討論個人化的機率。' },
+  { q: 'Where can I find IRFC\'s official CDC-reported outcomes data?', a: 'US fertility clinics that perform ART cycles submit annual outcome data to the CDC. You can search the National ART Surveillance System (NASS) database at cdc.gov/art to compare reported outcomes across clinics, including IRFC. We encourage you to review this data and bring your questions to your consultation.', qZh: '我在哪裡可以找到 IRFC 官方、經 CDC 申報的治療結果資料？', aZh: '在美國執行 ART 週期的生育診所，每年都會向 CDC 申報治療結果資料。你可以在 cdc.gov/art 搜尋「全國 ART 監測系統（NASS）」資料庫，比較各家診所（包含 IRFC）申報的結果。我們鼓勵你查閱這些資料，並帶著問題前來諮詢。' },
+  { q: 'What success rate should I realistically expect for my situation?', a: 'Your physician will review your complete history, bloodwork, ultrasound findings, and diagnosis before providing an honest, individualized estimate. Key inputs include your age, ovarian reserve (AMH and antral follicle count), uterine anatomy, partner\'s semen parameters, and any underlying conditions. We do not offer false hope — and we do not give up easily.', qZh: '以我的情況，實際上應期待怎樣的成功率？', aZh: '你的醫師會先檢閱完整的病史、驗血、超音波發現與診斷，再給出誠實、個人化的預估。關鍵依據包含你的年齡、卵巢儲備（AMH 與竇卵泡數）、子宮解剖構造、伴侶的精液參數，以及任何潛在狀況。我們不給予虛假希望——也不輕言放棄。' },
+  { q: 'Does PGT-A genetic testing significantly improve success rates?', a: 'PGT-A improves the per-transfer live birth rate by ensuring only chromosomally normal (euploid) embryos are transferred. For patients over 35, or those with prior unexplained IVF failures, this can meaningfully reduce miscarriage risk and improve confidence in each transfer. Whether PGT-A is right for your situation is a discussion for your physician — it is not appropriate for every patient.', qZh: 'PGT-A 基因檢測能顯著提升成功率嗎？', aZh: 'PGT-A 透過確保只有染色體正常（整倍體）的胚胎被植入，提升每次植入的活產率。對 35 歲以上、或曾有不明原因 IVF 失敗的病人，這能有意義地降低流產風險，並提升對每次植入的信心。PGT-A 是否適合你的情況，需與你的醫師討論——它並非適用於每一位病人。' },
+  { q: 'How many IVF cycles do most patients need?', a: 'There is no universal answer, and anyone who gives you one is guessing. Some patients succeed on their first cycle; others benefit from two or three. Your physician will discuss the cumulative probability of success across multiple cycles based on your specific profile. Our financial coordinator can help you plan for different scenarios so cost is never a surprise.', qZh: '大多數病人需要幾次 IVF 週期？', aZh: '沒有放諸四海皆準的答案，任何給你一個確切數字的人都在臆測。有些病人第一次週期就成功；有些則受益於兩到三次。你的醫師會根據你的具體狀況，討論跨越多個週期的累積成功機率。我們的財務協調專員能協助你規劃不同情境，讓費用絕不會成為意外。' },
+  { q: 'Are your success rates higher with donor eggs?', a: 'Yes — significantly. Donor egg IVF success rates are primarily determined by the egg donor\'s age, not the recipient\'s. This means a 44-year-old patient using eggs from a 26-year-old donor can achieve success rates comparable to a 26-year-old patient using her own eggs — typically 50–60% per transfer. For patients with severely diminished ovarian reserve or prior IVF failures, donor egg IVF is often the most direct path to a healthy pregnancy.', qZh: '使用捐卵時，你們的成功率會更高嗎？', aZh: '是的——顯著更高。捐卵 IVF 的成功率，主要由捐卵者的年齡決定，而非受贈者。這意味著一位 44 歲、使用 26 歲捐卵者卵子的病人，能達成與 26 歲、使用自身卵子的病人相當的成功率——通常每次植入 50–60%。對卵巢儲備嚴重下降或曾有 IVF 失敗的病人，捐卵 IVF 往往是通往健康懷孕最直接的路徑。' },
+];
+
+const singleNumberCards = [
+  { heading: 'Age changes everything.', headingZh: '年齡改變一切。', body: 'A clinic with a 45% overall rate may serve mostly younger patients. A clinic with a 38% rate may specialize in complex, high-age cases. Overall averages conceal more than they reveal.', bodyZh: '整體成功率 45% 的診所，可能主要服務年輕病人；整體 38% 的診所，可能專精於複雜、高齡的個案。整體平均值隱藏的，往往多於它揭示的。' },
+  { heading: 'Not all labs are equal.', headingZh: '並非所有實驗室都一樣。', body: 'The laboratory environment — temperature, oxygen levels, culture media, embryologist expertise — has a profound effect on embryo development. Two clinics with identical patients can produce very different embryos.', bodyZh: '實驗室的環境——溫度、含氧量、培養液、胚胎學家的專業——對胚胎發育有深遠影響。面對相同的病人，兩家診所可能培育出截然不同的胚胎。' },
+  { heading: 'Diagnosis shapes probability.', headingZh: '診斷形塑機率。', body: 'IVF for unexplained infertility has a very different success profile than IVF for severe diminished ovarian reserve. The right number is the one calculated for your specific clinical picture.', bodyZh: '針對不明原因不孕的 IVF，與針對嚴重卵巢儲備下降的 IVF，成功率走向截然不同。正確的數字，是為你的具體臨床情況所計算出的那一個。' },
+];
+
+const techVars = [
+  { name: 'EmbryoScope+', impactZh: '持續縮時攝影監測，意味著胚胎永遠不必為了觀察而離開最佳培養環境。這消除了會損害發育的溫度與含氧干擾——並提供即時數據，用以挑選最強健的胚胎。' },
+  { name: 'PGT-A Genetic Testing', impactZh: '植入前的染色體篩檢，能辨識出整倍體胚胎，並排除 IVF 失敗與流產的主因。對符合資格的病人而言，這直接轉化為更高的每次植入活產率。' },
+  { name: 'RI Witness™ RFID Witnessing', impactZh: '自動化電子驗證，確保在 IVF 流程的每一步，生物檢體都與正確的病人配對——這是最高品質照護標準的絕對前提。' },
+  { name: 'TMRW Smart Vault', impactZh: '具備 RFID 追蹤的 24/7 即時冷凍監測，確保冷凍卵子與胚胎在儲存期間的完整性——守護你的投資與未來。' },
+];
+
+const title = ZH ? 'IVF 成功率與臨床結果' : 'IVF Success Rates & Clinical Outcomes';
+const description = ZH
+  ? 'IRFC 如何誠實地看待成功率——這些數字代表什麼、是什麼驅動結果，以及如何理解你個人的機率。2016 年全美 IVF 實驗室排名第一。'
+  : 'How IRFC approaches success rates honestly — what the numbers mean, what drives outcomes, and how to understand your personal probability. Ranked #1 US IVF lab in 2016.';
+---
+<!-- marked: component for /outcomes and /zh-hant/outcomes -->
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '成功率與治療結果' : 'Success Rates & Outcomes'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? (
+            <>成功率很重要。<br/><em class="not-italic" style="color: var(--color-gold-500);">脈絡同樣重要。</em></>
+          ) : (
+            <>Success Rates Matter.<br/><em class="not-italic" style="color: var(--color-gold-500);">So Does Context.</em></>
+          )}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH
+            ? '一個單一的百分比，說明不了什麼。真正重要的，是適用於「你」的數字——你的年齡、你的診斷、你的胚胎。在 IRFC，我們相信誠實、個人化的成功率預估，比聳動的統計數字更能建立信任。'
+            : 'A single percentage tells you very little. What matters is the number that applies to you — your age, your diagnosis, your embryos. At IRFC, we believe honest, personalized probability estimates build more trust than headline statistics.'}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+          <a href={localeHref('/contact', locale)} class="btn-primary">
+            {ZH ? '索取您的個人化預估' : 'Request Your Personal Estimate'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="#credentials" class="btn-outline">{ZH ? '我們的實證紀錄' : 'Our Proven Record'}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why a single number isn't enough -->
+  <section class="py-20 border-y border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-px" style="background: var(--color-stone-200);">
+        {singleNumberCards.map(item => (
+          <div class="bg-white p-10 lg:p-12">
+            <div class="w-8 h-px mb-6" style="background: var(--color-gold-500);"></div>
+            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{ZH ? item.headingZh : item.heading}</h3>
+            <p class="text-sm leading-relaxed text-stone-500">{ZH ? item.bodyZh : item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Age-based reference data -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mb-16">
+        <div class="section-divider mb-6"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-5">
+          {ZH ? (
+            <>理解成功率<br/><em class="not-italic" style="color: var(--color-gold-500);">依年齡而異</em></>
+          ) : (
+            <>Understanding Success<br/><em class="not-italic" style="color: var(--color-gold-500);">by Age</em></>
+          )}
+        </h2>
+        <p class="text-sm leading-relaxed text-stone-500 max-w-xl">
+          {ZH
+            ? '下表顯示來自 SART（美國輔助生殖技術學會）資料的<strong class="text-stone-700 font-medium">全國平均每次取卵週期活產率</strong>——採用病人自身卵子、合併所有診斷。這些是參考基準，並非 IRFC 的特定數據。您的醫師會在諮詢時與您討論個人化的機率。'
+            : 'The table below shows <strong class="text-stone-700 font-medium">national average live birth rates per retrieval cycle</strong> from SART (Society for Assisted Reproductive Technology) data — using a patient’s own eggs, all diagnoses combined. These are reference benchmarks, not IRFC-specific figures. Your physician will discuss your individual probability at consultation.'}
+        </p>
+      </div>
+
+      <!-- Desktop table -->
+      <div class="hidden md:block overflow-hidden border border-stone-200">
+        <table class="w-full">
+          <thead>
+            <tr style="background: var(--color-stone-50);">
+              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans); width: 22%;">{ZH ? '年齡區間' : 'Age Range'}</th>
+              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans); width: 20%;">{ZH ? '全國平均<br/>(活產 / 取卵)' : 'National Avg.<br/>(Live Birth / Retrieval)'}</th>
+              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans);">{ZH ? '臨床脈絡' : 'Clinical Context'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ageGroups.map((group, i) => (
+              <tr class={i < ageGroups.length - 1 ? 'border-b border-stone-100' : ''}>
+                <td class="px-8 py-7">
+                  <span class="text-xl font-light" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{group.range}</span>
+                </td>
+                <td class="px-8 py-7">
+                  <span class="text-3xl font-light" style={`font-family: var(--font-serif); color: var(--color-gold-600);`}>{group.national}</span>
+                </td>
+                <td class="px-8 py-7">
+                  <p class="text-sm leading-relaxed text-stone-500 max-w-lg">{ZH ? group.noteZh : group.note}</p>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="px-8 py-5 border-t border-stone-100" style="background: var(--color-stone-50);">
+          <p class="text-xs text-stone-400 leading-relaxed">
+            {ZH
+              ? '資料來源：SART 全國平均、自卵 IVF 週期。個別結果因診斷、療程、實驗室品質與胚胎基因而異。數據反映近期約略的全國平均，僅供教育參考之用。'
+              : 'Source: SART national averages, own-egg IVF cycles. Individual outcomes vary by diagnosis, protocol, laboratory quality, and embryo genetics. Data reflects approximate recent national averages and is provided for educational context only.'}
+          </p>
+        </div>
+      </div>
+
+      <!-- Mobile cards -->
+      <div class="md:hidden space-y-4">
+        {ageGroups.map((group) => (
+          <div class="border border-stone-200 p-6">
+            <div class="flex items-baseline gap-6 mb-3">
+              <span class="text-xl font-light text-stone-800" style="font-family: var(--font-serif);">{group.range}</span>
+              <span class="text-3xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">{group.national}</span>
+              <span class="text-xs text-stone-400">{ZH ? '全國平均' : 'national avg.'}</span>
+            </div>
+            <p class="text-sm leading-relaxed text-stone-500">{ZH ? group.noteZh : group.note}</p>
+          </div>
+        ))}
+        <p class="text-xs text-stone-400 leading-relaxed pt-2">
+          {ZH ? '資料來源：SART 全國平均、自卵 IVF。個別結果因人而異。僅供教育參考。' : 'Source: SART national averages, own-egg IVF. Individual outcomes vary. Provided for educational context only.'}
+        </p>
+      </div>
+
+      <!-- Donor egg callout -->
+      <div class="mt-8 p-8 lg:p-10 border border-stone-200 bg-stone-50">
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '另一條路' : 'A Different Path'}</p>
+            <h3 class="text-2xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{ZH ? '捐卵 IVF' : 'Donor Egg IVF'}</h3>
+            <p class="text-sm leading-relaxed text-stone-500">
+              {ZH
+                ? '對於卵巢儲備下降或曾 IVF 失敗的病人，捐卵 IVF 將成功機率重置為捐卵者的年齡層——通常<strong class="text-stone-700 font-medium">每次植入 50–60%</strong>，與受贈者年齡無關。許多病人發現，這條路徑雖與原先想像不同，卻是通往期盼已久家庭最直接的道路。'
+                : 'For patients with diminished ovarian reserve or prior IVF failures, donor egg IVF resets the success probability to the donor’s age group — typically <strong class="text-stone-700 font-medium">50–60% per transfer</strong>, regardless of recipient age. Many patients find that this path, though different from what they imagined, is the most direct route to the family they’ve always wanted.'}
+            </p>
+          </div>
+          <div class="lg:text-right">
+            <a href={`${localeHref('/services', locale)}#donors`} class="btn-outline">
+              {ZH ? '進一步了解捐卵 IVF' : 'Learn About Donor Egg IVF'}
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IRFC Credentials -->
+  <section id="credentials" class="py-24 lg:py-32 border-y border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '經驗證的榮譽' : 'Verified Recognition'}</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-5">
+          {ZH ? '我們的實證紀錄' : 'Our Proven Record'}
+        </h2>
+        <p class="text-sm text-stone-500 max-w-xl mx-auto leading-relaxed">
+          {ZH
+            ? '這些榮譽皆經獨立驗證，並紮根於臨床結果——而非自我宣稱的行銷說法。'
+            : 'These distinctions are independently verified and rooted in clinical outcomes — not self-reported marketing claims.'}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-px" style="background: var(--color-stone-200);">
+        {credentials.map(cred => (
+          <div class="bg-white p-10 lg:p-14">
+            <div class="flex items-start gap-6 mb-6">
+              <span class="text-5xl font-light leading-none flex-shrink-0" style="font-family: var(--font-serif); color: var(--color-gold-300);">{cred.stat}</span>
+              <div>
+                <p class="text-lg font-light text-stone-800 whitespace-pre-line leading-snug" style="font-family: var(--font-serif);">{ZH ? cred.labelZh : cred.label}</p>
+                <p class="text-xs tracking-widest uppercase mt-1" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? cred.yearZh : cred.year}</p>
+              </div>
+            </div>
+            <div class="w-8 h-px mb-5" style="background: var(--color-gold-400);"></div>
+            <p class="text-sm leading-relaxed text-stone-500">{ZH ? cred.detailZh : cred.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What drives outcomes -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <div class="lg:sticky" style="top: 8rem; align-self: start;">
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+            {ZH ? (
+              <>影響治療結果的<br/><em class="not-italic" style="color: var(--color-gold-500);">五大因素</em></>
+            ) : (
+              <>Five Factors That<br/><em class="not-italic" style="color: var(--color-gold-500);">Drive Your Outcome</em></>
+            )}
+          </h2>
+          <p class="text-sm leading-relaxed text-stone-500 mb-8">
+            {ZH
+              ? 'IVF 的成功並非由單一變數決定。了解是什麼驅動結果，能幫助你提出更好的問題——也有助於我們為你擬定更好的計畫。'
+              : 'Success in IVF is not determined by a single variable. Understanding what drives outcomes helps you ask better questions — and helps us build a better plan for you.'}
+          </p>
+          <a href={localeHref('/contact', locale)} class="btn-primary">
+            {ZH ? '討論您的個別情況' : 'Discuss Your Specific Case'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="space-y-0 border-t border-stone-100">
+          {factors.map(factor => (
+            <div class="py-10 border-b border-stone-100">
+              <div class="flex gap-8">
+                <span class="text-3xl font-light flex-shrink-0 leading-none mt-1" style="font-family: var(--font-serif); color: var(--color-gold-300);">{factor.num}</span>
+                <div>
+                  <h3 class="text-xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{ZH ? factor.titleZh : factor.title}</h3>
+                  <p class="text-sm leading-relaxed text-stone-500">{ZH ? factor.descZh : factor.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology + outcomes -->
+  <section class="overflow-hidden border-y border-stone-100" style="background: var(--color-stone-50);">
+    <div class="lg:grid lg:grid-cols-2">
+      <div class="relative hidden lg:block" style="min-height: 560px;">
+        <img
+          src="/images/surgery-center.webp" srcset="/images/surgery-center-800.webp 800w, /images/surgery-center-1280.webp 1280w, /images/surgery-center.webp 2560w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+          alt="IRFC embryology laboratory"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+      <div class="py-24 lg:py-28 px-6 lg:px-16">
+        <div class="max-w-lg">
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-5">
+            {ZH ? (
+              <>科技，也是<br/><em class="not-italic" style="color: var(--color-gold-500);">影響結果的變數</em></>
+            ) : (
+              <>Technology as an<br/><em class="not-italic" style="color: var(--color-gold-500);">Outcome Variable</em></>
+            )}
+          </h2>
+          <p class="text-sm leading-relaxed text-stone-500 mb-12">
+            {ZH
+              ? '實驗室設備並非行銷上的區隔——它是臨床變數。下列每一項技術，都應用於每一位 IRFC 病人、每一個週期。'
+              : 'Laboratory equipment is not a marketing distinction — it is a clinical variable. Each of the following technologies is used for every IRFC patient, every cycle.'}
+          </p>
+          <div class="space-y-8">
+            {techVars.map(tech => (
+              <div class="flex gap-5 items-start">
+                <div class="flex-shrink-0 w-1 self-stretch" style="background: var(--color-gold-300);"></div>
+                <div>
+                  <h3 class="text-base font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">{tech.name}</h3>
+                  <p class="text-sm leading-relaxed text-stone-500">{ZH ? tech.impactZh : ''}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <a href={localeHref('/technology', locale)} class="btn-outline mt-12 inline-flex items-center gap-2">
+            {ZH ? '完整技術總覽' : 'Full Technology Overview'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-16">
+        <div>
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">
+            {ZH ? '常見問題' : 'Common Questions'}
+          </h2>
+          <p class="text-sm leading-relaxed text-stone-500">
+            {ZH
+              ? '若你有此處未涵蓋的問題，初次諮詢是最好的提問時機。你會直接與醫師對話——而非協調專員。'
+              : 'If you have a question not covered here, your first consultation is the best place to ask. You’ll speak directly with a physician — not a coordinator.'}
+          </p>
+          <a href={localeHref('/contact', locale)} class="btn-outline mt-8 inline-flex items-center gap-2">
+            {ZH ? '預約諮詢' : 'Schedule a Consultation'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="lg:col-span-2">
+          <div class="divide-y divide-stone-100">
+            {faqs.map((faq, i) => (
+              <details class="group py-6" open={i === 0}>
+                <summary class="flex items-start justify-between gap-6 cursor-pointer list-none select-none">
+                  <span class="text-base font-light text-stone-800 leading-snug" style="font-family: var(--font-serif);">{ZH ? faq.qZh : faq.q}</span>
+                  <svg class="w-4 h-4 flex-shrink-0 mt-1 text-stone-400 transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                </summary>
+                <p class="mt-4 text-sm leading-relaxed text-stone-500 max-w-2xl">{ZH ? faq.aZh : faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative overflow-hidden py-28 lg:py-36">
+    <img src="/images/couple-clinic.webp" srcset="/images/couple-clinic-800.webp 800w, /images/couple-clinic-1280.webp 1280w, /images/couple-clinic.webp 2292w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+    <div class="absolute inset-0" style="background: rgba(20,18,15,0.72);"></div>
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? '你的下一步' : 'Your Next Step'}</span>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white mb-6 leading-tight">
+          {ZH ? '了解你的數字。<br/>做出你的決定。' : 'Know Your Numbers.<br/>Make Your Decision.'}
+        </h2>
+        <p class="text-sm leading-relaxed mb-10" style="color: rgba(255,255,255,0.65);">
+          {ZH
+            ? '我們的醫師會檢閱你的病史、說明你實際的成功機率，並以你的具體情況為核心設計計畫——而非套用通用療程。'
+            : 'Our physicians will review your history, explain your realistic probability of success, and design a plan built around your specific situation — not a generic protocol.'}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href={localeHref('/contact', locale)} class="btn-primary">
+            {ZH ? '預約諮詢' : 'Schedule a Consultation'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="tel:+14244324732" class="btn-outline" style="border-color: rgba(255,255,255,0.35); color: white;">{ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}</a>
+        </div>
+        <p class="mt-6 text-xs" style="color: rgba(255,255,255,0.35);">
+          {ZH ? '提供遠距醫療。遠距醫療適用於外地與國際病人。' : 'Telehealth available. Telehealth available for out-of-area and international patients.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  details[open] summary svg {
+    transform: rotate(45deg);
+  }
+</style>

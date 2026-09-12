@@ -1,0 +1,171 @@
+---
+// 病症頁共用骨架（英文 / 繁體中文共用）：
+//   Hero → Care Team Spotlight → <slot intro>（主題 + 治療網格，逐頁提供）
+//   → 圖片帶引語 → <slot between>（選用 FAQ）→ 病人引言（選用）→ CTA
+// 各病症頁以 <ConditionLayout ...> 呼叫，並把獨有內容塞進 intro / between 插槽。
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+interface Props {
+  titleEn: string;
+  titleZh: string;
+  descriptionEn: string;
+  descriptionZh: string;
+  ledeEn: string;
+  ledeZh: string;
+  bandImage: string;
+  bandAltEn: string;
+  bandAltZh: string;
+  bandQuoteEn: string;
+  bandQuoteZh: string;
+  bandAlign?: 'left' | 'right';
+  bandHeight?: number;
+  quoteEn?: string;
+  quoteZh?: string;
+  quoteAttributionEn?: string;
+  quoteAttributionZh?: string;
+  ctaTitleEn: string;
+  ctaTitleZh: string;
+  ctaTextEn: string;
+  ctaTextZh: string;
+  ctaPrimaryHref: string;
+  ctaPrimaryLabelEn: string;
+  ctaPrimaryLabelZh: string;
+  ctaSecondaryHref?: string;
+  ctaSecondaryLabelEn?: string;
+  ctaSecondaryLabelZh?: string;
+}
+
+const {
+  titleEn,
+  titleZh,
+  descriptionEn,
+  descriptionZh,
+  ledeEn,
+  ledeZh,
+  bandImage,
+  bandAltEn,
+  bandAltZh,
+  bandQuoteEn,
+  bandQuoteZh,
+  bandAlign = 'left',
+  bandHeight = 360,
+  quoteEn,
+  quoteZh,
+  quoteAttributionEn,
+  quoteAttributionZh,
+  ctaTitleEn,
+  ctaTitleZh,
+  ctaTextEn,
+  ctaTextZh,
+  ctaPrimaryHref,
+  ctaPrimaryLabelEn,
+  ctaPrimaryLabelZh,
+  ctaSecondaryHref,
+  ctaSecondaryLabelEn,
+  ctaSecondaryLabelZh,
+} = Astro.props;
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+const title = ZH ? titleZh : titleEn;
+const description = ZH ? descriptionZh : descriptionEn;
+const bandAlt = ZH ? bandAltZh : bandAltEn;
+const bandQuote = ZH ? bandQuoteZh : bandQuoteEn;
+const bandRight = bandAlign === 'right';
+const hasQuote = Boolean(quoteEn);
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '我們治療的病症' : 'Conditions We Treat'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none" set:html={ZH ? titleZh : titleEn}></h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl" set:html={ZH ? ledeZh : ledeEn}></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Team Spotlight -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="overflow-hidden">
+          <img
+            src="/images/care-team-coordinator.webp"
+            srcset="/images/care-team-coordinator-800.webp 800w, /images/care-team-coordinator.webp 1024w"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            alt={ZH ? 'IRFC 協調員檢視病人治療計畫' : 'IRFC care coordinator reviewing a patient treatment plan'}
+            width="1024" height="1024" class="w-full h-auto object-cover"
+          />
+        </div>
+        <div>
+          <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '診斷，始於一次傾聽' : 'Diagnosis starts with a conversation'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '在展開任何治療前，您的醫師會花時間了解您的完整病史，並說明現有證據顯示的結果——讓治療計畫貼合您，而非套用「一體適用」的制式流程。' : 'Before any treatment, your physician takes the time to understand your full history and explain what the evidence shows — so the plan fits you, not a one-size-fits-all protocol.'}</p>
+          <a href={localeHref('/contact', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">
+            {ZH ? '與協調員聊聊' : 'Talk to a coordinator'}
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 各頁獨有：主題章節 + 治療網格（含表格 / 編號卡等） -->
+  <slot name="intro" />
+
+  <!-- 圖片帶引語 -->
+  <section class="relative overflow-hidden" style={`height: ${bandHeight}px;`}>
+    <img
+      src={bandImage}
+      alt={bandAlt}
+      class="w-full h-full object-cover"
+      style={bandRight ? 'object-top' : 'object-center'}
+    />
+    <div class="absolute inset-0" style={`background: linear-gradient(to ${bandRight ? 'left' : 'right'}, rgba(20,18,15,${bandRight ? '0.5' : '0.45'}) 0%, transparent ${bandRight ? '60%' : '55%'});`}></div>
+    <div class={`absolute inset-0 flex items-center ${bandRight ? 'justify-end' : ''} px-10 lg:px-20`}>
+      <p style="font-family: var(--font-serif);" class={`text-2xl font-light text-white max-w-sm leading-relaxed ${bandRight ? 'text-right' : ''}`} set:html={bandQuote}></p>
+    </div>
+  </section>
+
+  <!-- 各頁獨有：FAQ / 補充盒（位於圖片帶之後、病人引言之前） -->
+  <slot name="between" />
+
+  <!-- 病人引言（選用） -->
+  {hasQuote && (
+    <section class="py-16" style="background: var(--color-stone-50);">
+      <div class="max-w-2xl mx-auto px-6 text-center">
+        <svg class="w-8 h-8 mx-auto mb-6 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);"><path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/></svg>
+        <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-700 italic leading-relaxed mb-5" set:html={ZH ? quoteZh : quoteEn}></p>
+        <p class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600);">{ZH ? quoteAttributionZh : quoteAttributionEn}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4" set:html={ZH ? ctaTitleZh : ctaTitleEn}></h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);" set:html={ZH ? ctaTextZh : ctaTextEn}></p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref(ctaPrimaryHref, locale)} class="btn-primary">{ZH ? ctaPrimaryLabelZh : ctaPrimaryLabelEn}</a>
+        {ctaSecondaryHref && (
+          <a href={localeHref(ctaSecondaryHref, locale)} class="btn-outline">{ZH ? ctaSecondaryLabelZh : ctaSecondaryLabelEn}</a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

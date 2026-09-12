@@ -1,0 +1,401 @@
+---
+// 療程旅程（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const phases = [
+  {
+    phase: 'Phase One',
+    phaseZh: '階段一',
+    title: 'Getting Started',
+    titleZh: '起步',
+    timeframe: 'Weeks 1 – 3',
+    timeframeZh: '第 1–3 週',
+    steps: [
+      {
+        num: '01',
+        title: 'Initial Consultation',
+        titleZh: '初次諮詢',
+        time: 'Day 1 · 60–90 minutes',
+        timeZh: '第 1 天 · 60–90 分鐘',
+        body: 'Your first appointment is with a physician — not a coordinator or nurse. You\'ll discuss your complete medical history, any prior fertility testing, and your goals. No decisions are required at this visit. Bring any prior records, bloodwork, or semen analyses you have. If you have a partner, we encourage them to attend.',
+        bodyZh: '你的初次約診對象是醫師——而非協調專員或護理師。你會討論完整的病史、任何先前的生育檢查，以及你的目標。這次看診不需做任何決定。請攜帶你已有的任何紀錄、驗血或精液分析報告。若有伴侶，我們鼓勵對方一同出席。',
+        note: 'Free of charge. Telehealth available for out-of-area patients.',
+        noteZh: '免費。外地病人可採遠距醫療。',
+      },
+      {
+        num: '02',
+        title: 'Diagnostic Workup',
+        titleZh: '診斷檢查',
+        time: 'Week 1–2 · Multiple visits',
+        timeZh: '第 1–2 週 · 多次約診',
+        body: 'Your physician will order a comprehensive evaluation: Day 3 bloodwork (FSH, estradiol, AMH, AFC ultrasound), a transvaginal ultrasound to assess ovarian reserve and uterine anatomy, and a semen analysis for male partners. If needed, additional tests such as an HSG (to confirm tubal patency) or SHG (saline sonogram) may be ordered.',
+        bodyZh: '你的醫師會安排完整的評估：第 3 天驗血（FSH、雌二醇、AMH、AFC 超音波）、評估卵巢儲備與子宮構造的陰道超音波，以及男性伴侶的精液分析。若有需要，可能會安排額外檢查，例如 HSG（確認輸卵管通暢度）或 SHG（生理鹽水超音波）。',
+        note: 'Male factor contributes to 40–50% of infertility cases. A semen analysis is always part of a complete evaluation.',
+        noteZh: '男性因素佔不孕個案的 40–50%。精液分析始終是完整評估的一環。',
+      },
+      {
+        num: '03',
+        title: 'Results Review & Protocol Design',
+        titleZh: '結果檢閱與療程設計',
+        time: 'Week 2–3 · 45–60 minutes',
+        timeZh: '第 2–3 週 · 45–60 分鐘',
+        body: 'Your physician reviews all test results with you in detail — not just numbers, but what they mean for your path. Together, you\'ll discuss treatment options, expected response, and realistic success probabilities. If IVF is recommended, your personalized stimulation protocol is designed at this visit. Financial planning and insurance review happen in parallel with your financial coordinator.',
+        bodyZh: '醫師會與你詳細檢閱所有檢查結果——不只是數字，還有它們對你這條路意味著什麼。你們會一起討論治療選項、預期反應與現實的成功機率。若建議進行 IVF，你的個人化刺激療程會在這次看診中設計好。財務規劃與保險審閱，會與你的財務協調專員同步進行。',
+        note: 'At IRFC, your protocol is designed by your physician — not a template.',
+        noteZh: '在 IRFC，你的療程由醫師親自設計——而非套用模板。',
+      },
+    ],
+  },
+  {
+    phase: 'Phase Two',
+    phaseZh: '階段二',
+    title: 'The IVF Cycle',
+    titleZh: 'IVF 週期',
+    timeframe: 'Weeks 4 – 8',
+    timeframeZh: '第 4–8 週',
+    steps: [
+      {
+        num: '04',
+        title: 'Cycle Preparation',
+        titleZh: '週期準備',
+        time: 'Week 3–4 · 1–2 visits',
+        timeZh: '第 3–4 週 · 1–2 次約診',
+        body: 'Before stimulation begins, your nurse coordinator teaches you how to self-administer injections, reviews the medication schedule, and answers all practical questions. For patients doing a freeze-all cycle, a mock transfer may be performed to map the uterine cavity and confirm the optimal catheter path before the real thing.',
+        bodyZh: '在刺激開始前，你的護理協調專員會教你如何自我施打針劑、說明用藥時程，並回答所有實務問題。對於進行全冷凍週期的病人，可能會先進行模擬植入，以描繪子宮腔並確認最佳導管路徑，再進行正式植入。',
+        note: 'Injection training is done in-clinic. Most patients feel confident after one session.',
+        noteZh: '施打訓練在診所內進行。大多數病人在一次課程後便感到有信心。',
+      },
+      {
+        num: '05',
+        title: 'Ovarian Stimulation',
+        titleZh: '卵巢刺激',
+        time: '8–14 days · Monitoring every 2–3 days',
+        timeZh: '8–14 天 · 每 2–3 天監測',
+        body: 'You self-administer injectable hormones at home to stimulate the development of multiple follicles. You\'ll visit IRFC every 2–3 days for ultrasound monitoring and bloodwork. Your physician adjusts your medication dosage in real time based on your response. When follicles reach the target size, a trigger injection is given to mature the eggs.',
+        bodyZh: '你在家中自行施打注射型荷爾蒙，以刺激多顆卵泡發育。你會每 2–3 天到 IRFC 進行超音波監測與驗血。醫師會依據你的反應即時調整用藥劑量。當卵泡達到目標大小，便施打破卵針以促使卵子成熟。',
+        note: 'Most patients find monitoring appointments quick (30–45 min). Morning slots are available.',
+        noteZh: '大多數病人覺得監測約診很快速（30–45 分鐘）。提供上午時段。',
+      },
+      {
+        num: '06',
+        title: 'Egg Retrieval',
+        titleZh: '取卵',
+        time: 'Day 1 of retrieval phase · 20–30 minutes',
+        timeZh: '取卵階段第 1 天 · 20–30 分鐘',
+        body: 'Egg retrieval is performed under light intravenous sedation — you are asleep and comfortable throughout. Using transvaginal ultrasound guidance, your physician aspirates the fluid from each follicle. The procedure typically takes 20–30 minutes. You rest at the clinic for about an hour afterward, then go home. Most patients feel mild cramping for 1–2 days.',
+        bodyZh: '取卵在輕度靜脈鎮靜下進行——你全程都在睡眠中、舒適無痛。醫師在陰道超音波導引下，抽吸每個卵泡中的液體。手術通常耗時 20–30 分鐘。術後你在診所休息約一小時，隨後返家。大多數病人會有 1–2 天的輕微不適。',
+        note: 'You\'ll need a driver. Plan to rest for the remainder of the day.',
+        noteZh: '你需要有人接送。當天其餘時間請安排休息。',
+      },
+      {
+        num: '07',
+        title: 'Fertilization & Embryo Culture',
+        titleZh: '受精與胚胎培養',
+        time: 'Days 1–6 in the laboratory',
+        timeZh: '實驗室內第 1–6 天',
+        body: 'Retrieved eggs are evaluated, matured, and fertilized — either by conventional insemination or ICSI (intracytoplasmic sperm injection), depending on your protocol. Fertilized embryos develop in our EmbryoScope+ time-lapse incubators for 5–6 days. Your embryologist monitors development continuously. On Day 5 or 6, each blastocyst is graded and either biopsied for genetic testing or vitrified (frozen).',
+        bodyZh: '取出的卵子會經過評估、成熟與受精——依你的療程，採傳統授精或 ICSI（卵胞質內單精子注入）。受精卵在我們的 EmbryoScope+ 縮時培養箱中發育 5–6 天。胚胎學家持續監測發育。第 5 或第 6 天，每個囊胚會被評級，並進行基因檢測切片或玻璃化冷凍（凍存）。',
+        note: 'EmbryoScope+ means your embryos are never removed from their environment for observation.',
+        noteZh: 'EmbryoScope+ 意味著你的胚胎永遠不必為了觀察而離開環境。',
+      },
+      {
+        num: '08',
+        title: 'Genetic Testing (Optional)',
+        titleZh: '基因檢測（選用）',
+        time: '10–14 days for results',
+        timeZh: '10–14 天出結果',
+        body: 'If PGT-A is part of your plan, a small biopsy of each blastocyst is sent to a genetics laboratory. Results identify which embryos are chromosomally normal (euploid) and ready for transfer. Embryos are safely frozen while you wait for results. Most patients find the wait the most emotionally challenging part of the process — your care team is available throughout.',
+        bodyZh: '若 PGT-A 是你計畫的一部分，每個囊胚會取少量切片送交基因實驗室。結果會指出哪些胚胎染色體正常（整倍體）、可準備植入。等待結果期間，胚胎會安全冷凍。大多數病人覺得等待是過程中最情緒煎熬的部分——你的照護團隊全程都在。',
+        note: 'PGT-A is not recommended for every patient. Your physician will discuss whether it adds value for your specific situation.',
+        noteZh: 'PGT-A 並非建議每位病人都做。你的醫師會討論它是否對你的具體情況有價值。',
+      },
+    ],
+  },
+  {
+    phase: 'Phase Three',
+    phaseZh: '階段三',
+    title: 'Transfer & Beyond',
+    titleZh: '植入與後續',
+    timeframe: 'Weeks 9 – 14+',
+    timeframeZh: '第 9–14 週以上',
+    steps: [
+      {
+        num: '09',
+        title: 'Transfer Preparation',
+        titleZh: '植入準備',
+        time: '2–4 weeks',
+        timeZh: '2–4 週',
+        body: 'Before a frozen embryo transfer, your body needs preparation. You\'ll take estrogen to develop the uterine lining, followed by progesterone to create a receptive environment. Your physician monitors lining development with ultrasound. Transfer is scheduled when your lining reaches the optimal thickness and pattern.',
+        bodyZh: '在冷凍胚胎植入前，你的身體需要準備。你會服用雌激素以增厚子宮內膜，接著服用黃體素營造可著床的環境。醫師會以超音波監測內膜發育。當內膜達到最佳的厚度與型態時，便安排植入。',
+        note: 'For fresh transfers, the lining is prepared during the stimulation cycle itself.',
+        noteZh: '若是新鮮植入，內膜會在刺激週期本身準備好。',
+      },
+      {
+        num: '10',
+        title: 'Embryo Transfer',
+        titleZh: '胚胎植入',
+        time: 'Transfer day · 10–15 minutes',
+        timeZh: '植入日 · 10–15 分鐘',
+        body: 'Embryo transfer is a gentle, awake procedure — no sedation is needed. Using ultrasound guidance, a thin, flexible catheter places the embryo into the uterine cavity. Most patients describe it as feeling similar to a Pap smear. You rest briefly afterward and can resume normal light activity the same day. Strenuous exercise and certain medications are restricted for a short period.',
+        bodyZh: '胚胎植入是一個溫和、清醒的過程——不需要鎮靜。在超音波導引下，一根細軟的導管將胚胎置入子宮腔。大多數病人描述感覺類似子宮頸抹片檢查。術後你稍作休息，當天即可恢復正常的輕度活動。劇烈運動與部分藥物會在短期內受到限制。',
+        note: 'At IRFC, only one embryo is transferred at a time in most cases — the single embryo transfer (eSET) standard is the safest approach for both mother and baby.',
+        noteZh: '在 IRFC，多數情況下每次只植入一顆胚胎——單一胚胎植入（eSET）標準，是對母嬰雙方都最安全的做法。',
+      },
+      {
+        num: '11',
+        title: 'Pregnancy Confirmation',
+        titleZh: '懷孕確認',
+        time: '10–12 days after transfer',
+        timeZh: '植入後 10–12 天',
+        body: 'A blood hCG test confirms whether implantation has occurred. If positive, a second test 2 days later confirms that levels are rising appropriately. A gestational sac ultrasound follows at approximately 6 weeks. This is one of the most emotionally charged moments of the journey — your care team is with you regardless of the result.',
+        bodyZh: '血液 hCG 檢測會確認是否著床。若為陽性，兩天後的第二次檢測會確認數值適當上升。約第 6 週會進行妊娠囊超音波。這是旅程中最情緒起伏的時刻之一——無論結果如何，你的照護團隊都與你同在。',
+        note: 'If the first transfer does not result in pregnancy, your physician reviews all data and discusses next steps without delay.',
+        noteZh: '若第一次植入未成功懷孕，醫師會檢閱所有資料，並立即討論下一步。',
+      },
+      {
+        num: '12',
+        title: 'Graduate to Your OB',
+        titleZh: '轉診至你的產檢醫師',
+        time: '8–10 weeks',
+        timeZh: '8–10 週',
+        body: 'At 8–10 weeks, with a confirmed heartbeat and healthy progression, you graduate from IRFC to your obstetric provider. We prepare a complete clinical summary and transfer your care with full documentation. Many of our patients stay in touch — we love hearing the good news.',
+        bodyZh: '在 8–10 週，當心跳確認、發育健康穩定，你便從 IRFC 畢業，轉往你的產科醫師。我們會準備完整的臨床摘要，並以完整的文件交接照護。許多病人仍與我們保持聯繫——我們樂於聽到好消息。',
+        note: 'IRFC does not provide obstetric care, but we support the transition to your OB fully.',
+        noteZh: 'IRFC 不提供產科照護，但我們全力支援你轉往產檢醫師的過渡。',
+      },
+    ],
+  },
+];
+
+const overviewStrip = [
+  { label: 'Phase 1', labelZh: '階段 1', detail: 'Consultation & Workup', detailZh: '諮詢與檢查', time: '~3 weeks' },
+  { label: 'Phase 2', labelZh: '階段 2', detail: 'Stimulation & Retrieval', detailZh: '刺激與取卵', time: '~4 weeks' },
+  { label: 'Phase 3', labelZh: '階段 3', detail: 'Transfer & Confirmation', detailZh: '植入與確認', time: '~4–6 weeks' },
+];
+
+const ifNotWorkItems = [
+  { heading: 'Frozen embryos transfer forward', headingZh: '冷凍胚胎可接續植入', body: 'If you have banked embryos, additional transfers do not require a new retrieval — reducing both time and cost.', bodyZh: '若你已冷凍保存胚胎，額外的植入便不需要再次取卵——同時減少時間與費用。' },
+  { heading: 'Protocol adjustments are standard', headingZh: '調整療程是常規', body: 'Every cycle generates data. Your physician uses that data to refine the next approach — stimulation dose, trigger timing, transfer protocol.', bodyZh: '每個週期都產生數據。醫師運用這些數據來精煉下一次的做法——刺激劑量、破卵時機、植入療程。' },
+  { heading: 'Donor egg IVF remains an option', headingZh: '捐卵 IVF 仍是選項', body: 'For patients with poor ovarian response or repeated failures, donor egg IVF offers substantially higher success rates and a clear path forward.', bodyZh: '對於卵巢反應不佳或屢次失敗的病人，捐卵 IVF 提供顯著更高的成功率，以及一條清晰的出路。' },
+  { heading: 'Emotional support is built in', headingZh: '情緒支援內建其中', body: 'Your nurse coordinator and care team are available between appointments. Fertility journeys have difficult moments — you should never navigate them alone.', bodyZh: '你的護理協調專員與照護團隊，在約診之間也隨時可聯繫。生育旅程會有艱難時刻——你絕不該獨自面對。' },
+];
+
+const title = ZH ? '療程旅程' : 'Patient Journey';
+const description = ZH
+  ? 'IRFC 的 IVF 流程逐步指南——從初次諮詢，到胚胎植入，再到轉診產檢醫師。清楚掌握每個階段該期待什麼。'
+  : 'A step-by-step guide to the IVF process at IRFC — from your first consultation through embryo transfer and graduation to OB care. Know what to expect at every stage.';
+---
+<!-- marked: component for /patient-journey and /zh-hant/patient-journey -->
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? 'IVF 旅程' : 'The IVF Journey'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? (
+            <>從第一通電話<br/><em class="not-italic" style="color: var(--color-gold-500);">到第一次心跳。</em></>
+          ) : (
+            <>From First Call<br/><em class="not-italic" style="color: var(--color-gold-500);">to First Heartbeat.</em></>
+          )}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH
+            ? '病人最常問的問題之一，是：<em>「這個過程實際上長什麼樣子？」</em>本頁帶你走過每一步——從初次諮詢，到你畢業轉往產檢醫師的那一刻——讓你能帶著清晰，而非焦慮，繼續前行。'
+            : 'One of the most common questions patients ask is: <em>"What does the process actually look like?"</em> This page walks you through every step — from your first consultation to the moment you graduate to your OB — so you can move forward with clarity, not anxiety.'}
+        </p>
+      </div>
+
+      <!-- Quick overview strip -->
+      <div class="mt-12 grid sm:grid-cols-3 gap-px" style="background: var(--color-stone-200); max-width: 680px;">
+        {overviewStrip.map(p => (
+          <div class="bg-white px-6 py-5">
+            <p class="text-xs tracking-widest uppercase mb-1" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? p.labelZh : p.label}</p>
+            <p class="text-sm font-light text-stone-800" style="font-family: var(--font-serif);">{ZH ? p.detailZh : p.detail}</p>
+            <p class="text-xs mt-1" style="color: var(--color-gold-600);">{p.time}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Team spotlight -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="overflow-hidden rounded-sm order-2 lg:order-1">
+          <img
+            src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            alt="IRFC physician meeting with a patient during an initial fertility consultation"
+            width="1800" height="1200"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '你會先見到醫師' : 'You’ll Meet a Physician First'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">
+            {ZH
+              ? '在 IRFC，你的初次約診是與醫師一對一的對話——而非協調專員或護理師。你會檢閱病史、了解診斷，並帶著對選項的誠實圖像離開。'
+              : 'At IRFC, your first appointment is a one-on-one conversation with a physician — not a coordinator or nurse. You’ll review your history, understand your diagnosis, and leave with an honest picture of your options.'}
+          </p>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            {ZH
+              ? '那次看診不需做任何決定。請攜帶任何先前的紀錄，若有伴侶，我們鼓勵對方出席。'
+              : 'No decisions are required at that visit. Bring any prior records, and if you have a partner, we encourage them to attend.'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline phases -->
+  {phases.map((phase, phaseIdx) => (
+    <section class={`py-20 lg:py-28 ${phaseIdx % 2 === 0 ? 'bg-white' : ''}`} style={phaseIdx % 2 !== 0 ? 'background: var(--color-stone-50);' : ''}>
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+
+        <!-- Phase header -->
+        <div class="flex items-end gap-8 mb-16 pb-8 border-b border-stone-100">
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? `${phase.phaseZh} · ${phase.timeframeZh}` : `${phase.phase} · ${phase.timeframe}`}</p>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800">{ZH ? phase.titleZh : phase.title}</h2>
+          </div>
+          <div class="hidden lg:block flex-1 h-px mb-3" style="background: var(--color-stone-100);"></div>
+        </div>
+
+        <!-- Steps -->
+        <div class="space-y-0">
+          {phase.steps.map((step, stepIdx) => (
+            <div class={`grid lg:grid-cols-12 gap-8 lg:gap-16 py-12 ${stepIdx < phase.steps.length - 1 ? 'border-b border-stone-100' : ''}`}>
+
+              <!-- Step number + connector -->
+              <div class="lg:col-span-1 flex lg:flex-col items-center lg:items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-stone-200 bg-white">
+                  <span class="text-sm font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">{step.num}</span>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="lg:col-span-5">
+                <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? step.timeZh : step.time}</p>
+                <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{ZH ? step.titleZh : step.title}</h3>
+                <p class="text-sm leading-relaxed text-stone-500">{ZH ? step.bodyZh : step.body}</p>
+              </div>
+
+              <!-- Note card -->
+              <div class="lg:col-span-5 lg:col-start-8">
+                <div class="border-l-2 pl-5 py-1" style="border-color: var(--color-gold-400);">
+                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '須知' : 'What to Know'}</p>
+                  <p class="text-sm leading-relaxed text-stone-500 italic">{ZH ? step.noteZh : step.note}</p>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  ))}
+
+  <!-- Photo break -->
+  <section class="relative overflow-hidden" style="height: 360px;">
+    <img src="/images/consultation-joyful.webp" srcset="/images/consultation-joyful-800.webp 800w, /images/consultation-joyful-1280.webp 1280w, /images/consultation-joyful.webp 2560w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC patient consultation" class="w-full h-full object-cover" style="object-position: center 35%;" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.52) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '你旅程的每一步，我們都與你同在。' : 'Every step of your journey, we’re with you.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- What if it doesn't work -->
+  <section class="py-20 lg:py-28 bg-white border-y border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="section-divider mb-6"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-6">
+            {ZH ? (
+              <>如果<br/><em class="not-italic" style="color: var(--color-gold-500);">第一次週期沒成功？</em></>
+            ) : (
+              <>What Happens If the<br/><em class="not-italic" style="color: var(--color-gold-500);">First Cycle Doesn’t Work?</em></>
+            )}
+          </h2>
+          <p class="text-sm leading-relaxed text-stone-500 mb-5">
+            {ZH
+              ? 'IVF 並非總是在第一次週期就成功——任何誠實的醫師都會事先告訴你。若植入未成功懷孕，醫師會徹底檢閱每一個數據點：刺激反應、胚胎品質、內膜準備與植入技術。'
+              : 'IVF is not always successful on the first cycle — and any honest physician will tell you that upfront. If a transfer does not result in pregnancy, your physician conducts a thorough review of every data point: stimulation response, embryo quality, endometrial preparation, and transfer technique.'}
+          </p>
+          <p class="text-sm leading-relaxed text-stone-500 mb-5">
+            {ZH
+              ? '大多數第一次週期未成功的病人，都有冷凍胚胎可供後續植入——意味著取卵的體力與財務投入得以延續。在其他情況下，可能會建議進行第二次刺激週期。'
+              : 'Most patients who do not succeed on the first cycle have frozen embryos available for subsequent transfers — meaning the physical and financial investment of retrieval carries forward. In other situations, a second stimulation cycle may be recommended.'}
+          </p>
+          <p class="text-sm leading-relaxed text-stone-500">
+            {ZH
+              ? 'IRFC 不輕言放棄。我們也絕不會讓一個失敗的週期，在尚未理解原因的情況下就過去。'
+              : 'IRFC does not give up easily. And we never let a failed cycle pass without understanding why.'}
+          </p>
+        </div>
+        <div class="space-y-5">
+          {ifNotWorkItems.map(item => (
+            <div class="flex gap-5 items-start">
+              <div class="flex-shrink-0 w-1 self-stretch" style="background: var(--color-gold-300);"></div>
+              <div>
+                <p class="text-sm font-medium text-stone-800 mb-1" style="font-family: var(--font-sans);">{ZH ? item.headingZh : item.heading}</p>
+                <p class="text-sm leading-relaxed text-stone-500">{ZH ? item.bodyZh : item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: linear-gradient(90deg, transparent, var(--color-gold-500));"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '展開你的旅程' : 'Begin Your Journey'}</span>
+          <div class="h-px w-12" style="background: linear-gradient(90deg, var(--color-gold-500), transparent);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-6">
+          {ZH ? '準備好踏出第一步了嗎？' : 'Ready to Take the First Step?'}
+        </h2>
+        <p class="text-sm text-stone-500 leading-relaxed mb-10 max-w-lg mx-auto">
+          {ZH
+            ? '你會直接與醫師對話，他會檢閱你的病史、回答你的問題，並給你對選項的誠實圖像。'
+            : 'You’ll speak directly with a physician who will review your history, answer your questions, and give you an honest picture of your options.'}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={localeHref('/contact', locale)} class="btn-primary">
+            {ZH ? '預約諮詢' : 'Schedule a Consultation'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href={localeHref('/outcomes', locale)} class="btn-outline">
+            {ZH ? '查看成功率' : 'View Success Rates'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

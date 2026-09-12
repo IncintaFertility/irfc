@@ -1,0 +1,425 @@
+---
+// 療程與服務樞紐頁共用骨架（英文 / 繁體中文）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+interface Props {
+  locale: 'en' | 'zh-hant';
+}
+
+const { locale } = Astro.props;
+const ZH = locale === 'zh-hant';
+const pick = (zh: string | undefined, en: string) => (ZH ? (zh ?? en) : en);
+
+const artServices = [
+  {
+    id: 'ivf',
+    title: 'In Vitro Fertilization (IVF)',
+    titleZh: '體外受精（IVF）',
+    category: 'Assisted Reproductive Technology',
+    categoryZh: '輔助生殖技術',
+    desc: `IVF is our most comprehensive fertility treatment. Eggs are retrieved from the ovaries, fertilized with sperm in our world-class laboratory, and the resulting embryos are carefully developed before transfer to the uterus.`,
+    descZh: 'IVF 是我們最全面的生育治療。卵子從卵巢取出，在我們世界級的實驗室中與精子受精，生成的胚胎在植入子宮前被悉心培育。',
+    details: [
+      'Initial consultation and comprehensive diagnostic workup',
+      'Ovarian stimulation with personalized medication protocols',
+      'Egg retrieval under anesthesia',
+      'Fertilization and embryo development in our CAP-certified lab',
+      'Embryo monitoring with EmbryoScope+ time-lapse technology',
+      'Fresh or frozen embryo transfer',
+      'Pregnancy testing and early pregnancy monitoring',
+    ],
+    detailsZh: [
+      '初次諮詢與完整的診斷評估',
+      '以個人化用藥療程進行卵巢刺激',
+      '麻醉下取卵',
+      '在我們 CAP 認證的實驗室中完成受精與胚胎發育',
+      '以 EmbryoScope+ 縮時技術監測胚胎',
+      '新鮮或冷凍胚胎移植',
+      '驗孕與早期懷孕監測',
+    ],
+    also: ['Low Stimulation IVF', 'Natural Cycle IVF', 'ICSI', 'Assisted Hatching'],
+    alsoZh: ['低刺激 IVF', '自然週期 IVF', 'ICSI', '輔助孵化'],
+  },
+  {
+    id: 'iui',
+    title: 'Intrauterine Insemination (IUI)',
+    titleZh: '子宮腔內人工授精（IUI）',
+    category: 'Assisted Reproductive Technology',
+    categoryZh: '輔助生殖技術',
+    desc: 'IUI is a minimally invasive first-line treatment that places prepared sperm directly into the uterus at the time of ovulation, increasing the chances of fertilization.',
+    descZh: 'IUI 是一種微創的第一線治療，在排卵時將處理過的精子直接置入子宮，提高受精機會。',
+    details: [
+      'Monitoring of natural or medically-stimulated cycle',
+      'Sperm preparation and concentration',
+      'Timed insemination procedure',
+      'Appropriate for select candidates based on thorough evaluation',
+    ],
+    detailsZh: [
+      '監測自然或藥物刺激的週期',
+      '精子處理與濃縮',
+      '定時授精程序',
+      '適合經完整評估後選定的合適對象',
+    ],
+    also: [],
+    alsoZh: [],
+  },
+  {
+    id: 'preservation',
+    title: 'Egg Freezing & Fertility Preservation',
+    titleZh: '卵子凍結與生育保存',
+    category: 'Egg, Embryo & Sperm Freezing',
+    categoryZh: '卵子、胚胎與精子冷凍',
+    desc: "Whether you're not yet ready to start a family, facing a medical diagnosis, or planning ahead, IRFC offers state-of-the-art cryopreservation to protect your reproductive future.",
+    descZh: '無論是尚未準備成家、面對醫療診斷，還是提前規劃，IRFC 都提供最先進的冷凍保存技術，守護您的生育未來。',
+    details: [
+      'Egg (oocyte) freezing for individuals and couples',
+      'Embryo cryopreservation for future frozen embryo transfers',
+      'Sperm freezing and banking',
+      'Vitrification technology for superior freeze-thaw survival rates',
+      'Secure storage in the TMRW Vault with real-time monitoring',
+      'Oncofertility: fertility preservation for cancer patients',
+    ],
+    detailsZh: [
+      '為個人與伴侶提供卵子冷凍',
+      '胚胎冷凍保存，供未來冷凍胚胎移植',
+      '精子冷凍與保存',
+      '玻璃化冷凍技術，提升解凍存活率',
+      '存放於具即時監控的 TMRW 智慧冷凍庫，安全無虞',
+      '腫瘤生育學：為癌症病人提供的生育保存',
+    ],
+    also: [],
+    alsoZh: [],
+  },
+  {
+    id: 'pgt',
+    title: 'Preimplantation Genetic Testing (PGT)',
+    titleZh: '胚胎著床前基因檢測（PGT）',
+    category: 'Genetic Testing',
+    categoryZh: '基因檢測',
+    desc: 'PGT allows our embryologists to screen embryos for chromosomal abnormalities and specific genetic conditions before transfer, significantly improving the likelihood of a healthy pregnancy.',
+    descZh: 'PGT 讓我們的胚胎學家能在植入前篩檢胚胎的染色體異常與特定遺傳疾病，顯著提高健康懷孕的機會。',
+    details: [
+      'PGT-A: Aneuploidy screening for chromosomal balance',
+      'PGT-M: Monogenic disease testing for inherited conditions',
+      'PGT-SR: Structural rearrangement analysis',
+      'Biopsy of trophectoderm cells at the blastocyst stage',
+      'Results guide selection of the most viable embryo for transfer',
+    ],
+    detailsZh: [
+      'PGT-A：針對染色體平衡的非整倍體篩檢',
+      'PGT-M：針對遺傳疾病的單基因疾病檢測',
+      'PGT-SR：結構重排分析',
+      '在囊胚階段進行滋養外胚層細胞切片',
+      '結果引導挑選最具活力的胚胎進行植入',
+    ],
+    also: [],
+    alsoZh: [],
+  },
+  {
+    id: 'embryo-transfer',
+    title: 'Embryo Transfer',
+    titleZh: '胚胎移植',
+    category: 'Assisted Reproductive Technology',
+    categoryZh: '輔助生殖技術',
+    desc: 'The culmination of the IVF process — a carefully timed, minimally invasive procedure in which selected embryos are placed into the uterine cavity to initiate pregnancy.',
+    descZh: 'IVF 過程的頂峰——一項精準計時、微創的程序，將選定的胚胎置入子宮腔以啟動懷孕。',
+    details: [
+      'Fresh embryo transfer following egg retrieval cycle',
+      'Frozen embryo transfer (FET) with hormone priming',
+      'Ultrasound guidance for precise catheter placement',
+      'Single embryo transfer protocols to minimize multiple pregnancy risk',
+    ],
+    detailsZh: [
+      '取卵週期後的新鮮胚胎移植',
+      '以荷爾蒙前置處理的冷凍胚胎移植（FET）',
+      '超音波導引，精準放置導管',
+      '單一胚胎移植療程，降低多胞胎風險',
+    ],
+    also: [],
+    alsoZh: [],
+  },
+  {
+    id: 'ovulation',
+    title: 'Ovulation Induction',
+    titleZh: '排卵誘導',
+    category: 'Assisted Reproductive Technology',
+    categoryZh: '輔助生殖技術',
+    desc: 'For patients who do not ovulate regularly, medication-based protocols stimulate the ovaries to develop and release one or more mature eggs, creating optimal conditions for conception.',
+    descZh: '針對排卵不規律的病人，以藥物為基礎的療程刺激卵巢發育並釋出一或多顆成熟卵子，創造最佳的受孕條件。',
+    details: [
+      'Oral and injectable medication options',
+      'Cycle monitoring with ultrasound and hormone testing',
+      'Timed intercourse or IUI coordination',
+      'Carefully managed to reduce multiple pregnancy risk',
+    ],
+    detailsZh: [
+      '口服與注射藥物選擇',
+      '以超音波與荷爾蒙檢測監測週期',
+      '配合定時同房或 IUI',
+      '謹慎管理以降低多胞胎風險',
+    ],
+    also: [],
+    alsoZh: [],
+  },
+];
+
+const donorServices = [
+  {
+    id: 'donors-surrogacy',
+    title: 'Donor Egg Program',
+    titleZh: '捐卵方案',
+    desc: 'IRFC offers access to a comprehensive egg donor database, including our partnership with Fairfax EggBank, the largest egg bank in the United States. Our coordinators guide recipients through every step of the selection and matching process.',
+    descZh: 'IRFC 提供完整的捐卵者資料庫，包括與全美最大卵子銀行 Fairfax EggBank 的合作。我們的協調員在選擇與配對的每一步，引導受贈者完成流程。',
+  },
+  {
+    id: 'surrogacy',
+    title: 'Gestational Surrogacy',
+    titleZh: '代理孕母',
+    desc: 'For patients who are unable to carry a pregnancy, gestational surrogacy offers a path to parenthood using their own or donated embryos. IRFC coordinates with reputable surrogacy agencies and provides full medical management.',
+    descZh: '針對無法自行懷孕的病人，代理孕母提供一條以自身或捐贈胚胎邁向為人父母的路。IRFC 與信譽良好的代理孕母機構合作，並提供完整的醫療管理。',
+  },
+  {
+    id: 'lgbtqia',
+    title: 'LGBTQIA+ Family Building',
+    titleZh: 'LGBTQIA+ 成家',
+    desc: 'IRFC is proud to offer inclusive, affirming care to same-sex couples and single individuals. Whether through sperm donation, egg donation, reciprocal IVF, or gestational surrogacy, we help all families grow.',
+    descZh: 'IRFC 很榮幸為同性伴侶與單身者提供包容、肯定的照護。無論透過精子捐贈、卵子捐贈、回體 IVF（reciprocal IVF）或代理孕母，我們協助所有家庭成長。',
+  },
+  {
+    id: 'sperm-retrieval',
+    title: 'Sperm Retrieval',
+    titleZh: '精子取出',
+    desc: 'For male patients with obstructive or non-obstructive azoospermia, IRFC offers surgical sperm retrieval procedures — including TESE and micro-TESE — to obtain sperm for use in IVF/ICSI.',
+    descZh: '針對阻塞性或非阻塞性無精症的男性病人，IRFC 提供外科精子取出程序——包括 TESE 與 micro-TESE——以取得用於 IVF/ICSI 的精子。',
+  },
+];
+
+const surgicalServices = [
+  {
+    title: 'Diagnostic Hysteroscopy',
+    titleZh: '診斷性子宮鏡',
+    desc: 'A minimally invasive procedure to examine and treat the inside of the uterus, identifying polyps, fibroids, or structural abnormalities.',
+    descZh: '一項微創程序，檢查並治療子宮內部，辨識息肉、肌瘤或結構異常。',
+  },
+  {
+    title: 'Operative Hysteroscopy',
+    titleZh: '手術性子宮鏡',
+    desc: 'Treatment of uterine conditions such as polyp or fibroid removal, septum resection, and adhesion lysis — performed at IRFC’s accredited surgery centers.',
+    descZh: '治療息肉或肌瘤切除、中隔切開、沾黏分離等子宮狀況——於 IRFC 認證的手術中心執行。',
+  },
+  {
+    title: 'Laparoscopic Surgery',
+    titleZh: '腹腔鏡手術',
+    desc: 'Minimally invasive abdominal surgery to diagnose and treat endometriosis, ovarian cysts, tubal disease, and other conditions affecting fertility.',
+    descZh: '微創的腹部手術，診斷並治療子宮內膜異位症、卵巢囊腫、輸卵管疾病，以及其他影響生育的狀況。',
+  },
+];
+
+const collaborative = [
+  { en: 'Maternal Fetal Medicine', zh: '母胎醫學' },
+  { en: 'Minimally Invasive Gynecological Surgery', zh: '微創婦科手術' },
+  { en: 'Preconception Weight Loss Management', zh: '孕前減重管理' },
+  { en: 'Reproductive Urology', zh: '生殖泌尿科' },
+  { en: 'Oncofertility', zh: '腫瘤生育學' },
+  { en: 'Fertility Acupuncture', zh: '生育針灸' },
+];
+
+const title = ZH ? '南加州的生育治療與服務' : 'Fertility Treatments & Services in Southern California';
+const description = ZH
+  ? 'IRFC 在南北加四處據點，提供從 IVF、IUI、卵子凍結、基因檢測、捐贈服務到外科手術的全方位生育治療。'
+  : 'IRFC offers a full spectrum of fertility treatments including IVF, IUI, egg freezing, genetic testing, donor services, and surgical care at four Southern California locations.';
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '療程與服務' : 'Treatments & Services'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>您的路徑，<br/><em class="not-italic" style="color: var(--color-gold-500);">我們的專業。</em></> : <>Your Path,<br/><em class="not-italic" style="color: var(--color-gold-500);">Our Expertise.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed">
+          {ZH ? '沒有兩段生育旅程是一模一樣的。IRFC 提供從基礎診斷到先進輔助生殖的全面療程，全部依您的個別狀況與目標量身打造。' : 'No two fertility journeys are alike. IRFC offers a comprehensive range of treatments — from foundational diagnostics to advanced assisted reproduction — all tailored to your individual circumstances and goals.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ART Services -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '輔助生殖技術' : 'ART'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '輔助生殖技術' : 'Assisted Reproductive Technology'}</h2>
+      </div>
+
+      <div class="space-y-8">
+        {artServices.map((service) => (
+          <div id={service.id} class="bg-white p-8 lg:p-12 border border-stone-200">
+            <div class="grid lg:grid-cols-3 gap-8">
+              <div>
+                <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? service.categoryZh : service.category}</p>
+                <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">{ZH ? service.titleZh : service.title}</h3>
+                <p class="text-sm text-stone-500 leading-relaxed">{ZH ? service.descZh : service.desc}</p>
+                {service.also.length > 0 && (
+                  <div class="mt-5">
+                    <p class="text-xs text-stone-400 mb-2 tracking-wide">{ZH ? '另包含：' : 'Also includes:'}</p>
+                    <div class="flex flex-wrap gap-2">
+                      {service.also.map((a, i) => (
+                        <span class="text-xs px-2.5 py-1 border" style="color: var(--color-stone-500); border-color: var(--color-stone-200);">{ZH ? service.alsoZh[i] : a}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div class="lg:col-span-2">
+                <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '預期內容' : 'What to expect'}</p>
+                <ul class="space-y-3">
+                  {service.details.map((detail, i) => (
+                    <li class="flex items-start gap-3">
+                      <span class="flex-shrink-0 text-xs mt-1 w-5 h-5 flex items-center justify-center border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{String(i + 1).padStart(2, '0')}</span>
+                      <span class="text-sm text-stone-600 leading-relaxed">{ZH ? service.detailsZh[i] : detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden" style="height: 380px;">
+    <img src="/images/lobby-wide.webp" srcset="/images/lobby-wide-800.webp 800w, /images/lobby-wide-1280.webp 1280w, /images/lobby-wide.webp 2400w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt={ZH ? 'IRFC 診所' : 'IRFC clinic'} class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.55) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-3xl font-light text-white max-w-md leading-relaxed">
+        {ZH ? '每一條成家之路，都值得專業的引導。' : 'Every path to parenthood deserves expert guidance.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Donor & Third Party -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-500); font-family: var(--font-sans);">{ZH ? '第三方生殖' : 'Third-Party Reproduction'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '捐贈者、代理孕母與包容的照護' : 'Donors, Surrogacy & Inclusive Care'}</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          {ZH ? '成家有很多種形式。IRFC 以專業、同理與完全的包容，支持每一條路徑。' : 'Building a family takes many forms. IRFC supports every path with expertise, compassion, and complete inclusivity.'}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6" id="donors">
+        {donorServices.map((service) => (
+          <div id={service.id} class="p-8 border border-stone-200 card-hover">
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? service.titleZh : service.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{ZH ? service.descZh : service.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Surgical -->
+  <section class="py-20" id="surgical" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '微創' : 'Minimally Invasive'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '外科手術服務' : 'Surgical Services'}</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          {ZH ? '由 IRFC 經驗豐富的醫師，在 Corona 與 Irvine 具專業認證的手術中心執行。' : 'Performed at IRFC’s professionally accredited surgery centers in Corona and Irvine by our experienced physicians.'}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {surgicalServices.map((service) => (
+          <div class="bg-white p-8 border border-stone-200 card-hover">
+            <div class="w-8 h-px mb-5" style="background: var(--color-gold-500);"></div>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? service.titleZh : service.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{ZH ? service.descZh : service.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden" style="height: 340px;">
+    <img src="/images/consultation.webp" srcset="/images/consultation-800.webp 800w, /images/consultation-1280.webp 1280w, /images/consultation.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt={ZH ? 'IRFC 諮詢' : 'IRFC consultation'} class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 55%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '從診斷到生產的全面照護。' : 'Comprehensive care from diagnosis to delivery.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Collaborative Specialties -->
+  <section class="py-20" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-white mb-4">
+            {ZH ? '協作專科' : 'Collaborative Specialties'}
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-400);">
+            {ZH ? 'IRFC 與跨多個學科的專家合作，提供照顧您生殖健康與整體身心每一層面的全面照護。' : 'IRFC collaborates with specialists across multiple disciplines to provide comprehensive care that addresses every aspect of your reproductive health and overall wellbeing.'}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {collaborative.map((spec) => (
+            <div class="flex items-center gap-3 p-4 border" style="border-color: var(--color-stone-800);">
+              <div class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--color-gold-500);"></div>
+              <span class="text-sm" style="color: var(--color-stone-300);">{ZH ? spec.zh : spec.en}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Telehealth -->
+  <section class="py-16 bg-white border-b border-stone-100">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row items-center gap-8 p-10 bg-stone-50 border border-stone-200">
+        <div class="flex-1">
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-2">{ZH ? '遠距醫療諮詢' : 'Telehealth Consultations'}</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+            {ZH ? '無法親自到場？IRFC 為遠地、國際與繁忙的病人提供線上諮詢。從任何地方展開您的旅程。' : 'Can’t come in person? IRFC offers virtual consultations for out-of-area, international, and busy patients. Start your journey from anywhere.'}
+          </p>
+        </div>
+        <a href={localeHref('/contact', locale)} class="btn-primary flex-shrink-0">{ZH ? '預約遠距諮詢' : 'Book a Telehealth Visit'}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        {ZH ? '不確定從哪裡開始？' : 'Not Sure Where to Start?'}
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH ? '我們的醫師會引導您完成完整的評估，並建議最適合您狀況的治療計劃。' : 'Our physicians will guide you through a comprehensive evaluation and recommend the treatment plan best suited to your situation.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href={localeHref('/team', locale)} class="btn-outline">{ZH ? '認識我們的醫師' : 'Meet Our Physicians'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

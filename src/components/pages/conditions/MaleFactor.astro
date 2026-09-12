@@ -1,0 +1,139 @@
+---
+import ConditionLayout from '../ConditionLayout.astro';
+import { getLocaleFromPath } from '../../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const causes = [
+  { titleEn: 'Low Sperm Count (Oligospermia)', titleZh: '精子數量偏低（寡精子症）', descEn: 'Fewer sperm than normal, reducing the likelihood of successful fertilization.', descZh: '精子少於正常，降低成功受精的機率。' },
+  { titleEn: 'Poor Motility (Asthenospermia)', titleZh: '活動力不佳（弱精子症）', descEn: 'Sperm that cannot swim effectively toward the egg.', descZh: '精子無法有效游向卵子。' },
+  { titleEn: 'Abnormal Morphology (Teratospermia)', titleZh: '型態異常（畸精子症）', descEn: 'High proportion of abnormally shaped sperm, which are less able to fertilize.', descZh: '異常型態精子比例偏高，受精能力較低。' },
+  { titleEn: 'Azoospermia', titleZh: '無精症', descEn: 'No sperm in the ejaculate — either due to a blockage (obstructive) or production failure (non-obstructive).', descZh: '精液中沒有精子——可能源於阻塞（阻塞性）或製造失敗（非阻塞性）。' },
+  { titleEn: 'Hormonal Imbalances', titleZh: '荷爾蒙失衡', descEn: 'Low testosterone, elevated FSH, or other hormonal issues that impair sperm production.', descZh: '睪固酮偏低、FSH 升高，或其他損害精子製造的荷爾蒙問題。' },
+  { titleEn: 'Varicocele', titleZh: '精索靜脈曲張', descEn: 'Enlarged veins in the scrotum that raise testicular temperature and reduce sperm quality.', descZh: '陰囊內靜脈曲張，會升高睪丸溫度、降低精子品質。' },
+];
+
+const diagnostics = [
+  { en: 'Semen analysis (count, motility, morphology, volume)', zh: '精液分析（數量、活動力、型態、容量）' },
+  { en: 'Hormonal panel (testosterone, FSH, LH, prolactin)', zh: '荷爾蒙檢測（睪固酮、FSH、LH、泌乳激素）' },
+  { en: 'Genetic testing when indicated (Y-chromosome microdeletion, karyotype)', zh: '必要時的基因檢測（Y 染色體微缺失、核型分析）' },
+  { en: 'Scrotal ultrasound to evaluate for varicocele or structural abnormalities', zh: '陰囊超音波，評估精索靜脈曲張或構造異常' },
+  { en: 'Referral to reproductive urologist for further evaluation when needed', zh: '必要時轉介生殖泌尿科醫師進一步評估' },
+];
+
+const treatments = [
+  {
+    titleEn: 'IUI with Sperm Preparation',
+    titleZh: '精子處理合併 IUI',
+    descEn: `For mild male factor, washing and concentrating the sperm sample before IUI significantly improves the number of motile sperm reaching the egg.`,
+    descZh: `對輕度男性因素，在 IUI 前洗滌並濃縮精子檢體，能顯著提高到達卵子的活動精子數。`,
+  },
+  {
+    titleEn: 'IVF with ICSI',
+    titleZh: 'ICSI 合併 IVF',
+    descEn: `Intracytoplasmic sperm injection (ICSI) injects a single selected sperm directly into each egg — effective even when sperm count or motility is severely reduced.`,
+    descZh: `卵胞質內單精子注入（ICSI）將挑選出的單一精子直接注入每顆卵子——即使精子數量或活動力嚴重偏低也有效。`,
+  },
+  {
+    titleEn: 'Surgical Sperm Retrieval',
+    titleZh: '手術取精',
+    descEn: `For men with azoospermia, IRFC coordinates TESE (testicular sperm extraction) or micro-TESE — procedures that retrieve sperm directly from testicular tissue for use in IVF/ICSI.`,
+    descZh: `對無精症男性，IRFC 協調 TESE（睪丸精子抽取術）或 micro-TESE——直接從睪丸組織取出精子，用於 IVF/ICSI。`,
+  },
+  {
+    titleEn: 'Sperm Freezing',
+    titleZh: '冷凍精子',
+    descEn: `Sperm can be frozen and banked before cancer treatment, vasectomy reversal, or as a precaution against future decline in sperm quality.`,
+    descZh: `在癌症治療、輸精管重建手術之前，或作為防範未來精子品質下降的預備，都可以冷凍並保存精子。`,
+  },
+  {
+    titleEn: 'Donor Sperm',
+    titleZh: '捐精',
+    descEn: `When no sperm can be retrieved, or when a couple chooses not to pursue sperm retrieval, IRFC helps select high-quality donors through licensed sperm banks.`,
+    descZh: `當無法取得精子，或伴侶選擇不進行取精時，IRFC 協助透過合格精子銀行挑選高品質捐精者。`,
+  },
+  {
+    titleEn: 'Lifestyle & Supplement Guidance',
+    titleZh: '生活型態與營養補充指引',
+    descEn: `Dietary changes, antioxidant supplementation, heat avoidance, and lifestyle modification can meaningfully improve sperm parameters for some patients.`,
+    descZh: `飲食調整、抗氧化物補充、避免高溫與生活型態改變，對部分病人能顯著改善精子指標。`,
+  },
+];
+---
+
+<ConditionLayout
+  titleEn={`Male Factor<br/>Infertility`}
+  titleZh={`男性因素<br/>不孕症`}
+  descriptionEn="Male factor infertility treatment at IRFC — semen analysis, sperm retrieval, IVF with ICSI. Expert care for all causes of male infertility in Southern California."
+  descriptionZh="男性因素不孕症的治療：IRFC 提供精液分析、取精手術、ICSI 合併 IVF。為南加州各類男性不孕症成因提供專業照護。"
+  ledeEn="Male factor infertility contributes to approximately 40–50% of all infertility cases. At IRFC, male factor is evaluated thoroughly, treated where possible, and bypassed with advanced techniques when necessary — without judgment, and with the same compassion we extend to every patient."
+  ledeZh="男性因素不孕症佔所有不孕症案例的約 40–50%。在 IRFC，男性因素會被徹底評估、在可能時予以治療，必要時以先進技術繞過——不帶任何評斷，並以我們對每位病人相同的同理心對待。"
+  bandImage="/images/couple-clinic.webp"
+  bandAltEn="IRFC patient couple"
+  bandAltZh="IRFC 病人伴侶"
+  bandQuoteEn="Infertility is a medical issue — not a personal one."
+  bandQuoteZh="不孕是醫學問題——不是個人的問題。"
+  ctaTitleEn="Male Factor Is Treatable"
+  ctaTitleZh="男性因素是可以治療的"
+  ctaTextEn="Infertility is a medical issue — not a personal failing. Our team evaluates male factor thoroughly and compassionately, and we have solutions for virtually every presentation."
+  ctaTextZh="不孕是醫學問題——不是個人的失敗。我們的團隊以徹底且充滿同理心的方式評估男性因素，幾乎對每一種表現都有對應的解方。"
+  ctaPrimaryHref="/contact"
+  ctaPrimaryLabelEn="Schedule a Consultation"
+  ctaPrimaryLabelZh="預約諮詢"
+>
+  <div slot="intro">
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-14">
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '男性不孕的成因' : 'Causes of Male Infertility'}</h2>
+            <p class="text-stone-600 leading-relaxed mb-5 text-sm">{ZH ? '男性不孕症可能源自精子製造、功能或輸送的問題。精液分析是不可或缺的初步檢查——評估精子數量、活動力（移動能力）、型態（形狀）及其他參數。' : 'Male infertility can stem from problems with sperm production, function, or delivery. A semen analysis is the essential first test — evaluating sperm count, motility (movement), morphology (shape), and other parameters.'}</p>
+            <div class="space-y-4">
+              {causes.map((c) => (
+                <div class="flex gap-4">
+                  <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-500);"></div>
+                  <div>
+                    <p class="text-sm font-medium text-stone-800">{ZH ? c.titleZh : c.titleEn}</p>
+                    <p class="text-xs text-stone-500 leading-relaxed">{ZH ? c.descZh : c.descEn}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="space-y-5">
+            <div class="p-7 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-4">{ZH ? 'IRFC 的診斷評估' : 'Diagnostic Evaluation at IRFC'}</h3>
+              <ul class="space-y-2">
+                {diagnostics.map((d) => (
+                  <li class="flex items-start gap-3 text-sm text-stone-600">
+                    <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                    {ZH ? d.zh : d.en}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="p-7 bg-white border border-stone-200">
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '整合照護' : 'Collaborative Care'}</p>
+              <p class="text-sm text-stone-600 leading-relaxed">{ZH ? 'IRFC 與生殖泌尿科醫師合作，提供全面的男性因素照護——包含精索靜脈曲張修復，以及為無精症病人進行手術取精。' : 'IRFC works with reproductive urologists to provide comprehensive male factor care — including varicocele repair and surgical sperm retrieval for azoospermic patients.'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? '治療選項' : 'Treatment Options'}</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {treatments.map((t) => (
+            <div class="p-7 border border-stone-200 card-hover">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{ZH ? t.titleZh : t.titleEn}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? t.descZh : t.descEn}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</ConditionLayout>

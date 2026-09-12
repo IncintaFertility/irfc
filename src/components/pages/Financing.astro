@@ -1,0 +1,299 @@
+---
+// 財務與費用（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath } from '../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const faqs = [
+  {
+    q: 'How much does IVF cost at IRFC?',
+    qZh: 'IRFC 的 IVF 費用是多少？',
+    a: 'IVF costs vary based on your individual treatment protocol, medications, and any additional procedures such as genetic testing. Our financial coordinator will provide a detailed, personalized cost estimate during your consultation. We are committed to full transparency — no hidden fees.',
+    aZh: 'IVF 費用會依您的個人治療療程、藥物，以及任何額外程序（如基因檢測）而有所不同。我們的財務協調員會在諮詢中提供詳細、個人化的費用估算。我們致力完全透明——絕無隱藏費用。',
+  },
+  {
+    q: 'Does my insurance cover fertility treatments?',
+    qZh: '我的保險有給付生育治療嗎？',
+    a: 'Coverage varies significantly by insurance plan and employer. Some plans cover diagnostics and monitoring; others cover IVF cycles. We encourage you to contact your insurance provider directly and ask specifically about "infertility benefits." Our team can help you navigate this process.',
+    aZh: '給付範圍依保險方案與雇主而有顯著差異。部分方案涵蓋診斷與監測；部分涵蓋 IVF 週期。我們建議您直接聯絡保險公司，並特別詢問「不孕給付（infertility benefits）」。我們的團隊可協助您處理這個流程。',
+  },
+  {
+    q: 'What is CapexMD and how does it work?',
+    qZh: '什麼是 CapexMD？如何運作？',
+    a: 'CapexMD is a specialized medical lender that offers personal loans for fertility treatments. Once approved, funds are deposited directly so you can begin treatment without delay. IRFC facilitates the connection — all loan terms and repayment questions should be directed to CapexMD. IRFC is a separate entity and does not act as a financing institution.',
+    aZh: 'CapexMD 是專精醫療貸款的機構，提供生育治療的個人貸款。核准後款項直接撥付，讓您能毫不延誤地展開治療。IRFC 協助牽線——所有貸款條件與還款問題請直接詢問 CapexMD。IRFC 為獨立機構，並非金融放貸單位。',
+  },
+  {
+    q: 'Are there multi-cycle discount programs?',
+    qZh: '是否有多次週期折扣方案？',
+    a: 'We offer various package options depending on your treatment plan. Please speak with our financial coordinator during your consultation to learn which options may be appropriate for your situation.',
+    aZh: '我們依您的治療計畫提供多種套裝選項。請於諮詢中與我們的財務協調員討論，了解哪些選項可能適合您的情況。',
+  },
+  {
+    q: 'Can I use HSA or FSA funds?',
+    qZh: '我可以使用 HSA 或 FSA 資金嗎？',
+    a: 'Yes. Fertility treatments are generally considered qualified medical expenses under IRS guidelines, making them eligible for payment with Health Savings Account (HSA) or Flexible Spending Account (FSA) funds. We recommend confirming with your plan administrator.',
+    aZh: '可以。生育治療依 IRS 指引通常被視為合格醫療支出，因此可用健康儲蓄帳戶（HSA）或彈性支出帳戶（FSA）資金支付。我們建議您向方案管理方確認。',
+  },
+];
+
+const facts = [
+  { label: 'Transparent Pricing', labelZh: '透明價格', detail: 'Itemized estimates before treatment begins', detailZh: '治療開始前提供逐項估算' },
+  { label: 'Flexible Financing Available', labelZh: '彈性財務方案', detail: 'Through our lending partner CapexMD', detailZh: '透過貸款合作夥伴 CapexMD' },
+  { label: 'HSA / FSA Accepted', labelZh: '接受 HSA / FSA', detail: 'Use pre-tax dollars for treatment', detailZh: '以稅前資金支付治療' },
+];
+
+const steps = [
+  { n: '01', title: 'Initial Consultation', titleZh: '初次諮詢', desc: 'Meet your physician. Understand your diagnosis and recommended path forward.', descZh: '與您的醫師會面。了解您的診斷與建議的後續方向。' },
+  { n: '02', title: 'Cost Estimate', titleZh: '費用估算', desc: 'Our financial coordinator provides a transparent, itemized estimate for your recommended treatment plan.', descZh: '我們的財務協調員為您建議的治療計畫，提供透明、逐項的估算。' },
+  { n: '03', title: 'Insurance Verification', titleZh: '保險確認', desc: 'We help verify your insurance benefits and identify what may be covered under your plan.', descZh: '我們協助確認您的保險權益，並指出方案中可能涵蓋的項目。' },
+  { n: '04', title: 'Financing Application', titleZh: '財務方案申請', desc: 'If needed, apply through CapexMD or explore HSA/FSA options. Most decisions are fast.', descZh: '若有需要，透過 CapexMD 申請，或探索 HSA/FSA 選項。多數決定都很快速。' },
+  { n: '05', title: 'Begin Treatment', titleZh: '展開治療', desc: 'With a plan in place, you can focus entirely on your fertility journey — we handle the rest.', descZh: '計畫就緒後，您可全心投入自己的生育旅程——其餘交給我們。' },
+];
+---
+
+<Layout
+  title={ZH ? '財務與費用' : 'Financing & Cost'}
+  description={ZH
+    ? 'IRFC 的生育治療財務方案——CapexMD 貸款、保險指引、HSA/FSA，以及初次諮詢。我們協助移除照護的財務障礙。'
+    : 'Fertility treatment financing options at IRFC — CapexMD lending, insurance guidance, HSA/FSA, and initial consultations. We help remove financial barriers to care.'}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '財務與費用' : 'Financing & Cost'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>費用不該成為<br/><em class="not-italic" style="color: var(--color-gold-500);">您與家庭之間的距離。</em></> : <>Cost Shouldn’t Stand<br/><em class="not-italic" style="color: var(--color-gold-500);">Between You and Family.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH
+            ? '我們相信每個人都應享有卓越的生育照護。正因如此，IRFC 與值得信賴的財務夥伴合作，並從第一天起就提供透明的費用指引——讓您專注於自己的旅程，而非文書作業。'
+            : 'We believe every person deserves access to exceptional fertility care. That’s why IRFC works with trusted financing partners and provides transparent cost guidance from day one — so you can focus on your journey, not the paperwork.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Team spotlight -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="overflow-hidden rounded-sm order-2 lg:order-1">
+          <img
+            src="/images/care-team-coordinator.webp" srcset="/images/care-team-coordinator-800.webp 800w, /images/care-team-coordinator.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            alt={ZH ? 'IRFC 財務協調員與病人檢視治療計畫' : 'IRFC financial coordinator reviewing a treatment plan with a patient'}
+            width="1024" height="1024"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '站在您這一側的協調員' : 'A Coordinator in Your Corner'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">
+            {ZH
+              ? '從您第一通電話開始，專屬的財務協調員便與您同行——翻譯保險術語、建立透明估算，並為您媒合合適的財務方案。沒有驚喜，也沒有壓力。'
+              : 'From your very first call, a dedicated financial coordinator walks alongside you — translating insurance jargon, building transparent estimates, and connecting you with financing that fits. No surprises, no pressure.'}
+          </p>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            {ZH ? '我們提供國語（中文）支援，讓每個家庭都能以最舒適的語言規劃照護。' : 'Mandarin-speaking support is available, so every family can plan their care in the language they’re most comfortable with.'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Facts Bar -->
+  <section class="py-10 border-y border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid sm:grid-cols-3 gap-6 text-center">
+        {facts.map(item => (
+          <div class="flex flex-col items-center gap-1">
+            <div class="w-6 h-px mb-3" style="background: var(--color-gold-500);"></div>
+            <p class="text-sm font-medium text-stone-800" style="font-family: var(--font-sans);">{ZH ? item.labelZh : item.label}</p>
+            <p class="text-xs" style="color: var(--color-stone-500);">{ZH ? item.detailZh : item.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Financing Options -->
+  <section class="py-24 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '您的選項' : 'Your Options'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '治療的付款方式' : 'Ways to Pay for Treatment'}</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- CapexMD -->
+        <div class="bg-white p-8 border border-stone-200 card-hover flex flex-col">
+          <div class="w-10 h-10 mb-6 flex items-center justify-center border" style="border-color: var(--color-gold-400);">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color: var(--color-gold-600);">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
+            </svg>
+          </div>
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? 'CapexMD 醫療貸款' : 'Medical Financing via CapexMD'}</h3>
+          <p class="text-sm text-stone-500 leading-relaxed flex-1 mb-6">
+            {ZH
+              ? 'IRFC 與專精生育與醫療治療貸款的 CapexMD 合作。核准後款項迅速撥付，治療可即時展開。貸款條件、利率與還款問題，請直接透過 CapexMD 處理。'
+              : 'IRFC partners with CapexMD, a specialized lender for fertility and medical treatments. Upon approval, funds are disbursed quickly so treatment can begin without delay. Loan terms, rates, and repayment questions are handled directly through CapexMD.'}
+          </p>
+          <p class="text-xs mb-4" style="color: var(--color-stone-400);">
+            {ZH ? 'IRFC 為獨立機構，並非金融放貸單位。所有貸款問題請逕洽 CapexMD。' : 'IRFC is a separate entity and does not act as a financing institution. Please direct all loan questions to CapexMD.'}
+          </p>
+          <a
+            href="https://www.capexmd.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs tracking-widest uppercase flex items-center gap-2"
+            style="color: var(--color-gold-600);"
+          >
+            {ZH ? '進一步了解 CapexMD.com' : 'Learn more at CapexMD.com'}
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+
+        <!-- Insurance -->
+        <div class="bg-white p-8 border border-stone-200 card-hover flex flex-col">
+          <div class="w-10 h-10 mb-6 flex items-center justify-center border" style="border-color: var(--color-gold-500);">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color: var(--color-gold-500);">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+            </svg>
+          </div>
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? '保險給付' : 'Insurance Coverage'}</h3>
+          <p class="text-sm text-stone-500 leading-relaxed flex-1 mb-6">
+            {ZH
+              ? '生育給付依方案而有極大差異。部分保險涵蓋診斷、荷爾蒙檢測與監測；部分——尤其是強制州的雇主方案——包含 IVF 週期。我們建議首次看診前致電保險公司，並特別詢問「不孕治療給付」。'
+              : 'Fertility coverage varies widely by plan. Some insurance policies cover diagnostics, hormonal testing, and monitoring. Others — especially employer-sponsored plans in mandated states — include IVF cycles. We recommend calling your insurer before your first visit and asking specifically about "infertility treatment benefits."'}
+          </p>
+          <div class="text-xs space-y-1.5" style="color: var(--color-stone-400);">
+            <p>✓ {ZH ? '凱薩醫療病人：IRFC 為指定卓越中心' : 'Kaiser Permanente patients: IRFC is a designated Center of Excellence'}</p>
+            <p>✓ {ZH ? '我們接受多數主要保險方案' : 'We accept most major insurance plans'}</p>
+            <p>✓ {ZH ? '我們的團隊可協助確認權益' : 'Our team can assist with benefit verification'}</p>
+          </div>
+        </div>
+
+        <!-- Self-pay & HSA/FSA -->
+        <div class="bg-white p-8 border border-stone-200 card-hover flex flex-col">
+          <div class="w-10 h-10 mb-6 flex items-center justify-center border" style="border-color: var(--color-gold-400);">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color: var(--color-gold-600);">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? '自費與 HSA / FSA' : 'Self-Pay & HSA / FSA'}</h3>
+          <p class="text-sm text-stone-500 leading-relaxed flex-1 mb-6">
+            {ZH
+              ? '自費病人可享 IRFC 透明的價格模式。我們在治療開始前提供逐項估算。此外，生育治療通常被視為合格醫療支出——也就是您可用 HSA 或 FSA 的稅前資金支付費用。'
+              : 'Patients paying out of pocket benefit from IRFC’s transparent pricing model. We provide itemized estimates before treatment begins. Additionally, fertility treatments are generally qualified medical expenses — meaning you can use HSA or FSA pre-tax dollars to cover costs.'}
+          </p>
+          <div class="text-xs space-y-1.5" style="color: var(--color-stone-400);">
+            <p>✓ {ZH ? '事前提供逐項估算' : 'Itemized estimates provided upfront'}</p>
+            <p>✓ {ZH ? '接受 HSA 與 FSA 資金' : 'HSA and FSA funds accepted'}</p>
+            <p>✓ {ZH ? '透明價格——絕無驚喜' : 'Transparent pricing — no surprises'}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Steps -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-14">
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? 'IRFC 的財務規劃流程' : 'How Financial Planning Works at IRFC'}</h2>
+        </div>
+        <div class="space-y-0">
+          {steps.map((step, i, arr) => (
+            <div class="flex gap-8 pb-10 relative">
+              {i < arr.length - 1 && (
+                <div class="absolute left-6 top-12 bottom-0 w-px" style="background: var(--color-stone-200);"></div>
+              )}
+              <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center border z-10 bg-white" style="border-color: var(--color-gold-400);">
+                <span class="text-xs font-medium" style="color: var(--color-gold-600); font-family: var(--font-sans);">{step.n}</span>
+              </div>
+              <div class="pt-2">
+                <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-1">{ZH ? step.titleZh : step.title}</h3>
+                <p class="text-sm text-stone-500 leading-relaxed">{ZH ? step.descZh : step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-14">
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '常見財務問題' : 'Common Financing Questions'}</h2>
+        </div>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-base font-medium text-stone-800 pr-4">{ZH ? faq.qZh : faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+              </summary>
+              <div class="px-7 pb-6">
+                <p class="text-sm text-stone-500 leading-relaxed">{ZH ? faq.aZh : faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden" style="height: 360px;">
+    <img src="/images/lobby-detail.webp" srcset="/images/lobby-detail-800.webp 800w, /images/lobby-detail-1280.webp 1280w, /images/lobby-detail.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt={ZH ? 'IRFC 診所大廳' : 'IRFC clinic lobby'} class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '從第一天起，費用就透明。' : 'Transparent costs, from day one.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        {ZH ? '讓我們一起討論您的選項' : 'Let’s Talk Through Your Options'}
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH
+          ? '我們的財務協調員隨時為您解說費用、保險權益與財務方案，絕無壓力。'
+          : 'Our financial coordinator is here to walk you through costs, insurance benefits, and financing options, no pressure.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={ZH ? '/zh-hant/contact' : '/contact'} class="btn-primary">{ZH ? '預約諮詢' : 'Schedule a Consultation'}</a>
+        <a href="tel:+14244324732" class="btn-outline">{ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}</a>
+      </div>
+      <p class="mt-5 text-xs" style="color: var(--color-stone-400);">
+        {ZH
+          ? '國語協調員專線：<a href="tel:+16263886022" class="hover:underline" style="color: var(--color-gold-600);">(626) 388-6022</a>'
+          : 'Mandarin-speaking coordinator available: <a href="tel:+16263886022" class="hover:underline" style="color: var(--color-gold-600);">(626) 388-6022</a>'}
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

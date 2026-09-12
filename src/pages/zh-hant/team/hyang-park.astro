@@ -1,0 +1,8 @@
+---
+import TeamMember from '../../../components/pages/TeamMember.astro';
+import { getTeamMember } from '../../../data/team';
+
+const member = getTeamMember('hyang-park');
+if (!member) throw new Error('Team member not found: hyang-park');
+---
+<TeamMember member={member} locale="zh-hant" />

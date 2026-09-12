@@ -1,0 +1,141 @@
+---
+import ConditionLayout from '../ConditionLayout.astro';
+import { getLocaleFromPath } from '../../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const stages = [
+  { stage: 'Stage I–II (Minimal/Mild)', stageZh: '第一期–二期（輕微／輕度）', descEn: 'Superficial implants, minimal scarring. Fertility impact varies.', descZh: '表淺著床、疤痕極少。對生育的影響程度不一。' },
+  { stage: 'Stage III (Moderate)', stageZh: '第三期（中度）', descEn: 'Deeper implants, possible endometriomas, some adhesions.', descZh: '較深層的著床、可能出現子宮內膜異位瘤（巧克力囊腫）、部分沾黏。' },
+  { stage: 'Stage IV (Severe)', stageZh: '第四期（重度）', descEn: 'Extensive disease, large endometriomas, significant adhesions. Higher fertility impact.', descZh: '病灶廣泛、大型子宮內膜異位瘤、明顯沾黏。對生育影響較大。' },
+];
+
+const symptoms = [
+  { en: 'Pelvic pain — especially during menstruation', zh: '骨盆腔疼痛——尤其在經期時' },
+  { en: 'Pain during intercourse', zh: '性交時疼痛' },
+  { en: 'Pain with bowel movements or urination', zh: '排便或排尿時疼痛' },
+  { en: 'Heavy menstrual bleeding', zh: '月經血量過多' },
+  { en: 'Spotting between periods', zh: '經期之間點狀出血' },
+  { en: 'Difficulty conceiving', zh: '難以受孕' },
+  { en: 'Fatigue', zh: '疲勞' },
+];
+
+const treatments = [
+  {
+    titleEn: 'Laparoscopic Surgery',
+    titleZh: '腹腔鏡手術',
+    descEn: `For moderate-to-severe endometriosis, surgical removal of implants and adhesions can restore anatomy, relieve pain, and improve natural fertility. IRFC performs minimally invasive laparoscopic excision at our accredited surgery centers.`,
+    descZh: `對中度至重度子宮內膜異位症，手術移除著床組織與沾黏能恢復解剖結構、緩解疼痛，並改善自然受孕能力。IRFC 在通過認證的手術中心執行微創腹腔鏡切除術。`,
+  },
+  {
+    titleEn: 'IUI with Ovulation Induction',
+    titleZh: '促排卵合併 IUI',
+    descEn: `For mild endometriosis with patent tubes, medicated IUI cycles can improve the chance of natural conception without surgery — often the first-line treatment option.`,
+    descZh: `對輸卵管通暢的輕度子宮內膜異位症，藥物輔助的 IUI 週期能在不動手術的情況下提高自然受孕機會——通常是最先採取的治療選項。`,
+  },
+  {
+    titleEn: 'IVF',
+    titleZh: 'IVF（試管嬰兒）',
+    descEn: `IVF bypasses the fallopian tubes and provides the highest success rates for women with endometriosis, particularly moderate-to-severe disease. IRFC customizes stimulation protocols to protect ovarian reserve.`,
+    descZh: `IVF 繞過輸卵管，為子宮內膜異位症女性提供最高的成功率，尤其對中度至重度病灶。IRFC 客製化刺激療程以保護卵巢庫存。`,
+  },
+  {
+    titleEn: 'Endometrioma Management',
+    titleZh: '子宮內膜異位瘤（巧克力囊腫）處置',
+    descEn: `Ovarian endometriomas (chocolate cysts) require careful evaluation. IRFC weighs the risks of surgical removal against the benefits, always with ovarian reserve preservation as a priority.`,
+    descZh: `卵巢子宮內膜異位瘤（巧克力囊腫）需要謹慎評估。IRFC 會權衡手術移除的風險與效益，始終以保留卵巢庫存為優先。`,
+  },
+  {
+    titleEn: 'Egg Freezing (Oncofertility)',
+    titleZh: '冷凍卵子（腫瘤生育力保存）',
+    descEn: `Women with endometriosis who are not ready to conceive should consider freezing eggs before surgical treatment or disease progression reduces their ovarian reserve further.`,
+    descZh: `尚未準備懷孕的子宮內膜異位症女性，應考慮在手術治療或病情進展進一步削減卵巢庫存之前，先冷凍卵子。`,
+  },
+  {
+    titleEn: 'Collaborative Care',
+    titleZh: '整合照護',
+    descEn: `IRFC coordinates with minimally invasive gynecological surgeons, pain specialists, and pelvic floor therapists to address endometriosis comprehensively — not just its fertility impact.`,
+    descZh: `IRFC 與微創婦科手術醫師、疼痛專家及骨盆底治療師協作，全面處理子宮內膜異位症——而不只是其對生育的影響。`,
+  },
+];
+---
+
+<ConditionLayout
+  titleEn="Endometriosis"
+  titleZh="子宮內膜異位症"
+  descriptionEn="Endometriosis and fertility treatment at IRFC. Expert diagnosis, surgical treatment, and IVF for patients with endometriosis across Southern California."
+  descriptionZh="子宮內膜異位症與生育治療：IRFC 為南加州子宮內膜異位症病人提供專業診斷、手術治療與 IVF。"
+  ledeEn="Endometriosis affects 1 in 10 women and is a leading cause of chronic pelvic pain and infertility. IRFC offers expert evaluation, laparoscopic surgery, and targeted fertility treatment for women at every stage of this condition."
+  ledeZh="子宮內膜異位症影響每 10 名女性中的 1 人，是慢性骨盆腔疼痛與不孕的主要成因。IRFC 為處於此病症各階段的女性，提供專業評估、腹腔鏡手術，以及標靶化的生育治療。"
+  bandImage="/images/consultation.webp"
+  bandAltEn="IRFC patient consultation"
+  bandAltZh="IRFC 病人諮詢"
+  bandQuoteEn="Every question deserves an honest answer."
+  bandQuoteZh="每個問題，都值得一個誠實的答案。"
+  quoteEn={`"I had Stage III endometriosis and two failed IUIs elsewhere. IRFC recommended laparoscopy first, then IVF. I'm now 14 weeks pregnant with my baby boy."`}
+  quoteZh={`「我當時是第三期子宮內膜異位症，在別處做過兩次失敗的 IUI。IRFC 建議先做腹腔鏡手術，再做 IVF。現在我懷了男寶，已經 14 週。」`}
+  quoteAttributionEn="— IRFC Patient, Laparoscopy + IVF"
+  quoteAttributionZh="— IRFC 病人，腹腔鏡手術 + IVF"
+  ctaTitleEn="Expert Endometriosis Care"
+  ctaTitleZh="專業的子宮內膜異位症照護"
+  ctaTextEn="Whether you've just been diagnosed or struggled for years, IRFC can help you find the right path forward. Let us help you find the right path."
+  ctaTextZh="無論您是剛確診，還是已經掙扎多年，IRFC 都能幫您找到前進的正確方向。"
+  ctaPrimaryHref="/contact"
+  ctaPrimaryLabelEn="Schedule a Consultation"
+  ctaPrimaryLabelZh="預約諮詢"
+>
+  <div slot="intro">
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-14">
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '什麼是子宮內膜異位症？' : 'What Is Endometriosis?'}</h2>
+            <p class="text-stone-600 leading-relaxed mb-4 text-sm">{ZH ? '子宮內膜異位症是指類似子宮內膜（endometrium）的組織生長在子宮外——長在卵巢、輸卵管、骨盆腔腹膜，某些情況下也長在其他器官上。這些組織會對荷爾蒙週期產生反應，造成發炎、疤痕與沾黏。' : 'Endometriosis occurs when tissue similar to the uterine lining (endometrium) grows outside the uterus — on the ovaries, fallopian tubes, pelvic peritoneum, and in some cases on other organs. This tissue responds to hormonal cycles, causing inflammation, scarring, and adhesions.'}</p>
+            <p class="text-stone-600 leading-relaxed mb-5 text-sm">{ZH ? '子宮內膜異位症會透過多種方式損害生育力：扭曲骨盆腔解剖構造、損傷輸卵管、製造對卵子與胚胎不友善的發炎環境，並降低卵巢庫存——尤其當出現卵巢子宮內膜異位瘤（囊腫）時。' : 'Endometriosis can impair fertility by distorting pelvic anatomy, damaging the fallopian tubes, creating an inflammatory environment hostile to eggs and embryos, and reducing ovarian reserve — particularly when ovarian endometriomas (cysts) are present.'}</p>
+            <div class="p-6 border border-stone-200 bg-white">
+              <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '子宮內膜異位症分期' : 'Stages of Endometriosis'}</p>
+              <div class="space-y-2">
+                {stages.map((s) => (
+                  <div class="py-2 border-b border-stone-100 last:border-0">
+                    <p class="text-sm font-medium text-stone-700">{ZH ? s.stageZh : s.stage}</p>
+                    <p class="text-xs text-stone-500">{ZH ? s.descZh : s.descEn}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-4">{ZH ? '常見症狀' : 'Common Symptoms'}</h3>
+            <ul class="space-y-2 mb-8">
+              {symptoms.map((s) => (
+                <li class="flex items-start gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: var(--color-gold-500);"></div>
+                  {ZH ? s.zh : s.en}
+                </li>
+              ))}
+            </ul>
+            <div class="p-6 bg-white border border-stone-200">
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '診斷' : 'Diagnosis'}</p>
+              <p class="text-sm text-stone-600 leading-relaxed">{ZH ? '確定性診斷需要腹腔鏡——一種微創手術。IRFC 在 Corona 與 Irvine 通過認證的手術中心執行診斷性腹腔鏡，並能在同一次手術中處理發現的病灶。' : 'Definitive diagnosis requires laparoscopy — a minimally invasive surgical procedure. IRFC performs diagnostic laparoscopy at accredited surgery centers in Corona and Irvine, with the ability to treat findings in the same procedure.'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? '子宮內膜異位症的生育治療' : 'Fertility Treatment for Endometriosis'}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {treatments.map((t) => (
+            <div class="p-7 border border-stone-200 card-hover">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{ZH ? t.titleZh : t.titleEn}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? t.descZh : t.descEn}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</ConditionLayout>

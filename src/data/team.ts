@@ -1,0 +1,551 @@
+// 醫療團隊個人頁（英文 / 繁體中文雙語資料來源）
+// 由 7 個獨立 team 頁抽出的單一資料來源，驅動 TeamMember.astro 共用骨架。
+
+export interface TeamMember {
+  slug: string;
+  nameLine1: string;
+  nameLine2: string;
+  nameLine1Zh: string;
+  nameLine2Zh: string;
+  role: string;
+  roleZh: string;
+  specialty: string;
+  specialtyZh: string;
+  lead: string;
+  leadZh: string;
+  heroBadge?: string;
+  heroBadgeZh?: string;
+  heroCtaLabel: string;
+  heroCtaLabelZh: string;
+  heroCtaHref: string;
+  aboutName: string;
+  aboutNameZh: string;
+  bio: string[];
+  bioZh: string[];
+  quote?: string;
+  quoteZh?: string;
+  quoteAttribution?: string;
+  quoteAttributionZh?: string;
+  practiceBox: {
+    label: string;
+    labelZh: string;
+    title: string;
+    titleZh: string;
+    body: string;
+    bodyZh: string;
+    ctaLabel: string;
+    ctaLabelZh: string;
+    ctaHref: string;
+  };
+  focus: string[];
+  focusZh: string[];
+  languages: string[];
+  languagesZh: string[];
+  relatedSlugs: string[];
+  cardBadge: string;
+  cardBadgeZh: string;
+  photo: string;
+  schemaName: string;
+  schemaNameZh: string;
+  schemaType: 'Physician' | 'Person';
+  schemaJobTitle: string;
+  schemaDescription: string;
+}
+
+export const team: TeamMember[] = [
+  {
+    slug: 'dr-james-lin',
+    nameLine1: 'James P. Lin,',
+    nameLine2: 'MD',
+    nameLine1Zh: 'James P. Lin，',
+    nameLine2Zh: '醫師',
+    role: 'Founder & Medical Director',
+    roleZh: '創辦人暨醫療總監',
+    specialty: 'Reproductive Endocrinology & Infertility',
+    specialtyZh: '生殖內分泌與不孕症',
+    lead: `The founder of Reproductive Fertility Center and Medical Director of IRFC. Over 20 years of experience, recognized as one of Southern California's most distinguished fertility specialists.`,
+    leadZh: 'Reproductive Fertility Center 的創辦人，也是 IRFC 的醫療總監。擁有超過 20 年的經驗，被譽為南加州最傑出的生育專家之一。',
+    heroCtaLabel: 'Meet Our Physicians',
+    heroCtaLabelZh: '認識我們的醫師',
+    heroCtaHref: '/contact',
+    aboutName: 'About James P. Lin, MD',
+    aboutNameZh: '認識 James P. Lin 醫師',
+    bio: [
+      `Dr. James P. Lin is the founder of Reproductive Fertility Center and Medical Director of IRFC. With over 20 years of experience in reproductive endocrinology and infertility, he is widely recognized as one of Southern California's most distinguished fertility specialists.`,
+      `An award-winning physician, Dr. Lin built RFC on the belief that every patient deserves a clinic that feels like "both a family and a home." His leadership transformed RFC into a Kaiser Permanente Center of Excellence and one of the largest Fairfax EggBank production facilities in the United States.`,
+      `Dr. Lin is internationally renowned for his expertise and continues to shape the future of fertility medicine through clinical innovation and his commitment to patient-centered care.`,
+    ],
+    bioZh: [
+      'James P. Lin 醫師是 Reproductive Fertility Center 的創辦人，也是 IRFC 的醫療總監。擁有超過 20 年生殖內分泌與不孕症的臨床經驗，他被廣泛譽為南加州最傑出的生育專家之一。',
+      '身為獲獎無數的醫師，Dr. Lin 以「每位病人都值得一間如同家人、也如同歸處的診所」為信念創立 RFC。他的領導將 RFC 打造成凱薩醫療（Kaiser Permanente）卓越中心，以及美國最大卵子銀行 Fairfax EggBank 規模最大的生產機構之一。',
+      'Dr. Lin 以其專業享譽國際，並持續透過臨床創新與對以病人為中心照護的承諾，形塑生育醫學的未來。',
+    ],
+    quote: 'Every patient deserves a clinic that feels like both a family and a home.',
+    quoteZh: '每位病人都值得一間如同家人、也如同歸處的診所。',
+    quoteAttribution: '— James P. Lin, MD',
+    quoteAttributionZh: '— James P. Lin 醫師',
+    practiceBox: {
+      label: 'The Practice Dr. Lin Built',
+      labelZh: 'Dr. Lin 打造的診所',
+      title: 'One team, one standard of care.',
+      titleZh: '一個團隊，同一套照護標準。',
+      body: `IRFC brings physicians, embryologists, and nurses together as a single unit around every case — the collaborative model Dr. Lin established from the very beginning.`,
+      bodyZh: 'IRFC 讓醫師、胚胎學家與護理師在每一個病例上同心協力，如同單一的團隊——這正是 Dr. Lin 自一開始就建立的協作模式。',
+      ctaLabel: 'Our Story',
+      ctaLabelZh: '我們的故事',
+      ctaHref: '/about',
+    },
+    focus: [
+      'Reproductive Endocrinology & Infertility',
+      'IVF Protocol Design',
+      'Fertility Preservation',
+      'Patient-Centered Care',
+      'Clinic Leadership & Strategy',
+      'Kaiser Permanente Center of Excellence',
+    ],
+    focusZh: [
+      '生殖內分泌與不孕症',
+      'IVF 療程設計',
+      '生育保存',
+      '以病人為中心的照護',
+      '診所領導與策略',
+      '凱薩醫療卓越中心',
+    ],
+    languages: ['English', 'Mandarin'],
+    languagesZh: ['英文', '中文'],
+    relatedSlugs: ['dr-tiffanny-jones', 'dr-zitao-liu'],
+    cardBadge: 'Physician',
+    cardBadgeZh: '醫師',
+    photo: '/images/team/dr-james-lin-circle.png',
+    schemaName: 'James P. Lin, MD',
+    schemaNameZh: 'James P. Lin 醫師',
+    schemaType: 'Physician',
+    schemaJobTitle: 'Founder & Medical Director',
+    schemaDescription:
+      'Board-certified reproductive endocrinologist and infertility specialist with over 20 years of experience. Founder of Reproductive Fertility Center, Medical Director of IRFC, Kaiser Permanente Center of Excellence physician.',
+  },
+  {
+    slug: 'dr-tiffanny-jones',
+    nameLine1: 'Tiffanny LaTrice',
+    nameLine2: 'Jones, MD',
+    nameLine1Zh: 'Tiffanny LaTrice',
+    nameLine2Zh: 'Jones 醫師',
+    role: 'Reproductive Endocrinology Specialist',
+    roleZh: '生殖內分泌專科醫師',
+    specialty: 'Reproductive Endocrinology & Infertility',
+    specialtyZh: '生殖內分泌與不孕症',
+    lead: `A reproductive endocrinology specialist at IRFC, supporting patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.`,
+    leadZh: 'IRFC 的生殖內分泌專科醫師，協助病人進行生育評估、IVF、基因檢測諮詢與生育保存規劃。',
+    heroCtaLabel: 'Meet Our Physicians',
+    heroCtaLabelZh: '認識我們的醫師',
+    heroCtaHref: '/contact',
+    aboutName: 'About Tiffanny LaTrice Jones, MD',
+    aboutNameZh: '認識 Tiffanny LaTrice Jones 醫師',
+    bio: [
+      `Dr. Tiffanny LaTrice Jones is a reproductive endocrinology specialist at IRFC. She supports patients through fertility evaluation, IVF, genetic-testing discussions, and fertility-preservation planning.`,
+      `Known for her patient-centered approach, Dr. Jones takes time to explain each step clearly and to tailor treatment to every patient's unique goals and circumstances.`,
+    ],
+    bioZh: [
+      'Tiffanny LaTrice Jones 醫師是 IRFC 的生殖內分泌專科醫師，協助病人進行生育評估、IVF、基因檢測諮詢與生育保存規劃。',
+      '以病人為中心的態度聞名，Dr. Jones 會花時間清楚說明每個步驟，並根據每位病人的獨特目標與狀況量身調整治療。',
+    ],
+    quote: 'Fertility care works best when the patient understands every step.',
+    quoteZh: '當病人理解每一個步驟，生育照護才能發揮最好的效果。',
+    quoteAttribution: '— Tiffanny LaTrice Jones, MD',
+    quoteAttributionZh: '— Tiffanny LaTrice Jones 醫師',
+    practiceBox: {
+      label: 'Your Evaluation, Explained',
+      labelZh: '為您說明的評估',
+      title: 'Clarity at every turn.',
+      titleZh: '每一步都清晰明瞭。',
+      body: `From the first consult to a personalized plan, Dr. Jones makes sure you always know what comes next — and why.`,
+      bodyZh: '從首次諮詢到個人化方案，Dr. Jones 都會讓您清楚知道下一步是什麼，以及為什麼。',
+      ctaLabel: 'The Patient Journey',
+      ctaLabelZh: '病人的旅程',
+      ctaHref: '/patient-journey',
+    },
+    focus: [
+      'Fertility Evaluation',
+      'In Vitro Fertilization (IVF)',
+      'Preimplantation Genetic Testing (PGT)',
+      'Fertility Preservation',
+      'Patient-Centered Counseling',
+      'Individualized Treatment Planning',
+    ],
+    focusZh: [
+      '生育評估',
+      '體外受精（IVF）',
+      '胚胎著床前基因檢測（PGT）',
+      '生育保存',
+      '以病人為中心的諮詢',
+      '個人化治療規劃',
+    ],
+    languages: ['English'],
+    languagesZh: ['英文'],
+    relatedSlugs: ['dr-james-lin', 'dr-zitao-liu'],
+    cardBadge: 'Physician',
+    cardBadgeZh: '醫師',
+    photo: '/images/doctor-tiffanny-jones.webp',
+    schemaName: 'Tiffanny LaTrice Jones, MD, FACOG',
+    schemaNameZh: 'Tiffanny LaTrice Jones 醫師',
+    schemaType: 'Physician',
+    schemaJobTitle: 'Reproductive Endocrinology Specialist',
+    schemaDescription:
+      'Reproductive endocrinologist at IRFC specializing in fertility evaluation, IVF, preimplantation genetic testing, and fertility-preservation planning.',
+  },
+  {
+    slug: 'dr-zitao-liu',
+    nameLine1: 'Zitao',
+    nameLine2: 'Liu, MD',
+    nameLine1Zh: 'Zitao',
+    nameLine2Zh: 'Liu 醫師',
+    role: 'Associate Chief Medical Officer',
+    roleZh: '醫療副總監',
+    specialty: 'Reproductive Endocrinology & Infertility',
+    specialtyZh: '生殖內分泌與不孕症',
+    lead: `A rising leader in the field, Dr. Liu pioneers mild-stimulation protocols that reduce patient burden while maintaining excellent outcomes — and now accepts new patients.`,
+    leadZh: '作為領域中新崛起的領袖，Dr. Liu 開創能在減輕病人負擔的同時維持優異成果的輕刺激療程——現正收治新病人。',
+    heroBadge: 'Now Accepting New Patients',
+    heroBadgeZh: '現正收治新病人',
+    heroCtaLabel: 'Meet Our Physicians',
+    heroCtaLabelZh: '認識我們的醫師',
+    heroCtaHref: '/contact',
+    aboutName: 'About Zitao Liu, MD',
+    aboutNameZh: '認識 Zitao Liu 醫師',
+    bio: [
+      `Dr. Zitao Liu serves as Associate Chief Medical Officer at IRFC and is now accepting new patients. A rising leader in the field, Dr. Liu has become a pioneer in the development of mild stimulation protocols that reduce patient burden while maintaining excellent outcomes.`,
+      `He brings a forward-thinking approach to fertility care, integrating artificial intelligence and data-driven tools to enhance diagnostic precision and treatment planning. His work represents the next generation of reproductive medicine — thoughtful, innovative, and deeply personalized.`,
+    ],
+    bioZh: [
+      'Zitao Liu 醫師現任 IRFC 醫療副總監，現正收治新病人。作為領域中新崛起的領袖，Dr. Liu 已成為輕刺激療程的先驅，在減輕病人負擔的同時維持優異的成果。',
+      '他以前瞻的思維投入生育照護，結合人工智慧與數據驅動工具來提升診斷精準度與治療規劃。他的工作代表下一代的生殖醫學——深思、創新且深切個人化。',
+    ],
+    quote: 'The future of reproductive medicine is thoughtful, innovative, and deeply personalized.',
+    quoteZh: '生殖醫學的未來，是深思、創新且深切個人化的。',
+    quoteAttribution: '— Zitao Liu, MD',
+    quoteAttributionZh: '— Zitao Liu 醫師',
+    practiceBox: {
+      label: 'Precision, Reimagined',
+      labelZh: '重新定義精準',
+      title: 'Less burden, same excellence.',
+      titleZh: '更少的負擔，同樣的卓越。',
+      body: `Dr. Liu's mild-stimulation protocols pair clinical evidence with AI-assisted planning — so your care is gentler without compromising results.`,
+      bodyZh: 'Dr. Liu 的輕刺激療程結合臨床實證與 AI 輔助規劃，讓您的照護更溫和，卻不犧牲成效。',
+      ctaLabel: 'About IVF at IRFC',
+      ctaLabelZh: '認識 IRFC 的 IVF',
+      ctaHref: '/services/ivf',
+    },
+    focus: [
+      'Mild Stimulation IVF',
+      'AI-Assisted Diagnostics',
+      'Data-Driven Treatment Planning',
+      'Reproductive Endocrinology & Infertility',
+      'Personalized Protocol Design',
+      'Clinical Innovation',
+    ],
+    focusZh: [
+      '輕刺激 IVF',
+      'AI 輔助診斷',
+      '數據驅動的治療規劃',
+      '生殖內分泌與不孕症',
+      '個人化療程設計',
+      '臨床創新',
+    ],
+    languages: ['English', 'Mandarin'],
+    languagesZh: ['英文', '中文'],
+    relatedSlugs: ['dr-james-lin', 'dr-tiffanny-jones'],
+    cardBadge: 'Physician',
+    cardBadgeZh: '醫師',
+    photo: '/images/team/dr-zitao-liu-circle.png',
+    schemaName: 'Zitao Liu, MD',
+    schemaNameZh: 'Zitao Liu 醫師',
+    schemaType: 'Physician',
+    schemaJobTitle: 'Associate Chief Medical Officer',
+    schemaDescription:
+      'Reproductive endocrinologist specializing in mild stimulation IVF protocols and AI-assisted fertility diagnostics. Associate Chief Medical Officer at IRFC, now accepting new patients.',
+  },
+  {
+    slug: 'dr-yufen-xie',
+    nameLine1: 'Yufen',
+    nameLine2: 'Xie, PhD',
+    nameLine1Zh: 'Yufen',
+    nameLine2Zh: 'Xie 博士',
+    role: 'IVF Laboratory Director',
+    roleZh: 'IVF 實驗室主任',
+    specialty: 'Embryology & Reproductive Science',
+    specialtyZh: '胚胎學與生殖科學',
+    lead: `The scientific leader behind IRFC's embryology laboratory — the team that was ranked #1 in US IVF success rates in 2016.`,
+    leadZh: 'IRFC 胚胎學實驗室背後的科學領導者——正是這支團隊在 2016 年全美 IVF 成功率排名第一。',
+    heroCtaLabel: 'Meet Our Laboratory Team',
+    heroCtaLabelZh: '認識我們的胚胎學團隊',
+    heroCtaHref: '/contact',
+    aboutName: 'About Yufen Xie, PhD',
+    aboutNameZh: '認識 Yufen Xie 博士',
+    bio: [
+      `Dr. Yufen Xie leads IRFC's embryology laboratory with extraordinary distinction. She directed the team that achieved the remarkable milestone of being ranked #1 in US IVF success rates in 2016. Her dedication to world-class embryology technique and continuous improvement defines the standard of care in our lab.`,
+    ],
+    bioZh: [
+      'Yufen Xie 博士以非凡的成就領導 IRFC 的胚胎學實驗室。她帶領團隊締造 2016 年全美 IVF 成功率排名第一的重要里程碑。她對世界級胚胎學技術與持續精進的投入，奠定了實驗室的照護標準。',
+    ],
+    quote: 'World-class embryology is a culture of precision, repeated every single day.',
+    quoteZh: '世界級的胚胎學，是一種精準的文化，日復一日地重複實踐。',
+    quoteAttribution: '— Yufen Xie, PhD',
+    quoteAttributionZh: '— Yufen Xie 博士',
+    practiceBox: {
+      label: 'The Laboratory Dr. Xie Leads',
+      labelZh: 'Xie 博士領導的實驗室',
+      title: 'World-class technology. Exacting protocols.',
+      titleZh: '世界級技術。嚴謹的流程。',
+      body: `IRFC's laboratory is equipped with EmbryoScope+ continuous time-lapse monitoring, RI Witness electronic witnessing, and TMRW smart cryogenic vault with 24/7 real-time monitoring.`,
+      bodyZh: 'IRFC 的實驗室配備 EmbryoScope+ 連續縮時監測、RI Witness 電子見證系統，以及具 24/7 即時監控的 TMRW 智慧冷凍庫。',
+      ctaLabel: 'Laboratory Technology Overview',
+      ctaLabelZh: '實驗室技術總覽',
+      ctaHref: '/technology',
+    },
+    focus: [
+      'Embryology Laboratory Direction',
+      'IVF Culture & Incubation Systems',
+      'Time-Lapse Monitoring (EmbryoScope+)',
+      'Quality Control & Continuous Improvement',
+      'RI Witness Electronic Witnessing',
+      'Cryopreservation & TMRW Smart Vault',
+    ],
+    focusZh: [
+      '胚胎學實驗室領導',
+      'IVF 培養與孵化系統',
+      '縮時監測（EmbryoScope+）',
+      '品質管控與持續精進',
+      'RI Witness 電子見證系統',
+      '冷凍保存與 TMRW 智慧冷凍庫',
+    ],
+    languages: ['English', 'Mandarin'],
+    languagesZh: ['英文', '中文'],
+    relatedSlugs: ['hyang-park', 'lily-hao'],
+    cardBadge: 'Lab Director',
+    cardBadgeZh: '實驗室主任',
+    photo: '/images/team/dr-yufen-xie.png',
+    schemaName: 'Yufen Xie, PhD',
+    schemaNameZh: 'Yufen Xie 博士',
+    schemaType: 'Person',
+    schemaJobTitle: 'IVF Laboratory Director',
+    schemaDescription:
+      'IVF Laboratory Director at IRFC, who led the team ranked #1 in US IVF success rates in 2016.',
+  },
+  {
+    slug: 'hyang-park',
+    nameLine1: 'Hyang Park,',
+    nameLine2: 'M.S.',
+    nameLine1Zh: 'Hyang Park，',
+    nameLine2Zh: '碩士',
+    role: 'IVF Laboratory Supervisor',
+    roleZh: 'IVF 實驗室督導',
+    specialty: 'Embryology & Reproductive Science',
+    specialtyZh: '胚胎學與生殖科學',
+    lead: `The steady hand behind IRFC's laboratory consistency. Hyang Park ensures every protocol, every culture system, and every cycle meets the exacting standard that has defined our lab's reputation.`,
+    leadZh: 'IRFC 實驗室一致性的穩定雙手。Hyang Park 確保每一道流程、每一套培養系統、每一個週期，都符合定義我們實驗室聲譽的嚴謹標準。',
+    heroCtaLabel: 'Meet Our Laboratory Team',
+    heroCtaLabelZh: '認識我們的胚胎學團隊',
+    heroCtaHref: '/contact',
+    aboutName: 'About Hyang Park',
+    aboutNameZh: '認識 Hyang Park',
+    bio: [
+      `Hyang Park serves as IVF Laboratory Supervisor at IRFC, where she safeguards the day-to-day excellence of our embryology laboratory. With meticulous attention to protocol, quality control, and team coordination, she maintains the rigorous standards that have defined the lab's outstanding reputation.`,
+      `In a discipline where consistency is everything, Hyang's work is the quiet engine behind every successful cycle. She coordinates the embryology team, monitors culture and incubation systems, and ensures that each patient's embryos are handled with the same uncompromising precision — regardless of which scientist is at the bench that day.`,
+      `Her stewardship extends beyond technique: Hyang helps translate IRFC's laboratory philosophy — that the lab environment is one of the most significant controllable variables in IVF outcomes — into the routines and checks that make excellence repeatable.`,
+    ],
+    bioZh: [
+      'Hyang Park 現任 IRFC 的 IVF 實驗室督導，守護著我們胚胎學實驗室日常的卓越。她以對流程、品質管控與團隊協調的細心把關，維持了實驗室卓越聲譽所需的嚴謹標準。',
+      '在一致性就是一切的領域中，Hyang 的工作是每一次成功週期背後那股安靜的引擎。她協調胚胎學團隊、監控培養與孵化系統，並確保每位病人的胚胎，無論當天是哪位科學家在台前，都以同樣毫不妥協的精準被對待。',
+      '她的守護不僅止於技術：Hyang 協助將 IRFC 的實驗室理念——實驗室環境是 IVF 結果中最具影響力的可控變因之一——轉化為可重複卓越的日常例行與檢核。',
+    ],
+    quote: 'Great embryology is not a single heroic moment — it is a thousand small, disciplined choices made the same way, every single day.',
+    quoteZh: '卓越的胚胎學不是單一的英雄時刻，而是日復一日、以同樣方式做出的成千上萬個微小而自律的選擇。',
+    quoteAttribution: '— Hyang Park',
+    quoteAttributionZh: '— Hyang Park',
+    practiceBox: {
+      label: 'The Laboratory Hyang Supports',
+      labelZh: 'Hyang 守護的實驗室',
+      title: 'World-class technology. Exacting protocols.',
+      titleZh: '世界級技術。嚴謹的流程。',
+      body: `IRFC's laboratory is equipped with EmbryoScope+ continuous time-lapse monitoring, RI Witness electronic witnessing, and TMRW smart cryogenic vault with 24/7 real-time monitoring.`,
+      bodyZh: 'IRFC 的實驗室配備 EmbryoScope+ 連續縮時監測、RI Witness 電子見證系統，以及具 24/7 即時監控的 TMRW 智慧冷凍庫。',
+      ctaLabel: 'Laboratory Technology Overview',
+      ctaLabelZh: '實驗室技術總覽',
+      ctaHref: '/technology',
+    },
+    focus: [
+      'Embryology Laboratory Operations',
+      'Quality Control & Protocol Consistency',
+      'Culture Media & Incubation Systems',
+      'Embryo Cryopreservation Oversight',
+      'Team Coordination & Training',
+      'CAP / CLIA Laboratory Standards',
+    ],
+    focusZh: [
+      '胚胎學實驗室運作',
+      '品質管控與流程一致性',
+      '培養液與孵化系統',
+      '胚胎冷凍保存監督',
+      '團隊協調與培訓',
+      'CAP / CLIA 實驗室標準',
+    ],
+    languages: ['English', 'Korean'],
+    languagesZh: ['英文', '韓文'],
+    relatedSlugs: ['dr-yufen-xie', 'lily-hao'],
+    cardBadge: 'Embryology',
+    cardBadgeZh: '胚胎學',
+    photo: '/images/team/hyang-park.png',
+    schemaName: 'Hyang Park, M.S.',
+    schemaNameZh: 'Hyang Park',
+    schemaType: 'Person',
+    schemaJobTitle: 'IVF Laboratory Supervisor',
+    schemaDescription:
+      'IVF Laboratory Supervisor at IRFC, ensuring day-to-day excellence of the embryology laboratory through meticulous quality control and team coordination.',
+  },
+  {
+    slug: 'lily-hao',
+    nameLine1: 'Lily Hao,',
+    nameLine2: 'MSN, WHNP',
+    nameLine1Zh: 'Lily Hao，',
+    nameLine2Zh: '護理碩士',
+    role: 'Nurse Manager',
+    roleZh: '護理長',
+    specialty: 'Patient Care & Nursing',
+    specialtyZh: '病人照護與護理',
+    lead: `The advocate who makes sure every patient feels seen, heard, and cared for. Lily Hao brings clinical expertise and genuine warmth to her role leading IRFC's nursing team.`,
+    leadZh: '那位確保每位病人都被看見、被聽見、被妥善照顧的倡議者。Lily Hao 以臨床專業與真誠的溫度，領導 IRFC 的護理團隊。',
+    heroCtaLabel: 'Talk With Our Care Team',
+    heroCtaLabelZh: '與我們的照護團隊洽談',
+    heroCtaHref: '/contact',
+    aboutName: 'About Lily Hao',
+    aboutNameZh: '認識 Lily Hao',
+    bio: [
+      `Lily Hao brings her expertise as a Women's Health Nurse Practitioner to her role as IRFC's Nurse Manager. A passionate advocate for the patient-first philosophy, she ensures that every patient experiences exceptional, compassionate nursing care throughout their fertility journey.`,
+      `Fertility treatment can be emotionally demanding. Lily's focus is on the human experience of care — clear communication, steady reassurance, and coordination that removes friction so patients can focus on what matters. She works closely with physicians and coordinators to make sure no patient falls through the cracks.`,
+      `As Nurse Manager, she sets the tone for the entire clinical team: rigorous where it counts, gentle where it matters. Under her leadership, IRFC's nursing care reflects the belief that science and humanity are not separate — they are the same act of care.`,
+    ],
+    bioZh: [
+      'Lily Hao 以女性健康護理師（WHNP）的專業擔任 IRFC 護理長。作為病人優先理念的熱情倡議者，她確保每位病人在生育旅程中都能體驗卓越、充滿同理的護理照護。',
+      '生育治療可能在情緒上令人負荷沉重。Lily 專注於照護的人性體驗——清晰的溝通、穩定的安心感，以及消除摩擦的協調，讓病人能專注於重要的事。她與醫師及協調員緊密合作，確保沒有病人被遺漏。',
+      '身為護理長，她為整個臨床團隊定調：在關鍵處嚴謹，在重要處溫柔。在她的領導下，IRFC 的護理照護體現了一個信念：科學與人性並非分離——它們是同一個照護的行動。',
+    ],
+    quote: 'Behind every protocol is a person hoping for a family. Our job is to make sure they never feel like a chart — only like a priority.',
+    quoteZh: '每一道流程背後，都是一個渴望擁有家庭的人。我們的工作，是讓他們從不覺得自己只是一張病歷——而始終是被優先對待的人。',
+    quoteAttribution: '— Lily Hao',
+    quoteAttributionZh: '— Lily Hao',
+    practiceBox: {
+      label: 'The Experience Lily Leads',
+      labelZh: 'Lily 領導的體驗',
+      title: 'Science held with humanity.',
+      titleZh: '以人性承載科學。',
+      body: `From the texture of pearl to the imagery of the lotus, IRFC designs spaces and moments that make the hardest parts of the journey feel held — for every kind of family that comes to us.`,
+      bodyZh: '從珍珠的質感到大蓮花的意象，IRFC 設計空間與時刻，讓旅程中最艱難的片段也能被溫柔承接——無論前來的是哪一種家庭。',
+      ctaLabel: 'Patient Resources',
+      ctaLabelZh: '病人資源',
+      ctaHref: '/patient-resources',
+    },
+    focus: [
+      'Patient-Centered Nursing Care',
+      'Care Coordination & Education',
+      'Fertility Treatment Support',
+      'Clinical Workflow & Patient Experience',
+      'Compassionate, Inclusive Communication',
+      'Nursing Team Leadership',
+    ],
+    focusZh: [
+      '以病人為中心的護理照護',
+      '照護協調與衛教',
+      '生育治療支援',
+      '臨床流程與病人體驗',
+      '具同理、包容的溝通',
+      '護理團隊領導',
+    ],
+    languages: ['English', 'Mandarin Chinese'],
+    languagesZh: ['英文', '中文'],
+    relatedSlugs: ['hyang-park', 'kelly-zhao'],
+    cardBadge: 'Nursing',
+    cardBadgeZh: '護理',
+    photo: '/images/team/lily-hao.png',
+    schemaName: 'Lily Hao, MSN, WHNP',
+    schemaNameZh: 'Lily Hao',
+    schemaType: 'Person',
+    schemaJobTitle: 'Nurse Manager',
+    schemaDescription:
+      `Women’s Health Nurse Practitioner and Nurse Manager at IRFC, ensuring every patient experiences exceptional, compassionate nursing care throughout their fertility journey.`,
+  },
+  {
+    slug: 'kelly-zhao',
+    nameLine1: 'Kelly',
+    nameLine2: 'Zhao',
+    nameLine1Zh: 'Kelly',
+    nameLine2Zh: 'Zhao',
+    role: 'Third Party Coordinator',
+    roleZh: '第三方協調員',
+    specialty: 'Donation & Surrogacy',
+    specialtyZh: '捐贈與代理孕母',
+    lead: `The guide who walks families through the most intricate paths to parenthood. Kelly Zhao makes egg donation and surrogacy feel navigable, supported, and deeply human.`,
+    leadZh: '那位陪伴家庭走過最錯綜複雜成家之路的引路人。Kelly Zhao 讓卵子捐贈與代理孕母變得可行、有支援，且深深人性化。',
+    heroCtaLabel: 'Explore Family Building Options',
+    heroCtaLabelZh: '探索成家選擇',
+    heroCtaHref: '/services/lgbtqia',
+    aboutName: 'About Kelly Zhao',
+    aboutNameZh: '認識 Kelly Zhao',
+    bio: [
+      `Kelly Zhao is IRFC's bilingual Third Party Coordinator, specializing in egg donation and surrogacy programs. She supports patients navigating the complex world of donor and gestational carrier arrangements with warmth, expertise, and culturally competent care.`,
+      `Third-party reproduction involves medical, logistical, and emotional dimensions that can feel overwhelming. Kelly's role is to translate that complexity into clear next steps — coordinating with donor banks and surrogacy agencies, aligning timelines with the clinical team, and keeping every family informed and reassured along the way.`,
+      `Fluent in both English and Mandarin, Kelly is especially trusted by international and multilingual families building their lives across borders. She approaches every arrangement with the same conviction: that the path to family, however it is built, deserves to be handled with care and respect.`,
+    ],
+    bioZh: [
+      'Kelly Zhao 是 IRFC 雙語的第三方協調員，專精卵子捐贈與代理孕母方案。她以溫暖、專業與具文化敏感度的方式，協助走過捐贈者與代理孕母複雜世界的病人。',
+      '第三方生殖涉及可能在情感上令人窒息的醫療、後勤與情緒層面。Kelly 的職責是將這份複雜轉化為清晰的下一步——與捐卵銀行及代理孕母機構協調、讓時程與臨床團隊對齊，並在過程中讓每個家庭都知情且安心。',
+      'Kelly 流利使用英文與中文（國語），特別受跨國、多語家庭的信賴，協助他們在國界之間建構人生。她以同樣的信念對待每一項安排：無論以何種方式建構，通往家庭的路都值得被用心與尊重地對待。',
+    ],
+    quote: 'Every family is built differently — and every one of them deserves a coordinator who treats their path as carefully as they do.',
+    quoteZh: '每個家庭建構的方式都不同——而每一個家庭，都值得一位如同他們自己一般，慎重對待其路徑的協調員。',
+    quoteAttribution: '— Kelly Zhao',
+    quoteAttributionZh: '— Kelly Zhao',
+    practiceBox: {
+      label: 'The Paths Kelly Coordinates',
+      labelZh: 'Kelly 協調的路徑',
+      title: 'Donors, surrogacy & inclusive care.',
+      titleZh: '捐贈、代理孕母與包容的照護。',
+      body: `From reciprocal IVF to donor eggs and gestational carriers, IRFC supports every route to parenthood with affirming, personalized coordination.`,
+      bodyZh: '從回體 IVF（reciprocal IVF）到捐贈卵子與代理孕母，IRFC 以肯定、個人化的協調，支持每一條通往為人父母的路。',
+      ctaLabel: 'Donors & Surrogacy',
+      ctaLabelZh: '捐贈與代理孕母',
+      ctaHref: '/services/donors-surrogacy',
+    },
+    focus: [
+      'Egg Donation Programs',
+      'Gestational Surrogacy Coordination',
+      'Donor & Carrier Matching Support',
+      'Bilingual Patient Guidance',
+      'International & Cross-Border Logistics',
+      'Culturally Competent Care',
+    ],
+    focusZh: [
+      '卵子捐贈方案',
+      '代理孕母協調',
+      '捐贈者與代理孕母配對支援',
+      '雙語病人引導',
+      '國際與跨國後勤',
+      '具文化敏感度的照護',
+    ],
+    languages: ['English', 'Mandarin Chinese'],
+    languagesZh: ['英文', '中文'],
+    relatedSlugs: ['lily-hao', 'dr-tiffanny-jones'],
+    cardBadge: 'Coordination',
+    cardBadgeZh: '協調',
+    photo: '/images/team/kelly-zhao.png',
+    schemaName: 'Kelly Zhao',
+    schemaNameZh: 'Kelly Zhao',
+    schemaType: 'Person',
+    schemaJobTitle: 'Third Party Coordinator',
+    schemaDescription:
+      'Bilingual Third Party Coordinator at IRFC, specializing in egg donation and surrogacy programs with warmth, expertise, and culturally competent care.',
+  },
+];
+
+export function getTeamMember(slug: string): TeamMember | undefined {
+  return team.find((m) => m.slug === slug);
+}

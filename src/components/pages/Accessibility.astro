@@ -1,0 +1,107 @@
+---
+// 無障礙聲明（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath } from '../../i18n';
+import { LEGAL_ENTITY, BRAND_ABBREV, SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config/brand';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const commitments = [
+  {
+    title: 'Visual design',
+    titleZh: '視覺設計',
+    body: 'We aim to maintain sufficient colour contrast between text and background, and to keep body text legible at standard zoom levels across the site.',
+    bodyZh: '我們致力於維持文字與背景之間足夠的顏色對比，並確保正文在網站標準縮放層級下清晰易讀。',
+  },
+  {
+    title: 'Keyboard navigation',
+    titleZh: '鍵盤瀏覽',
+    body: 'Primary navigation, menus, and forms are intended to be operable using a keyboard alone, with visible focus states on interactive elements.',
+    bodyZh: '主要導覽、選單與表單皆設計為可單獨以鍵盤操作，並在互動元素上提供可見的焦點狀態。',
+  },
+  {
+    title: 'Images and media',
+    titleZh: '圖像與影音',
+    body: 'Meaningful images carry descriptive alternative text so that screen readers can convey their content. Decorative imagery is marked as such.',
+    bodyZh: '具意義的圖像皆附有描述性替代文字，使螢幕閱讀器能傳達其內容；裝飾性圖像則標示為裝飾。',
+  },
+  {
+    title: 'Structure and headings',
+    titleZh: '結構與標題',
+    body: 'Pages use semantic headings and landmarks so that assistive technologies can navigate content by structure rather than by visual position alone.',
+    bodyZh: '網頁採用語意化標題與地標，使輔助科技能依結構而非僅依視覺位置來瀏覽內容。',
+  },
+  {
+    title: 'Language support',
+    titleZh: '語言支援',
+    body: 'Care is available in English, Mandarin Chinese, Japanese, Korean, and Spanish. Interpretation can be arranged for clinical consultations.',
+    bodyZh: '我們提供英文、國語（中文）、日文、韓文與西班牙文照護。臨床諮詢可安排口譯協助。',
+  },
+];
+
+const title = ZH ? '無障礙宣告' : 'Accessibility';
+const description = ZH
+  ? `${LEGAL_ENTITY}（${BRAND_ABBREV}）致力讓網站人人都能使用，包括使用輔助科技的使用者。`
+  : `Our commitment to making the ${LEGAL_ENTITY} (${BRAND_ABBREV}) website usable by everyone, including people using assistive technologies.`;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <section class="pt-40 pb-16" style="background: var(--color-pearl-100);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
+        {ZH ? '我們的承諾' : 'Commitment'}
+      </p>
+      <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
+        {title}
+      </h1>
+      <p class="text-lg text-stone-500 font-light leading-relaxed">
+        {ZH
+          ? '每個人都應能找到自己所需的照護。我們努力讓本網站適合各種能力的使用者，包括使用螢幕閱讀器、鍵盤瀏覽或其他輔助科技的人。'
+          : 'Everyone deserves to be able to find the care they need. We work to keep this site usable for people of all abilities, including those using screen readers, keyboard navigation, or other assistive technologies.'}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-pearl-50);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+
+      <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-8">
+        {ZH ? '我們努力的方向' : 'What we work toward'}
+      </h2>
+
+      <div class="space-y-8 mb-14">
+        {commitments.map((item) => (
+          <div class="flex gap-4">
+            <span class="mt-2 shrink-0" style="color: var(--color-champagne-500);">—</span>
+            <div>
+              <p class="text-stone-800 font-light mb-1">{ZH ? item.titleZh : item.title}</p>
+              <p class="text-stone-500 font-light leading-relaxed">{ZH ? item.bodyZh : item.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="pt-10" style="border-top: 1px solid var(--color-pearl-300);">
+        <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+          {ZH ? '需要協助或遇到障礙？' : 'Need help or found a barrier?'}
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed mb-6">
+          {ZH
+            ? '若本網站的任何部分難以使用，或您需要其他格式的資訊，請告訴我們。我們會盡力直接提供您所需的內容，並修復問題。'
+            : 'If any part of this site is difficult to use, or if you need information in another format, please tell us. We will do our best to provide what you need directly and to fix the issue.'}
+        </p>
+        <a href={`tel:${SITE_PHONE}`} class="btn-primary">
+          {ZH ? `致電 ${SITE_PHONE_DISPLAY}` : `Call ${SITE_PHONE_DISPLAY}`}
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

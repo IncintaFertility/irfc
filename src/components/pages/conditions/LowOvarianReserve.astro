@@ -1,0 +1,142 @@
+---
+import ConditionLayout from '../ConditionLayout.astro';
+import { getLocaleFromPath } from '../../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const markers = [
+  { name: 'AMH (Anti-Müllerian Hormone)', descEn: 'The most reliable single marker of ovarian reserve. Produced by small follicles, AMH reflects the size of the remaining egg pool.', descZh: '卵巢庫存最可靠的單一指標。由小卵泡製造，AMH 反映剩餘卵子池的規模。' },
+  { name: 'AFC (Antral Follicle Count)', descEn: 'Ultrasound count of small follicles visible at the start of a cycle — a direct measure of immediately available eggs.', descZh: '週期開始時超音波計算可見的小卵泡——直接衡量當下可用的卵子數。' },
+  { name: 'FSH (Follicle-Stimulating Hormone)', descEn: 'Elevated early-cycle FSH suggests the brain is working harder to recruit eggs — a sign of diminished reserve.', descZh: '週期早期 FSH 升高，代表腦部需更費力募集卵子——是庫存下降的訊號。' },
+  { name: 'Estradiol (Day 3)', descEn: 'Elevated early-cycle estradiol can mask FSH elevation and is assessed alongside FSH for a complete picture.', descZh: '週期早期雌二醇升高可能掩蓋 FSH 的上升，需與 FSH 一併評估才能看全貌。' },
+];
+
+const affected = [
+  { en: 'Women over 35 (natural age-related decline)', zh: '35 歲以上女性（自然的年齡相關衰退）' },
+  { en: 'Women with a family history of early menopause', zh: '有早發性停經家族史的女性' },
+  { en: 'Patients who have undergone ovarian surgery (e.g., endometrioma removal)', zh: '曾接受卵巢手術（如巧克力囊腫移除）的病人' },
+  { en: 'Patients after chemotherapy or radiation', zh: '接受過化療或放射線治療的病人' },
+  { en: 'Women with certain autoimmune conditions', zh: '患有特定自體免疫疾病的女性' },
+  { en: 'Women with unexplained infertility who test poorly despite younger age', zh: '年紀較輕、但檢測結果不佳的不明原因不孕症女性' },
+];
+
+const treatments = [
+  {
+    titleEn: 'Optimized IVF Stimulation',
+    titleZh: '優化的 IVF 刺激療程',
+    descEn: `IRFC customizes stimulation protocols specifically for DOR patients — using higher doses, shorter protocols, or alternative approaches (e.g., flare or antagonist protocols) to maximize the number of eggs retrieved.`,
+    descZh: `IRFC 針對 DOR（卵巢庫存減少）病人客製化刺激療程——採用較高劑量、較短療程，或替代方案（例如 flare 或拮抗劑療程），以最大化取出的卵子數。`,
+  },
+  {
+    titleEn: 'Mild / Mini-Stimulation IVF',
+    titleZh: '溫和／低劑量刺激 IVF',
+    descEn: `For some DOR patients, a gentle approach retrieving fewer but potentially higher-quality eggs may be preferable. Dr. Liu specializes in mild stimulation protocols tailored to individual response.`,
+    descZh: `對部分 DOR 病人而言，溫和取卵、數量較少但品質可能更高的方式反而更合適。劉醫師專精於依個別反應調整的溫和刺激療程。`,
+  },
+  {
+    titleEn: 'Egg Banking Over Multiple Cycles',
+    titleZh: '多個週期累積冷凍卵子／胚胎',
+    descEn: `Freezing eggs or embryos from several cycles before attempting transfer can accumulate a larger pool — improving the overall chance of success for patients with very low reserve.`,
+    descZh: `在嘗試植入前，先從數個週期冷凍卵子或胚胎，能累積更大的卵子池——提高庫存極低病人的整體成功機會。`,
+  },
+  {
+    titleEn: 'Natural or Modified Natural Cycle IVF',
+    titleZh: '自然週期或改良自然週期 IVF',
+    descEn: `For patients who produce very few eggs with stimulation, retrieving the single egg the body selects naturally can be a meaningful option.`,
+    descZh: `對刺激後僅能產出極少卵子的病人，取出身體自然篩選出的那一顆卵子，可能是有意義的選擇。`,
+  },
+  {
+    titleEn: 'PGT-A with Low Reserve',
+    titleZh: '低庫存合併 PGT-A',
+    descEn: `Combining PGT-A with IVF allows selection of chromosomally normal embryos — reducing the chance of wasted transfers and miscarriage. Particularly valuable when the embryo pool is small.`,
+    descZh: `將 PGT-A 與 IVF 合併，能篩選出染色體正常的胚胎——減少徒勞的植入與流產機會。當胚胎池很小時格外有價值。`,
+  },
+  {
+    titleEn: 'Donor Egg IVF',
+    titleZh: '捐卵 IVF',
+    descEn: `When a patient's own eggs are no longer viable, donor egg IVF offers excellent success rates. IRFC's comprehensive donor program, in partnership with Fairfax EggBank, provides access to a wide range of screened, tested donors.`,
+    descZh: `當病人自身的卵子已不可行時，捐卵 IVF 提供極佳的成功率。IRFC 與 Fairfax EggBank 合作的完整捐卵計畫，讓您能接觸到多樣且經過篩檢與檢測的捐卵者。`,
+  },
+];
+---
+
+<ConditionLayout
+  titleEn="Low Ovarian Reserve"
+  titleZh="卵巢庫存偏低"
+  descriptionEn="Low ovarian reserve treatment at IRFC. Expert care for diminished ovarian reserve (DOR), low AMH, and premature ovarian insufficiency across Southern California."
+  descriptionZh="卵巢庫存偏低的治療：IRFC 為南加州卵巢庫存減少（DOR）、AMH 偏低與早發性卵巢功能不全的病人提供專業照護。"
+  ledeEn="A diagnosis of low ovarian reserve — diminished AMH, elevated FSH, or a low antral follicle count — is not the end of the road. At IRFC, we specialize in maximizing outcomes for patients with reduced egg supply, including through egg donation when the time is right."
+  ledeZh="「卵巢庫存偏低」的診斷——AMH 降低、FSH 升高，或竇卵泡數偏低——並不代表無路可走。在 IRFC，我們專精於為卵子供給減少的病人爭取最佳結果，包括在適當時機透過捐卵。"
+  bandImage="/images/patient-portrait.webp"
+  bandAltEn="IRFC fertility patient"
+  bandAltZh="IRFC 不孕症病人"
+  bandQuoteEn="A low reserve is not the end of your story."
+  bandQuoteZh="庫存偏低，不代表故事的終點。"
+  bandAlign="right"
+  quoteEn={`"When I was 41, Dr. Lin was honest with me. He said I had about a 10% chance. He designed a protocol around that reality — and my baby is now 6 months old."`}
+  quoteZh={`「我 41 歲時，林醫師對我很誠實。他說我大概只有 10% 的機會。他根據這個現實設計了療程——而我的寶寶現在已經 6 個月大了。」`}
+  quoteAttributionEn="— IRFC Patient, Age 41, IVF with DOR"
+  quoteAttributionZh="— IRFC 病人，41 歲，DOR 合併 IVF"
+  ctaTitleEn="Act Early, Act with Expertise"
+  ctaTitleZh="及早行動，以專業為伴"
+  ctaTextEn="With low ovarian reserve, timing matters. Our physicians will give you an honest picture of your situation — and every available option to move forward with confidence."
+  ctaTextZh="卵巢庫存偏低時，時機至關重要。我們的醫師會誠實說明您的狀況——以及所有能讓您有信心前進的選項。"
+  ctaPrimaryHref="/contact"
+  ctaPrimaryLabelEn="Schedule a Consultation"
+  ctaPrimaryLabelZh="預約諮詢"
+>
+  <div slot="intro">
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-14">
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '認識卵巢庫存' : 'Understanding Ovarian Reserve'}</h2>
+            <p class="text-stone-600 leading-relaxed mb-4 text-sm">{ZH ? '每位女性出生時都帶有固定數量的卵子。「卵巢庫存」指的是剩餘卵子的「數量」與「品質」。它會隨年齡自然下降——但有些女性的衰退早於預期，這種狀況稱為卵巢庫存減少（DOR）。' : 'Every woman is born with a finite number of eggs. "Ovarian reserve" refers to the quantity and quality of eggs remaining. It naturally declines with age — but some women experience this decline earlier than expected, a condition known as diminished ovarian reserve (DOR).'}</p>
+            <p class="text-stone-600 leading-relaxed mb-5 text-sm">{ZH ? 'DOR 不代表無法懷孕——但它確實意味著時間特別重要，治療也應審慎且個人化。IRFC 的醫師在各種嚴重程度的 DOR 管理上，都有豐富經驗。' : 'DOR does not mean pregnancy is impossible — but it does mean that time is particularly important, and that treatment should be thoughtful and individualized. IRFC physicians bring extensive experience managing DOR at every stage of severity.'}</p>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-4">{ZH ? '我們評估的關鍵指標' : 'Key Markers We Evaluate'}</h3>
+            <div class="space-y-3">
+              {markers.map((m) => (
+                <div class="p-4 bg-white border border-stone-200">
+                  <p class="text-sm font-medium text-stone-800 mb-1">{m.name}</p>
+                  <p class="text-xs text-stone-500 leading-relaxed">{ZH ? m.descZh : m.descEn}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="space-y-5">
+            <div class="p-7 bg-white border border-stone-200">
+              <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '哪些人會受影響？' : 'Who Is Affected?'}</p>
+              <ul class="space-y-2">
+                {affected.map((w) => (
+                  <li class="flex items-start gap-3 text-sm text-stone-600">
+                    <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: var(--color-gold-500);"></div>
+                    {ZH ? w.zh : w.en}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="p-7 bg-white border border-gold-200" style="border-color: var(--color-gold-200);">
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? 'IRFC 的做法' : 'IRFC’s Approach'}</p>
+              <p class="text-sm text-stone-600 leading-relaxed">{ZH ? '我們相信誠實、直接的預後溝通——並結合具創意、個人化的治療策略，讓每一顆可用的卵子發揮最大價值。林醫師與劉醫師在管理各嚴重程度的 DOR 上經驗豐富。' : 'We believe in honest, direct communication about prognosis — combined with creative, individualized treatment strategies that maximize every available egg. Dr. Lin and Dr. Liu are experienced managing DOR at all severity levels.'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? '卵巢庫存偏低的治療選項' : 'Treatment Options for Low Ovarian Reserve'}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {treatments.map((t) => (
+            <div class="p-7 border border-stone-200 card-hover">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{ZH ? t.titleZh : t.titleEn}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? t.descZh : t.descEn}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</ConditionLayout>

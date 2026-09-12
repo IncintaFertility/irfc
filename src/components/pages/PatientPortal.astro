@@ -1,0 +1,375 @@
+---
+// 病人專區頁共用骨架（英文 / 繁體中文）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+interface Props {
+  locale: 'en' | 'zh-hant';
+}
+
+const { locale } = Astro.props;
+const ZH = locale === 'zh-hant';
+const pick = (zh: string | undefined, en: string) => (ZH ? (zh ?? en) : en);
+
+const portalLogin = 'https://portal.rfcfamily.com/PatientPortal';
+// TODO: eIVF 开通自助注册后，替换为专用注册链接
+const registrationUrl = portalLogin;
+const appStore = 'https://apps.apple.com/us/app/eivf-caresync/id6477145996';
+const googlePlay = 'https://play.google.com/store/apps/details?id=com.practicehwy.eivf.revamp';
+
+const features = [
+  {
+    title: 'Access your health information',
+    titleZh: '存取您的健康資訊',
+    desc: 'Review your records and the details of your care whenever you need them — anytime, anywhere.',
+    descZh: '隨時隨地查看您的病歷與照護細節。',
+  },
+  {
+    title: 'View prescriptions & medications',
+    titleZh: '查看處方與藥物',
+    desc: 'See your current prescriptions and medication instructions in one place.',
+    descZh: '在一處查看您目前的處方與用藥說明。',
+  },
+  {
+    title: 'Review lab results',
+    titleZh: '檢視實驗室結果',
+    desc: 'Stay up to date with your lab results as soon as they are released by your care team.',
+    descZh: '在照護團隊發布後，立即掌握您最新的實驗室結果。',
+  },
+  {
+    title: 'View & sign forms',
+    titleZh: '檢視並簽署表單',
+    desc: 'Read and electronically sign consents and documents required for your treatment.',
+    descZh: '閱讀並以電子方式簽署治療所需的同意書與文件。',
+  },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'Receive your login credentials',
+    titleZh: '取得您的登入憑證',
+    desc: 'Before your first appointment, our front desk will provide a unique username and a temporary password for the eIVF patient portal.',
+    descZh: '在您的首次預約前，我們的前台會提供 eIVF 病人專區專屬的使用者名稱與臨時密碼。',
+  },
+  {
+    n: '02',
+    title: 'Log in on desktop first',
+    titleZh: '先於桌機登入',
+    desc: 'Use the desktop version of the portal for your first login. You will be prompted immediately to change your password to keep your account secure.',
+    descZh: '首次登入請使用專區的桌機版本。系統會立即提示您更改密碼，以確保帳號安全。',
+  },
+  {
+    n: '03',
+    title: 'Sign consents on desktop',
+    titleZh: '於桌機簽署同意書',
+    desc: 'All patient consents and any documents requiring your signature (or your partner’s) must be completed in the desktop version of the portal.',
+    descZh: '所有病人同意書，以及任何需要您（或伴侶）簽名的文件，都必須在專區的桌機版本中完成。',
+  },
+  {
+    n: '04',
+    title: 'Complete your profile',
+    titleZh: '完成您的個人檔案',
+    desc: 'After creating your new password, you will be prompted to fill in your patient information, medical history, and consents. These must be finished before your first consultation with your physician.',
+    descZh: '設定新密碼後，系統會提示您填寫病人資訊、病史與同意書。這些都必須在您與醫師的首次諮詢前完成。',
+  },
+  {
+    n: '05',
+    title: 'Download the mobile app',
+    titleZh: '下載手機應用程式',
+    desc: 'After a successful desktop login, download the eIVF CareSync app from Google Play or the Apple App Store (links below).',
+    descZh: '桌機登入成功後，請從 Google Play 或 Apple App Store 下載 eIVF CareSync 應用程式（連結如下）。',
+  },
+  {
+    n: '06',
+    title: 'Enter your Practice ID',
+    titleZh: '輸入您的診所 ID',
+    desc: 'The app will ask for the RFC Practice ID. Find it by clicking the “GET Your APP CODE HERE!” icon on the home screen of the desktop portal.',
+    descZh: '應用程式會要求輸入 RFC 診所 ID。請點擊桌機專區首頁的「GET Your APP CODE HERE!」圖示來取得。',
+  },
+];
+
+const faqDesktop = [
+  {
+    q: 'I can’t sign my consent form.',
+    qZh: '我無法簽署同意書。',
+    a: 'First, make sure you are using the desktop version of the patient portal — the mobile app cannot be used to sign consents. When signing, follow the on-screen prompts and click the red link to reveal the signature box. Some forms require multiple signatures and/or initials. Before clicking “Submit Your Document,” complete every action by clicking all red links.',
+    aZh: '首先，請確認您使用的是病人專區的桌機版本——手機應用程式無法用於簽署同意書。簽署時請依照螢幕指示，並點擊紅色連結以展開簽名欄。部分表單需要多次簽名及/或署名。在點擊「Submit Your Document」之前，請點擊所有紅色連結完成每個動作。',
+  },
+  {
+    q: 'I signed my consent, but my partner can’t see it on their portal.',
+    qZh: '我已簽署同意書，但我的伴侶在專區上看不到。',
+    a: 'If you and your partner were both logged in when you signed and submitted, it may take up to 30 minutes for the consent to appear on their side, and they will need to log out and back in. If your partner was not logged in when you submitted, they should see it immediately.',
+    aZh: '若您與伴侶在簽署並提交時都處於登入狀態，同意書可能需要長達 30 分鐘才會顯示在對方那一側，且他們需要登出再重新登入。若您提交時伴侶未登入，對方應會立即看到。',
+  },
+];
+
+const faqMobile = [
+  {
+    q: 'I clicked the “Documents” tab but don’t see my patient instructions.',
+    qZh: '我點了「Documents」分頁，卻看不到我的病人指示。',
+    a: 'To view your patient instructions, first find the “Patient Instructions” link at the top of the Documents page. Click it to open the page listing all instructions, then click the blue underlined title of the instruction you want to view — a popup will appear.',
+    aZh: '若要檢視病人指示，請先在 Documents 頁面頂端找到「Patient Instructions」連結。點擊它開啟列出所有指示的頁面，再點擊您想檢視的指示的藍色底線標題——即會出現彈出視窗。',
+  },
+  {
+    q: 'I can’t view my lab results.',
+    qZh: '我看不到我的實驗室結果。',
+    a: 'On the Patient Portal home screen, click the “Lab Results” tab at the top. A list page with all lab tests will appear; click the blue underlined title of the test you want to view — a popup will appear.',
+    aZh: '在病人專區首頁，點擊頂端的「Lab Results」分頁。即會出現列出所有實驗室檢驗的清單頁；點擊您想檢視檢驗的藍色底線標題——即會出現彈出視窗。',
+  },
+  {
+    q: 'I can’t view my flowsheet.',
+    qZh: '我看不到我的週期表（flowsheet）。',
+    a: 'If your cycle flowsheet isn’t showing on the “Flowsheets” page, contact your clinical coordinator and ask whether the flowsheet has been “released.” Your coordinator must release it before you can view it on the Patient Portal.',
+    aZh: '若您的週期表未顯示在「Flowsheets」頁面，請聯絡您的臨床協調員，詢問該週期表是否已「發布（released）」。協調員必須先發布，您才能在病人專區檢視。',
+  },
+  {
+    q: 'I’m having trouble with the mobile app.',
+    qZh: '我的手機應用程式有問題。',
+    a: 'Technical issues can happen. Try closing and reopening the app, make sure it is updated to the latest version, and check your internet connection. If the problem persists, contact our support team for help.',
+    aZh: '技術問題難免發生。請嘗試關閉並重新開啟應用程式，確認已更新至最新版本，並檢查您的網路連線。若問題持續，請聯絡我們的支援團隊尋求協助。',
+  },
+];
+
+const videos = [
+  { title: 'How to Log In to the Portal', titleZh: '如何登入專區', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_16351107/6658175.mp4' },
+  { title: 'How to Access Your Profile Information', titleZh: '如何存取您的個人檔案資訊', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_576529/1766478.mp4' },
+  { title: 'Home Screen Features Overview', titleZh: '首頁功能總覽', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_9140672/13179681.mp4' },
+  { title: 'Viewing Your Flowsheets', titleZh: '檢視您的週期表', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_2417295/2189859.mp4' },
+  { title: 'Viewing Your Lab Results', titleZh: '檢視您的實驗室結果', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_14969768/11842746.mp4' },
+  { title: 'How to View Prescriptions', titleZh: '如何檢視處方', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_20880929/14919039.mp4' },
+  { title: 'How to Electronically Sign Documents', titleZh: '如何以電子方式簽署文件', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_207409012/222068269.mp4&t=2m25s' },
+  { title: 'Submitting Patient Surveys & Feedback', titleZh: '提交病人問卷與回饋', url: 'https://kb.eivf.net/kbfiles/Videos/VideoCtrl/video.html?Video=A_1134761/10359403.mp4' },
+];
+
+const title = ZH ? '病人專區' : 'Patient Portal';
+const description = ZH
+  ? '使用 IRFC 病人專區——與您的照護團隊聯繫、檢視實驗室結果、簽署表單，並使用 eIVF CareSync 手機應用程式。'
+  : 'Access the IRFC patient portal — message your care team, review lab results, sign forms, and use the eIVF CareSync mobile app.';
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #1c1917 0%, #292524 60%, #3f3f46 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 20%, var(--color-gold-400) 0, transparent 40%);"></div>
+    <div class="relative max-w-screen-xl mx-auto px-6 lg:px-10 pt-40 pb-24 lg:pt-48 lg:pb-28 text-center">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+        <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? '病人專區' : 'Patient Portal'}</span>
+        <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+      </div>
+      <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-white mb-5 leading-none">
+        {ZH ? '歡迎來到您的病人專區' : 'Welcome to Your Patient Portal'}
+      </h1>
+      <p class="text-lg md:text-xl font-light mb-10" style="color: var(--color-stone-300);">{ZH ? '與您的照護、您的結果、您的團隊，始終相連。' : 'Stay connected — to your care, your results, and your team.'}</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href={portalLogin} target="_blank" rel="noopener noreferrer" class="btn-primary" style="background: var(--color-gold-500);">
+          {ZH ? '登入專區' : 'Log In to Portal'}
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+        <a href={localeHref('/appointment', locale)} class="btn-outline" style="border-color: rgba(255,255,255,0.4); color: white;">
+          {ZH ? '預約就診' : 'Book an Appointment'}
+        </a>
+      </div>
+      <p class="mt-6 text-xs" style="color: var(--color-stone-400);">{ZH ? '專區會在新分頁中開啟，位於安全的 eIVF 系統。' : 'The portal opens in a new tab on the secure eIVF system.'}</p>
+    </div>
+  </section>
+
+  <!--
+    New patient self-registration banner.
+    TODO: eIVF self-registration / online booking module 未开通前，"Register Online"
+    暂指向门户登录页；eIVF 开通自助注册后，把 REGISTRATION_URL 换成
+    eIVF 提供的专用注册链接即可（注册、病史、同意书均在 eIVF 内完成，
+    网站不收集任何临床信息）。
+  -->
+  <section class="py-16 lg:py-20 bg-white border-b border-stone-200">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '初次來到 IRFC？' : 'New to IRFC?'}</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-stone-800 mb-4">
+            {ZH ? <>線上註冊，<br/>再提出您的預約。</> : <>Register online, then <em class="not-italic" style="color: var(--color-gold-500);">request your visit.</em></>}
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+            {ZH ? '新病人可透過安全的 eIVF 專區開始註冊——您的身分、病史與同意書都留在我們符合 HIPAA 的系統內，絕不置於公開網站。' : 'New patients can start their registration through the secure eIVF portal — your identity, medical history, and consents stay inside our HIPAA-compliant system, never on the public website.'}
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row lg:justify-end gap-4">
+          <a href={registrationUrl} target="_blank" rel="noopener noreferrer" class="btn-primary">
+            {ZH ? '線上註冊' : 'Register Online'}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href={localeHref('/appointment#request', locale)} class="btn-outline" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
+            {ZH ? '提出預約' : 'Request an Appointment'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What your portal unlocks -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14 max-w-2xl">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '始終觸手可及' : 'Always Within Reach'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-stone-800">{ZH ? '您的專區能解鎖什麼' : 'What your portal unlocks'}</h2>
+        <p class="mt-4 text-sm leading-relaxed" style="color: var(--color-stone-500);">
+          {ZH ? '身為病人，您在整段生育旅程中都能 24/7 存取所需的資訊與工具。登入帳號即可使用以下項目：' : 'As a patient, you have 24/7 access to the information and tools you need throughout your fertility journey. Log in to your account to use the following:'}
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {features.map((f) => (
+          <div class="p-8 border border-stone-200 card-hover">
+            <div class="w-10 h-10 flex items-center justify-center mb-5 rounded-full" style="background: var(--color-gold-100); color: var(--color-gold-600);">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{ZH ? f.titleZh : f.title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">{ZH ? f.descZh : f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- New Patient Guide -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14 max-w-2xl">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '首次設定' : 'First-Time Setup'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-stone-800">{ZH ? '新病人指南' : 'New Patient Guide'}</h2>
+        <p class="mt-4 text-sm leading-relaxed" style="color: var(--color-stone-500);">
+          {ZH ? '請依下列步驟開始使用 eIVF 病人專區與 CareSync 手機應用程式。' : 'Follow these steps to get started with the eIVF patient portal and the CareSync mobile app.'}
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-x-10 gap-y-8">
+        {steps.map((s) => (
+          <div class="flex gap-5 items-start">
+            <span class="text-2xl font-light flex-shrink-0 w-12 text-right" style="font-family: var(--font-serif); color: var(--color-gold-500);">{s.n}</span>
+            <div class="border-t border-stone-200 pt-4">
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{ZH ? s.titleZh : s.title}</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">{ZH ? s.descZh : s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile app -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '隨時隨地' : 'On the Go'}</p>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-stone-800 mb-4">{ZH ? '取得手機應用程式' : 'Get the mobile app'}</h2>
+          <p class="text-sm leading-relaxed mb-8" style="color: var(--color-stone-500);">
+            {ZH ? '把您的專區帶著走。從 Google Play 或 Apple App Store 下載 eIVF CareSync，然後輸入您的 RFC 診所 ID（位於桌機專區首頁）以連結帳號。' : 'Take your portal with you. Download eIVF CareSync from Google Play or the Apple App Store, then enter your RFC Practice ID (found on the desktop portal home screen) to connect your account.'}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href={googlePlay} target="_blank" rel="noopener noreferrer" class="btn-outline" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
+              {ZH ? 'Google Play' : 'Google Play'}
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6L4 12l6 6 4-6-4-6zm0 0l4 6"/></svg>
+            </a>
+            <a href={appStore} target="_blank" rel="noopener noreferrer" class="btn-outline" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
+              {ZH ? 'App Store' : 'App Store'}
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="p-10 border border-stone-200 text-center" style="background: var(--color-stone-50);">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-2xl flex items-center justify-center" style="background: var(--color-gold-500);">
+            <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-2">{ZH ? 'eIVF CareSync' : 'eIVF CareSync'}</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">{ZH ? '訊息、結果與提醒——無論您的旅程帶您去哪裡。' : 'Messages, results, and reminders — wherever your journey takes you.'}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14 text-center">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '協助與解答' : 'Help & Answers'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-stone-800">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div>
+          <h3 class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '桌機版本' : 'Desktop Version'}</h3>
+          <div class="space-y-4">
+            {faqDesktop.map((item) => (
+              <details class="group border border-stone-200 bg-white">
+                <summary class="cursor-pointer list-none flex items-center justify-between gap-4 px-6 py-5 text-stone-800" style="font-family: var(--font-serif);">
+                  <span class="text-base font-light">{ZH ? item.qZh : item.q}</span>
+                  <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                </summary>
+                <p class="px-6 pb-6 text-sm leading-relaxed" style="color: var(--color-stone-500);">{ZH ? item.aZh : item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '手機應用程式' : 'Mobile App'}</h3>
+          <div class="space-y-4">
+            {faqMobile.map((item) => (
+              <details class="group border border-stone-200 bg-white">
+                <summary class="cursor-pointer list-none flex items-center justify-between gap-4 px-6 py-5 text-stone-800" style="font-family: var(--font-serif);">
+                  <span class="text-base font-light">{ZH ? item.qZh : item.q}</span>
+                  <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                </summary>
+                <p class="px-6 pb-6 text-sm leading-relaxed" style="color: var(--color-stone-500);">{ZH ? item.aZh : item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tutorial videos -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12 max-w-2xl">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '認識專區' : 'Learn the Portal'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-stone-800">{ZH ? '教學影片' : 'Tutorial Videos'}</h2>
+        <p class="mt-4 text-sm leading-relaxed" style="color: var(--color-stone-500);">
+          {ZH ? '由 eIVF（官方病人專區平台）提供的逐步影片指南。' : 'Step-by-step video guides from eIVF, the official patient portal platform.'}
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {videos.map((v) => (
+          <a href={v.url} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 p-5 border border-stone-200 card-hover">
+            <span class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-full" style="background: var(--color-stone-100); color: var(--color-gold-600);">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="text-sm leading-snug text-stone-700 group-hover:text-stone-900">{ZH ? v.titleZh : v.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Support -->
+  <section class="py-20 lg:py-28" style="background: linear-gradient(135deg, #1c1917 0%, #292524 100%);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl lg:text-4xl font-light text-white mb-4">{ZH ? '遇到技術問題？' : 'Having a technical issue?'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-300);">
+        {ZH ? '我們專屬的支援團隊隨時為您提供協助。提交一張工單，團隊成員會儘快回覆您。' : 'Our dedicated support team is here to help. Submit a ticket and a team member will get back to you as soon as possible.'}
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="mailto:info@irfc.com" class="btn-primary" style="background: var(--color-gold-500);">{ZH ? '電郵支援' : 'Email Support'}</a>
+        <a href={localeHref('/contact', locale)} class="btn-outline" style="border-color: rgba(255,255,255,0.4); color: white;">{ZH ? '聯絡我們' : 'Contact Us'}</a>
+      </div>
+      <p class="mt-6 text-xs tracking-wide" style="color: var(--color-stone-400);">{ZH ? '週一至週五，上午 8:00 – 下午 5:00  ·  Support@RFCfamily.com' : 'Monday – Friday, 8:00 AM – 5:00 PM  ·  Support@RFCfamily.com'}</p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

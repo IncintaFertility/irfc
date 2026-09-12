@@ -1,0 +1,181 @@
+---
+// 醫療團隊個人頁共用骨架（英文 / 繁體中文）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+import { SITE_URL } from '../../config/brand';
+import { getTeamMember, type TeamMember } from '../../data/team';
+
+interface Props {
+  member: TeamMember;
+  locale: 'en' | 'zh-hant';
+}
+
+const { member, locale } = Astro.props;
+const ZH = locale === 'zh-hant';
+const pick = (zh: string | undefined, en: string) => (ZH ? (zh ?? en) : en);
+
+const title = ZH ? `${member.schemaNameZh} — ${member.roleZh}` : `${member.schemaName} — ${member.role}`;
+const description = pick(member.leadZh, member.lead);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': member.schemaType,
+  name: member.schemaName,
+  ...(member.schemaType === 'Physician' ? { honorificPrefix: 'Dr.' } : {}),
+  jobTitle: member.schemaJobTitle,
+  description: member.schemaDescription,
+  ...(member.schemaType === 'Physician' ? { medicalSpecialty: 'Reproductive Medicine' } : {}),
+  worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
+  image: SITE_URL + member.photo,
+  url: SITE_URL + '/team/' + member.slug,
+};
+
+const related = member.relatedSlugs
+  .map((slug) => getTeamMember(slug))
+  .filter((m): m is TeamMember => Boolean(m));
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-0 items-end">
+        <div class="pb-16 lg:pb-24 pt-12">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{pick(member.roleZh, member.role)}</span>
+          </div>
+          <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-4 leading-none">
+            {ZH ? <>{member.nameLine1Zh}<br/><em class="not-italic" style="color: var(--color-gold-500);">{member.nameLine2Zh}</em></> : <>{member.nameLine1}<br/><em class="not-italic" style="color: var(--color-gold-500);">{member.nameLine2}</em></>}
+          </h1>
+          <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">{pick(member.specialtyZh, member.specialty)}</p>
+          <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-10">{pick(member.leadZh, member.lead)}</p>
+          {member.heroBadge && (
+            <span class="inline-block mb-8 text-xs px-3 py-1.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">{pick(member.heroBadgeZh, member.heroBadge)}</span>
+          )}
+          <div>
+            <a href={localeHref(member.heroCtaHref, locale)} class="btn-outline inline-flex items-center gap-2">
+              {pick(member.heroCtaLabelZh, member.heroCtaLabel)}
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="hidden lg:block relative" style="min-height: 560px;">
+          <img
+            src={member.photo}
+            alt={pick(member.schemaNameZh, member.schemaName)}
+            class="absolute bottom-0 right-0 h-full w-full object-cover object-top"
+            style="object-position: center top;"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Biography -->
+  <section class="py-24 lg:py-32 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-16">
+        <div class="lg:col-span-2 space-y-6">
+          <div class="section-divider mb-8"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">{pick(member.aboutNameZh, member.aboutName)}</h2>
+
+          {(ZH ? member.bioZh : member.bio).map((para) => (
+            <p class="text-stone-600 leading-relaxed">{para}</p>
+          ))}
+
+          {member.quote && (
+            <blockquote class="py-10 border-y border-stone-100 my-10">
+              <p class="text-2xl font-light leading-relaxed text-stone-700 italic" style="font-family: var(--font-serif);">
+                {ZH ? member.quoteZh : member.quote}
+              </p>
+              <cite class="block mt-4 text-xs tracking-widest uppercase not-italic" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? member.quoteAttributionZh : member.quoteAttribution}</cite>
+            </blockquote>
+          )}
+
+          <div class="p-8 lg:p-10 border border-stone-200" style="background: var(--color-stone-50);">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">{pick(member.practiceBox.labelZh, member.practiceBox.label)}</p>
+            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{pick(member.practiceBox.titleZh, member.practiceBox.title)}</h3>
+            <p class="text-sm leading-relaxed text-stone-500 mb-6">{pick(member.practiceBox.bodyZh, member.practiceBox.body)}</p>
+            <a href={localeHref(member.practiceBox.ctaHref, locale)} class="btn-outline inline-flex items-center gap-2 text-xs py-2.5 px-5">
+              {pick(member.practiceBox.ctaLabelZh, member.practiceBox.ctaLabel)}
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-10">
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '專注領域' : 'Areas of Focus'}</p>
+            <ul class="space-y-3">
+              {member.focus.map((item, i) => (
+                <li class="flex items-center gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 flex-shrink-0" style="background: var(--color-gold-400);"></div>
+                  {ZH ? member.focusZh[i] : item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="border-t border-stone-100 pt-8">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '語言' : 'Languages'}</p>
+            <div class="flex flex-wrap gap-2">
+              {member.languages.map((lang, i) => (
+                <span class="text-xs px-3 py-1.5 border border-stone-200 text-stone-600">{ZH ? member.languagesZh[i] : lang}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="border border-stone-200 p-6" style="background: var(--color-stone-50);">
+            <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
+            <p class="text-sm font-light text-stone-800 mb-2" style="font-family: var(--font-serif);">{ZH ? '預約就診' : 'Plan Your Visit'}</p>
+            <p class="text-xs text-stone-500 mb-5 leading-relaxed">{ZH ? '準備開始了嗎？與我們的照護團隊預約諮詢。' : 'Ready to begin? Schedule a consultation with our care team.'}</p>
+            <a href={localeHref('/appointment', locale)} class="btn-primary text-xs py-2.5 px-5 w-full justify-center">
+              {t(locale, 'nav.cta')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other team -->
+  <section class="py-16 border-t border-stone-100" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex items-center justify-between mb-10">
+        <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">{ZH ? 'IRFC 其他成員' : 'Also at IRFC'}</h3>
+        <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          {ZH ? '完整團隊' : 'Full Team'}
+          <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        {related.map((doc) => (
+          <a href={localeHref('/team/' + doc.slug, locale)} class="group bg-white border border-stone-200 p-6 flex items-center gap-5 card-hover">
+            <img src={doc.photo} alt={ZH ? doc.schemaNameZh : doc.schemaName} class="w-16 h-16 object-cover flex-shrink-0" style="border-radius: 50%;" />
+            <div class="flex-1 min-w-0">
+              <p class="text-base font-light text-stone-800" style="font-family: var(--font-serif);">{ZH ? doc.schemaNameZh : doc.schemaName}</p>
+              <p class="text-xs tracking-wider uppercase mt-0.5" style="color: var(--color-stone-400);">{ZH ? doc.roleZh : doc.role}</p>
+              <span class="inline-block mt-2 text-xs px-2 py-0.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{ZH ? doc.cardBadgeZh : doc.cardBadge}</span>
+            </div>
+            <svg class="w-4 h-4 flex-shrink-0 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,187 @@
+---
+import ConditionLayout from '../ConditionLayout.astro';
+import { getLocaleFromPath } from '../../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const normalFindings = [
+  { en: 'Normal ovarian reserve (AMH, FSH, antral follicle count)', zh: '正常的卵巢庫存（AMH、FSH、竇卵泡數）' },
+  { en: 'Regular ovulation confirmed', zh: '確認排卵規律' },
+  { en: 'Open fallopian tubes on HSG', zh: '子宮輸卵管攝影（HSG）顯示輸卵管通暢' },
+  { en: 'Normal uterine cavity on sonogram or hysteroscopy', zh: '超音波或子宮鏡下子宮腔正常' },
+  { en: 'Adequate semen analysis (count, motility, morphology)', zh: '精液分析充足（數量、活動力、型態）' },
+];
+
+const beyond = [
+  { en: 'ERA (Endometrial Receptivity Array) — testing implantation timing', zh: 'ERA（子宮內膜著床窗檢測）——評估植入時機' },
+  { en: 'Sperm DNA fragmentation analysis', zh: '精子 DNA 斷裂分析' },
+  { en: 'Advanced embryo grading via EmbryoScope+ time-lapse', zh: '透過 EmbryoScope+ 縮時攝影進行進階胚胎評級' },
+  { en: 'Immune and uterine natural killer cell evaluation', zh: '免疫與子宮自然殺手細胞評估' },
+  { en: 'Hysteroscopy to visualize the uterine cavity directly', zh: '子宮鏡直接觀察子宮腔' },
+];
+
+const steps = [
+  {
+    n: '01',
+    titleEn: 'Expectant Management',
+    titleZh: '期待性處理',
+    descEn: `For younger patients with a short duration of infertility, a monitored period of timed intercourse may be appropriate. Spontaneous conception rates remain meaningful in this group.`,
+    descZh: `對不孕時間短、年紀較輕的病人，在監測下擇時同房一段時間可能是合適的。此族群的天然受孕率仍具意義。`,
+  },
+  {
+    n: '02',
+    titleEn: 'IUI with Ovarian Stimulation',
+    titleZh: '促排卵合併 IUI',
+    descEn: `Combining mild ovarian stimulation (Clomid or letrozole with or without FSH injections) with intrauterine insemination increases the number of eggs available and places sperm directly at the site of fertilization. A common first-line treatment for unexplained infertility.`,
+    descZh: `將溫和促排卵（克羅米芬或來曲唑，可合併或不合併 FSH 注射）與子宮腔內人工授精結合，能增加可用卵子數並將精子直接送達受精處。是不明原因不孕症常見的第一線治療。`,
+  },
+  {
+    n: '03',
+    titleEn: 'IVF',
+    titleZh: 'IVF（試管嬰兒）',
+    descEn: `IVF is the most effective treatment for unexplained infertility. It bypasses most potential barriers to conception — fertilization is confirmed in the laboratory, embryo development is observed, and the best embryo is transferred. IVF also provides diagnostic information: if fertilization or development fails, that knowledge guides the next step.`,
+    descZh: `IVF 是不明原因不孕症最有效的治療。它繞過大多數可能阻礙受孕的障礙——受精在實驗室中確認、胚胎發育被觀察，並植入最優質的胚胎。IVF 也提供診斷資訊：若受精或發育失敗，這些知識能指引下一步。`,
+  },
+];
+
+const faqs = [
+  {
+    qEn: `Is unexplained infertility really untreatable?`,
+    qZh: `不明原因不孕症真的無法治療嗎？`,
+    aEn: `No — the name is misleading. "Unexplained" means the standard workup did not identify a specific cause, not that the situation is hopeless. The majority of patients with unexplained infertility achieve pregnancy with appropriate treatment. Success rates are generally higher than for many other fertility diagnoses.`,
+    aZh: `不——這個名稱會誤導人。「不明原因」是指標準檢查未找出特定成因，並不代表情況無望。大多數不明原因不孕症的病人都能在適切治療下懷孕。成功率通常高於許多其他不孕症診斷。`,
+  },
+  {
+    qEn: `Should I do more testing before starting treatment?`,
+    qZh: `開始治療前，我該做更多檢查嗎？`,
+    aEn: `In some cases, yes. If your prior workup was not comprehensive, or if initial treatment attempts have failed, additional testing (ERA, sperm DNA fragmentation, immune workup) may reveal actionable information. Your physician will recommend further testing only when it is likely to change your treatment plan.`,
+    aZh: `某些情況下，是的。若您先前的檢查不夠完整，或初期的治療嘗試失敗，額外檢查（ERA、精子 DNA 斷裂、免疫評估）可能揭示可採取行動的資訊。您的醫師只會在檢查很可能改變治療計畫時，才建議進一步檢測。`,
+  },
+  {
+    qEn: `How many IUI cycles should I try before moving to IVF?`,
+    qZh: `在轉向 IVF 之前，我應該嘗試幾次 IUI 週期？`,
+    aEn: `Evidence suggests that 3 IUI cycles with ovarian stimulation is a reasonable approach for unexplained infertility, after which IVF offers meaningfully better success rates. However, age matters significantly — patients over 37 may be advised to proceed to IVF sooner. Your physician will give you a personalized recommendation.`,
+    aZh: `證據顯示，不明原因不孕症先做 3 次合併促排卵的 IUI 週期是合理的做法，之後 IVF 能提供明顯更好的成功率。不過年齡影響很大——37 歲以上的病人可能被建議更早轉向 IVF。您的醫師會給出個人化建議。`,
+  },
+  {
+    qEn: `Will IVF give me a diagnosis too?`,
+    qZh: `IVF 也能幫我做出診斷嗎？`,
+    aEn: `Often, yes. IVF allows the embryologist to observe fertilization and embryo development directly. If eggs fertilize poorly, embryos arrest early, or blastocyst rates are low, that information provides important diagnostic clues — even if prior testing was normal. IVF is often as much a diagnostic tool as a treatment.`,
+    aZh: `通常可以。IVF 讓胚胎學家能直接觀察受精與胚胎發育。若卵子受精不良、胚胎早期停滯，或囊胚率偏低，這些資訊能提供重要的診斷線索——即使先前的檢查都正常。IVF 往往既是診斷工具，也是治療。`,
+  },
+];
+---
+
+<ConditionLayout
+  titleEn={`Unexplained<br/>Infertility`}
+  titleZh={`不明原因<br/>不孕症`}
+  descriptionEn="Unexplained infertility affects up to 30% of couples. IRFC provides advanced diagnostic workups and evidence-based treatment to help patients move forward with confidence."
+  descriptionZh="不明原因不孕症影響高達 30% 的伴侶。IRFC 提供進階診斷評估與實證治療，幫助病人有信心地向前邁進。"
+  ledeEn="Receiving a diagnosis of “unexplained infertility” — meaning all standard tests are normal yet pregnancy has not occurred — can feel profoundly frustrating. It is one of the most common fertility diagnoses, and one of the most treatable."
+  ledeZh="得到「不明原因不孕症」的診斷——也就是所有標準檢查都正常，卻遲遲未能懷孕——會讓人感到極度挫敗。它是最常見的不孕症診斷之一，也是最容易治療的之一。"
+  bandImage="/images/couple-clinic.webp"
+  bandAltEn="Couple at IRFC clinic"
+  bandAltZh="IRFC 診所中的伴侶"
+  bandQuoteEn={`"Unexplained" is not the end of the story.`}
+  bandQuoteZh={`「不明原因」不代表故事的終點。`}
+  bandHeight={340}
+  ctaTitleEn="Get Answers. Move Forward."
+  ctaTitleZh="得到答案，向前邁進。"
+  ctaTextEn="A consultation with an IRFC physician begins with a thorough review of everything you've already done — and a clear-eyed plan for what comes next."
+  ctaTextZh="與 IRFC 醫師的諮詢，從徹底檢視您已做過的一切開始——並為接下來的步驟擬定務實的計畫。"
+  ctaPrimaryHref="/contact"
+  ctaPrimaryLabelEn="Schedule a Consultation"
+  ctaPrimaryLabelZh="預約諮詢"
+  ctaSecondaryHref="/services/ivf"
+  ctaSecondaryLabelEn="Learn About IVF"
+  ctaSecondaryLabelZh="認識 IVF"
+>
+  <div slot="intro">
+    <!-- What is it -->
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-14">
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '什麼是不明原因不孕症？' : 'What Is Unexplained Infertility?'}</h2>
+            <p class="text-stone-600 leading-relaxed mb-4 text-sm">{ZH ? '不明原因不孕症定義為：在未避孕同房 12 個月後（女性超過 35 歲則為 6 個月）仍未能懷孕，但標準生育評估卻顯示：' : 'Unexplained infertility is defined as failure to conceive after 12 months of unprotected intercourse (6 months if the woman is over 35) despite a standard fertility workup showing:'}</p>
+            <ul class="space-y-2 mb-6">
+              {normalFindings.map((item) => (
+                <li class="flex items-start gap-3 text-sm text-stone-600">
+                  <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                  {ZH ? item.zh : item.en}
+                </li>
+              ))}
+            </ul>
+            <p class="text-stone-600 leading-relaxed text-sm">{ZH ? '不明原因不孕症約佔所有不孕症診斷的 20–30%。儘管名稱如此，研究人員相信潛在成因往往存在於標準檢測無法察覺的微觀或分子層級——包含細微的卵子品質問題、精卵互作異常，或胚胎著床因素。' : 'Unexplained infertility accounts for approximately 20–30% of all infertility diagnoses. Despite the name, researchers believe underlying causes often exist at a microscopic or molecular level not detectable by standard tests — including subtle egg quality issues, sperm-egg interaction problems, or embryo implantation factors.'}</p>
+          </div>
+          <div class="space-y-5">
+            <div class="p-7 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{ZH ? '超越標準檢查' : 'Going Beyond the Standard Workup'}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '當標準檢查都正常時，IRFC 醫師可能建議進一步評估，以找出細微因素：' : 'When standard tests are normal, IRFC physicians may recommend additional evaluation to look for subtle factors:'}</p>
+              <ul class="space-y-2 text-sm text-stone-600">
+                {beyond.map((d) => (
+                  <li class="flex items-start gap-3">
+                    <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2" style="background: var(--color-gold-400);"></div>
+                    {ZH ? d.zh : d.en}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="p-7 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{ZH ? '何時該做評估' : 'When to Seek Evaluation'}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? '未滿 35 歲：嘗試 12 個月後。超過 35 歲：6 個月後。若有已知風險因子（月經不規則、曾動手術、子宮內膜異位症病史）：應更早評估。若您已在別處完成基礎檢查，IRFC 可檢視您的結果並建議下一步。' : 'Under 35: after 12 months of trying. Over 35: after 6 months. Known risk factors (irregular cycles, prior surgery, endometriosis history): earlier evaluation is appropriate. If you have already completed a basic workup elsewhere, IRFC can review your results and recommend next steps.'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treatment Approach -->
+    <section class="py-20 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12">{ZH ? '治療方向' : 'Treatment Approach'}</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          {steps.map((step) => (
+            <div class="p-7 border border-stone-200">
+              <div class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</div>
+              <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? step.titleZh : step.titleEn}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? step.descZh : step.descEn}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-8 p-7 border border-stone-200" style="background: var(--color-stone-50);">
+          <div class="grid lg:grid-cols-[auto_1fr] gap-6 items-start">
+            <svg class="w-8 h-8 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+            <div>
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{ZH ? 'IRFC 的做法' : 'The IRFC Approach'}</h3>
+              <p class="text-sm text-stone-600 leading-relaxed">{ZH ? 'IRFC 的醫師不會預設「一體適用」的制式療程。您的醫師會評估您的年齡、不孕時間、既往治療史與個人偏好，推薦最有可能帶來成功懷孕的方向——而不是最昂貴或最激進的那個。有些病人適合從 IUI 開始；有些則更適合直接進行 IVF。這項建議是誠實的，基於您的具體狀況。' : 'IRFC physicians do not default to a one-size-fits-all protocol. Your physician will evaluate your age, duration of infertility, prior treatment history, and personal preferences to recommend the approach most likely to lead to a successful pregnancy — not the most expensive or most aggressive one. Some patients benefit from starting with IUI; others are better served by proceeding directly to IVF. That recommendation is made honestly, based on your specific situation.'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div slot="between">
+    <!-- FAQ -->
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="max-w-3xl mx-auto">
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+          <div class="border border-stone-200 bg-white">
+            {faqs.map((faq) => (
+              <details class="group border-b border-stone-200 last:border-b-0">
+                <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                  <h3 class="text-sm font-medium text-stone-800 pr-4">{ZH ? faq.qZh : faq.qEn}</h3>
+                  <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </summary>
+                <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{ZH ? faq.aZh : faq.aEn}</p></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</ConditionLayout>

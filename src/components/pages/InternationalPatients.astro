@@ -1,0 +1,253 @@
+---
+// 國際與外地病人（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const languages = [
+  { lang: 'English', flag: '🇺🇸', langZh: '英語' },
+  { lang: 'Mandarin Chinese', flag: '🇨🇳', langZh: '普通話' },
+  { lang: 'Japanese', flag: '🇯🇵', langZh: '日語' },
+  { lang: 'Korean', flag: '🇰🇷', langZh: '韓語' },
+  { lang: 'Spanish', flag: '🇪🇸', langZh: '西班牙語' },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'Initial Telehealth Consultation',
+    titleZh: '初次遠距醫療諮詢',
+    desc: 'Your first appointment with an IRFC physician can be conducted by secure video — no travel required. You will discuss your medical history, prior fertility evaluations, and goals. If you have existing records, send them in advance and your physician will review them before your appointment.',
+    descZh: '您與 IRFC 醫師的初次約診，可透過安全的視訊進行——無須旅行。您將討論病史、先前的生育評估與目標。若您已有相關紀錄，請提前寄送，醫師會在約診前先行檢閱。',
+  },
+  {
+    n: '02',
+    title: 'Remote Diagnostic Workup',
+    titleZh: '遠端診斷檢查',
+    desc: 'Bloodwork and ultrasound monitoring can often be completed at a clinic near you, with results sent to IRFC for interpretation. Our team will coordinate directly with your local clinic and provide detailed instructions on exactly what tests are needed and when.',
+    descZh: '驗血與超音波監測，通常可在您附近的診所完成，再由該診所將結果送交 IRFC 解讀。我們的團隊會直接與您當地診所協調，並詳細說明需要哪些檢查、以及時程。',
+  },
+  {
+    n: '03',
+    title: 'Treatment Planning & Coordination',
+    titleZh: '療程規劃與協調',
+    desc: 'Once your workup is complete, your IRFC physician prepares your individualized treatment plan. Your coordinator contacts you with a detailed timeline, cost estimate, and itinerary for your in-person visit. We plan everything around your travel schedule.',
+    descZh: '檢查完成後，您的 IRFC 醫師會為您擬定個人化療程計畫。協調專員會與您聯繫，提供詳細時程、費用預估與到院看診的行程安排。我們會以您的旅行時程為核心進行規劃。',
+  },
+  {
+    n: '04',
+    title: 'In-Person Visit for Procedure',
+    titleZh: '到院進行療程',
+    desc: 'Egg retrieval, embryo transfer, and certain monitoring appointments require in-person visits to our Southern California clinic. Most patients schedule a 1–2 week stay for an IVF cycle. Your coordinator helps arrange logistics so your time in California is efficient and focused on your care.',
+    descZh: '取卵、胚胎植入，以及部分監測約診，需親自到訪我們位於南加州的診所。大多數病人會為一個 IVF 週期安排 1–2 週的停留。協調專員會協助安排後勤，讓您在加州的時間高效且專注於療程。',
+  },
+  {
+    n: '05',
+    title: 'Follow-Up & Ongoing Support',
+    titleZh: '後續追蹤與持續支援',
+    desc: 'After your procedure, follow-up monitoring and pregnancy support can resume with your local clinic, coordinated by IRFC. We remain available for consultation and provide detailed instructions to your local care team to ensure seamless continuity of care.',
+    descZh: '療程結束後，後續監測與懷孕支援可在 IRFC 協調下，回到您當地的診所進行。我們隨時可提供諮詢，並向您當地的照護團隊提供詳細指示，確保照護的無縫延續。',
+  },
+];
+
+const faqs = [
+  { q: 'Can I start the process without traveling to California?', a: 'Yes. Your initial consultation, medical record review, and much of your diagnostic workup can be done remotely via telehealth and coordination with a local clinic near you. In-person visits are required only for specific procedures — primarily egg retrieval and embryo transfer.', qZh: '我可以不必前往加州就展開流程嗎？', aZh: '可以。您的初次諮詢、病歷檢閱，以及大部分診斷檢查，都能透過遠距醫療、並與您附近的當地診所協調來完成。僅特定療程（主要是取卵與胚胎植入）需要親自到院。' },
+  { q: 'How long do I need to stay in California for an IVF cycle?', a: 'Most patients plan for 10–14 days for the egg retrieval phase, and a shorter visit (2–4 days) for embryo transfer if done in a separate cycle. We work with your schedule to minimize time away from home without compromising your care.', qZh: '進行一個 IVF 週期，我需要在加州停留多久？', aZh: '大多數病人會為取卵階段規劃 10–14 天；若胚胎植入在另一個週期進行，則停留較短（2–4 天）。我們會配合您的時程，在不影響療程的前提下，盡量減少您離家的時間。' },
+  { q: 'Can IRFC coordinate with my local fertility clinic?', a: 'Yes. IRFC has experience working alongside clinics worldwide. We provide detailed instructions for monitoring protocols, and your local clinic sends results directly to our team. We review everything and adjust your protocol in real time.', qZh: 'IRFC 可以與我當地的生育診所協調嗎？', aZh: '可以。IRFC 具備與世界各地診所合作的經驗。我們會提供監測流程的詳細指示，您當地的診所也會直接將結果送交我們的團隊。我們會檢視所有資料，並即時調整您的療程。' },
+  { q: 'What languages does IRFC support?', a: "IRFC's clinical and coordination team speaks English, Mandarin Chinese, Japanese, Korean, and Spanish. Consultations and coordination can be conducted in your preferred language.", qZh: 'IRFC 提供哪些語言？', aZh: 'IRFC 的臨床與協調團隊會說英語、普通話、日語、韓語與西班牙語。諮詢與協調皆可以您偏好的語言進行。' },
+  { q: 'Can I freeze embryos at IRFC and return for transfer later?', a: 'Absolutely. Many international patients choose to complete egg retrieval and embryo banking during one visit, then return for embryo transfer at a time that suits them. Embryos are stored in our TMRW Vault with RFID tracking and 24/7 monitoring for as long as needed.', qZh: '我可以在 IRFC 冷凍胚胎，之後再回來進行植入嗎？', aZh: '當然可以。許多國際病人會選擇在一次到訪中完成取卵與胚胎保存，之後再於適合自己的時間回來進行胚胎植入。胚胎儲存於我們的 TMRW Vault，具備 RFID 追蹤與 24/7 監測，可保存至需要為止。' },
+  { q: 'Does IRFC assist with visa or travel arrangements?', a: 'IRFC does not arrange visas or travel directly, but we provide supporting documentation for visa applications where relevant (such as medical visit letters). Our coordinator can provide guidance on the type of visit required and assist with planning.', qZh: 'IRFC 會協助簽證或旅行安排嗎？', aZh: 'IRFC 不直接代辦簽證或旅行安排，但我們會在相關情況下提供簽證申請的佐證文件（例如就醫證明信）。我們的協調專員可就所需簽證類型提供指引，並協助規劃。' },
+  { q: 'What are the costs for international patients?', a: 'IRFC provides a detailed cost estimate before treatment begins. International patients typically pay out of pocket; our financial coordinator will give you a transparent, itemized breakdown including all clinic fees. Financing options through CapexMD are available to eligible US-based patients.', qZh: '國際病人的費用如何計算？', aZh: 'IRFC 會在療程開始前提供詳細的費用預估。國際病人通常以自費方式支付；我們的財務協調專員會提供透明、逐項列出的明細，包含所有診所費用。符合資格、身處美國的病人，亦可選用 CapexMD 的融資方案。' },
+];
+
+const whyItems = [
+  { title: '#1 US IVF Success Rates', desc: 'IRFC laboratory ranked first in the United States in 2016.', titleZh: '全美 IVF 成功率第一', descZh: 'IRFC 實驗室於 2016 年在全美排名居冠。' },
+  { title: 'Telehealth-First Approach', desc: 'Most consultations and follow-ups can be done remotely.', titleZh: '遠距醫療優先', descZh: '大多數諮詢與後續追蹤皆可遠端進行。' },
+  { title: 'Remote Monitoring Coordination', desc: 'We work with clinics worldwide to manage your cycle from anywhere.', titleZh: '遠端監測協調', descZh: '我們與世界各地的診所合作，讓您在任何地方都能管理療程。' },
+  { title: 'Multilingual Team', desc: 'Clinical support in English, Mandarin, Japanese, Korean, and Spanish.', titleZh: '多語團隊', descZh: '提供英語、普通話、日語、韓語與西班牙語的臨床支援。' },
+  { title: 'TMRW Vault Storage', desc: 'RFID-tracked, 24/7 monitored embryo and egg storage for long-term peace of mind.', titleZh: 'TMRW Vault 儲存', descZh: '具備 RFID 追蹤、24/7 監測的胚胎與卵子儲存，讓您長期安心。' },
+];
+
+const title = ZH ? '國際與外地病人' : 'International & Out-of-Town Patients';
+const description = ZH
+  ? 'IRFC 歡迎來自美國各地與世界各地的病人。遠距醫療諮詢、遠端監測協調，以及英語、普通話、日語、韓語與西班牙語的多語支援。'
+  : 'IRFC welcomes patients from across the US and internationally. Telehealth consultations, remote monitoring coordination, and multilingual support in English, Mandarin, Japanese, Korean, and Spanish.';
+---
+<!-- marked: component for /international-patients and /zh-hant/international-patients -->
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '為病人' : 'For Patients'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-5 leading-none">
+          {ZH ? '國際與外地<br/>病人' : 'International &<br/>Out-of-Town Patients'}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH
+            ? 'IRFC 歡迎來自美國各地與世界各地的病人。我們的團隊在協調無法每次都親臨南加州的病人的照護上，擁有豐富經驗——結合遠距醫療、遠端監測，以及經過精心安排的到院看診。'
+            : 'IRFC welcomes patients from across the United States and around the world. Our team has extensive experience coordinating care for patients who cannot be present in Southern California for every appointment — combining telehealth, remote monitoring, and carefully timed in-person visits.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Team spotlight -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="overflow-hidden rounded-sm order-2 lg:order-1">
+          <img
+            src="/images/care-team-coordinator.webp" srcset="/images/care-team-coordinator-800.webp 800w, /images/care-team-coordinator.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            alt="IRFC international patient coordinator on a video consultation with a patient abroad"
+            width="1024" height="1024"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '從遠方協調' : 'Coordinated From Afar'}</h2>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">
+            {ZH
+              ? '您的初次諮詢、病歷檢閱，以及大部分診斷檢查，都能在遠端完成——透過安全的視訊，並與您附近的診所協調。我們會以您的旅行時程為核心來設計療程。'
+              : 'Your first consultation, medical record review, and much of your diagnostic workup can happen remotely — by secure video and through coordination with a clinic near you. We design your plan around your travel schedule.'}
+          </p>
+          <p class="text-sm text-stone-500 leading-relaxed">
+            {ZH
+              ? '我們的多語協調團隊以英語、普通話、日語、韓語與西班牙語為您提供支援，讓您無論身處何地，都不會在溝通中漏失任何資訊。'
+              : 'Our multilingual coordination team supports you in English, Mandarin, Japanese, Korean, and Spanish, so nothing is lost in translation no matter where you are.'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why IRFC -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '病人為何遠道而來接受 IRFC 的照護' : 'Why Patients Travel to IRFC'}</h2>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH
+              ? '對許多病人而言，選擇在哪裡接受生育照護，不只是地理問題——更是信心問題。當病人從其他州或他國遠道而來接受 IRFC 的照護，通常是因為他們希望看診特定的醫師、擁有實證紀錄的實驗室，或是當地無法提供的療程方案。'
+              : 'For many patients, choosing where to receive fertility care is not just a matter of geography — it is a matter of confidence. When patients travel to IRFC from other states or other countries, it is typically because they want access to a specific physician, a laboratory with a demonstrated track record, or a treatment protocol not available locally.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4 text-sm">
+            {ZH
+              ? 'IRFC 的實驗室團隊於 2016 年在全美 IVF 成功率排名居冠。我們的醫師包括低刺激與自然週期 IVF 的先驅 James Lin 醫師，以及研究與臨床專精皆吸引尋求高度個人化療程病人的 Zitao Liu 醫師。'
+              : 'IRFC’s laboratory team achieved the #1 ranking for IVF success rates in the United States in 2016. Our physicians include Dr. James Lin, a pioneer in low-stimulation and natural cycle IVF, and Dr. Zitao Liu, whose research and clinical expertise attract patients seeking highly individualized protocols.'}
+          </p>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            {ZH
+              ? '我們理解，為了生育照護而遠行，會為本已艱辛的過程增添情緒與財務上的複雜性。我們的國際病人協調團隊，正是為了讓這段旅程盡可能順暢、高效而存在。'
+              : 'We understand that traveling for fertility care adds emotional and financial complexity to an already demanding process. Our international patient coordination team exists specifically to make that journey as smooth and efficient as possible.'}
+          </p>
+        </div>
+        <div class="space-y-4">
+          {whyItems.map(item => (
+            <div class="flex gap-4 p-5 bg-white border border-stone-200">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              <div>
+                <div class="text-xs tracking-widest uppercase font-medium mb-1" style="color: var(--color-stone-700); font-family: var(--font-sans);">{ZH ? item.titleZh : item.title}</div>
+                <p class="text-sm text-stone-500">{ZH ? item.descZh : item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Language support -->
+  <section class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-8 text-center">{ZH ? '我們提供的語言' : 'Languages We Serve'}</h2>
+      <div class="flex flex-wrap gap-4 justify-center">
+        {languages.map(l => (
+          <div class="flex items-center gap-3 px-6 py-4 border border-stone-200 bg-white">
+            <span class="text-xl">{l.flag}</span>
+            <span class="text-sm font-medium text-stone-700" style="font-family: var(--font-sans);">{ZH ? l.langZh : l.lang}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-12 text-center">{ZH ? '運作方式' : 'How It Works'}</h2>
+      <div class="space-y-4 max-w-3xl mx-auto">
+        {steps.map(step => (
+          <div class="flex gap-6 p-7 bg-white border border-stone-200">
+            <div class="text-xs tracking-widest uppercase flex-shrink-0 pt-1" style="color: var(--color-gold-500); font-family: var(--font-sans);">{step.n}</div>
+            <div>
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-2">{ZH ? step.titleZh : step.title}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? step.descZh : step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo section -->
+  <section class="relative overflow-hidden" style="height: 300px;">
+    <img src="/images/consultation.webp" srcset="/images/consultation-800.webp 800w, /images/consultation-1280.webp 1280w, /images/consultation.webp 1707w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC consultation" class="w-full h-full object-cover object-top" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.55) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '距離，不該決定您照護的品質。' : 'Distance should not determine the quality of your care.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10 text-center">{ZH ? '常見問題' : 'Frequently Asked Questions'}</h2>
+        <div class="border border-stone-200">
+          {faqs.map(faq => (
+            <details class="group border-b border-stone-200 last:border-b-0">
+              <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
+                <h3 class="text-sm font-medium text-stone-800 pr-4">{ZH ? faq.qZh : faq.q}</h3>
+                <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              </summary>
+              <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{ZH ? faq.aZh : faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '從遠距醫療諮詢開始' : 'Start with a Telehealth Consultation'}</h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH
+          ? '初次約診無須旅行。透過安全的視訊與 IRFC 醫師會面，帶著清晰的計畫離開。'
+          : 'No travel required for your first appointment. Meet with an IRFC physician by secure video and leave with a clear plan.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{ZH ? '預約遠距醫療諮詢' : 'Book a Telehealth Consultation'}</a>
+        <a href="tel:+14244324732" class="btn-outline">{ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

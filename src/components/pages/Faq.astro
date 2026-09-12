@@ -1,0 +1,393 @@
+---
+// 常見問題（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath } from '../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const categories = [
+  {
+    id: 'getting-started',
+    label: 'Getting Started',
+    labelZh: '開始前',
+    faqs: [
+      {
+        q: 'How do I know if I should see a fertility specialist?',
+        qZh: '我該如何判斷是否該看生育科醫師？',
+        a: 'Most guidelines recommend seeing a specialist after 12 months of trying to conceive without success if you are under 35, or after 6 months if you are 35 or older. However, you should seek evaluation sooner if you have irregular or absent periods, a known condition such as PCOS, endometriosis, or prior surgery, a history of recurrent miscarriage, or if your partner has a known semen abnormality. You do not need a referral to schedule a consultation at IRFC.',
+        aZh: '多數指引建議：若您未滿 35 歲、嘗試受孕滿 12 個月仍未成功，或年滿 35 歲以上、滿 6 個月未成功，即應諮詢專科醫師。然而，若您有月經不規則或停經、已知疾病（如多囊性卵巢症候群 PCOS、子宮內膜異位症）或曾接受手術、有反覆流產史，或您的伴侶有已知的精液異常，則應提早評估。在 IRFC 預約諮詢無需轉診介紹。',
+      },
+      {
+        q: 'What happens at the first consultation?',
+        qZh: '第一次諮詢會發生什麼？',
+        a: 'Your first appointment is a one-on-one conversation with a physician — not a coordinator or nurse. Your doctor will review your medical history, prior fertility history, and any records you bring. Depending on your situation, a baseline ultrasound and bloodwork (AMH, FSH, estradiol) may be ordered at that visit or shortly after. You will leave with a clear picture of your current fertility status and the treatment paths that make sense for your situation.',
+        aZh: '您的第一次預約，是與醫師一對一的對談——而非協調員或護理師。醫師會檢視您的病史、先前的生育史，以及您攜帶的任何病歷。視您的情況，可能會在當次或稍後安排基礎超音波與血液檢查（AMH、FSH、雌二醇）。離開時，您將清楚了解自己目前的生育狀況，以及適合您情況的治療路徑。',
+      },
+      {
+        q: 'Do you offer telehealth consultations?',
+        qZh: '你們提供遠距醫療諮詢嗎？',
+        a: 'Yes. IRFC offers telehealth for initial consultations and follow-up appointments. This is particularly useful for out-of-area and international patients, or for anyone with a demanding schedule. Some diagnostic steps — ultrasound, bloodwork — will require an in-person visit, but we design your care plan to minimize unnecessary travel whenever possible.',
+        aZh: '是的。IRFC 提供遠距醫療，適用於初次諮詢與後續回診。這對外地與國際病人，或行程繁忙者特別有幫助。部分診斷步驟——如超音波、血液檢查——仍需親自到院，但我們會盡可能安排治療計畫，以減少不必要的奔波。',
+      },
+      {
+        q: 'What languages does IRFC offer care in?',
+        qZh: 'IRFC 提供哪些語言的照護？',
+        a: 'IRFC\'s team provides care in English, Mandarin Chinese, Japanese, Korean, and Spanish. We understand that navigating fertility treatment in a second language adds stress — our multilingual staff ensures nothing is lost in translation at any stage of your care.',
+        aZh: 'IRFC 的團隊以英文、國語（中文）、日文、韓文與西班牙文提供照護。我們理解以第二語言經歷生育治療會帶來額外壓力——我們的多語言同仁，會確保在您照護的每個階段都不會因翻譯而遺漏任何資訊。',
+      },
+      {
+        q: 'Do I need a referral to be seen at IRFC?',
+        qZh: '在 IRFC 看診需要轉診嗎？',
+        a: 'No. You can contact IRFC directly to schedule your first appointment. Some insurance plans may require a referral for coverage purposes — our team can help you navigate this — but a referral is never required to be seen.',
+        aZh: '不需要。您可以直接聯絡 IRFC 安排首次預約。部分保險方案可能為給付而要求轉診——我們的團隊可協助您處理——但看診本身從不需要轉診。',
+      },
+    ],
+  },
+  {
+    id: 'treatments',
+    label: 'Treatments',
+    labelZh: '療程',
+    faqs: [
+      {
+        q: 'What is IVF and how does it work?',
+        qZh: '什麼是試管嬰兒（IVF）？如何進行？',
+        a: 'In vitro fertilization (IVF) involves stimulating the ovaries to produce multiple eggs, retrieving those eggs in a brief outpatient procedure, fertilizing them with sperm in our laboratory, and culturing the resulting embryos for 5–6 days. The healthiest embryo is then transferred to the uterus. At IRFC, embryos are monitored continuously using EmbryoScope+ time-lapse technology — allowing our embryologists to assess development without disturbing the culture environment.',
+        aZh: '體外受精（IVF）包含刺激卵巢產出多顆卵子，在短暫的門診手術中取出卵子，於實驗室中以精子受精，並將形成的胚胎培養 5–6 天。隨後將最健康的胚胎植入子宮。在 IRFC，胚胎以 EmbryoScope+ 連續拍攝技術持續監測——讓胚胎學家能在不打擾培養環境的情況下評估發育。',
+      },
+      {
+        q: 'What is the difference between IVF and IUI?',
+        qZh: 'IVF 與 IUI 有何不同？',
+        a: 'IUI (intrauterine insemination) is a simpler, less invasive procedure in which prepared sperm is placed directly into the uterus near the time of ovulation. It is appropriate for select candidates — typically those with mild male factor infertility, unexplained infertility, or cervical issues — and is often tried before IVF. IVF produces higher success rates per cycle, involves more medications and monitoring, and is typically recommended when IUI has been unsuccessful or is unlikely to succeed based on your diagnosis.',
+        aZh: '子宮內人工授精（IUI）是一種較簡單、侵入性較低的程序，將處理過的精子在排卵時直接置入子宮。它適用於特定對象——通常是輕度男性因素不孕、不明原因不孕或子宮頸因素者——且常在 IVF 之前先嘗試。IVF 每週期的成功率較高，但涉及較多藥物與監測，通常在 IUI 失敗或依診斷判斷難以成功時建議採用。',
+      },
+      {
+        q: 'What is mild stimulation IVF?',
+        qZh: '什麼是微刺激試管嬰兒？',
+        a: 'Mild stimulation IVF uses lower doses of fertility medications over a shorter period compared to conventional IVF protocols. This approach reduces side effects, lowers the risk of ovarian hyperstimulation syndrome (OHSS), and often costs less per cycle. While fewer eggs are typically retrieved, many patients — particularly those with PCOS, those sensitive to hormonal medications, or those who prefer a more natural approach — find that mild stimulation produces fewer but higher-quality embryos. Dr. Zitao Liu specializes in mild stimulation protocols at IRFC.',
+        aZh: '微刺激 IVF 相較於傳統 IVF 療程，在較短時間內使用較低劑量的生育藥物。此方法能減少副作用、降低卵巢過度刺激症候群（OHSS）風險，且每週期費用通常較低。雖然取出的卵子通常較少，但許多病人——尤其是 PCOS 患者、對荷爾蒙藥物敏感者，或偏好更自然療程者——發現微刺激產出的卵子雖少，但胚胎品質更高。IRFC 的劉子滔（Zitao Liu）醫師專精微刺激療程。',
+      },
+      {
+        q: 'What is PGT-A (preimplantation genetic testing)?',
+        qZh: '什麼是 PGT-A（胚胎著床前基因檢測）？',
+        a: 'PGT-A tests embryos for chromosomal abnormalities before transfer. A few cells are biopsied from the embryo on day 5 or 6, and the embryo is frozen while results are analyzed. Only chromosomally normal (euploid) embryos are then selected for transfer. PGT-A improves per-transfer live birth rates and reduces miscarriage risk, and is particularly valuable for patients over 35, those with unexplained recurrent implantation failure, or those with prior pregnancy loss. It is not appropriate for every patient — your physician will discuss whether it makes sense for your situation.',
+        aZh: 'PGT-A 在植入前檢測胚胎的染色體異常。於第 5 或第 6 天從胚胎取少量細胞進行切片，胚胎則在等待分析結果期間冷凍。隨後僅選擇染色體正常（整倍體）的胚胎植入。PGT-A 能提升每次植入的活產率並降低流產風險，對 35 歲以上、不明原因反覆著床失敗，或有過去妊娠流失的病人特別有價值。它並非適用於每位病人——您的醫師會與您討論是否適合您的情況。',
+      },
+      {
+        q: 'What is fertility preservation (egg freezing)?',
+        qZh: '什麼是生育力保存（凍卵）？',
+        a: 'Egg freezing (oocyte cryopreservation) uses the same ovarian stimulation and retrieval process as IVF. Mature eggs are then vitrified (flash-frozen) rather than fertilized, and stored in IRFC\'s TMRW cryogenic vault. This allows you to preserve your reproductive potential before age-related decline, before cancer treatment, or before you are ready to conceive. Freezing before age 35 generally produces the strongest outcomes. IRFC also prioritizes expedited consultations for patients facing oncological treatment who have limited time before starting chemotherapy or radiation.',
+        aZh: '凍卵（卵母細胞冷凍保存）採用與 IVF 相同的卵巢刺激與取卵流程。隨後將成熟卵子以玻璃化（快速冷凍）方式冷凍，而非受精，並儲存於 IRFC 的 TMRW 超低溫冷凍庫。這讓您能在年齡相關的卵巢功能衰退前、癌症治療前，或準備好懷孕前，保存生育潛力。35 歲前凍卵通常成效最佳。IRFC 也優先為面臨腫瘤治療、在化療或放射治療前時間有限的患者安排快速諮詢。',
+      },
+      {
+        q: 'How many embryos are transferred during IVF?',
+        qZh: 'IVF 療程中會植入多少顆胚胎？',
+        a: 'In the vast majority of cases, IRFC transfers a single embryo per cycle (elective single embryo transfer, or eSET). This approach significantly reduces the risks associated with twin or higher-order pregnancies — which carry substantially greater risk of premature birth, low birth weight, and maternal complications — while maintaining strong cumulative success rates when remaining embryos are frozen for future cycles. Your physician will discuss the appropriate protocol for your specific situation.',
+        aZh: '在絕大多數情況下，IRFC 每次週期僅植入一顆胚胎（選擇性單一胚胎植入，eSET）。此方法能顯著降低雙胞胎或多胞胎妊娠的風險——此類妊娠早產、低出生體重與母體併發症的風險明顯較高——同時在剩餘胚胎冷凍留待未來週期時，仍能維持強勁的累積成功率。您的醫師會針對您的具體情況討論適當的療程。',
+      },
+    ],
+  },
+  {
+    id: 'success-rates',
+    label: 'Success Rates',
+    labelZh: '成功率',
+    faqs: [
+      {
+        q: 'What are IRFC\'s IVF success rates?',
+        qZh: 'IRFC 的 IVF 成功率如何？',
+        a: 'US fertility clinics submit annual outcome data to the CDC, which publishes it through the National ART Surveillance System (NASS) at cdc.gov/art. IRFC\'s laboratory team achieved the highest IVF success rates in the United States as reported to SART in 2016 — a distinction reflecting the extraordinary precision of our embryology team under the direction of Dr. Yufen Xie. We encourage you to review the publicly available CDC data and bring your questions to your consultation, where your physician will provide a frank, personalized assessment.',
+        aZh: '美國生育診所每年將治療結果資料提交給 CDC，並經由國家輔助生殖技術監測系統（NASS，網址 cdc.gov/art）發布。IRFC 的實驗室團隊在 2016 年向 SART 申報的 IVF 成功率為全美最高——此榮譽反映了在謝玉芬（Yufen Xie）醫師領軍下，我們胚胎學團隊的非凡精準度。我們鼓勵您查閱公開的 CDC 資料，並帶著您的問題前來諮詢；醫師會為您提供坦誠且個人化的評估。',
+      },
+      {
+        q: 'How should I interpret published success rate data?',
+        qZh: '我該如何解讀公開的成功率資料？',
+        a: 'Published rates represent averages across a clinic\'s patient population — they do not tell you what your personal probability looks like. A 50% success rate for a 28-year-old with unexplained infertility is a very different number from a 50% rate for a 41-year-old with diminished ovarian reserve. Clinic comparisons can also be distorted by patient selection: centers that take only straightforward cases will show higher aggregate numbers. At IRFC, we do not turn away complex cases — and we give every patient an honest, individualized probability estimate.',
+        aZh: '公開的成功率代表診所病人族群的平均值——它無法告訴您個人的機率。一位 28 歲、不明原因不孕者的 50% 成功率，與一位 41 歲、卵巢儲備下降者的 50% 成功率，意義截然不同。診所間的比較也會因病人篩選而失真：只收治單純病例的機構，其總體數字會較高。在 IRFC，我們不拒收複雜病例——並為每位病人提供誠實、個人化的機率評估。',
+      },
+      {
+        q: 'What factors most affect my personal chances of success?',
+        qZh: '哪些因素對我個人的成功率影響最大？',
+        a: 'The most significant factors are age and ovarian reserve (measured by AMH and antral follicle count), uterine anatomy, sperm parameters, any underlying diagnoses (such as PCOS, endometriosis, or recurrent pregnancy loss), and embryo chromosomal health. Your physician will review all of these during your initial evaluation and give you a realistic picture of what to expect.',
+        aZh: '最重要的因素包括年齡與卵巢儲備（以 AMH 與竇卵泡數衡量）、子宮構造、精子參數、任何潛在診斷（如 PCOS、子宮內膜異位症或反覆妊娠流失），以及胚胎染色體健康。您的醫師會在初次評估時檢視所有這些項目，並為您勾勒出合理的預期。',
+      },
+      {
+        q: 'Do success rates improve with donor eggs?',
+        qZh: '使用捐贈卵子能提高成功率嗎？',
+        a: 'Yes — substantially. Donor egg IVF success rates are primarily determined by the donor\'s age rather than the recipient\'s. A patient in her mid-40s using eggs from a donor in her mid-20s can achieve per-transfer success rates comparable to a young patient using her own eggs — typically 50–65% per transfer. For patients with severely diminished ovarian reserve, prior IVF failures, or premature ovarian insufficiency, donor egg IVF is often the most direct path to a successful pregnancy.',
+        aZh: '是的——而且提升幅度顯著。捐卵 IVF 的成功率主要由捐贈者的年齡決定，而非受贈者。一位 40 多歲中期的病人，使用 20 多歲捐贈者的卵子，每次植入的成功率可與年輕病人使用自身卵子相當——通常每次植入為 50–65%。對於卵巢儲備嚴重下降、先前 IVF 失敗，或卵巢早衰的病人，捐卵 IVF 往往是最直接邁向成功懷孕的途徑。',
+      },
+    ],
+  },
+  {
+    id: 'costs',
+    label: 'Costs & Financing',
+    labelZh: '費用與財務',
+    faqs: [
+      {
+        q: 'How much does IVF cost at IRFC?',
+        qZh: 'IRFC 的 IVF 費用是多少？',
+        a: 'IVF costs vary based on your treatment protocol, the medications required, and whether add-ons such as PGT-A genetic testing are appropriate for your situation. IRFC provides a transparent, itemized cost estimate before treatment begins — there are no hidden fees. Our financial coordinator will walk you through every component of your recommended plan so you can make an informed decision.',
+        aZh: 'IVF 費用會依您的治療療程、所需藥物，以及是否適合加做如 PGT-A 基因檢測等附加項目而有所不同。IRFC 在治療開始前提供透明、逐項列出的費用估算——絕無隱藏費用。我們的財務協調員會帶您逐一了解建議方案的每個項目，讓您能做明智的決定。',
+      },
+      {
+        q: 'Does insurance cover fertility treatments?',
+        qZh: '保險會給付生育治療嗎？',
+        a: 'Coverage varies significantly by plan and employer. California law requires certain employers to offer fertility treatment coverage, but the specifics depend on your plan. Kaiser Permanente patients benefit from IRFC\'s designation as a Kaiser Center of Excellence, which may expand your coverage options. Our team will verify your insurance benefits before treatment and clearly explain what is and is not covered under your plan.',
+        aZh: '給付範圍依方案與雇主而有顯著差異。加州法律要求特定雇主提供生育治療給付，但具體內容取決於您的方案。凱薩醫療（Kaiser Permanente）的病人，因 IRFC 獲指定為凱薩卓越中心而受惠，可能擴大您的給付選項。我們的團隊會在治療前確認您的保險權益，並清楚說明您的方案涵蓋與不涵蓋的項目。',
+      },
+      {
+        q: 'What financing options are available?',
+        qZh: '有哪些財務方案可供選擇？',
+        a: 'IRFC partners with CapexMD, a specialized medical lender that offers personal loans for fertility treatments. Once approved, funds are deposited directly so you can begin treatment without delay. Loan terms and eligibility are determined by CapexMD directly — IRFC facilitates the connection but is a separate entity. Our financial coordinator can help you initiate the application process.',
+        aZh: 'IRFC 與專精醫療貸款的 CapexMD 合作，提供生育治療的個人貸款。核准後款項直接撥付，讓您能毫不延誤地展開治療。貸款條件與資格由 CapexMD 直接決定——IRFC 協助牽線，但為獨立機構。我們的財務協調員可協助您啟動申請流程。',
+      },
+      {
+        q: 'Can I use HSA or FSA funds for fertility treatment?',
+        qZh: '我可以使用 HSA 或 FSA 資金支付生育治療嗎？',
+        a: 'Yes. Fertility treatments — including IVF, IUI, egg freezing, and related medications — are generally considered qualified medical expenses under IRS guidelines, making them eligible for payment with Health Savings Account (HSA) or Flexible Spending Account (FSA) funds. We recommend confirming eligibility with your plan administrator, as specific plan rules can vary.',
+        aZh: '可以。生育治療——包含 IVF、IUI、凍卵及相關藥物——依 IRS 指引通常被視為合格醫療支出，因此可用健康儲蓄帳戶（HSA）或彈性支出帳戶（FSA）資金支付。我們建議您向方案管理方確認資格，因各方案規定可能不同。',
+      },
+      {
+        q: 'Are there multi-cycle or package pricing options?',
+        qZh: '是否有多次週期或套裝價格方案？',
+        a: 'IRFC offers various package options depending on your treatment plan. These are discussed with our financial coordinator during your consultation, once your physician has recommended a treatment approach. Package options vary by protocol and individual situation.',
+        aZh: 'IRFC 依您的治療計畫提供多種套裝選項。這些會在您的醫師建議治療方向後，於諮詢中與我們的財務協調員討論。套裝選項依療程與個人情況而異。',
+      },
+    ],
+  },
+  {
+    id: 'laboratory',
+    label: 'The Laboratory',
+    labelZh: '實驗室',
+    faqs: [
+      {
+        q: 'What technology does IRFC use in its IVF laboratory?',
+        qZh: 'IRFC 的 IVF 實驗室使用哪些技術？',
+        a: 'IRFC\'s CAP-certified laboratory is equipped with EmbryoScope+ continuous time-lapse incubation, which monitors embryo development every 10 minutes without removing embryos from their culture environment. RI Witness RFID electronic witnessing verifies that biological samples are precisely matched to each patient at every step of the IVF process — eliminating the risk of sample mix-up. The laboratory operates under the direction of Dr. Yufen Xie, who led IRFC\'s embryology team to the #1 ranking in US IVF success rates in 2016.',
+        aZh: 'IRFC 通過 CAP 認證的實驗室配備 EmbryoScope+ 連續拍攝培養系統，每 10 分鐘監測胚胎發育，且無需將胚胎移出培養環境。RI Witness RFID 電子見證系統，在 IVF 流程的每一個步驟確認生物檢體與每位病人精確對應——杜絕檢體混淆的風險。實驗室由謝玉芬（Yufen Xie）醫師主持，她帶領 IRFC 的胚胎學團隊於 2016 年榮登全美 IVF 成功率第一。',
+      },
+      {
+        q: 'How are my frozen eggs and embryos stored?',
+        qZh: '我的冷凍卵子與胚胎如何儲存？',
+        a: 'IRFC uses the TMRW smart cryogenic vault for all cryopreserved eggs and embryos. TMRW uses RFID barcoding and 24/7 real-time sensor monitoring to track every stored sample with precision — providing automated alerts if temperature or pressure parameters deviate from specifications. This is a meaningful clinical distinction: conventional storage tanks are manually checked intermittently, while TMRW provides continuous monitoring of every individual sample.',
+        aZh: 'IRFC 所有冷凍卵子與胚胎均使用 TMRW 智慧型超低溫冷凍庫儲存。TMRW 透過 RFID 條碼與 24/7 即時感測器監控，精準追蹤每一份儲存檢體——當溫度或壓力參數偏離規格時會自動警示。這是意義重大的臨床差異：傳統儲存槽僅間歇性人工檢查，而 TMRW 對每一份檢體提供連續監控。',
+      },
+      {
+        q: 'What is CAP and CLIA accreditation?',
+        qZh: '什麼是 CAP 與 CLIA 認證？',
+        a: 'CAP (College of American Pathologists) accreditation and CLIA (Clinical Laboratory Improvement Amendments) certification are independent quality standards for clinical laboratories. CAP accreditation requires rigorous on-site inspections by peer laboratory professionals and is widely considered the gold standard in laboratory quality assurance. CLIA certification is a federal requirement for laboratories that perform clinical testing on human specimens. IRFC\'s laboratory holds both — reflecting our commitment to operating at the highest standard of laboratory practice.',
+        aZh: 'CAP（美國病理學會）認證與 CLIA（臨床實驗室改進修正案）證書，是臨床實驗室的獨立品質標準。CAP 認證要求同儕實驗室專業人員嚴謹的現場查核，被廣泛視為實驗室品質保證的黃金標準。CLIA 證書是對人體檢體執行臨床檢測的聯邦要求。IRFC 的實驗室同時持有兩者——反映我們致力以最高標準運作實驗室的承諾。',
+      },
+    ],
+  },
+  {
+    id: 'inclusive-care',
+    label: 'Inclusive Care',
+    labelZh: '包容性照護',
+    faqs: [
+      {
+        q: 'Does IRFC provide care for LGBTQIA+ patients?',
+        qZh: 'IRFC 是否為 LGBTQIA+ 病人提供照護？',
+        a: 'Yes — wholeheartedly. IRFC provides affirming, inclusive fertility care for same-sex couples, transgender individuals, and single parents by choice. Our care coordinators are experienced in the full range of family-building paths available, and our physicians approach every patient with the same clinical rigor and personal respect.',
+        aZh: '是的——衷心提供。IRFC 為同性伴侶、跨性別者，以及自主選擇的單親家長，提供肯定、包容的生育照護。我們的照護協調員熟悉所有可行的成家路徑，醫師也以同樣的臨床嚴謹與個人尊重對待每位病人。',
+      },
+      {
+        q: 'What is reciprocal IVF?',
+        qZh: '什麼是互助式 IVF（reciprocal IVF）？',
+        a: 'Reciprocal IVF — also called partner IVF or co-IVF — is a family-building approach in which one partner provides the eggs and the other carries the pregnancy. The egg provider undergoes ovarian stimulation and retrieval; the eggs are fertilized with donor sperm and the resulting embryo is transferred to the carrying partner\'s uterus. This allows both partners to have a biological and gestational connection to the pregnancy. IRFC has extensive experience with reciprocal IVF.',
+        aZh: '互助式 IVF——也稱伴侶 IVF 或 co-IVF——是一種成家方式：由一方伴侶提供卵子，另一方懷孕。提供卵子的一方接受卵巢刺激與取卵；卵子以捐贈精子受精，形成的胚胎植入懷孕方子宮。這讓雙方伴侶都能與這次懷孕建立生物與妊娠上的連結。IRFC 在互助式 IVF 方面經驗豐富。',
+      },
+      {
+        q: 'Do you work with egg donors and gestational surrogates?',
+        qZh: '你們是否與卵子捐贈者及代理孕母合作？',
+        a: 'Yes. IRFC coordinates with egg banks and donor agencies, and works with established surrogacy agencies for gestational carrier arrangements. Our team will guide you through the medical, logistical, and timeline aspects of third-party reproduction. Legal agreements between all parties are handled through independent reproductive attorneys — IRFC does not provide legal advice but can refer you to experienced counsel.',
+        aZh: '是的。IRFC 與卵子銀行及捐贈機構協調，並與成熟的代理孕母機構合作辦理妊娠代孕安排。我們的團隊會引導您了解第三方生殖的醫療、後勤與時程層面。各方之間的法律協議由獨立的生殖法律師處理——IRFC 不提供法律建議，但可為您轉介經驗豐富的律師。',
+      },
+      {
+        q: 'Do you see single individuals who want to have a child?',
+        qZh: '你們是否看診想要生育的單身者？',
+        a: 'Yes. Many patients at IRFC are single individuals pursuing parenthood through donor sperm IUI or IVF, or through egg freezing to preserve future options. We approach every patient\'s path to family without judgment, and our team is experienced in supporting solo parents from consultation through treatment.',
+        aZh: '是的。IRFC 許多病人是透過捐贈精子 IUI 或 IVF 追求為人父母、或透過凍卵保存未來選項的單身者。我們以不評判的態度面對每位病人成家的路徑，團隊也具備從諮詢到治療全程支持單親家長的經驗。',
+      },
+    ],
+  },
+];
+
+// Build FAQPage schema from all Q&As (language-aware)
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: categories.flatMap(cat =>
+    cat.faqs.map(faq => ({
+      '@type': 'Question',
+      name: ZH ? faq.qZh : faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: ZH ? faq.aZh : faq.a },
+    }))
+  ),
+};
+
+const title = ZH ? '常見問題' : 'FAQ — Frequently Asked Questions';
+const description = ZH
+  ? 'IRFC（南加州獲獎生育中心）關於 IVF、生育治療、費用、成功率與病人照護的常見問題解答。'
+  : 'Answers to common questions about IVF, fertility treatments, costs, success rates, and patient care at IRFC — Southern California’s award-winning fertility center.';
+---
+
+<Layout
+  title={title}
+  description={description}
+  schema={faqSchema}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '常見問題' : 'Frequently Asked Questions'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>值得提問的<br/><em class="not-italic" style="color: var(--color-gold-500);">問題。</em></> : <>Questions Worth<br/><em class="not-italic" style="color: var(--color-gold-500);">Asking.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH
+            ? '生育治療會帶來許多問題——而您值得清晰、誠實的答案。請依主題瀏覽，或將任何未解之處帶到您的諮詢中。'
+            : 'Fertility treatment raises many questions — and you deserve clear, honest answers. Browse by topic below, or bring anything unanswered to your consultation.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo break -->
+  <section class="relative overflow-hidden" style="height: 300px;">
+    <img src="/images/patient-reading.webp" srcset="/images/patient-reading-800.webp 800w, /images/patient-reading-1280.webp 1280w, /images/patient-reading.webp 2560w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt="IRFC patient" class="w-full h-full object-cover" style="object-position: center 20%;" />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.48) 0%, transparent 55%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white max-w-sm leading-relaxed">
+        {ZH ? '知情，才能更有力量。' : 'An informed patient is an empowered patient.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Category jump nav -->
+  <div class="sticky top-[4.5rem] z-40 bg-white border-y border-stone-100 overflow-x-auto">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="flex gap-0 min-w-max">
+        {categories.map(cat => (
+          <a href={`#${cat.id}`} class="faq-nav-item">{ZH ? cat.labelZh : cat.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ categories -->
+  <div class="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 lg:py-20">
+    <div class="lg:grid lg:grid-cols-[260px_1fr] lg:gap-20 items-start">
+
+      <!-- Sticky sidebar (desktop) -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-32 space-y-1">
+          <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '主題' : 'Topics'}</p>
+          {categories.map(cat => (
+            <a href={`#${cat.id}`} class="faq-sidebar-link">{ZH ? cat.labelZh : cat.label}</a>
+          ))}
+          <div class="pt-8 mt-8 border-t border-stone-100">
+            <p class="text-xs text-stone-400 leading-relaxed mb-4" style="font-family: var(--font-sans);">{ZH ? '找不到您的答案？' : 'Didn’t find your answer?'}</p>
+            <a href={ZH ? '/zh-hant/contact' : '/contact'} class="btn-primary text-xs py-2.5 px-5 w-full justify-center">{ZH ? '詢問醫師' : 'Ask a Physician'}</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Q&A sections -->
+      <main class="space-y-16 lg:space-y-20">
+        {categories.map(cat => (
+          <section id={cat.id} class="scroll-mt-32">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="h-px w-8 flex-shrink-0" style="background: var(--color-gold-400);"></div>
+              <h2 class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? cat.labelZh : cat.label}</h2>
+            </div>
+
+            <div class="divide-y divide-stone-100">
+              {cat.faqs.map((faq, i) => (
+                <details class="faq-item group" open={i === 0 && cat.id === 'getting-started'}>
+                  <summary class="flex items-start justify-between gap-6 py-5 cursor-pointer list-none select-none">
+                    <span class="text-base font-light text-stone-800 leading-snug" style="font-family: var(--font-serif);">{ZH ? faq.qZh : faq.q}</span>
+                    <svg class="w-4 h-4 flex-shrink-0 mt-0.5 text-stone-400 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                  </summary>
+                  <p class="pb-5 text-sm leading-relaxed text-stone-500 max-w-2xl">{ZH ? faq.aZh : faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        <!-- Bottom prompt -->
+        <section class="border-t border-stone-100 pt-12 grid lg:grid-cols-2 gap-10 items-center">
+          <div class="overflow-hidden rounded-sm">
+            <img
+              src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              alt={ZH ? 'IRFC 醫師於諮詢中回答病人問題' : 'IRFC physician answering a patient’s questions during a consultation'}
+              width="1800" height="1200"
+              class="w-full h-auto object-cover"
+            />
+          </div>
+          <div>
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '仍有疑問？' : 'Still have questions?'}</p>
+            <h3 class="text-2xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{ZH ? '您的醫師有答案。' : 'Your physician has answers.'}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed mb-6 max-w-lg">{ZH ? '每個情況都不同。帶著您具體的問題前來諮詢，獲得真正適用於您的答案。' : 'Every situation is different. Bring your specific questions to a consultation and get answers that actually apply to you.'}</p>
+            <a href={ZH ? '/zh-hant/contact' : '/contact'} class="btn-primary">{ZH ? '預約諮詢' : 'Schedule a Consultation'}</a>
+          </div>
+        </section>
+      </main>
+
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  .faq-nav-item {
+    display: inline-block;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+    color: var(--color-stone-500);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .faq-nav-item:hover {
+    color: var(--color-gold-600);
+    border-bottom-color: var(--color-gold-400);
+  }
+
+  .faq-sidebar-link {
+    display: block;
+    padding: 0.45rem 0;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+    color: var(--color-stone-500);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .faq-sidebar-link:hover { color: var(--color-gold-600); }
+
+  details[open] summary svg {
+    transform: rotate(45deg);
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+</style>

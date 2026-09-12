@@ -1,0 +1,15 @@
+---
+import StandardsHub from '../../../components/pages/StandardsHub.astro';
+import { standards } from '../../../data/standards';
+
+export function getStaticPaths() {
+  return standards.map((s) => ({
+    params: { slug: s.slug },
+    props: { standard: s },
+  }));
+}
+
+const { standard } = Astro.props;
+---
+
+<StandardsHub standard={standard} locale="zh-hant" />

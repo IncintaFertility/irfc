@@ -47,7 +47,9 @@ const ogLocale = localeMeta[locale].ogLocale;
 const ogLocaleAlt = locale === 'zh-hant' ? 'en_US' : 'zh_Hant';
 
 // hreflang 互鏈：以「去 locale 前綴的基準路徑」為準，分別生成 en 與 zh-hant 絕對網址
-const basePath = stripLocale(Astro.url.pathname) || '/';
+// 基準路徑統一帶尾端斜線（home 為 /），與 canonicalURL（Astro.url.pathname）保持一致。
+const basePathRaw = stripLocale(Astro.url.pathname) || '/';
+const basePath = basePathRaw === '/' ? '/' : basePathRaw.replace(/\/+$/, '') + '/';
 const hreflangEn = new URL(basePath, SITE_URL).href;
 const hreflangZh = new URL('/zh-hant' + (basePath === '/' ? '' : basePath), SITE_URL).href;
 // 僅當該基準路徑確實有繁體版本時，才輸出 zh-hant 的 hreflang / og:locale 互鏈，

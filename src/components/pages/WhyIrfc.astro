@@ -1,0 +1,250 @@
+---
+// 為何選擇 IRFC（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath, type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+import { FIVE_STANDARDS } from '../../config/brand';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const pillars = FIVE_STANDARDS.map((s) => ({
+  number: s.index,
+  title: s.en,
+  titleZh: s.zh,
+  claim: s.claim,
+  claimZh: s.claimZh,
+  color: 'champagne',
+  desc: s.body,
+  descZh: {
+    'science-revealed':
+      '我們的胚胎學實驗室，是為了被看見而建，而非僅供描述。每一項流程、每一台監測設備、每一個決策，對最關切的人而言都清晰可讀——因為理解正在自己身上發生的事，本身就是照護的一部分。',
+    'architected-for-life':
+      '空氣、光線、循環與工程系統，都圍繞一個問題設計：發育中的胚胎需要什麼？我們的設施從內而外為此目的建造——而非事後才做改造。',
+    'life-treasured':
+      '我們為您保存的，無可取代。儲存、監測與備援皆經過工程設計，確保沒有任何單一失效點會造成影響。',
+    'systems-of-excellence':
+      '手術、實驗室與臨床照護，在我們的網絡中作為同一個系統運作——因此能力不取決於病人走進哪一道門。',
+    'private-by-nature':
+      '醫院的嚴謹，加上私人照護的親密。您不是在系統中流轉的個案編號——而是從初次諮詢起，就由同一個團隊持續看見的「人」。',
+  }[s.id],
+  highlights: s.evidence,
+  highlightsZh: {
+    'science-revealed': ['每個週期皆採用 EmbryoScope+ 縮時攝影監測', '胚胎學團隊於美國 IVF 成功率排名居冠（2016）', '每一個檢體皆經 RI Witness 電子見證系統把關'],
+    'architected-for-life': ['獨立空調與過濾系統', '為臨床動線與病人流程專門設計的空間', '實驗室空間全面採用低揮發性有機化合物（VOC）材質'],
+    'life-treasured': ['TMRW Vault 智慧冷凍儲存', '具備備援警報系統的持續監測', '每一處據點皆設有備用電力與失效安全機制'],
+    'systems-of-excellence': ['通過認證、並與實驗室能力整合的手術中心', '獲 Kaiser Permanente 傑出中心（Center of Excellence）認證', '整個中心網絡採用一致的臨床標準'],
+    'private-by-nature': ['與專屬團隊建立的持續照護關係', '私密的諮詢與恢復空間', '提供英語、普通話、日語、韓語與西班牙語照護'],
+  }[s.id],
+}));
+
+const synergies = [
+  {
+    from: 'RFC',
+    brought: '20 years of clinical trust, Kaiser COE designation, Fairfax EggBank partnership, and a physician-led model built on Safety, Quality, and Integrity.',
+    broughtZh: '20 年的臨床信任、Kaiser 傑出中心（COE）認證、Fairfax EggBank 合作夥伴關係，以及建立在安全、品質與誠信之上的醫師主導模式。',
+  },
+  {
+    from: 'Incinta',
+    brought: "The #1 US IVF lab, open-concept laboratory design, a culture of patient-centered innovation, and the belief that 'you are more than your fertility.'",
+    broughtZh: '全美排名第一的 IVF 實驗室、開放式實驗室設計、以病人為中心的創新文化，以及「你不只是你的生育能力」這項信念。',
+  },
+];
+
+const recognition = [
+  { title: 'Kaiser Permanente Center of Excellence', detail: 'Designated across Southern California for clinical quality and outcomes', titleZh: 'Kaiser Permanente 傑出中心（Center of Excellence）', detailZh: '因臨床品質與治療結果，獲南加州全區認證' },
+  { title: '#1 US IVF Success Rate', detail: 'Ranked first among all US fertility laboratories, 2016', titleZh: '全美 IVF 成功率第一', detailZh: '於全美生育實驗室中排名居冠，2016 年' },
+  { title: 'Top IVF Center — California', detail: 'Recognized by IVF Authority, especially for patients aged 38–40', titleZh: '加州頂尖 IVF 中心', detailZh: '獲 IVF Authority 認可，特別針對 38–40 歲的病人' },
+  { title: 'Fairfax EggBank Partner', detail: 'One of the largest production facilities for the largest US egg bank', titleZh: 'Fairfax EggBank 合作夥伴', detailZh: '全美最大卵子銀行之一的生產據點' },
+];
+
+const careTeam = [
+  { img: '/images/care-team-physician.webp', alt: 'Physician consulting with a patient', kicker: 'Physician', title: 'Understand the Whole Picture.', kickerZh: '醫師', titleZh: '看見全貌。' },
+  { img: '/images/care-team-coordinator.webp', alt: 'Care coordinator with a patient', kicker: 'Nursing & Coordination', title: 'Every Step Clear and Organized.', kickerZh: '護理與協調', titleZh: '每一步都清楚有序。' },
+  { img: '/images/care-team-embryologist.webp', alt: 'Embryologist in the IRFC laboratory', kicker: 'Embryology Lab', title: 'Precise Laboratory Care.', kickerZh: '胚胎學實驗室', titleZh: '精準的實驗室照護。' },
+  { img: '/images/care-team-followup.webp', alt: 'Physician in follow-up consultation', kicker: 'Follow-Up', title: 'Into the Next Decision.', kickerZh: '後續追蹤', titleZh: '迎向下一個決定。' },
+];
+
+const title = ZH ? '為何選擇 IRFC' : 'Why Choose IRFC';
+const description = ZH
+  ? '是什麼讓 IRFC 與眾不同——20 年以上的經驗、全美排名第一的 IVF 實驗室、Kaiser Permanente 傑出中心認證、尖端技術，以及遍及南加州的多語照護。'
+  : 'What makes IRFC different — 20+ years of experience, the #1 ranked US IVF lab, Kaiser Permanente Center of Excellence, cutting-edge technology, and multilingual care across Southern California.';
+---
+<!-- marked: component for /why-irfc and /zh-hant/why-irfc -->
+<Layout title={title} description={description}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '為何選擇 IRFC' : 'Why Choose IRFC'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? (
+            <>並非所有生育診所<br/><em class="not-italic" style="color: var(--color-gold-500);">都一樣。</em></>
+          ) : (
+            <>Not All Fertility<br/><em class="not-italic" style="color: var(--color-gold-500);">Clinics Are Equal.</em></>
+          )}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
+          {ZH
+            ? '選擇生育診所，是您將做出最重要的決定之一。這正是南加州——以及世界各地——數千名病人選擇 IRFC 的原因。'
+            : 'Choosing a fertility clinic is one of the most important decisions you will make. Here is why thousands of patients in Southern California — and from around the world — choose IRFC.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Pillars -->
+  <section id="standards" class="py-4 scroll-mt-24" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="space-y-1">
+        {pillars.map((pillar, i) => (
+          <div class={`grid lg:grid-cols-12 gap-0 border border-stone-200 ${i % 2 === 0 ? 'bg-white' : ''}`} style={i % 2 !== 0 ? 'background: var(--color-stone-50);' : ''}>
+            <!-- Number -->
+            <div class="lg:col-span-1 p-8 flex items-start">
+              <span class="text-xs tracking-widest font-medium" style={`color: var(--color-${pillar.color}-400); font-family: var(--font-sans);`}>{pillar.number}</span>
+            </div>
+            <!-- Content -->
+            <div class="lg:col-span-5 p-8 pt-0 lg:pt-8 border-b lg:border-b-0 lg:border-r border-stone-200">
+              <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-2">{ZH ? pillar.titleZh : pillar.title}</h2>
+              <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-champagne-600); font-family: var(--font-sans);">{ZH ? pillar.claimZh : pillar.claim}</p>
+              <p class="text-sm text-stone-600 leading-relaxed mb-4">{ZH ? pillar.descZh : pillar.desc}</p>
+            </div>
+            <!-- Highlights -->
+            <div class="lg:col-span-6 p-8">
+              <ul class="space-y-3">
+                {(ZH ? pillar.highlightsZh : pillar.highlights).map(h => (
+                  <li class="flex items-start gap-3">
+                    <div class="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-1.5" style={`background: var(--color-${pillar.color}-500);`}></div>
+                    <span class="text-sm text-stone-600 leading-relaxed">{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Couple Photo Banner -->
+  <section class="relative overflow-hidden" style="height: 360px;">
+    <img
+      src="/images/couple-clinic.webp" srcset="/images/couple-clinic-800.webp 800w, /images/couple-clinic-1280.webp 1280w, /images/couple-clinic.webp 2292w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+      alt="Couple at IRFC"
+      class="w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(253,250,243,0.85) 0%, rgba(253,250,243,0.3) 50%, transparent 100%);"></div>
+    <div class="absolute inset-0 flex items-center px-10 lg:px-20">
+      <div class="max-w-md">
+        <p style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 leading-snug">
+          {ZH
+            ? '每個家庭的路都不一樣。<br/>每位病人都值得一位看見這點的醫師。'
+            : '"Every family’s path is different.<br/>Every patient deserves a physician who sees that."'}
+        </p>
+        <p class="mt-4 text-xs tracking-widest uppercase" style="color: var(--color-gold-600);">{ZH ? '— 創辦人 James P. Lin 醫師' : '— Dr. James P. Lin, Founder'}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connected Care Team -->
+  <section class="py-20" style="background: var(--color-pearl-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {careTeam.map(role => (
+          <div class="bg-white border border-stone-200 overflow-hidden">
+            <div class="relative" style="aspect-ratio: 4 / 5;">
+              <img src={role.img} alt={role.alt} width="1024" height="1024" class="absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <div class="p-5">
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-champagne-600); font-family: var(--font-sans);">{ZH ? role.kickerZh : role.kicker}</p>
+              <h3 style="font-family: var(--font-sans);" class="text-sm font-light text-stone-800 leading-snug">{ZH ? role.titleZh : role.title}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="text-center mt-6 text-sm" style="color: var(--color-stone-500);">{ZH ? '不同的專家。同一條協調的路。' : 'Different specialists. One coordinated path.'}</p>
+    </div>
+  </section>
+
+  <!-- The Merger Advantage -->
+  <section class="py-24 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-14">
+        <div class="h-px w-12 mx-auto mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '兩段傳承的力量' : 'The Strength of Two Legacies'}</h2>
+        <p class="mt-4 text-sm max-w-xl mx-auto" style="color: var(--color-stone-500);">
+          {ZH
+            ? 'IRFC 不只是一次重新命名——它是兩種截然不同臨床文化的結合，各自帶來獨特的優勢，如今我們的病人能一同受惠。'
+            : 'IRFC isn’t just a rebrand — it’s the combination of two distinct clinical cultures, each bringing unique strengths that our patients now benefit from together.'}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-px" style="background: var(--color-stone-200);">
+        {synergies.map(s => (
+          <div class="bg-white p-10 lg:p-14">
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-stone-400); font-family: var(--font-sans);">{s.from}</p>
+            <p class="text-stone-600 leading-relaxed text-sm">{ZH ? s.broughtZh : s.brought}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 p-10 lg:p-14 border border-stone-200 text-center" style="background: var(--color-stone-50);">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <div class="h-px flex-1" style="background: var(--color-gold-300);"></div>
+          <span class="text-xl" style="font-family: var(--font-serif); color: var(--color-gold-600);">{ZH ? '合在一起' : 'Together'}</span>
+          <div class="h-px flex-1" style="background: var(--color-gold-300);"></div>
+        </div>
+        <p class="text-stone-600 leading-relaxed text-sm max-w-2xl mx-auto">
+          {ZH
+            ? 'IRFC 結合 RFC 二十年來的信任與臨床嚴謹，以及 Incinta 屢獲殊榮的實驗室與以病人為中心的理念——打造出一個大於各部分之和的診所，並全心致力於我們協助建立的每一個家庭。'
+            : 'IRFC combines RFC’s 20-year legacy of trust and clinical rigor with Incinta’s award-winning laboratory and patient-centered philosophy — creating a practice that is greater than the sum of its parts, and dedicated entirely to the families we help build.'}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recognition Wall -->
+  <section class="py-20" style="background: var(--color-stone-900);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-12">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-white">{ZH ? '榮譽與認證' : 'Recognition & Accreditation'}</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {recognition.map(rec => (
+          <div class="p-7 border" style="border-color: var(--color-stone-800);">
+            <div class="w-6 h-px mb-4" style="background: var(--color-gold-500);"></div>
+            <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-white mb-2">{ZH ? rec.titleZh : rec.title}</h3>
+            <p class="text-xs leading-relaxed" style="color: var(--color-stone-400);">{ZH ? rec.detailZh : rec.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
+      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">
+        {ZH ? '親眼見證' : 'See It for Yourself'}
+      </h2>
+      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
+        {ZH
+          ? '言語終究有限。預約諮詢，與我們的醫師見面、參觀設施，並向我們提出任何問題——絕無義務。'
+          : 'Words only go so far. Schedule a consultation and meet our physicians, see our facility, and ask us anything — no obligation.'}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={localeHref('/contact', locale)} class="btn-primary">{ZH ? '預約諮詢' : 'Schedule a Consultation'}</a>
+        <a href={localeHref('/team', locale)} class="btn-outline">{ZH ? '認識我們的團隊' : 'Meet Our Team'}</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

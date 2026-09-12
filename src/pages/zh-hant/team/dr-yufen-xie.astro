@@ -1,0 +1,8 @@
+---
+import TeamMember from '../../../components/pages/TeamMember.astro';
+import { getTeamMember } from '../../../data/team';
+
+const member = getTeamMember('dr-yufen-xie');
+if (!member) throw new Error('Team member not found: dr-yufen-xie');
+---
+<TeamMember member={member} locale="zh-hant" />

@@ -1,0 +1,144 @@
+---
+import ConditionLayout from '../ConditionLayout.astro';
+import { getLocaleFromPath } from '../../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+const symptoms = [
+  { en: 'Irregular, infrequent, or absent periods', zh: '月經不規則、稀少或停經' },
+  { en: 'Difficulty conceiving', zh: '難以受孕' },
+  { en: 'Excess facial or body hair (hirsutism)', zh: '面部或體毛過多（多毛症）' },
+  { en: 'Acne or oily skin', zh: '青春痘或油性肌膚' },
+  { en: 'Thinning scalp hair', zh: '頭皮毛髮變稀疏' },
+  { en: 'Weight gain or difficulty losing weight', zh: '體重增加或難以減重' },
+  { en: 'Darkened skin patches (acanthosis nigricans)', zh: '皮膚色素沉著（黑色棘皮症）' },
+];
+
+const diagnoses = [
+  { en: 'Comprehensive hormonal panel (LH, FSH, testosterone, DHEA-S, insulin, thyroid)', zh: '完整荷爾蒙檢測（LH、FSH、睾酮、DHEA-S、胰島素、甲狀腺）' },
+  { en: 'Antral follicle count and ovarian volume via pelvic ultrasound', zh: '經骨盆腔超音波評估竇卵泡數與卵巢體積' },
+  { en: 'Fasting glucose and insulin resistance screening', zh: '空腹血糖與胰島素阻抗篩檢' },
+  { en: 'Full medical history and menstrual cycle review', zh: '完整病史與月經週期評估' },
+];
+
+const treatments = [
+  {
+    titleEn: 'Lifestyle Optimization',
+    titleZh: '生活型態調整',
+    descEn: `Even modest weight loss (5–10%) can restore regular ovulation in overweight women with PCOS. IRFC collaborates with weight management specialists and nutritionists as part of a holistic approach.`,
+    descZh: `即使小幅減重（5–10%）也能讓過重 PCOS 女性恢復規律排卵。IRFC 與體重管理專家及營養師合作，納入整體療護方針。`,
+  },
+  {
+    titleEn: 'Ovulation Induction',
+    titleZh: '促排卵',
+    descEn: `Oral medications (letrozole or clomiphene) stimulate the ovaries to produce and release one or two eggs per cycle. Paired with timed intercourse or IUI, this is often the first treatment step.`,
+    descZh: `口服藥物（來曲唑或克羅米芬）刺激卵巢每個週期排出一至兩顆卵子。搭配擇時同房或 IUI，通常是最先採取的治療步驟。`,
+  },
+  {
+    titleEn: 'IUI (Intrauterine Insemination)',
+    titleZh: 'IUI（子宮腔內人工授精）',
+    descEn: `Combined with monitored ovulation induction, IUI places concentrated sperm directly into the uterus at the optimal moment — maximizing the chance of fertilization.`,
+    descZh: `搭配監測下的促排卵，IUI 在最佳時機將濃縮精子直接送入子宮，最大化受精機會。`,
+  },
+  {
+    titleEn: 'IVF with Gentle Protocols',
+    titleZh: '採溫和療程的 IVF（試管嬰兒）',
+    descEn: `For women who don't respond to or conceive with simpler treatments, IVF offers the highest success rates. IRFC uses careful, individualized stimulation protocols to minimize OHSS risk in PCOS patients.`,
+    descZh: `對於對簡易療法無反應或未能受孕的女性，IVF 提供最高的成功率。IRFC 採用謹慎、個人化的刺激療程，以降低 PCOS 病人發生卵巢過度刺激症候群（OHSS）的風險。`,
+  },
+  {
+    titleEn: 'Metformin & Insulin Sensitizers',
+    titleZh: 'Metformin 與胰島素增敏劑',
+    descEn: `When insulin resistance is a contributing factor, medications like metformin can improve hormonal balance, restore ovulation, and reduce miscarriage risk.`,
+    descZh: `當胰島素阻抗是成因之一時，metformin 等藥物可改善荷爾蒙平衡、恢復排卵，並降低流產風險。`,
+  },
+  {
+    titleEn: 'PCOS & Mild Stimulation IVF',
+    titleZh: 'PCOS 與溫和刺激 IVF',
+    descEn: `Dr. Liu specializes in mild stimulation IVF protocols that are particularly well-suited for PCOS patients, who are at elevated risk of ovarian hyperstimulation syndrome (OHSS) with conventional dosing.`,
+    descZh: `劉醫師專精於溫和刺激 IVF 療程，特別適合 PCOS 病人——使用常規劑量時，這類病人發生卵巢過度刺激症候群（OHSS）的風險較高。`,
+  },
+];
+---
+
+<ConditionLayout
+  titleEn={`Polycystic Ovary<br/>Syndrome (PCOS)`}
+  titleZh={`多囊性卵巢<br/>症候群 (PCOS)`}
+  descriptionEn="PCOS and fertility at IRFC. Polycystic ovary syndrome is the most common cause of ovulatory infertility — learn how we diagnose and treat it."
+  descriptionZh="PCOS 與生育力：在 IRFC，多囊性卵巢症候群是女性排卵性不孕症最常見的原因——了解我們如何診斷與治療。"
+  ledeEn="PCOS is the most common hormonal disorder in women of reproductive age and the leading cause of ovulatory infertility. With proper management, the large majority of women with PCOS can conceive successfully."
+  ledeZh="多囊性卵巢症候群（PCOS）是育齡女性最常見的荷爾蒙失調，也是排卵性不孕症的首要成因。透過妥善管理，絕大多數 PCOS 女性都能順利懷孕。"
+  bandImage="/images/patient-reading.webp"
+  bandAltEn="IRFC fertility patient"
+  bandAltZh="IRFC 不孕症病人"
+  bandQuoteEn="PCOS is the most treatable cause of female infertility."
+  bandQuoteZh="多囊性卵巢症候群（PCOS）是女性不孕症中最可治療的病因。"
+  quoteEn={`"When I was told I had low AMH and PCOS, I thought my chances were gone. Dr. Lin designed a protocol just for me. After one IUI, I was pregnant."`}
+  quoteZh={`「醫師告訴我 AMH 偏低又患有 PCOS 時，我以為自己沒機會了。林醫師為我量身設計了療程，做一次 IUI 我就懷孕了。」`}
+  quoteAttributionEn="— IRFC Patient, IUI with PCOS"
+  quoteAttributionZh="— IRFC 病人，PCOS 合併 IUI 療程"
+  ctaTitleEn="PCOS Doesn't Have to Mean Infertility"
+  ctaTitleZh="PCOS 不代表與不孕畫上等號"
+  ctaTextEn="Most women with PCOS can conceive with the right treatment. Let's find the right path for you."
+  ctaTextZh="大多數 PCOS 女性都能在適切治療下懷孕。讓我們為您找到合適的路徑。"
+  ctaPrimaryHref="/contact"
+  ctaPrimaryLabelEn="Schedule a Consultation"
+  ctaPrimaryLabelZh="預約諮詢"
+>
+  <div slot="intro">
+    <!-- What Is PCOS -->
+    <section class="py-20" style="background: var(--color-stone-50);">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-14">
+          <div>
+            <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '認識 PCOS' : 'Understanding PCOS'}</h2>
+            <p class="text-stone-600 leading-relaxed mb-4 text-sm">{ZH ? '多囊性卵巢症候群（PCOS）是一種荷爾蒙異常：卵巢分泌過多的雄激素（男性荷爾蒙），導致排卵不規則或停止、卵巢出現細小囊泡，以及一系列全身性症狀。' : 'Polycystic ovary syndrome (PCOS) is a hormonal condition in which the ovaries produce excess androgens (male hormones), leading to irregular or absent ovulation, small fluid-filled follicles on the ovaries, and a range of systemic symptoms.'}</p>
+            <p class="text-stone-600 leading-relaxed mb-6 text-sm">{ZH ? 'PCOS 影響約每 10 名育齡女性中的 1 人。診斷依鹿特丹標準：下列三項特徵中需具備兩項——排卵不規則、雄激素過高，或超音波下呈現多囊性卵巢外觀。' : 'PCOS affects approximately 1 in 10 women of reproductive age. It is diagnosed using the Rotterdam criteria: two of the following three features must be present — irregular ovulation, elevated androgens, or polycystic-appearing ovaries on ultrasound.'}</p>
+            <h3 style="font-family: var(--font-serif);" class="text-xl font-light text-stone-800 mb-3">{ZH ? '常見症狀' : 'Common Symptoms'}</h3>
+            <ul class="space-y-2">
+              {symptoms.map((s) => (
+                <li class="flex items-start gap-3 text-sm text-stone-600">
+                  <div class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: var(--color-gold-500);"></div>
+                  {ZH ? s.zh : s.en}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="space-y-5">
+            <div class="p-7 bg-white border border-stone-200">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{ZH ? 'IRFC 如何診斷 PCOS' : 'How IRFC Diagnoses PCOS'}</h3>
+              <ul class="space-y-2 text-sm text-stone-600">
+                {diagnoses.map((d) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--color-gold-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                    {ZH ? d.zh : d.en}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="p-7 bg-white border border-stone-200">
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '重點須知' : 'Key Fact'}</p>
+              <p class="text-sm text-stone-600 leading-relaxed">{ZH ? 'PCOS 是女性不孕症中最<strong class="text-stone-800">可治療</strong>的病因。大多數想懷孕的 PCOS 女性，都能透過適當的促排卵或人工生殖順利受孕。' : 'PCOS is the most <strong class="text-stone-800">treatable</strong> cause of female infertility. Most women with PCOS who want to conceive can do so with appropriate ovulation induction or assisted reproduction.'}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treatment Options -->
+    <section class="py-24 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-10">{ZH ? 'IRFC 的治療方式' : 'Treatment at IRFC'}</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {treatments.map((t) => (
+            <div class="p-7 border border-stone-200 card-hover">
+              <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 mb-3">{ZH ? t.titleZh : t.titleEn}</h3>
+              <p class="text-sm text-stone-500 leading-relaxed">{ZH ? t.descZh : t.descEn}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</ConditionLayout>

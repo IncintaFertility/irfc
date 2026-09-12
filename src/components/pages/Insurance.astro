@@ -1,0 +1,91 @@
+---
+// 保險與給付（英文 / 繁體中文共用元件）
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getLocaleFromPath } from '../../i18n';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+---
+
+<Layout
+  title={ZH ? '保險與給付' : 'Insurance & Coverage'}
+  description={ZH
+    ? '了解 IRFC 生育照護的保險運作方式。確認您的權益、了解哪些項目可能給付，並探索自費方案。'
+    : 'Understand how insurance works for fertility care at IRFC. Verify your benefits, learn what may be covered, and explore self-pay options.'}
+>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '保險與給付' : 'Insurance & Coverage'}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
+          {ZH ? <>與您的給付<br/><em class="not-italic" style="color: var(--color-gold-500);">並肩同行的照護。</em></> : <>Care that works<br/><em class="not-italic" style="color: var(--color-gold-500);">with your coverage.</em></>}
+        </h1>
+        <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl mb-10">
+          {ZH
+            ? '生育給付依方案而異。我們的團隊會協助您了解保險可能涵蓋的範圍，並充分運用——清楚作答，絕無驚喜。'
+            : 'Fertility benefits vary by plan. Our team will help you understand what your insurance may cover and how to make the most of it — with clear answers, never surprises.'}
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="tel:+14244324732" class="btn-primary inline-flex items-center gap-2">
+            {ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}
+          </a>
+          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
+            {ZH ? '透過 WhatsApp 聯絡我們' : 'Message Us on WhatsApp'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-14">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '如何使用您的權益' : 'How to use your benefits'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '三個步驟，釐清權益' : 'Three steps to clarity'}</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div>
+          <p class="text-5xl font-light mb-4" style="font-family: var(--font-serif); color: var(--color-gold-400);">01</p>
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{ZH ? '確認您的權益' : 'Verify your benefits'}</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">{ZH ? '致電我們的團隊或登入病人入口，我們能在您的首次看診前，先確認您方案的生育給付範圍。' : 'Call our team or sign in to the patient portal so we can check your plan’s fertility coverage before your first visit.'}</p>
+        </div>
+        <div>
+          <p class="text-5xl font-light mb-4" style="font-family: var(--font-serif); color: var(--color-gold-400);">02</p>
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{ZH ? '了解涵蓋項目' : 'Know what’s covered'}</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">{ZH ? '診斷性檢查通常給付；治療給付則依您的方案而定。我們會以平白的語言，帶您了解兩者的差別。' : 'Diagnostic testing is often covered; treatment coverage depends on your plan. We walk you through the difference in plain language.'}</p>
+        </div>
+        <div>
+          <p class="text-5xl font-light mb-4" style="font-family: var(--font-serif); color: var(--color-gold-400);">03</p>
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{ZH ? '其餘交給我們' : 'We handle the rest'}</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">{ZH ? '從事前授權到理賠申請，我們的帳務協調員處理所有文書作業，讓您能專注於自己的照護。' : 'From prior authorizations to claims, our billing coordinators manage the paperwork so you can focus on your care.'}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Self-pay -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '沒有給付？沒問題' : 'No coverage? No problem'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-4">{ZH ? '彈性的自費方案' : 'Flexible self-pay options'}</h2>
+        <p class="text-sm text-stone-600 leading-relaxed mb-8">{ZH ? '若您的方案不含生育照護，透明的價格與月付計畫，讓卓越的照護依然觸手可及。在一處即可探索費用與財務方案。' : 'If your plan does not include fertility care, transparent pricing and monthly payment plans keep exceptional care within reach. Explore costs and financing in one place.'}</p>
+        <a href={ZH ? '/zh-hant/financing' : '/financing'} class="btn-primary inline-flex items-center gap-2">
+          {ZH ? '查看財務與費用' : 'View Financing & Cost'}
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
