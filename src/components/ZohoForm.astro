@@ -13,8 +13,9 @@
  *  - Zoho 后台把 returnURL 固定成 irfc.pages.dev/contact/success，而该成功页带
  *    X-Frame-Options: DENY；原生表单把 iframe 重定向到它时被浏览器拒绝加载，
  *    iframe 的 load 事件无法触发成功提示（表现为「点了没反应」）。
- *  - 改用 fetch + mode:'no-cors' + redirect:'manual'：请求照常送达 Zoho 创建线索，
- *    响应为 opaque/opaque-redirect，.then 必然触发 → 确定性地显示成功 / 失败 UI。
+ *  - 改用 fetch + mode:'no-cors'（redirect 用默认 'follow'）：请求照常送达 Zoho 创建线索，
+ *    浏览器跟随其 302 跳转到成功页，最终响应为 opaque，.then 必然触发 → 确定性地显示成功 / 失败 UI。
+ *    注意：no-cors 模式不允许 redirect:'manual'（会直接抛 network error），必须跟随重定向。
  *  - fetch body 用 URLSearchParams（application/x-www-form-urlencoded），与浏览器原生
  *    表单 POST 完全一致，Zoho 已验证接受。
  *
@@ -242,7 +243,7 @@ const inputCls =
       fetch(form.action, {
         method: 'POST',
         mode: 'no-cors',
-        redirect: 'manual',
+        // no-cors 模式下 redirect 必须是 'follow'（默认），不能写 'manual'，否则浏览器直接抛 network error
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: body,
       })
