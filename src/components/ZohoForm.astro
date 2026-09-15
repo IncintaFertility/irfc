@@ -136,21 +136,6 @@ const inputCls =
     {t(locale, 'form.note')}
   </p>
 
-  <div id="zf-success" class="hidden border p-8 text-center" style="border-color: var(--color-champagne-300); background: var(--color-champagne-50);">
-    <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{t(locale, 'form.successTitle')}</p>
-    <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
-      {t(locale, 'form.successBody')}
-    </p>
-  </div>
-
-  <div id="zf-error" role="alert" aria-live="assertive" class="hidden border-2 border-red-300 bg-red-50 p-6 text-center rounded-sm">
-    <p class="text-sm font-medium leading-relaxed text-red-700 mb-3">
-      {ZH ? '請填寫必填欄位（姓氏、電子郵件或電話、診所與預約服務）。若仍無法提交，請直接致電。' : 'Please complete the required fields (last name, email or phone, location and intended service). If it still will not submit, please call us.'}
-    </p>
-    <a href="tel:+14244324732" class="btn-outline inline-flex items-center gap-2" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
-      (424) 432-4732
-    </a>
-  </div>
 </form>
 
 <style>
@@ -167,8 +152,6 @@ const inputCls =
     var form = document.getElementById('zoho-lead-form');
     if (!form) return;
 
-    var success = document.getElementById('zf-success');
-    var errorBox = document.getElementById('zf-error');
     var label = document.getElementById('zf-submit-label');
     var submitBtn = form.querySelector('button[type="submit"]');
     var submitting = false;
@@ -189,23 +172,23 @@ const inputCls =
     }
 
     function showSuccess() {
-      // 隐藏表单内除成功/错误框以外的所有元素
-      Array.prototype.forEach.call(form.children, function (ch) {
-        if (ch.id !== 'zf-success' && ch.id !== 'zf-error') ch.classList.add('hidden');
-      });
-      success.classList.remove('hidden');
-      // 匿名转化回传（无 PII；服务端转发 GA4 Measurement Protocol）。fire-and-forget。
+      // 匿名转化回传（无 PII；服务端转发 GA4 Measurement Protocol）。
+      // 用 sendBeacon 确保页面跳转前一定能发出（普通 fetch 在 unload 时可能被取消）
       try {
-        fetch('/api/lead-event', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({
-            location: val('zf-location'),
-            service: val('zf-service'),
-            gaClientId: readGaClientId(),
-          }),
+        var payload = JSON.stringify({
+          location: val('zf-location'),
+          service: val('zf-service'),
+          gaClientId: readGaClientId(),
         });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon('/api/lead-event', new Blob([payload], { type: 'application/json' }));
+        } else {
+          fetch('/api/lead-event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload });
+        }
       } catch (e) {}
+      // 提交成功后跳转到品牌化成功页（等同 Zoho 原生表单重定向到 returnURL）
+      var ret = form.querySelector('input[name="returnURL"]');
+      window.location.href = ret ? ret.value : '/contact/success';
     }
 
     var REQUIRED_IDS = ['zf-last-name', 'zf-first-name', 'zf-email', 'zf-phone', 'zf-location', 'zf-service', 'zf-message'];
@@ -219,16 +202,18 @@ const inputCls =
 
     function showError(missing) {
       clearInvalid();
+      // 仅高亮对应缺失字段（不再用通用提示框），并滚动/聚焦到第一个缺失项
+      var first = null;
       (missing || []).forEach(function (id) {
         var el = document.getElementById(id);
-        if (el) el.classList.add('zf-invalid');
+        if (el) {
+          el.classList.add('zf-invalid');
+          if (!first) first = el;
+        }
       });
-      errorBox.classList.remove('hidden');
-      // 滚动到错误提示，确保用户一定看到（而非沉在表单底部被忽略）
-      try {
-        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } catch (e) {
-        errorBox.scrollIntoView();
+      if (first) {
+        try { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { first.scrollIntoView(); }
+        try { first.focus({ preventScroll: true }); } catch (e) {}
       }
     }
 
@@ -242,7 +227,6 @@ const inputCls =
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      errorBox.classList.add('hidden');
 
       // honeypot：机器人填写 → 静默丢弃（Zoho 端也会丢弃）
       if (val('zf-honeypot')) return;
@@ -285,21 +269,18 @@ const inputCls =
           showSuccess();
         })
         .catch(function (err) {
-          // 网络层失败：恢复按钮并提示用户重试（线索可能已创建，提示致电兜底）
+          // 网络层失败：恢复按钮，提示用户重试（字段已校验通过，仅恢复可重提）
           console.error('Zoho lead submission failed:', err);
           setSubmitting(false);
-          showError();
         });
     });
 
-    // 用户开始输入/修改时，清除对应字段红框并隐藏错误提示
+    // 用户开始输入/修改时，清除对应字段红框
     form.addEventListener('input', function () {
       clearInvalid();
-      errorBox.classList.add('hidden');
     });
     form.addEventListener('change', function () {
       clearInvalid();
-      errorBox.classList.add('hidden');
     });
   })();
 </script>
