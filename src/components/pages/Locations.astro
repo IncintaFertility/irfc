@@ -3,6 +3,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
 import { BRAND_ABBREV, SITE_URL } from '../../config/brand';
 
@@ -43,11 +44,11 @@ const bentoLabelsZh: Record<string, string> = {
 
 const bento = [
   { src: '/images/locations/network-welcome-beverly-hills.jpg', alt: 'Welcoming IRFC patient lounge', altZh: '溫馨的 IRFC 病人休息室', label: 'Welcoming Spaces' },
-  { src: '/images/locations/network-access-corona.jpg', alt: 'IRFC Southern California clinic access', altZh: 'IRFC 南加州診所據點', label: 'Southern California Access' },
+  { src: '/images/locations/network-access-corona.webp', alt: 'IRFC Southern California clinic access', altZh: 'IRFC 南加州診所據點', label: 'Southern California Access' },
   { src: '/images/locations/network-lab-corona.jpg', alt: 'IRFC embryology laboratory', altZh: 'IRFC 胚胎學實驗室', label: 'Laboratory Technology' },
   { src: '/images/locations/network-comfort-irvine.jpg', alt: 'Comfortable private consultation room', altZh: '舒適的私人諮詢室', label: 'Comfort and Privacy' },
   { src: '/images/locations/network-clinical-corona.jpg', alt: 'IRFC clinical environment', altZh: 'IRFC 臨床環境', label: 'Clinical Environments' },
-  { src: '/images/locations/network-welcome-irvine.jpg', alt: 'Thoughtful clinic detail', altZh: '細膩的診所設計', label: 'Thoughtful Details' },
+  { src: '/images/locations/network-welcome-irvine.webp', alt: 'Thoughtful clinic detail', altZh: '細膩的診所設計', label: 'Thoughtful Details' },
   { src: '/images/locations/network-consultation-beverly-hills.jpg', alt: 'Space for conversation', altZh: '對話空間', label: 'Space for Conversation' },
   { src: '/images/locations/network-welcome-torrance.jpg', alt: 'Connected care network', altZh: '連結的照護網絡', label: 'Connected Care' },
   { src: '/images/locations/incinta-reception-desk.jpg', alt: 'Warm IRFC reception desk', altZh: '溫暖的 IRFC 接待櫃檯', label: 'Warm Reception' },
@@ -256,6 +257,9 @@ const description = ZH
           <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
             {ZH ? 'WhatsApp (424) 432-4732' : 'WhatsApp (424) 432-4732'}
           </a>
+        </div>
+        <div class="mt-5 max-w-2xl mx-auto">
+          <WhatsAppDisclaimer />
         </div>
       </div>
     </div>

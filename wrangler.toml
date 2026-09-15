@@ -13,4 +13,8 @@ pages_build_output_dir = "./dist"
 #    MAIL_FROM = "no-reply@irfc.com"        # 发件地址（需为站点域）
 #    MAIL_TO   = "newpatients@irfc.com"     # 协调员收件地址（必须位于已签 BAA 的邮件服务，如 Google Workspace / Microsoft 365）
 #
-# 3. 建议同时为 /api/appointment-request 开启 Cloudflare Turnstile 校验。
+# 3. 建议同时为 /api/appointment-request 开启 Cloudflare Turnstile 校验：
+#    - 服务端（本仓库已落地）：Functions 环境变量 TURNSTILE_SECRET = <服务端密钥>
+#    - 前端（本仓库已落地）：src/config/brand.ts 的 TURNSTILE_SITEKEY = <站点公钥>
+#    - 两端须同时就位才生效；仅服务端配置会拒绝无 token 的请求，仅前端配置则服务端不校验。
+#    - 上线后把本仓库 appointment-request.ts 注释里的 "TODO（上线前）：开启 Turnstile" 移除。

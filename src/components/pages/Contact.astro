@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import RequestForm from '../../components/RequestForm.astro';
+import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -81,6 +82,9 @@ const description = ZH
             <div>
               <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">WhatsApp</p>
               <a href="https://wa.me/14244324732" class="text-2xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">+1 (424) 432-4732</a>
+            </div>
+            <div class="mt-4">
+              <WhatsAppDisclaimer />
             </div>
             <div>
               <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '電子郵件' : 'Email'}</p>

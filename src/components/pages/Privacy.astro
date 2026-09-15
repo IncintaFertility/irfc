@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
-import { LEGAL_ENTITY, BRAND_ABBREV, SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config/brand';
+import { LEGAL_ENTITY, BRAND_ABBREV, SITE_PHONE, SITE_PHONE_DISPLAY, PRIVACY_RETENTION_MONTHS } from '../../config/brand';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
@@ -79,6 +79,72 @@ const sections = [
     ],
   },
   {
+    id: 'retention',
+    title: 'How Long We Keep Your Information',
+    titleZh: '我們保留資訊的期間',
+    body: [
+      `Appointment-request contact details submitted through this website are kept only as the email correspondence needed to respond to your inquiry and schedule your care. We review and purge these records on a routine basis, and no later than ${PRIVACY_RETENTION_MONTHS} months after the matter is resolved, unless a longer period is required by law or to defend a legal claim.`,
+      'No medical records or protected health information are created or stored on this public website. All clinical records are maintained in our HIPAA-compliant patient portal (eIVF) and follow its own retention schedule.',
+    ],
+    bodyZh: [
+      `透過本網站提交的預約請求聯絡資料，僅作為回應您的諮詢與安排照護所需的電子郵件往來而保留。我們會定期檢視並刪除這些紀錄，最遲於案件結案後 ${PRIVACY_RETENTION_MONTHS} 個月內清除，法律要求或為防衛法律主張而須較長保留者除外。`,
+      '本公開網站不建立或儲存任何病歷或受保護健康資訊。所有臨床紀錄均保存於我們符合 HIPAA 規範的病人專區（eIVF），並依其保留時程處理。',
+    ],
+  },
+
+  {
+    id: 'disclosure',
+    title: 'How We Use and Disclose Health Information',
+    titleZh: '我們如何使用與揭露健康資訊',
+    body: [
+      'Once you become a patient, your protected health information (PHI) may be used and disclosed for treatment, payment, and health care operations (TPO) — for example, coordinating care among our physicians, laboratories, and clinics; obtaining payment from your insurer; and conducting quality and safety activities.',
+      'For uses and disclosures of PHI that are not for TPO, we will obtain your written authorization, except where HIPAA permits or requires disclosure without authorization (such as to public health authorities, as required by law, or in response to a lawful subpoena). You may revoke an authorization in writing at any time, subject to limited exceptions.',
+    ],
+    bodyZh: [
+      '一旦成為我們的病人，您的受保護健康資訊（PHI）可能為了治療、付款與醫療營運（TPO）而被使用與揭露——例如在我們的醫師、實驗室與診所之間協調照護、向您的保險公司請款，以及執行品質與安全活動。',
+      '對於非屬 TPO 的 PHI 使用與揭露，我們會取得您的書面授權，但 HIPAA 允許或要求無須授權之揭露（例如向公共衛生主管機關、依法要求，或回應合法傳票）者除外。您得隨時以書面撤銷授權，受限於少數例外情形。',
+    ],
+  },
+
+  {
+    id: 'breach',
+    title: 'Breach Notification',
+    titleZh: '資訊外洩通知',
+    body: [
+      'If a breach of unsecured protected health information affecting you occurs, we will notify you without unreasonable delay and no later than 60 calendar days after we discover the breach, as required by the HIPAA Breach Notification Rule. Notification will be delivered by mail or email, as appropriate.',
+    ],
+    bodyZh: [
+      '若發生影響您的未加密受保護健康資訊外洩事件，我們將依 HIPAA 資訊外洩通知規則，在不合理延遲的情況下、且最遲於發現外洩後 60 個日曆日內通知您。通知將視情況以郵寄或電子郵件方式送達。',
+    ],
+  },
+
+  {
+    id: 'associates',
+    title: 'Our Business Associates',
+    titleZh: '我們的業務夥伴',
+    body: [
+      'We engage service providers who perform functions on our behalf involving the use or disclosure of PHI. These business associates are bound by written Business Associate Agreements (BAAs) requiring them to safeguard your information. They include our patient-portal and electronic health-record platform (eIVF), our secure email and productivity provider, and our cloud hosting and content-delivery provider (Cloudflare).',
+    ],
+    bodyZh: [
+      '我們委託的服務提供者，會代表我們執行涉及 PHI 使用或揭露的功能。這些業務夥伴均受書面《業務夥伴協議》（BAA）約束，須對您的資訊採取保護措施。包含我們的病人專區與電子病歷平台（eIVF）、安全的電子郵件與生產力工具提供商，以及雲端託管與內容傳遞提供商（Cloudflare）。',
+    ],
+  },
+
+  {
+    id: 'analytics',
+    title: 'Third-Party Analytics',
+    titleZh: '第三方分析工具',
+    body: [
+      'This website uses Google Tag Manager (container GTM-TLN399PK) to measure site traffic and improve content. Google is not a HIPAA business associate, so we do not transmit, and will never instruct you to enter, any protected health information (PHI) through this site to Google. The public site collects only the contact details you choose to submit via the request form, and those are forwarded by email to our clinic — they are not routed through Google.',
+      'Analytics may record technical information such as pages visited, device and browser type, and approximate location derived from your IP address. You can limit tracking by enabling "Do Not Track" in your browser or using a content blocker. For Google\'s own data practices, see Google\'s Privacy & Terms.',
+    ],
+    bodyZh: [
+      '本網站使用 Google Tag Manager（容器 GTM-TLN399PK）來衡量流量並改善內容。Google 並非 HIPAA 商務夥伴，因此我們不會傳送、也不會引導您經由本網站向 Google 提供任何受保護健康資訊（PHI）。公開網站僅收集您透過預約表單主動提供的聯絡資料，並以電子郵件轉寄至診所——並不經由 Google 傳輸。',
+      '分析工具可能記錄技術性資訊，例如瀏覽頁面、裝置與瀏覽器類型，以及由 IP 位址推得的概略位置。您可在瀏覽器中啟用「勿追蹤」（Do Not Track）或使用內容封鎖工具來限制追蹤。有關 Google 自身的資料處理方式，請參閱 Google 隱私與條款。',
+    ],
+  },
+
+  {
     id: 'ccpa',
     title: 'California Privacy Rights',
     titleZh: '加州隱私權',
@@ -94,10 +160,10 @@ const sections = [
     title: 'Questions or Requests',
     titleZh: '問題或請求',
     body: [
-      `If you have questions about this notice, or wish to exercise any of the rights described above, please contact our Privacy Officer at ${LEGAL_ENTITY} using the phone number or address listed below.`,
+      `If you have questions about this notice, or wish to exercise any of the rights described above, please contact our Privacy Officer at ${LEGAL_ENTITY} using the phone number or address listed below, or by email at privacy@irfc.com.`,
     ],
     bodyZh: [
-      `若您對本告知有疑問，或希望行使上述任一權利，請透過以下電話或地址，聯絡 ${LEGAL_ENTITY} 的隱私權負責人。`,
+      `若您對本告知有疑問，或希望行使上述任一權利，請透過以下電話或地址，或電子郵件 privacy@irfc.com，聯絡 ${LEGAL_ENTITY} 的隱私權負責人。`,
     ],
   },
 ];

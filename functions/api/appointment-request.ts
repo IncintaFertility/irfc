@@ -42,6 +42,33 @@ export const onRequestPost = async (ctx: { request: Request; env: any }) => {
   // honeypot：正常用户不会填写
   if (str(data.company, 200)) return json({ ok: true });
 
+  // G3 — Cloudflare Turnstile 校验（仅当配置了 TURNSTILE_SECRET 时强制）
+  // 未配置则跳过，保持向后兼容；两端（站点公钥 + 服务端密钥）须同时就位才生效。
+  if (env?.TURNSTILE_SECRET) {
+    const token = str(data["cf-turnstile-response"], 2000);
+    if (!token) return json({ ok: false, error: "verification_required" }, 400);
+    try {
+      const fd = new URLSearchParams();
+      fd.set("secret", env.TURNSTILE_SECRET);
+      fd.set("response", token);
+      const ip = request.headers.get("cf-connecting-ip");
+      if (ip) fd.set("remoteip", ip);
+      const vres = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: { "content-type": "application/x-www-form-urlencoded" },
+          body: fd.toString(),
+        },
+      ).then((r) => r.json().catch(() => ({})));
+      if (!(vres as { success?: boolean }).success) {
+        return json({ ok: false, error: "verification_failed" }, 403);
+      }
+    } catch {
+      return json({ ok: false, error: "verification_error" }, 503);
+    }
+  }
+
   const firstName = str(data.firstName, 80);
   const lastName = str(data.lastName, 80);
   const email = str(data.email, 160);

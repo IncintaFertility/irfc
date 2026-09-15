@@ -1,6 +1,7 @@
 ---
 import { getLocaleFromPath, t } from '../i18n/index';
 const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
 ---
 
 <div id="floating-contact" class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 hidden md:flex">
@@ -11,6 +12,7 @@ const locale = getLocaleFromPath(Astro.url.pathname);
     target="_blank"
     rel="noopener noreferrer"
     aria-label={t(locale, 'floating.whatsapp')}
+    title={ZH ? 'WhatsApp 僅供一般聯繫與預約，請勿傳送任何醫療資訊（PHI）。涉及個人醫療資訊請使用 eIVF 病人專區。' : 'WhatsApp is for general contact and scheduling only — do not send any medical information (PHI). For personal health information, use the eIVF patient portal.'}
     class="floating-btn group flex items-center gap-3"
   >
     <span class="floating-label hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs tracking-wide bg-white text-stone-700 px-3 py-1.5 shadow border border-stone-100 whitespace-nowrap">

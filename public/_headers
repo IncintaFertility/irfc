@@ -3,6 +3,18 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  # G2 — 强制 HTTPS + 防降级（HIPAA 传输安全）
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Upgrade-Insecure-Requests: 1
+  # G2 — 内容安全策略
+  # 同源优先；放开以下"有意使用"的第三方（否则会破坏既有功能）：
+  #   - fonts.googleapis.com / fonts.gstatic.com ：Google Fonts（无 PHI）
+  #   - www.googletagmanager.com            ：Google Tag Manager（GTM-TLN399PK，见 G11）
+  #   - challenges.cloudflare.com           ：可选 Turnstile（G3）
+  #   - s3-media0.fl.yelpcdn.com            ：Yelp 头像静态图
+  # 表单 fetch / 页面导航均限制为同源（form-action 'self'、connect-src 'self'），
+  # 杜绝表单数据被注入脚本外泄到非预期域。
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; child-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; object-src 'none'; img-src 'self' https://s3-media0.fl.yelpcdn.com https://challenges.cloudflare.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com; connect-src 'self'
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable

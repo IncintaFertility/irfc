@@ -3,6 +3,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -64,6 +65,9 @@ const description = ZH
           <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
             {ZH ? '申請 Zoom 看診' : 'Request a Zoom Visit'}
           </a>
+        </div>
+        <div class="mt-5 max-w-2xl">
+          <WhatsAppDisclaimer />
         </div>
       </div>
     </div>

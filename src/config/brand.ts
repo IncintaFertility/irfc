@@ -26,6 +26,21 @@ export const SITE_PHONE = '+14244324732';
 export const SITE_PHONE_DISPLAY = '(424) 432-4732';
 
 /**
+ * Cloudflare Turnstile 站点公钥（G3 反滥用整改）。
+ * 留空时：前端不渲染验证组件、服务端也不强制校验（保持当前行为）。
+ * 配置后：在 Cloudflare Dashboard → Pages → irfc → Settings → Functions 设置
+ *   变量 TURNSTILE_SECRET（服务端校验密钥），并把本站公钥填入此处。
+ * 两端都配置才会生效；仅一端配置会被服务端拒绝（防绕过）。
+ */
+export const TURNSTILE_SITEKEY = '';
+
+/**
+ * 隐私告知中的数据保留期限（月）——G4 整改的可配置政策值。
+ * 由隐私官 / 合规负责人依实际记录保留政策确认后调整。
+ */
+export const PRIVACY_RETENTION_MONTHS = 24;
+
+/**
  * 四层品牌语言（Brand Message Architecture）
  * 从信念 → 核心 → 承诺 → 情感连接
  */

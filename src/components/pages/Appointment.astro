@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import RequestForm from '../../components/RequestForm.astro';
+import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -99,6 +100,9 @@ const description = ZH
           <p class="text-sm leading-relaxed mb-8" style="color: var(--color-stone-500);">
             {ZH ? '告訴我們如何與您聯繫，以及哪間診所最方便。我們的協調員通常會在一個工作日內，與您確認合適的醫師與時間。' : 'Tell us how to reach you and which clinic works best. Our coordinators will confirm a time with the right physician — usually within one business day.'}
           </p>
+          <div class="mb-8 max-w-xl">
+            <WhatsAppDisclaimer />
+          </div>
           <div class="border-t border-stone-200 pt-6 space-y-4">
             <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
               <span class="font-medium" style="color: var(--color-stone-800);">{ZH ? '以隱私為本。' : 'Private by design.'}</span>
