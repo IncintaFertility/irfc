@@ -148,6 +148,15 @@ const selectStyle = `background-image: url("data:image/svg+xml,%3Csvg xmlns='htt
       const get = (id: string) =>
         (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null)?.value?.trim() ?? '';
 
+      // 读 _ga cookie → 匿名 client_id（仅分析 ID，非 PII），随表单提交带给服务端，
+      // 用于服务端 GA4 Measurement Protocol 把转化归因到用户浏览会话（HIPAA 合规：不传 PII）。
+      const readGaClientId = (): string => {
+        const m = document.cookie.match(/(?:^|;\s*)_ga=([^;]*)/);
+        if (!m) return '';
+        const parts = decodeURIComponent(m[1]).split('.');
+        return parts.length >= 4 ? parts.slice(2).join('.') : m[1];
+      };
+
       const payload = {
         firstName: get('rf-first-name'),
         lastName: get('rf-last-name'),
@@ -157,6 +166,7 @@ const selectStyle = `background-image: url("data:image/svg+xml,%3Csvg xmlns='htt
         visitType: get('rf-visit-type'),
         language: get('rf-language'),
         company: get('rf-company'),
+        gaClientId: readGaClientId(),
         'cf-turnstile-response': (document.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value ?? '',
       };
 

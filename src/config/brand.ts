@@ -35,6 +35,26 @@ export const SITE_PHONE_DISPLAY = '(424) 432-4732';
 export const TURNSTILE_SITEKEY = '';
 
 /**
+ * GA4 服务端转化回传（Measurement Protocol）—— 在「不向 Google 暴露 PHI」前提下
+ * 最大化转化归因。
+ *
+ * 设计（HIPAA 合规要点）：
+ *  - 回传发生在 Cloudflare 函数（服务端），不在浏览器；表单页的浏览器从不联系 Google。
+ *  - 仅携带「匿名 client_id」（来自访客 _ga cookie）+ 非 PHI 的选择项
+ *    （visit_type / location / language）。绝不携带 姓名 / 邮箱 / 电话 等 PII。
+ *  - 匿名 client_id 不属于 PHI，Google 虽无 BAA 也不触发违规；
+ *    这是无 BAA 第三方分析下能拿到的最大合规转化数据。
+ *  - 留空时：不回传，行为完全不变（向后兼容）。
+ *
+ * 配置（Dashboard → Pages 项目 → Settings → Functions 变量）：
+ *   GA4_MEASUREMENT_ID = G-XXXXXXXXXX
+ *   GA4_API_SECRET     = GA4 后台「数据流 → 事件 API 密钥」生成的密钥
+ * 两端都配置才会回传；仅一端配置则跳过（防误配泄露）。
+ */
+export const GA4_MEASUREMENT_ID = '';
+export const GA4_API_SECRET = '';
+
+/**
  * 隐私告知中的数据保留期限（月）——G4 整改的可配置政策值。
  * 由隐私官 / 合规负责人依实际记录保留政策确认后调整。
  */

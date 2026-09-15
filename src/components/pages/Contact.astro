@@ -3,7 +3,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import RequestForm from '../../components/RequestForm.astro';
+import ZohoForm from '../../components/ZohoForm.astro';
 import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
 
@@ -55,7 +55,7 @@ const description = ZH
         <!-- Contact Form -->
         <div id="consultation">
           <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-8">{ZH ? '提出諮詢' : 'Request a Consultation'}</h2>
-          <RequestForm />
+          <ZohoForm />
         </div>
 
         <!-- Contact Info -->

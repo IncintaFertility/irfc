@@ -1,0 +1,24 @@
+---
+// Zoho CRM Web Form 嵌入（HIPAA 合规摄入路径）
+// - 浏览器直连 crm.zoho.com，PHI 不经本站服务器 / Google，审计面最小
+// - 上线前须与 Zoho 签 BAA 并启用 HIPAA 合规版
+// - 表单通过 Zoho 注入到下方容器内；提交行为由 Zoho 后台配置（原地提示 / 跳转回执页）
+---
+<div class="zoho-form-embed" style="min-height: 420px;">
+  <!-- Zoho 官方 web form 脚本：script=$sYG 为内联注入模式 -->
+  <script
+    is:inline
+    id="formScript5370431000160778269"
+    src="https://crm.zoho.com/crm/WebFormServeServlet?rid=4cd2c645181fc006162463d71e627cc5054617a83f08c8b30c94dbe6161eb0659de033ec24add6588f7183e5996d5c18gid06e405a03f6f6c97f27cd72d357c28e34705580a8d602ea2222b6730069ab52d&script=$sYG"
+  ></script>
+</div>
+
+<style>
+  /* 约束 Zoho 注入表单的宽度，使其贴合卡片布局；其余样式由 Zoho 自带 */
+  .zoho-form-embed :global(form),
+  .zoho-form-embed :global(.zf-templateWrapper),
+  .zoho-form-embed :global(iframe) {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+</style>

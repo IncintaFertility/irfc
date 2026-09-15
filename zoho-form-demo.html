@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INCINTA — Appointment Request Demo (Zoho Web Form)</title>
+  <style>
+    :root {
+      --gold: #b8924f;
+      --gold-soft: #c9a35f;
+      --stone-900: #1c1917;
+      --stone-600: #57534e;
+      --stone-400: #a8a29e;
+      --stone-100: #f5f3ef;
+      --stone-50: #faf9f7;
+      --line: #e7e2da;
+      --serif: "Georgia", "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--stone-50);
+      color: var(--stone-900);
+      font-family: var(--sans);
+      line-height: 1.6;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-family: var(--serif); letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); font-size: 13px; margin-bottom: 28px;
+    }
+    .brand .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+    h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: 38px; line-height: 1.2; margin: 0 0 10px;
+    }
+    .lede { color: var(--stone-600); font-size: 16px; margin: 0 0 8px; }
+    .meta { color: var(--stone-400); font-size: 13px; margin: 0 0 32px; }
+
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: 14px;
+      padding: 28px 28px 32px; box-shadow: 0 1px 2px rgba(28,25,23,.04);
+    }
+    /* Zoho 注入的表单容器：约束宽度、居中，并微调间距以贴合卡片 */
+    #zoho-form-host { min-height: 360px; }
+    #zoho-form-host iframe,
+    #zoho-form-host form { width: 100% !important; max-width: 100% !important; }
+    #zoho-form-host .zf-templateWrapper,
+    #zoho-form-host form.zf-form { font-family: var(--sans) !important; }
+
+    .note {
+      margin-top: 24px; padding: 16px 18px; border-radius: 10px;
+      background: var(--stone-100); border: 1px solid var(--line);
+      font-size: 13px; color: var(--stone-600);
+    }
+    .note b { color: var(--stone-900); }
+    .note code {
+      background: #fff; padding: 1px 6px; border-radius: 4px;
+      border: 1px solid var(--line); font-size: 12px; color: var(--stone-900);
+    }
+    .badge {
+      display: inline-block; font-size: 11px; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-soft);
+      border-radius: 999px; padding: 3px 10px; margin-bottom: 14px;
+    }
+    footer { text-align: center; color: var(--stone-400); font-size: 12px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> INCINTA Reproductive Fertility Center</div>
+
+    <span class="badge">HIPAA · Zoho Web Form embed demo</span>
+    <h1>Request a Consultation</h1>
+    <p class="lede">Tell us how to reach you and which clinic works best. Our care coordinators will confirm a time — usually within one business day.</p>
+    <p class="meta">Demo only — submissions land in the connected Zoho CRM, not the live clinic inbox.</p>
+
+    <div class="card">
+      <!--
+        Zoho CRM Web Form（官方 HIPAA 背书摄入路径）：
+        - 浏览器直连 crm.zoho.com，PHI 不经我们的服务器/Google，审计面最小。
+        - 上线前须与 Zoho 签 BAA，并确认账号启用 HIPAA 合规版。
+        - 表单由 Zoho 注入到下方 host 容器内。
+      -->
+      <div id="zoho-form-host">
+        <script
+          id="formScript5370431000160778269"
+          src="https://crm.zoho.com/crm/WebFormServeServlet?rid=4cd2c645181fc006162463d71e627cc5054617a83f08c8b30c94dbe6161eb0659de033ec24add6588f7183e5996d5c18gid06e405a03f6f6c97f27cd72d357c28e34705580a8d602ea2222b6730069ab52d&script=$sYG">
+        </script>
+      </div>
+
+      <div class="note">
+        <b>转化归因（可选）：</b> 在 Zoho 表单后台把"提交后跳转"设为
+        <code>/contact/success</code>（本站回执页），我们即可在该页用服务端 GA4
+        <code>generate_lead</code> 回传拿转化数据——全程不带 PII，合规前提下保留归因。
+        这需要 Zoho 表单的 thank-you URL 指向我们的回执页，请在 Zoho 后台配置。
+      </div>
+    </div>
+
+    <footer>IRFC · This is a local demo page for testing the Zoho web-form integration.</footer>
+  </div>
+</body>
+</html>

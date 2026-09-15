@@ -18,3 +18,17 @@ pages_build_output_dir = "./dist"
 #    - 前端（本仓库已落地）：src/config/brand.ts 的 TURNSTILE_SITEKEY = <站点公钥>
 #    - 两端须同时就位才生效；仅服务端配置会拒绝无 token 的请求，仅前端配置则服务端不校验。
 #    - 上线后把本仓库 appointment-request.ts 注释里的 "TODO（上线前）：开启 Turnstile" 移除。
+#
+# 4. GA4 服务端转化回传（选配）：环境变量
+#    GA4_MEASUREMENT_ID = "G-XXXXXXXXXX"     # GA4 数据流测量 ID
+#    GA4_API_SECRET     = "<GA4 事件 API 密钥>"  # GA4 后台「数据流 → 事件 API 密钥」生成
+#    （两端都配才回传；仅匿名 client_id + 非 PHI 选择项，表单页浏览器不联系 Google）
+#
+# 5. Zoho CRM 服务端写入（选配 / HIPAA：须启用 Zoho 合规版并签 BAA）：
+#    ZOHO_CLIENT_ID      = "<Zoho OAuth Client ID>"
+#    ZOHO_CLIENT_SECRET  = "<Zoho OAuth Client Secret>"
+#    ZOHO_REFRESH_TOKEN  = "<Zoho OAuth Refresh Token>"
+#    ZOHO_DC             = "com"   # 数据中心后缀：美区 com / 欧区 eu / 印度 in …（按账号区填写）
+#    - 获取 refresh_token：Zoho API Console 建 Self Client → 用 scope "ZohoCRM.modules.ALL"
+#      （或最小 "ZohoCRM.modules.Leads.CREATE"）生成 grant token → 用 grant token 换 refresh token。
+#    - 写入对象为 /crm/v7/Leads；诊所/就诊方式/语言进 Lead 的 Description 字段。
