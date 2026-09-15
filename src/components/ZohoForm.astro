@@ -6,18 +6,20 @@
  * 且内容位于跨域 iframe，外部 CSS 无法覆盖 —— 视觉上与本站设计完全脱节。
  *
  * 方案：按 Zoho 生成的 HTML 版表单结构（GET WebFormServeServlet?rid=… 可取回），
- * 用本站设计系统重绘 UI，隐藏 token 字段原样保留，提交仍由浏览器直连
+ * 用本站设计系统重绘 UI，隐藏 token 字段原样保留，提交由浏览器 **fetch 直连**
  * https://crm.zoho.com/crm/WebToLeadForm —— 与官方嵌入同一条摄入路径。
  *
- * 提交应答：Zoho WebToLeadForm 返回 JSON 且不带 CORS 头，跨域 fetch 读不到内容；
- * 因此用 target 指向隐藏 iframe 的原生 POST，iframe load 事件即视为提交完成 → 原地成功提示。
- * （已实测：无需任何附加 token；honeypot aG9uZXlwb3Q 命中时 Zoho 静默丢弃。）
+ * 为什么用 fetch 而非原生表单 target=iframe：
+ *  - Zoho 后台把 returnURL 固定成 irfc.pages.dev/contact/success，而该成功页带
+ *    X-Frame-Options: DENY；原生表单把 iframe 重定向到它时被浏览器拒绝加载，
+ *    iframe 的 load 事件无法触发成功提示（表现为「点了没反应」）。
+ *  - 改用 fetch + mode:'no-cors' + redirect:'manual'：请求照常送达 Zoho 创建线索，
+ *    响应为 opaque/opaque-redirect，.then 必然触发 → 确定性地显示成功 / 失败 UI。
+ *  - fetch body 用 URLSearchParams（application/x-www-form-urlencoded），与浏览器原生
+ *    表单 POST 完全一致，Zoho 已验证接受。
  *
- * HIPAA：
- *  - 浏览器直连 crm.zoho.com，PHI 不经本站服务器 / Google（审计面最小）
- *  - 上线前须与 Zoho 签 BAA 并启用 HIPAA 合规版
- *  - 隐藏 token 字段（xnQsjsdp / xmIwtLD / actionType / returnURL / zc_gad）来自 Zoho
- *    后台 Web Form 配置，勿改动；改表单字段须与 Zoho 后台 picklist 同步
+ * HIPAA：浏览器直连 crm.zoho.com，PHI 不经本站服务器 / Google（审计面最小）。
+ *  上线前须与 Zoho 签 BAA 并启用 HIPAA 合规版。
  *
  * 转化统计：表单页不加载 GTM/GA（HIPAA 约定），成功后向 /api/lead-event 发送
  * 仅含匿名 client_id + 非 PHI 选择项的回传，由服务端转发 GA4 Measurement Protocol。
@@ -57,9 +59,9 @@ const inputCls =
   id="zoho-lead-form"
   method="POST"
   action="https://crm.zoho.com/crm/WebToLeadForm"
-  target="zoho-submit-frame"
   class="space-y-6"
   novalidate
+  data-zh={ZH ? 'true' : 'false'}
 >
   <!-- Zoho Web Form token 字段（来自后台生成的 HTML 版嵌入码），勿改动 -->
   <input type="hidden" name="xnQsjsdp" value="6fdaa78f4bbb8bc82d5767727f0f1ae3a99d2508191f4b927cca2578124b1a6e" />
@@ -123,7 +125,7 @@ const inputCls =
   </div>
 
   <button type="submit" class="btn-primary w-full justify-center">
-    {t(locale, 'form.submit')}
+    <span id="zf-submit-label">{t(locale, 'form.submit')}</span>
     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
     </svg>
@@ -142,7 +144,7 @@ const inputCls =
 
   <div id="zf-error" class="hidden border border-red-200 bg-red-50 p-6 text-center">
     <p class="text-sm leading-relaxed text-stone-700 mb-3">
-      {ZH ? '請填寫必填欄位（姓氏、電子郵件或電話、診所與預約服務）。' : 'Please complete the required fields (last name, email or phone, location and intended service).'}
+      {ZH ? '請填寫必填欄位（姓氏、電子郵件或電話、診所與預約服務）。若仍無法提交，請直接致電。' : 'Please complete the required fields (last name, email or phone, location and intended service). If it still will not submit, please call us.'}
     </p>
     <a href="tel:+14244324732" class="btn-outline inline-flex items-center gap-2" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
       (424) 432-4732
@@ -150,78 +152,109 @@ const inputCls =
   </div>
 </form>
 
-<!-- 提交应答落地 iframe（Zoho 无 CORS 头，读不到内容；load 事件即提交完成信号） -->
-<iframe name="zoho-submit-frame" title={ZH ? '表單提交' : 'Form submission'} class="hidden" aria-hidden="true" tabindex="-1"></iframe>
-
 <script>
-  const form = document.getElementById('zoho-lead-form') as HTMLFormElement | null;
-  if (form) {
-    const success = document.getElementById('zf-success')!;
-    const errorBox = document.getElementById('zf-error')!;
-    const frame = document.getElementById('zoho-submit-frame');
-    let submitted = false;
+  (function () {
+    var form = document.getElementById('zoho-lead-form');
+    if (!form) return;
 
-    const get = (id: string) =>
-      (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null)?.value?.trim() ?? '';
+    var success = document.getElementById('zf-success');
+    var errorBox = document.getElementById('zf-error');
+    var label = document.getElementById('zf-submit-label');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var submitting = false;
+    var zh = form.getAttribute('data-zh') === 'true';
+    var defaultLabel = label ? label.textContent : '';
+
+    function val(id) {
+      var el = document.getElementById(id);
+      return el && el.value ? el.value.trim() : '';
+    }
 
     // 读 _ga cookie → 匿名 client_id（仅分析 ID，非 PII），用于服务端 GA4 转化归因
-    const readGaClientId = (): string => {
-      const m = document.cookie.match(/(?:^|;\s*)_ga=([^;]*)/);
+    function readGaClientId() {
+      var m = document.cookie.match(/(?:^|;\s*)_ga=([^;]*)/);
       if (!m) return '';
-      const parts = decodeURIComponent(m[1]).split('.');
+      var parts = decodeURIComponent(m[1]).split('.');
       return parts.length >= 4 ? parts.slice(2).join('.') : m[1];
-    };
+    }
 
-    const showSuccess = () => {
-      form
-        .querySelectorAll('div:not(#zf-success):not(#zf-error), button, p')
-        .forEach((el) => el.classList.add('hidden'));
+    function showSuccess() {
+      // 隐藏表单内除成功/错误框以外的所有元素
+      Array.prototype.forEach.call(form.children, function (ch) {
+        if (ch.id !== 'zf-success' && ch.id !== 'zf-error') ch.classList.add('hidden');
+      });
       success.classList.remove('hidden');
       // 匿名转化回传（无 PII；服务端转发 GA4 Measurement Protocol）。fire-and-forget。
-      fetch('/api/lead-event', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          location: get('zf-location'),
-          service: get('zf-service'),
-          gaClientId: readGaClientId(),
-        }),
-      }).catch(() => {});
-    };
+      try {
+        fetch('/api/lead-event', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            location: val('zf-location'),
+            service: val('zf-service'),
+            gaClientId: readGaClientId(),
+          }),
+        });
+      } catch (e) {}
+    }
 
-    // Zoho 应答返回（JSON / 跳转页），iframe load 触发 → 原地成功提示
-    frame?.addEventListener('load', () => {
-      if (submitted) showSuccess();
-    });
+    function showError() {
+      errorBox.classList.remove('hidden');
+    }
 
-    form.addEventListener('submit', (e) => {
+    function setSubmitting(on) {
+      submitting = on;
+      if (submitBtn) {
+        submitBtn.disabled = on;
+        if (label) label.textContent = on ? (zh ? '提交中…' : 'Submitting…') : defaultLabel;
+      }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
       errorBox.classList.add('hidden');
 
-      // honeypot：机器人填写 → 静默丢弃（Zoho 端也会丢弃，这里省一次往返）
-      if (get('zf-honeypot')) {
-        e.preventDefault();
-        return;
-      }
+      // honeypot：机器人填写 → 静默丢弃（Zoho 端也会丢弃）
+      if (val('zf-honeypot')) return;
 
       // 前端轻校验（与 Zoho 必填一致：Last Name + LEADCF1；另要求 email 或 phone 二选一）
-      const email = get('zf-email');
-      const phone = get('zf-phone');
-      let invalid = false;
-      if (!get('zf-last-name')) invalid = true;
-      if (!get('zf-service')) invalid = true;
-      if (!get('zf-location')) invalid = true;
+      var email = val('zf-email');
+      var phone = val('zf-phone');
+      var invalid = false;
+      if (!val('zf-last-name')) invalid = true;
+      if (!val('zf-service')) invalid = true;
+      if (!val('zf-location')) invalid = true;
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) && !phone) invalid = true;
       if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) invalid = true;
 
       if (invalid) {
-        e.preventDefault();
-        errorBox.classList.remove('hidden');
+        showError();
         return;
       }
+      if (submitting) return;
 
-      submitted = true;
-      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-      if (submitBtn) submitBtn.disabled = true;
+      setSubmitting(true);
+
+      // 用 URLSearchParams 构造 application/x-www-form-urlencoded body（与原生表单 POST 一致）
+      var fd = new FormData(form);
+      var body = new URLSearchParams(fd);
+
+      fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        redirect: 'manual',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body,
+      })
+        .then(function () {
+          showSuccess();
+        })
+        .catch(function (err) {
+          // 网络层失败：恢复按钮并提示用户重试（线索可能已创建，提示致电兜底）
+          console.error('Zoho lead submission failed:', err);
+          setSubmitting(false);
+          showError();
+        });
     });
-  }
+  })();
 </script>
