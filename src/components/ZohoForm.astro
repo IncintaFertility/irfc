@@ -1,24 +1,227 @@
 ---
-// Zoho CRM Web Form 嵌入（HIPAA 合规摄入路径）
-// - 浏览器直连 crm.zoho.com，PHI 不经本站服务器 / Google，审计面最小
-// - 上线前须与 Zoho 签 BAA 并启用 HIPAA 合规版
-// - 表单通过 Zoho 注入到下方容器内；提交行为由 Zoho 后台配置（原地提示 / 跳转回执页）
----
-<div class="zoho-form-embed" style="min-height: 420px;">
-  <!-- Zoho 官方 web form 脚本：script=$sYG 为内联注入模式 -->
-  <script
-    is:inline
-    id="formScript5370431000160778269"
-    src="https://crm.zoho.com/crm/WebFormServeServlet?rid=4cd2c645181fc006162463d71e627cc5054617a83f08c8b30c94dbe6161eb0659de033ec24add6588f7183e5996d5c18gid06e405a03f6f6c97f27cd72d357c28e34705580a8d602ea2222b6730069ab52d&script=$sYG"
-  ></script>
-</div>
+/**
+ * ZohoForm — Zoho CRM Web Form（站内样式重绘版）
+ *
+ * 背景：Zoho 官方脚本嵌入会注入自带样式的表单（蓝色按钮 / 左标签右输入的浮动布局），
+ * 且内容位于跨域 iframe，外部 CSS 无法覆盖 —— 视觉上与本站设计完全脱节。
+ *
+ * 方案：按 Zoho 生成的 HTML 版表单结构（GET WebFormServeServlet?rid=… 可取回），
+ * 用本站设计系统重绘 UI，隐藏 token 字段原样保留，提交仍由浏览器直连
+ * https://crm.zoho.com/crm/WebToLeadForm —— 与官方嵌入同一条摄入路径。
+ *
+ * 提交应答：Zoho WebToLeadForm 返回 JSON 且不带 CORS 头，跨域 fetch 读不到内容；
+ * 因此用 target 指向隐藏 iframe 的原生 POST，iframe load 事件即视为提交完成 → 原地成功提示。
+ * （已实测：无需任何附加 token；honeypot aG9uZXlwb3Q 命中时 Zoho 静默丢弃。）
+ *
+ * HIPAA：
+ *  - 浏览器直连 crm.zoho.com，PHI 不经本站服务器 / Google（审计面最小）
+ *  - 上线前须与 Zoho 签 BAA 并启用 HIPAA 合规版
+ *  - 隐藏 token 字段（xnQsjsdp / xmIwtLD / actionType / returnURL / zc_gad）来自 Zoho
+ *    后台 Web Form 配置，勿改动；改表单字段须与 Zoho 后台 picklist 同步
+ *
+ * 转化统计：表单页不加载 GTM/GA（HIPAA 约定），成功后向 /api/lead-event 发送
+ * 仅含匿名 client_id + 非 PHI 选择项的回传，由服务端转发 GA4 Measurement Protocol。
+ */
+import { getLocaleFromPath, t } from '../i18n/index';
 
-<style>
-  /* 约束 Zoho 注入表单的宽度，使其贴合卡片布局；其余样式由 Zoho 自带 */
-  .zoho-form-embed :global(form),
-  .zoho-form-embed :global(.zf-templateWrapper),
-  .zoho-form-embed :global(iframe) {
-    max-width: 100% !important;
-    width: 100% !important;
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+// Zoho LEADCF13（Location）picklist —— value 必须与 Zoho 后台选项完全一致
+const locations = [
+  { value: 'Torrance', labelZh: '托倫斯，加州' },
+  { value: 'Alhambra', labelZh: '阿罕布拉，加州' },
+  { value: 'Beverly Hills', labelZh: '比佛利山，加州' },
+  { value: 'Corona', labelZh: '柯羅娜，加州' },
+  { value: 'Irvine', labelZh: '爾灣，加州' },
+  { value: 'China', labelZh: '中國' },
+];
+// Zoho LEADCF1（Intended Service）picklist —— value 必须与 Zoho 后台选项完全一致
+const services = [
+  { value: 'Fertility Treatment (IUI, IVF)', labelZh: '生育治療（IUI、IVF）' },
+  { value: 'Fertility Consultation', labelZh: '生育諮詢' },
+  { value: 'Egg Preservation', labelZh: '凍卵' },
+  { value: 'Egg/Sperm Donor/Surrogacy', labelZh: '卵子/精子捐贈/代孕' },
+  { value: 'Embryo Freezing', labelZh: '胚胎冷凍' },
+  { value: 'Prepping For Pregnancy', labelZh: '孕前準備' },
+  { value: 'Open House', labelZh: '開放日' },
+  { value: 'Other', labelZh: '其他' },
+];
+const selectStyle = `background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a8a89a'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;`;
+const labelCls = 'block text-xs tracking-widest uppercase mb-2';
+const labelStyle = 'color: var(--color-stone-400);';
+const inputCls =
+  'w-full px-4 py-3 border border-stone-200 bg-white text-stone-800 text-sm focus:outline-none';
+---
+<form
+  id="zoho-lead-form"
+  method="POST"
+  action="https://crm.zoho.com/crm/WebToLeadForm"
+  target="zoho-submit-frame"
+  class="space-y-6"
+  novalidate
+>
+  <!-- Zoho Web Form token 字段（来自后台生成的 HTML 版嵌入码），勿改动 -->
+  <input type="hidden" name="xnQsjsdp" value="e3c261671f3d7032c14581c55aa11ffdaf632152886a16597fb62f9975c54782" />
+  <input type="hidden" name="zc_gad" value="" />
+  <input type="hidden" name="xmIwtLD" value="e3d68d71c488c91bffc0eb15533f78c1339126caf44fe25407712e7b6e385f45d8afbf52184fca463e5c1d0e1a51afbb" />
+  <input type="hidden" name="actionType" value="TGVhZHM=" />
+  <input type="hidden" name="returnURL" value="https://irfc.pages.dev/contact/success" />
+  <input type="hidden" name="wFaTrisJS" value="true" />
+  <!-- CONTACT TYPE（Zoho 后台默认选中的来源标记，隐藏） -->
+  <input type="hidden" name="LEADCF4" value="incintafertility.com" />
+
+  <!-- honeypot（Zoho 自带反垃圾 aG9uZXlwb3Q = "honeypot"）：对用户不可见，机器人填写即被 Zoho 丢弃 -->
+  <div class="hidden" aria-hidden="true">
+    <label for="zf-honeypot">Comments</label>
+    <input type="text" id="zf-honeypot" name="aG9uZXlwb3Q" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-5">
+    <div>
+      <label class={labelCls} style={labelStyle} for="zf-last-name">{t(locale, 'form.lastName')} *</label>
+      <input type="text" id="zf-last-name" name="Last Name" required autocomplete="family-name" maxlength="80" class={inputCls} />
+    </div>
+    <div>
+      <label class={labelCls} style={labelStyle} for="zf-first-name">{t(locale, 'form.firstName')}</label>
+      <input type="text" id="zf-first-name" name="First Name" autocomplete="given-name" maxlength="40" class={inputCls} />
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-5">
+    <div>
+      <label class={labelCls} style={labelStyle} for="zf-email">{t(locale, 'form.email')} *</label>
+      <input type="email" id="zf-email" name="Email" autocomplete="email" maxlength="100" class={inputCls} />
+      <p class="text-xs mt-2" style={labelStyle}>{t(locale, 'form.emailHint')}</p>
+    </div>
+    <div>
+      <label class={labelCls} style={labelStyle} for="zf-phone">{t(locale, 'form.phone')}</label>
+      <input type="tel" id="zf-phone" name="Phone" autocomplete="tel" maxlength="30" class={inputCls} />
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-5">
+    <div>
+      <label class={labelCls} style={labelStyle} for="zf-location">{t(locale, 'form.location')} *</label>
+      <select id="zf-location" name="LEADCF13" required class={inputCls + ' text-stone-700 appearance-none'} style={selectStyle}>
+        <option value="">{t(locale, 'form.locationPlaceholder')}</option>
+        {locations.map((l) => <option value={l.value}>{ZH ? l.labelZh : l.value}</option>)}
+      </select>
+    </div>
+    <div>
+      <label class={labelCls} style={labelStyle} for="zf-service">{ZH ? '預約服務' : 'Intended Service'} *</label>
+      <select id="zf-service" name="LEADCF1" required class={inputCls + ' text-stone-700 appearance-none'} style={selectStyle}>
+        <option value="">{ZH ? '請選擇服務' : 'Select a service'}</option>
+        {services.map((s) => <option value={s.value}>{ZH ? s.labelZh : s.value}</option>)}
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label class={labelCls} style={labelStyle} for="zf-message">{ZH ? '訊息' : 'Messages'}</label>
+    <textarea id="zf-message" name="LEADCF2" rows="4" maxlength="1000" class={inputCls + ' resize-y'}></textarea>
+  </div>
+
+  <button type="submit" class="btn-primary w-full justify-center">
+    {t(locale, 'form.submit')}
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </button>
+
+  <p class="text-xs text-center" style={labelStyle}>
+    {t(locale, 'form.note')}
+  </p>
+
+  <div id="zf-success" class="hidden border p-8 text-center" style="border-color: var(--color-champagne-300); background: var(--color-champagne-50);">
+    <p style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{t(locale, 'form.successTitle')}</p>
+    <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+      {t(locale, 'form.successBody')}
+    </p>
+  </div>
+
+  <div id="zf-error" class="hidden border border-red-200 bg-red-50 p-6 text-center">
+    <p class="text-sm leading-relaxed text-stone-700 mb-3">
+      {ZH ? '請填寫必填欄位（姓氏、電子郵件或電話、診所與預約服務）。' : 'Please complete the required fields (last name, email or phone, location and intended service).'}
+    </p>
+    <a href="tel:+14244324732" class="btn-outline inline-flex items-center gap-2" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
+      (424) 432-4732
+    </a>
+  </div>
+</form>
+
+<!-- 提交应答落地 iframe（Zoho 无 CORS 头，读不到内容；load 事件即提交完成信号） -->
+<iframe name="zoho-submit-frame" title={ZH ? '表單提交' : 'Form submission'} class="hidden" aria-hidden="true" tabindex="-1"></iframe>
+
+<script>
+  const form = document.getElementById('zoho-lead-form') as HTMLFormElement | null;
+  if (form) {
+    const success = document.getElementById('zf-success')!;
+    const errorBox = document.getElementById('zf-error')!;
+    const frame = document.getElementById('zoho-submit-frame');
+    let submitted = false;
+
+    const get = (id: string) =>
+      (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null)?.value?.trim() ?? '';
+
+    // 读 _ga cookie → 匿名 client_id（仅分析 ID，非 PII），用于服务端 GA4 转化归因
+    const readGaClientId = (): string => {
+      const m = document.cookie.match(/(?:^|;\s*)_ga=([^;]*)/);
+      if (!m) return '';
+      const parts = decodeURIComponent(m[1]).split('.');
+      return parts.length >= 4 ? parts.slice(2).join('.') : m[1];
+    };
+
+    const showSuccess = () => {
+      form
+        .querySelectorAll('div:not(#zf-success):not(#zf-error), button, p')
+        .forEach((el) => el.classList.add('hidden'));
+      success.classList.remove('hidden');
+      // 匿名转化回传（无 PII；服务端转发 GA4 Measurement Protocol）。fire-and-forget。
+      fetch('/api/lead-event', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          location: get('zf-location'),
+          service: get('zf-service'),
+          gaClientId: readGaClientId(),
+        }),
+      }).catch(() => {});
+    };
+
+    // Zoho 应答返回（JSON / 跳转页），iframe load 触发 → 原地成功提示
+    frame?.addEventListener('load', () => {
+      if (submitted) showSuccess();
+    });
+
+    form.addEventListener('submit', (e) => {
+      errorBox.classList.add('hidden');
+
+      // honeypot：机器人填写 → 静默丢弃（Zoho 端也会丢弃，这里省一次往返）
+      if (get('zf-honeypot')) {
+        e.preventDefault();
+        return;
+      }
+
+      // 前端轻校验（与 Zoho 必填一致：Last Name + LEADCF1；另要求 email 或 phone 二选一）
+      const email = get('zf-email');
+      const phone = get('zf-phone');
+      let invalid = false;
+      if (!get('zf-last-name')) invalid = true;
+      if (!get('zf-service')) invalid = true;
+      if (!get('zf-location')) invalid = true;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) && !phone) invalid = true;
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) invalid = true;
+
+      if (invalid) {
+        e.preventDefault();
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      submitted = true;
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+    });
   }
-</style>
+</script>
