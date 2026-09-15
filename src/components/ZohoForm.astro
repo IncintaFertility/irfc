@@ -143,8 +143,8 @@ const inputCls =
     </p>
   </div>
 
-  <div id="zf-error" class="hidden border border-red-200 bg-red-50 p-6 text-center">
-    <p class="text-sm leading-relaxed text-stone-700 mb-3">
+  <div id="zf-error" role="alert" aria-live="assertive" class="hidden border-2 border-red-300 bg-red-50 p-6 text-center rounded-sm">
+    <p class="text-sm font-medium leading-relaxed text-red-700 mb-3">
       {ZH ? '請填寫必填欄位（姓氏、電子郵件或電話、診所與預約服務）。若仍無法提交，請直接致電。' : 'Please complete the required fields (last name, email or phone, location and intended service). If it still will not submit, please call us.'}
     </p>
     <a href="tel:+14244324732" class="btn-outline inline-flex items-center gap-2" style="border-color: var(--color-champagne-500); color: var(--color-champagne-700);">
@@ -152,6 +152,15 @@ const inputCls =
     </a>
   </div>
 </form>
+
+<style>
+  /* 校验失败时高亮缺失的必填字段 */
+  #zoho-lead-form .zf-invalid {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 1px #dc2626;
+    background-color: #fef2f2;
+  }
+</style>
 
 <script>
   (function () {
@@ -199,8 +208,28 @@ const inputCls =
       } catch (e) {}
     }
 
-    function showError() {
+    var REQUIRED_IDS = ['zf-last-name', 'zf-first-name', 'zf-email', 'zf-phone', 'zf-location', 'zf-service', 'zf-message'];
+
+    function clearInvalid() {
+      REQUIRED_IDS.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove('zf-invalid');
+      });
+    }
+
+    function showError(missing) {
+      clearInvalid();
+      (missing || []).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.add('zf-invalid');
+      });
       errorBox.classList.remove('hidden');
+      // 滚动到错误提示，确保用户一定看到（而非沉在表单底部被忽略）
+      try {
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (e) {
+        errorBox.scrollIntoView();
+      }
     }
 
     function setSubmitting(on) {
@@ -221,15 +250,20 @@ const inputCls =
       // 前端轻校验（与 Zoho 必填一致：Last Name + LEADCF1；另要求 email 或 phone 二选一）
       var email = val('zf-email');
       var phone = val('zf-phone');
-      var invalid = false;
-      if (!val('zf-last-name')) invalid = true;
-      if (!val('zf-service')) invalid = true;
-      if (!val('zf-location')) invalid = true;
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) && !phone) invalid = true;
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) invalid = true;
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+      var missing = [];
 
-      if (invalid) {
-        showError();
+      if (!val('zf-last-name')) missing.push('zf-last-name');
+      if (!val('zf-location')) missing.push('zf-location');
+      if (!val('zf-service')) missing.push('zf-service');
+      if (!emailOk && !phone) {
+        if (!email) missing.push('zf-email');
+        if (!phone) missing.push('zf-phone');
+      }
+      if (email && !emailOk) missing.push('zf-email');
+
+      if (missing.length) {
+        showError(missing);
         return;
       }
       if (submitting) return;
@@ -256,6 +290,16 @@ const inputCls =
           setSubmitting(false);
           showError();
         });
+    });
+
+    // 用户开始输入/修改时，清除对应字段红框并隐藏错误提示
+    form.addEventListener('input', function () {
+      clearInvalid();
+      errorBox.classList.add('hidden');
+    });
+    form.addEventListener('change', function () {
+      clearInvalid();
+      errorBox.classList.add('hidden');
     });
   })();
 </script>
