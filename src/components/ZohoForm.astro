@@ -173,22 +173,27 @@ const inputCls =
 
     function showSuccess() {
       // 匿名转化回传（无 PII；服务端转发 GA4 Measurement Protocol）。
-      // 用 sendBeacon 确保页面跳转前一定能发出（普通 fetch 在 unload 时可能被取消）
+      // sendBeacon 优先；入队失败用 fetch keepalive 兜底。
+      // 跳转前留 400ms：确保请求在页面卸载前已进入网络栈，避免竞态丢失。
+      var ret = form.querySelector('input[name="returnURL"]');
+      var go = function () {
+        window.location.href = ret ? ret.value : '/contact/success';
+      };
       try {
         var payload = JSON.stringify({
           location: val('zf-location'),
           service: val('zf-service'),
           gaClientId: readGaClientId(),
         });
+        var queued = false;
         if (navigator.sendBeacon) {
-          navigator.sendBeacon('/api/lead-event', new Blob([payload], { type: 'application/json' }));
-        } else {
-          fetch('/api/lead-event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload });
+          queued = navigator.sendBeacon('/api/lead-event', new Blob([payload], { type: 'application/json' }));
+        }
+        if (!queued) {
+          fetch('/api/lead-event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload, keepalive: true });
         }
       } catch (e) {}
-      // 提交成功后跳转到品牌化成功页（等同 Zoho 原生表单重定向到 returnURL）
-      var ret = form.querySelector('input[name="returnURL"]');
-      window.location.href = ret ? ret.value : '/contact/success';
+      setTimeout(go, 400);
     }
 
     var REQUIRED_IDS = ['zf-last-name', 'zf-first-name', 'zf-email', 'zf-phone', 'zf-location', 'zf-service', 'zf-message'];

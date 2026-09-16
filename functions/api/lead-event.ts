@@ -66,7 +66,7 @@ export const onRequestPost: PagesFunction<PagesEnv> = async ({
   });
 
   try {
-    await fetch(
+    const mpRes = await fetch(
       `https://www.google-analytics.com/mp/collect?measurement_id=${encodeURIComponent(
         env.GA4_MEASUREMENT_ID,
       )}&api_secret=${encodeURIComponent(env.GA4_API_SECRET)}`,
@@ -76,11 +76,11 @@ export const onRequestPost: PagesFunction<PagesEnv> = async ({
         body: mpBody,
       },
     );
+    // 透传 GA4 受理状态便于诊断：2xx=已受理；401=api_secret 错误；400/403=参数/权限问题
+    return json({ ok: true, mpStatus: mpRes.status });
   } catch {
-    /* GA4 回传失败不影响表单流程 */
+    return json({ ok: true, mpStatus: 0 });
   }
-
-  return json({ ok: true });
 };
 
 export const onRequestGet = async () => json({ ok: false, error: "method_not_allowed" }, 405);
