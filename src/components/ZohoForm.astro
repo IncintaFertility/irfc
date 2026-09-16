@@ -163,36 +163,18 @@ const inputCls =
       return el && el.value ? el.value.trim() : '';
     }
 
-    // 读 _ga cookie → 匿名 client_id（仅分析 ID，非 PII），用于服务端 GA4 转化归因
-    function readGaClientId() {
-      var m = document.cookie.match(/(?:^|;\s*)_ga=([^;]*)/);
-      if (!m) return '';
-      var parts = decodeURIComponent(m[1]).split('.');
-      return parts.length >= 4 ? parts.slice(2).join('.') : m[1];
-    }
-
     function showSuccess() {
-      // 匿名转化回传（无 PII；服务端转发 GA4 Measurement Protocol）。
-      // sendBeacon 优先；入队失败用 fetch keepalive 兜底。
-      // 跳转前留 400ms：确保请求在页面卸载前已进入网络栈，避免竞态丢失。
+      // 提交成功后跳转到品牌化成功页。成功页本身加载了 GTM，会在该页用前端
+      // gtag 直接发 generate_lead（带真实 client_id + session，归因更准、可进
+      // DebugView）。通过 ?lead=1 标记“这是一次真实提交到达”，成功页据此打点，
+      // 并随即用 history.replaceState 去掉参数，避免用户刷新成功页造成重复计数。
+      // 原服务端 /api/lead-event 回传已弃用（见 functions/api/lead-event.ts 注释）。
       var ret = form.querySelector('input[name="returnURL"]');
+      var dest = ret && ret.value ? ret.value : '/contact/success';
+      dest += (dest.indexOf('?') === -1 ? '?' : '&') + 'lead=1';
       var go = function () {
-        window.location.href = ret ? ret.value : '/contact/success';
+        window.location.href = dest;
       };
-      try {
-        var payload = JSON.stringify({
-          location: val('zf-location'),
-          service: val('zf-service'),
-          gaClientId: readGaClientId(),
-        });
-        var queued = false;
-        if (navigator.sendBeacon) {
-          queued = navigator.sendBeacon('/api/lead-event', new Blob([payload], { type: 'application/json' }));
-        }
-        if (!queued) {
-          fetch('/api/lead-event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload, keepalive: true });
-        }
-      } catch (e) {}
       setTimeout(go, 400);
     }
 

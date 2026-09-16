@@ -68,3 +68,31 @@ import { BRAND_LANGUAGE, CTA, SITE_PHONE, SITE_PHONE_DISPLAY } from '../../confi
 
   <Footer />
 </Layout>
+
+<script>
+  // 仅在“真实提交到达”时打点（URL 带 ?lead=1，由表单提交成功后跳转带入）。
+  // 成功页加载了 GTM，gtag 由 GA4 Configuration 标签初始化；待其就绪后发 generate_lead。
+  // 发完后用 history.replaceState 去掉 ?lead=1，避免用户刷新本页造成重复计数。
+  (function () {
+    function fireLead() {
+      if (new URLSearchParams(location.search).get('lead') !== '1') return;
+      var attempts = 0;
+      var tryFire = function () {
+        if (window.gtag) {
+          window.gtag('event', 'generate_lead');
+          if (history.replaceState) {
+            history.replaceState(null, '', location.pathname + location.hash);
+          }
+          return;
+        }
+        if (attempts++ < 20) setTimeout(tryFire, 200);
+      };
+      tryFire();
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fireLead);
+    } else {
+      fireLead();
+    }
+  })();
+</script>
