@@ -39,7 +39,7 @@ const recognitions = [
 
 const languages = ['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'];
 
-const title = ZH ? '關於 IRFC' : 'About IRFC';
+const title = ZH ? '關於 IRFC 生育診所' : 'About IRFC — Southern California Fertility Clinic';
 const description = ZH
   ? 'Incinta Reproductive Fertility Center (IRFC) — 逾二十年於南加州深耕生殖醫學的卓越成就。認識我們的故事、標準與照護團隊。'
   : 'Incinta Reproductive Fertility Center (IRFC) — over 20 years of reproductive medicine excellence across Southern California. Learn our story, our standards, and our care team.';
@@ -101,6 +101,33 @@ const description = ZH
     </div>
   </section>
 
+  <!-- Watch our story — full promotional video slot -->
+  <!-- 完整版宣傳影片請放至：public/videos/irfc-full-story.mp4（可選 .webm 並再加一條 <source>） -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-10">
+        <div class="h-px w-12 mx-auto mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '觀看我們的故事' : 'Watch Our Story'}</h2>
+        <p class="mt-3 text-sm max-w-xl mx-auto" style="color: var(--color-stone-500);">
+          {ZH ? '幾分鐘，看見 IRFC 如何將兩個傳承，匯聚為同一使命。' : 'In just a few minutes, see how IRFC brings two legacies together under one mission.'}
+        </p>
+      </div>
+
+      <div class="relative overflow-hidden bg-stone-900" style="aspect-ratio: 16 / 9;">
+        <video
+          poster="/images/consultation-joyful.webp"
+          preload="none"
+          controls
+          playsinline
+          class="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/irfc-full-story.mp4" type="video/mp4" />
+          {ZH ? '您的瀏覽器不支援影片播放。' : 'Your browser does not support the video tag.'}
+        </video>
+      </div>
+    </div>
+  </section>
+
   <!-- Achievement Stats Bar -->
   <section class="py-12 bg-white border-y border-stone-100">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
@@ -115,45 +142,73 @@ const description = ZH
     </div>
   </section>
 
-  <!-- Clinic Photos -->
+  <!-- Inside IRFC — real photography gallery -->
   <section class="py-20 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid lg:grid-cols-2 gap-6">
-        <div class="overflow-hidden">
-          <img
-            src="/images/clinic-scene.webp" srcset="/images/clinic-scene-800.webp 800w, /images/clinic-scene-1280.webp 1280w, /images/clinic-scene.webp 1300w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-            alt={ZH ? 'IRFC 診所內部' : 'IRFC clinic interior'}
-            class="w-full h-72 object-cover"
-          />
-        </div>
-        <div class="grid grid-rows-2 gap-6">
+      <div class="mb-12">
+        <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+        <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '走進 IRFC' : 'Inside IRFC'}</h2>
+        <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
+          {ZH ? '從溫馨的接待處到世界級的胚胎實驗室，每一處空間都為了讓你感到被看見、被支持而設計。' : 'From a welcoming reception to a world-class embryology lab, every space is designed to help you feel seen and supported.'}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <figure class="group">
           <div class="overflow-hidden">
             <img
-              src="/images/hero-incinta.webp" srcset="/images/hero-incinta-800.webp 800w, /images/hero-incinta.webp 1254w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              alt={ZH ? 'Incinta Fertility Center' : 'Incinta Fertility Center'}
-              class="w-full h-32 object-cover object-center"
+              src="/images/reception-desk.webp" srcset="/images/reception-desk-800.webp 800w, /images/reception-desk.webp 1280w" sizes="(max-width: 768px) 50vw, 320px"
+              alt={ZH ? 'IRFC 溫馨的接待前台' : 'IRFC welcoming reception desk'}
+              class="w-full h-56 object-cover transition duration-700 group-hover:scale-105"
             />
           </div>
+          <figcaption class="mt-3 text-xs tracking-wide" style="color: var(--color-stone-500);">{ZH ? '溫馨的接待前台' : 'A welcoming reception'}</figcaption>
+        </figure>
+
+        <figure class="group">
           <div class="overflow-hidden">
             <img
-              src="/images/consultant.webp" srcset="/images/consultant-800.webp 800w, /images/consultant-1280.webp 1280w, /images/consultant.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              alt={ZH ? 'IRFC 諮詢' : 'IRFC consultation'}
-              class="w-full h-32 object-cover object-center"
+              src="/images/consultation-joyful.webp" srcset="/images/consultation-joyful-800.webp 800w, /images/consultation-joyful-1280.webp 1280w" sizes="(max-width: 768px) 50vw, 320px"
+              alt={ZH ? '醫師與病人一同檢視療程' : 'A physician reviewing a plan with a patient'}
+              class="w-full h-56 object-cover transition duration-700 group-hover:scale-105"
             />
           </div>
-        </div>
+          <figcaption class="mt-3 text-xs tracking-wide" style="color: var(--color-stone-500);">{ZH ? '一次一次的諮詢' : 'One conversation at a time'}</figcaption>
+        </figure>
+
+        <figure class="group">
+          <div class="overflow-hidden">
+            <img
+              src="/images/care-team-embryologist.webp" srcset="/images/care-team-embryologist-800.webp 800w, /images/care-team-embryologist.webp 1280w" sizes="(max-width: 768px) 50vw, 320px"
+              alt={ZH ? '胚胎學家於實驗室中工作' : 'An embryologist at work in the lab'}
+              class="w-full h-56 object-cover transition duration-700 group-hover:scale-105"
+            />
+          </div>
+          <figcaption class="mt-3 text-xs tracking-wide" style="color: var(--color-stone-500);">{ZH ? '胚胎學實驗室' : 'Inside our embryology lab'}</figcaption>
+        </figure>
+
+        <figure class="group">
+          <div class="overflow-hidden">
+            <img
+              src="/images/couple-clinic.webp" srcset="/images/couple-clinic-800.webp 800w, /images/couple-clinic-1280.webp 1280w" sizes="(max-width: 768px) 50vw, 320px"
+              alt={ZH ? '一對伴侶於 IRFC 診所中' : 'A couple at an IRFC clinic'}
+              class="w-full h-56 object-cover transition duration-700 group-hover:scale-105"
+            />
+          </div>
+          <figcaption class="mt-3 text-xs tracking-wide" style="color: var(--color-stone-500);">{ZH ? '家庭由此開始' : 'Where families begin'}</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
   <!-- Care in action -->
-  <section class="relative overflow-hidden" style="height: 340px;">
-    <img src="/images/care-team-physician.webp" srcset="/images/care-team-physician-800.webp 800w, /images/care-team-physician-1280.webp 1280w, /images/care-team-physician.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt={ZH ? 'James Lin 醫師與病人交談' : 'Dr. James Lin speaking with a patient'} class="w-full h-full object-cover object-center" />
+  <section class="relative overflow-hidden" style="height: 380px;">
+    <img src="/images/team-rfc-wide.webp" srcset="/images/team-rfc-wide-800.webp 800w, /images/team-rfc-wide-1280.webp 1280w, /images/team-rfc-wide.webp 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px" alt={ZH ? 'IRFC 照護團隊' : 'The IRFC care team'} class="w-full h-full object-cover object-center" />
     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.5) 0%, transparent 55%);"></div>
     <div class="absolute inset-0 flex items-center px-10 lg:px-20">
       <div class="max-w-md">
         <p style="font-family: var(--font-serif);" class="text-3xl font-light text-white leading-snug">
-          {ZH ? '「你不只是你的生育能力。<br/>我們也不只是間生育診所。」' : '"You\'re more than your fertility.<br/>We\'re more than a fertility clinic."'}
+          {ZH ? <>「你不只是你的生育能力。<br/>我們也不只是間生育診所。」</> : <>"You're more than your fertility.<br/>We're more than a fertility clinic."</>}
         </p>
       </div>
     </div>

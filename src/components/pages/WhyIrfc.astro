@@ -67,7 +67,7 @@ const careTeam = [
   { img: '/images/care-team-followup.webp', alt: 'Physician in follow-up consultation', kicker: 'Follow-Up', title: 'Into the Next Decision.', kickerZh: '後續追蹤', titleZh: '迎向下一個決定。' },
 ];
 
-const title = ZH ? '為何選擇 IRFC' : 'Why Choose IRFC';
+const title = ZH ? '為何選擇 IRFC 生育診所' : 'Why Choose IRFC — Southern California Fertility Care';
 const description = ZH
   ? '是什麼讓 IRFC 與眾不同——20 年以上的經驗、全美排名第一的 IVF 實驗室、Kaiser Permanente 傑出中心認證、尖端技術，以及遍及南加州的多語照護。'
   : 'What makes IRFC different — 20+ years of experience, the #1 ranked US IVF lab, Kaiser Permanente Center of Excellence, cutting-edge technology, and multilingual care across Southern California.';
@@ -145,8 +145,8 @@ const description = ZH
       <div class="max-w-md">
         <p style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 leading-snug">
           {ZH
-            ? '每個家庭的路都不一樣。<br/>每位病人都值得一位看見這點的醫師。'
-            : '"Every family’s path is different.<br/>Every patient deserves a physician who sees that."'}
+            ? <>每個家庭的路都不一樣。<br/>每位病人都值得一位看見這點的醫師。</>
+            : <>"Every family’s path is different.<br/>Every patient deserves a physician who sees that."</>}
         </p>
         <p class="mt-4 text-xs tracking-widest uppercase" style="color: var(--color-gold-600);">{ZH ? '— 創辦人 James P. Lin 醫師' : '— Dr. James P. Lin, Founder'}</p>
       </div>

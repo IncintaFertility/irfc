@@ -19,7 +19,7 @@ const pick = (zh: string | undefined, en: string) => (ZH ? (zh ?? en) : en);
 
 const title = pick(standard.titleZh, standard.title);
 const description = pick(standard.textZh, standard.text);
-const pageTitle = ZH ? `${title} — INCINTA 的標準` : `${standard.title} — The INCINTA Standard`;
+const pageTitle = ZH ? `${title}：${standard.seoTagZh}` : `${standard.title} — ${standard.seoTag}`;
 
 const otherStandards = standards.filter((s) => s.slug !== standard.slug);
 ---

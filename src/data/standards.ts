@@ -47,6 +47,10 @@ export interface Standard {
   title: string;
   /** 繁體中文標題 */
   titleZh?: string;
+  /** Commercial SEO descriptor appended to the hub <title> (e.g. "Fertility Specialist Care") */
+  seoTag: string;
+  /** 繁體中文商業 SEO 描述 */
+  seoTagZh?: string;
   /** Compact nav title (keep it short: one word or 2-3 words max) */
   navLabel: string;
   /** 繁體中文導航標題 */
@@ -77,6 +81,8 @@ export const standards: Standard[] = [
     slug: 'collective-expertise',
     title: 'Collective expertise',
     titleZh: '集體專業',
+    seoTag: 'Fertility Specialist Care',
+    seoTagZh: '生育專業團隊照護',
     navLabel: 'Our Team',
     navLabelZh: '醫療團隊',
     lead: 'One patient. The expertise of an entire team.',
@@ -126,6 +132,8 @@ export const standards: Standard[] = [
     slug: 'precision-personalization',
     title: 'Precision & personalization',
     titleZh: '精準與個人化',
+    seoTag: 'Personalized IVF Treatment',
+    seoTagZh: '個人化 IVF 療程',
     navLabel: 'Treatments',
     navLabelZh: '療程',
     lead: 'No two patients are the same. Their care shouldn’t be either.',
@@ -169,6 +177,8 @@ export const standards: Standard[] = [
     slug: 'laboratory-excellence',
     title: 'Laboratory excellence',
     titleZh: '卓越實驗室',
+    seoTag: 'IVF Laboratory & Embryology',
+    seoTagZh: 'IVF 實驗室與胚胎學',
     navLabel: 'Our Lab',
     navLabelZh: '實驗室',
     lead: 'Where life begins, standards matter most.',
@@ -197,6 +207,8 @@ export const standards: Standard[] = [
     slug: 'privacy-transparency',
     title: 'Privacy & transparency',
     titleZh: '隱私與透明',
+    seoTag: 'Transparent Fertility Care Costs',
+    seoTagZh: '透明的生育療程費用',
     navLabel: 'Financing',
     navLabelZh: '費用',
     lead: 'Private, yet completely open.',
@@ -234,6 +246,8 @@ export const standards: Standard[] = [
     slug: 'art-of-care',
     title: 'The art of care',
     titleZh: '照護的藝術',
+    seoTag: 'Compassionate Fertility Care',
+    seoTagZh: '充滿同理的生育照護',
     navLabel: 'Resources',
     navLabelZh: '資源',
     lead: 'More than clinical rigor, it holds the beauty of art and the warmth of nature.',
@@ -264,6 +278,8 @@ export const standards: Standard[] = [
     slug: 'care-within-reach',
     title: 'Exceptional care, within reach',
     titleZh: '卓越照護，觸手可及',
+    seoTag: 'Southern California Fertility Clinics',
+    seoTagZh: '南加州生育診所',
     navLabel: 'Visit Us',
     navLabelZh: '預約前往',
     lead: 'Beyond distance and resources.',

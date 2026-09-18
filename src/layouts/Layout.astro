@@ -32,7 +32,7 @@ interface Props {
 const {
   title,
   description = DEFAULT_DESCRIPTION,
-  image = '/images/lobby-wide.webp',
+  image = '/images/og-default-1200x630.webp',
   schema,
   noindex = false,
   locale = getLocaleFromPath(Astro.url.pathname),
@@ -134,6 +134,9 @@ const breadcrumbSchema = segs.length
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#c2a14d" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{fullTitle}</title>
