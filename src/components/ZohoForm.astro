@@ -22,8 +22,8 @@
  * HIPAA：浏览器直连 crm.zoho.com，PHI 不经本站服务器 / Google（审计面最小）。
  *  上线前须与 Zoho 签 BAA 并启用 HIPAA 合规版。
  *
- * 转化统计：表单页不加载 GTM/GA（HIPAA 约定），成功后向 /api/lead-event 发送
- * 仅含匿名 client_id + 非 PHI 选择项的回传，由服务端转发 GA4 Measurement Protocol。
+ * 转化统计：表单页不加载 GTM/GA（HIPAA 约定）；提交成功后跳转到成功页，
+ * 由成功页（加载 GTM）以前端 gtag 发送 generate_lead（带真实 client_id + session）。
  */
 import { getLocaleFromPath, t } from '../i18n/index';
 
@@ -123,6 +123,7 @@ const inputCls =
   <div>
     <label class={labelCls} style={labelStyle} for="zf-message">{ZH ? '訊息' : 'Messages'}</label>
     <textarea id="zf-message" name="LEADCF2" rows="4" maxlength="1000" class={inputCls + ' resize-y'}></textarea>
+    <p class="text-xs mt-2" style="color: var(--color-stone-400);">{ZH ? '請勿於此填寫病史、診斷或任何敏感健康資訊。' : 'Please do not include medical history, diagnosis, or any sensitive health information here.'}</p>
   </div>
 
   <button type="submit" class="btn-primary w-full justify-center">
@@ -168,7 +169,6 @@ const inputCls =
       // gtag 直接发 generate_lead（带真实 client_id + session，归因更准、可进
       // DebugView）。通过 ?lead=1 标记“这是一次真实提交到达”，成功页据此打点，
       // 并随即用 history.replaceState 去掉参数，避免用户刷新成功页造成重复计数。
-      // 原服务端 /api/lead-event 回传已弃用（见 functions/api/lead-event.ts 注释）。
       var ret = form.querySelector('input[name="returnURL"]');
       var dest = ret && ret.value ? ret.value : '/contact/success';
       dest += (dest.indexOf('?') === -1 ? '?' : '&') + 'lead=1';
