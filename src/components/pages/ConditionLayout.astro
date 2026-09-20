@@ -71,7 +71,7 @@ const {
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
-const title = ZH ? titleZh : titleEn;
+const titleMeta = (ZH ? titleZh : titleEn).replace(/<br\s*\/?>/gi, ' ');
 const description = ZH ? descriptionZh : descriptionEn;
 const bandAlt = ZH ? bandAltZh : bandAltEn;
 const bandQuote = ZH ? bandQuoteZh : bandQuoteEn;
@@ -79,7 +79,7 @@ const bandRight = bandAlign === 'right';
 const hasQuote = Boolean(quoteEn);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={titleMeta} description={description}>
   <Nav />
 
   <!-- Hero -->

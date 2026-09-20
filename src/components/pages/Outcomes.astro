@@ -228,7 +228,7 @@ const description = ZH
           <thead>
             <tr style="background: var(--color-stone-50);">
               <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans); width: 22%;">{ZH ? '年齡區間' : 'Age Range'}</th>
-              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans); width: 20%;">{ZH ? '全國平均<br/>(活產 / 取卵)' : 'National Avg.<br/>(Live Birth / Retrieval)'}</th>
+              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans); width: 20%;">{ZH ? '全國平均' : 'National Avg.'}<br />{ZH ? '(活產 / 取卵)' : '(Live Birth / Retrieval)'}</th>
               <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans);">{ZH ? '臨床脈絡' : 'Clinical Context'}</th>
             </tr>
           </thead>
@@ -478,7 +478,7 @@ const description = ZH
           <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? '你的下一步' : 'Your Next Step'}</span>
         </div>
         <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white mb-6 leading-tight">
-          {ZH ? '了解你的數字。<br/>做出你的決定。' : 'Know Your Numbers.<br/>Make Your Decision.'}
+          <>{ZH ? '了解你的數字。' : 'Know Your Numbers.'}<br />{ZH ? '做出你的決定。' : 'Make Your Decision.'}</>
         </h2>
         <p class="text-sm leading-relaxed mb-10" style="color: rgba(255,255,255,0.65);">
           {ZH

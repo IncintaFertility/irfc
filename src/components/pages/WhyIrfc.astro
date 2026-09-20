@@ -5,12 +5,12 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
 import { localeHref } from '../../i18n/routes';
-import { FIVE_STANDARDS } from '../../config/brand';
+import { FIVE_PROOFS } from '../../config/brand';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
 
-const pillars = FIVE_STANDARDS.map((s) => ({
+const pillars = FIVE_PROOFS.map((s) => ({
   number: s.index,
   title: s.en,
   titleZh: s.zh,
@@ -100,9 +100,14 @@ const description = ZH
     </div>
   </section>
 
-  <!-- 6 Pillars -->
-  <section id="standards" class="py-4 scroll-mt-24" style="background: var(--color-stone-50);">
+  <!-- The INCINTA Proofs: 5 proofs of trust (distinct from the 6 IRFC service standards in standards.ts / nav) -->
+  <section id="proofs" class="py-4 scroll-mt-24" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-10">
+        <div class="h-px w-12 mb-6" style="background: var(--color-gold-500);"></div>
+        <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? 'INCINTA 的印證' : 'The INCINTA Proofs'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800">{ZH ? '五大印證，讓信任被看見' : 'Five proofs, made visible'}</h2>
+      </div>
       <div class="space-y-1">
         {pillars.map((pillar, i) => (
           <div class={`grid lg:grid-cols-12 gap-0 border border-stone-200 ${i % 2 === 0 ? 'bg-white' : ''}`} style={i % 2 !== 0 ? 'background: var(--color-stone-50);' : ''}>

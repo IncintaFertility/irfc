@@ -161,6 +161,64 @@ const description = ZH
     </div>
   </section>
 
+  <!-- Contact & telehealth (merged from /contact and /consultation) -->
+  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="mb-12">
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '聯絡與遠距醫療' : 'Contact &amp; Telehealth'}</p>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '我們隨時為您服務' : "We're here for you"}</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-14">
+        <!-- Direct channels -->
+        <div>
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-6">{ZH ? '直接聯絡我們' : 'Reach us directly'}</h3>
+          <div class="space-y-5">
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '總機' : 'Main line'}</p>
+              <a href="tel:+14244324732" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(424) 432-4732</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '國語（普通話）' : 'Mandarin Chinese'}</p>
+              <a href="tel:+16263886022" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(626) 388-6022</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">WhatsApp</p>
+              <a href="https://wa.me/14244324732" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">+1 (424) 432-4732</a>
+            </div>
+            <div>
+              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '電子郵件' : 'Email'}</p>
+              <a href="mailto:info@irfc.com" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">info@irfc.com</a>
+            </div>
+          </div>
+          <div class="mt-8 p-6 bg-white border border-stone-200">
+            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '我們說您的語言' : 'We speak your language'}</p>
+            <div class="flex flex-wrap gap-2">
+              {['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'].map(lang => (
+                <span class="text-xs px-3 py-1.5 border" style="color: var(--color-stone-600); border-color: var(--color-stone-300);">{lang}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <!-- Telehealth -->
+        <div>
+          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-6">{ZH ? '到院或 Zoom' : 'In person or by Zoom'}</h3>
+          <p class="text-sm text-stone-600 leading-relaxed mb-4">
+            {ZH ? '我們建議首次看診親自到院——檢查、超音波與實驗室檢驗都在現場同一處完成。' : 'We recommend an in-person first visit — exams, ultrasound, and lab work are all on site, in one place.'}
+          </p>
+          <p class="text-sm text-stone-600 leading-relaxed mb-6">
+            {ZH ? '若行程或時間不便，您也可以透過安全的 Zoom 視訊與醫師會面——諮詢費用與到院完全相同，適合追蹤、第二意見或遠距諮詢。' : 'If travel or time is hard, meet your physician by secure Zoom video — at the same consultation fee, ideal for follow-ups, second opinions, or distance care.'}
+          </p>
+          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
+            {ZH ? '申請 Zoom 看診' : 'Request a Zoom Visit'}
+          </a>
+          <div class="mt-5">
+            <WhatsAppDisclaimer />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Portal / CTA -->
   <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">

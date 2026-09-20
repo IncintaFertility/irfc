@@ -89,14 +89,17 @@ export const BRAND_LANGUAGE = {
 } as const;
 
 /**
- * 五大标准（The INCINTA Standard）
+ * 五大印證（The INCINTA Proofs）
  *
  * 叙事视角：体验哲学导向 —— 让信任被看见，而非索取信任。
  * 品牌原文判据：Trust in medicine should not be requested.
  *              It should be visible, felt, and proven.
  *
- * 每个标准下的 evidence 为可验证的硬资产（Kaiser 认证、#1 实验室等），
+ * 每个印證下的 evidence 为可验证的硬资产（Kaiser 认证、#1 实验室等），
  * 它们下沉为证据，不再作为标题层的自述。
+ *
+ * 注意：本清单是「信任证明」，与 standards.ts 的 6 大「服务标准」是两套体系，
+ *       不得混用「标准」一词（避免站内撞名、稀释 The INCINTA Standard 主题权重）。
  */
 export interface Standard {
   id: string;
@@ -116,7 +119,7 @@ export interface Standard {
   image: string;
 }
 
-export const FIVE_STANDARDS: Standard[] = [
+export const FIVE_PROOFS: Standard[] = [
   {
     id: 'science-revealed',
     index: '01',
