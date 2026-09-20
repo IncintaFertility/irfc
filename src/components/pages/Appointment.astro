@@ -1,5 +1,5 @@
 ---
-// 預約（英文 / 繁體中文共用元件）
+// 預約（英文 / 繁體中文共用元件）— 純預約頁（方案 C 簡化）
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -15,24 +15,6 @@ const locations = [
   { city: 'Beverly Hills', address: '8635 W 3rd St, Suite 1170W, Los Angeles, CA 90048', phone: '(213) 600-8088' },
   { city: 'Corona', address: '400 E Rincon St, Suite 108, CA 92879', phone: '(951) 272-2221' },
   { city: 'Irvine', address: '16300 Sand Canyon Ave, 9th Fl, CA 92618', phone: '(949) 453-8600' },
-];
-
-const steps = [
-  {
-    n: '01',
-    title: ZH ? '選擇您的診所' : 'Choose your clinic',
-    body: ZH ? '選擇對您最便利的 IRFC 據點。每間診所都提供完整的生育服務，並秉持相同的照護標準。' : 'Select the IRFC location most convenient to you. Every clinic offers the full range of fertility services with the same standard of care.',
-  },
-  {
-    n: '02',
-    title: ZH ? '提出諮詢' : 'Request a consultation',
-    body: ZH ? '請致電我們的排程團隊、以 WhatsApp 聯絡，或登入病人專區。我們將為您媒合最符合您目標的醫師。' : 'Call our scheduling team, message us on WhatsApp, or sign in to the patient portal. We will match you with the right physician for your goals.',
-  },
-  {
-    n: '03',
-    title: ZH ? '認識您的照護團隊' : 'Meet your care team',
-    body: ZH ? '初次看診時，我們會檢視您的病史、討論選項，並開始擬定個人化計畫——每一步都充滿溫度與清晰。' : 'At your first visit we review your history, discuss options, and begin building a personalized plan — with warmth and clarity at every step.',
-  },
 ];
 
 const title = ZH ? '預約諮詢' : 'Schedule a Consultation';
@@ -71,25 +53,6 @@ const description = ZH
     </div>
   </section>
 
-  <!-- Steps -->
-  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="mb-14">
-        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '如何開始' : 'How to get started'}</p>
-        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '三個簡單步驟' : 'Three simple steps'}</h2>
-      </div>
-      <div class="grid md:grid-cols-3 gap-10">
-        {steps.map(step => (
-          <div>
-            <p class="text-5xl font-light mb-4" style="font-family: var(--font-serif); color: var(--color-gold-400);">{step.n}</p>
-            <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3">{step.title}</h3>
-            <p class="text-sm text-stone-600 leading-relaxed">{step.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- Request form (minimal fields — clinical history is collected in the patient portal) -->
   <section id="request" class="py-20 lg:py-28 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
@@ -103,15 +66,34 @@ const description = ZH
           <div class="mb-8 max-w-xl">
             <WhatsAppDisclaimer />
           </div>
+          <!-- Compact contact directory + Zoom + portal, folded in from the old standalone blocks -->
           <div class="border-t border-stone-200 pt-6 space-y-4">
-            <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
-              <span class="font-medium" style="color: var(--color-stone-800);">{ZH ? '以隱私為本。' : 'Private by design.'}</span>
-              {ZH ? '此表單僅收集您的聯絡資料。您的病史與同意書，將於病人專區中安全地完成。' : 'This form collects contact details only. Your medical history and consents are completed securely in the patient portal.'}
+            <div class="flex items-baseline justify-between gap-4">
+              <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '總機' : 'Main line'}</p>
+              <a href="tel:+14244324732" class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(424) 432-4732</a>
+            </div>
+            <div class="flex items-baseline justify-between gap-4">
+              <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '國語（普通話）' : 'Mandarin Chinese'}</p>
+              <a href="tel:+16263886022" class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(626) 388-6022</a>
+            </div>
+            <div class="flex items-baseline justify-between gap-4">
+              <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">WhatsApp</p>
+              <a href="https://wa.me/14244324732" class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">+1 (424) 432-4732</a>
+            </div>
+            <div class="flex items-baseline justify-between gap-4">
+              <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '電子郵件' : 'Email'}</p>
+              <a href="mailto:info@irfc.com" class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">info@irfc.com</a>
+            </div>
+            <p class="text-sm leading-relaxed pt-2" style="color: var(--color-stone-500);">
+              <span class="font-medium" style="color: var(--color-stone-800);">{ZH ? '到院或 Zoom。' : 'In person or by Zoom.'}</span>
+              {ZH ? '首診建議親自到院——檢查、超音波與實驗室檢驗皆在同一處完成；若行程不便，也可透過安全的 Zoom 視訊諮詢（費用與到院相同）。' : 'We recommend an in-person first visit — exams, ultrasound, and lab work are all on site. If travel is hard, a secure Zoom visit is available at the same consultation fee.'}
             </p>
             <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
-              <span class="font-medium" style="color: var(--color-stone-800);">{ZH ? '偏好直接洽談？' : 'Prefer to talk?'}</span>
-              {ZH ? '請直接致電診所，或撥打我們的總機 ' : 'Call the clinic directly or our main line at '}
-              <a href="tel:+14244324732" class="font-medium" style="color: var(--color-gold-600);">(424) 432-4732</a>.
+              <span class="font-medium" style="color: var(--color-stone-800);">{ZH ? '以隱私為本。' : 'Private by design.'}</span>
+              {ZH ? '此表單僅收集您的聯絡資料。病史與同意書將於病人專區中安全地完成。' : 'This form collects contact details only. Your medical history and consents are completed securely in the patient portal.'}
+            </p>
+            <p class="text-sm leading-relaxed" style="color: var(--color-stone-500);">
+              {ZH ? '已是病人？' : 'Already a patient?'}<a href="/patient-portal" class="font-medium ml-1" style="color: var(--color-gold-600);">{ZH ? '開啟病人專區' : 'Open the patient portal'}</a>
             </p>
           </div>
         </div>
@@ -158,78 +140,6 @@ const description = ZH
           </div>
         ))}
       </div>
-    </div>
-  </section>
-
-  <!-- Contact & telehealth (merged from /contact and /consultation) -->
-  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="mb-12">
-        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '聯絡與遠距醫療' : 'Contact &amp; Telehealth'}</p>
-        <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800">{ZH ? '我們隨時為您服務' : "We're here for you"}</h2>
-      </div>
-      <div class="grid lg:grid-cols-2 gap-14">
-        <!-- Direct channels -->
-        <div>
-          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-6">{ZH ? '直接聯絡我們' : 'Reach us directly'}</h3>
-          <div class="space-y-5">
-            <div>
-              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '總機' : 'Main line'}</p>
-              <a href="tel:+14244324732" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(424) 432-4732</a>
-            </div>
-            <div>
-              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '國語（普通話）' : 'Mandarin Chinese'}</p>
-              <a href="tel:+16263886022" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(626) 388-6022</a>
-            </div>
-            <div>
-              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">WhatsApp</p>
-              <a href="https://wa.me/14244324732" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">+1 (424) 432-4732</a>
-            </div>
-            <div>
-              <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '電子郵件' : 'Email'}</p>
-              <a href="mailto:info@irfc.com" class="text-xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">info@irfc.com</a>
-            </div>
-          </div>
-          <div class="mt-8 p-6 bg-white border border-stone-200">
-            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '我們說您的語言' : 'We speak your language'}</p>
-            <div class="flex flex-wrap gap-2">
-              {['English', 'Chinese', 'Japanese', 'Korean', 'Spanish'].map(lang => (
-                <span class="text-xs px-3 py-1.5 border" style="color: var(--color-stone-600); border-color: var(--color-stone-300);">{lang}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <!-- Telehealth -->
-        <div>
-          <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-6">{ZH ? '到院或 Zoom' : 'In person or by Zoom'}</h3>
-          <p class="text-sm text-stone-600 leading-relaxed mb-4">
-            {ZH ? '我們建議首次看診親自到院——檢查、超音波與實驗室檢驗都在現場同一處完成。' : 'We recommend an in-person first visit — exams, ultrasound, and lab work are all on site, in one place.'}
-          </p>
-          <p class="text-sm text-stone-600 leading-relaxed mb-6">
-            {ZH ? '若行程或時間不便，您也可以透過安全的 Zoom 視訊與醫師會面——諮詢費用與到院完全相同，適合追蹤、第二意見或遠距諮詢。' : 'If travel or time is hard, meet your physician by secure Zoom video — at the same consultation fee, ideal for follow-ups, second opinions, or distance care.'}
-          </p>
-          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
-            {ZH ? '申請 Zoom 看診' : 'Request a Zoom Visit'}
-          </a>
-          <div class="mt-5">
-            <WhatsAppDisclaimer />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portal / CTA -->
-  <section class="py-20 lg:py-28" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-center">
-      <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-4">{ZH ? '已是病人？' : 'Already a patient?'}</h2>
-      <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
-        {ZH ? '登入 IRFC 病人專區，與您的照護團隊傳訊、查看結果並管理即將到來的看診。' : 'Sign in to the IRFC patient portal to message your care team, review results, and manage upcoming visits.'}
-      </p>
-      <a href="/patient-portal" class="btn-primary">
-        {ZH ? '開啟病人專區' : 'Open Patient Portal'}
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
     </div>
   </section>
 
