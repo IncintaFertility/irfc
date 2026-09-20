@@ -14,9 +14,9 @@
 | 官网（公开站） | Astro 静态站 + Cloudflare Pages | 否，仅收集联系方式最小字段 |
 | 预约请求接口 | `functions/api/appointment-request.ts`（Cloudflare Pages Function） | 否，仅转发联系方式，不落库 |
 | 患者门户 | 外部 eIVF 系统（`portal.rfcfamily.com`） | 是，全部临床 PHI 在此处理（不在本站代码内） |
-| 第三方联系渠道 | WhatsApp（`wa.me/14244324732`） | 风险点（见 G1） |
+| 第三方联系渠道 | WhatsApp（`wa.me/14244324732`） | 已于 2026-09-20 从代码层移除（见 G1） |
 
-**核心结论**：本站把"公开网站不碰 PHI"作为架构原则落地了——这是面向患者营销站点最重要的一条 HIPAA 控制线，目前是**守得住的**。主要风险集中在**运营层面（WhatsApp 渠道）**与**响应头/文档完整度**两项，而非代码 PHI 泄露。
+**核心结论**：本站把"公开网站不碰 PHI"作为架构原则落地了——这是面向患者营销站点最重要的一条 HIPAA 控制线，目前是**守得住的**。主要风险集中在**响应头/文档完整度**与 **GTM 第三方脚本（G11）** 两项，而非代码 PHI 泄露；原运营层面 WhatsApp 渠道风险已于 2026-09-20 从代码层彻底移除。
 
 ---
 
@@ -64,11 +64,10 @@ Privacy 页、表单下方提示、Appointment 页三处文案一致声明："�
 **G1 — WhatsApp 作为患者联系渠道，存在 PHI 暴露风险**
 - **现象**：WhatsApp 在全站多处主动引导（浮动按钮 `FloatingContact.astro`、Contact、Insurance、Consultation、Locations、Appointment 页，文案含"message us on WhatsApp"预约咨询）。WhatsApp 由 Meta 运营，**不提供 HIPAA BAA**。
 - **风险**：一旦患者经 WhatsApp 发送任何生育史/化验结果/治疗细节，即构成未加密 PHI 披露，属 HIPAA 违规，面临 OCR 处罚。
-- **整改**：
-  1. 在 WhatsApp 入口旁加明确免责："仅用于预约与一般性联系，请勿发送任何医疗信息"；
-  2. 临床沟通一律引导至安全门户或电话；
-  3. 对前台/协调员做培训，禁止在 WhatsApp 讨论病情；
-  4. 评估是否从临床语境页面移除 WhatsApp 入口。
+- **整改（2026-09-20 已完成代码层移除）**：
+  1. ✅ 已从代码层彻底移除所有 WhatsApp 入口：`FloatingContact.astro` 浮动按钮、Appointment / Locations / Insurance 页 CTA、预约成功页文案、免责组件 `WhatsAppDisclaimer.astro` 与 i18n `floating.whatsapp` 键全部删除；构建产物 `dist/` 已确认 0 处 `wa.me`/`WhatsApp`。
+  2. 临床沟通渠道收敛为：电话（总机/普通话线）、邮箱 `info@irfc.com`、eIVF 病人门户、安全 Zoom——均为合规或低风险路径。
+  3. ⚠️ 仍待运营侧：前台/协调员培训（禁止在任意非 BAA 渠道讨论病情）；巡查历史链接/书签是否仍指向 wa.me。
 
 ### 🟠 中危
 **G2 — 安全响应头不完整**
@@ -152,17 +151,17 @@ Privacy 页、表单下方提示、Appointment 页三处文案一致声明："�
 | 患者门户隔离 | 🟢 优秀 | PHI 全在 eIVF 外部系统 |
 | 安全响应头 | 🟢 优秀 | 已补 HSTS+CSP（G2 已落地） |
 | NPP 完整度 | 🟢 优秀 | 已补全 retention/breach/BA/TPO/隐私官（G4 已落地） |
-| 非技术渠道（WhatsApp/Zoom） | 🟠 中危 | WhatsApp 已加免责与 tooltip（G1 代码侧）；员工培训待落地 |
+| 非技术渠道（Zoom） | 🟢 已收敛 | WhatsApp 已从代码层移除（G1 已闭环）；Zoom 须用 BAA 版（G8 待确认） |
 | 接口抗滥用（Turnstile） | 🟢 优秀 | 服务端校验已落地，仅待 Dashboard 配置密钥激活（G3） |
 | CRM 线索写入（Zoho） | 🟢 优秀 | 服务端写 Zoho，PHI 不出边缘函数；待 Zoho 合规版 BAA 落地（G12） |
 
-**总体判断**：作为"公开营销站点"，IRFC 在**技术层面已达标甚至优于多数同业**（零 PHI、零追踪、PHI 全外移）。剩余风险主要是 **WhatsApp 渠道的运营管控**与**合规文档/响应头的收尾**。优先处理 G1、G2、G4 即可将合规水位拉到稳健级别。
+**总体判断**：作为"公开营销站点"，IRFC 在**技术层面已达标甚至优于多数同业**（零 PHI、零追踪、PHI 全外移）。剩余风险主要为 **GTM 第三方脚本（G11）** 与**合规文档/响应头的收尾**（WhatsApp 渠道风险已于 2026-09-20 闭环）。
 
 ---
 
 ## 六、建议执行顺序
 
-1. **立即（G1）**：WhatsApp 免责声明 + 员工培训，堵住 PHI 经 Meta 渠道外泄。
+1. **已完成（G1）**：WhatsApp 入口已从代码层移除（2026-09-20）；员工培训仍待运营侧落地。
 2. **本周（G2/G3）**：补全 `_headers`（HSTS+CSP），开启 Turnstile。
 3. **本月（G4/G5）**：补全 NPP（保留期/泄露通知/BA/TPO/隐私官），对齐隐私文案与真实遥测。
 4. **确认类（G8/G9/G10）**：管理员核实 BAA 状态、Zoom 版本、MFA 访问。
@@ -173,11 +172,14 @@ Privacy 页、表单下方提示、Appointment 页三处文案一致声明："�
 
 > 全部改动已通过 `astro build` 验证（EXIT=0），构建产物 `dist/` 已确认包含新增内容。
 
-### G1 — WhatsApp PHI 管控（代码侧已落地）
-- 新增 `src/components/WhatsAppDisclaimer.astro`：统一声明「WhatsApp 由 Meta 运营、无 BAA，仅限一般联系与预约，严禁 PHI」，EN + 繁中双语。
-- 在 **Contact / Consultation / Insurance / Locations / Appointment** 五处 WhatsApp 入口旁注入该声明（导入 + 渲染）。
-- `FloatingContact.astro` 浮动按钮增加 `title` tooltip：同样的 PHI 免责提示。
-- ⚠️ **待运营侧**：前台/协调员培训 + 评估是否从临床语境页面移除 WhatsApp。代码无法强制执行。
+### G1 — WhatsApp PHI 管控（2026-09-20 已从代码层彻底移除）
+- **2026-09-20 更新**：用户决定不再以"加免责"方式保留 WhatsApp，而是**从代码层彻底移除**该渠道，根除 PHI 经 Meta 泄露的风险面。
+  - 删除 `src/components/WhatsAppDisclaimer.astro` 免责组件（已无引用）。
+  - `FloatingContact.astro` 浮动条仅保留电话按钮。
+  - `Appointment.astro` / `Locations.astro` / `Insurance.astro` 移除 WhatsApp CTA 与免责；`AppointmentSuccess.astro` 文案去除"WhatsApp 更快回覆"。
+  - `i18n/index.ts` 删除 `floating.whatsapp` 双语键。
+  - 构建产物 `dist/` 全站 0 处 `wa.me` / `WhatsApp`（已 grep 确认）。
+- ⚠️ **仍待运营侧**：前台/协调员培训（禁止在任意非 BAA 渠道讨论病情）；巡查历史物料/书签是否仍指向 wa.me。
 
 ### G2 — 安全响应头（已落地）
 `public/_headers` 的 `/*` 段新增：

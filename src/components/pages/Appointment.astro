@@ -4,7 +4,6 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ZohoForm from '../../components/ZohoForm.astro';
-import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -63,9 +62,6 @@ const description = ZH
           <p class="text-sm leading-relaxed mb-8" style="color: var(--color-stone-500);">
             {ZH ? '告訴我們如何與您聯繫，以及哪間診所最方便。我們的協調員通常會在一個工作日內，與您確認合適的醫師與時間。' : 'Tell us how to reach you and which clinic works best. Our coordinators will confirm a time with the right physician — usually within one business day.'}
           </p>
-          <div class="mb-8 max-w-xl">
-            <WhatsAppDisclaimer />
-          </div>
           <!-- Compact contact directory + Zoom + portal, folded in from the old standalone blocks -->
           <div class="border-t border-stone-200 pt-6 space-y-4">
             <div class="flex items-baseline justify-between gap-4">
@@ -75,10 +71,6 @@ const description = ZH
             <div class="flex items-baseline justify-between gap-4">
               <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '國語（普通話）' : 'Mandarin Chinese'}</p>
               <a href="tel:+16263886022" class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(626) 388-6022</a>
-            </div>
-            <div class="flex items-baseline justify-between gap-4">
-              <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">WhatsApp</p>
-              <a href="https://wa.me/14244324732" class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">+1 (424) 432-4732</a>
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '電子郵件' : 'Email'}</p>

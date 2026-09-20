@@ -3,7 +3,6 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath } from '../../i18n';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -38,12 +37,6 @@ const ZH = locale === 'zh-hant';
           <a href="tel:+14244324732" class="btn-primary inline-flex items-center gap-2">
             {ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}
           </a>
-          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
-            {ZH ? '透過 WhatsApp 聯絡我們' : 'Message Us on WhatsApp'}
-          </a>
-        </div>
-        <div class="mt-5 max-w-2xl">
-          <WhatsAppDisclaimer />
         </div>
       </div>
     </div>

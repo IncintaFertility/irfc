@@ -3,7 +3,6 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import WhatsAppDisclaimer from '../../components/WhatsAppDisclaimer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
 import { BRAND_ABBREV, SITE_URL } from '../../config/brand';
 
@@ -249,17 +248,11 @@ const description = ZH
           <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
         </div>
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900 mb-5">{ZH ? '準備好找到您的照護團隊了嗎？' : 'Ready to find your care team?'}</h2>
-        <p class="text-stone-500 mb-8 leading-relaxed">{ZH ? '請撥打我們的總機、以 WhatsApp 聯絡，或線上提出諮詢。' : 'Call our main line, message us on WhatsApp, or request a consultation online.'}</p>
+        <p class="text-stone-500 mb-8 leading-relaxed">{ZH ? '請撥打我們的總機，或線上提出諮詢。' : 'Call our main line, or request a consultation online.'}</p>
         <div class="flex flex-wrap justify-center gap-4">
           <a href="tel:+14244324732" class="btn-primary inline-flex items-center gap-2">
             {ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}
           </a>
-          <a href="https://wa.me/14244324732" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2">
-            {ZH ? 'WhatsApp (424) 432-4732' : 'WhatsApp (424) 432-4732'}
-          </a>
-        </div>
-        <div class="mt-5 max-w-2xl mx-auto">
-          <WhatsAppDisclaimer />
         </div>
       </div>
     </div>

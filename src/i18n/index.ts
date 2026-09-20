@@ -52,7 +52,6 @@ export const ui: Record<Locale, UIDict> = {
       'Something went wrong sending your request. Please call us instead — we’ll schedule you right away.',
     'form.note':
       'We typically respond within one business day. This form collects your contact details only — your medical history is gathered securely through the patient portal after registration.',
-    'floating.whatsapp': 'WhatsApp Us',
     'floating.call': 'Call',
     'common.learnMore': 'Learn More',
     'common.readMore': 'Read More',
@@ -88,7 +87,6 @@ export const ui: Record<Locale, UIDict> = {
     'form.errorBody': '送出申請時發生問題，請直接致電我們——我們會立即為您安排。',
     'form.note':
       '我們通常於一個工作日內回覆。此表單僅收集您的聯絡資料——您的病史將於註冊後經由病人專區安全地建立。',
-    'floating.whatsapp': 'WhatsApp 聯絡',
     'floating.call': '致電',
     'common.learnMore': '了解更多',
     'common.readMore': '閱讀更多',
