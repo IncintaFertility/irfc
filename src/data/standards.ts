@@ -268,7 +268,6 @@ export const standards: Standard[] = [
           { href: '/blog', label: 'Fertility Insights', labelZh: '生育洞察', desc: 'Articles & patient guides', descZh: '文章與病人指南' },
           { href: '/patient-portal', label: 'Patient Portal', labelZh: '病人專區', desc: 'Access your records & messages', descZh: '查看病歷與訊息' },
           { href: '/testimonials', label: 'Patient Stories', labelZh: '病人故事', desc: 'Voices from our community', descZh: '來自社群的真實聲音' },
-          { href: '/about', label: 'About', labelZh: '關於機構', desc: 'Our commitment to welcome all', descZh: '我們歡迎每一個家庭的承諾' },
         ],
       },
     ],
@@ -298,6 +297,7 @@ export const standards: Standard[] = [
         items: [
           { href: '/appointment', label: 'Schedule a Consultation', labelZh: '預約諮詢', desc: 'Book your first appointment' },
           { href: '/locations', label: 'Locations', labelZh: '診所地點', desc: '4 Southern California clinics' },
+          { href: '/about', label: 'About', labelZh: '關於機構', desc: 'Our commitment to welcome all', descZh: '我們歡迎每一個家庭的承諾' },
         ],
       },
       {
