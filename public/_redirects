@@ -1,3 +1,15 @@
 # Legacy redirects for old RFC and Incinta URLs
 /rfcfamily  /about  301
 /incinta    /about  301
+
+# Consolidate /contact & /consultation into /appointment (2026-09-20)
+/contact                    /appointment                301
+/contact/                  /appointment                301
+/consultation              /appointment                301
+/consultation/            /appointment                301
+/zh-hant/contact          /zh-hant/appointment         301
+/zh-hant/contact/        /zh-hant/appointment         301
+/zh-hant/consultation      /zh-hant/appointment         301
+/zh-hant/consultation/    /zh-hant/appointment         301
+/contact/success          /appointment/success         301
+/zh-hant/contact/success  /zh-hant/appointment/success 301

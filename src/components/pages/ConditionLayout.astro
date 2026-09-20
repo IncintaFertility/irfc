@@ -113,7 +113,7 @@ const hasQuote = Boolean(quoteEn);
           <div class="h-px w-12 mb-5" style="background: var(--color-gold-500);"></div>
           <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '診斷，始於一次傾聽' : 'Diagnosis starts with a conversation'}</h2>
           <p class="text-sm text-stone-500 leading-relaxed mb-4">{ZH ? '在展開任何治療前，您的醫師會花時間了解您的完整病史，並說明現有證據顯示的結果——讓治療計畫貼合您，而非套用「一體適用」的制式流程。' : 'Before any treatment, your physician takes the time to understand your full history and explain what the evidence shows — so the plan fits you, not a one-size-fits-all protocol.'}</p>
-          <a href={localeHref('/contact', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">
+          <a href={localeHref('/appointment', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2 mt-2" style="color: var(--color-gold-600);">
             {ZH ? '與協調員聊聊' : 'Talk to a coordinator'}
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>

@@ -70,7 +70,7 @@ const reading = (r: string) => (ZH ? r.replace(/(\d+)\s*min read/i, '約 $1 分�
           ? '這些指南是一般衛教，並非醫療建議。下一步是與醫師對談——親自前往我們南加州四間診所任一處，或透過安全視訊。'
           : 'These guides are general education, not medical advice. The next step is a conversation with a physician — in person at one of our four Southern California clinics, or by secure video visit.'}
       </p>
-      <a class="blog-hub-cta-btn" href={localeHref('/consultation', locale)}>
+      <a class="blog-hub-cta-btn" href={localeHref('/appointment', locale)}>
         {ZH ? '與醫師交談 →' : 'Talk with a Physician →'}
       </a>
     </section>

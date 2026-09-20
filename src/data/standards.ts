@@ -296,9 +296,7 @@ export const standards: Standard[] = [
         heading: 'Find & Reach Us',
         headingZh: '尋找與聯絡',
         items: [
-          { href: '/consultation', label: 'Phone & Online Consultation', labelZh: '電話與線上諮詢', desc: 'Call or meet us virtually' },
           { href: '/appointment', label: 'Schedule a Consultation', labelZh: '預約諮詢', desc: 'Book your first appointment' },
-          { href: '/contact', label: 'Contact Us', labelZh: '聯絡我們', desc: 'Questions? Reach our team' },
           { href: '/locations', label: 'Locations', labelZh: '診所地點', desc: '4 Southern California clinics' },
         ],
       },

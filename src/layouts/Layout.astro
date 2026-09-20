@@ -58,7 +58,7 @@ const zhExists = isTranslated(basePath);
 
 // 表单页面（会录入联系方式 / 潜在 PHI 的页面）不加载 GTM，
 // 从源头避免分析数据外泄到无 HIPAA BAA 的 Google。其余营销页正常统计。
-const FORM_PAGE_BASES = ['/contact', '/appointment'];
+const FORM_PAGE_BASES = ['/appointment'];
 const isFormPage = FORM_PAGE_BASES.includes(basePathRaw.replace(/\/+$/, '') || '/');
 
 const orgSchema = {

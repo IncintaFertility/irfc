@@ -63,7 +63,7 @@ export const blogPosts: BlogPost[] = [
       <p>Also ask how many cycles they perform a year (volume correlates with lab refinement), whether they tailor stimulation protocols rather than using one default, and how they handle frozen embryos. A transparent clinic will walk you through the nuance rather than quoting a single headline figure.</p>
 
       <h2>Reading rates alongside care</h2>
-      <p>Statistics are one input, not the whole decision. The right clinic pairs honest numbers with a protocol built around your biology, clear pricing, and a team you can actually reach. If you want to talk through what your own odds might look like, <a href="/consultation">book a consultation</a> with one of our physicians — in person at any of our <a href="/locations">four Southern California clinics</a> or by secure video visit.</p>
+      <p>Statistics are one input, not the whole decision. The right clinic pairs honest numbers with a protocol built around your biology, clear pricing, and a team you can actually reach. If you want to talk through what your own odds might look like, <a href="/appointment">book a consultation</a> with one of our physicians — in person at any of our <a href="/locations">four Southern California clinics</a> or by secure video visit.</p>
     `,
     cover: '/images/consultation-joyful.webp',
     coverAlt: 'A joyful patient celebrating a successful fertility outcome at Incinta Reproductive Fertility Center.',
@@ -98,7 +98,7 @@ export const blogPosts: BlogPost[] = [
       <p>也要詢問他們一年執行多少週期（量能與實驗室精進相關）、是否量身打造刺激療程而非套用預設、以及如何處理冷凍胚胎。透明的診所會帶你理解細微差異，而非只報一個標題數字。</p>
 
       <h2>看懂數字，也看懂照護</h2>
-      <p>統計只是一項輸入，而非整個決定。對的診所，是把誠實數字與為你生理打造的療程、清晰價格，以及真正聯絡得到的團隊結合在一起。若你想聊聊自己可能的機會，<a href="/consultation">預約諮詢</a>，與我們任一醫師面對面——在我們<a href="/locations">南加州四間診所</a>任一處，或透過安全視訊。</p>
+      <p>統計只是一項輸入，而非整個決定。對的診所，是把誠實數字與為你生理打造的療程、清晰價格，以及真正聯絡得到的團隊結合在一起。若你想聊聊自己可能的機會，<a href="/appointment">預約諮詢</a>，與我們任一醫師面對面——在我們<a href="/locations">南加州四間診所</a>任一處，或透過安全視訊。</p>
     `,
   },
   {
@@ -131,7 +131,7 @@ export const blogPosts: BlogPost[] = [
       <p>It is a screening test, not a full guarantee. It does not assess every genetic disease, and it does not grade an embryo’s developmental potential perfectly. A "normal" result raises the odds substantially; it does not eliminate them. Your care team should be clear about both the upside and the limits.</p>
 
       <h2>Fitting PGT into your cycle</h2>
-      <p>PGT adds a biopsy step and a few days of waiting (the embryo is vitrified in the meantime), but it does not change the stimulation itself. If you are considering it, ask how your clinic’s lab validates results and how biopsy experience compares across embryologists. To see how genetic testing sits within a full treatment plan, <a href="/services/pgt">explore our PGT overview</a> or <a href="/consultation">speak with a physician</a>.</p>
+      <p>PGT adds a biopsy step and a few days of waiting (the embryo is vitrified in the meantime), but it does not change the stimulation itself. If you are considering it, ask how your clinic’s lab validates results and how biopsy experience compares across embryologists. To see how genetic testing sits within a full treatment plan, <a href="/services/pgt">explore our PGT overview</a> or <a href="/appointment">speak with a physician</a>.</p>
     `,
     cover: '/images/care-team-embryologist.webp',
     coverAlt: 'An IRFC embryologist working at the microscope in the IVF laboratory during preimplantation genetic testing.',
@@ -159,7 +159,7 @@ export const blogPosts: BlogPost[] = [
       <p>它是篩檢，而非完全保證。它不檢查每一種基因疾病，也無法完美評估胚胎的發育潛力。「正常」結果大幅提高機會，但不消除。你的照護團隊應同時說明優點與限制。</p>
 
       <h2>PGT 如何融入你的療程</h2>
-      <p>PGT 增加一道切片步驟與數天等待（胚胎在此期間玻璃化冷凍），但不改變刺激本身。若你在考慮，請詢問診所實驗室如何驗證結果，以及不同胚胎學家的切片經驗。想了解基因檢測在完整療程中的位置，<a href="/services/pgt">瀏覽我們的 PGT 總覽</a>，或<a href="/consultation">與醫師交談</a>。</p>
+      <p>PGT 增加一道切片步驟與數天等待（胚胎在此期間玻璃化冷凍），但不改變刺激本身。若你在考慮，請詢問診所實驗室如何驗證結果，以及不同胚胎學家的切片經驗。想了解基因檢測在完整療程中的位置，<a href="/services/pgt">瀏覽我們的 PGT 總覽</a>，或<a href="/appointment">與醫師交談</a>。</p>
     `,
   },
   {
@@ -191,7 +191,7 @@ export const blogPosts: BlogPost[] = [
       <p>There is no single answer, but the younger you are, the fewer eggs you typically need for a reasonable chance. A common target range is roughly 15–20 mature eggs for someone freezing before 35, and more if freezing later. Your clinician should give you a personalized estimate rather than a generic number.</p>
 
       <h2>Is it right for you?</h2>
-      <p>Preservation is also relevant for medical reasons — before cancer treatment, for example — and for anyone who wants options without a present plan. It is not a guarantee of a future pregnancy, but it meaningfully widens the window. If you want to understand your own numbers, <a href="/consultation">schedule a consultation</a> or review our <a href="/services/egg-freezing">egg freezing overview</a>.</p>
+      <p>Preservation is also relevant for medical reasons — before cancer treatment, for example — and for anyone who wants options without a present plan. It is not a guarantee of a future pregnancy, but it meaningfully widens the window. If you want to understand your own numbers, <a href="/appointment">schedule a consultation</a> or review our <a href="/services/egg-freezing">egg freezing overview</a>.</p>
     `,
     cover: '/images/patient-portrait.webp',
     coverAlt: 'A patient considering egg freezing and fertility preservation at Incinta Reproductive Fertility Center.',
@@ -218,7 +218,7 @@ export const blogPosts: BlogPost[] = [
       <p>沒有單一答案，但越年輕，通常需要的成熟卵子越少就能有合理機會。常見目標範圍：35 歲前約 15–20 顆成熟卵子，若較晚凍卵則更多。你的臨床醫師應給你個人化估計，而非通用數字。</p>
 
       <h2>適合你嗎</h2>
-      <p>保存也與醫療原因相關——例如癌症治療前——以及任何想要選擇、卻尚未有計畫的人。它不保證未來懷孕，但明顯拓寬了窗口。若想了解你自己的數字，<a href="/consultation">預約諮詢</a>，或參考我們的<a href="/services/egg-freezing">凍卵總覽</a>。</p>
+      <p>保存也與醫療原因相關——例如癌症治療前——以及任何想要選擇、卻尚未有計畫的人。它不保證未來懷孕，但明顯拓寬了窗口。若想了解你自己的數字，<a href="/appointment">預約諮詢</a>，或參考我們的<a href="/services/egg-freezing">凍卵總覽</a>。</p>
     `,
   },
 ];

@@ -67,7 +67,7 @@ export const team: TeamMember[] = [
     leadZh: 'Reproductive Fertility Center 的創辦人，也是 IRFC 的醫療總監。擁有超過 20 年的經驗，被譽為南加州最傑出的生育專家之一。',
     heroCtaLabel: 'Meet Our Physicians',
     heroCtaLabelZh: '認識我們的醫師',
-    heroCtaHref: '/contact',
+    heroCtaHref: '/appointment',
     aboutName: 'About James P. Lin, MD',
     aboutNameZh: '認識 James P. Lin 醫師',
     bio: [
@@ -138,7 +138,7 @@ export const team: TeamMember[] = [
     leadZh: 'IRFC 的生殖內分泌專科醫師，協助病人進行生育評估、IVF、基因檢測諮詢與生育保存規劃。',
     heroCtaLabel: 'Meet Our Physicians',
     heroCtaLabelZh: '認識我們的醫師',
-    heroCtaHref: '/contact',
+    heroCtaHref: '/appointment',
     aboutName: 'About Tiffanny LaTrice Jones, MD',
     aboutNameZh: '認識 Tiffanny LaTrice Jones 醫師',
     bio: [
@@ -209,7 +209,7 @@ export const team: TeamMember[] = [
     heroBadgeZh: '現正收治新病人',
     heroCtaLabel: 'Meet Our Physicians',
     heroCtaLabelZh: '認識我們的醫師',
-    heroCtaHref: '/contact',
+    heroCtaHref: '/appointment',
     aboutName: 'About Zitao Liu, MD',
     aboutNameZh: '認識 Zitao Liu 醫師',
     bio: [
@@ -278,7 +278,7 @@ export const team: TeamMember[] = [
     leadZh: 'IRFC 胚胎學實驗室背後的科學領導者——正是這支團隊在 2016 年全美 IVF 成功率排名第一。',
     heroCtaLabel: 'Meet Our Laboratory Team',
     heroCtaLabelZh: '認識我們的胚胎學團隊',
-    heroCtaHref: '/contact',
+    heroCtaHref: '/appointment',
     aboutName: 'About Yufen Xie, PhD',
     aboutNameZh: '認識 Yufen Xie 博士',
     bio: [
@@ -345,7 +345,7 @@ export const team: TeamMember[] = [
     leadZh: 'IRFC 實驗室一致性的穩定雙手。Hyang Park 確保每一道流程、每一套培養系統、每一個週期，都符合定義我們實驗室聲譽的嚴謹標準。',
     heroCtaLabel: 'Meet Our Laboratory Team',
     heroCtaLabelZh: '認識我們的胚胎學團隊',
-    heroCtaHref: '/contact',
+    heroCtaHref: '/appointment',
     aboutName: 'About Hyang Park',
     aboutNameZh: '認識 Hyang Park',
     bio: [
@@ -416,7 +416,7 @@ export const team: TeamMember[] = [
     leadZh: '那位確保每位病人都被看見、被聽見、被妥善照顧的倡議者。Lily Hao 以臨床專業與真誠的溫度，領導 IRFC 的護理團隊。',
     heroCtaLabel: 'Talk With Our Care Team',
     heroCtaLabelZh: '與我們的照護團隊洽談',
-    heroCtaHref: '/contact',
+    heroCtaHref: '/appointment',
     aboutName: 'About Lily Hao',
     aboutNameZh: '認識 Lily Hao',
     bio: [

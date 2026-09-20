@@ -29,6 +29,8 @@ import { getLocaleFromPath, t } from '../i18n/index';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
+// 表单成功落地页（由原 /contact/success 迁至 /appointment/success，繁体对应 /zh-hant/appointment/success）
+const successUrl = ZH ? 'https://irfc.pages.dev/zh-hant/appointment/success' : 'https://irfc.pages.dev/appointment/success';
 
 // Zoho LEADCF13（Location）picklist —— value 必须与 Zoho 后台选项完全一致
 const locations = [
@@ -170,7 +172,7 @@ const inputCls =
       // DebugView）。通过 ?lead=1 标记“这是一次真实提交到达”，成功页据此打点，
       // 并随即用 history.replaceState 去掉参数，避免用户刷新成功页造成重复计数。
       var ret = form.querySelector('input[name="returnURL"]');
-      var dest = ret && ret.value ? ret.value : '/contact/success';
+      var dest = ret && ret.value ? ret.value : '/appointment/success';
       dest += (dest.indexOf('?') === -1 ? '?' : '&') + 'lead=1';
       var go = function () {
         window.location.href = dest;
