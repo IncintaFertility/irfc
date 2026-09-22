@@ -4,7 +4,8 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath } from '../../i18n';
-import { LEGAL_ENTITY, BRAND_ABBREV, SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config/brand';
+import { LEGAL_ENTITY, BRAND_ABBREV } from '../../config/brand';
+import MainPhone from '../MainPhone.astro';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
@@ -95,9 +96,7 @@ const description = ZH
             ? '若本網站的任何部分難以使用，或您需要其他格式的資訊，請告訴我們。我們會盡力直接提供您所需的內容，並修復問題。'
             : 'If any part of this site is difficult to use, or if you need information in another format, please tell us. We will do our best to provide what you need directly and to fix the issue.'}
         </p>
-        <a href={`tel:${SITE_PHONE}`} class="btn-primary">
-          {ZH ? `致電 ${SITE_PHONE_DISPLAY}` : `Call ${SITE_PHONE_DISPLAY}`}
-        </a>
+        <MainPhone class="btn-primary" />
       </div>
 
     </div>

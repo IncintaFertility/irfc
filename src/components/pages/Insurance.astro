@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath } from '../../i18n';
+import MainPhone from '../MainPhone.astro';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
@@ -34,9 +35,7 @@ const ZH = locale === 'zh-hant';
             : 'Fertility benefits vary by plan. Our team will help you understand what your insurance may cover and how to make the most of it — with clear answers, never surprises.'}
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="tel:+14244324732" class="btn-primary inline-flex items-center gap-2">
-            {ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}
-          </a>
+          <MainPhone class="btn-primary inline-flex items-center gap-2" />
         </div>
       </div>
     </div>

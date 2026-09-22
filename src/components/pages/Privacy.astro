@@ -4,7 +4,8 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
-import { LEGAL_ENTITY, BRAND_ABBREV, SITE_PHONE, SITE_PHONE_DISPLAY, PRIVACY_RETENTION_MONTHS } from '../../config/brand';
+import { LEGAL_ENTITY, BRAND_ABBREV, PRIVACY_RETENTION_MONTHS } from '../../config/brand';
+import MainPhone from '../MainPhone.astro';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
@@ -229,7 +230,7 @@ const description = ZH
           16300 Sand Canyon Avenue, 9th Floor, Irvine, CA 92618
         </p>
         <p class="text-stone-500 font-light leading-relaxed">
-          <a href={`tel:${SITE_PHONE}`} style="color: var(--color-champagne-700);">{SITE_PHONE_DISPLAY}</a>
+          <MainPhone withLabel={false} style="color: var(--color-champagne-700);" />
         </p>
       </div>
 

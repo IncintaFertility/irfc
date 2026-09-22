@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath } from '../../i18n';
+import MainPhone from '../MainPhone.astro';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
@@ -337,7 +338,7 @@ const faqs = [
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href={ZH ? '/zh-hant/appointment' : '/appointment'} class="btn-primary">{ZH ? '預約諮詢' : 'Schedule a Consultation'}</a>
-        <a href="tel:+14244324732" class="btn-outline">{ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}</a>
+        <MainPhone class="btn-outline" />
       </div>
     </div>
   </section>

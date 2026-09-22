@@ -3,6 +3,7 @@ import { standards } from '../data/standards';
 import { getLocaleFromPath, t, type Locale } from '../i18n/index';
 import { localeHref } from '../i18n/routes';
 import LocaleSwitch from './LocaleSwitch.astro';
+import MainPhone from './MainPhone.astro';
 
 const pathname = Astro.url.pathname;
 const locale = getLocaleFromPath(pathname);
@@ -115,7 +116,7 @@ const isActive = (group: typeof navGroups[0]) =>
       ))}
     </nav>
     <div class="nav-mobile-bottom">
-      <a href="tel:+14244324732" class="nav-mobile-phone">(424) 432-4732</a>
+      <MainPhone class="nav-mobile-phone" withLabel={false} />
       <a href={localeHref('/appointment', locale)} class="btn-primary nav-mobile-cta">{t(locale, 'nav.cta')}</a>
       <LocaleSwitch pathname={pathname} current={locale} variant="mobile" />
     </div>

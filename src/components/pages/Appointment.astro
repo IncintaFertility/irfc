@@ -5,6 +5,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ZohoForm from '../../components/ZohoForm.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import MainPhone from '../MainPhone.astro';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
@@ -44,9 +45,7 @@ const description = ZH
             {ZH ? '提出預約' : 'Request an Appointment'}
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
-          <a href="tel:+14244324732" class="btn-outline inline-flex items-center gap-2">
-            {ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}
-          </a>
+          <MainPhone class="btn-outline inline-flex items-center gap-2" />
         </div>
       </div>
     </div>
@@ -66,7 +65,7 @@ const description = ZH
           <div class="border-t border-stone-200 pt-6 space-y-4">
             <div class="flex items-baseline justify-between gap-4">
               <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '總機' : 'Main line'}</p>
-              <a href="tel:+14244324732" class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">(424) 432-4732</a>
+              <MainPhone withLabel={false} class="text-lg font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);" />
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '國語（普通話）' : 'Mandarin Chinese'}</p>

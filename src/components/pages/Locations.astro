@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
+import MainPhone from '../MainPhone.astro';
 import { BRAND_ABBREV, SITE_URL } from '../../config/brand';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -250,9 +251,7 @@ const description = ZH
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900 mb-5">{ZH ? '準備好找到您的照護團隊了嗎？' : 'Ready to find your care team?'}</h2>
         <p class="text-stone-500 mb-8 leading-relaxed">{ZH ? '請撥打我們的總機，或線上提出諮詢。' : 'Call our main line, or request a consultation online.'}</p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="tel:+14244324732" class="btn-primary inline-flex items-center gap-2">
-            {ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}
-          </a>
+          <MainPhone class="btn-primary inline-flex items-center gap-2" />
         </div>
       </div>
     </div>

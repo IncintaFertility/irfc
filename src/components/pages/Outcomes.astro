@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
+import MainPhone from '../MainPhone.astro';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -492,7 +493,7 @@ const description = ZH
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
-          <a href="tel:+14244324732" class="btn-outline" style="border-color: rgba(255,255,255,0.35); color: white;">{ZH ? '致電 (424) 432-4732' : 'Call (424) 432-4732'}</a>
+          <MainPhone class="btn-outline" style="border-color: rgba(255,255,255,0.35); color: white;" />
         </div>
         <p class="mt-6 text-xs" style="color: rgba(255,255,255,0.35);">
           {ZH ? '提供遠距醫療。遠距醫療適用於外地與國際病人。' : 'Telehealth available. Telehealth available for out-of-area and international patients.'}

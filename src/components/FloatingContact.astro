@@ -9,11 +9,12 @@ const ZH = locale === 'zh-hant';
   <!-- Phone -->
   <a
     href="tel:+14244324732"
-    aria-label={t(locale, 'floating.call') + ' IRFC'}
+    aria-label={t(locale, 'floating.call') + ' 424 432 4732'}
+    title={ZH ? '拼出 IRFC · 拨号请按 4 7 3 2' : 'Spells IRFC · dial 4 7 3 2'}
     class="floating-btn group flex items-center gap-3"
   >
     <span class="floating-label hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs tracking-wide bg-white text-stone-700 px-3 py-1.5 shadow border border-stone-100 whitespace-nowrap">
-      (424) 432-4732
+      (424) 432-<span class="vanity">IRFC</span>
     </span>
     <div class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:-translate-y-0.5" style="background: linear-gradient(135deg, var(--color-gold-500), var(--color-gold-700));">
       <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -23,3 +24,11 @@ const ZH = locale === 'zh-hant';
   </a>
 
 </div>
+
+<style>
+  .vanity {
+    color: var(--color-gold-600);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+import { getLocaleFromPath } from '../i18n/index';
+import { SITE_PHONE } from '../config/brand';
+
+interface Props {
+  /** 附加 class（如 btn-outline / nav-mobile-phone） */
+  class?: string;
+  /** 是否显示 "Call / 致電" 前缀；false 时只显示号码（导航/页脚等紧凑处） */
+  withLabel?: boolean;
+  /** 透传 style（如 Hero 白色 CTA 需 color:white） */
+  style?: string;
+}
+const { class: className = '', withLabel = true, style } = Astro.props;
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const ZH = locale === 'zh-hant';
+
+// 总机 (424) 432-4732 在电话键盘上拼出品牌缩写 IRFC（4=I, 7=R, 3=F, 2=C），
+// 是美国常见的 "vanity number" 助记法（类似 1-800-FLOWERS）。
+// 可见文字用字母助记强化品牌；但 tel: 与屏幕阅读器一律用纯数字，避免拨号/读屏异常。
+const tooltip = ZH ? '拼出 IRFC · 拨号请按 4 7 3 2' : 'Spells IRFC · dial 4 7 3 2';
+const ariaLabel = (ZH ? '致電 ' : 'Call ') + '424 432 4732';
+---
+<a
+  href={`tel:${SITE_PHONE}`}
+  class={className}
+  aria-label={ariaLabel}
+  title={tooltip}
+  style={style}
+>
+  {withLabel && (ZH ? '致電 ' : 'Call ')}
+  (424) 432-<span class="vanity">IRFC</span>
+</a>
+
+<style>
+  .vanity {
+    color: var(--color-gold-600);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+</style>
