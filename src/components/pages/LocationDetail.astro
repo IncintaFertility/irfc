@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import MainPhone from '../../components/MainPhone.astro';
-import { getClinic, buildClinicSchema, SERVICE_LABELS, type ClinicLocation } from '../../data/clinics';
+import { getClinic, clinicLocations, buildClinicSchema, SERVICE_LABELS, type ClinicLocation } from '../../data/clinics';
 import { reviews } from '../../data/testimonials';
 import { SITE_URL } from '../../config/brand';
 import { type Locale } from '../../i18n';
@@ -28,13 +28,13 @@ const MAP_IMG = '/images/locations/southern-california-irfc-map-label-free.webp'
 const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address + ', ' + clinic.cityState)}`;
 ---
 
-<Layout title={title} description={description} schema={buildClinicSchema(clinic)} image={clinic.heroImage}>
+<Layout title={title} description={description} schema={buildClinicSchema(clinic)}>
   <Nav />
 
   <!-- Hero -->
   <section class="bg-stone-50">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 md:py-20 lg:py-24 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-      <div class="max-w-2xl">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 md:py-20 lg:py-24">
+      <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-5">
           <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
           <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? clinic.regionZh : clinic.region}</span>
@@ -57,16 +57,6 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
           </a>
           <MainPhone class="btn-primary inline-flex items-center gap-2" />
         </div>
-      </div>
-      <div class="relative">
-        <img
-          src={clinic.heroImage}
-          alt={ZH ? `${clinic.city} 診所外觀` : `${clinic.city} fertility clinic`}
-          class="w-full h-72 lg:h-[440px] object-cover rounded-3xl"
-          width="640" height="440"
-          fetchpriority="high"
-          decoding="async"
-        />
       </div>
     </div>
   </section>
@@ -147,62 +137,97 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
     </div>
   </section>
 
-  <!-- Clinic gallery -->
-  <section class="py-16 lg:py-24 bg-white">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="max-w-3xl mb-10">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
-          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '診所實景' : 'Inside the Clinic'}</span>
-        </div>
-        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900">{ZH ? `走進 ${clinic.city} 診所` : `A look inside our ${clinic.city} clinic`}</h2>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {clinic.gallery.map((src, i) => (
-          <img
-            src={src}
-            alt={ZH ? `${clinic.city} 診所實景 ${i + 1}` : `${clinic.city} clinic photo ${i + 1}`}
-            class="w-full h-64 object-cover rounded-2xl"
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Find us / map -->
-  <section class="py-16 lg:py-20" style="background: var(--color-stone-50);">
-    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-        <div class="relative overflow-hidden rounded-3xl">
+  <!-- Find us / map (hub-style panel) -->
+  <section class="py-14 md:py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-5 lg:gap-6 items-stretch">
+        <div class="relative rounded-[2rem] overflow-hidden shadow-xl min-h-[420px] lg:min-h-[560px] bg-stone-100">
           <img
             src={MAP_IMG}
-            alt={ZH ? `${clinic.city} 診所位置地圖` : `${clinic.city} clinic location map`}
-            class="w-full object-cover"
+            alt={ZH ? 'IRFC 南加州診所位置地圖' : 'Map of IRFC Southern California clinic locations'}
+            class="absolute inset-0 w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"
           />
-        </div>
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
-            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '交通位置' : 'Getting Here'}</span>
+          {clinicLocations.map((loc) => (
+            loc.slug === clinic.slug ? (
+              <span class="map-marker map-marker--active" style={`left:${loc.mapX}%; top:${loc.mapY}%;`} aria-current="true">
+                <span class="map-dot"></span>
+                <span class="map-label">{loc.city}</span>
+              </span>
+            ) : (
+              <a
+                href={localeHref('/locations/' + loc.slug, locale)}
+                class="map-marker"
+                style={`left:${loc.mapX}%; top:${loc.mapY}%;`}
+                aria-label={ZH ? `前往 ${loc.city} 診所頁面` : `Go to the ${loc.city} location page`}
+              >
+                <span class="map-dot"></span>
+                <span class="map-label">{loc.city}</span>
+              </a>
+            )
+          ))}
+          <div class="absolute bottom-5 left-5 z-[2]">
+            <span class="text-[10px] tracking-[0.25em] uppercase text-white/85 font-medium" style="font-family: var(--font-sans); text-shadow: 0 1px 3px rgba(0,0,0,0.4);">{ZH ? '南加州診所地點' : 'Southern California Locations'}</span>
           </div>
-          <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900 mb-5">{ZH ? `來找我們` : `Find us in ${clinic.city}`}</h2>
-          <p class="text-stone-600 leading-relaxed mb-2">{clinic.address}</p>
-          <p class="text-stone-600 leading-relaxed mb-8">{clinic.cityState}</p>
-          <a
-            href={mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-medium transition-colors"
-            style="background: var(--color-gold-500); color: #fff; font-family: var(--font-sans);"
-          >
-            {ZH ? '取得路線' : 'Get Directions'}
-          </a>
+        </div>
+
+        <div class="rounded-[2rem] p-7 md:p-10 lg:p-12 shadow-xl flex flex-col bg-white">
+          <div class="grid grid-cols-2 gap-3 mb-8">
+            {clinicLocations.map((loc) => (
+              loc.slug === clinic.slug ? (
+                <span class="loc-city-btn loc-city-btn--active text-center px-4 py-3 rounded-full text-sm font-medium" style="font-family: var(--font-sans);" aria-current="page">{loc.city}</span>
+              ) : (
+                <a href={localeHref('/locations/' + loc.slug, locale)} class="loc-city-btn text-center px-4 py-3 rounded-full text-sm font-medium transition-all" style="font-family: var(--font-sans);">{loc.city}</a>
+              )
+            ))}
+          </div>
+
+          <div class="flex-1">
+            <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? clinic.regionZh : clinic.region}</p>
+            <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-900 mb-6 leading-none">{clinic.city}</h2>
+
+            <div class="space-y-5 mb-8" style="font-family: var(--font-sans);">
+              <div>
+                <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '地址' : 'Address'}</p>
+                <p class="text-stone-700 leading-relaxed">{clinic.address}<br />{clinic.cityState}</p>
+              </div>
+              <div>
+                <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '電話' : 'Phone'}</p>
+                <a href={`tel:${clinic.phoneHref}`} class="text-stone-700 hover:underline" style="color: var(--color-gold-700);">{clinic.phone}</a>
+              </div>
+              <div>
+                <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '門診時間' : 'Hours'}</p>
+                <p class="text-stone-600 leading-relaxed text-sm">{ZH ? clinic.hoursZh : clinic.hours}</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-medium transition-colors"
+                style="background: var(--color-gold-500); color: #fff; font-family: var(--font-sans);"
+              >
+                {ZH ? '取得路線' : 'Get Directions'}
+              </a>
+              <a
+                href={localeHref('/locations', locale)}
+                class="inline-flex items-center gap-1.5 text-sm font-medium underline underline-offset-4 transition-colors"
+                style="color: var(--color-stone-600); font-family: var(--font-sans);"
+              >
+                {ZH ? '查看所有據點' : 'View All Locations'}
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+
+      <p class="text-center text-sm text-stone-400 mt-6">{ZH ? '點按地圖標記或上方城市可前往其他據點頁面。' : 'Tap a marker on the map or a city above to visit another location.'}</p>
     </div>
   </section>
 
@@ -280,4 +305,66 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
   </section>
 
   <Footer />
+
+  <style>
+    .loc-city-btn {
+      background: var(--color-stone-100);
+      color: var(--color-stone-700);
+      border: 1px solid transparent;
+    }
+    a.loc-city-btn:hover {
+      border-color: var(--color-gold-300);
+      color: var(--color-gold-700);
+    }
+    .loc-city-btn--active {
+      background: var(--color-gold-500);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(194,161,77,0.22);
+    }
+
+    .map-marker {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+    }
+    a.map-marker { cursor: pointer; }
+    .map-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: var(--color-gold-500);
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    a.map-marker:hover .map-dot,
+    .map-marker--active .map-dot {
+      transform: scale(1.4);
+      background: var(--color-gold-600);
+    }
+    .map-label {
+      font-size: 11px;
+      font-family: var(--font-sans);
+      color: #fff;
+      background: rgba(28,25,23,0.80);
+      padding: 2px 9px;
+      border-radius: 9999px;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    a.map-marker:hover .map-label,
+    .map-marker--active .map-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </Layout>
