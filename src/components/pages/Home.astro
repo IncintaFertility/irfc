@@ -187,33 +187,36 @@ const description = ZH
       v.muted = true;
       v.setAttribute('muted', '');
       v.playsInline = true;
+      v.defaultMuted = true;
 
       var started = false;
       function tryPlay() {
-        if (started) return;
-        // Only attempt once we actually have frames to show; otherwise wait for the
-        // data events below. Calling play() too early makes X5 reject it silently.
-        if (v.readyState < 2) return;
+        if (!v || !v.paused) { started = true; return; } // already playing
+        if (started) return;                               // play() already pending
         started = true;
+        // Re-assert muted right before play(): some kernels only honour it at call time.
+        v.muted = true;
         var p = v.play();
         if (p && typeof p.catch === 'function') {
           p.catch(function () {
-            // Autoplay was rejected (still buffering / policy). Allow later retries.
+            // Autoplay rejected (policy / not buffered). Allow a later retry.
             started = false;
           });
         }
       }
 
-      // Start as soon as the video can display frames.
-      if (v.readyState >= 2) tryPlay();
-      v.addEventListener('loadeddata', tryPlay);
-      v.addEventListener('canplay', tryPlay);
-
-      // WeChat (iOS + Android X5) gates autoplay behind its JS bridge. The bridge may
-      // fire before the large video has buffered, so tryPlay() no-ops until readyState
-      // is high enough and the timed retry below picks it up.
+      // WeChat (iOS + Android X5) gates autoplay behind its JS bridge — a TRUSTED
+      // context where play() is allowed even before the video is buffered. Call it
+      // immediately; do NOT wait for readyState, or the bridge fires too early,
+      // tryPlay() no-ops, and the later timer retry (non-gesture) is silently rejected
+      // by X5, leaving the poster frozen on screen.
       document.addEventListener('WeixinJSBridgeReady', tryPlay, false);
       if (typeof window.WeixinJSBridge !== 'undefined') tryPlay();
+
+      // iOS Safari + standard browsers: muted inline autoplay via media events.
+      v.addEventListener('loadeddata', tryPlay);
+      v.addEventListener('canplay', tryPlay);
+      if (v.readyState >= 2) tryPlay();
 
       // Belt-and-suspenders: retry on a timer until the video is actually playing.
       // Covers slow mobile networks where the bridge fires ahead of buffering.
@@ -221,7 +224,7 @@ const description = ZH
       var timer = setInterval(function () {
         if (!v) { clearInterval(timer); return; }
         if (!v.paused) { clearInterval(timer); return; }
-        if (retries++ > 14) { clearInterval(timer); return; } // ~12s cap
+        if (retries++ > 30) { clearInterval(timer); return; } // ~24s cap
         tryPlay();
       }, 800);
 
