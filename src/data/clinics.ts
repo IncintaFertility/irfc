@@ -28,6 +28,8 @@ export interface ClinicLocation {
   /** 真实 Google 商家页 URL（NAP 对齐用）。无公开 GBP 则省略。 */
   sameAs?: string;
   heroImage: string;
+  /** 诊所实景区画廊图片路径（现有素材，无需新拍摄） */
+  gallery: string[];
   introEn: string;
   introZh: string;
   landmarksEn: { label: string; text: string }[];
@@ -66,6 +68,7 @@ export const clinicLocations: ClinicLocation[] = [
     geo: { lat: 33.827, lng: -118.3396 },
     sameAs: 'https://www.google.com/maps/search/?api=1&query=Incinta+Fertility+Center+Torrance+CA',
     heroImage: '/images/locations/network-welcome-torrance.jpg',
+    gallery: ['/images/locations/incinta-reception-desk.jpg', '/images/lobby-wide.webp'],
     introEn:
       "IRFC's Torrance clinic brings expert fertility care to the South Bay, serving families from Torrance, Redondo Beach, Manhattan Beach, Palos Verdes, and greater Los Angeles' beach cities. Located at 21545 Hawthorne Blvd in Pavilion B, the clinic offers consultations, monitoring, and coordinated treatment planning in a calm, welcoming setting just off the 405 and 91 freeways. While advanced embryo work is performed at our Irvine and Corona laboratories, Torrance patients receive the same connected standard of care — your physician, care coordinator, and lab team share every case. Mandarin-speaking coordinators are available, and parking is on-site. Whether you are beginning with a fertility evaluation, considering IUI or IVF, or continuing care close to home, our Torrance team helps you move forward with clarity.",
     introZh:
@@ -117,6 +120,7 @@ export const clinicLocations: ClinicLocation[] = [
     hoursZh: '週一至週五 7:00 AM – 5:00 PM · 週六 8:00 AM – 12:00 PM · 週日 休診',
     geo: { lat: 34.0736, lng: -118.3791 },
     heroImage: '/images/locations/network-consultation-beverly-hills.jpg',
+    gallery: ['/images/reception-desk.webp', '/images/consultant.webp'],
     introEn:
       "On West 3rd Street in the heart of Beverly Hills, IRFC's Westside clinic offers discreet, convenient fertility consultations and monitoring for patients across Los Angeles — from Century City and West Hollywood to Beverly Hills and Hollywood. The suite at 8635 West 3rd Street places expert reproductive care within minutes of the 10 and 405 freeways. Here you meet with a reproductive endocrinologist to map a personalized plan, with monitoring appointments scheduled around your life. As with every IRFC location, your case is coordinated as one team with our Irvine and Corona laboratories, so nothing is lost in the handoff. Mandarin and Spanish-speaking coordination is available. Begin with a consultation and leave with a clear next step.",
     introZh:
@@ -169,6 +173,7 @@ export const clinicLocations: ClinicLocation[] = [
     geo: { lat: 33.8667, lng: -117.5664 },
     sameAs: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+400+E+Rincon+St+Corona+CA+92879',
     heroImage: '/images/locations/network-lab-corona.jpg',
+    gallery: ['/images/locations/network-clinical-corona.jpg', '/images/locations/network-access-corona.webp'],
     introEn:
       "In the Inland Empire, IRFC's Corona clinic is a full-service fertility center with on-site surgical and embryology facilities — so most of your care happens under one roof. From 400 East Rincon Street, we serve families across Corona, Riverside, Ontario, and the wider Inland Empire, with easy access from the 91 and 15 freeways. Beyond consultations and monitoring, Corona offers IVF, ICSI, preimplantation genetic testing, egg freezing, and donor or surrogacy coordination, supported by an on-site laboratory and procedure suite. The same embryology team ranked #1 in US IVF success rates in 2016 cares for your cycle here. Mandarin-speaking coordinators and on-site parking make visits straightforward. This is comprehensive care, close to home.",
     introZh:
@@ -221,6 +226,7 @@ export const clinicLocations: ClinicLocation[] = [
     geo: { lat: 33.667, lng: -117.7617 },
     sameAs: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+16300+Sand+Canyon+Ave+Irvine+CA+92618',
     heroImage: '/images/locations/network-welcome-irvine.webp',
+    gallery: ['/images/locations/network-comfort-irvine.jpg', '/images/clinic-scene.webp'],
     introEn:
       "Our Irvine location is IRFC's Orange County flagship — a dedicated fertility center with a full surgery center and IVF laboratory on-site at 16300 Sand Canyon Avenue. Serving Irvine, Tustin, Newport Beach, and greater Orange County, the clinic brings the complete journey together: consultation, monitoring, retrieval, transfer, and cryopreservation, all in one building with on-site parking. The embryology lab pairs EmbryoScope+ time-lapse monitoring with RI Witness electronic witnessing and the TMRW smart cryo vault. Our medical director and lab leadership practice here, and the same coordinated model connects you to every IRFC location. Mandarin, Spanish, Korean, and Japanese coordination is available. Choose Irvine for the fullest on-site capability in Southern California.",
     introZh:
