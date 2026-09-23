@@ -45,7 +45,7 @@ const related = member.relatedSlugs
   <section class="pt-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-2 gap-0 items-end">
-        <div class="pb-16 lg:pb-24 pt-12">
+        <div class="pb-16 lg:pb-24 pt-12 order-2 lg:order-1">
           <div class="flex items-center gap-3 mb-6">
             <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
             <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{pick(member.roleZh, member.role)}</span>
@@ -67,11 +67,11 @@ const related = member.relatedSlugs
             </a>
           </div>
         </div>
-        <div class="hidden lg:block relative" style="min-height: 560px;">
+        <div class="relative order-1 lg:order-2 mt-10 lg:mt-0 lg:min-h-[560px] aspect-[4/5] lg:aspect-auto">
           <img
             src={member.photo}
             alt={pick(member.schemaNameZh, member.schemaName)}
-            class="absolute bottom-0 right-0 h-full w-full object-cover object-top"
+            class="absolute inset-0 h-full w-full object-cover object-top"
             style="object-position: center top;"
           />
         </div>

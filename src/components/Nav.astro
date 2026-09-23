@@ -558,11 +558,13 @@ const isActive = (group: typeof navGroups[0]) =>
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .site-nav { padding: 0 5vw; }
+  .site-nav { padding: 0 5vw; gap: 0.5rem; }
   .nav-links,
   .nav-phone,
   .nav-cta { display: none; }
   .nav-hamburger { display: flex; }
+  /* 手機：語言切換徽章貼齊漢堡選單靠右，不被 space-between 推到中間 */
+  .nav-right { margin-left: auto; gap: 0.5rem; }
 }
 </style>
 
