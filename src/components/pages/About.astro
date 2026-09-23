@@ -127,7 +127,7 @@ const description = ZH
           {ZH ? '您的瀏覽器不支援影片播放。' : 'Your browser does not support the video tag.'}
         </video>
 
-        <!-- 播放遮罩：影片靜音自動播放；點擊開啟音效並淡出遮罩 -->
+        <!-- 播放遮罩：影片播放中自動收起；暫停/未播放時顯示，點擊開啟音效並播放 -->
         <button
           id="about-story-overlay"
           type="button"
@@ -491,11 +491,14 @@ const description = ZH
       if (p && typeof p.catch === 'function') p.catch(() => {});
     });
 
-    // 音效已開（無論來自遮罩點擊或原生控制項）→ 收合遮罩
-    video.addEventListener('volumechange', () => {
-      if (!video.muted && video.volume > 0) hideOverlay();
-      else showOverlay();
-    });
+    // 播放中（含靜音自動播放）→ 收起遮罩；暫停或結束 → 顯示遮罩
+    video.addEventListener('play', hideOverlay);
+    video.addEventListener('playing', hideOverlay);
+    video.addEventListener('timeupdate', () => { if (!video.paused) hideOverlay(); });
+    video.addEventListener('pause', showOverlay);
+
+    // 初始狀態：若已開始自動播放，立即收起遮罩（避免首幀閃現）
+    if (!video.paused && !video.ended) hideOverlay();
 
     // 保險：部分瀏覽器要在載入完成後再觸發一次，靜音自動播放才會啟動
     const nudge = () => {
