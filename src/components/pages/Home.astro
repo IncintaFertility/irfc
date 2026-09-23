@@ -44,8 +44,11 @@ const description = ZH
   <!-- 01 / HERO — First impression should convey the brand, not a row of treatment buttons -->
   <section class="idx-hero">
     <video id="idx-hero-video" class="idx-hero-bg" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="auto" width="1920" height="1080" poster="/images/lobby-wide.webp">
-      <source src="/videos/brand-promo.webm" type="video/webm" />
+      <!-- mp4 MUST come first: WeChat's Android X5 kernel cannot decode webm (VP8/VP9)
+           and may grab the first source it "can play" then fail autoplay. mp4 is the
+           universally-supported container for both iOS Safari and X5. -->
       <source src="/videos/brand-promo.mp4" type="video/mp4" />
+      <source src="/videos/brand-promo.webm" type="video/webm" />
     </video>
     <div class="idx-hero-overlay"></div>
 
@@ -178,29 +181,65 @@ const description = ZH
     (function () {
       var v = document.getElementById('idx-hero-video');
       if (!v) return;
+
+      // Muted must be a *property* (not just the attribute) for programmatic autoplay
+      // to be permitted by iOS Safari and WeChat's X5 kernel.
       v.muted = true;
       v.setAttribute('muted', '');
+      v.playsInline = true;
+
       var started = false;
-      function start() {
+      function tryPlay() {
         if (started) return;
+        // Only attempt once we actually have frames to show; otherwise wait for the
+        // data events below. Calling play() too early makes X5 reject it silently.
+        if (v.readyState < 2) return;
         started = true;
-        try {
-          var p = v.play();
-          if (p && typeof p.catch === 'function') p.catch(function () {});
-        } catch (e) {}
+        var p = v.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(function () {
+            // Autoplay was rejected (still buffering / policy). Allow later retries.
+            started = false;
+          });
+        }
       }
-      // Native autoplay (muted + playsinline + autoplay attr) covers iOS Safari and
-      // modern WebViews. WeChat's Android X5 kernel still rejects programmatic play()
-      // unless it runs inside the WeixinJSBridgeReady context or on first user gesture,
-      // so we force it there. Resume if WeChat backgrounds/pauses the video.
-      if (v.readyState >= 2) start();
-      else v.addEventListener('loadeddata', start, { once: true });
-      document.addEventListener('WeixinJSBridgeReady', start, false);
-      if (typeof window.WeixinJSBridge !== 'undefined') start();
-      document.addEventListener('touchstart', start, { once: true });
-      document.addEventListener('click', start, { once: true });
+
+      // Start as soon as the video can display frames.
+      if (v.readyState >= 2) tryPlay();
+      v.addEventListener('loadeddata', tryPlay);
+      v.addEventListener('canplay', tryPlay);
+
+      // WeChat (iOS + Android X5) gates autoplay behind its JS bridge. The bridge may
+      // fire before the large video has buffered, so tryPlay() no-ops until readyState
+      // is high enough and the timed retry below picks it up.
+      document.addEventListener('WeixinJSBridgeReady', tryPlay, false);
+      if (typeof window.WeixinJSBridge !== 'undefined') tryPlay();
+
+      // Belt-and-suspenders: retry on a timer until the video is actually playing.
+      // Covers slow mobile networks where the bridge fires ahead of buffering.
+      var retries = 0;
+      var timer = setInterval(function () {
+        if (!v) { clearInterval(timer); return; }
+        if (!v.paused) { clearInterval(timer); return; }
+        if (retries++ > 14) { clearInterval(timer); return; } // ~12s cap
+        tryPlay();
+      }, 800);
+
+      // User-gesture fallback: any tap starts it if it is still paused.
+      function onGesture() {
+        tryPlay();
+        if (v && !v.paused) {
+          document.removeEventListener('touchstart', onGesture);
+          document.removeEventListener('click', onGesture);
+          clearInterval(timer);
+        }
+      }
+      document.addEventListener('touchstart', onGesture, { passive: true });
+      document.addEventListener('click', onGesture);
+
+      // Resume if WeChat backgrounds/pauses the video.
       document.addEventListener('visibilitychange', function () {
-        if (!document.hidden && v.paused) { try { v.play(); } catch (e) {} }
+        if (!document.hidden && v.paused) tryPlay();
       });
     })();
   </script>
@@ -508,7 +547,18 @@ const description = ZH
   .idx-hero-h1 { margin-bottom: 1.5rem; }
   .idx-hero-h1 span { font-size: clamp(2.3rem, 9.5vw, 2.85rem); white-space: nowrap; }
   .idx-hero-ctas {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  /* 紧凑化：375px 视口下主按钮（含箭头）不换行、不溢出 */
+  .idx-hero-ctas .btn-primary {
+    padding: 0.8125rem 1.25rem;
+    font-size: 0.72rem;
+  }
+  .idx-hero-ctas .idx-ghost-btn {
+    padding: 0.8125rem 1.25rem;
+    font-size: 0.68rem;
   }
 
   .idx-standards { padding: 3.5rem 0 4.5rem; }
