@@ -556,16 +556,9 @@ const description = ZH
     padding: 0.8125rem 1.25rem;
     font-size: 0.72rem;
   }
+  /* 用户要求：手机端（≤768px）不显示「Our Story」幽灵按钮，仅保留 Schedule a Consultation */
   .idx-hero-ctas .idx-ghost-btn {
-    padding: 0.8125rem 1.25rem;
-    font-size: 0.68rem;
-    /* 移动端首屏视频常停留于明亮海报帧（或自动播放被拦截），幽灵按钮白字+40%白边易与浅色背景
-       融为一体而「看不见」；补一层半透明深色底 + 更实的描边 + 轻微毛玻璃，确保任何画面下都清晰可见。 */
-    background: rgba(11, 7, 16, 0.42);
-    border-color: rgba(255, 255, 255, 0.7);
-    color: #fff;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
+    display: none;
   }
 
   .idx-standards { padding: 3.5rem 0 4.5rem; }
