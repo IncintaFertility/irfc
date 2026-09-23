@@ -1,0 +1,6 @@
+---
+import LocationDetail from '../../components/pages/LocationDetail.astro';
+import { getClinic } from '../../data/clinics';
+const clinic = getClinic('beverly-hills')!;
+---
+<LocationDetail clinic={clinic} locale="en" />

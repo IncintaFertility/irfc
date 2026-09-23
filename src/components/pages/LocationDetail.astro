@@ -1,0 +1,242 @@
+---
+// 诊所城市页共用元件（SEO spoke 页）；en / zh-hant 双语由 locale prop 控制
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import MainPhone from '../../components/MainPhone.astro';
+import { getClinic, buildClinicSchema, SERVICE_LABELS, type ClinicLocation } from '../../data/clinics';
+import { reviews } from '../../data/testimonials';
+import { getTeamMember } from '../../data/team';
+import { SITE_URL } from '../../config/brand';
+import { type Locale } from '../../i18n';
+import { localeHref } from '../../i18n/routes';
+
+interface Props {
+  clinic: ClinicLocation;
+  locale: Locale;
+}
+const { clinic, locale } = Astro.props;
+const ZH = locale === 'zh-hant';
+
+const title = ZH ? `${clinic.city} 生育診所 | IRFC` : `${clinic.city} Fertility Clinic | IRFC`;
+const description = ZH
+  ? `IRFC ${clinic.city} 生育診所——位於${clinic.regionZh}的諮詢、監測與協調式 IVF 照護。設有國語（中文）協調員與現場停車。`
+  : `IRFC ${clinic.city} fertility clinic — consultations, monitoring, and coordinated IVF care in ${clinic.region}. Mandarin-speaking coordinators and on-site parking.`;
+
+const localReviews = reviews.filter((r) => r.clinic === clinic.key).slice(0, 3);
+const team = clinic.localTeamSlugs.map(getTeamMember).filter(Boolean);
+---
+
+<Layout title={title} description={description} schema={buildClinicSchema(clinic)} image={clinic.heroImage}>
+  <Nav />
+
+  <!-- Hero -->
+  <section class="bg-stone-50">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 md:py-20 lg:py-24">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? clinic.regionZh : clinic.region}</span>
+        </div>
+        <h1 style="font-family: var(--font-serif);" class="text-stone-900 text-4xl md:text-5xl lg:text-6xl font-light leading-none mb-5">
+          {ZH ? `${clinic.city} 生育診所` : `${clinic.city} Fertility Clinic`}
+        </h1>
+        <p class="text-stone-600 text-base md:text-lg font-light leading-relaxed max-w-2xl mb-8">
+          {ZH
+            ? `${clinic.city} 是 IRFC 在南加州四間生育診所之一，與其他據點共享同一套連結的照護標準。`
+            : `${clinic.city} is one of four IRFC fertility clinics across Southern California, sharing one connected standard of care.`}
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a
+            href={localeHref('/appointment', locale)}
+            class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-medium transition-colors"
+            style="background: var(--color-gold-500); color: #fff; font-family: var(--font-sans);"
+          >
+            {ZH ? '預約門診' : 'Schedule Appointment'}
+          </a>
+          <MainPhone class="btn-primary inline-flex items-center gap-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick info + About -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-10 lg:gap-14">
+      <!-- Quick info card -->
+      <aside class="lg:col-span-1">
+        <div class="rounded-[1.5rem] p-7 shadow-xl bg-stone-50" style="font-family: var(--font-sans);">
+          <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600);">{ZH ? '診所資訊' : 'Clinic Info'}</p>
+          <div class="space-y-5">
+            <div>
+              <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '地址' : 'Address'}</p>
+              <p class="text-stone-700 leading-relaxed">{clinic.address}<br />{clinic.cityState}</p>
+            </div>
+            <div>
+              <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '電話' : 'Phone'}</p>
+              <a href={`tel:${clinic.phoneHref}`} class="hover:underline" style="color: var(--color-gold-700);">{clinic.phone}</a>
+            </div>
+            <div>
+              <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '門診時間' : 'Hours'}</p>
+              <p class="text-stone-600 leading-relaxed text-sm">{ZH ? clinic.hoursZh : clinic.hours}</p>
+            </div>
+          </div>
+          <a
+            href={`https://maps.google.com/?q=${encodeURIComponent(clinic.address + ', ' + clinic.cityState)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex items-center justify-center w-full px-7 py-3 rounded-full text-sm font-medium transition-colors"
+            style="background: var(--color-gold-500); color: #fff; font-family: var(--font-sans);"
+          >
+            {ZH ? '取得路線' : 'Get Directions'}
+          </a>
+          <a
+            href={localeHref('/locations', locale)}
+            class="mt-3 inline-flex items-center justify-center w-full px-7 py-3 rounded-full text-sm font-medium transition-colors"
+            style="border:1px solid var(--color-stone-300); color: var(--color-stone-700); font-family: var(--font-sans);"
+          >
+            {ZH ? '查看所有據點' : 'View All Locations'}
+          </a>
+        </div>
+      </aside>
+
+      <!-- About -->
+      <div class="lg:col-span-2">
+        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '關於本據點' : 'About This Location'}</p>
+        <p style="font-family: var(--font-serif);" class="text-2xl md:text-3xl font-light text-stone-900 mb-6 leading-snug">
+          {ZH ? `生育照護，來到 ${clinic.city}。` : `Fertility care, right here in ${clinic.city}.`}
+        </p>
+        <p class="text-stone-600 leading-relaxed mb-8">{ZH ? clinic.introZh : clinic.introEn}</p>
+
+        <!-- Services -->
+        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '提供的療程' : 'Treatments Offered'}</p>
+        <div class="flex flex-wrap gap-2.5 mb-10">
+          {clinic.services.map((slug) => (
+            <a
+              href={localeHref('/services/' + slug, locale)}
+              class="inline-flex items-center px-4 py-2 rounded-full text-sm transition-colors"
+              style="background: var(--color-stone-100); color: var(--color-stone-700); font-family: var(--font-sans);"
+            >
+              {ZH ? SERVICE_LABELS[slug].zh : SERVICE_LABELS[slug].en}
+            </a>
+          ))}
+        </div>
+
+        <!-- Directions & landmarks -->
+        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '交通與地標' : 'Getting Here'}</p>
+        <ul class="space-y-4 mb-2">
+          {(ZH ? clinic.landmarksZh : clinic.landmarksEn).map((lm) => (
+            <li class="flex gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style="background: var(--color-gold-500);"></span>
+              <span class="text-stone-600 leading-relaxed"><span class="text-stone-800 font-medium">{lm.label}:</span> {lm.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local reviews -->
+  <section class="py-16 lg:py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '病人評價' : 'Patient Reviews'}</span>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900">{ZH ? `來自 ${clinic.city} 病人的真實心聲` : `Real words from ${clinic.city} patients`}</h2>
+      </div>
+      {localReviews.length > 0 ? (
+        <div class="grid md:grid-cols-3 gap-5">
+          {localReviews.map((r) => (
+            <figure class="rounded-2xl p-6 bg-white shadow-sm flex flex-col">
+              <div class="text-[#C2A14D] text-lg leading-none mb-3">{'★'.repeat(Math.round(r.rating))}</div>
+              <blockquote class="text-stone-700 text-sm leading-relaxed flex-1">“{r.quote}”</blockquote>
+              <figcaption class="mt-4 text-xs text-stone-500" style="font-family: var(--font-sans);">— {r.author} · <span class="uppercase tracking-wide">{r.source}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <p class="text-stone-500">
+          {ZH
+            ? '歡迎在 Google 商家頁與我們分享您的經驗。'
+            : 'We welcome you to share your experience on our Google Business Profile.'}
+          {clinic.sameAs && (
+            <a href={clinic.sameAs} target="_blank" rel="noopener noreferrer" class="ml-2 underline" style="color: var(--color-gold-700);">Google Reviews →</a>
+          )}
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- Local team -->
+  {team.length > 0 && (
+    <section class="py-16 lg:py-20 bg-white">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+        <div class="max-w-3xl mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '照護團隊' : 'Your Care Team'}</span>
+          </div>
+          <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900">{ZH ? `在 ${clinic.city} 支援您的專家` : `The specialists who support ${clinic.city} patients`}</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {team.map((m) => (
+            <a href={localeHref('/team/' + m.slug, locale)} class="group flex items-center gap-4 rounded-2xl p-5 bg-stone-50 transition-colors hover:bg-stone-100">
+              <img src={m.photo} alt={ZH ? m.schemaNameZh : m.schemaName} class="w-16 h-16 rounded-full object-cover shrink-0" loading="lazy" decoding="async" />
+              <div>
+                <p class="text-stone-900 font-medium" style="font-family: var(--font-sans);">{ZH ? m.nameLine1Zh + ' ' + m.nameLine2Zh : m.nameLine1 + ' ' + m.nameLine2}</p>
+                <p class="text-sm text-stone-500" style="font-family: var(--font-sans);">{ZH ? m.roleZh : m.role}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+        <p class="mt-6 text-sm text-stone-400" style="font-family: var(--font-sans);">
+          {ZH ? '醫師-診所排程為暫定，實際看診醫師請於預約時確認。' : 'Physician schedules are indicative — confirm your physician when booking.'}
+        </p>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  <section class="py-16 lg:py-20" style="background: var(--color-stone-50);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900 mb-8 text-center">{ZH ? `關於 ${clinic.city} 診所` : `About the ${clinic.city} clinic`}</h2>
+      <div class="space-y-3">
+        {(ZH ? clinic.faqs.map((f) => ({ q: f.qZh, a: f.aZh })) : clinic.faqs.map((f) => ({ q: f.q, a: f.a }))).map((f) => (
+          <details class="rounded-2xl bg-white px-6 py-4 shadow-sm">
+            <summary class="cursor-pointer text-stone-900 font-medium py-1" style="font-family: var(--font-sans); list-style: none;">{f.q}</summary>
+            <p class="text-stone-600 leading-relaxed pt-2 pb-1">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-3 mb-5">
+          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '從這裡開始' : 'Begin Here'}</span>
+          <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
+        </div>
+        <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900 mb-5">{ZH ? `準備好在 ${clinic.city} 開始了嗎？` : `Ready to begin in ${clinic.city}?`}</h2>
+        <p class="text-stone-500 mb-8 leading-relaxed">{ZH ? '請撥打我們的總機，或線上提出諮詢。' : 'Call our main line, or request a consultation online.'}</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a
+            href={localeHref('/appointment', locale)}
+            class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-medium transition-colors"
+            style="background: var(--color-gold-500); color: #fff; font-family: var(--font-sans);"
+          >
+            {ZH ? '預約門診' : 'Schedule Appointment'}
+          </a>
+          <MainPhone class="btn-primary inline-flex items-center gap-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
