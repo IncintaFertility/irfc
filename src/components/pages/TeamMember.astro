@@ -45,12 +45,12 @@ const related = member.relatedSlugs
   <section class="pt-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-2 gap-0 items-end">
-        <div class="pb-16 lg:pb-24 pt-12 order-2 lg:order-1">
+        <div class="pb-16 lg:pb-24 pt-8 lg:pt-12 order-2 lg:order-1">
           <div class="flex items-center gap-3 mb-6">
             <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
             <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{pick(member.roleZh, member.role)}</span>
           </div>
-          <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-4 leading-none">
+          <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-4 leading-none">
             {ZH ? <>{member.nameLine1Zh}<br/><em class="not-italic" style="color: var(--color-gold-500);">{member.nameLine2Zh}</em></> : <>{member.nameLine1}<br/><em class="not-italic" style="color: var(--color-gold-500);">{member.nameLine2}</em></>}
           </h1>
           <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">{pick(member.specialtyZh, member.specialty)}</p>
@@ -67,12 +67,14 @@ const related = member.relatedSlugs
             </a>
           </div>
         </div>
-        <div class="relative order-1 lg:order-2 mt-10 lg:mt-0 lg:min-h-[560px] aspect-[4/5] lg:aspect-auto">
+        <!-- Mobile/tablet: centered, capped-height rounded portrait (4:5, no crop to
+             circle) so the hero photo reads as a real portrait without eating the
+             first screen. Desktop (>=1024px): unchanged large side portrait. -->
+        <div class="relative order-1 lg:order-2 mt-8 lg:mt-0 mx-auto lg:mx-0 max-w-[340px] lg:max-w-none h-[380px] lg:h-auto lg:min-h-[560px] overflow-hidden rounded-2xl lg:rounded-none">
           <img
             src={member.photo}
             alt={pick(member.schemaNameZh, member.schemaName)}
-            class="absolute inset-0 h-full w-full object-cover object-top"
-            style="object-position: center top;"
+            class="h-full w-full object-cover object-top lg:absolute lg:inset-0"
           />
         </div>
       </div>
