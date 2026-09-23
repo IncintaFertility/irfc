@@ -6,7 +6,6 @@ import Footer from '../../components/Footer.astro';
 import MainPhone from '../../components/MainPhone.astro';
 import { getClinic, buildClinicSchema, SERVICE_LABELS, type ClinicLocation } from '../../data/clinics';
 import { reviews } from '../../data/testimonials';
-import { getTeamMember } from '../../data/team';
 import { SITE_URL } from '../../config/brand';
 import { type Locale } from '../../i18n';
 import { localeHref } from '../../i18n/routes';
@@ -24,7 +23,6 @@ const description = ZH
   : `IRFC ${clinic.city} fertility clinic — consultations, monitoring, and coordinated IVF care in ${clinic.region}. Mandarin-speaking coordinators and on-site parking.`;
 
 const localReviews = reviews.filter((r) => r.clinic === clinic.key).slice(0, 3);
-const team = clinic.localTeamSlugs.map(getTeamMember).filter(Boolean);
 ---
 
 <Layout title={title} description={description} schema={buildClinicSchema(clinic)} image={clinic.heroImage}>
@@ -168,35 +166,6 @@ const team = clinic.localTeamSlugs.map(getTeamMember).filter(Boolean);
       )}
     </div>
   </section>
-
-  <!-- Local team -->
-  {team.length > 0 && (
-    <section class="py-16 lg:py-20 bg-white">
-      <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-        <div class="max-w-3xl mb-10">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
-            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '照護團隊' : 'Your Care Team'}</span>
-          </div>
-          <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900">{ZH ? `在 ${clinic.city} 支援您的專家` : `The specialists who support ${clinic.city} patients`}</h2>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {team.map((m) => (
-            <a href={localeHref('/team/' + m.slug, locale)} class="group flex items-center gap-4 rounded-2xl p-5 bg-stone-50 transition-colors hover:bg-stone-100">
-              <img src={m.photo} alt={ZH ? m.schemaNameZh : m.schemaName} class="w-16 h-16 rounded-full object-cover shrink-0" loading="lazy" decoding="async" />
-              <div>
-                <p class="text-stone-900 font-medium" style="font-family: var(--font-sans);">{ZH ? m.nameLine1Zh + ' ' + m.nameLine2Zh : m.nameLine1 + ' ' + m.nameLine2}</p>
-                <p class="text-sm text-stone-500" style="font-family: var(--font-sans);">{ZH ? m.roleZh : m.role}</p>
-              </div>
-            </a>
-          ))}
-        </div>
-        <p class="mt-6 text-sm text-stone-400" style="font-family: var(--font-sans);">
-          {ZH ? '醫師-診所排程為暫定，實際看診醫師請於預約時確認。' : 'Physician schedules are indicative — confirm your physician when booking.'}
-        </p>
-      </div>
-    </section>
-  )}
 
   <!-- FAQ -->
   <section class="py-16 lg:py-20" style="background: var(--color-stone-50);">
