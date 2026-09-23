@@ -101,7 +101,7 @@ const description = ZH
     </div>
   </section>
 
-  <!-- Watch our story — full promotional video -->
+  <!-- Watch our story — full promotional video（靜音自動播放；點遮罩開啟音效；不設 poster 以免被誤認為靜態圖） -->
   <!-- 完整版宣傳影片（遠端託管）：https://hub.ie8.net/f/7FN44pR8.mp4 -->
   <section class="py-20 lg:py-28 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
@@ -115,15 +115,33 @@ const description = ZH
 
       <div class="relative overflow-hidden bg-stone-900" style="aspect-ratio: 16 / 9;">
         <video
-          poster="/images/consultation-joyful.webp"
-          preload="none"
-          controls
+          id="about-story-video"
+          autoplay
+          muted
           playsinline
+          controls
+          preload="auto"
           class="absolute inset-0 w-full h-full object-cover"
         >
           <source src="https://hub.ie8.net/f/7FN44pR8.mp4" type="video/mp4" />
           {ZH ? '您的瀏覽器不支援影片播放。' : 'Your browser does not support the video tag.'}
         </video>
+
+        <!-- 播放遮罩：影片靜音自動播放；點擊開啟音效並淡出遮罩 -->
+        <button
+          id="about-story-overlay"
+          type="button"
+          class="about-story-overlay"
+          aria-label={ZH ? '播放完整版影片並開啟音效' : 'Play the full story with sound'}
+        >
+          <span class="about-story-overlay-play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+          <span class="about-story-overlay-label">{ZH ? '觀看完整版影片' : 'Watch the full story'}</span>
+          <span class="about-story-overlay-hint">{ZH ? '點擊開啟音效' : 'Tap for sound'}</span>
+        </button>
       </div>
     </div>
   </section>
@@ -375,3 +393,116 @@ const description = ZH
 
   <Footer />
 </Layout>
+
+<style>
+  /* About「觀看我們的故事」播放遮罩 */
+  .about-story-overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .about-story-overlay.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .about-story-overlay-play {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding-left: 0.2rem;
+    border-radius: 9999px;
+    color: #fff;
+    background: rgba(20, 20, 16, 0.5);
+    border: 1px solid var(--color-gold-300);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.38);
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  .about-story-overlay:hover .about-story-overlay-play,
+  .about-story-overlay:focus-visible .about-story-overlay-play {
+    transform: scale(1.07);
+    background: rgba(20, 20, 16, 0.74);
+  }
+
+  .about-story-overlay-label {
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
+  }
+
+  .about-story-overlay-hint {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--color-gold-200);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.75);
+  }
+
+  @media (max-width: 640px) {
+    .about-story-overlay-play {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+    .about-story-overlay-label {
+      font-size: 0.78rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-story-overlay-play {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const video = document.getElementById('about-story-video') as HTMLVideoElement | null;
+    const overlay = document.getElementById('about-story-overlay') as HTMLButtonElement | null;
+    if (!video || !overlay) return;
+
+    const hideOverlay = () => overlay.classList.add('is-hidden');
+    const showOverlay = () => overlay.classList.remove('is-hidden');
+
+    // 點遮罩 = 開啟音效並播放（瀏覽器禁止非靜音自動播放，故自動播放一律靜音）
+    overlay.addEventListener('click', () => {
+      video.muted = false;
+      video.volume = 1;
+      const p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    });
+
+    // 音效已開（無論來自遮罩點擊或原生控制項）→ 收合遮罩
+    video.addEventListener('volumechange', () => {
+      if (!video.muted && video.volume > 0) hideOverlay();
+      else showOverlay();
+    });
+
+    // 保險：部分瀏覽器要在載入完成後再觸發一次，靜音自動播放才會啟動
+    const nudge = () => {
+      const p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    };
+    nudge();
+    window.addEventListener('load', nudge, { once: true });
+  })();
+</script>
