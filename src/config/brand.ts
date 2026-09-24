@@ -195,7 +195,7 @@ export const FIVE_PROOFS: Standard[] = [
     evidence: [
       'Continuous care relationship with a dedicated team',
       'Private consultation and recovery spaces',
-      'Care in English, Mandarin, Japanese, Korean and Spanish',
+      'Care in English, Mandarin, Japanese and Spanish',
     ],
     visual: '私密诊室 / 医患关系 / 细节',
     image: '/images/consultation-800.webp',

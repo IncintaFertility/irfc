@@ -14,7 +14,6 @@ const languages = [
   { lang: 'English', flag: '🇺🇸', langZh: '英語' },
   { lang: 'Mandarin Chinese', flag: '🇨🇳', langZh: '普通話' },
   { lang: 'Japanese', flag: '🇯🇵', langZh: '日語' },
-  { lang: 'Korean', flag: '🇰🇷', langZh: '韓語' },
   { lang: 'Spanish', flag: '🇪🇸', langZh: '西班牙語' },
 ];
 
@@ -60,7 +59,7 @@ const faqs = [
   { q: 'Can I start the process without traveling to California?', a: 'Yes. Your initial consultation, medical record review, and much of your diagnostic workup can be done remotely via telehealth and coordination with a local clinic near you. In-person visits are required only for specific procedures — primarily egg retrieval and embryo transfer.', qZh: '我可以不必前往加州就展開流程嗎？', aZh: '可以。您的初次諮詢、病歷檢閱，以及大部分診斷檢查，都能透過遠距醫療、並與您附近的當地診所協調來完成。僅特定療程（主要是取卵與胚胎植入）需要親自到院。' },
   { q: 'How long do I need to stay in California for an IVF cycle?', a: 'Most patients plan for 10–14 days for the egg retrieval phase, and a shorter visit (2–4 days) for embryo transfer if done in a separate cycle. We work with your schedule to minimize time away from home without compromising your care.', qZh: '進行一個 IVF 週期，我需要在加州停留多久？', aZh: '大多數病人會為取卵階段規劃 10–14 天；若胚胎植入在另一個週期進行，則停留較短（2–4 天）。我們會配合您的時程，在不影響療程的前提下，盡量減少您離家的時間。' },
   { q: 'Can IRFC coordinate with my local fertility clinic?', a: 'Yes. IRFC has experience working alongside clinics worldwide. We provide detailed instructions for monitoring protocols, and your local clinic sends results directly to our team. We review everything and adjust your protocol in real time.', qZh: 'IRFC 可以與我當地的生育診所協調嗎？', aZh: '可以。IRFC 具備與世界各地診所合作的經驗。我們會提供監測流程的詳細指示，您當地的診所也會直接將結果送交我們的團隊。我們會檢視所有資料，並即時調整您的療程。' },
-  { q: 'What languages does IRFC support?', a: "IRFC's clinical and coordination team speaks English, Mandarin Chinese, Japanese, Korean, and Spanish. Consultations and coordination can be conducted in your preferred language.", qZh: 'IRFC 提供哪些語言？', aZh: 'IRFC 的臨床與協調團隊會說英語、普通話、日語、韓語與西班牙語。諮詢與協調皆可以您偏好的語言進行。' },
+  { q: 'What languages does IRFC support?', a: "IRFC's clinical and coordination team speaks English, Mandarin Chinese, Japanese, and Spanish. Consultations and coordination can be conducted in your preferred language.", qZh: 'IRFC 提供哪些語言？', aZh: 'IRFC 的臨床與協調團隊會說英語、普通話、日語與西班牙語。諮詢與協調皆可以您偏好的語言進行。' },
   { q: 'Can I freeze embryos at IRFC and return for transfer later?', a: 'Absolutely. Many international patients choose to complete egg retrieval and embryo banking during one visit, then return for embryo transfer at a time that suits them. Embryos are stored in our TMRW Vault with RFID tracking and 24/7 monitoring for as long as needed.', qZh: '我可以在 IRFC 冷凍胚胎，之後再回來進行植入嗎？', aZh: '當然可以。許多國際病人會選擇在一次到訪中完成取卵與胚胎保存，之後再於適合自己的時間回來進行胚胎植入。胚胎儲存於我們的 TMRW Vault，具備 RFID 追蹤與 24/7 監測，可保存至需要為止。' },
   { q: 'Does IRFC assist with visa or travel arrangements?', a: 'IRFC does not arrange visas or travel directly, but we provide supporting documentation for visa applications where relevant (such as medical visit letters). Our coordinator can provide guidance on the type of visit required and assist with planning.', qZh: 'IRFC 會協助簽證或旅行安排嗎？', aZh: 'IRFC 不直接代辦簽證或旅行安排，但我們會在相關情況下提供簽證申請的佐證文件（例如就醫證明信）。我們的協調專員可就所需簽證類型提供指引，並協助規劃。' },
   { q: 'What are the costs for international patients?', a: 'IRFC provides a detailed cost estimate before treatment begins. International patients typically pay out of pocket; our financial coordinator will give you a transparent, itemized breakdown including all clinic fees. Financing options through CapexMD are available to eligible US-based patients.', qZh: '國際病人的費用如何計算？', aZh: 'IRFC 會在療程開始前提供詳細的費用預估。國際病人通常以自費方式支付；我們的財務協調專員會提供透明、逐項列出的明細，包含所有診所費用。符合資格、身處美國的病人，亦可選用 CapexMD 的融資方案。' },
@@ -70,14 +69,14 @@ const whyItems = [
   { title: '#1 US IVF Success Rates', desc: 'IRFC laboratory ranked first in the United States in 2016.', titleZh: '全美 IVF 成功率第一', descZh: 'IRFC 實驗室於 2016 年在全美排名居冠。' },
   { title: 'Telehealth-First Approach', desc: 'Most consultations and follow-ups can be done remotely.', titleZh: '遠距醫療優先', descZh: '大多數諮詢與後續追蹤皆可遠端進行。' },
   { title: 'Remote Monitoring Coordination', desc: 'We work with clinics worldwide to manage your cycle from anywhere.', titleZh: '遠端監測協調', descZh: '我們與世界各地的診所合作，讓您在任何地方都能管理療程。' },
-  { title: 'Multilingual Team', desc: 'Clinical support in English, Mandarin, Japanese, Korean, and Spanish.', titleZh: '多語團隊', descZh: '提供英語、普通話、日語、韓語與西班牙語的臨床支援。' },
+  { title: 'Multilingual Team', desc: 'Clinical support in English, Mandarin, Japanese, and Spanish.', titleZh: '多語團隊', descZh: '提供英語、普通話、日語與西班牙語的臨床支援。' },
   { title: 'TMRW Vault Storage', desc: 'RFID-tracked, 24/7 monitored embryo and egg storage for long-term peace of mind.', titleZh: 'TMRW Vault 儲存', descZh: '具備 RFID 追蹤、24/7 監測的胚胎與卵子儲存，讓您長期安心。' },
 ];
 
 const title = ZH ? '國際與外地病人' : 'International & Out-of-Town Patients';
 const description = ZH
-  ? 'IRFC 歡迎來自美國各地與世界各地的病人。遠距醫療諮詢、遠端監測協調，以及英語、普通話、日語、韓語與西班牙語的多語支援。'
-  : 'IRFC welcomes patients from across the US and internationally. Telehealth consultations, remote monitoring coordination, and multilingual support in English, Mandarin, Japanese, Korean, and Spanish.';
+  ? 'IRFC 歡迎來自美國各地與世界各地的病人。遠距醫療諮詢、遠端監測協調，以及英語、普通話、日語與西班牙語的多語支援。'
+  : 'IRFC welcomes patients from across the US and internationally. Telehealth consultations, remote monitoring coordination, and multilingual support in English, Mandarin, Japanese, and Spanish.';
 ---
 <!-- marked: component for /international-patients and /zh-hant/international-patients -->
 <Layout title={title} description={description}>
@@ -125,8 +124,8 @@ const description = ZH
           </p>
           <p class="text-sm text-stone-500 leading-relaxed">
             {ZH
-              ? '我們的多語協調團隊以英語、普通話、日語、韓語與西班牙語為您提供支援，讓您無論身處何地，都不會在溝通中漏失任何資訊。'
-              : 'Our multilingual coordination team supports you in English, Mandarin, Japanese, Korean, and Spanish, so nothing is lost in translation no matter where you are.'}
+              ? '我們的多語協調團隊以英語、普通話、日語與西班牙語為您提供支援，讓您無論身處何地，都不會在溝通中漏失任何資訊。'
+              : 'Our multilingual coordination team supports you in English, Mandarin, Japanese, and Spanish, so nothing is lost in translation no matter where you are.'}
           </p>
         </div>
       </div>

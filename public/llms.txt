@@ -8,31 +8,67 @@ INCINTA is the parent brand. IRFC (Incinta Reproductive Fertility Center) is the
 - Belief: "Life Is the Ultimate Art."
 - Core: "Science · Art · Life"
 - Promise: "Every Extraordinary Life Deserves an Extraordinary Beginning."
-- The INCINTA Standard (Five Standards): Science, Revealed · Architected for Life · Life, Treasured · Systems of Excellence · Private by Nature.
-- Care is delivered in English, Mandarin, Japanese, Korean, and Spanish.
+- Expression: "Where Art Nurtures Possibility, and Science Listens for a Heartbeat."
+- Care is delivered in English, Mandarin, Japanese, and Spanish.
+
+## The INCINTA Standard (six pillars)
+The six pillars of care that define IRFC, each backed by verifiable evidence:
+- Collective expertise — one patient, the expertise of an entire team.
+- Precision & personalization — care crafted for each patient's life.
+- Laboratory excellence — an embryology lab ranked #1 in US IVF success rates (2016).
+- Privacy & transparency — information kept private, practices kept open.
+- The art of care — science and humanity, carried through the hardest parts.
+- Exceptional care, within reach — four clinics, telehealth, and transparent financing.
+
+## The INCINTA Proofs (five proofs)
+Trust made visible through hard, verifiable assets (distinct from the six pillars above):
+- Science, Revealed — EmbryoScope+ time-lapse, #1-ranked embryology team, RI Witness electronic witnessing.
+- Architected for Life — independent air handling, purpose-built clinical flow, VOC-controlled labs.
+- Life, Treasured — TMRW Vault smart cryogenic storage, continuous monitoring, redundant alarms.
+- Systems of Excellence — accredited surgery centers, Kaiser Center of Excellence, one clinical standard.
+- Private by Nature — continuous dedicated-team care, private spaces, multilingual service.
 
 ## Primary conversion actions
 - Schedule a Consultation (primary call to action)
-- Find a Location / Call (949) 453-8600
+- Find a Location / Call (424) 432-4732
 
 ## Sections
-- [Home](https://irfc.com/): Brand belief, the five standards overview, connected care team, patient voices, and locations.
-- [Why IRFC](https://irfc.com/why-irfc): The five INCINTA Standards and the verifiable evidence behind each.
+- [Home](https://irfc.com/): Brand belief, the six pillars, connected care team, patient voices, and locations.
+- [Why IRFC](https://irfc.com/why-irfc): The INCINTA Standard — six pillars and the verifiable proofs behind each.
 - [About](https://irfc.com/about): The IRFC story — the union of Reproductive Fertility Center and Incinta, and the patient-first model of care.
-- [Our Team](https://irfc.com/team): Physicians and embryology leadership.
+- [Our Team](https://irfc.com/team): Physicians, embryology leadership, and care coordinators.
   - [Dr. James P. Lin](https://irfc.com/team/dr-james-lin): Founder & Medical Director.
-  - [Dr. Yufen Xie](https://irfc.com/team/dr-yufen-xie): Reproductive endocrinologist.
-  - [Dr. Zitao Liu](https://irfc.com/team/dr-zitao-liu): Reproductive endocrinologist.
-- [Technology](https://irfc.com/technology): EmbryoScope+ time-lapse monitoring, RI Witness electronic witnessing, TMRW Vault cryogenic storage, and the #1-ranked (2016) embryology laboratory.
+  - [Dr. Tiffanny LaTrice Jones](https://irfc.com/team/dr-tiffanny-jones): Reproductive endocrinology specialist.
+  - [Dr. Zitao Liu](https://irfc.com/team/dr-zitao-liu): Associate Chief Medical Officer.
+  - [Yufen Xie, PhD](https://irfc.com/team/dr-yufen-xie): IVF Laboratory Director.
+  - [Hyang Park, M.S.](https://irfc.com/team/hyang-park): IVF Laboratory Supervisor.
+  - [Lily Hao, MSN, WHNP](https://irfc.com/team/lily-hao): Nurse Manager.
+  - [Kelly Zhao](https://irfc.com/team/kelly-zhao): Third-Party Coordinator.
+- [Our Lab / Technology](https://irfc.com/technology): EmbryoScope+ time-lapse monitoring, RI Witness electronic witnessing, TMRW Vault cryogenic storage, and the #1-ranked (2016) embryology laboratory.
 - [Outcomes](https://irfc.com/outcomes): Success rates and clinical data.
 - [Testimonials](https://irfc.com/testimonials): Patient stories and Google reviews.
 - [FAQ](https://irfc.com/faq): Common questions about treatment, cost, and process.
 - [Locations](https://irfc.com/locations): Four Southern California centers and directions.
-- [Contact](https://irfc.com/contact): Consultation requests and clinic directory.
+  - [Beverly Hills](https://irfc.com/locations/beverly-hills): Los Angeles, CA — (213) 600-8088.
+  - [Torrance](https://irfc.com/locations/torrance): Torrance, CA — (424) 212-4087.
+  - [Irvine](https://irfc.com/locations/irvine): Irvine, CA — (949) 453-8600.
+  - [Corona](https://irfc.com/locations/corona): Corona, CA — (951) 272-2221.
+- [Schedule a Consultation](https://irfc.com/appointment): Booking hub for new-patient consultations (replaces the former /contact page).
 - [Financing](https://irfc.com/financing): Programs, insurance, and payment options.
+- [Insurance](https://irfc.com/insurance): What your plan may cover.
 - [Patient Journey](https://irfc.com/patient-journey): Step-by-step from first consultation to pregnancy.
 - [Patient Resources](https://irfc.com/patient-resources): Guides and support.
-- [International Patients](https://irfc.com/international-patients): Cross-border care coordination.
+- [Patient Portal](https://irfc.com/patient-portal): Access records and messages.
+- [International Patients](https://irfc.com/international-patients): Cross-border care coordination and telehealth.
+- [Fertility Insights (Blog)](https://irfc.com/blog): Articles and patient guides.
+
+## The INCINTA Standard — pillar pages
+- [Collective expertise](https://irfc.com/standards/collective-expertise)
+- [Precision & personalization](https://irfc.com/standards/precision-personalization)
+- [Laboratory excellence](https://irfc.com/standards/laboratory-excellence)
+- [Privacy & transparency](https://irfc.com/standards/privacy-transparency)
+- [The art of care](https://irfc.com/standards/art-of-care)
+- [Exceptional care, within reach](https://irfc.com/standards/care-within-reach)
 
 ## Treatments (Services)
 - [IVF](https://irfc.com/services/ivf): In vitro fertilization.
@@ -58,5 +94,5 @@ INCINTA is the parent brand. IRFC (Incinta Reproductive Fertility Center) is the
 - [Accessibility](https://irfc.com/accessibility)
 
 ## Notes
-- Demo pages (homepage-a / homepage-b) are staging variants and are excluded from indexing.
-- This file is maintained manually and should stay consistent with the brand language in src/config/brand.ts.
+- This file is maintained manually and should stay consistent with the brand language in src/config/brand.ts and the six standards in src/data/standards.ts.
+- The site is available in English and Traditional Chinese (zh-hant); this index describes the English site.

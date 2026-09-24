@@ -224,9 +224,9 @@ export const clinicLocations: ClinicLocation[] = [
     sameAs: 'https://www.google.com/maps/search/?api=1&query=Reproductive+Fertility+Center+16300+Sand+Canyon+Ave+Irvine+CA+92618',
     mapX: 67.7, mapY: 70.9,
     introEn:
-      "Our Irvine location is IRFC's Orange County flagship — a dedicated fertility center with a full surgery center and IVF laboratory on-site at 16300 Sand Canyon Avenue. Serving Irvine, Tustin, Newport Beach, and greater Orange County, the clinic brings the complete journey together: consultation, monitoring, retrieval, transfer, and cryopreservation, all in one building with on-site parking. The embryology lab pairs EmbryoScope+ time-lapse monitoring with RI Witness electronic witnessing and the TMRW smart cryo vault. Our medical director and lab leadership practice here, and the same coordinated model connects you to every IRFC location. Mandarin, Spanish, Korean, and Japanese coordination is available. Choose Irvine for the fullest on-site capability in Southern California.",
+      "Our Irvine location is IRFC's Orange County flagship — a dedicated fertility center with a full surgery center and IVF laboratory on-site at 16300 Sand Canyon Avenue. Serving Irvine, Tustin, Newport Beach, and greater Orange County, the clinic brings the complete journey together: consultation, monitoring, retrieval, transfer, and cryopreservation, all in one building with on-site parking. The embryology lab pairs EmbryoScope+ time-lapse monitoring with RI Witness electronic witnessing and the TMRW smart cryo vault. Our medical director and lab leadership practice here, and the same coordinated model connects you to every IRFC location. Mandarin, Spanish, and Japanese coordination is available. Choose Irvine for the fullest on-site capability in Southern California.",
     introZh:
-      '我們的 Irvine 據點是 IRFC 在橙縣的旗艦——一間設有完整手術中心與現場 IVF 實驗室的專屬生育中心，位於 16300 Sand Canyon Avenue。服務 Irvine、Tustin、Newport Beach 與更廣大的橙縣，診所將完整的旅程匯聚一處：諮詢、監測、取卵、植入與冷凍保存，全在同一棟建築、設有現場停車。胚胎學實驗室結合 EmbryoScope+ 連續縮時監測、RI Witness 電子見證系統，以及 TMRW 智慧冷凍庫。我們的醫療總監與實驗室領導在此執業，同一套協調模式也將您連結到每一間 IRFC 據點。我們提供國語（中文）、西班牙語、韓語與日語協調。若要在南加州享有最完整的現場能力，請選擇 Irvine。',
+      '我們的 Irvine 據點是 IRFC 在橙縣的旗艦——一間設有完整手術中心與現場 IVF 實驗室的專屬生育中心，位於 16300 Sand Canyon Avenue。服務 Irvine、Tustin、Newport Beach 與更廣大的橙縣，診所將完整的旅程匯聚一處：諮詢、監測、取卵、植入與冷凍保存，全在同一棟建築、設有現場停車。胚胎學實驗室結合 EmbryoScope+ 連續縮時監測、RI Witness 電子見證系統，以及 TMRW 智慧冷凍庫。我們的醫療總監與實驗室領導在此執業，同一套協調模式也將您連結到每一間 IRFC 據點。我們提供國語（中文）、西班牙語與日語協調。若要在南加州享有最完整的現場能力，請選擇 Irvine。',
     landmarksEn: [
       { label: 'By car', text: 'Off the 405 and 5 interchange at Sand Canyon Avenue, with easy access across Orange County.' },
       { label: 'Nearby', text: 'Close to Hoag and the Irvine business and medical districts.' },
@@ -255,8 +255,8 @@ export const clinicLocations: ClinicLocation[] = [
       {
         q: 'Which languages are supported at Irvine?',
         qZh: 'Irvine 支援哪些語言？',
-        a: 'English, Mandarin Chinese, Spanish, Korean, and Japanese coordination are available.',
-        aZh: '我們提供英文、國語（中文）、西班牙語、韓語與日語協調。',
+        a: 'English, Mandarin Chinese, Spanish, and Japanese coordination are available.',
+        aZh: '我們提供英文、國語（中文）、西班牙語與日語協調。',
       },
     ],
   },
