@@ -7,7 +7,12 @@ export default defineConfig({
   output: 'static',
   site: 'https://irfc.com',
   integrations: [
-    sitemap({ filter: (page) => !page.includes('/contact/success/') }),
+    // 排除提交成功后的薄确认页（en + zh-hant），避免无意义的页面进 sitemap
+    sitemap({
+      filter: (page) =>
+        !page.includes('/appointment/success/') &&
+        !page.includes('/contact/success/'),
+    }),
   ],
   vite: {
     plugins: [tailwindcss()],

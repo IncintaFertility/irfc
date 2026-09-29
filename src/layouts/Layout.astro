@@ -123,12 +123,15 @@ const breadcrumbSchema = segs.length
   <head>
     <meta charset="UTF-8" />
 
-    {/* 表单页面不加载 GTM：避免联系方式 / 潜在 PHI 经无 BAA 的 Google 外泄 */}
+    {/* 表单页面不加载 GTM：避免联系方式 / 潜在 PHI 经无 BAA 的 Google 外泄。
+        非表单页改用 idle 懒加载：先建 dataLayer，待主线程空闲(兜底 window.load)再注入 gtm.js，
+        移出首屏关键路径，降低移动端 TBT / 改善 Lighthouse 性能；dataLayer 语义不变。 */}
     {!isFormPage && (
       <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      new Date().getTime(),event:'gtm.js'});function g(){var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+      if(w.requestIdleCallback)w.requestIdleCallback(g,{timeout:3000});else w.addEventListener('load',g);
       })(window,document,'script','dataLayer','GTM-TLN399PK');</script>
     )}
 

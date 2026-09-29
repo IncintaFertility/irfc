@@ -44,9 +44,11 @@ const description = ZH
   <!-- 01 / HERO — First impression should convey the brand, not a row of treatment buttons -->
   <section class="idx-hero">
     <video id="idx-hero-video" class="idx-hero-bg" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="auto" width="1920" height="1080" poster="/images/lobby-wide.webp">
-      <!-- mp4 MUST come first: WeChat's Android X5 kernel cannot decode webm (VP8/VP9)
-           and may grab the first source it "can play" then fail autoplay. mp4 is the
-           universally-supported container for both iOS Safari and X5. -->
+      <!-- 移动端(≤768px)走 720p 轻量源，避免下载 16MB 的 1080p 主源拖垮首屏；
+           mp4 仍排各档首位：WeChat X5 内核无法解码 webm，须先给 mp4 才肯 autoplay。 -->
+      <source media="(max-width: 768px)" src="/videos/brand-promo-mobile.mp4" type="video/mp4" />
+      <source media="(max-width: 768px)" src="/videos/brand-promo-mobile.webm" type="video/webm" />
+      <!-- 桌面端(>768px)用 1080p 主源 -->
       <source src="/videos/brand-promo.mp4" type="video/mp4" />
       <source src="/videos/brand-promo.webm" type="video/webm" />
     </video>
@@ -244,6 +246,17 @@ const description = ZH
       document.addEventListener('visibilitychange', function () {
         if (!document.hidden && v.paused) tryPlay();
       });
+
+      // 滚出视口暂停解码(省 CPU/省电)，回到视口再播；首屏自动播放刚需不受影响。
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { if (v.paused) tryPlay(); }
+            else if (!v.paused) { v.pause(); }
+          });
+        }, { threshold: 0.1 });
+        io.observe(v);
+      }
     })();
   </script>
 </Layout>
