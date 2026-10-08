@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -37,11 +38,37 @@ const labItems = [
   { title: ZH ? 'EmbryoScope+ 監控' : 'EmbryoScope+ Monitoring', desc: ZH ? '所有胚胎——無論 ICSI 或傳統受精——都在我們的 EmbryoScope+ 縮時培養箱中培養，能在不干擾培養的情況下持續記錄發育影像。' : 'All embryos — ICSI or conventionally fertilized — are cultured in our EmbryoScope+ time-lapse incubators, capturing continuous development images without disturbing the culture.' },
   { title: ZH ? '精準顯微操作' : 'Precision Micromanipulation', desc: ZH ? 'IRFC 採用最新的顯微操作系統與 Piezo-ICSI 技術，為適合的卵子提供更溫和注射方式。' : 'IRFC uses the latest micromanipulation systems and Piezo-ICSI techniques for eggs that benefit from gentler injection methods.' },
 ];
+const schemaTitle = ZH ? '卵胞質內單精子注入 (ICSI)' : 'Intracytoplasmic Sperm Injection (ICSI)';
+const schemaDesc = ZH ? 'IRFC 的 ICSI——針對男性因素不孕、受精失敗與 PGT 週期的卵胞質內單精子注入。了解其運作方式與最適用對象。' : 'ICSI at IRFC — intracytoplasmic sperm injection for male factor infertility, fertilization failure, and PGT cycles. Learn how it works and who benefits most.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: schemaTitle,
+  alternateName: 'ICSI',
+  description: schemaDesc,
+  url: schemaUrl,
+  provider: { '@type': 'MedicalOrganization', name: LEGAL_ENTITY, url: SITE_URL },
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? '卵胞質內單精子注入 (ICSI)' : 'Intracytoplasmic Sperm Injection (ICSI)'}
   description={ZH ? 'IRFC 的 ICSI——針對男性因素不孕、受精失敗與 PGT 週期的卵胞質內單精子注入。了解其運作方式與最適用對象。' : 'ICSI at IRFC — intracytoplasmic sperm injection for male factor infertility, fertilization failure, and PGT cycles. Learn how it works and who benefits most.'}
+  schema={pageSchema}
 >
   <Nav />
 

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -78,11 +79,38 @@ const faqs = [
   { q: ZH ? '反覆懷孕流失後的預後如何？' : 'What is the prognosis after recurrent pregnancy loss?', a: ZH ? '優於多數病患預期。即便經歷三次流失，在適當照護下未來活產的機率仍有 60–70% 或更高，取決於年齡與找出的原因。搭配 PGT-A，各年齡層每次整倍體植入的活產率接近 60–65%。醫師會依你的特定病史與評估結果，給出個別化預後。' : 'Better than most patients expect. Even after three losses, the probability of a future live birth with appropriate care is 60–70% or higher, depending on age and the cause identified. With PGT-A, live birth rates per euploid transfer approach 60–65% across age groups. Your physician will give you an individualized prognosis based on your specific history and evaluation results.' },
   { q: ZH ? '流產後，我該等多久再嘗試？' : 'Should I wait before trying again after a miscarriage?', a: ZH ? '生理上，多數醫師建議等待 1–2 個正常月經週期再嘗試受孕。情感上，時程是個人的——你不必在準備好之前就勉強進行。當你準備就緒，IRFC 能評估你的狀況，協助優化下一次嘗試的方向。' : 'Physically, most physicians recommend waiting one to two normal menstrual cycles before attempting conception again. Emotionally, the timeline is personal — there is no obligation to proceed before you feel ready. When you are ready, IRFC can evaluate your situation and help optimize your approach for the next attempt.' },
 ];
+const schemaTitle = ZH ? '反覆流產' : 'Recurrent Pregnancy Loss';
+const schemaDesc = ZH ? 'IRFC 提供反覆流產的全面評估——找出原因、擬定個人化治療計畫，並在邁向成功懷孕的路上提供支持。' : 'IRFC provides a comprehensive evaluation for recurrent pregnancy loss — identifying causes, building a personalized treatment plan, and supporting patients toward a successful pregnancy.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: schemaTitle,
+  description: schemaDesc,
+  url: schemaUrl,
+  inLanguage: ZH ? 'zh-Hant' : 'en-US',
+  audience: { '@type': 'Patient' },
+  isPartOf: { '@type': 'WebSite', url: SITE_URL },
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? '反覆流產' : 'Recurrent Pregnancy Loss'}
   description={ZH ? 'IRFC 提供反覆流產的全面評估——找出原因、擬定個人化治療計畫，並在邁向成功懷孕的路上提供支持。' : 'IRFC provides a comprehensive evaluation for recurrent pregnancy loss — identifying causes, building a personalized treatment plan, and supporting patients toward a successful pregnancy.'}
+  schema={pageSchema}
 >
   <Nav />
 

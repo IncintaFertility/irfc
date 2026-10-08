@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -36,11 +37,38 @@ const indications = [
   ZH ? '需要進行胚胎著床前基因檢測（PGT）' : 'A need for preimplantation genetic testing (PGT)',
   ZH ? '計畫使用捐卵或代理孕母' : 'Plans to use donor eggs or gestational surrogacy',
 ];
+const schemaTitle = ZH ? '體外受精 (IVF)' : 'In Vitro Fertilization (IVF)';
+const schemaDesc = ZH ? 'IRFC 的 IVF 療程——結合 EmbryoScope+ 監控的體外受精逐步指南。了解過程、適應對象，以及如何開始。' : 'IVF at IRFC — step-by-step guide to in vitro fertilization with EmbryoScope+ monitoring. Learn what to expect, who is a candidate, and how to get started.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: schemaTitle,
+  alternateName: 'IVF',
+  description: schemaDesc,
+  url: schemaUrl,
+  provider: { '@type': 'MedicalOrganization', name: LEGAL_ENTITY, url: SITE_URL },
+  howPerformed: steps.map((s) => s.title + ': ' + s.desc).join(' '),
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? '體外受精 (IVF)' : 'In Vitro Fertilization (IVF)'}
   description={ZH ? 'IRFC 的 IVF 療程——結合 EmbryoScope+ 監控的體外受精逐步指南。了解過程、適應對象，以及如何開始。' : 'IVF at IRFC — step-by-step guide to in vitro fertilization with EmbryoScope+ monitoring. Learn what to expect, who is a candidate, and how to get started.'}
+  schema={pageSchema}
 >
   <Nav />
 

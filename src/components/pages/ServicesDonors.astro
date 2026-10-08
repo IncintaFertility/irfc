@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -39,11 +40,38 @@ const faqs = [
   { q: ZH ? '男同志伴侶的雙方都能提供精子嗎？' : 'Can both partners in a same-sex male couple contribute sperm?', a: ZH ? '可以。可使用雙方精子與捐卵製作胚胎，再以 PGT 辨識每顆胚胎的基因來源。部分伴侶會依序分別植入來自雙方的胚胎。醫師會與你討論相關的臨床與後勤考量。' : 'Yes. It is possible to create embryos using sperm from both partners and donor eggs, then use PGT to identify each embryo\'s genetic origin. Some couples choose to transfer embryos from each partner sequentially. Your physician will discuss the clinical and logistical considerations involved.' },
   { q: ZH ? '使用捐卵或代孕母的費用是多少？' : 'What is the cost of using donor eggs or a gestational carrier?', a: ZH ? '第三方生育包含臨床費用（IVF 週期、胚胎植入）、機構費用、捐贈者補償與法律費用。總費用依安排而有很大差異。我們的財務協調師會在你開始前提供詳細的費用明細，並有融資方案可供選擇。' : 'Third-party reproduction involves clinical fees (IVF cycle, embryo transfer), agency fees, donor compensation, and legal fees. Total costs vary widely depending on the arrangement. Our financial coordinator provides a detailed cost breakdown before you begin, and financing options are available.' },
 ];
+const schemaTitle = ZH ? '捐卵與代理孕母 — 第三方生育' : 'Donors & Surrogacy — Third-Party Reproduction';
+const schemaDesc = ZH ? 'IRFC 提供完整的第三方生育服務，包含捐卵、捐精、捐贈胚胎，以及妊娠代孕的協調。' : 'IRFC provides comprehensive third-party reproduction services including egg donation, sperm donation, embryo donation, and gestational surrogacy coordination.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: schemaTitle,
+  description: schemaDesc,
+  url: schemaUrl,
+  inLanguage: ZH ? 'zh-Hant' : 'en-US',
+  audience: { '@type': 'Patient' },
+  isPartOf: { '@type': 'WebSite', url: SITE_URL },
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? '捐卵與代理孕母 — 第三方生育' : 'Donors & Surrogacy — Third-Party Reproduction'}
   description={ZH ? 'IRFC 提供完整的第三方生育服務，包含捐卵、捐精、捐贈胚胎，以及妊娠代孕的協調。' : 'IRFC provides comprehensive third-party reproduction services including egg donation, sperm donation, embryo donation, and gestational surrogacy coordination.'}
+  schema={pageSchema}
 >
   <Nav />
 

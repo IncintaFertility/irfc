@@ -20,6 +20,8 @@ const pick = (zh: string | undefined, en: string) => (ZH ? (zh ?? en) : en);
 const title = ZH ? `${member.schemaNameZh} — ${member.roleZh}` : `${member.schemaName} — ${member.role}`;
 const description = pick(member.leadZh, member.lead);
 
+const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': member.schemaType,
@@ -30,7 +32,7 @@ const schema = {
   ...(member.schemaType === 'Physician' ? { medicalSpecialty: 'Reproductive Medicine' } : {}),
   worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
   image: SITE_URL + member.photo,
-  url: SITE_URL + '/team/' + member.slug,
+  url: canonicalUrl,
 };
 
 const related = member.relatedSlugs

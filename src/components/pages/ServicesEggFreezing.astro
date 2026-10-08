@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -41,11 +42,38 @@ const vaultFeatures = [
   ZH ? '軍規等級、符合 HIPAA 的加密' : 'Military-grade HIPAA-compliant encryption',
   ZH ? '遠端專家團隊監督與異常警示' : 'Remote expert team oversight and anomaly alerts',
 ];
+const schemaTitle = ZH ? '凍卵與生育保存' : 'Egg Freezing & Fertility Preservation';
+const schemaDesc = ZH ? 'IRFC 的凍卵療程——以玻璃化冷凍與 TMRW Vault 保存，守護你的生育未來。了解流程、時程，以及過程中會發生什麼。' : 'Egg freezing at IRFC — protect your reproductive future with vitrification and TMRW Vault storage. Learn the process, timeline, and what to expect.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: schemaTitle,
+  alternateName: 'Egg Freezing',
+  description: schemaDesc,
+  url: schemaUrl,
+  provider: { '@type': 'MedicalOrganization', name: LEGAL_ENTITY, url: SITE_URL },
+  howPerformed: steps.map((s) => s.title + ': ' + s.desc).join(' '),
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? '凍卵與生育保存' : 'Egg Freezing & Fertility Preservation'}
   description={ZH ? 'IRFC 的凍卵療程——以玻璃化冷凍與 TMRW Vault 保存，守護你的生育未來。了解流程、時程，以及過程中會發生什麼。' : 'Egg freezing at IRFC — protect your reproductive future with vitrification and TMRW Vault storage. Learn the process, timeline, and what to expect.'}
+  schema={pageSchema}
 >
   <Nav />
 

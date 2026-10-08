@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -32,11 +33,38 @@ const indications = [
   ZH ? '使用捐精的單身者或女同志伴侶' : 'Single individuals or same-sex female couples using donor sperm',
   ZH ? '偏好較低侵入性第一步的伴侶' : 'Couples preferring a lower-intervention first step',
 ];
+const schemaTitle = ZH ? '宮腔內人工授精 (IUI)' : 'Intrauterine Insemination (IUI)';
+const schemaDesc = ZH ? 'IRFC 的 IUI 療程——一項微創的第一線生育治療。了解宮腔內人工授精如何運作、適用對象，以及過程中會發生什麼。' : 'IUI at IRFC — a minimally invasive first-line fertility treatment. Learn how intrauterine insemination works, who it helps, and what to expect.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: schemaTitle,
+  alternateName: 'IUI',
+  description: schemaDesc,
+  url: schemaUrl,
+  provider: { '@type': 'MedicalOrganization', name: LEGAL_ENTITY, url: SITE_URL },
+  howPerformed: steps.map((s) => s.title + ': ' + s.desc).join(' '),
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? '宮腔內人工授精 (IUI)' : 'Intrauterine Insemination (IUI)'}
   description={ZH ? 'IRFC 的 IUI 療程——一項微創的第一線生育治療。了解宮腔內人工授精如何運作、適用對象，以及過程中會發生什麼。' : 'IUI at IRFC — a minimally invasive first-line fertility treatment. Learn how intrauterine insemination works, who it helps, and what to expect.'}
+  schema={pageSchema}
 >
   <Nav />
 

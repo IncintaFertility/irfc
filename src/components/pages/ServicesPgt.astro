@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -43,11 +44,37 @@ const ageRows = [
   { age: ZH ? '38–40 歲' : 'Age 38–40', rate: ZH ? '約 50–60% 胚胎受影響' : '~50–60% of embryos affected' },
   { age: ZH ? '40 歲以上' : 'Over 40', rate: ZH ? '約 70–80% 胚胎受影響' : '~70–80% of embryos affected' },
 ];
+const schemaTitle = ZH ? '胚胎著床前基因檢測 (PGT)' : 'Preimplantation Genetic Testing (PGT)';
+const schemaDesc = ZH ? 'IRFC 的 PGT——在植入前篩檢胚胎的染色體異常與遺傳疾病。了解 PGT-A、PGT-M 與 PGT-SR。' : 'PGT at IRFC — screen embryos for chromosomal abnormalities and inherited conditions before transfer. Learn about PGT-A, PGT-M, and PGT-SR.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: schemaTitle,
+  alternateName: 'PGT',
+  description: schemaDesc,
+  url: schemaUrl,
+  provider: { '@type': 'MedicalOrganization', name: LEGAL_ENTITY, url: SITE_URL },
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? '胚胎著床前基因檢測 (PGT)' : 'Preimplantation Genetic Testing (PGT)'}
   description={ZH ? 'IRFC 的 PGT——在植入前篩檢胚胎的染色體異常與遺傳疾病。了解 PGT-A、PGT-M 與 PGT-SR。' : 'PGT at IRFC — screen embryos for chromosomal abnormalities and inherited conditions before transfer. Learn about PGT-A, PGT-M, and PGT-SR.'}
+  schema={pageSchema}
 >
   <Nav />
 

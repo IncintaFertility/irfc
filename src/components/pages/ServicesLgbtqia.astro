@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../Nav.astro';
 import Footer from '../Footer.astro';
 import { getLocaleFromPath, t, type Locale } from '../../i18n';
+import { SITE_URL, LEGAL_ENTITY } from '../../config/brand';
 import { localeHref } from '../../i18n/routes';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -52,11 +53,38 @@ const startSteps = [
   { n: '02', title: ZH ? '生育評估' : 'Fertility Evaluation', desc: ZH ? '依你的路徑安排適當檢查——卵巢庫存、精液分析或子宮評估，視你的狀況而定。' : 'Appropriate testing is ordered based on your pathway — ovarian reserve, semen analysis, or uterine evaluation, depending on your situation.' },
   { n: '03', title: ZH ? '治療與協調' : 'Treatment & Coordination', desc: ZH ? '你的臨床團隊與第三方協調師共同管理治療、捐贈者挑選或代孕安排的每一個層面。' : 'Your clinical team and third-party coordinator work together to manage every aspect of your treatment, donor selection, or surrogacy arrangement.' },
 ];
+const schemaTitle = ZH ? 'LGBTQIA+ 成家' : 'LGBTQIA+ Family Building';
+const schemaDesc = ZH ? 'IRFC 為 LGBTQIA+ 個人與伴侶提供包容、肯定式的生育照護——同志伴侶、跨性別病患，以及自主選擇的單身父母。' : 'IRFC provides inclusive, affirming fertility care for LGBTQIA+ individuals and couples — same-sex couples, transgender patients, and single parents by choice.';
+
+// ── Structured data (JSON-LD)：Google / AI 可讀的療程結構化資料 ──
+// schemaDescription 與下方 <Layout> 的 meta description 同源，避免兩處文案漂移。
+const schemaUrl = new URL(Astro.url.pathname, SITE_URL).href;
+const treatmentSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: schemaTitle,
+  description: schemaDesc,
+  url: schemaUrl,
+  inLanguage: ZH ? 'zh-Hant' : 'en-US',
+  audience: { '@type': 'Patient' },
+  isPartOf: { '@type': 'WebSite', url: SITE_URL },
+};
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+const pageSchema = [treatmentSchema, faqPageSchema];
 ---
 
 <Layout
   title={ZH ? 'LGBTQIA+ 成家' : 'LGBTQIA+ Family Building'}
   description={ZH ? 'IRFC 為 LGBTQIA+ 個人與伴侶提供包容、肯定式的生育照護——同志伴侶、跨性別病患，以及自主選擇的單身父母。' : 'IRFC provides inclusive, affirming fertility care for LGBTQIA+ individuals and couples — same-sex couples, transgender patients, and single parents by choice.'}
+  schema={pageSchema}
 >
   <Nav />
 
