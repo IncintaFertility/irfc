@@ -27,13 +27,13 @@ const ZH = locale === 'zh-hant';
           class="w-16 h-16 rounded-full flex items-center justify-center"
           style="background: var(--color-amethyst-600);"
         >
-          <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <svg aria-hidden="true" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
       </div>
 
-      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-champagne-600); font-family: var(--font-sans);">
+      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-gold-text); font-family: var(--font-sans);">
         {ZH ? '已收到請求' : 'Request Received'}
       </p>
 
@@ -41,7 +41,7 @@ const ZH = locale === 'zh-hant';
         style="font-family: var(--font-serif);"
         class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight"
       >
-        {ZH ? <>謝謝您。<br /><em class="not-italic" style="color: var(--color-champagne-600);">您的旅程自此開始。</em></> : <>Thank you.<br /><em class="not-italic" style="color: var(--color-champagne-600);">Your beginning starts here.</em></>}
+        {ZH ? <>謝謝您。<br /><em class="not-italic" style="color: var(--color-gold-text);">您的旅程自此開始。</em></> : <>Thank you.<br /><em class="not-italic" style="color: var(--color-gold-text);">Your beginning starts here.</em></>}
       </h1>
 
       <p class="text-lg text-stone-500 font-light leading-relaxed mb-4 max-w-xl mx-auto">

@@ -37,7 +37,7 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-5">
           <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
-          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? clinic.regionZh : clinic.region}</span>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? clinic.regionZh : clinic.region}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-stone-900 text-4xl md:text-5xl lg:text-6xl font-light leading-none mb-5">
           {ZH ? `${clinic.city} 生育診所` : `${clinic.city} Fertility Clinic`}
@@ -67,7 +67,7 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
       <!-- Quick info card -->
       <aside class="lg:col-span-1">
         <div class="rounded-[1.5rem] p-7 shadow-xl bg-stone-50" style="font-family: var(--font-sans);">
-          <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600);">{ZH ? '診所資訊' : 'Clinic Info'}</p>
+          <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-text);">{ZH ? '診所資訊' : 'Clinic Info'}</p>
           <div class="space-y-5">
             <div>
               <p class="text-[11px] tracking-[0.18em] uppercase mb-1" style="color: var(--color-stone-400);">{ZH ? '地址' : 'Address'}</p>
@@ -103,14 +103,14 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
 
       <!-- About -->
       <div class="lg:col-span-2">
-        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '關於本據點' : 'About This Location'}</p>
+        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '關於本據點' : 'About This Location'}</p>
         <p style="font-family: var(--font-serif);" class="text-2xl md:text-3xl font-light text-stone-900 mb-6 leading-snug">
           {ZH ? `生育照護，來到 ${clinic.city}。` : `Fertility care, right here in ${clinic.city}.`}
         </p>
         <p class="text-stone-600 leading-relaxed mb-8">{ZH ? clinic.introZh : clinic.introEn}</p>
 
         <!-- Services -->
-        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '提供的療程' : 'Treatments Offered'}</p>
+        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '提供的療程' : 'Treatments Offered'}</p>
         <div class="flex flex-wrap gap-2.5 mb-10">
           {clinic.services.map((slug) => (
             <a
@@ -124,7 +124,7 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
         </div>
 
         <!-- Directions & landmarks -->
-        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '交通與地標' : 'Getting Here'}</p>
+        <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '交通與地標' : 'Getting Here'}</p>
         <ul class="space-y-4 mb-2">
           {(ZH ? clinic.landmarksZh : clinic.landmarksEn).map((lm) => (
             <li class="flex gap-3">
@@ -184,7 +184,7 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
           </div>
 
           <div class="flex-1">
-            <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? clinic.regionZh : clinic.region}</p>
+            <p class="text-[11px] tracking-[0.2em] uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? clinic.regionZh : clinic.region}</p>
             <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-900 mb-6 leading-none">{clinic.city}</h2>
 
             <div class="space-y-5 mb-8" style="font-family: var(--font-sans);">
@@ -218,7 +218,7 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
                 style="color: var(--color-stone-600); font-family: var(--font-sans);"
               >
                 {ZH ? '查看所有據點' : 'View All Locations'}
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
               </a>
@@ -237,7 +237,7 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
       <div class="max-w-3xl mb-10">
         <div class="flex items-center gap-3 mb-4">
           <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
-          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '病人評價' : 'Patient Reviews'}</span>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '病人評價' : 'Patient Reviews'}</span>
         </div>
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900">{ZH ? `來自 ${clinic.city} 病人的真實心聲` : `Real words from ${clinic.city} patients`}</h2>
       </div>
@@ -285,7 +285,7 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(clinic.address 
       <div class="max-w-3xl mx-auto text-center">
         <div class="flex items-center justify-center gap-3 mb-5">
           <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
-          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '從這裡開始' : 'Begin Here'}</span>
+          <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '從這裡開始' : 'Begin Here'}</span>
           <div class="h-px w-12" style="background: var(--color-gold-400);"></div>
         </div>
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-900 mb-5">{ZH ? `準備好在 ${clinic.city} 開始了嗎？` : `Ready to begin in ${clinic.city}?`}</h2>

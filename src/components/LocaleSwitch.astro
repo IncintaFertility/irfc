@@ -59,15 +59,17 @@ const { pathname, current, variant = 'nav' } = Astro.props;
     justify-content: center;
     color: var(--color-stone-500);
     padding: 0.3rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     border-radius: 999px;
     background: transparent;
     user-select: none;
     transition: color 0.2s, background 0.2s;
   }
   .locale-switch-trigger::-webkit-details-marker { display: none; }
-  .locale-switch-trigger:hover { color: var(--color-gold-600); background: var(--color-stone-100); }
+  .locale-switch-trigger:hover { color: var(--color-gold-text); background: var(--color-stone-100); }
   .locale-switch-globe { display: block; }
-  .locale-switch[open] .locale-switch-globe { color: var(--color-gold-600); }
+  .locale-switch[open] .locale-switch-globe { color: var(--color-gold-text); }
 
   /* 下拉選單 */
   .locale-switch-menu {
@@ -96,8 +98,8 @@ const { pathname, current, variant = 'nav' } = Astro.props;
     font-family: var(--font-sans);
     transition: background 0.15s, color 0.15s;
   }
-  .locale-switch-link:hover { background: var(--color-stone-100); color: var(--color-gold-600); }
-  .locale-switch-link.is-active { color: var(--color-gold-600); }
+  .locale-switch-link:hover { background: var(--color-stone-100); color: var(--color-gold-text); }
+  .locale-switch-link.is-active { color: var(--color-gold-text); }
   .locale-switch-link-code {
     font-size: 0.72rem;
     letter-spacing: 0.06em;

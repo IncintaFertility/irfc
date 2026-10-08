@@ -243,10 +243,10 @@ const description = ZH
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '療程與服務' : 'Treatments & Services'}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '療程與服務' : 'Treatments & Services'}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
-          {ZH ? <>您的路徑，<br/><em class="not-italic" style="color: var(--color-gold-500);">我們的專業。</em></> : <>Your Path,<br/><em class="not-italic" style="color: var(--color-gold-500);">Our Expertise.</em></>}
+          {ZH ? <>您的路徑，<br/><em class="not-italic" style="color: var(--color-gold-text);">我們的專業。</em></> : <>Your Path,<br/><em class="not-italic" style="color: var(--color-gold-text);">Our Expertise.</em></>}
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed">
           {ZH ? '沒有兩段生育旅程是一模一樣的。IRFC 提供從基礎診斷到先進輔助生殖的全面療程，全部依您的個別狀況與目標量身打造。' : 'No two fertility journeys are alike. IRFC offers a comprehensive range of treatments — from foundational diagnostics to advanced assisted reproduction — all tailored to your individual circumstances and goals.'}
@@ -259,7 +259,7 @@ const description = ZH
   <section class="py-20" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="mb-14">
-        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '輔助生殖技術' : 'ART'}</p>
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '輔助生殖技術' : 'ART'}</p>
         <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '輔助生殖技術' : 'Assisted Reproductive Technology'}</h2>
       </div>
 
@@ -287,7 +287,7 @@ const description = ZH
                 <ul class="space-y-3">
                   {service.details.map((detail, i) => (
                     <li class="flex items-start gap-3">
-                      <span class="flex-shrink-0 text-xs mt-1 w-5 h-5 flex items-center justify-center border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{String(i + 1).padStart(2, '0')}</span>
+                      <span class="flex-shrink-0 text-xs mt-1 w-5 h-5 flex items-center justify-center border" style="color: var(--color-gold-text); border-color: var(--color-gold-300);">{String(i + 1).padStart(2, '0')}</span>
                       <span class="text-sm text-stone-600 leading-relaxed">{ZH ? service.detailsZh[i] : detail}</span>
                     </li>
                   ))}
@@ -314,7 +314,7 @@ const description = ZH
   <section class="py-20 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="mb-14">
-        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-500); font-family: var(--font-sans);">{ZH ? '第三方生殖' : 'Third-Party Reproduction'}</p>
+        <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '第三方生殖' : 'Third-Party Reproduction'}</p>
         <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800">{ZH ? '捐贈者、代理孕母與包容的照護' : 'Donors, Surrogacy & Inclusive Care'}</h2>
         <p class="mt-3 text-sm max-w-xl" style="color: var(--color-stone-500);">
           {ZH ? '成家有很多種形式。IRFC 以專業、同理與完全的包容，支持每一條路徑。' : 'Building a family takes many forms. IRFC supports every path with expertise, compassion, and complete inclusivity.'}

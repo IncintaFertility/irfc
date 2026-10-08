@@ -85,13 +85,13 @@ const description = ZH
         <div class="pb-20">
           <div class="flex items-center gap-3 mb-6">
             <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '真實病人評價' : 'Real Patient Reviews'}</span>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '真實病人評價' : 'Real Patient Reviews'}</span>
           </div>
           <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
             {ZH ? (
-              <>聽他們<br/><em class="not-italic" style="color: var(--color-gold-500);">親口說。</em></>
+              <>聽他們<br/><em class="not-italic" style="color: var(--color-gold-text);">親口說。</em></>
             ) : (
-              <>In Their<br/><em class="not-italic" style="color: var(--color-gold-500);">Own Words.</em></>
+              <>In Their<br/><em class="not-italic" style="color: var(--color-gold-text);">Own Words.</em></>
             )}
           </h1>
           <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
@@ -117,7 +117,7 @@ const description = ZH
       <div class="max-w-3xl mb-10">
         <div class="flex items-center gap-3 mb-5">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '遍佈各診所' : 'Across Our Locations'}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '遍佈各診所' : 'Across Our Locations'}</span>
         </div>
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-4">{ZH ? '各診所的評分，逐一看。' : 'Our ratings, location by location.'}</h2>
         {ZH ? (
@@ -134,7 +134,7 @@ const description = ZH
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {clinics.map((c) => (
           <div class="p-6 border border-stone-200 bg-white flex flex-col">
-            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{c.city}</p>
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-text); font-family: var(--font-sans);">{c.city}</p>
             <h3 style="font-family: var(--font-serif);" class="text-lg font-light text-stone-800 leading-snug mb-2">{c.clinicName}</h3>
             <p class="text-xs leading-relaxed mb-5" style="color: var(--color-stone-400);">{c.address}</p>
 
@@ -154,7 +154,7 @@ const description = ZH
                         <span class="text-sm font-light" style="font-family: var(--font-serif); color: var(--color-stone-800);">{s.rating.toFixed(1)}</span>
                         <span class="flex gap-0.5">
                           {Array.from({ length: 5 }).map((_, i) => (
-                            <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill={i < Math.round(s.rating) ? 'currentColor' : 'none'} stroke="currentColor" style={i < Math.round(s.rating) ? 'color: var(--color-gold-500);' : 'color: var(--color-stone-300);'}>
+                            <svg aria-hidden="true" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill={i < Math.round(s.rating) ? 'currentColor' : 'none'} stroke="currentColor" style={i < Math.round(s.rating) ? 'color: var(--color-gold-text);' : 'color: var(--color-stone-300);'}>
                               <path stroke-linejoin="round" d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9z" />
                             </svg>
                           ))}
@@ -181,7 +181,7 @@ const description = ZH
   <section class="py-24 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="max-w-2xl mb-12">
-        <p class="text-xs tracking-[0.24em] uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '精選病人故事 · Google' : 'Featured patient stories · Google'}</p>
+        <p class="text-xs tracking-[0.24em] uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '精選病人故事 · Google' : 'Featured patient stories · Google'}</p>
         <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-5xl font-light text-stone-800">{ZH ? '讓人銘記的照護' : 'Care that patients remember'}</h2>
         <p class="mt-4 text-sm leading-relaxed text-stone-500">{ZH ? '以下每一則故事，皆連結至評論者原公開檔案與來源列表。' : 'Every story below is linked to the reviewer’s original public profile and source listing.'}</p>
       </div>
@@ -210,14 +210,14 @@ const description = ZH
 
               <div class="mt-8 flex items-center gap-0.5" aria-label={`${r.rating} out of 5 stars`}>
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <svg class="w-4 h-4" viewBox="0 0 20 20" fill={i < r.rating ? 'currentColor' : 'none'} stroke="currentColor" style={i < r.rating ? 'color: var(--color-gold-500);' : 'color: var(--color-stone-300);'}>
+                  <svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 20 20" fill={i < r.rating ? 'currentColor' : 'none'} stroke="currentColor" style={i < r.rating ? 'color: var(--color-gold-text);' : 'color: var(--color-stone-300);'}>
                     <path stroke-linejoin="round" d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9z" />
                   </svg>
                 ))}
               </div>
 
               <blockquote class="relative mt-5 flex-1 text-xl font-light leading-relaxed text-stone-700" style="font-family: var(--font-serif);">
-                <span class="absolute -left-1 -top-5 text-5xl leading-none opacity-20" aria-hidden="true" style="color: var(--color-gold-500);">“</span>
+                <span class="absolute -left-1 -top-5 text-5xl leading-none opacity-20" aria-hidden="true" style="color: var(--color-gold-text);">“</span>
                 <span class="relative">{r.quote}</span>
               </blockquote>
 
@@ -226,9 +226,9 @@ const description = ZH
                   <span class="block text-xs font-medium text-stone-700">{clinic.city}</span>
                   <span class="mt-0.5 block text-[10px] text-stone-400">{r.date}</span>
                 </span>
-                <a href={r.reviewUrl ?? clinic.sources.google?.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-[10px] tracking-[0.18em] uppercase transition group-hover:gap-3" style="color: var(--color-gold-600);">
+                <a href={r.reviewUrl ?? clinic.sources.google?.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-[10px] tracking-[0.18em] uppercase transition group-hover:gap-3" style="color: var(--color-gold-text);">
                   {ZH ? '在 Google 上查看' : 'View on Google'}
-                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </a>
               </div>
             </div>
@@ -253,13 +253,13 @@ const description = ZH
             <div>
               <div class="flex items-end justify-between mb-7 flex-wrap gap-4">
                 <div>
-                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{clinic.city}</p>
+                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-text); font-family: var(--font-sans);">{clinic.city}</p>
                   <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">{clinic.clinicName}</h3>
                 </div>
                 {yelp && (
-                  <a href={yelp.url} target="_blank" rel="noopener noreferrer" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+                  <a href={yelp.url} target="_blank" rel="noopener noreferrer" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-text);">
                     {ZH ? `查看全部 ${yelp.count} 則 Yelp 評價` : `All ${yelp.count} Yelp reviews`}
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </a>
                 )}
               </div>
@@ -270,7 +270,7 @@ const description = ZH
                       <span class="text-sm font-semibold tracking-tight" style="color: #D32323; font-family: var(--font-sans);">Yelp</span>
                       <div class="flex gap-0.5" aria-label={`${r.rating} out of 5 stars`}>
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill={i < r.rating ? 'currentColor' : 'none'} stroke="currentColor" style={i < r.rating ? 'color: var(--color-gold-500);' : 'color: var(--color-stone-300);'}>
+                          <svg aria-hidden="true" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill={i < r.rating ? 'currentColor' : 'none'} stroke="currentColor" style={i < r.rating ? 'color: var(--color-gold-text);' : 'color: var(--color-stone-300);'}>
                             <path stroke-linejoin="round" d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9z" />
                           </svg>
                         ))}
@@ -294,7 +294,7 @@ const description = ZH
                       </span>
                       <span class="text-xs shrink-0" style="color: var(--color-stone-400);">{r.date}</span>
                     </figcaption>
-                    <a href={r.reviewUrl ?? yelp?.url} target="_blank" rel="noopener noreferrer" class="mt-4 text-[10px] tracking-widest uppercase" style="color: var(--color-gold-600);">{ZH ? '在 Yelp 上查看 →' : 'View on Yelp →'}</a>
+                    <a href={r.reviewUrl ?? yelp?.url} target="_blank" rel="noopener noreferrer" class="mt-4 text-[10px] tracking-widest uppercase" style="color: var(--color-gold-text);">{ZH ? '在 Yelp 上查看 →' : 'View on Yelp →'}</a>
                   </figure>
                 ))}
               </div>

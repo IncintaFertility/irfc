@@ -202,13 +202,13 @@ const description = ZH
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? 'IVF 旅程' : 'The IVF Journey'}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? 'IVF 旅程' : 'The IVF Journey'}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
           {ZH ? (
-            <>從第一通電話<br/><em class="not-italic" style="color: var(--color-gold-500);">到第一次心跳。</em></>
+            <>從第一通電話<br/><em class="not-italic" style="color: var(--color-gold-text);">到第一次心跳。</em></>
           ) : (
-            <>From First Call<br/><em class="not-italic" style="color: var(--color-gold-500);">to First Heartbeat.</em></>
+            <>From First Call<br/><em class="not-italic" style="color: var(--color-gold-text);">to First Heartbeat.</em></>
           )}
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
@@ -224,7 +224,7 @@ const description = ZH
           <div class="bg-white px-6 py-5">
             <p class="text-xs tracking-widest uppercase mb-1" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? p.labelZh : p.label}</p>
             <p class="text-sm font-light text-stone-800" style="font-family: var(--font-serif);">{ZH ? p.detailZh : p.detail}</p>
-            <p class="text-xs mt-1" style="color: var(--color-gold-600);">{p.time}</p>
+            <p class="text-xs mt-1" style="color: var(--color-gold-text);">{p.time}</p>
           </div>
         ))}
       </div>
@@ -283,7 +283,7 @@ const description = ZH
               <!-- Step number + connector -->
               <div class="lg:col-span-1 flex lg:flex-col items-center lg:items-start gap-4">
                 <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-stone-200 bg-white">
-                  <span class="text-sm font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">{step.num}</span>
+                  <span class="text-sm font-light" style="font-family: var(--font-serif); color: var(--color-gold-text);">{step.num}</span>
                 </div>
               </div>
 
@@ -297,7 +297,7 @@ const description = ZH
               <!-- Note card -->
               <div class="lg:col-span-5 lg:col-start-8">
                 <div class="border-l-2 pl-5 py-1" style="border-color: var(--color-gold-400);">
-                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '須知' : 'What to Know'}</p>
+                  <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '須知' : 'What to Know'}</p>
                   <p class="text-sm leading-relaxed text-stone-500 italic">{ZH ? step.noteZh : step.note}</p>
                 </div>
               </div>
@@ -329,9 +329,9 @@ const description = ZH
           <div class="section-divider mb-6"></div>
           <h2 style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 mb-6">
             {ZH ? (
-              <>如果<br/><em class="not-italic" style="color: var(--color-gold-500);">第一次週期沒成功？</em></>
+              <>如果<br/><em class="not-italic" style="color: var(--color-gold-text);">第一次週期沒成功？</em></>
             ) : (
-              <>What Happens If the<br/><em class="not-italic" style="color: var(--color-gold-500);">First Cycle Doesn’t Work?</em></>
+              <>What Happens If the<br/><em class="not-italic" style="color: var(--color-gold-text);">First Cycle Doesn’t Work?</em></>
             )}
           </h2>
           <p class="text-sm leading-relaxed text-stone-500 mb-5">
@@ -385,7 +385,7 @@ const description = ZH
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href={localeHref('/appointment', locale)} class="btn-primary">
             {ZH ? '預約諮詢' : 'Schedule a Consultation'}
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>

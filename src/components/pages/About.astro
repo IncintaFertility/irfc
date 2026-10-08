@@ -54,10 +54,10 @@ const description = ZH
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{title}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{title}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
-          {ZH ? <>兩個傳承。<br/><em class="not-italic" style="color: var(--color-gold-500);">同一使命。</em></> : <>Two Legacies.<br/><em class="not-italic" style="color: var(--color-gold-500);">One Mission.</em></>}
+          {ZH ? <>兩個傳承。<br/><em class="not-italic" style="color: var(--color-gold-text);">同一使命。</em></> : <>Two Legacies.<br/><em class="not-italic" style="color: var(--color-gold-text);">One Mission.</em></>}
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
           {ZH ? 'INCINTA 始於一個信念：每個非凡的生命，都值得非凡的開始。IRFC — Incinta Reproductive Fertility Center — 由兩家秉持相同信念的機構合而為一。' : 'INCINTA began with a conviction: every extraordinary life deserves an extraordinary beginning. IRFC — Incinta Reproductive Fertility Center — was formed when two practices built on that same belief came together as one.'}
@@ -71,7 +71,7 @@ const description = ZH
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <div>
-          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">Reproductive Fertility Center</p>
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-text); font-family: var(--font-sans);">Reproductive Fertility Center</p>
           <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '二十年的信任' : '20 Years of Trust'}</h2>
           <p class="text-stone-600 leading-relaxed mb-4 text-sm">
             {ZH ? '由 James P. Lin 醫師創辦的 Reproductive Fertility Center，立基於一個承諾：正在經歷不孕挑戰的病人，能在這裡找到「如同家人，也如同歸處」的所在。二十年來，RFC 從單一診所成長為南加州最受敬重的生育機構之一。' : 'Founded by Dr. James P. Lin, Reproductive Fertility Center was built on a promise: that patients navigating the challenges of infertility would find "both a family and a home" within these walls. Over two decades, RFC grew from a single clinic into one of Southern California\'s most respected fertility practices.'}
@@ -85,7 +85,7 @@ const description = ZH
         </div>
 
         <div class="border-l-2 pl-10 lg:pl-14" style="border-color: var(--color-gold-500);">
-          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-500); font-family: var(--font-sans);">Incinta Fertility</p>
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-text); font-family: var(--font-sans);">Incinta Fertility</p>
           <h2 style="font-family: var(--font-serif);" class="text-3xl font-light text-stone-800 mb-5">{ZH ? '生命的科學與藝術' : 'Science & Art of Life'}</h2>
           <p class="text-stone-600 leading-relaxed mb-4 text-sm">
             {ZH ? 'Incinta Fertility 建立起於另一種信念：生育診所不該只是臨床場所。「你不只是你的生育能力；我們也不只是間生育診所。」精心設計的空間、開放式實驗室，以及團隊照護模式，從一開始就是 Incinta 哲學的核心。' : 'Incinta Fertility was built around a different kind of belief: that a fertility clinic should be more than clinical. "You\'re more than your fertility. We\'re more than a fertility clinic." Artfully designed spaces, open-concept laboratories, and a team-based care model were central to the Incinta philosophy from day one.'}
@@ -152,7 +152,7 @@ const description = ZH
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-px" style="background: var(--color-stone-200);">
         {achievements.map(a => (
           <div class="bg-white py-8 px-10 text-center">
-            <p class="text-4xl lg:text-5xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-600);">{a.number}</p>
+            <p class="text-4xl lg:text-5xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-text);">{a.number}</p>
             <p class="text-xs tracking-wide" style="color: var(--color-stone-500); font-family: var(--font-sans);">{a.label}</p>
           </div>
         ))}
@@ -236,13 +236,13 @@ const description = ZH
   <section class="py-20 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="max-w-3xl mx-auto text-center">
-        <svg class="w-8 h-8 mx-auto mb-8 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-600);">
+        <svg aria-hidden="true" class="w-8 h-8 mx-auto mb-8 opacity-20" fill="currentColor" viewBox="0 0 32 32" style="color: var(--color-gold-text);">
           <path d="M10 8C6.686 8 4 10.686 4 14v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.314 0-6 2.686-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/>
         </svg>
         <blockquote style="font-family: var(--font-serif);" class="text-3xl md:text-4xl font-light text-stone-800 leading-relaxed italic mb-6">
           {ZH ? '「在這裡，你將於生育旅程的每一步，都找到如同家人、也如同歸處的所在。」' : '"Here you will find both a family and a home for every step of your fertility journey."'}
         </blockquote>
-        <p class="text-sm tracking-wider uppercase" style="color: var(--color-gold-600);">{ZH ? '— 創辦人 James P. Lin 醫師' : '— Dr. James P. Lin, Founder'}</p>
+        <p class="text-sm tracking-wider uppercase" style="color: var(--color-gold-text);">{ZH ? '— 創辦人 James P. Lin 醫師' : '— Dr. James P. Lin, Founder'}</p>
       </div>
     </div>
   </section>
@@ -349,9 +349,9 @@ const description = ZH
           <p class="text-sm leading-relaxed mb-8 text-stone-500">
             {ZH ? '為同性伴侶與單身者提供包容、肯定的照護——精子捐贈、卵子捐贈與代理孕母。' : 'Inclusive, affirming care for same-sex couples and single individuals — sperm donation, egg donation, and gestational surrogacy.'}
           </p>
-          <a href={ZH ? '/services/lgbtqia/' : '/services/#lgbtqia'} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          <a href={ZH ? '/services/lgbtqia/' : '/services/#lgbtqia'} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-text);">
             {ZH ? '了解更多' : 'Learn More'}
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
         </div>
 
@@ -366,9 +366,9 @@ const description = ZH
               <span class="text-xs px-3 py-1 border tracking-wide" style="border-color: var(--color-stone-300); color: var(--color-stone-500);">{lang}</span>
             ))}
           </div>
-          <a href="/appointment/" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          <a href="/appointment/" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-text);">
             {ZH ? '聯絡我們' : 'Contact Us'}
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
         </div>
       </div>

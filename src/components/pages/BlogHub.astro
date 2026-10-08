@@ -41,10 +41,10 @@ const reading = (r: string) => (ZH ? r.replace(/(\d+)\s*min read/i, '約 $1 分�
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '生育洞察' : 'Fertility Insights'}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '生育洞察' : 'Fertility Insights'}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
-          {ZH ? <>為你的生育旅程<br/><em class="not-italic" style="color: var(--color-gold-500);">而寫的指南與解答。</em></> : <>Guides &amp; answers<br/><em class="not-italic" style="color: var(--color-gold-500);">for your fertility journey.</em></>}
+          {ZH ? <>為你的生育旅程<br/><em class="not-italic" style="color: var(--color-gold-text);">而寫的指南與解答。</em></> : <>Guides &amp; answers<br/><em class="not-italic" style="color: var(--color-gold-text);">for your fertility journey.</em></>}
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed">
           {ZH
@@ -73,7 +73,7 @@ const reading = (r: string) => (ZH ? r.replace(/(\d+)\s*min read/i, '約 $1 分�
               />
             </div>
             <div class="p-7">
-              <span class="text-xs tracking-widest uppercase mb-3 block" style="color: var(--color-gold-600); font-family: var(--font-sans);">{cat(post.category)}</span>
+              <span class="text-xs tracking-widest uppercase mb-3 block" style="color: var(--color-gold-text); font-family: var(--font-sans);">{cat(post.category)}</span>
               <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-3 leading-snug">{ZH ? post.titleZh ?? post.title : post.title}</h2>
               <p class="text-sm text-stone-500 leading-relaxed mb-5">{ZH ? post.excerptZh ?? post.excerpt : post.excerpt}</p>
               <p class="text-xs tracking-wide" style="color: var(--color-stone-400); font-family: var(--font-sans);">{fmtDate(post.date)} · {reading(post.readingTime)}</p>

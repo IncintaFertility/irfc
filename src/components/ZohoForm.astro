@@ -10,8 +10,8 @@
  * https://crm.zoho.com/crm/WebToLeadForm —— 与官方嵌入同一条摄入路径。
  *
  * 为什么用 fetch 而非原生表单 target=iframe：
- *  - Zoho 后台把 returnURL 固定成 irfc.pages.dev/contact/success，而该成功页带
- *    X-Frame-Options: DENY；原生表单把 iframe 重定向到它时被浏览器拒绝加载，
+ *  - Zoho 后台默认 returnURL 指向成功页，而原生表单把 iframe 重定向到它时被浏览器拒绝加载
+ *    （成功页带 X-Frame-Options: DENY）；
  *    iframe 的 load 事件无法触发成功提示（表现为「点了没反应」）。
  *  - 改用 fetch + mode:'no-cors'（redirect 用默认 'follow'）：请求照常送达 Zoho 创建线索，
  *    浏览器跟随其 302 跳转到成功页，最终响应为 opaque，.then 必然触发 → 确定性地显示成功 / 失败 UI。
@@ -29,8 +29,9 @@ import { getLocaleFromPath, t } from '../i18n/index';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
-// 表单成功落地页（由原 /contact/success 迁至 /appointment/success，繁体对应 /zh-hant/appointment/success）
-const successUrl = ZH ? 'https://irfc.pages.dev/zh-hant/appointment/success' : 'https://irfc.pages.dev/appointment/success';
+// 表单成功落地页（/appointment/success，繁体对应 /zh-hant/appointment/success）。
+// 实际跳转由下方 returnURL 隐藏字段驱动（showSuccess() 读取其值）。统一走 www 主域，避免跨域 pages.dev。
+const successUrl = ZH ? 'https://www.irfc.com/zh-hant/appointment/success' : 'https://www.irfc.com/appointment/success';
 
 // Zoho LEADCF13（Location）picklist —— value 必须与 Zoho 后台选项完全一致
 const locations = [
@@ -71,7 +72,7 @@ const inputCls =
   <input type="hidden" name="zc_gad" value="" />
   <input type="hidden" name="xmIwtLD" value="1bc7463ed8956fec547f35d51fb251638929b7406cdd18e37b9696007af9f6214c5548bf6f7ad5c711f9018d545716cf" />
   <input type="hidden" name="actionType" value="TGVhZHM=" />
-  <input type="hidden" name="returnURL" value="https://irfc.pages.dev/contact/success" />
+  <input type="hidden" name="returnURL" value={ZH ? 'https://www.irfc.com/zh-hant/appointment/success' : 'https://www.irfc.com/appointment/success'} />
   <input type="hidden" name="wFaTrisJS" value="true" />
   <!-- CONTACT TYPE（Zoho 后台默认选中的来源标记，隐藏） -->
   <input type="hidden" name="LEADCF4" value="incintafertility.com" />
@@ -130,7 +131,7 @@ const inputCls =
 
   <button type="submit" class="btn-primary w-full justify-center">
     <span id="zf-submit-label">{t(locale, 'form.submit')}</span>
-    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+    <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
     </svg>
   </button>

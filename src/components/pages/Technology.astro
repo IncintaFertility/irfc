@@ -105,13 +105,13 @@ const description = ZH
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '實驗室技術' : 'Laboratory Technology'}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '實驗室技術' : 'Laboratory Technology'}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
           {ZH ? (
-            <>成就每一次成功的<br/><em class="not-italic" style="color: var(--color-gold-500);">背後科學。</em></>
+            <>成就每一次成功的<br/><em class="not-italic" style="color: var(--color-gold-text);">背後科學。</em></>
           ) : (
-            <>The Science Behind<br/><em class="not-italic" style="color: var(--color-gold-500);">Every Success.</em></>
+            <>The Science Behind<br/><em class="not-italic" style="color: var(--color-gold-text);">Every Success.</em></>
           )}
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
@@ -128,7 +128,7 @@ const description = ZH
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-16 text-center md:text-left">
         <div>
-          <p class="text-4xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-400);">#1</p>
+          <p class="text-4xl font-light mb-1" style="font-family: var(--font-serif); color: var(--color-gold-on-dark);">#1</p>
           <p class="text-xs tracking-widest uppercase" style="color: var(--color-stone-400);">{ZH ? '全美 IVF 成功率，2016' : 'US IVF Success Rate, 2016'}</p>
         </div>
         <div class="h-px w-12 md:h-12 md:w-px" style="background: var(--color-stone-700);"></div>
@@ -154,7 +154,7 @@ const description = ZH
     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.55) 0%, transparent 60%);"></div>
     <div class="absolute inset-0 flex items-center px-10 lg:px-20">
       <div class="max-w-sm">
-        <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? '走進胚胎學實驗室' : 'Inside the Embryology Lab'}</p>
+        <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '走進胚胎學實驗室' : 'Inside the Embryology Lab'}</p>
         <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white leading-relaxed">
           {ZH ? '每顆胚胎都經雙手呵護——並由科技持續守護。' : 'Every embryo is cared for by hand — and watched, continuously, by technology.'}
         </p>
@@ -206,7 +206,7 @@ const description = ZH
             <ul class="space-y-4">
               {(ZH ? tech.benefitsZh : tech.benefits).map(b => (
                 <li class="flex items-start gap-3">
-                  <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style={`color: var(--color-${tech.color}-500);`}>
+                  <svg aria-hidden="true" class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style={`color: var(--color-${tech.color}-500);`}>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
                   </svg>
                   <span class="text-sm text-stone-600 leading-relaxed">{b}</span>
@@ -229,7 +229,7 @@ const description = ZH
     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(20,18,15,0.55) 0%, transparent 60%);"></div>
     <div class="absolute inset-0 flex items-center px-10 lg:px-20">
       <div class="max-w-sm">
-        <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? '手術中心與胚胎學實驗室' : 'Surgery Center & Embryology Lab'}</p>
+        <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '手術中心與胚胎學實驗室' : 'Surgery Center & Embryology Lab'}</p>
         <p style="font-family: var(--font-serif);" class="text-2xl font-light text-white leading-relaxed">
           {ZH ? 'Irvine 與 Corona 據點，皆設有完整的現場 IVF 實驗室與通過認證的手術中心。' : 'Irvine and Corona locations feature fully on-site IVF laboratories and accredited surgery centers.'}
         </p>
@@ -248,7 +248,7 @@ const description = ZH
             class="flex-shrink-0 w-24 h-24 object-cover rounded-full"
           />
           <div>
-            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-500); font-family: var(--font-sans);">{ZH ? 'IVF 實驗室主任' : 'IVF Laboratory Director'}</p>
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--color-gold-on-dark); font-family: var(--font-sans);">{ZH ? 'IVF 實驗室主任' : 'IVF Laboratory Director'}</p>
             <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-white mb-1">Yufen Xie, PhD</h3>
             <p class="text-sm mb-5" style="color: var(--color-stone-400);">{ZH ? '胚胎學家 · 20 年以上經驗' : 'Embryologist · 20+ Years Experience'}</p>
             <p class="text-sm leading-relaxed" style="color: var(--color-stone-300);">
@@ -262,7 +262,7 @@ const description = ZH
           <p class="text-xl font-light italic leading-relaxed mb-4" style="font-family: var(--font-serif); color: var(--color-stone-200);">
             {ZH ? '科技給我們資訊。科學與經驗，告訴我們如何運用它。兩者結合，為我們的病人帶來最大的成功機會。' : 'Technology gives us the information. Science and experience tell us what to do with it. Together, they give our patients their best possible chance.'}
           </p>
-          <cite class="text-xs tracking-widest uppercase not-italic" style="color: var(--color-gold-500);">{ZH ? '— Yufen Xie 博士，IVF 實驗室主任' : '— Yufen Xie, PhD, IVF Laboratory Director'}</cite>
+          <cite class="text-xs tracking-widest uppercase not-italic" style="color: var(--color-gold-on-dark);">{ZH ? '— Yufen Xie 博士，IVF 實驗室主任' : '— Yufen Xie, PhD, IVF Laboratory Director'}</cite>
         </blockquote>
       </div>
     </div>

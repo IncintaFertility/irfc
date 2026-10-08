@@ -104,6 +104,20 @@
   --color-purple-800: var(--color-amethyst-800);
   --color-purple-900: var(--color-amethyst-900);
 
+  /* ── 无障碍文字金（Accessibility 修正 2026-10-08）──
+   * 装饰性金 gold-300~600 在浅底上对比度仅 1.85~3.6:1，未达 WCAG AA
+   * （正文 4.5:1 / 大字号 3:1）。所有「文字」用途统一走 gold-text
+   * （= champagne-700 #856335，白底 5.53:1），装饰用途（分隔线 / 圆点 /
+   * 边框）仍用原 gold-* 即可（无需对比度）。脚本化收口见提交说明。
+   */
+  --color-gold-text: var(--color-champagne-700);
+  --color-champagne-text: var(--color-champagne-700);
+
+  /* 深底（stone/amethyst/pearl/lavender 800-900）上的金色文字用浅金，
+   * 否则深金在深底上对比度不足。= champagne-400 #CBA865（stone-900 上 8:1）。 */
+  --color-gold-on-dark: var(--color-champagne-400);
+  --color-champagne-on-dark: var(--color-champagne-400);
+
   --color-stone-50: #fafaf8;
   --color-stone-100: #f5f5f0;
   --color-stone-200: #e8e8e0;
@@ -202,7 +216,7 @@
     transition: all 0.3s ease;
   }
   .btn-outline:hover {
-    background: var(--color-champagne-500);
+    background: var(--color-champagne-700);
     color: white;
   }
 

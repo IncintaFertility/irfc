@@ -162,13 +162,13 @@ const description = ZH
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '成功率與治療結果' : 'Success Rates & Outcomes'}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '成功率與治療結果' : 'Success Rates & Outcomes'}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
           {ZH ? (
-            <>成功率很重要。<br/><em class="not-italic" style="color: var(--color-gold-500);">脈絡同樣重要。</em></>
+            <>成功率很重要。<br/><em class="not-italic" style="color: var(--color-gold-text);">脈絡同樣重要。</em></>
           ) : (
-            <>Success Rates Matter.<br/><em class="not-italic" style="color: var(--color-gold-500);">So Does Context.</em></>
+            <>Success Rates Matter.<br/><em class="not-italic" style="color: var(--color-gold-text);">So Does Context.</em></>
           )}
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed max-w-2xl">
@@ -179,7 +179,7 @@ const description = ZH
         <div class="flex flex-col sm:flex-row gap-4 mt-10">
           <a href={localeHref('/appointment', locale)} class="btn-primary">
             {ZH ? '索取您的個人化預估' : 'Request Your Personal Estimate'}
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
@@ -196,7 +196,7 @@ const description = ZH
         {singleNumberCards.map(item => (
           <div class="bg-white p-10 lg:p-12">
             <div class="w-8 h-px mb-6" style="background: var(--color-gold-500);"></div>
-            <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{ZH ? item.headingZh : item.heading}</h3>
+            <h2 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{ZH ? item.headingZh : item.heading}</h2>
             <p class="text-sm leading-relaxed text-stone-500">{ZH ? item.bodyZh : item.body}</p>
           </div>
         ))}
@@ -211,9 +211,9 @@ const description = ZH
         <div class="section-divider mb-6"></div>
         <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-5">
           {ZH ? (
-            <>理解成功率<br/><em class="not-italic" style="color: var(--color-gold-500);">依年齡而異</em></>
+            <>理解成功率<br/><em class="not-italic" style="color: var(--color-gold-text);">依年齡而異</em></>
           ) : (
-            <>Understanding Success<br/><em class="not-italic" style="color: var(--color-gold-500);">by Age</em></>
+            <>Understanding Success<br/><em class="not-italic" style="color: var(--color-gold-text);">by Age</em></>
           )}
         </h2>
         <p class="text-sm leading-relaxed text-stone-500 max-w-xl">
@@ -240,7 +240,7 @@ const description = ZH
                   <span class="text-xl font-light" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{group.range}</span>
                 </td>
                 <td class="px-8 py-7">
-                  <span class="text-3xl font-light" style={`font-family: var(--font-serif); color: var(--color-gold-600);`}>{group.national}</span>
+                  <span class="text-3xl font-light" style={`font-family: var(--font-serif); color: var(--color-gold-text);`}>{group.national}</span>
                 </td>
                 <td class="px-8 py-7">
                   <p class="text-sm leading-relaxed text-stone-500 max-w-lg">{ZH ? group.noteZh : group.note}</p>
@@ -264,7 +264,7 @@ const description = ZH
           <div class="border border-stone-200 p-6">
             <div class="flex items-baseline gap-6 mb-3">
               <span class="text-xl font-light text-stone-800" style="font-family: var(--font-serif);">{group.range}</span>
-              <span class="text-3xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-600);">{group.national}</span>
+              <span class="text-3xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-text);">{group.national}</span>
               <span class="text-xs text-stone-400">{ZH ? '全國平均' : 'national avg.'}</span>
             </div>
             <p class="text-sm leading-relaxed text-stone-500">{ZH ? group.noteZh : group.note}</p>
@@ -279,7 +279,7 @@ const description = ZH
       <div class="mt-8 p-8 lg:p-10 border border-stone-200 bg-stone-50">
         <div class="grid lg:grid-cols-2 gap-8 items-center">
           <div>
-            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-600); font-family: var(--font-sans);">{ZH ? '另一條路' : 'A Different Path'}</p>
+            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '另一條路' : 'A Different Path'}</p>
             <h3 class="text-2xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{ZH ? '捐卵 IVF' : 'Donor Egg IVF'}</h3>
             <p class="text-sm leading-relaxed text-stone-500">
               {ZH
@@ -290,7 +290,7 @@ const description = ZH
           <div class="lg:text-right">
             <a href={`${localeHref('/services', locale)}#donors`} class="btn-outline">
               {ZH ? '進一步了解捐卵 IVF' : 'Learn About Donor Egg IVF'}
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
@@ -323,7 +323,7 @@ const description = ZH
         {credentials.map(cred => (
           <div class="bg-white p-10 lg:p-14">
             <div class="flex items-start gap-6 mb-6">
-              <span class="text-5xl font-light leading-none flex-shrink-0" style="font-family: var(--font-serif); color: var(--color-gold-300);">{cred.stat}</span>
+              <span class="text-5xl font-light leading-none flex-shrink-0" style="font-family: var(--font-serif); color: var(--color-gold-text);">{cred.stat}</span>
               <div>
                 <p class="text-lg font-light text-stone-800 whitespace-pre-line leading-snug" style="font-family: var(--font-serif);">{ZH ? cred.labelZh : cred.label}</p>
                 <p class="text-xs tracking-widest uppercase mt-1" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? cred.yearZh : cred.year}</p>
@@ -345,9 +345,9 @@ const description = ZH
           <div class="section-divider mb-6"></div>
           <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
             {ZH ? (
-              <>影響治療結果的<br/><em class="not-italic" style="color: var(--color-gold-500);">五大因素</em></>
+              <>影響治療結果的<br/><em class="not-italic" style="color: var(--color-gold-text);">五大因素</em></>
             ) : (
-              <>Five Factors That<br/><em class="not-italic" style="color: var(--color-gold-500);">Drive Your Outcome</em></>
+              <>Five Factors That<br/><em class="not-italic" style="color: var(--color-gold-text);">Drive Your Outcome</em></>
             )}
           </h2>
           <p class="text-sm leading-relaxed text-stone-500 mb-8">
@@ -357,7 +357,7 @@ const description = ZH
           </p>
           <a href={localeHref('/appointment', locale)} class="btn-primary">
             {ZH ? '討論您的個別情況' : 'Discuss Your Specific Case'}
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
@@ -367,7 +367,7 @@ const description = ZH
           {factors.map(factor => (
             <div class="py-10 border-b border-stone-100">
               <div class="flex gap-8">
-                <span class="text-3xl font-light flex-shrink-0 leading-none mt-1" style="font-family: var(--font-serif); color: var(--color-gold-300);">{factor.num}</span>
+                <span class="text-3xl font-light flex-shrink-0 leading-none mt-1" style="font-family: var(--font-serif); color: var(--color-gold-text);">{factor.num}</span>
                 <div>
                   <h3 class="text-xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{ZH ? factor.titleZh : factor.title}</h3>
                   <p class="text-sm leading-relaxed text-stone-500">{ZH ? factor.descZh : factor.desc}</p>
@@ -395,9 +395,9 @@ const description = ZH
           <div class="section-divider mb-6"></div>
           <h2 style="font-family: var(--font-serif);" class="text-4xl font-light text-stone-800 mb-5">
             {ZH ? (
-              <>科技，也是<br/><em class="not-italic" style="color: var(--color-gold-500);">影響結果的變數</em></>
+              <>科技，也是<br/><em class="not-italic" style="color: var(--color-gold-text);">影響結果的變數</em></>
             ) : (
-              <>Technology as an<br/><em class="not-italic" style="color: var(--color-gold-500);">Outcome Variable</em></>
+              <>Technology as an<br/><em class="not-italic" style="color: var(--color-gold-text);">Outcome Variable</em></>
             )}
           </h2>
           <p class="text-sm leading-relaxed text-stone-500 mb-12">
@@ -418,7 +418,7 @@ const description = ZH
           </div>
           <a href={localeHref('/technology', locale)} class="btn-outline mt-12 inline-flex items-center gap-2">
             {ZH ? '完整技術總覽' : 'Full Technology Overview'}
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
@@ -443,7 +443,7 @@ const description = ZH
           </p>
           <a href={localeHref('/appointment', locale)} class="btn-outline mt-8 inline-flex items-center gap-2">
             {ZH ? '預約諮詢' : 'Schedule a Consultation'}
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
@@ -455,7 +455,7 @@ const description = ZH
               <details class="group py-6" open={i === 0}>
                 <summary class="flex items-start justify-between gap-6 cursor-pointer list-none select-none">
                   <span class="text-base font-light text-stone-800 leading-snug" style="font-family: var(--font-serif);">{ZH ? faq.qZh : faq.q}</span>
-                  <svg class="w-4 h-4 flex-shrink-0 mt-1 text-stone-400 transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <svg aria-hidden="true" class="w-4 h-4 flex-shrink-0 mt-1 text-stone-400 transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                   </svg>
                 </summary>
@@ -476,7 +476,7 @@ const description = ZH
       <div class="max-w-2xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? '你的下一步' : 'Your Next Step'}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '你的下一步' : 'Your Next Step'}</span>
         </div>
         <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-white mb-6 leading-tight">
           <>{ZH ? '了解你的數字。' : 'Know Your Numbers.'}<br />{ZH ? '做出你的決定。' : 'Make Your Decision.'}</>
@@ -489,7 +489,7 @@ const description = ZH
         <div class="flex flex-col sm:flex-row gap-4">
           <a href={localeHref('/appointment', locale)} class="btn-primary">
             {ZH ? '預約諮詢' : 'Schedule a Consultation'}
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>

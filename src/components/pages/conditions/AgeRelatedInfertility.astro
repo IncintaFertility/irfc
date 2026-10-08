@@ -145,7 +145,7 @@ const faqs = [
             {ageData.map((row, i) => (
               <div class={`grid grid-cols-3 px-6 py-4 text-sm ${i < ageData.length - 1 ? 'border-b border-stone-100' : ''}`}>
                 <span class="font-medium text-stone-700">{ZH ? row.ageZh : row.age}</span>
-                <span style="color: var(--color-gold-600);">{row.ivfRate}</span>
+                <span style="color: var(--color-gold-text);">{row.ivfRate}</span>
                 <span class="text-stone-400">{ZH ? row.noteZh : row.noteEn}</span>
               </div>
             ))}
@@ -182,7 +182,7 @@ const faqs = [
               <details class="group border-b border-stone-200 last:border-b-0">
                 <summary class="flex items-center justify-between px-7 py-5 cursor-pointer list-none">
                   <h3 class="text-sm font-medium text-stone-800 pr-4">{ZH ? faq.qZh : faq.qEn}</h3>
-                  <svg class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-500);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                  <svg aria-hidden="true" class="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-45" style="color: var(--color-gold-text);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                 </summary>
                 <div class="px-7 pb-6"><p class="text-sm text-stone-500 leading-relaxed">{ZH ? faq.aZh : faq.aEn}</p></div>
               </details>

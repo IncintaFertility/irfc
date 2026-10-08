@@ -48,20 +48,20 @@ const related = member.relatedSlugs
         <div class="pb-16 lg:pb-24 pt-8 lg:pt-12 order-2 lg:order-1">
           <div class="flex items-center gap-3 mb-6">
             <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{pick(member.roleZh, member.role)}</span>
+            <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{pick(member.roleZh, member.role)}</span>
           </div>
           <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-4 leading-none">
-            {ZH ? <>{member.nameLine1Zh}<br/><em class="not-italic" style="color: var(--color-gold-500);">{member.nameLine2Zh}</em></> : <>{member.nameLine1}<br/><em class="not-italic" style="color: var(--color-gold-500);">{member.nameLine2}</em></>}
+            {ZH ? <>{member.nameLine1Zh}<br/><em class="not-italic" style="color: var(--color-gold-text);">{member.nameLine2Zh}</em></> : <>{member.nameLine1}<br/><em class="not-italic" style="color: var(--color-gold-text);">{member.nameLine2}</em></>}
           </h1>
           <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--color-stone-400); font-family: var(--font-sans);">{pick(member.specialtyZh, member.specialty)}</p>
           <p class="text-base text-stone-500 font-light leading-relaxed max-w-lg mb-10">{pick(member.leadZh, member.lead)}</p>
           {member.heroBadge && (
-            <span class="inline-block mb-8 text-xs px-3 py-1.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">{pick(member.heroBadgeZh, member.heroBadge)}</span>
+            <span class="inline-block mb-8 text-xs px-3 py-1.5 border" style="color: var(--color-gold-text); border-color: var(--color-gold-400); font-family: var(--font-sans);">{pick(member.heroBadgeZh, member.heroBadge)}</span>
           )}
           <div>
             <a href={localeHref(member.heroCtaHref, locale)} class="btn-outline inline-flex items-center gap-2">
               {pick(member.heroCtaLabelZh, member.heroCtaLabel)}
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
@@ -103,12 +103,12 @@ const related = member.relatedSlugs
           )}
 
           <div class="p-8 lg:p-10 border border-stone-200" style="background: var(--color-stone-50);">
-            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-600); font-family: var(--font-sans);">{pick(member.practiceBox.labelZh, member.practiceBox.label)}</p>
+            <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--color-gold-text); font-family: var(--font-sans);">{pick(member.practiceBox.labelZh, member.practiceBox.label)}</p>
             <h3 class="text-xl font-light text-stone-800 mb-4" style="font-family: var(--font-serif);">{pick(member.practiceBox.titleZh, member.practiceBox.title)}</h3>
             <p class="text-sm leading-relaxed text-stone-500 mb-6">{pick(member.practiceBox.bodyZh, member.practiceBox.body)}</p>
             <a href={localeHref(member.practiceBox.ctaHref, locale)} class="btn-outline inline-flex items-center gap-2 text-xs py-2.5 px-5">
               {pick(member.practiceBox.ctaLabelZh, member.practiceBox.ctaLabel)}
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </a>
@@ -156,9 +156,9 @@ const related = member.relatedSlugs
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="flex items-center justify-between mb-10">
         <h3 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800">{ZH ? 'IRFC 其他成員' : 'Also at IRFC'}</h3>
-        <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+        <a href={localeHref('/team', locale)} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-text);">
           {ZH ? '完整團隊' : 'Full Team'}
-          <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
       <div class="grid md:grid-cols-2 gap-5">
@@ -168,9 +168,9 @@ const related = member.relatedSlugs
             <div class="flex-1 min-w-0">
               <p class="text-base font-light text-stone-800" style="font-family: var(--font-serif);">{ZH ? doc.schemaNameZh : doc.schemaName}</p>
               <p class="text-xs tracking-wider uppercase mt-0.5" style="color: var(--color-stone-400);">{ZH ? doc.roleZh : doc.role}</p>
-              <span class="inline-block mt-2 text-xs px-2 py-0.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-300);">{ZH ? doc.cardBadgeZh : doc.cardBadge}</span>
+              <span class="inline-block mt-2 text-xs px-2 py-0.5 border" style="color: var(--color-gold-text); border-color: var(--color-gold-300);">{ZH ? doc.cardBadgeZh : doc.cardBadge}</span>
             </div>
-            <svg class="w-4 h-4 flex-shrink-0 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg aria-hidden="true" class="w-4 h-4 flex-shrink-0 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
             </svg>
           </a>

@@ -173,10 +173,10 @@ const description = ZH
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-12" style="background: var(--color-gold-500);"></div>
-          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-600); font-family: var(--font-sans);">{title}</span>
+          <span class="text-xs tracking-widest uppercase" style="color: var(--color-gold-text); font-family: var(--font-sans);">{title}</span>
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-5xl md:text-6xl font-light text-stone-800 mb-6 leading-none">
-          {ZH ? <>專業照護，<br/><em class="not-italic" style="color: var(--color-gold-500);">個人化關懷。</em></> : <>Expert Care,<br/><em class="not-italic" style="color: var(--color-gold-500);">Personal Attention.</em></>}
+          {ZH ? <>專業照護，<br/><em class="not-italic" style="color: var(--color-gold-text);">個人化關懷。</em></> : <>Expert Care,<br/><em class="not-italic" style="color: var(--color-gold-text);">Personal Attention.</em></>}
         </h1>
         <p class="text-lg text-stone-500 font-light leading-relaxed">
           {ZH ? 'IRFC 團隊的每位成員，都帶來專業的技術與真誠的投入。我們齊心協力，組成一個以同一目標為核心的協作團隊：您的成功。' : 'Every member of the IRFC team brings specialized expertise and genuine dedication. Together, we form a collaborative practice built around one goal: your success.'}
@@ -204,7 +204,7 @@ const description = ZH
                   <div class="w-20 h-20 flex items-center justify-center text-3xl font-light text-white mb-4" style={`background: linear-gradient(135deg, var(--color-${doc.color}-400), var(--color-${doc.color}-700));`}>{doc.initial}</div>
                 )}
                 {doc.badge && (
-                  <span class="text-xs tracking-wider px-3 py-1.5 border" style="color: var(--color-gold-600); border-color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? doc.badgeZh : doc.badge}</span>
+                  <span class="text-xs tracking-wider px-3 py-1.5 border" style="color: var(--color-gold-text); border-color: var(--color-gold-400); font-family: var(--font-sans);">{ZH ? doc.badgeZh : doc.badge}</span>
                 )}
               </div>
 
@@ -216,9 +216,9 @@ const description = ZH
                   <p class="text-sm text-stone-600 leading-relaxed mb-4">{para}</p>
                 ))}
                 {doc.href && (
-                  <a href={doc.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-2" style="color: var(--color-gold-600);">
+                  <a href={doc.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-2" style="color: var(--color-gold-text);">
                     {ZH ? '完整簡介' : 'Full Profile'}
-                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                   </a>
                 )}
               </div>
@@ -254,9 +254,9 @@ const description = ZH
                 <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{ZH ? member.roleZh : member.role}</p>
                 <p class="text-sm text-stone-500 leading-relaxed">{ZH ? member.bioZh : member.bio}</p>
                 {member.href && (
-                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-600);">
+                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-text);">
                     {ZH ? '完整簡介' : 'Full Profile'}
-                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                   </a>
                 )}
               </div>
@@ -289,9 +289,9 @@ const description = ZH
                 <p class="text-xs tracking-wider uppercase mb-3" style={`color: var(--color-${member.color}-600); font-family: var(--font-sans);`}>{ZH ? member.roleZh : member.role}</p>
                 <p class="text-sm text-stone-500 leading-relaxed">{ZH ? member.bioZh : member.bio}</p>
                 {member.href && (
-                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-600);">
+                  <a href={member.href} class="inline-flex items-center gap-2 text-xs tracking-widest uppercase mt-4" style="color: var(--color-gold-text);">
                     {ZH ? '完整簡介' : 'Full Profile'}
-                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                   </a>
                 )}
               </div>

@@ -63,7 +63,7 @@ const description = ZH
       <div class="idx-hero-ctas">
         <a href={localeHref('/appointment', locale)} class="btn-primary">
           {t(locale, 'nav.cta')}
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
           </svg>
         </a>
@@ -108,7 +108,7 @@ const description = ZH
             <p class="std-row-lead">{ZH ? (s.leadZh ?? s.lead) : s.lead}</p>
             <p class="std-row-text">{ZH ? (stdTextZh[s.slug] ?? s.text) : s.text}</p>
             <span class="std-row-cue">{t(locale, 'std.explore')}
-              <svg class="std-row-cue-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <svg aria-hidden="true" class="std-row-cue-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </span>
@@ -305,7 +305,7 @@ const description = ZH
   letter-spacing: 0.22em;
   font-size: 0.72rem;
   font-weight: 500;
-  color: var(--color-gold-400);
+  color: var(--color-gold-on-dark);
   margin-bottom: 1.25rem;
 }
 
@@ -326,7 +326,7 @@ const description = ZH
 
 .idx-hero-h1 em {
   font-style: italic;
-  color: var(--color-gold-400);
+  color: var(--color-gold-on-dark);
   font-size: inherit;
 }
 
@@ -405,7 +405,7 @@ const description = ZH
   font-family: var(--font-serif);
   font-style: italic;
   font-size: clamp(1.1rem, 2.1vw, 1.5rem);
-  color: var(--color-champagne-600);
+  color: var(--color-gold-text);
 }
 .idx-meaning-lead .en {
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
@@ -505,7 +505,7 @@ const description = ZH
   font-style: italic;
   font-size: 1.12rem;
   line-height: 1.5;
-  color: var(--color-champagne-600);
+  color: var(--color-gold-text);
   margin: 0 0 0.9rem;
 }
 
@@ -525,7 +525,7 @@ const description = ZH
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-gold-600);
+  color: var(--color-gold-text);
   opacity: 0;
   transform: translateY(4px);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -613,11 +613,11 @@ const description = ZH
   }
   .idx-dna-art {
     font-style: italic;
-    color: var(--color-champagne-600);
+    color: var(--color-gold-text);
     padding: 0 0.15em;
   }
   .idx-dna-dot {
-    color: var(--color-gold-400);
+    color: var(--color-gold-text);
     font-style: normal;
     padding: 0 0.35em;
   }
