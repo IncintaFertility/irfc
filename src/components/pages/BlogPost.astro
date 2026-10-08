@@ -33,14 +33,18 @@ const catMap: Record<string, string> = {
 const cat = (c: string) => (ZH ? catMap[c] ?? c : c);
 const reading = (r: string) => (ZH ? r.replace(/(\d+)\s*min read/i, '約 $1 分鐘') : r);
 
-// Localize internal links to the zh-hant version when on the Traditional Chinese page
+// 內部連結規範化：統一補尾端斜線（與 canonical 一致）；繁體頁再指向 /zh-hant 版本
 const rawBody = ZH ? post.bodyZh ?? post.body : post.body;
+const enBody = rawBody.replace(
+  /href="(\/(?:services|consultation|locations|about|team|contact|appointment|blog)(?:\/[^"]*)?)"/g,
+  (_m, p1) => `href="${p1.endsWith('/') ? p1 : p1 + '/'}`,
+);
 const body = ZH
   ? rawBody.replace(
       /href="(\/(?:services|consultation|locations|about|team|contact|appointment|blog)[^"]*)"/g,
-      'href="/zh-hant$1"',
+      'href="/zh-hant$1/"',
     )
-  : rawBody;
+  : enBody;
 
 const url = new URL(Astro.url.pathname, SITE_URL).href;
 

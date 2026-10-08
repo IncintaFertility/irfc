@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   output: 'static',
-  site: 'https://irfc.com',
+  site: 'https://www.irfc.com',
   integrations: [
     // 排除提交成功后的薄确认页（en + zh-hant），避免无意义的页面进 sitemap
     sitemap({

@@ -75,15 +75,31 @@ export function isTranslated(href: string): boolean {
   });
 }
 
-/** 內部連結：繁體模式下指向對應繁體頁；未翻譯則回英文版（不 404） */
+/**
+ * 內部連結：繁體模式下指向對應繁體頁；未翻譯則回英文版（不 404）。
+ * 統一補尾端斜線（與 canonical 規範形態對齊），避免 GSC 內鏈重複計數與權重分散。
+ * 排除：根「/」、含副檔名(資源)、錨點、查詢；外鏈(含「.」)不動。
+ */
 export function localeHref(href: string, locale: Locale): string {
-  if (locale === 'en') return href;
-  return isTranslated(href) ? localizePath(href, 'zh-hant') : href;
+  // 先拆出錨點 / 查詢，僅對路徑部分做 locale 轉換與補斜線
+  const hashIdx = href.indexOf('#');
+  const qIdx = href.indexOf('?');
+  const splitIdx = Math.min(hashIdx >= 0 ? hashIdx : Infinity, qIdx >= 0 ? qIdx : Infinity);
+  const path = splitIdx === Infinity ? href : href.slice(0, splitIdx);
+  const tail = splitIdx === Infinity ? '' : href.slice(splitIdx);
+  let p = locale === 'en' ? path : (isTranslated(path) ? localizePath(path, 'zh-hant') : path);
+  if (p !== '/' && !p.includes('.') && !p.endsWith('/')) p += '/';
+  return p + tail;
 }
 
-/** 語言切換器：切到繁體時若當前頁未翻譯，則停留在英文版 */
+/** 語言切換器：切到繁體時若當前頁未翻譯，則停留在英文版；同時補尾端斜線（首頁 / 與 /zh-hant 保持不變） */
 export function switchLocale(pathname: string, target: Locale): string {
-  if (target === 'en') return stripLocale(pathname) || '/';
+  if (target === 'en') {
+    const e = stripLocale(pathname) || '/';
+    return e !== '/' && !e.endsWith('/') ? e + '/' : e;
+  }
   const base = stripLocale(pathname);
-  return isTranslated(base) ? '/zh-hant' + (base === '/' ? '' : base) : (base || '/');
+  let t = isTranslated(base) ? '/zh-hant' + (base === '/' ? '' : base) : (base || '/');
+  if (t !== '/' && t !== '/zh-hant' && !t.endsWith('/')) t += '/';
+  return t;
 }

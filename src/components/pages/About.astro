@@ -349,7 +349,7 @@ const description = ZH
           <p class="text-sm leading-relaxed mb-8 text-stone-500">
             {ZH ? '為同性伴侶與單身者提供包容、肯定的照護——精子捐贈、卵子捐贈與代理孕母。' : 'Inclusive, affirming care for same-sex couples and single individuals — sperm donation, egg donation, and gestational surrogacy.'}
           </p>
-          <a href={ZH ? '/services/lgbtqia' : '/services#lgbtqia'} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          <a href={ZH ? '/services/lgbtqia/' : '/services/#lgbtqia'} class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
             {ZH ? '了解更多' : 'Learn More'}
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
@@ -366,7 +366,7 @@ const description = ZH
               <span class="text-xs px-3 py-1 border tracking-wide" style="border-color: var(--color-stone-300); color: var(--color-stone-500);">{lang}</span>
             ))}
           </div>
-          <a href="/appointment" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
+          <a href="/appointment/" class="text-xs tracking-widest uppercase flex items-center gap-2" style="color: var(--color-gold-600);">
             {ZH ? '聯絡我們' : 'Contact Us'}
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
@@ -385,8 +385,8 @@ const description = ZH
         {ZH ? '每段旅程都始於一場對話。今天就預約諮詢，讓我們認識你。' : 'Every journey starts with a conversation. Schedule your consultation today and let us learn about you.'}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/team" class="btn-outline">{ZH ? '認識我們的醫師' : 'Meet Our Physicians'}</a>
-        <a href="/appointment" class="btn-primary">{t(locale, 'nav.cta')}</a>
+        <a href="/team/" class="btn-outline">{ZH ? '認識我們的醫師' : 'Meet Our Physicians'}</a>
+        <a href="/appointment/" class="btn-primary">{t(locale, 'nav.cta')}</a>
       </div>
     </div>
   </section>

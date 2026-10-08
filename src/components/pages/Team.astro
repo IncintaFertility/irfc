@@ -130,7 +130,7 @@ const physicianSchema = [
     medicalSpecialty: 'Reproductive Medicine',
     worksFor: { '@type': 'MedicalOrganization', name: 'IRFC' },
     image: SITE_URL + '/images/team/dr-james-lin-circle.png',
-    url: SITE_URL + '/team',
+    url: SITE_URL + '/team/',
   },
   {
     '@context': 'https://schema.org',
@@ -320,7 +320,7 @@ const description = ZH
       <p class="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style="color: var(--color-stone-500);">
         {ZH ? '我們的團隊隨時準備回答您的疑問，並引導您了解各種選擇。今天就預約諮詢。' : 'Our team is ready to answer your questions and guide you through your options. Schedule a consultation today.'}
       </p>
-      <a href="/appointment" class="btn-primary">{t(locale, 'nav.cta')}</a>
+      <a href="/appointment/" class="btn-primary">{t(locale, 'nav.cta')}</a>
     </div>
   </section>
 

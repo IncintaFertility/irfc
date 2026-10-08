@@ -4,4 +4,4 @@ Allow: /
 # Expose the LLM indexing file
 Allow: /llms.txt
 
-Sitemap: https://irfc.com/sitemap-index.xml
+Sitemap: https://www.irfc.com/sitemap-index.xml

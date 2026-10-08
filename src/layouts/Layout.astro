@@ -99,7 +99,7 @@ const fullTitle = title.includes(LEGAL_ENTITY) ? title : `${title} | ${LEGAL_ENT
 
 // BreadcrumbList — 從當前路徑推導，標籤隨語言切換（linkLabel 單一來源）
 const segs = Astro.url.pathname.split('/').filter(Boolean);
-const crumbItems = [{ '@type': 'ListItem', position: 1, name: linkLabel(locale, '/'), item: SITE_URL }];
+const crumbItems = [{ '@type': 'ListItem', position: 1, name: linkLabel(locale, '/'), item: new URL('/', SITE_URL).href }];
 if (segs.length) {
   let acc = '';
   segs.forEach((seg, i) => {

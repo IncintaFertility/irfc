@@ -21,7 +21,7 @@ export const LEGAL_ENTITY = 'Incinta Reproductive Fertility Center';
 /** 业务实体缩写 */
 export const BRAND_ABBREV = 'IRFC';
 
-export const SITE_URL = 'https://irfc.com';
+export const SITE_URL = 'https://www.irfc.com';
 export const SITE_PHONE = '+14244324732';
 export const SITE_PHONE_DISPLAY = '(424) 432-4732';
 
