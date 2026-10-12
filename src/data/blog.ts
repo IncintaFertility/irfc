@@ -166,59 +166,143 @@ export const blogPosts: BlogPost[] = [
     slug: 'egg-freezing-guide',
     title: 'Egg Freezing & Fertility Preservation: What to Know Before You Start',
     description:
-      'Egg freezing lets you bank eggs at today’s egg quality for future use. Learn when it helps most, what a cycle involves, and how to think about timing and odds.',
+      'A practical guide to egg freezing: timing, ovarian reserve tests, treatment steps, risks, recovery, costs, storage, and realistic expectations for future use.',
     date: '2026-09-10',
     category: 'Preservation',
-    readingTime: '7 min read',
+    readingTime: '9 min read',
     excerpt:
-      'Fertility preservation banks eggs at your current egg quality. Here is what a freezing cycle involves, who it helps most, and how to think about timing.',
+      'Considering egg freezing? Understand the full pathway, from testing and retrieval to storage and future IVF, plus the questions to ask before starting.',
     body: `
-      <p><strong>Egg freezing</strong> (oocyte cryopreservation) has moved from experimental to mainstream. The appeal is simple: eggs are frozen at the quality they have today, then thawed and fertilized later — with a partner, donor sperm, or a future decision you have not made yet. Here is what to know before you start.</p>
+      <p><strong>Egg freezing</strong>, also called oocyte cryopreservation, preserves unfertilized eggs for possible use in a future pregnancy. It can be an option when you are not ready to have children or when medical treatment may affect fertility. It preserves an opportunity, not a promise: some eggs may not survive warming, fertilize, develop into usable embryos, or result in a live birth.</p>
+      <p>This guide explains how to think about timing, what treatment involves, and what to ask before committing to a cycle. For an overview of care at IRFC, visit our <a href="/services/egg-freezing">egg freezing service page</a>.</p>
 
-      <h2>Why timing matters more than anything</h2>
-      <p>Egg quality and quantity decline with age, gradually through your 30s and more steeply after about 35. Freezing at 32 is not the same as freezing at 39. The single biggest predictor of a future live birth from banked eggs is the age at which they were frozen — which is exactly why many people consider it earlier than they "feel" they need to.</p>
+      <h2>Who might consider fertility preservation?</h2>
+      <p>People consider planned egg freezing for many reasons, including education, work, relationships, or simply not being ready to parent. Others need a time-sensitive fertility preservation consultation before chemotherapy, pelvic radiation, certain ovarian surgeries, or other treatments that could affect their ovaries.</p>
+      <p>If preservation is medically urgent, ask your treating specialist and fertility physician to coordinate promptly. Whether stimulation is safe and how much time is available depend on your diagnosis and treatment plan. Do not delay prescribed medical care on your own. Egg freezing is one option; embryo freezing or other preservation approaches may be appropriate in some circumstances.</p>
 
-      <h2>What a freezing cycle involves</h2>
+      <h2>Timing: age matters, but there is no universal deadline</h2>
+      <p>On average, both egg supply and the likelihood that an egg can produce a chromosomally normal embryo decrease with age. Earlier freezing generally offers better reproductive potential per egg than later freezing. Age 35 is not a sudden cutoff, and people of the same age can respond differently to stimulation.</p>
+      <p>The age when eggs are frozen is an important factor in their future potential. Your age and health when you later carry a pregnancy also matter: freezing younger eggs does not remove age-related pregnancy risks. A useful decision weighs likely benefit against the cost, treatment burden, desired family size, and the possibility that you may never use the eggs.</p>
+
+      <h2>What ovarian reserve testing can—and cannot—tell you</h2>
+      <p>A consultation usually includes your menstrual and medical history, medications, previous pregnancies or fertility treatment, and family history of early menopause. Your clinician may recommend blood tests such as anti-Müllerian hormone (AMH), follicle-stimulating hormone (FSH), and estradiol, together with an ultrasound antral follicle count (AFC).</p>
+      <p>These tests help estimate how your ovaries might respond and how many eggs a cycle could yield. They do <strong>not directly measure egg quality</strong>, guarantee a future pregnancy, or reliably predict whether you can conceive naturally. A low AMH does not by itself mean pregnancy is impossible; a high AMH does not guarantee healthy eggs. Discuss results alongside age and your individual history.</p>
+
+      <h2>What happens during an egg freezing cycle?</h2>
       <ul>
-        <li><strong>Testing</strong> — baseline ultrasound and hormone bloodwork (AMH, FSH) to estimate your response.</li>
-        <li><strong>Stimulation</strong> — daily injections for ~10–12 days to grow multiple follicles, with monitoring visits.</li>
-        <li><strong>Retrieval</strong> — a short, sedated procedure to collect the eggs.</li>
-        <li><strong>Vitrification</strong> — eggs are flash-frozen using modern vitrification, which preserves them very reliably.</li>
+        <li><strong>Planning and baseline checks:</strong> review consent, medication training, screening, costs, and the timing of treatment. Depending on your circumstances, preparation can take longer than the stimulation itself.</li>
+        <li><strong>Ovarian stimulation:</strong> daily hormone injections commonly continue for about 10–14 days. Ultrasounds and blood tests guide dose adjustments and help determine when the follicles are ready.</li>
+        <li><strong>Trigger injection:</strong> a final medication helps eggs mature. Retrieval is usually scheduled about 34–36 hours later. Follow your clinic’s exact timing and call if a dose is missed; do not adjust it yourself.</li>
+        <li><strong>Egg retrieval:</strong> under sedation or anesthesia, a clinician uses an ultrasound-guided needle through the vaginal wall to collect fluid from the follicles. This is generally an outpatient procedure.</li>
+        <li><strong>Laboratory assessment and freezing:</strong> the embryology team identifies the eggs and assesses maturity. Mature eggs suitable for freezing are vitrified and placed in cryogenic storage. Ask for the number retrieved and the number of mature eggs actually frozen.</li>
       </ul>
-      <p>The stimulation and retrieval mirror the first half of an <a href="/services/ivf">IVF cycle</a>; the difference is that fertilization is deferred to the future.</p>
+      <p>The stimulation and retrieval resemble the first part of an <a href="/services/ivf">IVF cycle</a>. With egg freezing, fertilization and embryo transfer happen only if you decide to use the eggs later. Calendar dates and visit frequency vary; arrange flexibility for monitoring and a responsible adult to take you home after sedation.</p>
 
-      <h2>How many eggs should you bank?</h2>
-      <p>There is no single answer, but the younger you are, the fewer eggs you typically need for a reasonable chance. A common target range is roughly 15–20 mature eggs for someone freezing before 35, and more if freezing later. Your clinician should give you a personalized estimate rather than a generic number.</p>
+      <h2>How many mature eggs should you freeze?</h2>
+      <p>There is no egg count that guarantees a baby and no single target that is right for everyone. Planning depends on age at freezing, expected response, laboratory experience, and whether you hope for one child or more. Some people need more than one retrieval; others may decide that additional cycles are not worthwhile for them.</p>
+      <p>Keep the stages separate: follicles seen on ultrasound, eggs retrieved, and mature eggs frozen are different numbers. Later, only some frozen eggs will survive warming, fertilize, form embryos suitable for transfer, and lead to a live birth. Ask your physician for a range of likely outcomes, the evidence behind any calculator used, and how much uncertainty remains. A prediction model is an estimate, not your personal outcome.</p>
+      <blockquote>“Given my age, test results, and family goals, how many mature eggs might one cycle yield, and what would another cycle realistically add?”</blockquote>
 
-      <h2>Is it right for you?</h2>
-      <p>Preservation is also relevant for medical reasons — before cancer treatment, for example — and for anyone who wants options without a present plan. It is not a guarantee of a future pregnancy, but it meaningfully widens the window. If you want to understand your own numbers, <a href="/appointment">schedule a consultation</a> or review our <a href="/services/egg-freezing">egg freezing overview</a>.</p>
+      <h2>Side effects, risks, and recovery</h2>
+      <p>Temporary bloating, injection-site bruising, pelvic discomfort, and fatigue can occur during stimulation. After retrieval, mild cramping or light spotting may occur. Follow your team’s instructions about pain relief, work, exercise, sex, and when to resume normal activities. Enlarged ovaries can increase the risk of ovarian torsion, so ask which activities to avoid and for how long.</p>
+      <p>Less common but important risks include ovarian hyperstimulation syndrome (OHSS), bleeding, infection, and complications of sedation or anesthesia. Individualized medication choices and monitoring can reduce some risks, but cannot eliminate them.</p>
+      <p><strong>Contact your care team promptly</strong> for worsening or severe abdominal pain, rapidly increasing swelling or weight, persistent vomiting, reduced urination, fever, or heavy bleeding. Seek emergency care for difficulty breathing, chest pain, fainting, or other severe symptoms. Obtain an after-hours contact and written recovery instructions before retrieval.</p>
+
+      <h2>Costs: ask about the full pathway</h2>
+      <p>A quoted cycle price may not include medications, anesthesia, all monitoring, or annual storage. Request a written breakdown and clarify what happens if a cycle is cancelled or yields no mature eggs. Also ask whether additional retrievals are priced separately.</p>
+      <ul>
+        <li><strong>Now:</strong> consultation, testing, medications, monitoring, retrieval, anesthesia, and freezing.</li>
+        <li><strong>During storage:</strong> recurring fees, billing terms, and any transport or transfer charges.</li>
+        <li><strong>When you use the eggs:</strong> warming, fertilization, embryo culture, transfer, medications, and any separately indicated testing.</li>
+      </ul>
+      <p>Coverage varies by insurance plan, employer benefits, and whether preservation is medically indicated. Confirm benefits and authorization requirements directly rather than assuming coverage. Our <a href="/insurance">insurance information</a> and <a href="/financing">financing overview</a> can help you prepare questions; neither replaces a personalized quote or a benefits determination.</p>
+
+      <h2>Storage and using your eggs in the future</h2>
+      <p>Vitrified eggs can remain stored for years under appropriate conditions. Ask about monitoring, emergency procedures, storage location, consent renewal, transport to another clinic, and what happens if fees go unpaid or your wishes change. Confirm any clinic policies or legal limits that may affect storage and future treatment.</p>
+      <p>When you are ready, the team reassesses your health and treatment plan. Eggs are warmed and surviving eggs are typically fertilized using <a href="/services/icsi">intracytoplasmic sperm injection (ICSI)</a>. Embryos are cultured before a suitable embryo is selected for transfer. Genetic testing may be discussed when indicated; it is not automatically needed for everyone. You can also explore our <a href="/services/ivf">IVF overview</a> to understand the later stages.</p>
+
+      <h2>Egg freezing or embryo freezing?</h2>
+      <p>Egg freezing defers the choice of sperm source and preserves unfertilized eggs. Embryo freezing requires sperm now and provides information about fertilization and embryo development before storage. That distinction can matter for treatment planning, consent, and decisions about future use. Discuss both options if you have a partner or are considering donor sperm; neither guarantees a pregnancy.</p>
+
+      <h2>Questions to bring to your consultation</h2>
+      <ul>
+        <li>How do my age, ovarian reserve, medical history, and family goals change the recommendation?</li>
+        <li>What range of mature eggs should I expect, and when would you discuss another cycle?</li>
+        <li>Do your outcome estimates measure warming survival, pregnancy, or live birth, and are they based on patients like me?</li>
+        <li>How many monitoring visits will I need, and whom do I call after hours?</li>
+        <li>What is included in the quote, what are the ongoing storage fees, and what will future use cost?</li>
+        <li>What are my alternatives, including waiting or choosing not to freeze?</li>
+      </ul>
+      <p>If you are ready to discuss your own situation, <a href="/appointment">schedule a consultation</a>. The goal is a realistic plan that fits your health, priorities, and resources—not a universal egg target or a guaranteed result.</p>
     `,
     cover: '/images/patient-portrait.webp',
     coverAlt: 'A patient considering egg freezing and fertility preservation at Incinta Reproductive Fertility Center.',
     titleZh: '凍卵與生育保存：開始前該知道的事',
-    descriptionZh: '凍卵讓你以今日的卵子品質保存卵子供日後使用。了解何時最有幫助、一個療程包含什麼，以及如何思考時機與機會。',
-    excerptZh: '生育保存以你當前的卵子品質保存卵子。本文說明凍卵療程包含什麼、誰最有助益，以及如何思考時機。',
+    descriptionZh: '實用凍卵指南：了解時機、卵巢庫存檢測、療程步驟、風險與恢復、費用、保存及日後使用的合理期待。',
+    excerptZh: '考慮凍卵？從檢查、取卵到保存與日後 IVF，了解完整流程及開始前值得提出的問題。',
     coverAltZh: '一位在 Incinta Reproductive Fertility Center 考慮凍卵與生育保存的病人',
     bodyZh: `
-      <p><strong>凍卵</strong>（卵母細胞冷凍保存）已從實驗走向主流。吸引力很簡單：卵子以今日的品質冷凍，日後解凍受精——與伴侶、捐精，或一個你尚未做的決定。開始前該知道的事如下。</p>
+      <p><strong>凍卵</strong>，也稱卵母細胞冷凍保存，是將未受精卵子保存起來，供日後可能的懷孕使用。尚未準備生育，或即將接受可能影響生育力的醫療處置時，都可以考慮。它保留的是機會，而非承諾：並非每顆卵子都能在解凍後存活、受精、發育為可植入胚胎，或最終帶來活產。</p>
+      <p>本指南說明時機、療程與決定前值得問的問題。若想了解 IRFC 的服務流程，可先閱讀<a href="/services/egg-freezing">凍卵服務總覽</a>。</p>
 
-      <h2>為什麼時機比什麼都重要</h2>
-      <p>卵子品質與數量隨年齡下降，30 多歲逐漸下滑，約 35 歲後更陡。32 歲凍卵不同於 39 歲凍卵。未來來自冷凍卵子的活產機會，最大單一預測因子就是凍卵時的年齡——這正是許多人在「覺得」需要之前就考慮的原因。</p>
+      <h2>誰可以考慮生育保存？</h2>
+      <p>求學、工作、伴侶關係，或尚未準備好成為父母，都可能是考慮計畫性凍卵的原因。另一些人則需要在化學治療、骨盆放射治療、部分卵巢手術或其他可能影響卵巢的治療前，儘快評估生育保存。</p>
+      <p>若有醫療上的急迫性，請及早讓原治療專科與生殖醫師共同安排。能否安全刺激卵巢、可用的時間有多少，都取決於診斷與治療計畫。不要自行延後必要的醫療處置。凍卵只是選項之一；某些情況也可討論凍胚或其他保存方式。</p>
 
-      <h2>一個凍卵療程包含什麼</h2>
+      <h2>時機：年齡重要，但沒有適用所有人的期限</h2>
+      <p>平均而言，卵子數量與卵子形成染色體正常胚胎的機會會隨年齡下降。較早凍卵通常比晚些時候凍卵有較好的每顆卵子生育潛力。35 歲不是突然改變的分界，同齡者對刺激的反應也可能不同。</p>
+      <p>凍卵時的年齡是未來卵子潛力的重要因素；日後懷孕時的年齡與健康狀況同樣重要。使用年輕時保存的卵子，並不能消除高齡懷孕的風險。決策應同時衡量可能的效益、費用、療程負擔、期望的子女數，以及未來可能不會使用卵子的情況。</p>
+
+      <h2>卵巢庫存檢測能告訴你什麼？</h2>
+      <p>諮詢通常會了解月經與病史、用藥、過往懷孕或生育治療，以及家族是否有提早停經的情況。醫師可能安排抗穆勒氏管荷爾蒙（AMH）、濾泡刺激素（FSH）、雌二醇抽血，以及超音波竇卵泡數（AFC）檢查。</p>
+      <p>這些檢查有助估算卵巢對刺激的反應及一個週期可能取得的卵子數，卻<strong>不能直接測量卵子品質</strong>、保證日後懷孕，或可靠地預測能否自然受孕。低 AMH 不等於不可能懷孕；高 AMH 也不保證卵子健康。請結合年齡與個人病史解讀結果。</p>
+
+      <h2>一個凍卵週期如何進行？</h2>
       <ul>
-        <li><strong>檢查</strong>——基礎超音波與荷爾蒙抽血（AMH、FSH）估算你的反應。</li>
-        <li><strong>刺激</strong>——每日注射約 10–12 天，促使多顆卵泡生長，並安排監測回診。</li>
-        <li><strong>取卵</strong>——短暫、鎮靜下的程序，取出卵子。</li>
-        <li><strong>玻璃化冷凍</strong>——以現代玻璃化技術瞬間冷凍卵子，保存非常穩定。</li>
+        <li><strong>規劃與基礎檢查：</strong>確認同意書、注射教學、篩檢、費用及療程時機。依個人情況，準備時間可能比刺激階段更長。</li>
+        <li><strong>卵巢刺激：</strong>每日荷爾蒙注射通常約 10–14 天，配合超音波與抽血調整劑量，判斷卵泡是否準備就緒。</li>
+        <li><strong>觸發針：</strong>最後一劑藥物協助卵子成熟，通常約 34–36 小時後取卵。務必遵守診所指定時間；若漏打，請聯絡團隊，不要自行調整。</li>
+        <li><strong>取卵：</strong>在鎮靜或麻醉下，醫師以超音波導引細針，經陰道壁抽取卵泡液，通常當天即可返家。</li>
+        <li><strong>實驗室評估與冷凍：</strong>胚胎學家辨識卵子並評估成熟度，將適合保存的成熟卵子玻璃化冷凍。請確認「取出卵子數」及「實際冷凍成熟卵子數」。</li>
       </ul>
-      <p>刺激與取卵對應 <a href="/services/ivf">IVF 療程</a> 的前半段；差別在受精延後到未來。</p>
+      <p>刺激與取卵類似<a href="/services/ivf">試管嬰兒（IVF）療程</a>的前半段；凍卵則將受精與植入留到日後決定使用時。日期與回診頻率因人而異，請預留監測回診的彈性，並安排一位可靠的成人在鎮靜後接你返家。</p>
 
-      <h2>該保存多少顆卵子</h2>
-      <p>沒有單一答案，但越年輕，通常需要的成熟卵子越少就能有合理機會。常見目標範圍：35 歲前約 15–20 顆成熟卵子，若較晚凍卵則更多。你的臨床醫師應給你個人化估計，而非通用數字。</p>
+      <h2>應該保存多少顆成熟卵子？</h2>
+      <p>沒有任何卵子數能保證生下寶寶，也沒有適合所有人的固定目標。規劃需考慮凍卵年齡、預期反應、實驗室經驗，以及希望有一名或多名子女。有些人需要多次取卵；也有人會認為再做一個週期不符合自己的需求。</p>
+      <p>超音波看到的卵泡數、取出的卵子數、冷凍的成熟卵子數，是不同數字。未來冷凍卵子中，也只有部分能存活、受精、形成可植入胚胎並帶來活產。請醫師提供合理的結果範圍、估算工具的依據，以及仍存在的不確定性。預測模型是估計，並非你的個人結果。</p>
+      <blockquote>「依我的年齡、檢查結果與家庭目標，一個週期可能保存多少顆成熟卵子？再做一個週期能增加多少機會？」</blockquote>
 
-      <h2>適合你嗎</h2>
-      <p>保存也與醫療原因相關——例如癌症治療前——以及任何想要選擇、卻尚未有計畫的人。它不保證未來懷孕，但明顯拓寬了窗口。若想了解你自己的數字，<a href="/appointment">預約諮詢</a>，或參考我們的<a href="/services/egg-freezing">凍卵總覽</a>。</p>
+      <h2>副作用、風險與恢復</h2>
+      <p>刺激期間可能暫時腹脹、注射處瘀青、骨盆不適或疲倦；取卵後可能有輕微痙攣或少量出血。止痛、工作、運動、性行為及恢復日常活動的時機，請依團隊指示。卵巢變大會增加卵巢扭轉風險，應詢問需要避免哪些活動及多久。</p>
+      <p>較少見但重要的風險包括卵巢過度刺激症候群（OHSS）、出血、感染及鎮靜或麻醉相關併發症。個人化用藥與監測能降低部分風險，但無法完全消除。</p>
+      <p>若出現腹痛加劇或劇痛、腹脹或體重快速增加、持續嘔吐、尿量減少、發燒或大量出血，請<strong>儘快聯絡照護團隊</strong>。呼吸困難、胸痛、昏厥或其他嚴重症狀，應立即就醫。取卵前請取得非門診時間聯絡方式與書面恢復指示。</p>
+
+      <h2>費用：了解整條療程的支出</h2>
+      <p>一個週期的報價不一定包含藥物、麻醉、所有監測或每年保存費。請索取書面明細，確認取消週期或沒有成熟卵子時如何收費，以及追加取卵是否另行計價。</p>
+      <ul>
+        <li><strong>目前：</strong>諮詢、檢查、藥物、監測、取卵、麻醉與冷凍。</li>
+        <li><strong>保存期間：</strong>定期保存費、付款條款，以及運送或轉院費。</li>
+        <li><strong>日後使用：</strong>解凍、受精、胚胎培養、植入、用藥及另有適應症的檢測。</li>
+      </ul>
+      <p>保障因保險方案、雇主福利及是否有醫療適應症而異，請直接確認給付與事前授權，不要假定一定涵蓋。可參考我們的<a href="/insurance">保險資訊</a>及<a href="/financing">付款與融資說明</a>準備問題；這些資訊不能取代個人報價或保險給付認定。</p>
+
+      <h2>保存及日後使用卵子</h2>
+      <p>在適當條件下，玻璃化冷凍卵子可以保存多年。請了解監測、緊急應變、保存地點、同意書續簽、轉運至其他診所，以及未繳費或意願改變時的處理方式。也應確認診所政策或法律是否限制保存與日後治療。</p>
+      <p>準備使用時，團隊會重新評估你的健康與治療計畫。卵子解凍後，存活的卵子通常透過<a href="/services/icsi">卵胞漿內單精子注射（ICSI）</a>受精，再培養胚胎並選擇適合的胚胎植入。若有適應症，可討論基因檢測，但並非每個人都需要。閱讀<a href="/services/ivf">IVF 總覽</a>可了解後續階段。</p>
+
+      <h2>凍卵還是凍胚？</h2>
+      <p>凍卵保存未受精卵子，將精子來源的選擇留到未來；凍胚則需要現在決定精子來源，並可在保存前了解受精及胚胎發育情況。這個差別會影響療程規劃、同意書及未來使用的決定。有伴侶或正在考慮捐精時，可一起討論兩種選項；兩者都不保證懷孕。</p>
+
+      <h2>諮詢時值得帶上的問題</h2>
+      <ul>
+        <li>我的年齡、卵巢庫存、病史與家庭目標，如何影響建議？</li>
+        <li>預期能保存多少顆成熟卵子？什麼情況會討論追加週期？</li>
+        <li>估算的是解凍存活、懷孕，還是活產？資料是否來自與我相似的病人？</li>
+        <li>需要多少次監測回診？非門診時間要聯絡誰？</li>
+        <li>報價包含什麼？保存費與未來使用費用各是多少？</li>
+        <li>還有哪些選項，包括等待或選擇不凍卵？</li>
+      </ul>
+      <p>若想討論自己的情況，歡迎<a href="/appointment">預約諮詢</a>。目標是制定符合健康、優先事項與資源的務實計畫，而非套用固定卵子數或承諾結果。</p>
     `,
   },
 ];
