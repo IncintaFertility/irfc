@@ -120,18 +120,18 @@ export const clinicLocations: ClinicLocation[] = [
     geo: { lat: 34.0736, lng: -118.3791 },
     mapX: 18.5, mapY: 11.8,
     introEn:
-      "On West 3rd Street in the heart of Beverly Hills, IRFC's Westside clinic offers discreet, convenient fertility consultations and monitoring for patients across Los Angeles — from Century City and West Hollywood to Beverly Hills and Hollywood. The suite at 8635 West 3rd Street places expert reproductive care within minutes of the 10 and 405 freeways. Here you meet with a reproductive endocrinologist to map a personalized plan, with monitoring appointments scheduled around your life. As with every IRFC location, your case is coordinated as one team with our Irvine and Corona laboratories, so nothing is lost in the handoff. Mandarin and Spanish-speaking coordination is available. Begin with a consultation and leave with a clear next step.",
+      "On West 3rd Street in Los Angeles, serving Beverly Hills and the Westside, IRFC's Westside clinic offers discreet, convenient fertility consultations and monitoring for patients across Los Angeles — from Century City and West Hollywood to Beverly Hills and Hollywood. Visit us at 8635 West 3rd Street, Suite 1170W, Los Angeles, CA 90048. Here you meet with a reproductive endocrinologist to map a personalized plan, with monitoring appointments scheduled around your life. As with every IRFC location, your case is coordinated as one team with our Irvine and Corona laboratories, so nothing is lost in the handoff. Mandarin and Spanish-speaking coordination is available. Begin with a consultation and leave with a clear next step.",
     introZh:
-      'IRFC 西區診所位於 Beverly Hills 心臟地帶的 West 3rd Street，為大洛杉磯的病人提供隱私、便利的生育諮詢與監測——服務範圍涵蓋 Century City、West Hollywood、Beverly Hills 與 Hollywood。8635 West 3rd Street 的診間讓專業的生殖照護距 10 號與 405 號高速公路僅數分鐘。在此您將與生殖內分泌專科醫師會面，擬定個人化方案，監測預約也能配合您的生活安排。與每一間 IRFC 據點相同，您的病例與 Irvine、Corona 實驗室組成同一個團隊協調，交接不流失任何資訊。我們提供國語（中文）與西班牙語協調。從一次諮詢開始，帶著清晰的下一步離開。',
+      'IRFC 西區診所位於 Los Angeles 的 West 3rd Street，服務 Beverly Hills 與西區，為大洛杉磯的病人提供隱私、便利的生育諮詢與監測——服務範圍涵蓋 Century City、West Hollywood、Beverly Hills 與 Hollywood。地址為 8635 West 3rd Street, Suite 1170W, Los Angeles, CA 90048。在此您將與生殖內分泌專科醫師會面，擬定個人化方案，監測預約也能配合您的生活安排。與每一間 IRFC 據點相同，您的病例與 Irvine、Corona 實驗室組成同一個團隊協調，交接不流失任何資訊。我們提供國語（中文）與西班牙語協調。從一次諮詢開始，帶著清晰的下一步離開。',
     landmarksEn: [
-      { label: 'By car', text: 'Half a block south of the 10 Freeway at La Cienega Blvd, with easy access from Beverly Drive.' },
+      { label: 'By car', text: 'Use the directions link for 8635 West 3rd Street, Suite 1170W, Los Angeles, CA 90048.' },
       { label: 'Nearby', text: 'Close to the Cedars-Sinai medical corridor and Beverly Center.' },
-      { label: 'From West Hollywood', text: 'About 10 minutes west via the 10 — a short trip for Westside families.' },
+      { label: 'From West Hollywood', text: 'Check current traffic before traveling and confirm arrival and parking instructions with your coordinator.' },
     ],
     landmarksZh: [
-      { label: '開車', text: '位於 10 號高速公路 La Cienega Blvd 出口以南半個街區，由 Beverly Drive 容易抵達。' },
+      { label: '開車', text: '請使用路線連結前往 8635 West 3rd Street, Suite 1170W, Los Angeles, CA 90048。' },
       { label: '鄰近', text: '靠近 Cedars-Sinai 醫療廊與 Beverly Center。' },
-      { label: '自 West Hollywood', text: '經 10 號西行約 10 分鐣——對西區家庭是一段短程。' },
+      { label: '自 West Hollywood', text: '出發前請查看即時交通，並向協調員確認到院與停車資訊。' },
     ],
     services: ['ivf', 'iui', 'egg-freezing', 'pgt'],
     localTeamSlugs: ['dr-zitao-liu', 'lily-hao', 'kelly-zhao'],
@@ -293,7 +293,7 @@ export function buildClinicSchema(loc: ClinicLocation): object {
       addressCountry: 'US',
     },
     geo: { '@type': 'GeoCoordinates', latitude: loc.geo.lat, longitude: loc.geo.lng },
-    url: `${SITE_URL}/locations/${loc.slug}`,
+    url: `${SITE_URL}/locations/${loc.slug}/`,
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',

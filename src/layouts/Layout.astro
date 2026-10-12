@@ -17,6 +17,7 @@ import {
   type Locale,
 } from '../i18n/index';
 import { isTranslated } from '../i18n/routes';
+import { clinicLocations } from '../data/clinics';
 
 interface Props {
   title: string;
@@ -98,18 +99,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || SITE_URL);
 const fullTitle = title.includes(LEGAL_ENTITY) ? title : `${title} | ${LEGAL_ENTITY}`;
 
 // BreadcrumbList — 從當前路徑推導，標籤隨語言切換（linkLabel 單一來源）
-const segs = Astro.url.pathname.split('/').filter(Boolean);
+const segs = basePath.split('/').filter(Boolean);
 const crumbItems = [{ '@type': 'ListItem', position: 1, name: linkLabel(locale, '/'), item: new URL('/', SITE_URL).href }];
 if (segs.length) {
   let acc = '';
   segs.forEach((seg, i) => {
     acc += '/' + seg;
-    const label = linkLabel(locale, acc);
+    const clinic = clinicLocations.find((loc) => acc === `/locations/${loc.slug}`);
+    const label = clinic ? (locale === 'zh-hant' ? `${clinic.city} 生育診所` : `${clinic.city} Fertility Clinic`) : linkLabel(locale, acc);
     crumbItems.push({
       '@type': 'ListItem',
       position: i + 2,
       name: label,
-      item: new URL(acc + '/', SITE_URL).href,
+      item: new URL((locale === 'zh-hant' ? '/zh-hant' : '') + acc + '/', SITE_URL).href,
     });
   });
 }

@@ -49,7 +49,7 @@ const articleSchema = {
   headline: title,
   description,
   datePublished: post.date,
-  dateModified: post.date,
+  dateModified: post.updatedDate ?? post.date,
   author: { '@type': 'Organization', name: `${BRAND_ABBREV} — ${LEGAL_ENTITY}` },
   publisher: {
     '@type': 'Organization',
@@ -75,6 +75,8 @@ const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
         </div>
         <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-4 leading-tight">{title}</h1>
         <p class="text-sm tracking-wide" style="color: var(--color-stone-400); font-family: var(--font-sans);">{fmtDate(post.date)} · {reading(post.readingTime)}</p>
+        <p class="text-sm mt-3 text-stone-500">{ZH ? '機構作者：IRFC — Incinta Reproductive Fertility Center' : 'Organization author: IRFC — Incinta Reproductive Fertility Center'}</p>
+        {post.updatedDate && <p class="text-sm mt-2 text-stone-500">{ZH ? '更新：' : 'Updated: '}{fmtDate(post.updatedDate)}</p>}
       </header>
 
       <figure class="mb-10 aspect-[16/9] overflow-hidden rounded-2xl bg-stone-100">

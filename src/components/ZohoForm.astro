@@ -26,6 +26,7 @@
  * 由成功页（加载 GTM）以前端 gtag 发送 generate_lead（带真实 client_id + session）。
  */
 import { getLocaleFromPath, t } from '../i18n/index';
+import { clinicLocations } from '../data/clinics';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
@@ -34,14 +35,11 @@ const ZH = locale === 'zh-hant';
 const successUrl = ZH ? 'https://www.irfc.com/zh-hant/appointment/success' : 'https://www.irfc.com/appointment/success';
 
 // Zoho LEADCF13（Location）picklist —— value 必须与 Zoho 后台选项完全一致
-const locations = [
-  { value: 'Torrance', labelZh: '托倫斯，加州' },
-  { value: 'Alhambra', labelZh: '阿罕布拉，加州' },
-  { value: 'Beverly Hills', labelZh: '比佛利山，加州' },
-  { value: 'Corona', labelZh: '柯羅娜，加州' },
-  { value: 'Irvine', labelZh: '爾灣，加州' },
-  { value: 'China', labelZh: '中國' },
-];
+const locations = clinicLocations.map((clinic) => ({
+  value: clinic.city,
+  slug: clinic.slug,
+  labelZh: ({ torrance: '托倫斯，加州', 'beverly-hills': '比佛利山服務據點，洛杉磯', corona: '柯羅娜，加州', irvine: '爾灣，加州' })[clinic.slug] ?? clinic.city,
+}));
 // Zoho LEADCF1（Intended Service）picklist —— value 必须与 Zoho 后台选项完全一致
 const services = [
   { value: 'Fertility Treatment (IUI, IVF)', labelZh: '生育治療（IUI、IVF）' },
@@ -111,7 +109,7 @@ const inputCls =
       <label class={labelCls} style={labelStyle} for="zf-location">{t(locale, 'form.location')} *</label>
       <select id="zf-location" name="LEADCF13" required class={inputCls + ' text-stone-700 appearance-none'} style={selectStyle}>
         <option value="">{t(locale, 'form.locationPlaceholder')}</option>
-        {locations.map((l) => <option value={l.value}>{ZH ? l.labelZh : l.value}</option>)}
+        {locations.map((l) => <option value={l.value} data-clinic-slug={l.slug}>{ZH ? l.labelZh : l.value}</option>)}
       </select>
     </div>
     <div>
@@ -155,6 +153,16 @@ const inputCls =
   (function () {
     var form = document.getElementById('zoho-lead-form');
     if (!form) return;
+
+    // Only select a documented clinic option; never insert query text into the DOM.
+    var locationSelect = document.getElementById('zf-location');
+    var requestedLocation = new URLSearchParams(window.location.search).get('location');
+    if (locationSelect instanceof HTMLSelectElement && requestedLocation) {
+      var match = Array.from(locationSelect.options).find(function (option) {
+        return option.dataset.clinicSlug === requestedLocation;
+      });
+      if (match) locationSelect.value = match.value;
+    }
 
     var label = document.getElementById('zf-submit-label');
     var submitBtn = form.querySelector('button[type="submit"]');
