@@ -2,6 +2,8 @@
 
 本文件适用于整个仓库，包括主 agent、子 agent 和其他 AI 开发工具。开始工作前读取本文件及修改目录内的补充规则。使用其他工具时，请将本文件设为项目指令来源。
 
+本文先列简体中文规则，随后提供完整英文译文。两种版本应同步维护；如有歧义，以简体中文版本为准。
+
 ## 沟通语言
 
 - agent 的沟通、计划、工作进度、完成报告以及项目规则文档默认使用简体中文；用户明确指定其他语言时遵从用户要求。
@@ -95,3 +97,105 @@
 - 简要说明修改内容、验证结果、分支、提交与 PR 地址。
 - 提供已取得的实际 Cloudflare Pages 预览地址，并说明是否验证、是否受保护。
 - 区分本地完成、已推送、预览部署成功、已合并及生产部署成功；没有证据的状态不得宣称完成。
+
+---
+
+# AI Agent Collaboration Rules — English Translation
+
+These rules apply to the entire repository, including the primary agent, subagents, and other AI development tools. Before starting work, read this file and any supplementary rules in the directories being changed. Configure other tools to use this file as their project instruction source.
+
+The Simplified Chinese rules appear first, followed by this complete English translation. Keep both versions synchronized. If wording is ambiguous, the Simplified Chinese version takes precedence.
+
+## Communication Language
+
+- Use Simplified Chinese by default for agent communication, plans, progress updates, completion reports, and project rule documents. Follow the user's request when they explicitly specify another language.
+- The website remains in English and Traditional Chinese. Changing the communication language does not change website languages, existing routes, or content languages. Do not add a Simplified Chinese site without authorization.
+- Preserve code identifiers, commands, paths, and third-party proper names in their original form. Commit messages may follow the repository's existing English convention; PR descriptions default to Simplified Chinese.
+
+## Project and Validation
+
+- This is an Astro static website deployed on Cloudflare Pages. Node.js >=22.12.0 is required.
+- Pages are in `src/pages/`, shared pages and components in `src/components/`, blog content in `src/data/blog.ts`, and bilingual routing utilities in `src/i18n/`.
+- Run `npm install --package-lock=false` from the repository root. The repository intentionally does not use lockfiles. Do not add lockfiles or change dependencies without a reason.
+- Use `npm run dev` for development, `npm run build` for production validation, and `npm run preview` for local production previews.
+- Before committing application or website content changes, run a production build and check the actual content and functionality of affected pages. For changes limited to development documentation such as collaboration rules, `git diff --check` is sufficient.
+- When changing links or routes, verify rendered href attributes, destination pages, trailing slashes, and language. Unexecuted tests or an open port alone do not establish functional validation.
+
+## Branches, PRs, and Merging
+
+- Before starting, inspect the working tree, current branch, and remote state. Preserve other people's uncommitted changes and local commits.
+- Develop on a task branch created from the latest `origin/main`, such as `fix/blog-links`, `feat/example`, or `docs/agent-rules`. Reuse a user-specified branch or an existing branch for the task.
+- Do not develop on or push directly to `main`. When the user says “git push,” default to committing and pushing the current task branch.
+- Commit only files belonging to the current task. Inspect staged changes individually; avoid `git add .` or `git commit -a`, which may include other agents' changes.
+- After pushing, create or update a PR describing the problem, final changes, validation results, and actual Cloudflare Pages preview URL. If permissions are insufficient, report the specific blocker rather than claiming that a PR was created.
+- Completing development does not authorize merging. Merge into `main` only after the user explicitly requests or authorizes it, and honor branch protection and required checks.
+- Without explicit authorization, do not perform destructive resets, delete untracked files, force-push, or rewrite shared history.
+
+## Multi-Agent Collaboration
+
+- Use the existing checkout; do not create additional worktrees on your own. Obtain user authorization before creating an isolated checkout or worktree.
+- When multiple agents share a workspace, the primary agent assigns file ownership and dependencies. Avoid simultaneous edits to the same file; coordinate before handling overlapping changes.
+- In a shared workspace, the designated integration agent handles branch switching, staging, committing, pushing, and merging. Other agents report their changes and validation results.
+- Do not overwrite or revert changes of unknown origin, or remove another person's code or assertions merely to make tests pass.
+
+## AI Content Update Workflow
+
+### Before Updating
+
+- Read the target page, service pages on the same topic, English and Traditional Chinese versions, and relevant shared data to locate the actual content source. Avoid changing only a page wrapper or the wrong duplicate.
+- Determine the audience, questions to address, and scope from the user's goal. Resolve editorial details that can reasonably be inferred; do not guess unconfirmed clinic facts, prices, or medical review information.
+- Check existing facts and links rather than automatically treating old content as reliable evidence. Before adding a topic, check for existing articles to avoid duplicate pages or contradictory explanations.
+
+### Sources and Medical Accuracy
+
+- Base important medical conclusions, statistics, and time-sensitive recommendations primarily on applicable professional society guidelines, government agencies, peer-reviewed research, or authoritative patient education resources, such as ASRM, ACOG, CDC, SART, and HFEA.
+- For important new or revised claims, record source URLs, titles, publication or update dates when available, and the corresponding claims in the PR. Provide appropriate citations in the article for data and claims readers need to verify.
+- Actually open and verify cited sources. Do not invent publications, links, quotations, or claims that inaccessible materials were verified. If verification is impossible, explain the limitation and remove unsupported assertions or leave them pending confirmation; do not publish speculation as fact.
+- Success rates must identify the population, age, reporting period, and metric, such as per retrieval, per transfer, or cumulative live-birth rate. Do not confuse pregnancy rates with live-birth rates, total eggs with mature eggs, or screening with diagnosis.
+- Explain eligibility, limitations, risks, and alternatives. Do not guarantee outcomes, present averages as individual predictions, or provide individualized diagnoses or medication dosing instructions.
+- Retain appropriate medical disclaimers in educational content. For substantive medical advice or changes to important conclusions, identify the need for qualified medical review in the PR. AI self-review cannot replace medical review; do not invent reviewers or review dates.
+- Use only confirmed project materials or user-provided information for clinic prices, service locations, physician credentials, certifications, laboratory capabilities, and insurance commitments. Do not fabricate patient stories, testimonials, or cases.
+
+### Content Quality and Bilingual Consistency
+
+- Organize content around readers' questions, with useful explanations, practical processes, decision factors, and next steps. Do not add filler merely for word count or SEO.
+- Use clear headings, short paragraphs, and lists where useful. Explain technical terms and avoid fear-based messaging, exaggeration, or unsupported claims such as “best” or “guaranteed success.”
+- Keep facts, numbers, risks, citations, links, and calls to action synchronized between English and Traditional Chinese. Translate naturally and accurately rather than mechanically. If a version cannot be completed, explicitly report it as unfinished rather than claiming that the bilingual update is complete.
+- Do not convert the website's Traditional Chinese content to Simplified Chinese. Reuse existing components and styles, preserving mobile readability, semantic heading structure, and image alternative text.
+
+### SEO, Dates, and Links
+
+- Preserve existing slugs and URLs. If a change is necessary, handle redirects and check internal links, canonical URLs, language switching, and the sitemap.
+- Keep page titles, descriptions, and excerpts consistent with the article. Avoid keyword stuffing. Update reading time reasonably based on the final content.
+- Preserve the actual original publication date; do not fabricate a new publication date when refreshing content. Record a genuine modification date only for substantive updates. If the data model does not support modification dates, separately explain the implementation needed rather than repurposing the original publication date. Displayed dates and structured data must agree.
+- Use shared routing utilities such as `localeHref` for internal links. Link text must match the destination content; do not manually concatenate language prefixes or duplicate slashes.
+- Use real, relevant pages for external citations and verify their destinations and content. Record limitations when access is unavailable. Do not use unrelated internal links as substitutes for external organizations or original sources.
+- For new pages, check inclusion in blog listings, related content, and the sitemap. Content updates must preserve existing exclusions such as success confirmation pages.
+
+### Before Publishing Content
+
+- Run `npm run build` and inspect the updated English and Traditional Chinese pages in a local production preview.
+- Check article text, titles, excerpts, reading times, images, language switching, calls to action, and every new or modified rendered link. Internal destinations must work, and external links must match their citations.
+- Check effects on related shared components or data. When changing common blog link logic, validate other articles as well as the current article.
+- In the PR, list updated pages, substantive content changes, sources, validation results, medical review requirements, and unresolved issues. Clearly distinguish verified, unverified, and pending-confirmation content.
+- Content updates still use task branches, PRs, and Cloudflare Pages previews. Do not merge or publish content requiring medical review until that review is complete and the user has authorized the merge or publication.
+
+## Data Protection and Scope
+
+- Do not expose credentials or patient data in code, logs, commits, PRs, or chat. Do not submit real appointment forms, send emails, or operate on production data unless the user explicitly authorizes it.
+- Stay within the task's scope. Do not add unrelated refactoring, dependency upgrades, or repository-wide formatting.
+
+## Cloudflare Pages Previews
+
+- After pushing a task branch, use the existing Git integration to trigger a Pages preview deployment. If preview deployments are not configured for that branch, report the required setting rather than changing production deployment configuration yourself.
+- Obtain the actual preview URL from that commit's GitHub checks, deployment records, or the Cloudflare Pages API/dashboard. Prefer a deployment URL tied to the commit. If providing a branch alias that changes with later pushes, label it clearly.
+- Do not guess URLs from project or branch names, or present localhost as a Cloudflare preview URL.
+- After confirming successful deployment and a matching commit SHA, request affected preview pages and check HTTP status and expected content. Report actual results when validation fails or access protection prevents it.
+- If deployment records are inaccessible or permissions are missing, complete available development, committing, pushing, and local validation. Clearly state that the preview URL has not been obtained or verified; do not claim deployment success.
+- Do not deploy to production merely to obtain a preview. Pushing a task branch does not mean merging or publishing to production.
+
+## Completion Report
+
+- Briefly describe changes, validation results, the branch, commit, and PR URL.
+- Provide the actual Cloudflare Pages preview URL when obtained, noting whether it was verified or is access-protected.
+- Distinguish local completion, successful push, successful preview deployment, merging, and successful production deployment. Do not claim any state without evidence.
