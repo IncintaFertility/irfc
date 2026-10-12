@@ -5,6 +5,8 @@ export interface BlogPost {
   description: string;
   /** ISO date, used for display + Article structured data */
   date: string;
+  /** Date of a substantive update; original publication date is preserved. */
+  updatedDate?: string;
   /** Display category shown on cards + hub */
   category: string;
   /** Estimated reading time label */
@@ -32,19 +34,20 @@ export const blogPosts: BlogPost[] = [
     description:
       'IVF success rates are reported in ways that are easy to misread. Learn what clinic statistics actually measure, which factors move your odds, and the questions worth asking before you start.',
     date: '2026-09-08',
+    updatedDate: '2026-10-12',
     category: 'IVF & Treatment',
-    readingTime: '7 min read',
+    readingTime: '3 min read',
     excerpt:
       'Clinic success-rate tables can be misleading if you don’t know what they measure. Here is how to read IVF statistics and the factors that shape your own odds.',
     body: `
       <p>When you are comparing fertility clinics, the first number most people look for is the <strong>IVF success rate</strong>. It feels like a report card — higher must be better. But success-rate tables are easy to misread, and the figure that matters most is the one attached to <em>your</em> specific situation, not the clinic average.</p>
 
       <h2>What "success rate" actually measures</h2>
-      <p>Most published IVF statistics come from registries such as the U.S. <a href="/services/ivf">SART</a> or CDC reports. They are usually expressed a few different ways:</p>
+      <p>Published IVF statistics include <a href="https://www.cdc.gov/art/success-rates/index.html">CDC ART reports</a>. They are usually expressed a few different ways:</p>
       <ul>
-        <li><strong>Live-birth rate per transfer</strong> — the chance a single embryo transfer results in a baby. This is the most honest "per attempt" number.</li>
-        <li><strong>Live-birth rate per retrieval</strong> — across an entire stimulation cycle, including any frozen transfers from that cycle.</li>
-        <li><strong>Cumulative rate</strong> — the odds across all transfers from one retrieval plus any future retrievals, sometimes over a full year.</li>
+        <li><strong>Live-birth rate per transfer</strong> — the chance a single embryo transfer results in a baby. It excludes cycles that do not reach transfer.</li>
+        <li><strong>Live-birth rate per retrieval</strong> — check whether the report counts intended or actual retrievals and which subsequent transfers are included.</li>
+        <li><strong>Cumulative rate</strong> — outcomes across the transfers and follow-up period defined by that report; check whether it covers one retrieval or multiple retrievals.</li>
       </ul>
       <p>A clinic can post a very high "per transfer" rate simply by transferring only high-grade embryos to younger patients and declining harder cases. That is not cheating — but it means the average is not <em>your</em> average.</p>
 
@@ -53,17 +56,20 @@ export const blogPosts: BlogPost[] = [
       <ul>
         <li><strong>Ovarian reserve</strong> (AMH, FSH, antral follicle count) — sets how many eggs a cycle is likely to yield.</li>
         <li><strong>Diagnosis</strong> — unexplained infertility, endometriosis, male-factor, and recurrent loss each change the protocol.</li>
-        <li><strong>Embryo genetics</strong> — <a href="/services/pgt">preimplantation genetic testing (PGT-A)</a> helps select euploid embryos and is especially relevant after 35.</li>
+        <li><strong>Embryo genetics</strong> — <a href="/services/pgt">preimplantation genetic testing (PGT-A)</a> screens chromosome-number differences in sampled embryo cells. It is not recommended automatically by age and does not improve outcomes for everyone.</li>
         <li><strong>Lab quality</strong> — culture conditions, vitrification (freezing) skill, and embryologist experience quietly shape outcomes.</li>
       </ul>
 
       <h2>Questions worth asking before you start</h2>
       <p>Instead of asking "what is your overall success rate?", ask the clinic for numbers that match you:</p>
       <blockquote>"What is your live-birth rate per transfer for patients in my age band and diagnosis?"</blockquote>
-      <p>Also ask how many cycles they perform a year (volume correlates with lab refinement), whether they tailor stimulation protocols rather than using one default, and how they handle frozen embryos. A transparent clinic will walk you through the nuance rather than quoting a single headline figure.</p>
+      <p>Also ask how many cycles they perform a year , whether they tailor stimulation protocols rather than using one default, and how they handle frozen embryos. A transparent clinic will walk you through the nuance rather than quoting a single headline figure.</p>
 
       <h2>Reading rates alongside care</h2>
       <p>Statistics are one input, not the whole decision. The right clinic pairs honest numbers with a protocol built around your biology, clear pricing, and a team you can actually reach. If you want to talk through what your own odds might look like, <a href="/appointment">book a consultation</a> with one of our physicians — in person at any of our <a href="/locations">four Southern California clinics</a> or by secure video visit.</p>
+
+      <h2>Sources and further reading</h2>
+      <ul><li><a href="https://www.cdc.gov/art/success-rates/index.html">CDC — ART Success Rates</a></li><li><a href="https://www.hfea.gov.uk/treatments/treatment-add-ons/pre-implantation-genetic-testing-for-aneuploidy-pgt-a/">HFEA — PGT-A</a></li></ul>
     `,
     cover: '/images/consultation-joyful.webp',
     coverAlt: 'A joyful patient celebrating a successful fertility outcome at Incinta Reproductive Fertility Center.',
@@ -75,11 +81,11 @@ export const blogPosts: BlogPost[] = [
       <p>當你比較生育診所時，大多數人第一個看的數字就是 <strong>IVF 成功率</strong>。它感覺像成績單——數字越高一定越好。但成功率表很容易誤讀，而最關鍵的數字，是附在你<em>自身</em>特定情況下的那一個，而非診所平均值。</p>
 
       <h2>「成功率」真正衡量什麼</h2>
-      <p>大多數公開的 IVF 統計來自美國 <a href="/services/ivf">SART</a> 或 CDC 等登錄系統。它們通常以幾種方式呈現：</p>
+      <p>大多數公開的 IVF 統計來自美國 <a href="https://www.cdc.gov/art/success-rates/index.html">CDC ART 報告</a>。它們通常以幾種方式呈現：</p>
       <ul>
-        <li><strong>每次植入的活產率</strong>——單次胚胎植入帶來寶寶的機會。這是最誠實的「每次嘗試」數字。</li>
-        <li><strong>每次取卵的活產率</strong>——涵蓋整個刺激週期，包括該週期任何冷凍植入。</li>
-        <li><strong>累積活產率</strong>——來自一次取卵加上未來任何取卵的所有植入機會，有時長達一整年。</li>
+        <li><strong>每次植入的活產率</strong>——單次胚胎植入帶來寶寶的機會。分母不包含未進入植入階段的週期。</li>
+        <li><strong>每次取卵的活產率</strong>——請確認是預定取卵還是實際取卵，以及後續哪些植入被計入。</li>
+        <li><strong>累積活產率</strong>——涵蓋報告指定植入範圍與追蹤時間的結果；請確認是一次還是多次取卵。</li>
       </ul>
       <p>診所只要只對年輕病人植入高評級胚胎、婉拒較困難的個案，就能貼出極高的「每次植入」成功率。這不算作弊——但這表示平均值並非<em>你</em>的平均值。</p>
 
@@ -88,17 +94,20 @@ export const blogPosts: BlogPost[] = [
       <ul>
         <li><strong>卵巢庫存量</strong>（AMH、FSH、竇卵泡數）——決定一個週期可能取得的卵子數。</li>
         <li><strong>診斷</strong>——不明原因不孕、子宮內膜異位症、男性因素與反覆流產，各自改變療程。</li>
-        <li><strong>胚胎基因</strong>——<a href="/services/pgt">胚胎著床前基因檢測 (PGT-A)</a> 有助挑選染色體正常的胚胎，對 35 歲後尤其相關。</li>
+        <li><strong>胚胎基因</strong>——<a href="/services/pgt">胚胎著床前基因檢測 (PGT-A)</a> 篩檢胚胎取樣細胞的染色體數目差異。並非僅憑年齡就必須檢測，也不會改善每個人的結果。</li>
         <li><strong>實驗室品質</strong>——培養條件、玻璃化（冷凍）技術與胚胎學家經驗，悄悄影響結果。</li>
       </ul>
 
       <h2>開始前值得提出的問題</h2>
       <p>與其問「你們整體成功率是多少？」，不如請診所提供符合你的數字：</p>
       <blockquote>"在我這個年齡層與診斷下，你們每次植入的活產率是多少？"</blockquote>
-      <p>也要詢問他們一年執行多少週期（量能與實驗室精進相關）、是否量身打造刺激療程而非套用預設、以及如何處理冷凍胚胎。透明的診所會帶你理解細微差異，而非只報一個標題數字。</p>
+      <p>也要詢問他們一年執行多少週期、是否量身打造刺激療程而非套用預設、以及如何處理冷凍胚胎。透明的診所會帶你理解細微差異，而非只報一個標題數字。</p>
 
       <h2>看懂數字，也看懂照護</h2>
       <p>統計只是一項輸入，而非整個決定。對的診所，是把誠實數字與為你生理打造的療程、清晰價格，以及真正聯絡得到的團隊結合在一起。若你想聊聊自己可能的機會，<a href="/appointment">預約諮詢</a>，與我們任一醫師面對面——在我們<a href="/locations">南加州四間診所</a>任一處，或透過安全視訊。</p>
+
+      <h2>資料來源與延伸閱讀</h2>
+      <ul><li><a href="https://www.cdc.gov/art/success-rates/index.html">CDC — ART Success Rates</a></li><li><a href="https://www.hfea.gov.uk/treatments/treatment-add-ons/pre-implantation-genetic-testing-for-aneuploidy-pgt-a/">HFEA — PGT-A</a></li></ul>
     `,
   },
   {
@@ -107,31 +116,35 @@ export const blogPosts: BlogPost[] = [
     description:
       'PGT screens embryos for chromosomal normality before transfer. Learn what PGT-A, PGT-M, and PGT-SR actually test for, who benefits, and how it fits into an IVF cycle.',
     date: '2026-09-09',
+    updatedDate: '2026-10-12',
     category: 'IVF & Genetics',
-    readingTime: '8 min read',
+    readingTime: '3 min read',
     excerpt:
       'PGT checks embryos for the right number of chromosomes before they are transferred. Here is what each type tests for, who it helps, and what to expect.',
     body: `
-      <p>If you are going through <a href="/services/ivf">IVF</a>, you will almost certainly hear about <strong>preimplantation genetic testing (PGT)</strong>. It is one of the most misunderstood — and most useful — tools in modern fertility care. This guide explains what it does, the three types, and who tends to benefit.</p>
+      <p>If you are going through <a href="/services/ivf">IVF</a>, you will almost certainly hear about <strong>preimplantation genetic testing (PGT)</strong>. This guide explains the three types, what they test, and questions to discuss before deciding whether testing fits your plan.</p>
 
       <h2>What PGT does</h2>
-      <p>After eggs are fertilized (often with <a href="/services/icsi">ICSI</a> for male-factor cases), embryos are grown to the blastocyst stage (day 5–6). A few cells are gently biopsied and sent for genetic analysis. The embryo is frozen while results come back. Transfer then focuses on the healthiest embryo.</p>
+      <p>After eggs are fertilized (often with <a href="/services/icsi">ICSI</a> for male-factor cases), embryos are grown to the blastocyst stage (day 5–6). A few cells are gently biopsied and sent for genetic analysis. The embryo is frozen while results come back. Your team interprets the results alongside other embryo assessments.</p>
 
       <h2>The three types</h2>
       <ul>
-        <li><strong>PGT-A</strong> (aneuploidy) — screens for the right number of chromosomes. Most embryos from patients over 35 carry some chromosomal mismatch, and transferring a normal (euploid) embryo markedly improves the chance of a live birth and lowers miscarriage risk.</li>
+        <li><strong>PGT-A</strong> (aneuploidy) — screens for the right number of chromosomes. Results describe sampled cells and can include mosaic or inconclusive findings. PGT-A does not guarantee a healthy baby or improve live-birth outcomes for every patient.</li>
         <li><strong>PGT-M</strong> (monogenic) — checks for a specific single-gene condition the parents are known to carry, such as cystic fibrosis or Tay-Sachs.</li>
         <li><strong>PGT-SR</strong> (structural rearrangement) — for patients with a balanced translocation or inversion, to avoid passing an unbalanced chromosome set to the embryo.</li>
       </ul>
 
-      <h2>Who tends to benefit</h2>
-      <p>PGT-A is most often recommended for patients of advanced maternal age, those with recurrent pregnancy loss, repeated unexplained IVF failure, or known chromosomal concerns. For a younger patient with plenty of high-quality embryos, the added value is smaller — and a clinician should talk through the trade-offs rather than defaulting to "yes."</p>
+      <h2>Deciding whether PGT-A fits your plan</h2>
+      <p>PGT-A is not a routine requirement for every IVF patient. HFEA reports no evidence from randomized trials that it improves the chance of having a baby for most patients. It may reduce miscarriage in some circumstances, but this does not necessarily increase the overall chance of a baby. Discuss your history, available embryos, risks, costs, and alternatives with your physician.</p>
 
       <h2>What PGT cannot tell you</h2>
-      <p>It is a screening test, not a full guarantee. It does not assess every genetic disease, and it does not grade an embryo’s developmental potential perfectly. A "normal" result raises the odds substantially; it does not eliminate them. Your care team should be clear about both the upside and the limits.</p>
+      <p>It is a screening test, not a full guarantee. It does not assess every genetic disease, and it does not grade an embryo’s developmental potential perfectly. A result reported as normal does not guarantee pregnancy or live birth. Biopsy can damage an embryo, and inaccurate or mosaic results may reduce the embryos available for transfer. Your team should explain these limitations and how results are interpreted.</p>
 
       <h2>Fitting PGT into your cycle</h2>
-      <p>PGT adds a biopsy step and a few days of waiting (the embryo is vitrified in the meantime), but it does not change the stimulation itself. If you are considering it, ask how your clinic’s lab validates results and how biopsy experience compares across embryologists. To see how genetic testing sits within a full treatment plan, <a href="/services/pgt">explore our PGT overview</a> or <a href="/appointment">speak with a physician</a>.</p>
+      <p>PGT adds a biopsy step and a wait for laboratory results (the embryo is vitrified in the meantime), but it does not change the stimulation itself. If you are considering it, ask how your clinic’s lab validates results and how biopsy experience compares across embryologists. To see how genetic testing sits within a full treatment plan, <a href="/services/pgt">explore our PGT overview</a> or <a href="/appointment">speak with a physician</a>.</p>
+
+      <h2>Sources and further reading</h2>
+      <ul><li><a href="https://www.hfea.gov.uk/treatments/treatment-add-ons/pre-implantation-genetic-testing-for-aneuploidy-pgt-a/">HFEA — Pre-implantation genetic testing for aneuploidy (PGT-A)</a></li></ul>
     `,
     cover: '/images/care-team-embryologist.webp',
     coverAlt: 'An IRFC embryologist working at the microscope in the IVF laboratory during preimplantation genetic testing.',
@@ -140,26 +153,29 @@ export const blogPosts: BlogPost[] = [
     excerptZh: 'PGT 在植入前檢查胚胎是否擁有正確數量的染色體。本文說明各類型檢測內容、適用對象與預期過程。',
     coverAltZh: 'IRFC 胚胎學家在 IVF 實驗室顯微鏡前進行胚胎著床前基因檢測',
     bodyZh: `
-      <p>如果你正在進行 <a href="/services/ivf">IVF</a>，幾乎一定會聽到<strong>胚胎著床前基因檢測 (PGT)</strong>。它是現代生育照護中最被誤解——也最有用的工具之一。本指南說明它的作用、三種類型，以及誰通常受益。</p>
+      <p>如果你正在進行 <a href="/services/ivf">IVF</a>，幾乎一定會聽到<strong>胚胎著床前基因檢測 (PGT)</strong>。本指南說明三種類型、檢測內容，以及決定是否適合你的計畫前，值得討論的問題。</p>
 
       <h2>PGT 做什麼</h2>
-      <p>卵子受精後（男性因素個案常搭配 <a href="/services/icsi">ICSI</a>），胚胎培養至囊胚階段（第 5–6 天）。取少量細胞溫和地進行切片，送交基因分析。胚胎在結果出爐前冷凍。植入則聚焦在最健康的胚胎。</p>
+      <p>卵子受精後（男性因素個案常搭配 <a href="/services/icsi">ICSI</a>），胚胎培養至囊胚階段（第 5–6 天）。取少量細胞溫和地進行切片，送交基因分析。胚胎在結果出爐前冷凍。團隊會結合其他胚胎評估來解讀結果。</p>
 
       <h2>三種類型</h2>
       <ul>
-        <li><strong>PGT-A</strong>（非整倍體）——篩檢染色體數量是否正確。35 歲以上病人的多數胚胎帶有某些染色體偏差，植入正常（整倍體）胚胎能明顯提高活產機會並降低流產風險。</li>
+        <li><strong>PGT-A</strong>（非整倍體）——篩檢染色體數量是否正確。結果描述取樣細胞，可能出現嵌合或無法判讀的結果。PGT-A 不保證生下健康寶寶，也不會提高每位病人的活產機會。</li>
         <li><strong>PGT-M</strong>（單基因）——檢查父母已知帶有的特定單基因疾病，如囊狀纖維化或泰薩氏症。</li>
         <li><strong>PGT-SR</strong>（結構重排）——適用於帶有平衡轉位或倒位、避免將不平衡染色體組傳給胚胎的病人。</li>
       </ul>
 
-      <h2>誰通常受益</h2>
-      <p>PGT-A 最常建議給高齡、反覆流產、反覆不明原因 IVF 失敗，或有已知染色體疑慮的病人。對擁有充足高品質胚胎的年輕病人，附加價值較小——臨床醫師應討論利弊，而非預設「做」。</p>
+      <h2>決定 PGT-A 是否適合你的計畫</h2>
+      <p>PGT-A 並非每位 IVF 病人都必須進行。HFEA 指出，隨機試驗未證實它能提高多數病人生下寶寶的機會。某些情況下可能降低流產，但不一定提高整體生下寶寶的機會。請與醫師討論病史、可用胚胎、風險、費用與替代方案。</p>
 
       <h2>PGT 無法告訴你什麼</h2>
-      <p>它是篩檢，而非完全保證。它不檢查每一種基因疾病，也無法完美評估胚胎的發育潛力。「正常」結果大幅提高機會，但不消除。你的照護團隊應同時說明優點與限制。</p>
+      <p>它是篩檢，而非完全保證。它不檢查每一種基因疾病，也無法完美評估胚胎的發育潛力。「正常」結果不保證懷孕或活產。切片可能損傷胚胎，不準確或嵌合結果也可能減少可植入胚胎。團隊應說明這些限制及結果如何解讀。</p>
 
       <h2>PGT 如何融入你的療程</h2>
-      <p>PGT 增加一道切片步驟與數天等待（胚胎在此期間玻璃化冷凍），但不改變刺激本身。若你在考慮，請詢問診所實驗室如何驗證結果，以及不同胚胎學家的切片經驗。想了解基因檢測在完整療程中的位置，<a href="/services/pgt">瀏覽我們的 PGT 總覽</a>，或<a href="/appointment">與醫師交談</a>。</p>
+      <p>PGT 增加一道切片步驟與等待實驗室結果的時間（胚胎在此期間玻璃化冷凍），但不改變刺激本身。若你在考慮，請詢問診所實驗室如何驗證結果，以及不同胚胎學家的切片經驗。想了解基因檢測在完整療程中的位置，<a href="/services/pgt">瀏覽我們的 PGT 總覽</a>，或<a href="/appointment">與醫師交談</a>。</p>
+
+      <h2>資料來源與延伸閱讀</h2>
+      <ul><li><a href="https://www.hfea.gov.uk/treatments/treatment-add-ons/pre-implantation-genetic-testing-for-aneuploidy-pgt-a/">HFEA — Pre-implantation genetic testing for aneuploidy (PGT-A)</a></li></ul>
     `,
   },
   {

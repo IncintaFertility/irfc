@@ -60,6 +60,7 @@ const description = ZH
         {ZH ? <span>生命，</span> : <span>Life Is</span>}
         {ZH ? <span>是<em>最珍貴</em>的藝術。</span> : <span>the <em>Ultimate</em> Art.</span>}
       </h1>
+      <p class="idx-hero-services">{ZH ? '南加州生育照護：IVF、IUI、凍卵與個人化諮詢。' : 'Fertility care in Southern California: IVF, IUI, egg freezing, and personalized consultations.'}</p>
       <div class="idx-hero-ctas">
         <a href={localeHref('/appointment', locale)} class="btn-primary">
           {t(locale, 'nav.cta')}
@@ -80,10 +81,10 @@ const description = ZH
       </h2>
       <div class="idx-meaning-body">
         <p>
-          <span class="en">{ZH ? '當您開始想像一個孩子，那個生命的故事便已開始。' : 'The moment you begin to imagine a child, the story of that life has already begun.'}</span> <span class="idx-meaning-lotus"><span class="en">{ZH ? '如蓮花——花開之時，果實已在其中。' : 'Like the lotus &mdash; when the flower blooms, the fruit is already within.'}</span></span>
+          <span class="en">{ZH ? '當您開始想像一個孩子，那個生命的故事便已開始。' : 'The moment you begin to imagine a child, the story of that life has already begun.'}</span> <span class="idx-meaning-lotus"><span class="en">{ZH ? '如蓮花——花開之時，果實已在其中。' : 'Like the lotus — when the flower blooms, the fruit is already within.'}</span></span>
         </p>
         <p class="idx-meaning-seo">
-          <span class="en">{ZH ? '同樣的信念也形塑我們的生育醫學實踐——從 IVF、IUI 到凍卵與胚胎著床前基因檢測——遍佈南加州四間生育診所。' : 'That same belief shapes how we practise reproductive medicine &mdash; from IVF and IUI to egg freezing and preimplantation genetic testing &mdash; across our four fertility clinics in Southern California.'}</span>
+          <span class="en">{ZH ? '同樣的信念也形塑我們的生育醫學實踐——從 IVF、IUI 到凍卵與胚胎著床前基因檢測——遍佈南加州四間生育診所。' : 'That same belief shapes how we practise reproductive medicine — from IVF and IUI to egg freezing and preimplantation genetic testing — across our four fertility clinics in Southern California.'}</span>
         </p>
       </div>
     </div>
@@ -93,7 +94,7 @@ const description = ZH
   <section class="idx-standards" aria-label={ZH ? 'INCINTA 的標準' : 'The INCINTA Standard'}>
     <div class="idx-standards-head max-w-screen-xl mx-auto px-6 lg:px-10">
       <h2 class="idx-standards-title">{ZH ? '六項標準，幫助病人建立自己的判斷準則。' : 'Six standards help patients establish their own criteria.'}</h2>
-      <p class="idx-standards-lead">{ZH ? '一所值得信賴的生育中心，應通過六項考驗。在 IRFC 南加州四間生育診所，我們協助每位病人以這六項標準檢視自己的 IVF、IUI 與個人化照護——讓您能自信地做選擇。' : 'A fertility center worth trusting should pass six tests. At IRFC\'s four Southern California fertility clinics, we help every patient hold their IVF, IUI, and personalised care to these standards &mdash; so you can choose with confidence.'}</p>
+      <p class="idx-standards-lead">{ZH ? '一所值得信賴的生育中心，應通過六項考驗。在 IRFC 南加州四間生育診所，我們協助每位病人以這六項標準檢視自己的 IVF、IUI 與個人化照護——讓您能自信地做選擇。' : 'A fertility center worth trusting should pass six tests. At IRFC\'s four Southern California fertility clinics, we help every patient hold their IVF, IUI, and personalised care to these standards — so you can choose with confidence.'}</p>
     </div>
 
     <div class="idx-standards-rows max-w-screen-xl mx-auto px-6 lg:px-10">
@@ -330,6 +331,13 @@ const description = ZH
   font-size: inherit;
 }
 
+.idx-hero-services {
+  max-width: 36rem;
+  color: rgba(255,255,255,0.95);
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
 .idx-hero-ctas {
   display: flex;
   align-items: center;

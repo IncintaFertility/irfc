@@ -10,44 +10,6 @@ import { localeHref } from '../../i18n/routes';
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
 
-const ageGroups = [
-  {
-    range: 'Under 35',
-    national: '47%',
-    color: 'gold',
-    note: 'Egg quality and quantity are at their peak. Most patients in this group respond well to stimulation.',
-    noteZh: '卵子品質與數量都處於巔峰。此年齡層多數病人對刺激療程反應良好。',
-  },
-  {
-    range: '35 – 37',
-    national: '38%',
-    color: 'gold',
-    note: 'Strong outcomes remain achievable. Personalized protocols and lab quality make a measurable difference.',
-    noteZh: '仍能達成穩健的治療結果。個人化療程與實驗室品質，會帶來可衡量的差異。',
-  },
-  {
-    range: '38 – 40',
-    national: '25%',
-    color: 'stone',
-    note: 'PGT-A genetic testing is often recommended to identify the strongest embryos and reduce miscarriage risk.',
-    noteZh: '通常建議進行 PGT-A 基因檢測，以挑選最強健的胚胎並降低流產風險。',
-  },
-  {
-    range: '41 – 42',
-    national: '13%',
-    color: 'stone',
-    note: 'Multiple cycles or donor egg IVF significantly improve the probability of success for patients in this range.',
-    noteZh: '多次週期或捐卵 IVF，能顯著提升此年齡區間病人的成功機率。',
-  },
-  {
-    range: 'Over 42',
-    national: '5%',
-    color: 'stone',
-    note: "Donor egg IVF offers success rates equivalent to the donor's age — typically 50%+. Many patients find this path profoundly meaningful.",
-    noteZh: '捐卵 IVF 提供的成功率相當於捐卵者年齡層——通常超過 50%。許多病人發現這條路徑意義深遠。',
-  },
-];
-
 const factors = [
   {
     num: '01',
@@ -60,15 +22,15 @@ const factors = [
     num: '02',
     title: 'Laboratory Quality & Environment',
     titleZh: '實驗室品質與環境',
-    desc: "Embryos are extraordinarily sensitive to their culture environment. Temperature, oxygen levels, culture media composition, and handling practices all affect development. IRFC's CAP-certified laboratory and EmbryoScope+ continuous monitoring eliminate the environmental disruptions that compromise embryo quality in less rigorous settings.",
-    descZh: '胚胎對其培養環境極度敏感。溫度、含氧量、培養液組成與操作方式，都會影響發育。IRFC 通過 CAP 認證的實驗室與 EmbryoScope+ 持續監測，排除了在較不嚴謹環境中會損害胚胎品質的環境干擾。',
+    desc: 'Temperature, oxygen levels, culture media, and handling are part of laboratory quality control. Ask your team how embryos are monitored and how laboratory procedures are checked. Equipment alone cannot guarantee a treatment outcome.',
+    descZh: '溫度、含氧量、培養液與操作是實驗室品質管理的一部分。請向團隊詢問胚胎如何監測，以及實驗室程序如何核對。設備本身不能保證治療結果。',
   },
   {
     num: '03',
     title: 'Embryo Chromosomal Integrity',
     titleZh: '胚胎染色體完整性',
-    desc: 'The majority of IVF failures — and most miscarriages — are caused by chromosomally abnormal embryos. Preimplantation Genetic Testing (PGT-A) identifies euploid (chromosomally normal) embryos before transfer, significantly improving per-transfer success rates and reducing miscarriage risk.',
-    descZh: '大多數 IVF 失敗——以及多數流產——皆由染色體異常的胚胎造成。胚胎著床前基因檢測（PGT-A）能在植入前辨識出染色體正常（整倍體）的胚胎，顯著提升每次植入的成功率並降低流產風險。',
+    desc: 'Chromosomal findings are one part of embryo assessment. PGT-A screens sampled cells for chromosome-number differences; it does not guarantee a healthy baby or improve outcomes for every patient. Discuss its limitations and the chance of having no embryo recommended for transfer.',
+    descZh: '染色體結果是胚胎評估的一部分。PGT-A 篩檢取樣細胞的染色體數目差異；它不保證生下健康寶寶，也不會改善每位病人的結果。請討論其限制，以及可能沒有建議植入胚胎的情況。',
   },
   {
     num: '04',
@@ -81,8 +43,8 @@ const factors = [
     num: '05',
     title: 'Uterine Receptivity at Transfer',
     titleZh: '植入時的子宮接受度',
-    desc: 'Even a chromosomally perfect embryo requires the right uterine environment to implant. Your physician evaluates endometrial thickness, anatomy, and may recommend ERA (Endometrial Receptivity Analysis) or a mock cycle to optimize transfer timing for your body.',
-    descZh: '即便是染色體完美的胚胎，也需要合適的子宮環境才能著床。醫師會評估內膜厚度、解剖構造，並可能建議 ERA（子宮內膜容受性分析）或模擬週期，為你的身體優化植入時機。',
+    desc: 'Your physician evaluates uterine anatomy and prepares a transfer plan. Additional tests are not automatically needed; ask about the evidence, risks, costs, and alternatives before choosing an add-on.',
+    descZh: '醫師會評估子宮構造並規劃植入。額外檢查並非必然需要；選擇附加項目前，請詢問證據、風險、費用與替代方案。',
   },
 ];
 
@@ -129,9 +91,9 @@ const faqs = [
   { q: 'Why don\'t you list a specific success rate percentage on this page?', a: 'Because a single percentage without context is, at best, incomplete — and at worst, misleading. A 50% rate for a 28-year-old with unexplained infertility is very different from a 50% rate for a 41-year-old with diminished ovarian reserve. The number that matters is yours. We discuss your personalized probability honestly at your first consultation.', qZh: '為什麼這一頁不列出具體的成功率百分比？', aZh: '因為脫離脈絡的單一百分比，往好處說是不完整，往壞處說則會誤導。一位 28 歲、不明原因不孕者的 50% 成功率，與一位 41 歲、卵巢儲備下降者的 50% 成功率，意義截然不同。真正重要的數字，是「你的」。我們會在初次諮詢時，誠實地與你討論個人化的機率。' },
   { q: 'Where can I find IRFC\'s official CDC-reported outcomes data?', a: 'US fertility clinics that perform ART cycles submit annual outcome data to the CDC. You can search the National ART Surveillance System (NASS) database at cdc.gov/art to compare reported outcomes across clinics, including IRFC. We encourage you to review this data and bring your questions to your consultation.', qZh: '我在哪裡可以找到 IRFC 官方、經 CDC 申報的治療結果資料？', aZh: '在美國執行 ART 週期的生育診所，每年都會向 CDC 申報治療結果資料。你可以在 cdc.gov/art 搜尋「全國 ART 監測系統（NASS）」資料庫，比較各家診所（包含 IRFC）申報的結果。我們鼓勵你查閱這些資料，並帶著問題前來諮詢。' },
   { q: 'What success rate should I realistically expect for my situation?', a: 'Your physician will review your complete history, bloodwork, ultrasound findings, and diagnosis before providing an honest, individualized estimate. Key inputs include your age, ovarian reserve (AMH and antral follicle count), uterine anatomy, partner\'s semen parameters, and any underlying conditions. We do not offer false hope — and we do not give up easily.', qZh: '以我的情況，實際上應期待怎樣的成功率？', aZh: '你的醫師會先檢閱完整的病史、驗血、超音波發現與診斷，再給出誠實、個人化的預估。關鍵依據包含你的年齡、卵巢儲備（AMH 與竇卵泡數）、子宮解剖構造、伴侶的精液參數，以及任何潛在狀況。我們不給予虛假希望——也不輕言放棄。' },
-  { q: 'Does PGT-A genetic testing significantly improve success rates?', a: 'PGT-A improves the per-transfer live birth rate by ensuring only chromosomally normal (euploid) embryos are transferred. For patients over 35, or those with prior unexplained IVF failures, this can meaningfully reduce miscarriage risk and improve confidence in each transfer. Whether PGT-A is right for your situation is a discussion for your physician — it is not appropriate for every patient.', qZh: 'PGT-A 基因檢測能顯著提升成功率嗎？', aZh: 'PGT-A 透過確保只有染色體正常（整倍體）的胚胎被植入，提升每次植入的活產率。對 35 歲以上、或曾有不明原因 IVF 失敗的病人，這能有意義地降低流產風險，並提升對每次植入的信心。PGT-A 是否適合你的情況，需與你的醫師討論——它並非適用於每一位病人。' },
+  { q: 'Does PGT-A genetic testing significantly improve success rates?', a: 'PGT-A is a selection test, not a treatment for an embryo. HFEA reports no evidence from randomized trials that it improves the chance of having a baby for most IVF patients. It may reduce miscarriage in some circumstances, but may also reduce embryos available for transfer. Discuss your individual goals, evidence, risks, and costs with your physician.', qZh: 'PGT-A 基因檢測能顯著提升成功率嗎？', aZh: 'PGT-A 是挑選工具，並非治療胚胎的方法。HFEA 指出，隨機試驗未證實它能提高多數 IVF 病人生下寶寶的機會。某些情況下可能降低流產，但也可能減少可植入胚胎數量。請與醫師討論個人目標、證據、風險與費用。' },
   { q: 'How many IVF cycles do most patients need?', a: 'There is no universal answer, and anyone who gives you one is guessing. Some patients succeed on their first cycle; others benefit from two or three. Your physician will discuss the cumulative probability of success across multiple cycles based on your specific profile. Our financial coordinator can help you plan for different scenarios so cost is never a surprise.', qZh: '大多數病人需要幾次 IVF 週期？', aZh: '沒有放諸四海皆準的答案，任何給你一個確切數字的人都在臆測。有些病人第一次週期就成功；有些則受益於兩到三次。你的醫師會根據你的具體狀況，討論跨越多個週期的累積成功機率。我們的財務協調專員能協助你規劃不同情境，讓費用絕不會成為意外。' },
-  { q: 'Are your success rates higher with donor eggs?', a: 'Yes — significantly. Donor egg IVF success rates are primarily determined by the egg donor\'s age, not the recipient\'s. This means a 44-year-old patient using eggs from a 26-year-old donor can achieve success rates comparable to a 26-year-old patient using her own eggs — typically 50–60% per transfer. For patients with severely diminished ovarian reserve or prior IVF failures, donor egg IVF is often the most direct path to a healthy pregnancy.', qZh: '使用捐卵時，你們的成功率會更高嗎？', aZh: '是的——顯著更高。捐卵 IVF 的成功率，主要由捐卵者的年齡決定，而非受贈者。這意味著一位 44 歲、使用 26 歲捐卵者卵子的病人，能達成與 26 歲、使用自身卵子的病人相當的成功率——通常每次植入 50–60%。對卵巢儲備嚴重下降或曾有 IVF 失敗的病人，捐卵 IVF 往往是通往健康懷孕最直接的路徑。' },
+  { q: 'Are your success rates higher with donor eggs?', a: 'Do not assume a national donor-egg rate is your personal chance or an IRFC-specific result. Compare the reporting year, egg and embryo source, recipient group, and live-birth denominator with your physician before deciding whether donor eggs are an appropriate option.', qZh: '使用捐卵時，你們的成功率會更高嗎？', aZh: '不要將全國捐卵成功率當作你的個人機率或 IRFC 特定結果。決定捐卵是否適合前，請與醫師比較報告年份、卵子與胚胎來源、受贈者群體及活產率分母。' },
 ];
 
 const singleNumberCards = [
@@ -141,8 +103,8 @@ const singleNumberCards = [
 ];
 
 const techVars = [
-  { name: 'EmbryoScope+', impactZh: '持續縮時攝影監測，意味著胚胎永遠不必為了觀察而離開最佳培養環境。這消除了會損害發育的溫度與含氧干擾——並提供即時數據，用以挑選最強健的胚胎。' },
-  { name: 'PGT-A Genetic Testing', impactZh: '植入前的染色體篩檢，能辨識出整倍體胚胎，並排除 IVF 失敗與流產的主因。對符合資格的病人而言，這直接轉化為更高的每次植入活產率。' },
+  { name: 'EmbryoScope+', impactZh: '縮時攝影記錄胚胎發育，減少為觀察而取出胚胎的需要，提供評估資料；不保證治療結果。' },
+  { name: 'PGT-A Genetic Testing', impactZh: '篩檢取樣細胞的染色體數目差異。是否適用需討論證據、限制、風險與費用，不保證提高生下寶寶的機會。' },
   { name: 'RI Witness™ RFID Witnessing', impactZh: '自動化電子驗證，確保在 IVF 流程的每一步，生物檢體都與正確的病人配對——這是最高品質照護標準的絕對前提。' },
   { name: 'TMRW Smart Vault', impactZh: '具備 RFID 追蹤的 24/7 即時冷凍監測，確保冷凍卵子與胚胎在儲存期間的完整性——守護你的投資與未來。' },
 ];
@@ -204,103 +166,27 @@ const description = ZH
     </div>
   </section>
 
-  <!-- Age-based reference data -->
+  <!-- Explain report denominators instead of publishing unverified percentages. -->
   <section class="py-24 lg:py-32 bg-white">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
-      <div class="max-w-3xl mb-16">
-        <div class="section-divider mb-6"></div>
-        <h2 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-5">
-          {ZH ? (
-            <>理解成功率<br/><em class="not-italic" style="color: var(--color-gold-text);">依年齡而異</em></>
-          ) : (
-            <>Understanding Success<br/><em class="not-italic" style="color: var(--color-gold-text);">by Age</em></>
-          )}
-        </h2>
-        <p class="text-sm leading-relaxed text-stone-500 max-w-xl">
-          {ZH
-            ? <>下表顯示來自 SART（美國輔助生殖技術學會）資料的<strong class="text-stone-700 font-medium">全國平均每次取卵週期活產率</strong>——採用病人自身卵子、合併所有診斷。這些是參考基準，並非 IRFC 的特定數據。您的醫師會在諮詢時與您討論個人化的機率。</>
-            : <>The table below shows <strong class="text-stone-700 font-medium">national average live birth rates per retrieval cycle</strong> from SART (Society for Assisted Reproductive Technology) data — using a patient’s own eggs, all diagnoses combined. These are reference benchmarks, not IRFC-specific figures. Your physician will discuss your individual probability at consultation.</>}
-        </p>
-      </div>
-
-      <!-- Desktop table -->
-      <div class="hidden md:block overflow-hidden border border-stone-200">
-        <table class="w-full">
-          <thead>
-            <tr style="background: var(--color-stone-50);">
-              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans); width: 22%;">{ZH ? '年齡區間' : 'Age Range'}</th>
-              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans); width: 20%;">{ZH ? '全國平均' : 'National Avg.'}<br />{ZH ? '(活產 / 取卵)' : '(Live Birth / Retrieval)'}</th>
-              <th class="text-left px-8 py-5 text-xs tracking-widest uppercase text-stone-400 font-normal border-b border-stone-200" style="font-family: var(--font-sans);">{ZH ? '臨床脈絡' : 'Clinical Context'}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ageGroups.map((group, i) => (
-              <tr class={i < ageGroups.length - 1 ? 'border-b border-stone-100' : ''}>
-                <td class="px-8 py-7">
-                  <span class="text-xl font-light" style={`font-family: var(--font-serif); color: var(--color-stone-800);`}>{group.range}</span>
-                </td>
-                <td class="px-8 py-7">
-                  <span class="text-3xl font-light" style={`font-family: var(--font-serif); color: var(--color-gold-text);`}>{group.national}</span>
-                </td>
-                <td class="px-8 py-7">
-                  <p class="text-sm leading-relaxed text-stone-500 max-w-lg">{ZH ? group.noteZh : group.note}</p>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div class="px-8 py-5 border-t border-stone-100" style="background: var(--color-stone-50);">
-          <p class="text-xs text-stone-400 leading-relaxed">
-            {ZH
-              ? '資料來源：SART 全國平均、自卵 IVF 週期。個別結果因診斷、療程、實驗室品質與胚胎基因而異。數據反映近期約略的全國平均，僅供教育參考之用。'
-              : 'Source: SART national averages, own-egg IVF cycles. Individual outcomes vary by diagnosis, protocol, laboratory quality, and embryo genetics. Data reflects approximate recent national averages and is provided for educational context only.'}
-          </p>
-        </div>
-      </div>
-
-      <!-- Mobile cards -->
-      <div class="md:hidden space-y-4">
-        {ageGroups.map((group) => (
-          <div class="border border-stone-200 p-6">
-            <div class="flex items-baseline gap-6 mb-3">
-              <span class="text-xl font-light text-stone-800" style="font-family: var(--font-serif);">{group.range}</span>
-              <span class="text-3xl font-light" style="font-family: var(--font-serif); color: var(--color-gold-text);">{group.national}</span>
-              <span class="text-xs text-stone-400">{ZH ? '全國平均' : 'national avg.'}</span>
-            </div>
-            <p class="text-sm leading-relaxed text-stone-500">{ZH ? group.noteZh : group.note}</p>
-          </div>
-        ))}
-        <p class="text-xs text-stone-400 leading-relaxed pt-2">
-          {ZH ? '資料來源：SART 全國平均、自卵 IVF。個別結果因人而異。僅供教育參考。' : 'Source: SART national averages, own-egg IVF. Individual outcomes vary. Provided for educational context only.'}
-        </p>
-      </div>
-
-      <!-- Donor egg callout -->
-      <div class="mt-8 p-8 lg:p-10 border border-stone-200 bg-stone-50">
-        <div class="grid lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <p class="text-xs tracking-widest uppercase mb-3" style="color: var(--color-gold-text); font-family: var(--font-sans);">{ZH ? '另一條路' : 'A Different Path'}</p>
-            <h3 class="text-2xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{ZH ? '捐卵 IVF' : 'Donor Egg IVF'}</h3>
-            <p class="text-sm leading-relaxed text-stone-500">
-              {ZH
-                ? <>對於卵巢儲備下降或曾 IVF 失敗的病人，捐卵 IVF 將成功機率重置為捐卵者的年齡層——通常<strong class="text-stone-700 font-medium">每次植入 50–60%</strong>，與受贈者年齡無關。許多病人發現，這條路徑雖與原先想像不同，卻是通往期盼已久家庭最直接的道路。</>
-                : <>For patients with diminished ovarian reserve or prior IVF failures, donor egg IVF resets the success probability to the donor’s age group — typically <strong class="text-stone-700 font-medium">50–60% per transfer</strong>, regardless of recipient age. Many patients find that this path, though different from what they imagined, is the most direct route to the family they’ve always wanted.</>}
-            </p>
-          </div>
-          <div class="lg:text-right">
-            <a href={`${localeHref('/services', locale)}#donors`} class="btn-outline">
-              {ZH ? '進一步了解捐卵 IVF' : 'Learn About Donor Egg IVF'}
-              <svg aria-hidden="true" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
-        </div>
+      <h2 class="text-4xl font-light text-stone-800 mb-6" style="font-family: var(--font-serif);">{ZH ? '如何比較成功率報告' : 'How to Compare Success-Rate Reports'}</h2>
+      <p class="text-stone-600 leading-relaxed max-w-3xl mb-8">{ZH
+        ? '比較前，先確認報告年份、取卵時的年齡、自卵或捐卵，以及數字衡量的是懷孕還是活產。全國平均與診所平均都不是你的個人預測。'
+        : 'Before comparing rates, check the reporting year, age at retrieval, own or donor eggs, and whether the outcome is pregnancy or live birth. National and clinic averages are not personal predictions.'}</p>
+      <ul class="space-y-4 text-stone-600 leading-relaxed max-w-3xl">
+        <li>{ZH ? '每次植入：以已進行胚胎植入的週期為分母；未取得可植入胚胎的週期不在此分母中。' : 'Per transfer: the denominator is embryo transfers; cycles that do not reach transfer are not included in that denominator.'}</li>
+        <li>{ZH ? '每次預定取卵或實際取卵：確認是否包含取消的週期，以及取卵後哪些植入被計入。' : 'Per intended or actual retrieval: check whether canceled cycles are included and which subsequent transfers are counted.'}</li>
+        <li>{ZH ? '累積結果：查看報告指定的追蹤時間與計入的植入範圍，不將它與單次植入率直接比較。' : 'Cumulative outcomes: check the follow-up period and transfers included; do not directly compare this measure with a single-transfer rate.'}</li>
+      </ul>
+      <p class="mt-8 text-sm text-stone-600">{ZH ? '官方資料與閱讀指引：' : 'Official data and report guidance: '}<a href="https://www.cdc.gov/art/success-rates/index.html" class="underline underline-offset-4">CDC — ART Success Rates</a>. {ZH ? '請與醫師一起查看符合你年齡、診斷與治療方式的資料。' : 'Review the relevant age, diagnosis, and treatment categories with your physician.'}</p>
+      <div class="mt-10 p-8 border border-stone-200 bg-stone-50">
+        <h3 class="text-2xl font-light text-stone-800 mb-3" style="font-family: var(--font-serif);">{ZH ? '捐卵 IVF 的結果需另行比較' : 'Compare Donor-Egg IVF Separately'}</h3>
+        <p class="text-sm text-stone-600 leading-relaxed">{ZH ? '捐卵與自卵報告使用不同的患者與週期分類。請確認使用新鮮或冷凍卵子、胚胎來源及統計分母，並與醫師討論受贈者的健康與治療風險。' : 'Donor-egg and own-egg reports describe different patient and cycle groups. Check fresh or frozen eggs, embryo source, and the denominator, and discuss recipient health and treatment risks with your physician.'}</p>
+        <a href={localeHref('/services/donors-surrogacy', locale)} class="btn-outline mt-6">{ZH ? '了解捐卵與代理孕母服務' : 'Explore Donor and Surrogacy Services'}</a>
       </div>
     </div>
   </section>
 
-  <!-- IRFC Credentials -->
   <section id="credentials" class="py-24 lg:py-32 border-y border-stone-100" style="background: var(--color-stone-50);">
     <div class="max-w-screen-xl mx-auto px-6 lg:px-10">
       <div class="text-center mb-16">
@@ -402,9 +288,10 @@ const description = ZH
           </h2>
           <p class="text-sm leading-relaxed text-stone-500 mb-12">
             {ZH
-              ? '實驗室設備並非行銷上的區隔——它是臨床變數。下列每一項技術，都應用於每一位 IRFC 病人、每一個週期。'
-              : 'Laboratory equipment is not a marketing distinction — it is a clinical variable. Each of the following technologies is used for every IRFC patient, every cycle.'}
+              ? '實驗室設備支援臨床照護。PGT-A 是諮詢後決定的選擇性檢測，並非每位病人或每個週期都需要。團隊會說明哪些程序適用於你的計畫。'
+              : 'Laboratory equipment supports clinical care. PGT-A is an optional test selected after consultation, not a routine requirement for every patient or cycle. Your team will explain which procedures apply to your plan.'}
           </p>
+          <p class="text-sm text-stone-600 mb-8"><a href="https://www.hfea.gov.uk/treatments/treatment-add-ons/pre-implantation-genetic-testing-for-aneuploidy-pgt-a/" class="underline underline-offset-4">{ZH ? 'HFEA：PGT-A 的證據與風險' : 'HFEA: PGT-A evidence and risks'}</a></p>
           <div class="space-y-8">
             {techVars.map(tech => (
               <div class="flex gap-5 items-start">

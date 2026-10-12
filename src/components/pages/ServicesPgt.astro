@@ -13,7 +13,7 @@ const types = [
   {
     abbr: 'PGT-A',
     name: ZH ? '染色體數目篩檢' : 'Aneuploidy Screening',
-    desc: ZH ? '檢測胚胎染色體數目是否正確（共 46 條）。染色體錯誤（非整倍體）是 IVF 失敗與流產的主因——尤其見於 35 歲以上女性。PGT-A 可辨識出整倍體（染色體正常）的胚胎供植入。' : 'Tests embryos for the correct number of chromosomes (46 total). Chromosomal errors (aneuploidy) are the leading cause of IVF failure and miscarriage — especially in women over 35. PGT-A identifies euploid (chromosomally normal) embryos for transfer.',
+    desc: ZH ? '檢測胚胎染色體數目是否正確（共 46 條）。結果描述取樣細胞，並非胚胎每個細胞。可能出現嵌合或無法判讀的結果，不保證懷孕或活產。' : 'Tests embryos for the correct number of chromosomes (46 total). Results describe sampled cells, not every cell in an embryo. The test can produce mosaic or inconclusive findings and does not guarantee pregnancy or live birth.',
     best: ZH ? '高齡、反覆流產、屢次 IVF 失敗' : 'Advanced maternal age, recurrent pregnancy loss, repeated IVF failure',
   },
   {
@@ -32,18 +32,12 @@ const types = [
 
 const faqs = [
   { q: ZH ? 'PGT 能保證生下健康寶寶嗎？' : 'Does PGT guarantee a healthy baby?', a: ZH ? 'PGT 能顯著降低特定染色體或基因疾病的風險——但無法篩檢所有可能異常。它是一項重要的風險降低工具，而非絕對保證。醫師會與你討論務實的期待。' : 'PGT significantly reduces the risk of specific chromosomal or genetic conditions — but it cannot screen for all possible abnormalities. It is an important risk-reduction tool, not an absolute guarantee. Your physician will discuss realistic expectations.' },
-  { q: ZH ? '胚胎切片是如何進行的？' : 'How is the embryo biopsy performed?', a: ZH ? '在囊胚階段（第 5–6 天），胚胎師以雷射取出少量滋養外胚層細胞（日後形成胎盤，而非胎兒）。胚胎隨後冷凍，等待切片結果。研究證實此過程不會傷害胚胎。' : 'At the blastocyst stage (day 5–6), an embryologist uses a laser to remove a small number of trophectoderm cells (which become the placenta, not the baby). The embryo is then frozen while biopsy results are awaited. Studies confirm this process does not harm the embryo.' },
-  { q: ZH ? 'PGT 需要多久？' : 'How long does PGT take?', a: ZH ? '切片結果通常於 10–14 天內回報。醫師會與你一同檢視結果，並建議最適合植入的胚胎。' : 'Biopsy results typically return within 10–14 days. Your physician will review results with you and recommend which embryos are best suited for transfer.' },
-  { q: ZH ? 'PGT 能提升成功率嗎？' : 'Does PGT improve success rates?', a: ZH ? '對合適的病患，是的——尤其 35 歲以上女性、有反覆流產史，或曾有 IVF 失敗者。透過挑選染色體正常的胚胎，PGT-A 能降低流產風險並提升每次植入的著床率。' : 'For appropriate candidates, yes — particularly women over 35, those with recurrent miscarriage, or those with prior IVF failures. By selecting chromosomally normal embryos, PGT-A reduces miscarriage risk and improves implantation rates per transfer.' },
-  { q: ZH ? '未通過 PGT 的胚胎會如何處理？' : 'What happens to embryos that don\'t pass PGT?', a: ZH ? '檢出異常的胚胎不會被植入。病患可選擇捨棄、捐贈供研究，或在部分情況下與遺傳諮詢師及醫師討論其他選項。' : 'Embryos with detected abnormalities are not transferred. Patients may choose to discard them, donate them to research, or in some cases, discuss options with genetic counselors and their physician.' },
+  { q: ZH ? '胚胎切片是如何進行的？' : 'How is the embryo biopsy performed?', a: ZH ? '在囊胚階段（第 5–6 天），胚胎師以雷射取出少量滋養外胚層細胞（日後形成胎盤，而非胎兒）。胚胎隨後冷凍，等待切片結果。切片可能損傷胚胎。請向團隊詢問這項風險、結果準確性，以及可植入胚胎可能減少的情況。' : 'At the blastocyst stage (day 5–6), an embryologist uses a laser to remove a small number of trophectoderm cells (which become the placenta, not the baby). The embryo is then frozen while biopsy results are awaited. Biopsy can damage an embryo. Ask your team about this risk, result accuracy, and the possibility of having fewer embryos available for transfer.' },
+  { q: ZH ? 'PGT 需要多久？' : 'How long does PGT take?', a: ZH ? '回報時間依檢測與實驗室而定。請向協調員確認預計時間與植入安排。醫師會與你一起解讀結果。' : 'Turnaround time depends on the test and laboratory. Ask your coordinator for the expected timeline and transfer schedule. Your physician will interpret the results with you.' },
+  { q: ZH ? 'PGT 能提升成功率嗎？' : 'Does PGT improve success rates?', a: ZH ? 'PGT-A 並非能提高每個人生下寶寶的機會。HFEA 指出，隨機試驗未證實對多數 IVF 病人的益處。某些情況下可能降低流產，但也可能減少可植入胚胎。請討論適用於你情況的證據、風險與費用。' : 'PGT-A does not improve the chance of having a baby for everyone. HFEA reports no evidence from randomized trials of benefit for most IVF patients. It may reduce miscarriage in some circumstances, but may reduce embryos available for transfer. Discuss the evidence, risks, and costs for your situation.' },
+  { q: ZH ? '未通過 PGT 的胚胎會如何處理？' : 'What happens to embryos that don\'t pass PGT?', a: ZH ? '決定胚胎植入或處置前，請與醫師及遺傳諮詢師一起檢視異常、嵌合或無法判讀的結果。結果有其限制，需要結合實際情況解讀。' : 'Review abnormal, mosaic, or inconclusive findings with your physician and a genetic counselor before making decisions about embryo transfer or disposition. Results have limitations and must be interpreted in context.' },
 ];
 
-const ageRows = [
-  { age: ZH ? '35 歲以下' : 'Under 35', rate: ZH ? '約 20–25% 胚胎受影響' : '~20–25% of embryos affected' },
-  { age: ZH ? '35–37 歲' : 'Age 35–37', rate: ZH ? '約 40% 胚胎受影響' : '~40% of embryos affected' },
-  { age: ZH ? '38–40 歲' : 'Age 38–40', rate: ZH ? '約 50–60% 胚胎受影響' : '~50–60% of embryos affected' },
-  { age: ZH ? '40 歲以上' : 'Over 40', rate: ZH ? '約 70–80% 胚胎受影響' : '~70–80% of embryos affected' },
-];
 const schemaTitle = ZH ? '胚胎著床前基因檢測 (PGT)' : 'Preimplantation Genetic Testing (PGT)';
 const schemaDesc = ZH ? 'IRFC 的 PGT——在植入前篩檢胚胎的染色體異常與遺傳疾病。了解 PGT-A、PGT-M 與 PGT-SR。' : 'PGT at IRFC — screen embryos for chromosomal abnormalities and inherited conditions before transfer. Learn about PGT-A, PGT-M, and PGT-SR.';
 
@@ -124,21 +118,17 @@ const pageSchema = [treatmentSchema, faqPageSchema];
             {ZH ? '胚胎著床前基因檢測（PGT）是一項在 IVF 形成的胚胎植入子宮前，於實驗室中進行的程序。會從囊胚取出少量細胞，送往基因實驗室分析。' : 'Preimplantation Genetic Testing (PGT) is a laboratory procedure performed on embryos created through IVF before transfer to the uterus. A small number of cells are biopsied from the blastocyst and sent to a genetics laboratory for analysis.'}
           </p>
           <p class="text-stone-600 leading-relaxed text-sm">
-            {ZH ? 'PGT 讓 IRFC 的醫師能挑選最有可能發展為健康、持續妊娠的胚胎——並避免植入帶有染色體或基因異常、可能導致著床失敗、流產或受影響胎兒的胚胎。' : 'PGT allows IRFC\'s physicians to select the embryo most likely to result in a healthy, ongoing pregnancy — and to avoid transferring embryos with chromosomal or genetic abnormalities that would lead to failed implantation, miscarriage, or an affected child.'}
+            {ZH ? '檢測提供取樣細胞的資訊，供團隊結合其他評估解讀。它無法篩檢每種疾病、預測每個胚胎的結果，或保證健康妊娠。' : 'Testing provides information about the sampled cells for your team to interpret alongside other assessments. It cannot screen for every condition, predict every embryo outcome, or guarantee a healthy pregnancy.'}
           </p>
         </div>
         <div class="p-8 bg-white border border-stone-200">
-          <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-stone-400); font-family: var(--font-sans);">{ZH ? '為什麼染色體錯誤如此關鍵' : 'Why chromosomal errors matter'}</p>
-          <p class="text-sm text-stone-600 leading-relaxed mb-4">{ZH ? '染色體異常是 IVF 著床失敗與早期流產最常見的原因。其發生率隨母親年齡顯著上升：' : 'Chromosomal abnormalities are the most common cause of failed IVF implantation and early miscarriage. Their frequency increases significantly with maternal age:'}</p>
-          <div class="space-y-3">
-            {ageRows.map(row => (
-              <div class="flex justify-between items-center py-2 border-b border-stone-100 last:border-b-0">
-                <span class="text-sm text-stone-700">{row.age}</span>
-                <span class="text-sm" style="color: var(--color-gold-text);">{row.rate}</span>
-              </div>
-            ))}
-          </div>
-          <p class="text-xs mt-4" style="color: var(--color-stone-400);">{ZH ? '依據已發表的 ART 文獻推估。個別結果因人而異。' : 'Estimates based on published ART literature. Individual results vary.'}</p>
+          <h3 class="text-xl text-stone-800 mb-4">{ZH ? '決定檢測前的問題' : 'Questions Before Choosing Testing'}</h3>
+          <ul class="space-y-3 text-sm text-stone-600 leading-relaxed">
+            <li>{ZH ? '檢測針對的是染色體數目、特定單基因疾病，還是結構重排？' : 'Does the test address chromosome number, a specific single-gene condition, or a structural rearrangement?'}</li>
+            <li>{ZH ? '它對我的整體活產機會有何證據，而不只是每次植入的結果？' : 'What evidence applies to my overall chance of live birth, rather than only outcomes per transfer?'}</li>
+            <li>{ZH ? '如何解讀嵌合或無法判讀的結果？切片與誤判有哪些風險？' : 'How are mosaic or inconclusive results interpreted, and what are the biopsy and testing risks?'}</li>
+            <li>{ZH ? '費用、等待時間與不進行檢測的替代方案是什麼？' : 'What are the costs, waiting time, and alternatives without testing?'}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -214,5 +204,8 @@ const pageSchema = [treatmentSchema, faqPageSchema];
     </div>
   </section>
 
+  <section class="py-8 bg-white"><div class="max-w-screen-xl mx-auto px-6 lg:px-10 text-sm text-stone-600">
+    <a href="https://www.hfea.gov.uk/treatments/treatment-add-ons/pre-implantation-genetic-testing-for-aneuploidy-pgt-a/" class="underline underline-offset-4">{ZH ? '資料來源：HFEA — PGT-A 的證據、限制與風險' : 'Source: HFEA — PGT-A evidence, limitations, and risks'}</a>
+  </div></section>
   <Footer />
 </Layout>
