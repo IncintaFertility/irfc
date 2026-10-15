@@ -126,10 +126,11 @@ const company = [
       <p class="text-xs text-stone-500">
         © {new Date().getFullYear()} {BRAND_ABBREV} — {LEGAL_ENTITY}. {t(locale, 'footer.rights')}
       </p>
-      <div class="flex items-center gap-6">
+      <div class="flex flex-wrap justify-center items-center gap-6">
         <a href={localeHref('/privacy', locale)} class="text-xs text-stone-500 hover:text-stone-700 transition-colors">{linkLabel(locale, '/privacy')}</a>
         <a href={localeHref('/terms', locale)} class="text-xs text-stone-500 hover:text-stone-700 transition-colors">{linkLabel(locale, '/terms')}</a>
         <a href={localeHref('/accessibility', locale)} class="text-xs text-stone-500 hover:text-stone-700 transition-colors">{linkLabel(locale, '/accessibility')}</a>
+        <a href={localeHref('/feedback', locale)} class="text-xs text-stone-500 hover:text-stone-700 transition-colors">{locale === 'zh-hant' ? '意見與申訴' : 'Feedback & Complaints'}</a>
         <LocaleSwitch pathname={Astro.url.pathname} current={locale} variant="footer" />
       </div>
     </div>

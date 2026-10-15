@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import { getLocaleFromPath } from '../../i18n/index';
+import { localeHref } from '../../i18n/routes';
+import { feedbackFields } from '../../config/feedback';
+const locale = getLocaleFromPath(Astro.url.pathname);
+const zh = locale === 'zh-hant';
+const title = zh ? '意見與申訴' : 'Feedback & Complaints';
+const types = [ ['Suggestion', '建議'], ['Compliment', '表揚'], ['Service Concern', '服務問題'], ['Formal Complaint', '正式申訴'] ];
+---
+<Layout title={title} description={zh ? '向 IRFC 提交服務意見、建議或申訴。' : 'Share service feedback, suggestions, or a complaint with IRFC.'}>
+  <Nav />
+  <main class="pt-40 pb-24 px-6">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs uppercase tracking-widest mb-5" style="color: var(--color-gold-text)">IRFC</p>
+      <h1 class="text-4xl md:text-5xl mb-6" style="font-family: var(--font-serif)">{title}</h1>
+      <p class="text-stone-600 leading-relaxed mb-8">{zh ? '歡迎提出建議、分享服務體驗，或告訴我們需要改善的問題。若希望我們與您聯絡，請留下電子郵件或電話；兩者皆可不填。' : 'Share a suggestion, tell us about your experience, or raise a concern. If you would like us to contact you, leave an email address or phone number. Both are optional.'}</p>
+      <aside class="bg-stone-50 border border-stone-200 rounded-xl p-6 mb-8 text-sm leading-relaxed" id="feedback-guidance">
+        <p class="mb-3">{zh ? '此表單不用於緊急醫療情況、症狀諮詢或預約安排。請勿填寫病歷、診斷、用藥、出生日期或證件號碼。緊急情況請聯絡當地緊急服務。' : 'This form is not for medical emergencies, symptom advice, or appointment scheduling. Please do not include medical records, diagnoses, medications, dates of birth, or identification numbers. For emergencies, contact local emergency services.'}</p>
+        <a class="underline" href={localeHref('/patient-portal', locale)}>{zh ? '病人專區' : 'Patient Portal'}</a>
+        <span aria-hidden="true"> · </span>
+        <a class="underline" href={localeHref('/appointment', locale)}>{zh ? '預約諮詢' : 'Schedule a Consultation'}</a>
+      </aside>
+      <form id="feedback-form" action="https://crm.zoho.com/crm/WebForm" method="POST" accept-charset="UTF-8" data-locale={locale} aria-describedby="feedback-guidance feedback-privacy">
+        {Object.entries(feedbackFields).map(([name, value]) => <input type="hidden" name={name} value={value} />)}
+        <p class="text-sm text-stone-600 mb-6">{zh ? '* 為必填欄位。' : '* Required fields.'}</p>
+        <div class="field"><label for="feedback-subject">{zh ? '主旨 *' : 'Subject *'}</label><input id="feedback-subject" name="NAME" required maxlength="120" /></div>
+        <div class="field"><label for="feedback-type">{zh ? '意見類型 *' : 'Feedback Type *'}</label><select id="feedback-type" name="COBJ5CF5" required><option value="">{zh ? '請選擇' : 'Select a type'}</option>{types.map(([value, label]) => <option value={value}>{zh ? label : value}</option>)}</select></div>
+        <div class="field"><label for="feedback-details">{zh ? '內容 *' : 'Feedback Details *'}</label><textarea id="feedback-details" name="COBJ5CF2" required rows="7" aria-describedby="feedback-guidance"></textarea></div>
+        <div class="field"><label for="feedback-location">{zh ? '診所（選填）' : 'Location (optional)'}</label><select id="feedback-location" name="COBJ5CF3"><option value="-None-">{zh ? '不指定' : 'Not specified'}</option>{['Torrance', 'Irvine', 'Corona', 'Beverly Hills'].map(city => <option value={city}>{city}</option>)}</select></div>
+        <div class="grid sm:grid-cols-2 gap-x-6">
+          <div class="field"><label for="feedback-email">{zh ? '電子郵件（選填）' : 'Email (optional)'}</label><input id="feedback-email" type="email" name="Email" maxlength="100" autocomplete="email" /></div>
+          <div class="field"><label for="feedback-phone">{zh ? '電話（選填）' : 'Phone (optional)'}</label><input id="feedback-phone" type="tel" name="COBJ5CF1" maxlength="30" autocomplete="tel" /></div>
+        </div>
+        <div hidden aria-hidden="true"><label for="feedback-honeypot">Leave this empty</label><input id="feedback-honeypot" name="aG9uZXlwb3Q" tabindex="-1" autocomplete="off" /></div>
+        <p id="feedback-privacy" class="text-sm text-stone-600 leading-relaxed mb-6">{zh ? '提交後，內容及您選擇提供的聯絡資料將傳送至我們的 Zoho CRM，供團隊處理意見或申訴。未留下聯絡資料時，我們無法直接回覆。' : 'Your message and any contact details you choose to provide will be sent to our Zoho CRM for our team to handle your feedback or complaint. Without contact details, we cannot reply directly.'} <a class="underline" href={localeHref('/privacy', locale)}>{zh ? '隱私政策' : 'Privacy Policy'}</a></p>
+        <button type="submit" class="btn-primary">{zh ? '提交意見' : 'Submit Feedback'}</button>
+        <p id="feedback-status" role="status" aria-live="polite" tabindex="-1" class="mt-6 text-sm leading-relaxed"></p>
+        <noscript><p class="mt-4 text-sm">{zh ? '提交後將前往 Zoho 查看結果。' : 'After submitting, you will continue to Zoho to view the result.'}</p></noscript>
+      </form>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+<script>
+  import { initFeedbackForm } from '../../scripts/feedback.js';
+  initFeedbackForm();
+</script>
+<style>
+  .field { margin-bottom: 1.5rem; }
+  label { display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--color-stone-700); }
+  input:not([type="hidden"]), select, textarea { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem; background: white; font: inherit; }
+  textarea { resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--color-gold-text); outline-offset: 2px; }
+  button:disabled { opacity: 0.65; cursor: wait; }
+</style>
