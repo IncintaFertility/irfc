@@ -29,6 +29,18 @@
 - 完成开发不代表获准合并。等待用户明确要求或授权后再合并至 `main`，并遵守分支保护与必要检查。
 - 未经明确授权，不执行破坏性 reset、清除未跟踪文件、force push 或改写共享历史。
 
+## 固定 preview 验收流程
+
+- 标准流程：从最新 `origin/main` 创建功能分支 → 开发并验证 → 推送功能分支并创建 PR → 将该任务集成到 `preview` → 验证 Cloudflare 部署并返回预览地址 → 用户验收并明确授权后，将对应功能分支合并到 `main`。
+- `main` 是正式发布分支，`preview` 是长期保留的共享验收分支。不要直接在二者上开发，也不要从 `preview` 创建功能分支，避免混入其他未验收功能。
+- 用户已指定使用 `preview` 作为常规验收环境。任务开发及检查完成后，由集成 agent 将当前任务合并到 `preview` 并推送，无需重复询问是否更新预览；这不授权合并 `main`。仍须遵守分支保护及必要检查，受保护时通过 PR 集成，不绕过限制。
+- 集成前获取最新远程 `main`、功能分支与 `preview`，检查差异及工作区。保留 `preview` 中其他任务，不 reset、不 force push、不用整个功能分支覆盖预览。发生远程并发更新时，重新获取并合并后复验，不强推。
+- 多 agent 更新共享预览时由集成 agent 串行协调。合并后对整个预览版本执行必要构建和受影响功能检查；预览整合产生的冲突修复或调整，也要落实到相关功能分支并重新验证，避免正式合并时丢失修复。
+- `preview` 的固定分支地址用于日常验收，会随部署更新。回报时同时记录预览提交 SHA、包含的任务，以及可取得的单次部署地址，避免把后续版本误当本次结果。
+- 正式发布仅合并已验收且获授权的对应功能分支；不要将整个 `preview` 合并到 `main`，除非用户明确授权发布其中全部任务。用户说“合并”时，默认针对当前任务，不视为授权发布其他预览任务。
+- 合并到 `main` 后，保留长期 `preview` 分支。由集成 agent 将最新 `main` 合并回 `preview` 并验证，保留其中未发布的任务；不要以重置共享分支的方式同步。
+- 无法获取部署状态或真实预览地址时，说明已推送的预览 SHA 及具体阻碍，不猜测 URL，不将“已推送 preview”描述为“预览已可用”或“验收已通过”。
+
 ## 多 agent 协作
 
 - 使用现有 checkout；不要自行建立额外 worktree。如果需要隔离 checkout 或 worktree，先取得用户授权。
@@ -86,7 +98,7 @@
 ## Cloudflare Pages 预览
 
 - 任务分支推送后，通过既有 Git 集成触发 Pages 预览部署。如果项目尚未设置该分支的预览部署，报告所需设置，不自行修改生产部署配置。
-- 从该提交的 GitHub checks、部署记录或 Cloudflare Pages API/控制台取得实际预览 URL。优先提供绑定该提交的部署地址；如果提供会随后续推送变动的分支别名，明确标注。
+- 从该提交的 GitHub checks、部署记录或 Cloudflare Pages API/控制台取得实际预览 URL。验收时提供 `preview` 的实际固定分支地址，并尽可能附上绑定预览提交的部署地址；明确标注固定别名会随后续推送变动。
 - 不根据项目名或分支名猜测 URL，不把 localhost 当成 Cloudflare 预览地址。
 - 确认部署成功及提交 SHA 相符后，请求预览的受影响页面，检查 HTTP 状态与预期内容。验证失败或遭访问保护时，说明实际结果。
 - 如果无法读取部署记录或缺少必要权限，仍完成可做的开发、提交、推送与本地验证；明确说明预览 URL 尚未取得或尚未验证，不宣称已部署。
@@ -130,6 +142,18 @@ The Simplified Chinese rules appear first, followed by this complete English tra
 - After pushing, create or update a PR describing the problem, final changes, validation results, and actual Cloudflare Pages preview URL. If permissions are insufficient, report the specific blocker rather than claiming that a PR was created.
 - Completing development does not authorize merging. Merge into `main` only after the user explicitly requests or authorizes it, and honor branch protection and required checks.
 - Without explicit authorization, do not perform destructive resets, delete untracked files, force-push, or rewrite shared history.
+
+## Shared preview Acceptance Workflow
+
+- Standard workflow: create a feature branch from the latest `origin/main` → develop and validate → push the feature branch and create a PR → integrate that task into `preview` → verify the Cloudflare deployment and return its preview URL → after user acceptance and explicit authorization, merge the corresponding feature branch into `main`.
+- `main` is the production branch; `preview` is a permanent shared acceptance branch. Do not develop directly on either branch or create feature branches from `preview`, which could include other unaccepted work.
+- The user has designated `preview` as the routine acceptance environment. Once task development and checks are complete, the integration agent merges the current task into `preview` and pushes without asking again whether to update the preview. This does not authorize merging into `main`. Honor branch protection and required checks; integrate through a PR when protected, without bypassing restrictions.
+- Before integration, fetch the latest remote `main`, feature branch, and `preview`, and inspect differences and the working tree. Preserve other tasks in `preview`; do not reset, force-push, or overwrite it with the feature branch. If a concurrent remote update occurs, fetch and merge again, then revalidate rather than force-pushing.
+- The integration agent coordinates shared preview updates serially across agents. After merging, run the necessary build and affected functionality checks on the combined preview version. Carry conflict resolutions or integration adjustments back to the relevant feature branches and revalidate so those fixes are retained in production merges.
+- Use the fixed preview branch URL for routine acceptance; it changes with deployments. Report the preview commit SHA, included tasks, and an immutable deployment URL when available so later versions are not mistaken for this task's result.
+- For production, merge only the accepted and authorized feature branches. Do not merge all of `preview` into `main` unless the user explicitly authorizes releasing every included task. An instruction to “merge” applies to the current task by default, not to unrelated preview tasks.
+- After merging into `main`, retain the permanent `preview` branch. The integration agent merges the latest `main` back into `preview` and validates, preserving unreleased tasks. Do not synchronize by resetting the shared branch.
+- If deployment status or the real preview URL cannot be obtained, report the pushed preview SHA and specific blocker. Do not guess URLs or equate “pushed to preview” with “preview available” or “accepted.”
 
 ## Multi-Agent Collaboration
 
@@ -188,7 +212,7 @@ The Simplified Chinese rules appear first, followed by this complete English tra
 ## Cloudflare Pages Previews
 
 - After pushing a task branch, use the existing Git integration to trigger a Pages preview deployment. If preview deployments are not configured for that branch, report the required setting rather than changing production deployment configuration yourself.
-- Obtain the actual preview URL from that commit's GitHub checks, deployment records, or the Cloudflare Pages API/dashboard. Prefer a deployment URL tied to the commit. If providing a branch alias that changes with later pushes, label it clearly.
+- Obtain the actual preview URL from that commit's GitHub checks, deployment records, or the Cloudflare Pages API/dashboard. For acceptance, provide the actual fixed `preview` branch URL and, when available, a deployment URL tied to the preview commit. Clearly label the fixed alias as changing with later pushes.
 - Do not guess URLs from project or branch names, or present localhost as a Cloudflare preview URL.
 - After confirming successful deployment and a matching commit SHA, request affected preview pages and check HTTP status and expected content. Report actual results when validation fails or access protection prevents it.
 - If deployment records are inaccessible or permissions are missing, complete available development, committing, pushing, and local validation. Clearly state that the preview URL has not been obtained or verified; do not claim deployment success.
