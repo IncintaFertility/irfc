@@ -25,6 +25,7 @@ const translatedRoutes = new Set<string>([
   '/team/kelly-zhao',
   '/locations',
   '/appointment',
+  '/feedback',
   '/services',
   '/services/ivf',
   '/services/iui',
