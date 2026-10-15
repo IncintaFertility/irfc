@@ -29,17 +29,19 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
 
   <!-- ═══ HERO ═══ -->
   <section class="std-hero">
-    <div class="std-hero-media">
-      <img src={standard.image} alt={title} />
-    </div>
-    <div class="std-hero-body">
-      <div class="std-hero-eyebrow">
-        <span class="std-hero-num">{standard.number}</span>
-        <span>{ZH ? 'INCINTA 的標準' : 'The INCINTA Standard'}</span>
+    <div class="std-hero-inner">
+      <div class="std-hero-media">
+        <img src={standard.image} alt={title} />
       </div>
-      <h1 class="std-hero-title">{title}</h1>
-      <p class="std-hero-lead">{pick(standard.leadZh, standard.lead)}</p>
-      <p class="std-hero-text">{pick(standard.textZh, standard.text)}</p>
+      <div class="std-hero-body">
+        <div class="std-hero-eyebrow">
+          <span class="std-hero-num">{standard.number}</span>
+          <span>{ZH ? 'INCINTA 的標準' : 'The INCINTA Standard'}</span>
+        </div>
+        <h1 class="std-hero-title">{title}</h1>
+        <p class="std-hero-lead">{pick(standard.leadZh, standard.lead)}</p>
+        <p class="std-hero-text">{pick(standard.textZh, standard.text)}</p>
+      </div>
     </div>
   </section>
 
@@ -144,11 +146,16 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
 <style>
 /* ═══ HERO ═══ */
 .std-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 72vh;
+  padding: 4.5rem 4vw 0;
   background: var(--color-pearl-50);
   border-bottom: 1px solid var(--color-pearl-200);
+}
+.std-hero-inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 70rem;
+  min-height: clamp(32rem, 62vh, 42rem);
+  margin: 0 auto;
 }
 .std-hero-media {
   position: relative;
@@ -166,7 +173,8 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem 8vw 5rem 4rem;
+  min-width: 0;
+  padding: 3rem 0 3rem clamp(2rem, 4vw, 4rem);
 }
 .std-hero-eyebrow {
   display: flex;
@@ -212,11 +220,12 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
 
 /* ═══ INTRO ═══ */
 .std-intro {
-  padding: 5rem 8vw 4rem 4rem;
+  padding: 4rem 4vw;
   background: var(--color-pearl-50);
 }
-.std-intro-inner { max-width: 46rem; }
+.std-intro-inner { max-width: 70rem; margin: 0 auto; }
 .std-intro-copy {
+  max-width: 46rem;
   font-family: var(--font-serif);
   font-size: clamp(1.25rem, 2.3vw, 1.7rem);
   font-weight: 300;
@@ -480,8 +489,9 @@ const otherStandards = standards.filter((s) => s.slug !== standard.slug);
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 860px) {
-  .std-hero {
+  .std-hero-inner {
     grid-template-columns: 1fr;
+    min-height: 0;
   }
   .std-hero-media {
     min-height: 44vh;
