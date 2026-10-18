@@ -17,7 +17,7 @@ interface Props {
 const { clinic, locale } = Astro.props;
 const ZH = locale === 'zh-hant';
 
-const title = ZH ? `${clinic.city} 生育診所 | IRFC` : `${clinic.city} Fertility Clinic | IRFC`;
+const title = ZH ? `${clinic.city} 生育診所` : `${clinic.city} Fertility Clinic`;
 const description = ZH
   ? `IRFC ${clinic.city} 生育診所——位於${clinic.regionZh}的諮詢、監測與協調式 IVF 照護。設有國語（中文）協調員與現場停車。`
   : `IRFC ${clinic.city} fertility clinic — consultations, monitoring, and coordinated IVF care in ${clinic.region}. Mandarin-speaking coordinators and on-site parking.`;
