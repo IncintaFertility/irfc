@@ -93,7 +93,7 @@ export function localeHref(href: string, locale: Locale): string {
   return p + tail;
 }
 
-/** 語言切換器：切到繁體時若當前頁未翻譯，則停留在英文版；同時補尾端斜線（首頁 / 與 /zh-hant 保持不變） */
+/** 語言切換器：切到繁體時若當前頁未翻譯，則停留在英文版；同時補尾端斜線（根路徑 / 保持不變） */
 export function switchLocale(pathname: string, target: Locale): string {
   if (target === 'en') {
     const e = stripLocale(pathname) || '/';
@@ -101,6 +101,6 @@ export function switchLocale(pathname: string, target: Locale): string {
   }
   const base = stripLocale(pathname);
   let t = isTranslated(base) ? '/zh-hant' + (base === '/' ? '' : base) : (base || '/');
-  if (t !== '/' && t !== '/zh-hant' && !t.endsWith('/')) t += '/';
+  if (t !== '/' && !t.endsWith('/')) t += '/';
   return t;
 }
