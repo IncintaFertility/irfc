@@ -52,7 +52,7 @@ const ogLocaleAlt = locale === 'zh-hant' ? 'en_US' : 'zh_Hant';
 const basePathRaw = stripLocale(Astro.url.pathname) || '/';
 const basePath = basePathRaw === '/' ? '/' : basePathRaw.replace(/\/+$/, '') + '/';
 const hreflangEn = new URL(basePath, SITE_URL).href;
-const hreflangZh = new URL('/zh-hant' + (basePath === '/' ? '' : basePath), SITE_URL).href;
+const hreflangZh = new URL('/zh-hant' + basePath, SITE_URL).href;
 // 僅當該基準路徑確實有繁體版本時，才輸出 zh-hant 的 hreflang / og:locale 互鏈，
 // 避免英文頁指向尚未建置的 /zh-hant/<page> 造成 404 的錯誤 alternate。
 const zhExists = isTranslated(basePath);
