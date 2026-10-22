@@ -182,7 +182,7 @@ export const FIVE_PROOFS: Standard[] = [
       'One clinical standard across the entire center network',
     ],
     visual: '团队 / 网络 / 协作 / 系统',
-    image: '/images/team-rfc-wide-800.webp',
+    image: '/images/reception-desk-800.webp',
   },
   {
     id: 'private-by-nature',
