@@ -10,10 +10,10 @@ const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
 
 const steps = [
-  { n: '01', title: ZH ? 'IUI 準備' : 'IUI Preparation', desc: ZH ? 'IUIs 可以使用伴侶的精子或捐贈精子進行。建議病人在術前兩到三天禁慾。IUI 通常在排卵週期進行。若週期不規則，女性可能需要服用藥物來誘發排卵。' : 'IUIs can be performed either with the partner’s sperm or with donor sperm. It is recommended that the patient abstain from sexual intercourse for two to three days before the procedure. IUI is typically performed during the ovulation cycle. In some cases, it may be necessary for the female to take medication to induce ovulation if her cycles are not regular.' },
-  { n: '02', title: ZH ? '精液分析' : 'Semen Analysis', desc: ZH ? '男性會在手術前一到兩小時提供精液樣本。精液將經過洗滌——即將精子與精漿分離的程序——並分析精子品質。精子製備由高度專業的男科學家在我們的實驗室中進行，他們利用細緻的樣本處理和品質控制措施來確保安全。' : 'The male will provide a semen sample one to two hours before the procedure is to be performed. The semen will be washed, a procedure in which the sperm is separated from the seminal fluid, and the quality of the sperm is analyzed. Sperm preparation is performed in our laboratory by highly trained andrologists, who utilize meticulous specimen handling and quality control measures to ensure safety.' },
-  { n: '03', title: ZH ? '授精' : 'Insemination', desc: ZH ? '洗滌程序後即為授精手術，只需幾分鐘，且對女性而言不會造成太多（若有的話）不適。醫師會透過子宮頸將小導管插入子宮腔，直接將精子注入子宮。' : 'Following the wash is the insemination procedure, which only takes a few minutes and does not cause much, if any, discomfort for the female. The doctor will insert a small catheter into the uterine cavity through the cervix and inject sperm directly into the uterus.' },
-  { n: '04', title: ZH ? '授精後' : 'Post-Insemination', desc: ZH ? '授精程序完成後，病人在躺下幾分鐘後即可恢復正常活動。如果初次 IUI 未成功受孕，可能會在接下來的週期中重複此程序。' : 'Following the insemination process, the patient is able to resume normal activity after lying down for a few minutes. If pregnancy does not result from the initial IUI, the procedure may be repeated during the following cycles.' },
+  { n: '1.', title: ZH ? 'IUI 準備' : 'IUI Preparation', desc: ZH ? 'IUIs 可以使用伴侶的精子或捐贈精子進行。建議病人在術前兩到三天禁慾。IUI 通常在排卵週期進行。若週期不規則，女性可能需要服用藥物來誘發排卵。' : 'IUIs can be performed either with the partner’s sperm or with donor sperm. It is recommended that the patient abstain from sexual intercourse for two to three days before the procedure. IUI is typically performed during the ovulation cycle. In some cases, it may be necessary for the female to take medication to induce ovulation if her cycles are not regular.' },
+  { n: '2.', title: ZH ? '精液分析' : 'Semen Analysis', desc: ZH ? '男性會在手術前一到兩小時提供精液樣本。精液將經過洗滌——即將精子與精漿分離的程序——並分析精子品質。精子製備由高度專業的男科學家在我們的實驗室中進行，他們利用細緻的樣本處理和品質控制措施來確保安全。' : 'The male will provide a semen sample one to two hours before the procedure is to be performed. The semen will be washed, a procedure in which the sperm is separated from the seminal fluid, and the quality of the sperm is analyzed. Sperm preparation is performed in our laboratory by highly trained andrologists, who utilize meticulous specimen handling and quality control measures to ensure safety.' },
+  { n: '3.', title: ZH ? '授精' : 'Insemination', desc: ZH ? '洗滌程序後即為授精手術，只需幾分鐘，且對女性而言不會造成太多（若有的話）不適。醫師會透過子宮頸將小導管插入子宮腔，直接將精子注入子宮。' : 'Following the wash is the insemination procedure, which only takes a few minutes and does not cause much, if any, discomfort for the female. The doctor will insert a small catheter into the uterine cavity through the cervix and inject sperm directly into the uterus.' },
+  { n: '4.', title: ZH ? '授精後' : 'Post-Insemination', desc: ZH ? '授精程序完成後，病人在躺下幾分鐘後即可恢復正常活動。如果初次 IUI 未成功受孕，可能會在接下來的週期中重複此程序。' : 'Following the insemination process, the patient is able to resume normal activity after lying down for a few minutes. If pregnancy does not result from the initial IUI, the procedure may be repeated during the following cycles.' },
 ];
 
 const faqs = [
@@ -77,8 +77,8 @@ const pageSchema = [treatmentSchema, faqPageSchema];
     <div class="absolute inset-0 pointer-events-none z-0">
       <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 lg:via-white/70 to-transparent lg:to-stone-900/10 z-10"></div>
       <img 
-        src="https://rfcfamily.com/wp-content/uploads/2020/09/IUI-Diagram-818x1024.jpg" 
-        alt="IUI Diagram" 
+        src="https://rfcfamily.com/wp-content/uploads/2020/08/IUI-Small.jpg" 
+        alt="IUI" 
         class="absolute right-0 top-0 h-full w-full lg:w-1/2 object-cover object-center opacity-30 lg:opacity-85"
       />
     </div>
