@@ -134,4 +134,93 @@ const sections = [
   },
   {
     id: 'subject',
-    title: 'Data
+    title: 'Data Subject Rights',
+    titleZh: '資料主體權利',
+    body: [
+      'You have the right to access, correct, delete, or transfer your personal data that we hold. You can exercise these rights by contacting us at the details provided below.',
+    ],
+    bodyZh: [
+      '您有權存取、更正、刪除或轉移我們所持有的您的個人資料。您可以透過以下提供的聯絡方式與我們聯繫來行使這些權利。',
+    ],
+  },
+  {
+    id: 'changes',
+    title: 'Changes to Privacy Policy',
+    titleZh: '隱私權政策變更',
+    body: [
+      'We reserve the right to modify this Privacy Policy at any time. Changes will be posted on this page with a revised effective date. We encourage you to review this policy periodically.',
+    ],
+    bodyZh: [
+      '我們保留隨時修改本隱私權政策的權利。變更將發布在此頁面上並附上修訂後的生效日期。我們鼓勵您定期審查本政策。',
+    ],
+  },
+  {
+    id: 'contact',
+    title: 'Contact Us',
+    titleZh: '聯絡我們',
+    body: [
+      'If you have any questions about this Privacy Policy or our privacy practices, please contact us by phone.',
+    ],
+    bodyZh: [
+      '如果您對本隱私權政策或我們的隱私實務有任何疑問，請透過電話與我們聯繫。',
+    ],
+  },
+];
+
+const title = ZH ? '隱私權政策' : 'Privacy Policy';
+const description = ZH
+  ? `${legalEntity}（${brandAbbrev}）的隱私權政策，說明我們如何蒐集、使用與揭露您的個人及健康資訊。`
+  : `Privacy Policy for ${legalEntity} (${brandAbbrev}), explaining how we collect, use, and disclose your personal and health information.`;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <section class="pt-40 pb-16" style="background: var(--color-pearl-100);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-gold-text); font-family: var(--font-sans);">
+        {ZH ? '法律' : 'Legal'}
+      </p>
+      <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
+        {title}
+      </h1>
+      <p class="text-lg text-stone-500 font-light leading-relaxed">
+        {ZH
+          ? `${legalEntity}（${brandAbbrev}）致力於保護網站訪客的隱私，包含我們可能收到的任何受保護健康資訊（PHI）。本隱私權政策說明我們如何蒐集、使用與揭露 PHI 及其他個人資訊。`
+          : `At ${legalEntity} (${brandAbbrev}), we are committed to protecting the privacy of our website visitors, including any Protected Health Information (PHI) that we may receive. This Privacy Policy explains how we collect, use, and disclose PHI and other personal information.`}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16" style="background: var(--color-pearl-50);">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+
+      {sections.map((section) => (
+        <div class="mb-12" id={section.id}>
+          <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+            {ZH ? section.titleZh : section.title}
+          </h2>
+          {(ZH ? section.bodyZh : section.body).map((para) => (
+            <p class="text-stone-500 font-light leading-relaxed mb-4">{para}</p>
+          ))}
+        </div>
+      ))}
+
+      <div class="pt-10" style="border-top: 1px solid var(--color-pearl-300);">
+        <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
+          {ZH ? '聯絡方式' : 'Contact Us'}
+        </h2>
+        <p class="text-stone-500 font-light leading-relaxed mb-2">{legalEntity} ({brandAbbrev})</p>
+        <p class="text-stone-500 font-light leading-relaxed mb-2">
+          16300 Sand Canyon Avenue, 9th Floor, Irvine, CA 92618
+        </p>
+        <p class="text-stone-500 font-light leading-relaxed">
+          <a href="tel:4244324732" class="hover:underline" style="color: var(--color-champagne-700);">(424) 432-IRFC</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
