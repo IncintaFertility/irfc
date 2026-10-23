@@ -1,10 +1,10 @@
 ---
-// 隱私權告知（英文 / 繁體中文共用元件）
+// Privacy Policy (English / Traditional Chinese shared component)
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
-import { LEGAL_ENTITY, BRAND_ABBREV, PRIVACY_RETENTION_MONTHS } from '../../config/brand';
+import { LEGAL_ENTITY, BRAND_ABBREV } from '../../config/brand';
 import MainPhone from '../MainPhone.astro';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
@@ -16,12 +16,10 @@ const sections = [
     title: 'Information We Collect',
     titleZh: '我們蒐集的資訊',
     body: [
-      'When you submit an appointment request through this website, we collect the contact details you provide: your name, email address, phone number, preferred location, visit type, and preferred language. We do not ask for medical history or clinical information on this website — your medical history, consents, and health records are collected and stored only in our HIPAA-compliant patient portal (eIVF), which is accessed over an encrypted connection.',
-      'Like most websites, we may also collect technical information such as browser type, device type, and pages visited. This information is used only to understand how the site is used and to improve it.',
+      'When you visit our website, we may collect personal information such as your name, email address, and phone number if you choose to provide it to us through our contact forms or email addresses. We may also collect PHI, such as health status, medical history, and treatment information, if you voluntarily provide it to us for the purpose of receiving healthcare services. We also collect non-personal information such as your IP address, browser type, and operating system.',
     ],
     bodyZh: [
-      '當您透過本網站提交預約請求時，我們會蒐集您提供的聯絡資料：姓名、電子郵件、電話號碼、偏好診所、看診類型與偏好語言。我們不會在本網站索取病史或臨床資訊——您的病史、同意書與健康紀錄，僅在符合 HIPAA 規範的線上病人入口（eIVF）中蒐集與儲存，並經加密連線存取。',
-      '與大多數網站相同，我們也可能蒐集技術性資訊，例如瀏覽器類型、裝置類型與瀏覽頁面。這些資訊僅用於了解網站使用方式並加以改善。',
+      '當您訪問我們的網站時，如果您選擇透過我們的聯絡表單或電子郵件提供，我們可能會蒐集您的個人資訊，例如您的姓名、電子郵件地址和電話號碼。如果您自願向我們提供以接受醫療服務，我們也可能會蒐集 PHI，例如健康狀況、病史和治療資訊。我們還會蒐集非個人資訊，例如您的 IP 位址、瀏覽器類型和作業系統。',
     ],
   },
   {
@@ -29,154 +27,149 @@ const sections = [
     title: 'How We Use Your Information',
     titleZh: '我們如何使用您的資訊',
     body: [
-      'Information you submit is used to respond to your consultation request, schedule appointments, and provide the clinical care and communication you have asked for.',
-      'We do not sell your personal information. We do not share it with third parties for their own marketing purposes.',
+      'We use your personal information, including Protected Health Information (PHI), to provide you with healthcare services and to manage our operations. This includes scheduling appointments, providing treatment, billing and payment processing, and maintaining medical records.',
+      'We may also use your personal information to respond to inquiries, provide requested information, and send you newsletters and updates about our services.',
+      'With your explicit consent, we may use your email address to send you marketing communications. We may also use your email address to create custom audiences on platforms such as Facebook or Instagram, allowing us to serve relevant ads based on your interests and prior interactions with our website. By providing your email address, you consent to these uses and acknowledge that your information will be handled in accordance with this Privacy Policy.',
+      'In the future, with your consent, we may also use your phone number to send SMS text messages for marketing, appointment reminders, or important service updates. Standard messaging rates may apply. You may opt out of marketing emails or SMS messages at any time by following the instructions in the message or emailing us at marketing@reproductivefertilitycenter.com.',
     ],
     bodyZh: [
-      '您提交的資訊，用於回應您的諮詢請求、安排預約，以及提供您所要求的臨床照護與溝通。',
-      '我們不會出售您的個人資訊，也不會為第三方的行銷目的而與其分享。',
+      '我們使用您的個人資訊（包括受保護健康資訊 PHI）來向您提供醫療服務並管理我們的營運。這包括安排預約、提供治療、帳單與付款處理以及維護病歷。',
+      '我們也可能使用您的個人資訊來回覆查詢、提供要求的資訊，以及向您發送有關我們服務的通訊和更新。',
+      '在您明確同意的情況下，我們可能會使用您的電子郵件地址向您發送行銷通訊。我們也可能使用您的電子郵件地址在 Facebook 或 Instagram 等平台上建立自定義受眾，以便根據您的興趣和先前與我們網站的互動向您投放相關廣告。透過提供您的電子郵件地址，您同意這些用途並承認您的資訊將根據本隱私權政策進行處理。',
+      '未來在您同意的情況下，我們也可能使用您的電話號碼發送用於行銷、預約提醒或重要服務更新的簡訊。可能適用標準訊息費率。您可以隨時按照訊息中的說明或發送電子郵件至 marketing@reproductivefertilitycenter.com，選擇退出行銷郵件或簡訊。',
     ],
   },
   {
-    id: 'hipaa',
-    title: 'Your Rights Under HIPAA',
-    titleZh: '您在 HIPAA 下的權利',
+    id: 'disclosure',
+    title: 'Disclosure of Information',
+    titleZh: '資訊揭露',
     body: [
-      'Once you become a patient, the health information we create and maintain about you is protected health information under the Health Insurance Portability and Accountability Act (HIPAA). You have the right to:',
+      'We do not sell, trade, or otherwise transfer your personal information, including PHI, to outside parties without your consent, except as required by law or for the purposes of treatment, payment, or healthcare operations. We may disclose your personal information to our trusted third-party service providers who assist us in providing healthcare services or conducting our business.',
     ],
     bodyZh: [
-      '一旦成為我們的病人，我們為您建立與保存的健康資訊，即受《健康保險流通與責任法案》（HIPAA）保護，屬受保護健康資訊。您享有以下權利：',
-    ],
-    list: [
-      'Receive a copy of this Notice of Privacy Practices',
-      'Inspect and obtain a copy of your medical record',
-      'Request corrections to your health information',
-      'Request restrictions on certain uses and disclosures',
-      'Receive an accounting of disclosures we have made',
-      'Request confidential communications by alternative means or locations',
-      'File a complaint if you believe your privacy rights have been violated',
-    ],
-    listZh: [
-      '取得本隱私權告知的副本',
-      '檢視並取得您的病歷副本',
-      '要求更正您的健康資訊',
-      '要求限制某些使用與揭露',
-      '取得我們已進行揭露的帳目清單',
-      '要求以替代方式或地點進行保密通訊',
-      '若您認為隱私權受侵害，提出申訴',
+      '我們不會在未經您同意的情況下出售、交易或以其他方式將您的個人資訊（包括 PHI）轉讓給外部方，但法律要求或出於治療、付款或醫療營運的目的除外。我們可能會向協助我們提供醫療服務或經營業務的可信第三方服務提供者披露您的個人資訊。',
     ],
   },
   {
     id: 'security',
-    title: 'How We Protect Your Information',
-    titleZh: '我們如何保護您的資訊',
+    title: 'Security of Information',
+    titleZh: '資訊安全',
     body: [
-      'We maintain administrative, physical, and technical safeguards designed to protect the confidentiality, integrity, and availability of your information, including access controls, encrypted transmission, and workforce training on privacy obligations.',
-      'Please note that no method of transmission over the internet is entirely secure. For this reason, we ask that you do not send sensitive medical details through the general contact form on this site — those are best discussed directly with your care team.',
+      'We take reasonable measures to protect the security of your personal information, including PHI, but no method of transmission over the Internet or electronic storage is 100% secure. We comply with HIPAA’s security and privacy regulations, including technical, administrative, and physical safeguards to protect PHI.',
     ],
     bodyZh: [
-      '我們維持行政、實體與技術層面的防護措施，以保護您資訊的機密性、完整性與可用性，包括存取控制、加密傳輸，以及針對隱私義務的員工訓練。',
-      '請注意，網際網路上的任何傳輸方式都無法完全確保安全。因此，我們請您勿透過本網站的一般聯絡表單傳送敏感醫療細節——這類內容最適合直接與您的照護團隊討論。',
+      '我們採取合理措施保護您的個人資訊（包括 PHI）的安全，但網際網路上的任何傳輸方式或電子儲存方式都不是 100% 安全的。我們遵守 HIPAA 的安全與隱私規範，包括保護 PHI 的技術、行政和實體防護措施。',
+    ],
+  },
+  {
+    id: 'cookies',
+    title: 'Cookies',
+    titleZh: 'Cookie 使用',
+    body: [
+      'We use cookies to enhance your user experience and to understand how you interact with our website. You can choose to disable cookies in your browser settings, but this may affect the functionality of our website.',
+      'We use third-party services such as Google Analytics and Google Tag Manager to collect aggregate data about how users interact with our website. This data helps us improve user experience and evaluate the effectiveness of our marketing campaigns. These services may track your IP address, time spent on site, referral source, and pages visited.',
+      'You can opt out of Google Analytics tracking by installing the Google Analytics Opt-out Browser Add-on. For more information about how Google uses your data, please review Google’s Privacy Policy.',
+    ],
+    bodyZh: [
+      '我們使用 Cookie 來增進您的使用者體驗並了解您如何與我們的網站互動。您可以選擇在瀏覽器設定中停用 Cookie，但這可能會影響我們網站的功能。',
+      '我們使用第三方服務（例如 Google Analytics 和 Google Tag Manager）來收集有關使用者如何與我們網站互動的彙總資料。這些資料有助於我們改善使用者體驗並評估行銷活動的成效。這些服務可能會追蹤您的 IP 位址、停留時間、參照來源和瀏覽過的頁面。',
+      '您可以透過安裝 Google Analytics 停用瀏覽器外掛程式來選擇退出 Google Analytics 追蹤。有關 Google 如何使用您的資料的更多資訊，請參閱 Google 的隱私權政策。',
+    ],
+  },
+  {
+    id: 'third-party',
+    title: 'Third-Party Websites',
+    titleZh: '第三方網站',
+    body: [
+      'Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these websites.',
+    ],
+    bodyZh: [
+      '我們的網站可能包含指向第三方網站的連結。我們對這些網站的隱私權實務或內容概不負責。',
+    ],
+  },
+  {
+    id: 'baa',
+    title: 'Business Associate Agreements',
+    titleZh: '業務夥伴協議',
+    body: [
+      'We sign Business Associate Agreements (BAAs) with all third-party companies that handle PHI to ensure that they are complying with HIPAA regulations and safeguarding the PHI they handle. These agreements outline the specific requirements for protecting the privacy and security of PHI and set forth the legal obligations for our business associates to comply with these requirements.',
+    ],
+    bodyZh: [
+      '我們與所有處理 PHI 的第三方公司簽署業務夥伴協議（BAA），以確保他們遵守 HIPAA 規範並保護所處理的 PHI。這些協議概述了保護 PHI 隱私和安全的具體要求，並規定了我們的業務夥伴遵守這些要求的法律義務。',
+    ],
+  },
+  {
+    id: 'children',
+    title: "Children's Privacy",
+    titleZh: '兒童隱私',
+    body: [
+      'We do not knowingly collect or use any personal information from children under the age of 13. If we become aware that we have collected such information, we will take steps to delete it.',
+    ],
+    bodyZh: [
+      '我們不會蓄意蒐集或使用 13 歲以下兒童的任何個人資訊。如果我們發現我們已蒐集此類資訊，我們將採取步驟予以刪除。',
     ],
   },
   {
     id: 'retention',
-    title: 'How Long We Keep Your Information',
-    titleZh: '我們保留資訊的期間',
+    title: 'Data Retention Policy',
+    titleZh: '資料保留政策',
     body: [
-      `Appointment-request contact details submitted through this website are sent to and stored in our CRM platform (Zoho), where they are used only to respond to your inquiry and schedule your care. We review and purge these records on a routine basis, and no later than ${PRIVACY_RETENTION_MONTHS} months after the matter is resolved, unless a longer period is required by law or to defend a legal claim.`,
-      'Feedback and complaint messages, together with any optional contact details, are sent directly to Zoho CRM so our team can handle the issue and contact you when appropriate. Please do not include sensitive medical information in these messages.',
-      'No medical records or protected health information are created or stored on this public website. All clinical records are maintained in our HIPAA-compliant patient portal (eIVF) and follow its own retention schedule.',
+      'We retain personal data for as long as necessary to provide the services requested by you, or for other essential purposes such as complying with legal obligations and resolving disputes.',
     ],
     bodyZh: [
-      `透過本網站提交的預約請求聯絡資料，會送交並儲存於我們的 CRM 平台（Zoho），僅用於回應您的諮詢與安排照護。我們會定期檢視並刪除這些紀錄，最遲於案件結案後 ${PRIVACY_RETENTION_MONTHS} 個月內清除，法律要求或為防衛法律主張而須較長保留者除外。`,
-      '意見與申訴內容，以及您選擇提供的聯絡資料，會直接傳送至 Zoho CRM，供團隊處理問題並在適當時與您聯絡。請勿在內容中填寫敏感醫療資訊。',
-      '本公開網站不建立或儲存任何病歷或受保護健康資訊。所有臨床紀錄均保存於我們符合 HIPAA 規範的病人專區（eIVF），並依其保留時程處理。',
+      '我們會在提供您要求的服務所需的期間內，或出於遵守法律義務和解決爭議等其他重要目的，保留個人資料。',
     ],
   },
-
   {
-    id: 'disclosure',
-    title: 'How We Use and Disclose Health Information',
-    titleZh: '我們如何使用與揭露健康資訊',
+    id: 'international',
+    title: 'International Data Transfer',
+    titleZh: '國際資料傳輸',
     body: [
-      'Once you become a patient, your protected health information (PHI) may be used and disclosed for treatment, payment, and health care operations (TPO) — for example, coordinating care among our physicians, laboratories, and clinics; obtaining payment from your insurer; and conducting quality and safety activities.',
-      'For uses and disclosures of PHI that are not for TPO, we will obtain your written authorization, except where HIPAA permits or requires disclosure without authorization (such as to public health authorities, as required by law, or in response to a lawful subpoena). You may revoke an authorization in writing at any time, subject to limited exceptions.',
+      'Your information may be transferred to and maintained on computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.',
     ],
     bodyZh: [
-      '一旦成為我們的病人，您的受保護健康資訊（PHI）可能為了治療、付款與醫療營運（TPO）而被使用與揭露——例如在我們的醫師、實驗室與診所之間協調照護、向您的保險公司請款，以及執行品質與安全活動。',
-      '對於非屬 TPO 的 PHI 使用與揭露，我們會取得您的書面授權，但 HIPAA 允許或要求無須授權之揭露（例如向公共衛生主管機關、依法要求，或回應合法傳票）者除外。您得隨時以書面撤銷授權，受限於少數例外情形。',
+      '您的資訊可能會被傳輸並保存在您所在的州、省、國家或其他政府管轄區之外的電腦上，這些管轄區的資料保護法律可能與您管轄區的法律不同。',
     ],
   },
-
   {
-    id: 'breach',
-    title: 'Breach Notification',
-    titleZh: '資訊外洩通知',
+    id: 'subject',
+    title: 'Data Subject Rights',
+    titleZh: '資料主體權利',
     body: [
-      'If a breach of unsecured protected health information affecting you occurs, we will notify you without unreasonable delay and no later than 60 calendar days after we discover the breach, as required by the HIPAA Breach Notification Rule. Notification will be delivered by mail or email, as appropriate.',
+      'You have the right to access, correct, delete, or transfer your personal data that we hold. You can exercise these rights by contacting us at the details provided below.',
     ],
     bodyZh: [
-      '若發生影響您的未加密受保護健康資訊外洩事件，我們將依 HIPAA 資訊外洩通知規則，在不合理延遲的情況下、且最遲於發現外洩後 60 個日曆日內通知您。通知將視情況以郵寄或電子郵件方式送達。',
+      '您有權存取、更正、刪除或轉移我們所持有的您的個人資料。您可以透過以下提供的聯絡方式與我們聯繫來行使這些權利。',
     ],
   },
-
   {
-    id: 'associates',
-    title: 'Our Business Associates',
-    titleZh: '我們的業務夥伴',
+    id: 'changes',
+    title: 'Changes to Privacy Policy',
+    titleZh: '隱私權政策變更',
     body: [
-      'We engage service providers who perform functions on our behalf involving the use or disclosure of PHI. These business associates are bound by written Business Associate Agreements (BAAs) requiring them to safeguard your information. They include our patient-portal and electronic health-record platform (eIVF), our secure email and productivity provider, and our cloud hosting and content-delivery provider (Cloudflare).',
+      'We reserve the right to modify this Privacy Policy at any time. Changes will be posted on this page with a revised effective date. We encourage you to review this policy periodically.',
     ],
     bodyZh: [
-      '我們委託的服務提供者，會代表我們執行涉及 PHI 使用或揭露的功能。這些業務夥伴均受書面《業務夥伴協議》（BAA）約束，須對您的資訊採取保護措施。包含我們的病人專區與電子病歷平台（eIVF）、安全的電子郵件與生產力工具提供商，以及雲端託管與內容傳遞提供商（Cloudflare）。',
-    ],
-  },
-
-  {
-    id: 'analytics',
-    title: 'Third-Party Analytics',
-    titleZh: '第三方分析工具',
-    body: [
-      'This website uses Google Tag Manager (container GTM-TLN399PK) to measure site traffic and improve content on our general marketing pages. Google is not a HIPAA business associate, so we do not transmit, and will never instruct you to enter, any protected health information (PHI) through this site to Google.',
-      'To protect your information, analytics are switched off on the pages where you may submit personal or health-related details — including our appointment-request and feedback forms. On those pages the Google tags do not load at all, so no form data or page activity from them is sent to Google. The contact details you submit through the form are sent to our customer-relationship-management (CRM) platform (Zoho) so our care team can respond and schedule your visit — they are not routed through Google.',
-      'On other pages, analytics may record technical information such as pages visited, device and browser type, and approximate location derived from your IP address. You can limit tracking by enabling "Do Not Track" in your browser or using a content blocker. For Google\'s own data practices, see Google\'s Privacy & Terms.',
-    ],
-    bodyZh: [
-      '本網站在一般行銷頁面使用 Google Tag Manager（容器 GTM-TLN399PK）來衡量流量並改善內容。Google 並非 HIPAA 商務夥伴，因此我們不會傳送、也不會引導您經由本網站向 Google 提供任何受保護健康資訊（PHI）。',
-      '為保護您的資料，在您可能提交個人或健康相關資訊的頁面——包括我們的預約表單與意見表單頁——分析功能會完全關閉。這些頁面根本不會載入 Google 標籤，因此不會有任何表單資料或頁面活動被送往 Google。您透過表單提供的聯絡資料，會送交我們的客戶關係管理（CRM）平台（Zoho），以便照護團隊回應並安排您的看診——這些資料不經由 Google 傳輸。',
-      '在其餘頁面，分析工具可能記錄技術性資訊，例如瀏覽頁面、裝置與瀏覽器類型，以及由 IP 位址推得的概略位置。您可在瀏覽器中啟用「勿追蹤」（Do Not Track）或使用內容封鎖工具來限制追蹤。有關 Google 自身的資料處理方式，請參閱 Google 隱私與條款。',
-    ],
-  },
-
-  {
-    id: 'ccpa',
-    title: 'California Privacy Rights',
-    titleZh: '加州隱私權',
-    body: [
-      'If you are a California resident, you have the right to know what personal information we collect, to request deletion of that information, to opt out of any sale or sharing, and to receive equal service regardless of whether you exercise these rights. To make a request, contact us using the information below.',
-    ],
-    bodyZh: [
-      '若您是加州居民，您有權知悉我們蒐集哪些個人資訊、要求刪除該資訊、選擇退出任何出售或分享，並在行使這些權利時仍獲得同等服務。如提出請求，請以下方資訊與我們聯絡。',
+      '我們保留隨時修改本隱私權政策的權利。變更將發布在此頁面上並附上修訂後的生效日期。我們鼓勵您定期審查本政策。',
     ],
   },
   {
     id: 'contact',
-    title: 'Questions or Requests',
-    titleZh: '問題或請求',
+    title: 'Contact Us',
+    titleZh: '聯絡我們',
     body: [
-      `If you have questions about this notice, or wish to exercise any of the rights described above, please contact our Privacy Officer at ${LEGAL_ENTITY} using the phone number or address listed below, or by email at privacy@irfc.com.`,
+      'If you have any questions about this Privacy Policy or our privacy practices, please contact us at contactus@reproductivefertilitycenter.com.',
     ],
     bodyZh: [
-      `若您對本告知有疑問，或希望行使上述任一權利，請透過以下電話或地址，或電子郵件 privacy@irfc.com，聯絡 ${LEGAL_ENTITY} 的隱私權負責人。`,
+      '如果您對本隱私權政策或我們的隱私實務有任何疑問，請透過 contactus@reproductivefertilitycenter.com 與我們聯繫。',
     ],
   },
 ];
 
-const title = ZH ? '隱私權告知' : 'Notice of Privacy Practices';
+const title = ZH ? '隱私權政策' : 'Privacy Policy';
 const description = ZH
-  ? `${LEGAL_ENTITY}（${BRAND_ABBREV}）如何蒐集、使用與保護您的個人及健康資訊，包含您在 HIPAA 與加州隱私法下的權利。`
-  : `How ${LEGAL_ENTITY} (${BRAND_ABBREV}) collects, uses, and protects your personal and health information, including your rights under HIPAA and California privacy law.`;
+  ? `${LEGAL_ENTITY}（${BRAND_ABBREV}）的隱私權政策，說明我們如何蒐集、使用與揭露您的個人及健康資訊。`
+  : `Privacy Policy for ${LEGAL_ENTITY} (${BRAND_ABBREV}), explaining how we collect, use, and disclose your personal and health information.`;
 ---
 
 <Layout title={title} description={description}>
@@ -192,10 +185,9 @@ const description = ZH
       </h1>
       <p class="text-lg text-stone-500 font-light leading-relaxed">
         {ZH
-          ? '我們極為重視您付託給我們的信任。本告知說明我們蒐集哪些資訊、如何運用，以及您對這些資訊所擁有的權利。'
-          : 'We take the trust you place in us seriously. This notice explains what information we collect, how it is used, and the rights you have over it.'}
+          ? '生殖生育中心致力於保護網站訪客的隱私，包含我們可能收到的任何受保護健康資訊（PHI）。本隱私權政策說明我們如何蒐集、使用與揭露 PHI 及其他個人資訊。'
+          : 'At Reproductive Fertility Center, we are committed to protecting the privacy of our website visitors, including any Protected Health Information (PHI) that we may receive. This Privacy Policy explains how we collect, use, and disclose PHI and other personal information.'}
       </p>
-      <p class="text-sm text-stone-400 font-light mt-4">{ZH ? '生效日期：2026 年 8 月' : 'Effective date: August 2026'}</p>
     </div>
   </section>
 
@@ -210,22 +202,12 @@ const description = ZH
           {(ZH ? section.bodyZh : section.body).map((para) => (
             <p class="text-stone-500 font-light leading-relaxed mb-4">{para}</p>
           ))}
-          {section.list && (
-            <ul class="space-y-2 mt-4 ml-1">
-              {(ZH ? section.listZh : section.list).map((item) => (
-                <li class="flex gap-3 text-stone-500 font-light leading-relaxed">
-                  <span style="color: var(--color-gold-text);">—</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       ))}
 
       <div class="pt-10" style="border-top: 1px solid var(--color-pearl-300);">
         <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
-          {ZH ? '聯絡方式' : 'Contact'}
+          {ZH ? '聯絡方式' : 'Contact Us'}
         </h2>
         <p class="text-stone-500 font-light leading-relaxed mb-2">{LEGAL_ENTITY} ({BRAND_ABBREV})</p>
         <p class="text-stone-500 font-light leading-relaxed mb-2">
@@ -235,12 +217,6 @@ const description = ZH
           <MainPhone withLabel={false} style="color: var(--color-champagne-700);" />
         </p>
       </div>
-
-      <p class="text-xs text-stone-400 font-light mt-12 leading-relaxed">
-        {ZH
-          ? '本告知僅供一般資訊之用，不構成契約或法律保證，亦不得取代針對您個別情況之專業法律意見。'
-          : 'This notice is provided for general information. It does not create a contractual or legal guarantee, and it is not a substitute for advice from qualified counsel on your specific situation.'}
-      </p>
 
     </div>
   </section>
