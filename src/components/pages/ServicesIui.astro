@@ -71,15 +71,15 @@ const pageSchema = [treatmentSchema, faqPageSchema];
 >
   <Nav />
 
-  <!-- Hero Section with Right-Side Gradient Background Image -->
+  <!-- Hero Section using Global CSS utility classes -->
   <section class="relative pt-40 pb-20 overflow-hidden bg-white">
-    <!-- Background Image container with gradient mask: visible on the right on full screen, heavy gradient / fades out on mobile -->
-    <div class="absolute inset-0 pointer-events-none z-0">
-      <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 lg:via-white/70 to-transparent lg:to-stone-900/10 z-10"></div>
+    <!-- Reusable background container (Hidden on mobile via 'hidden lg:block') -->
+    <div class="hero-bg-split">
+      <div class="hero-bg-gradient"></div>
       <img 
         src="https://www.irfc.com/images/IUI-Small.jpg" 
         alt="IUI Diagram" 
-        class="absolute right-0 top-0 h-full w-full lg:w-1/2 object-cover object-center opacity-30 lg:opacity-85"
+        class="absolute inset-0 h-full w-full object-cover object-center opacity-85"
       />
     </div>
 
