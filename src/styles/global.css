@@ -267,8 +267,10 @@
   }
 }
 .hero-bg-split {
-  @apply absolute inset-y-0 right-0 w-full lg:w-1/2 pointer-events-none z-0 hidden lg:block;
+  @apply absolute inset-y-0 right-0 w-full lg:w-3/5 pointer-events-none z-0 hidden lg:block;
 }
+
 .hero-bg-gradient {
-  @apply absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent z-10;
+  /* Fades from solid white on the left/center into fully transparent on the right */
+  @apply absolute inset-0 bg-gradient-to-r from-white via-white/70 via-40% to-transparent z-10;
 }
