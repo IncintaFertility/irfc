@@ -4,11 +4,12 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getLocaleFromPath, type Locale } from '../../i18n';
-import { LEGAL_ENTITY, BRAND_ABBREV } from '../../config/brand';
-import MainPhone from '../MainPhone.astro';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const ZH = locale === 'zh-hant';
+
+const legalEntity = 'Incinta Reproductive Fertility Center';
+const brandAbbrev = 'IRFC';
 
 const sections = [
   {
@@ -30,13 +31,13 @@ const sections = [
       'We use your personal information, including Protected Health Information (PHI), to provide you with healthcare services and to manage our operations. This includes scheduling appointments, providing treatment, billing and payment processing, and maintaining medical records.',
       'We may also use your personal information to respond to inquiries, provide requested information, and send you newsletters and updates about our services.',
       'With your explicit consent, we may use your email address to send you marketing communications. We may also use your email address to create custom audiences on platforms such as Facebook or Instagram, allowing us to serve relevant ads based on your interests and prior interactions with our website. By providing your email address, you consent to these uses and acknowledge that your information will be handled in accordance with this Privacy Policy.',
-      'In the future, with your consent, we may also use your phone number to send SMS text messages for marketing, appointment reminders, or important service updates. Standard messaging rates may apply. You may opt out of marketing emails or SMS messages at any time by following the instructions in the message or emailing us at marketing@reproductivefertilitycenter.com.',
+      'In the future, with your consent, we may also use your phone number to send SMS text messages for marketing, appointment reminders, or important service updates. Standard messaging rates may apply. You may opt out of marketing communications at any time by following the instructions provided or contacting our office directly.',
     ],
     bodyZh: [
       '我們使用您的個人資訊（包括受保護健康資訊 PHI）來向您提供醫療服務並管理我們的營運。這包括安排預約、提供治療、帳單與付款處理以及維護病歷。',
       '我們也可能使用您的個人資訊來回覆查詢、提供要求的資訊，以及向您發送有關我們服務的通訊和更新。',
       '在您明確同意的情況下，我們可能會使用您的電子郵件地址向您發送行銷通訊。我們也可能使用您的電子郵件地址在 Facebook 或 Instagram 等平台上建立自定義受眾，以便根據您的興趣和先前與我們網站的互動向您投放相關廣告。透過提供您的電子郵件地址，您同意這些用途並承認您的資訊將根據本隱私權政策進行處理。',
-      '未來在您同意的情況下，我們也可能使用您的電話號碼發送用於行銷、預約提醒或重要服務更新的簡訊。可能適用標準訊息費率。您可以隨時按照訊息中的說明或發送電子郵件至 marketing@reproductivefertilitycenter.com，選擇退出行銷郵件或簡訊。',
+      '未來在您同意的情況下，我們也可能使用您的電話號碼發送用於行銷、預約提醒或重要服務更新的簡訊。可能適用標準訊息費率。您可以隨時按照提供的說明或直接聯絡我們的辦公室，選擇退出行銷通訊。',
     ],
   },
   {
@@ -133,93 +134,4 @@ const sections = [
   },
   {
     id: 'subject',
-    title: 'Data Subject Rights',
-    titleZh: '資料主體權利',
-    body: [
-      'You have the right to access, correct, delete, or transfer your personal data that we hold. You can exercise these rights by contacting us at the details provided below.',
-    ],
-    bodyZh: [
-      '您有權存取、更正、刪除或轉移我們所持有的您的個人資料。您可以透過以下提供的聯絡方式與我們聯繫來行使這些權利。',
-    ],
-  },
-  {
-    id: 'changes',
-    title: 'Changes to Privacy Policy',
-    titleZh: '隱私權政策變更',
-    body: [
-      'We reserve the right to modify this Privacy Policy at any time. Changes will be posted on this page with a revised effective date. We encourage you to review this policy periodically.',
-    ],
-    bodyZh: [
-      '我們保留隨時修改本隱私權政策的權利。變更將發布在此頁面上並附上修訂後的生效日期。我們鼓勵您定期審查本政策。',
-    ],
-  },
-  {
-    id: 'contact',
-    title: 'Contact Us',
-    titleZh: '聯絡我們',
-    body: [
-      'If you have any questions about this Privacy Policy or our privacy practices, please contact us at contactus@reproductivefertilitycenter.com.',
-    ],
-    bodyZh: [
-      '如果您對本隱私權政策或我們的隱私實務有任何疑問，請透過 contactus@reproductivefertilitycenter.com 與我們聯繫。',
-    ],
-  },
-];
-
-const title = ZH ? '隱私權政策' : 'Privacy Policy';
-const description = ZH
-  ? `${LEGAL_ENTITY}（${BRAND_ABBREV}）的隱私權政策，說明我們如何蒐集、使用與揭露您的個人及健康資訊。`
-  : `Privacy Policy for ${LEGAL_ENTITY} (${BRAND_ABBREV}), explaining how we collect, use, and disclose your personal and health information.`;
----
-
-<Layout title={title} description={description}>
-  <Nav />
-
-  <section class="pt-40 pb-16" style="background: var(--color-pearl-100);">
-    <div class="max-w-3xl mx-auto px-6 lg:px-10">
-      <p class="text-xs tracking-widest uppercase mb-5" style="color: var(--color-gold-text); font-family: var(--font-sans);">
-        {ZH ? '法律' : 'Legal'}
-      </p>
-      <h1 style="font-family: var(--font-serif);" class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
-        {title}
-      </h1>
-      <p class="text-lg text-stone-500 font-light leading-relaxed">
-        {ZH
-          ? '生殖生育中心致力於保護網站訪客的隱私，包含我們可能收到的任何受保護健康資訊（PHI）。本隱私權政策說明我們如何蒐集、使用與揭露 PHI 及其他個人資訊。'
-          : 'At Reproductive Fertility Center, we are committed to protecting the privacy of our website visitors, including any Protected Health Information (PHI) that we may receive. This Privacy Policy explains how we collect, use, and disclose PHI and other personal information.'}
-      </p>
-    </div>
-  </section>
-
-  <section class="py-16" style="background: var(--color-pearl-50);">
-    <div class="max-w-3xl mx-auto px-6 lg:px-10">
-
-      {sections.map((section) => (
-        <div class="mb-12" id={section.id}>
-          <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
-            {ZH ? section.titleZh : section.title}
-          </h2>
-          {(ZH ? section.bodyZh : section.body).map((para) => (
-            <p class="text-stone-500 font-light leading-relaxed mb-4">{para}</p>
-          ))}
-        </div>
-      ))}
-
-      <div class="pt-10" style="border-top: 1px solid var(--color-pearl-300);">
-        <h2 style="font-family: var(--font-serif);" class="text-2xl font-light text-stone-800 mb-4">
-          {ZH ? '聯絡方式' : 'Contact Us'}
-        </h2>
-        <p class="text-stone-500 font-light leading-relaxed mb-2">{LEGAL_ENTITY} ({BRAND_ABBREV})</p>
-        <p class="text-stone-500 font-light leading-relaxed mb-2">
-          16300 Sand Canyon Avenue, 9th Floor, Irvine, CA 92618
-        </p>
-        <p class="text-stone-500 font-light leading-relaxed">
-          <MainPhone withLabel={false} style="color: var(--color-champagne-700);" />
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <Footer />
-</Layout>
+    title: 'Data
